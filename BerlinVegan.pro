@@ -24,7 +24,9 @@ OTHER_FILES += qml/BerlinVegan.qml \
     rpm/BerlinVegan.spec \
     rpm/BerlinVegan.yaml \
     translations/*.ts \
-    BerlinVegan.desktop
+    BerlinVegan.desktop \
+    qml/JSONListModel/jsonpath.js \
+    qml/JSONListModel/JSONListModel.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
