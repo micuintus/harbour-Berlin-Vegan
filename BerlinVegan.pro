@@ -24,10 +24,8 @@ OTHER_FILES += qml/BerlinVegan.qml \
     rpm/BerlinVegan.yaml \
     translations/*.ts \
     BerlinVegan.desktop \
-    qml/JSONListModel/jsonpath.js \
     qml/JSONListModel/JSONListModel.qml \
     qml/pages/FoodLocationList.qml \
-    qml/JSONListModel/jsonData.txt \
     qml/JSONListModel/Example.qml \
     qml/pages/GastroLocations.json
 
