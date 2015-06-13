@@ -19,14 +19,17 @@ SOURCES += src/BerlinVegan.cpp
 OTHER_FILES += qml/BerlinVegan.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    qml/pages/SecondPage.qml \
     rpm/BerlinVegan.changes.in \
     rpm/BerlinVegan.spec \
     rpm/BerlinVegan.yaml \
     translations/*.ts \
     BerlinVegan.desktop \
     qml/JSONListModel/jsonpath.js \
-    qml/JSONListModel/JSONListModel.qml
+    qml/JSONListModel/JSONListModel.qml \
+    qml/pages/FoodLocationList.qml \
+    qml/JSONListModel/jsonData.txt \
+    qml/JSONListModel/Example.qml \
+    qml/pages/GastroLocations.json
 
 # to disable building translations every time, comment out the
 # following CONFIG line

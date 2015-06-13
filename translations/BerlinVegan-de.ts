@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.1">
 <context>
     <name>CoverPage</name>
     <message>
@@ -24,15 +24,25 @@
     </message>
 </context>
 <context>
-    <name>SecondPage</name>
+    <name>FoodLocationList</name>
     <message>
         <source>Nested Page</source>
-        <translation>Unterseite</translation>
+        <translation type="unfinished">Unterseite</translation>
     </message>
     <message>
         <source>Item</source>
-        <translation>Element</translation>
+        <translation type="obsolete">Element</translation>
+    </message>
+</context>
+<context>
+    <name>SecondPage</name>
+    <message>
+        <source>Nested Page</source>
+        <translation type="vanished">Unterseite</translation>
+    </message>
+    <message>
+        <source>Item</source>
+        <translation type="vanished">Element</translation>
     </message>
 </context>
 </TS>
-

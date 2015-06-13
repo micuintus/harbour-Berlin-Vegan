@@ -31,10 +31,11 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
+import "JSONListModel"
 
 ApplicationWindow
 {
-    initialPage: Component { FirstPage { } }
+    initialPage: Component { FoodLocationList { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
 

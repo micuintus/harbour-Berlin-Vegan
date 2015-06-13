@@ -30,6 +30,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../JSONListModel"
 
 
 Page {
@@ -43,7 +44,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Show Page 2")
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
+                onClicked: pageStack.push(Qt.resolvedUrl("../JSONListModel/Example.qml"))
             }
         }
 

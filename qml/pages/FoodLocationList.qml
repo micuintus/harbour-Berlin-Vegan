@@ -30,23 +30,32 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-
+import "../JSONListModel"
 
 Page {
     id: page
+
+
+    JSONListModel {
+        id: jsonModel
+        source: "../pages/GastroLocations.json"
+        query: "$"
+    }
+
     SilicaListView {
         id: listView
-        model: 20
+        model: jsonModel.model
         anchors.fill: parent
         header: PageHeader {
             title: qsTr("Nested Page")
         }
-        delegate: BackgroundItem {
+
+        delegate: ListItem {
             id: delegate
 
             Label {
                 x: Theme.paddingLarge
-                text: qsTr("Item") + " " + index
+                text: model.name
                 anchors.verticalCenter: parent.verticalCenter
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }

@@ -4,7 +4,7 @@
  * Licensed under the MIT licence (http://opensource.org/licenses/mit-license.php)
  */
 
-import QtQuick 1.1
+import QtQuick 2.0
 import "jsonpath.js" as JSONPath
 
 Item {
@@ -20,7 +20,10 @@ Item {
         xhr.open("GET", source);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == XMLHttpRequest.DONE)
+            {
                 json = xhr.responseText;
+                // console.log("JSON is: " + json.toString())
+            }
         }
         xhr.send();
     }
