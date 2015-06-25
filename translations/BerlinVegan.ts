@@ -24,7 +24,7 @@
     </message>
 </context>
 <context>
-    <name>FoodLocationList</name>
+    <name>GastroLocationList</name>
     <message>
         <source>Nested Page</source>
         <translation type="unfinished"></translation>

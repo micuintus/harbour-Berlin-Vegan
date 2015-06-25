@@ -35,7 +35,7 @@ import "JSONListModel"
 
 ApplicationWindow
 {
-    initialPage: Component { FoodLocationList { } }
+    initialPage: Component { GastroLocationList { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
 }
 

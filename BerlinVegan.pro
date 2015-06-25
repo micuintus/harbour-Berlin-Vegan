@@ -25,9 +25,10 @@ OTHER_FILES += qml/BerlinVegan.qml \
     translations/*.ts \
     BerlinVegan.desktop \
     qml/JSONListModel/JSONListModel.qml \
-    qml/pages/FoodLocationList.qml \
     qml/JSONListModel/Example.qml \
-    qml/pages/GastroLocations.json
+    qml/pages/GastroLocations.json \
+    qml/pages/GastroLocationList.qml \
+    qml/pages/GastroLocationDetails.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

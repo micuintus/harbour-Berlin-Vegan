@@ -35,7 +35,6 @@ import "../JSONListModel"
 Page {
     id: page
 
-
     JSONListModel {
         id: jsonModel
         source: "../pages/GastroLocations.json"
@@ -59,7 +58,8 @@ Page {
                 anchors.verticalCenter: parent.verticalCenter
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
-            onClicked: console.log("Clicked " + index)
+            onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDetails.qml"),
+                                     {restaurant : jsonModel.model.get(index) } )
         }
         VerticalScrollDecorator {}
     }
