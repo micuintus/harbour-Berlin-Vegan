@@ -59,7 +59,7 @@ Page {
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
             onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDetails.qml"),
-                                     {restaurant : jsonModel.model.get(index) } )
+                                     {restaurant : jsonModel.myArray[index] } )
         }
         VerticalScrollDecorator {}
     }

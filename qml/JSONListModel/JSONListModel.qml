@@ -9,6 +9,7 @@ import QtQuick 2.0
 Item {
     property string source: ""
     property string json: ""
+    property var myArray: []
 
     property ListModel model : ListModel { id: jsonModel }
     property alias count: jsonModel.count
@@ -34,11 +35,8 @@ Item {
         if ( json === "" )
             return;
 
-        var objectArray = JSON.parse(json);
+        myArray = JSON.parse(json);
+        jsonModel.append( myArray );
 
-        for ( var key in objectArray ) {
-            var jo = objectArray[key];
-            jsonModel.append( jo );
-        }
     }
 }
