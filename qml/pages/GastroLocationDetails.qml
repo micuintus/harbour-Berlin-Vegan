@@ -14,7 +14,7 @@ Page {
             id: image
             source: restaurant.pictures[0].url
             fillMode: Image.PreserveAspectCrop
-            height: page.height/3 - flicka.contentY
+            height: page.height/3 // - flicka.contentY
             opacity: 1 - flicka.contentY / (page.height/3)
         }
 
@@ -22,7 +22,9 @@ Page {
         PageHeader {
             id: myheader
             title : restaurant.name
-        //    y: image + height
+            y: 100 - flicka.contentY *0.3
+            opacity: 1 - flicka.contentY / (page.height/3)
+
         }
 
         SilicaFlickable {
