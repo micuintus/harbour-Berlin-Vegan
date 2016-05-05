@@ -1,0 +1,12 @@
+
+
+* Implement list ordered by position
+* Download JSON file
+* Map! -> QtLocation map?
+       -> Maep?
+       -> harbour-mapp? --> https://github.com/unsanded/harbour-mapp
+       -> poor maps? https://github.com/otsaloma/poor-maps
+       -> https://together.jolla.com/question/51587/a-map-component-for-sailfish-apps/
+* Improve detail view
+* Extent sources (merge in sources from vebu, HappyCow, etc.)
+       
