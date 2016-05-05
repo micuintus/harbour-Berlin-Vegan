@@ -29,39 +29,28 @@
 */
 
 import QtQuick 2.0
+import QtPositioning 5.0
+import QtLocation 5.0
 import Sailfish.Silica 1.0
 import "../JSONListModel"
 
 Page {
     id: page
-
-    JSONListModel {
-        id: jsonModel
-        source: "../pages/GastroLocations.json"
-    }
-
-
-    SilicaListView {
-        id: listView
-        model: jsonModel.model
+    Map {
         anchors.fill: parent
-        header: PageHeader {
-            title: qsTr("Nested Page")
-        }
 
-        delegate: ListItem {
-            id: delegate
-
-            Label {
-                x: Theme.paddingLarge
-                text: model.name
-                anchors.verticalCenter: parent.verticalCenter
-                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
-            }
-            onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDetails.qml"),
-                                     {restaurant : jsonModel.myArray[index] } )
+        plugin : Plugin {
+            id: plugin
+            preferred: ["osm"]
         }
-        VerticalScrollDecorator {}
+            gesture.enabled: true
+        id: map
+        zoomLevel: minimumZoomLevel+6
+        center {
+            // The Qt Company in Oslo
+            latitude: 59.9485
+            longitude: 10.7686
+        }
     }
 }
 
