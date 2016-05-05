@@ -13,7 +13,6 @@
 TARGET = BerlinVegan
 
 CONFIG += sailfishapp
-QT += positioning location
 
 SOURCES += src/BerlinVegan.cpp
 

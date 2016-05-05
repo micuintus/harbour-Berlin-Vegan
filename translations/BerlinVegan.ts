@@ -23,4 +23,11 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>GastroLocationList</name>
+    <message>
+        <source>Nested Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>
