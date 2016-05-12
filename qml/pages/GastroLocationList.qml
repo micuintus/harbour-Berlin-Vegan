@@ -30,9 +30,23 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtPositioning 5.2
 import "../JSONListModel"
 
+
+
 Page {
+
+    function calcDistance (gastroElement, coordinate)
+    {
+        return Math.sqrt(Math.pow(gastroElement.latCoord - coordinate.latitude, 2) + Math.pow(gastroElement.longCoord - coordinate.longitude, 2));
+    }
+         Component.onCompleted: positionSource.start()
+
+    PositionSource {
+        id: positionSource
+
+    }
     id: page
 
     JSONListModel {
@@ -46,7 +60,7 @@ Page {
         model: jsonModel.model
         anchors.fill: parent
         header: PageHeader {
-            title: qsTr("Nested Page")
+            title: positionSource.position.coordinate.latitude
         }
 
         delegate: ListItem {
@@ -54,12 +68,11 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: model.name
+                text: model.name + calcDistance(model, positionSource.position.coordinate)// + model.latCoord + model.longCoord
                 anchors.verticalCenter: parent.verticalCenter
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
-            onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDetails.qml"),
-                                     {restaurant : jsonModel.myArray[index] } )
+            onClicked:             positionSource.update()
         }
         VerticalScrollDecorator {}
     }

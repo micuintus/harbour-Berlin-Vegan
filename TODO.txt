@@ -10,3 +10,6 @@
 * Improve detail view
 * Extent sources (merge in sources from vebu, HappyCow, etc.)
        
+
+
+https://github.com/b0bben/SailfishOS_MapTutorial

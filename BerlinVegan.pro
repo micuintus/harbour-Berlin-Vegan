@@ -12,6 +12,8 @@
 # The name of your application
 TARGET = BerlinVegan
 
+QT += positioning
+
 CONFIG += sailfishapp
 
 SOURCES += src/BerlinVegan.cpp
