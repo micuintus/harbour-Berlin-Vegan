@@ -1,6 +1,8 @@
 
 
 * Implement list ordered by position
+  --> Find a solution for the case a position is not available
+      (async stuff needed probably)
 * Download JSON file
 * Map! -> QtLocation map?
        -> Maep?

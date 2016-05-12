@@ -36,11 +36,6 @@ import "../JSONListModel"
 
 
 Page {
-
-    function calcDistance (gastroElement, coordinate)
-    {
-        return Math.sqrt(Math.pow(gastroElement.latCoord - coordinate.latitude, 2) + Math.pow(gastroElement.longCoord - coordinate.longitude, 2));
-    }
          Component.onCompleted: positionSource.start()
 
     PositionSource {
@@ -60,7 +55,7 @@ Page {
         model: jsonModel.model
         anchors.fill: parent
         header: PageHeader {
-            title: positionSource.position.coordinate.latitude
+            title: qsTr("Vegan friendly venues")
         }
 
         delegate: ListItem {
@@ -68,11 +63,12 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: model.name + calcDistance(model, positionSource.position.coordinate)// + model.latCoord + model.longCoord
+                text: model.name + positionSource.position.coordinate.distanceTo(QtPositioning.coordinate(model.latCoord, model.longCoord))
                 anchors.verticalCenter: parent.verticalCenter
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
-            onClicked:             positionSource.update()
+            onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDetails.qml"),
+                                      {restaurant : jsonModel.myArray[index] } )
         }
         VerticalScrollDecorator {}
     }
