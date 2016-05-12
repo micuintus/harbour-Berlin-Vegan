@@ -36,19 +36,35 @@ import "../JSONListModel"
 
 
 Page {
-         Component.onCompleted: positionSource.start()
+
+    function humanReadableDistanceString(coordinate1, coordinate2)
+    {
+        var distance = coordinate1.distanceTo(coordinate2);
+        if (distance >= 1000)
+        {
+            var kilometres = Math.round(distance/100)/10;
+            return kilometres.toString() + " km";
+        }
+        else
+        {
+            var metres = Math.round(distance);
+            return metres.toString() + " m";
+        }
+    }
+
+
+    Component.onCompleted: positionSource.start()
 
     PositionSource {
         id: positionSource
-
     }
+
     id: page
 
     JSONListModel {
         id: jsonModel
         source: "../pages/GastroLocations.json"
     }
-
 
     SilicaListView {
         id: listView
@@ -63,7 +79,8 @@ Page {
 
             Label {
                 x: Theme.paddingLarge
-                text: model.name + positionSource.position.coordinate.distanceTo(QtPositioning.coordinate(model.latCoord, model.longCoord))
+                text: model.name + " " + humanReadableDistanceString(positionSource.position.coordinate,
+                                                                      QtPositioning.coordinate(model.latCoord, model.longCoord))
                 anchors.verticalCenter: parent.verticalCenter
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
