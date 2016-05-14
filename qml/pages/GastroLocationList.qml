@@ -76,14 +76,40 @@ Page {
 
         delegate: ListItem {
             id: delegate
+            width: page.width
+            height: childrenRect.height
 
             Label {
-                x: Theme.paddingLarge
-                text: model.name + " " + humanReadableDistanceString(positionSource.position.coordinate,
-                                                                      QtPositioning.coordinate(model.latCoord, model.longCoord))
-                anchors.verticalCenter: parent.verticalCenter
+                id: namelabel
+                text: model.name
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+
+                font.pixelSize: Theme.fontSizeMedium
+                truncationMode: TruncationMode.Fade
+                anchors {
+                    left: parent.left
+                    right: distance.left
+                    rightMargin: Theme.paddingSmall
+                    leftMargin: Theme.horizontalPageMargin
+                    verticalCenter: parent.verticalCenter
+                }
             }
+
+            Label {
+                id: distance
+                text: humanReadableDistanceString(positionSource.position.coordinate,
+                                                   QtPositioning.coordinate(model.latCoord, model.longCoord))
+                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+                font.pixelSize: Theme.fontSizeExtraSmall
+                horizontalAlignment: Text.AlignRight
+                anchors {
+                    right: parent.right
+                    rightMargin: Theme.horizontalPageMargin
+                    verticalCenter: parent.verticalCenter
+                }
+            }
+
+
             onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDetails.qml"),
                                       {restaurant : jsonModel.myArray[index] } )
         }
