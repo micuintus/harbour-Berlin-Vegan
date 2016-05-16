@@ -3,7 +3,9 @@
 * Implement list ordered by position
   --> Find a solution for the case a position is not available
       (async stuff needed probably)
+  ---> Use https://github.com/Cutehacks/gel?
 * Download JSON file
+* Tablet experience
 * Map! -> QtLocation map?
        -> Maep?
        -> harbour-mapp? --> https://github.com/unsanded/harbour-mapp
@@ -13,5 +15,14 @@
 * Extent sources (merge in sources from vebu, HappyCow, etc.)
        
 
-
 https://github.com/b0bben/SailfishOS_MapTutorial
+
+Sources for inspiration:
+
+    * Jolla together (especially the icon bar): <https://github.com/tace/jolla2gether>
+    * Tweetian: <https://github.com/veskuh/Tweetian/commits/sailfish-port>
+      <http://www.jollausers.com/2014/08/app-update-tweetian-for-sailfish-os-changelog/>
+    * VeggieSailor:
+      <https://github.com/VeggieSailor/VeggieSailor>
+      <https://openrepos.net/content/bluszcz/veggie-sailor>
+    * "Hide progress" : "Show progress" in <componentgallery/qml/pages/PanelPage.qml:134>
