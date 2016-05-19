@@ -26,3 +26,6 @@ Sources for inspiration:
       <https://github.com/VeggieSailor/VeggieSailor>
       <https://openrepos.net/content/bluszcz/veggie-sailor>
     * "Hide progress" : "Show progress" in <componentgallery/qml/pages/PanelPage.qml:134>
+
+    
+Build dependencies: qt5-qtquickcontrols-layouts
