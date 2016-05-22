@@ -41,6 +41,13 @@ Page {
 
         }
 
+        Separator {
+            width: parent.width
+            anchors.bottom: row.top
+            horizontalAlignment: Qt.AlignCenter
+            color: Theme.secondaryHighlightColor
+            height: 2
+        }
         RowLayout {
             id: row
             Layout.fillWidth: true
@@ -90,6 +97,13 @@ Page {
             }
 
         }
+        Separator {
+            width: parent.width
+            anchors.top: row.bottom
+            horizontalAlignment: Qt.AlignCenter
+            color: Theme.secondaryHighlightColor
+            height: 2
+        }
 
         SilicaFlickable {
             id: flicka
@@ -98,6 +112,8 @@ Page {
                 right: page.right
                 bottom: page.bottom
                 top: row.bottom
+                margins: Theme.paddingLarge
+
             }
 
 
