@@ -28,4 +28,11 @@ Sources for inspiration:
     * "Hide progress" : "Show progress" in <componentgallery/qml/pages/PanelPage.qml:134>
 
     
-Build dependencies: qt5-qtquickcontrols-layouts
+Build dependencies:
+? qt5-qtquickcontrols-layouts
+? qt5-qtpositioning-5.2.1+git9-1.25.1.i486
+
+
+run
+pkcon install qt5-qtdeclarative-import-positioning
+qt5-qtquickcontrols-layouts
