@@ -13,10 +13,16 @@
        -> https://together.jolla.com/question/51587/a-map-component-for-sailfish-apps/
 * Improve detail view
 * Extent sources (merge in sources from vebu, HappyCow, etc.)
-       
+* Improve sexiness: 
+  * Parallax scrolling 
+  * Animations
+* Tablet: Analyze actual Jolla QML files from tablet and phone to find out about how to treat the tablet
+
+* Porting app to Android / iOS?
+  
 
 https://github.com/b0bben/SailfishOS_MapTutorial
-
+---
 Sources for inspiration:
 
     * Jolla together (especially the icon bar): <https://github.com/tace/jolla2gether>
@@ -26,7 +32,6 @@ Sources for inspiration:
       <https://github.com/VeggieSailor/VeggieSailor>
       <https://openrepos.net/content/bluszcz/veggie-sailor>
     * "Hide progress" : "Show progress" in <componentgallery/qml/pages/PanelPage.qml:134>
-
     
 Build dependencies:
 ? qt5-qtquickcontrols-layouts
