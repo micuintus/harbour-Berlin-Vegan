@@ -9,63 +9,61 @@ Page {
 
     anchors.fill: parent
 
-    Image {
-        id: image
-        source: restaurant.pictures[0].url
-        fillMode: Image.PreserveAspectCrop
-        height: page.height/3 // - flicka.contentY
-        opacity: 1 - flicka.contentY / (page.height/3)
-    }
+    SilicaFlickable {
+        id: flicka
+        anchors.fill: parent
+        contentHeight: image.initalHeight + icontoolbar.height + dalabel.height
 
+        VerticalScrollDecorator {}
 
-    PageHeader {
-        id: myheader
-        title : restaurant.name
-        y: 100 - flicka.contentY *0.3
-        opacity: 1 - flicka.contentY / (page.height/3)
-    }
+        Image {
+            id: image
 
-     IconToolBar {
-         id: icontoolbar
-         restaurant: page.restaurant
-         anchors {
-             left: page.left
-             right: page.right
-             top: image.bottom
-             margins: Theme.paddingLarge
-         }
-         opacity: 1 - flicka.contentY / (page.height/3)
+            source: restaurant.pictures[0].url
+            property var initalHeight: page.height/3
 
+            fillMode: Image.PreserveAspectCrop
 
-     }
+            height: Math.max(initalHeight - flicka.contentY,0)
+            y: flicka.contentY
+            opacity: 1 - flicka.contentY / (page.height/3)
+        }
 
-     SilicaFlickable {
-         id: flicka
-         anchors {
-             left: page.left
-             right: page.right
-             bottom: page.bottom
-             top: icontoolbar.bottom
-             margins: Theme.paddingLarge
-         }
+        PageHeader {
+            id: myheader
 
-         contentHeight: myheader.height + dalabel.height
+            title : restaurant.name
+            y: 100  + flicka.contentY * 0.4
+            opacity: 1 - flicka.contentY / (page.height/3)
+        }
 
-         Label {
+        IconToolBar {
+            id: icontoolbar
+            restaurant: page.restaurant
 
-             id: dalabel
-             font.pixelSize: Theme.fontSizeSmall
-             text: restaurant.comment
-             wrapMode: Text.WordWrap
+            anchors {
+                left: parent.left
+                right: parent.right
+                margins: Theme.paddingLarge
+            }
 
-             anchors {
-                    left: parent.left
-                    right: parent.right
-                    margins: Theme.paddingLarge
-             }
-         }
+            y: image.initalHeight + Theme.paddingLarge
+            opacity: 1 - flicka.contentY / (page.height/3)
+        }
 
-         VerticalScrollDecorator {}
+        Label {
+            id: dalabel
+            font.pixelSize: Theme.fontSizeSmall
+            text: restaurant.comment
+            wrapMode: Text.WordWrap
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: icontoolbar.bottom
+                margins: Theme.paddingLarge
+            }
+        }
     }
 }
 
