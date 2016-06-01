@@ -31,19 +31,19 @@ Page {
 
         Rectangle {
             x: myheader.extraContent.x + myheader.extraContent.width - 10 // - flicka.contentY * 0.1// - Theme.paddingLarge
-            y: myheader.y + myheader.childrenRect.y - 10 - flicka.contentY *0.9 // + flicka.contentY * 0.4
-            height: myheader.childrenRect.height + 20 // + 2*Theme.paddingLarge
+            y: myheader.y + myheader.childrenRect.y - 7 - flicka.contentY *0.1 // + flicka.contentY * 0.4
+            height: myheader.childrenRect.height + 14 // + 2*Theme.paddingLarge
             width: myheader.childrenRect.width + 20 - myheader.extraContent.width // + 2*Theme.paddingLarge
-            radius: 10
-            color: Qt.rgba(1-Theme.highlightColor.r, 1-Theme.highlightColor.g, 1-Theme.highlightColor.b, 1) // Qt.rgba(255, 255, 255, 255)
-            opacity: 0.5  - flicka.contentY / (page.height/3)
+            radius: 5
+            color: Theme.highlightDimmerColor
+            opacity: 0.6  - flicka.contentY / (page.height/3)
         }
 
         PageHeader {
             id: myheader
 
             title : restaurant.name
-            y: 100  + flicka.contentY * 0.6
+            y: 100  + flicka.contentY * 0.5
             opacity: 1 - flicka.contentY / (page.height/3)
         }
 
