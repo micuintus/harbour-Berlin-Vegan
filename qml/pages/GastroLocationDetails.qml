@@ -12,7 +12,9 @@ Page {
     SilicaFlickable {
         id: flicka
         anchors.fill: parent
-        contentHeight: image.initalHeight + icontoolbar.height + dalabel.height
+        property real nonDescriptionHeaderHeight: image.initalHeight + icontoolbar.height
+        contentHeight: nonDescriptionHeaderHeight + dalabel.height
+        property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
 
         VerticalScrollDecorator {}
 
@@ -20,31 +22,35 @@ Page {
             id: image
 
             source: restaurant.pictures[0].url
-            property var initalHeight: page.height/3
+            property real initalHeight: page.height/3
 
             fillMode: Image.PreserveAspectCrop
 
             height: Math.max(initalHeight - flicka.contentY,0)
             y: flicka.contentY
-            opacity: 1 - flicka.contentY / (page.height/3)
+            opacity: flicka.scrolledUpRatio
         }
 
         Rectangle {
-            x: myheader.extraContent.x + myheader.extraContent.width - 10 // - flicka.contentY * 0.1// - Theme.paddingLarge
-            y: myheader.y + myheader.childrenRect.y - 7 - flicka.contentY *0.1 // + flicka.contentY * 0.4
-            height: myheader.childrenRect.height + 14 // + 2*Theme.paddingLarge
-            width: myheader.childrenRect.width + 20 - myheader.extraContent.width // + 2*Theme.paddingLarge
+            property int xMargin: 10
+            property int yMargin: 7
+            property real initialOpacity: 0.6
+            x: myheader.extraContent.x + myheader.extraContent.width - xMargin
+            y: myheader.y + myheader.childrenRect.y - yMargin - flicka.contentY * 0.1
+            height: myheader.childrenRect.height + yMargin*2
+            width: (myheader.childrenRect.width - myheader.extraContent.width) + xMargin*2
             radius: 5
             color: Theme.highlightDimmerColor
-            opacity: 0.6  - flicka.contentY / (page.height/3)
+            opacity: initialOpacity  * flicka.scrolledUpRatio
         }
 
         PageHeader {
             id: myheader
+            property int initalY: 100
 
             title : restaurant.name
-            y: 100  + flicka.contentY * 0.5
-            opacity: 1 - flicka.contentY / (page.height/3)
+            y: initalY  + flicka.contentY * 0.5
+            opacity: flicka.scrolledUpRatio
         }
 
         IconToolBar {
@@ -58,7 +64,7 @@ Page {
             }
 
             y: image.initalHeight + Theme.paddingLarge
-            opacity: 1 - flicka.contentY / (page.height/3)
+            opacity: flicka.scrolledUpRatio
         }
 
         Label {
