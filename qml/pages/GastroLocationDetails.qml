@@ -36,7 +36,7 @@ Page {
             property int yMargin: 7
             property real initialOpacity: 0.6
             x: myheader.extraContent.x + myheader.extraContent.width - xMargin
-            y: myheader.y + myheader.childrenRect.y - yMargin - flicka.contentY * 0.1
+            y: myheader.y + myheader.childrenRect.y - yMargin - flicka.contentY * 0.2
             height: myheader.childrenRect.height + yMargin*2
             width: (myheader.childrenRect.width - myheader.extraContent.width) + xMargin*2
             radius: 5
@@ -49,7 +49,7 @@ Page {
             property int initalY: 100
 
             title : restaurant.name
-            y: initalY  + flicka.contentY * 0.5
+            y: initalY  + flicka.contentY * flicka.scrolledUpRatio * 0.8
             opacity: flicka.scrolledUpRatio
         }
 
