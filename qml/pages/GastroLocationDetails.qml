@@ -53,6 +53,37 @@ Page {
             opacity: flicka.scrolledUpRatio
         }
 
+        Rectangle {
+            anchors {
+                top: streetLabel.top
+                left: image.left
+                right: image.right
+                bottom: image.bottom
+            }
+
+            color: Theme.highlightDimmerColor
+            opacity: 0.6* flicka.scrolledUpRatio
+        }
+
+        Label {
+            id: streetLabel
+            text: restaurant.street
+            font.pixelSize: Theme.fontSizeExtraSmall
+            color: Theme.primaryColor
+            truncationMode: TruncationMode.Fade
+
+            anchors {
+                left: image.left
+                // top: image.bottom
+                margins:  Theme.paddingLarge
+            }
+
+            opacity: flicka.scrolledUpRatio
+            y: image.initalHeight - height // + Theme.paddingSmall
+        }
+
+
+
         IconToolBar {
             id: icontoolbar
             restaurant: page.restaurant
@@ -60,10 +91,12 @@ Page {
             anchors {
                 left: parent.left
                 right: parent.right
+                top: streetLabel.bottom
                 margins: Theme.paddingLarge
+
             }
 
-            y: image.initalHeight + Theme.paddingLarge
+
             opacity: flicka.scrolledUpRatio
         }
 
@@ -72,12 +105,13 @@ Page {
             font.pixelSize: Theme.fontSizeSmall
             text: restaurant.comment
             wrapMode: Text.WordWrap
+            color: Theme.primaryColor
 
             anchors {
                 left: parent.left
                 right: parent.right
                 top: icontoolbar.bottom
-                margins: Theme.paddingLarge
+                margins:  Theme.paddingLarge
             }
         }
     }
