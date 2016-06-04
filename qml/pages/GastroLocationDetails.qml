@@ -79,7 +79,7 @@ Page {
             id: streetLabel
             text: restaurant.street
             font.pixelSize: Theme.fontSizeExtraSmall
-            color: Theme.primaryColor
+            color: Theme.highlightColor
             truncationMode: TruncationMode.Fade
 
             anchors {
@@ -98,7 +98,7 @@ Page {
             text: Distance.humanReadableDistanceString(positionSource.position.coordinate,
                                                        QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord))
             font.pixelSize: Theme.fontSizeExtraSmall
-            color: Theme.primaryColor
+            color: Theme.highlightColor
 
             anchors {
                 right: parent.right
