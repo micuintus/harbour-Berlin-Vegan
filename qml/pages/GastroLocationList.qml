@@ -31,35 +31,19 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
+import "../components/distance.js" as Distance
+
 import "../JSONListModel"
-
-
 
 Page {
 
-    function humanReadableDistanceString(coordinate1, coordinate2)
-    {
-        var distance = coordinate1.distanceTo(coordinate2);
-        if (distance >= 1000)
-        {
-            var kilometres = Math.round(distance/100)/10;
-            return kilometres.toString() + " km";
-        }
-        else
-        {
-            var metres = Math.round(distance);
-            return metres.toString() + " m";
-        }
-    }
-
+    id: page
 
     Component.onCompleted: positionSource.start()
 
     PositionSource {
         id: positionSource
     }
-
-    id: page
 
     JSONListModel {
         id: jsonModel
@@ -97,8 +81,8 @@ Page {
 
             Label {
                 id: distance
-                text: humanReadableDistanceString(positionSource.position.coordinate,
-                                                   QtPositioning.coordinate(model.latCoord, model.longCoord))
+                text: Distance.humanReadableDistanceString(positionSource.position.coordinate,
+                                                           QtPositioning.coordinate(model.latCoord, model.longCoord))
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 horizontalAlignment: Text.AlignRight

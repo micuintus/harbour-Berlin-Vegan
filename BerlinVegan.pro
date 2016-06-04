@@ -44,5 +44,6 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/BerlinVegan-de.ts
 
 DISTFILES += \
-    qml/components/IconToolBar.qml
+    qml/components/IconToolBar.qml \
+    qml/components/distance.js
 
