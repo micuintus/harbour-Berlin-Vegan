@@ -1,10 +1,20 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+
+import QtPositioning 5.2
+
+import "../components/distance.js" as Distance
 import "../components"
 
 Page {
 
     id: page
+
+
+    PositionSource {
+        id: positionSource
+    }
+
     property var restaurant
 
     anchors.fill: parent
@@ -62,7 +72,7 @@ Page {
             }
 
             color: Theme.highlightDimmerColor
-            opacity: 0.6* flicka.scrolledUpRatio
+            opacity: 0.6 * flicka.scrolledUpRatio
         }
 
         Label {
@@ -74,6 +84,7 @@ Page {
 
             anchors {
                 left: image.left
+                right: distance.left
                 // top: image.bottom
                 margins:  Theme.paddingLarge
             }
@@ -82,7 +93,22 @@ Page {
             y: image.initalHeight - height // + Theme.paddingSmall
         }
 
+        Label {
+            id: distance
+            text: Distance.humanReadableDistanceString(positionSource.position.coordinate,
+                                                       QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord))
+            font.pixelSize: Theme.fontSizeExtraSmall
+            color: Theme.primaryColor
 
+            anchors {
+                right: parent.right
+                // rightMargin: Theme.horizontalPageMargin
+                margins:  Theme.paddingLarge
+            }
+
+            opacity: flicka.scrolledUpRatio
+            y: image.initalHeight - height // + Theme.paddingSmall
+        }
 
         IconToolBar {
             id: icontoolbar

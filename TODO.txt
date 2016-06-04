@@ -18,6 +18,8 @@
   * Animations
   * Inert (slow) Animation of background rectangle (Windows Phone like) 
 * abstract the calculations in GastroLocationDetails  into functions and/or variables --- this is ugly (code wise) otherwise.
+   => Mostly done
+* Move more parts of GastroLocationDetails into their own components
 * Tablet: Analyze actual Jolla QML files from tablet and phone to find out about how to treat the tablet
 
 * Porting app to Android / iOS?
