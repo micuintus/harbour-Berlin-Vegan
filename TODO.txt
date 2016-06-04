@@ -35,6 +35,7 @@ Sources for inspiration:
       <https://openrepos.net/content/bluszcz/veggie-sailor>
     * "Hide progress" : "Show progress" in <componentgallery/qml/pages/PanelPage.qml:134>
     * Jolla Store: Detail desciption
+    * Phone app ringing, pic in the background
     
 Build dependencies:
 ? qt5-qtquickcontrols-layouts
