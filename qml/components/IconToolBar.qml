@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import org.nemomobile.dbus 1.0
+import org.nemomobile.dbus 2.0
 import Sailfish.Silica 1.0
 
 Column {
@@ -12,7 +12,7 @@ Column {
     DBusInterface {
         id: voicecall
 
-        destination: "com.jolla.voicecall.ui"
+        service: "com.jolla.voicecall.ui"
         path: "/"
         iface: "com.jolla.voicecall.ui"
 
