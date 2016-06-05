@@ -126,6 +126,46 @@ Page {
             opacity: flicka.scrolledUpRatio
         }
 
+        Column {
+            id: openinghourscolumn
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: icontoolbar.bottom
+            }
+            SectionHeader {
+                text: "Opening hours"
+            }
+            DetailItem {
+                label: qsTr("Monday")
+                value: restaurant.otMon
+            }
+            DetailItem {
+                label: qsTr("Tuesday")
+                value: restaurant.otTue
+            }
+            DetailItem {
+                label: qsTr("Wednesday")
+                value: restaurant.otWed
+            }
+            DetailItem {
+                label: qsTr("Thursday")
+                value: restaurant.otThu
+            }
+            DetailItem {
+                label: qsTr("Friday")
+                value: restaurant.otFri
+            }
+            DetailItem {
+                label: qsTr("Saturday")
+                value: restaurant.otSat
+            }
+            DetailItem {
+                label: qsTr("Sunday")
+                value: restaurant.otSun
+            }
+        }
+
         Label {
             id: dalabel
             font.pixelSize: Theme.fontSizeSmall
@@ -136,7 +176,7 @@ Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: icontoolbar.bottom
+                top: openinghourscolumn.bottom
                 margins:  Theme.paddingLarge
             }
         }

@@ -23,6 +23,18 @@
 * abstract the calculations in GastroLocationDetails  into functions and/or variables --- this is ugly (code wise) otherwise.
    => Mostly done
 * Move more parts of GastroLocationDetails into their own components
+
+* Condense opening hours
+        Inspiration sources:
+            * Android BVApp:
+              berlin-vegan-guide/app/src/main/java/org/berlin_vegan/bvapp/data/Location.java
+* Make these detail elements be collapsible
+        Inspiration sources:
+            * Jolla Store: Detail desciption / collapsible -> /usr/share/store-client/pages/AppPageDetails.qml (only as an inspiration, do not copy the code --> NO FOSS so far)
+            * Harbour-Warehouse: /usr/share/harbour-warehouse/qml/components/TextCollapsible.qml
+            * TAO translator: /usr/share/harbour-taot/qml/ExpandableLabel.qml / https://github.com/leppa/taot/blob/master/qml/sailfish/ExpandableLabel.qml
+
+
 * Tablet: Analyze actual Jolla QML files from tablet and phone to find out about how to treat the tablet
 
 * Porting app to Android / iOS?
@@ -42,7 +54,6 @@ Sources for inspiration:
       <https://github.com/VeggieSailor/VeggieSailor>
       <https://openrepos.net/content/bluszcz/veggie-sailor>
     * "Hide progress" : "Show progress" in <componentgallery/qml/pages/PanelPage.qml:134>
-    * Jolla Store: Detail desciption
     * Phone app ringing, pic in the background
     
 Build dependencies:
