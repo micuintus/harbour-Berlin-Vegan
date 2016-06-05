@@ -1,9 +1,12 @@
 
+* Transfer bascially this file to Gitlab / Github issue list (linkability between tickets and git commits)
+  * Find out a way to sync gitlab and github projects (including issue numbers in the best case!)
 
 * Implement list ordered by position
   --> Find a solution for the case a position is not available
       (async stuff needed probably)
   ---> Use https://github.com/Cutehacks/gel?
+  ---> Look at <componentgallery/qml/pages/SearchPage.qml:251>
 * Download JSON file
 * Tablet experience
 * Map! -> QtLocation map?
@@ -24,7 +27,10 @@
 
 * Porting app to Android / iOS?
   
+* How to trigger navigation "intent"?
 
+* Intents ("Get directions" with Android-Apps as an option)
+  
 https://github.com/b0bben/SailfishOS_MapTutorial
 ---
 Sources for inspiration:
