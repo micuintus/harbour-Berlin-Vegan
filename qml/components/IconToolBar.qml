@@ -66,7 +66,9 @@ Column {
                          ? Theme.highlightColor
                          : Theme.primaryColor)
 
-            onClicked: Qt.openUrlExternally("http://" + restaurant.website)
+            onClicked: Qt.openUrlExternally(restaurant.website.slice(0,4) == "http"
+                                            ?             restaurant.website
+                                            : "http://" + restaurant.website)
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
