@@ -66,7 +66,7 @@ Column {
                          ? Theme.highlightColor
                          : Theme.primaryColor)
 
-            onClicked: console.log("Play clicked!")
+            onClicked: Qt.openUrlExternally("http://" + restaurant.website)
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
