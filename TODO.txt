@@ -7,7 +7,7 @@
       (async stuff needed probably)
   ---> Use https://github.com/Cutehacks/gel?
   ---> Look at <componentgallery/qml/pages/SearchPage.qml:251>
-* Download JSON file
+* Automatically check for new JSON file on app startup and download new version
 * Tablet experience
 * Map! -> QtLocation map?
        -> Maep?
@@ -15,6 +15,7 @@
        -> poor maps? https://github.com/otsaloma/poor-maps
        -> https://together.jolla.com/question/51587/a-map-component-for-sailfish-apps/
 * Improve detail view
+* Make images be flickable?
 * Extent sources (merge in sources from vebu, HappyCow, etc.)
 * Improve sexiness: 
   * Parallax scrolling 
@@ -34,6 +35,10 @@
             * Harbour-Warehouse: /usr/share/harbour-warehouse/qml/components/TextCollapsible.qml
             * TAO translator: /usr/share/harbour-taot/qml/ExpandableLabel.qml / https://github.com/leppa/taot/blob/master/qml/sailfish/ExpandableLabel.qml
 
+Add license information: 
+   * own license
+   * Contributors licenses:
+      * JSON: 125d00c197a2ef6f7ef70fb9e00499da276d12a0 (Romain)
 
 * Tablet: Analyze actual Jolla QML files from tablet and phone to find out about how to treat the tablet
 
