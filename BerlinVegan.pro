@@ -45,5 +45,6 @@ TRANSLATIONS += translations/BerlinVegan-de.ts
 
 DISTFILES += \
     qml/components/IconToolBar.qml \
-    qml/components/distance.js
+    qml/components/distance.js \
+    qml/components/CollapsibleItem.qml
 

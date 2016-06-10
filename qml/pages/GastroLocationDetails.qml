@@ -126,43 +126,61 @@ Page {
             opacity: flicka.scrolledUpRatio
         }
 
-        Column {
-            id: openinghourscolumn
+        CollapsibleItem {
+            id: detailscollapsible
+
+            collapsedHeight: columnheader.height
+            expandedHeight: openinghours.implicitHeight
+
             anchors {
                 left: parent.left
                 right: parent.right
                 top: icontoolbar.bottom
             }
-            SectionHeader {
-                text: "Opening hours"
-            }
-            DetailItem {
-                label: qsTr("Monday")
-                value: restaurant.otMon
-            }
-            DetailItem {
-                label: qsTr("Tuesday")
-                value: restaurant.otTue
-            }
-            DetailItem {
-                label: qsTr("Wednesday")
-                value: restaurant.otWed
-            }
-            DetailItem {
-                label: qsTr("Thursday")
-                value: restaurant.otThu
-            }
-            DetailItem {
-                label: qsTr("Friday")
-                value: restaurant.otFri
-            }
-            DetailItem {
-                label: qsTr("Saturday")
-                value: restaurant.otSat
-            }
-            DetailItem {
-                label: qsTr("Sunday")
-                value: restaurant.otSun
+
+            Column {
+                id: openinghours
+                anchors.fill: parent
+
+                SectionHeader {
+                    id: columnheader
+                    text: "Opening hours"
+                }
+
+                DetailItem {
+                    label: qsTr("Monday")
+                    value: restaurant.otMon
+                }
+
+                DetailItem {
+                    label: qsTr("Tuesday")
+                    value: restaurant.otTue
+                }
+
+                DetailItem {
+                    label: qsTr("Wednesday")
+                    value: restaurant.otWed
+                }
+
+                DetailItem {
+                    label: qsTr("Thursday")
+                    value: restaurant.otThu
+                }
+
+                DetailItem {
+                    label: qsTr("Friday")
+                    value: restaurant.otFri
+                }
+
+                DetailItem {
+                    label: qsTr("Saturday")
+                    value: restaurant.otSat
+                }
+
+                DetailItem {
+                    label: qsTr("Sunday")
+                    value: restaurant.otSun
+                }
             }
         }
 
@@ -176,7 +194,7 @@ Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: openinghourscolumn.bottom
+                top: detailscollapsible.bottom
                 margins:  Theme.paddingLarge
             }
         }
