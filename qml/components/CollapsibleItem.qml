@@ -13,6 +13,8 @@ Item {
           ? collapsedHeight
           : expandedHeight
 
+    Behavior on height { NumberAnimation { easing.type:  Easing.OutBack } }
+
     MouseArea {
         id: mousearea
         anchors.fill: parent
