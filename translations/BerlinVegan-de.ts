@@ -24,7 +24,7 @@
     </message>
 </context>
 <context>
-    <name>GastroLocationDetails</name>
+    <name>GastroLocationDescription</name>
     <message>
         <source>Monday</source>
         <translation type="unfinished"></translation>
