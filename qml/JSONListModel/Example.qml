@@ -3,7 +3,7 @@
  * Licensed under the MIT licence (http://opensource.org/licenses/mit-license.php)
  */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
