@@ -129,7 +129,7 @@ Page {
         CollapsibleItem {
             id: detailscollapsible
 
-            collapsedHeight: columnheader.height
+            collapsedHeight: columnheader.height*3
             expandedHeight: openinghours.implicitHeight
 
             anchors {
@@ -138,7 +138,7 @@ Page {
                 top: icontoolbar.bottom
             }
 
-            Column {
+            contentItem: Column {
                 id: openinghours
                 anchors.fill: parent
 
@@ -183,6 +183,8 @@ Page {
                 }
             }
         }
+
+
 
         Label {
             id: dalabel
