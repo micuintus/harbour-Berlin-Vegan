@@ -27,7 +27,9 @@ OTHER_FILES += qml/BerlinVegan.qml \
     translations/*.ts \
     BerlinVegan.desktop \
     qml/components/IconToolBar.qml \
+    qml/JSONListModel/jsonpath.js \
     qml/JSONListModel/JSONListModel.qml \
+    qml/JSONListModel/jsonData.txt \
     qml/JSONListModel/Example.qml \
     qml/pages/GastroLocations.json \
     qml/pages/GastroLocationList.qml \

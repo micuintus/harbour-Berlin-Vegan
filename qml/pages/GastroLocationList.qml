@@ -48,6 +48,7 @@ Page {
     JSONListModel {
         id: jsonModel
         source: "../pages/GastroLocations.json"
+        query: "$"
     }
 
     SilicaListView {
