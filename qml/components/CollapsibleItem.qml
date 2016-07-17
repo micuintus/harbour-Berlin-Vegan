@@ -6,6 +6,7 @@ Item {
     property var expandItem
     property real collapsedHeight
     property real expandedHeight
+    property var contentItem
 
     clip: true
 
@@ -19,8 +20,21 @@ Item {
         id: mousearea
         anchors.fill: parent
         onClicked: {
-            parent.collapsed = !parent.collapsed
+                parent.collapsed = !parent.collapsed
+            }
         }
+
+
+    children : [mousearea, contentItem, ramp]
+
+
+    OpacityRampEffect {
+        anchors.fill: parent
+        id: ramp
+       sourceItem: contentItem
+        direction: OpacityRamp.TopToBottom
+       enabled: parent.collapsed
     }
+
 }
 

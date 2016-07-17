@@ -1,3 +1,5 @@
+for javafile in `find -name \*.java`; do  cat licenseHeader.txt $javafile > temp; cat temp > $javafile; done
+
 
 * Transfer bascially this file to Gitlab / Github issue list (linkability between tickets and git commits)
   * Find out a way to sync gitlab and github projects (including issue numbers in the best case!)
