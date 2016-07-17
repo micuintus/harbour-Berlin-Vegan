@@ -11,7 +11,6 @@ Item {
     property string source: ""
     property string json: ""
     property string query: ""
-    property var myArray: []
     property ListModel model : ListModel { id: jsonModel }
     property alias count: jsonModel.count
 

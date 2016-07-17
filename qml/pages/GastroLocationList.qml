@@ -48,7 +48,7 @@ Page {
     JSONListModel {
         id: jsonModel
         source: "../pages/GastroLocations.json"
-        query: "$"
+        query: "$..[?(@.name==\"\*V\*\")]"
     }
 
     SilicaListView {
@@ -96,7 +96,7 @@ Page {
 
 
             onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDescription.qml"),
-                                      {restaurant : jsonModel.myArray[index] } )
+                                      {restaurant : model } )
         }
         VerticalScrollDecorator {}
     }
