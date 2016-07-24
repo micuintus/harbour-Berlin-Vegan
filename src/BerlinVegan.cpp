@@ -34,6 +34,7 @@
 
 #include <sailfishapp.h>
 
+#include <3rdparty/Cutehacks/gel/gel.h>
 
 int main(int argc, char *argv[])
 {
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
     //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
     //
     // To display the view, call "show()" (will show fullscreen on device).
-
+    com::cutehacks::gel::registerEngine(NULL);
     return SailfishApp::main(argc, argv);
 }
 

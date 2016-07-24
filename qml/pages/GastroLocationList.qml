@@ -31,28 +31,45 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
-import "../components/distance.js" as Distance
 
-import "../JSONListModel"
+import com.cutehacks.gel 1.0
+import "../components/distance.js" as Distance
 
 Page {
 
     id: page
 
-    Component.onCompleted: positionSource.start()
+    Component.onCompleted: {
+        positionSource.start()
+
+        var json
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET","../pages/GastroLocations.json" )
+        xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE)
+                {
+                    json = xhr.responseText;
+                    jsonModel.add(JSON.parse(json));
+                }
+        }
+
+        xhr.send();
+    }
+
 
     PositionSource {
         id: positionSource
     }
 
-    JSONListModel {
+    JsonListModel {
         id: jsonModel
-        source: "../pages/GastroLocations.json"
+        dynamicRoles: true
+
     }
 
     SilicaListView {
         id: listView
-        model: jsonModel.model
+        model: jsonModel
         anchors.fill: parent
         header: PageHeader {
             title: qsTr("Vegan friendly venues")
@@ -95,7 +112,7 @@ Page {
 
 
             onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDescription.qml"),
-                                      {restaurant : jsonModel.myArray[index] } )
+                                      {restaurant : model } )
         }
         VerticalScrollDecorator {}
     }

@@ -12,11 +12,19 @@
 # The name of your application
 TARGET = BerlinVegan
 
-QT += positioning
+QT +=  positioning
 
 CONFIG += sailfishapp
 
-SOURCES += src/BerlinVegan.cpp
+SOURCES += src/BerlinVegan.cpp \
+           3rdparty/Cutehacks/gel/collection.cpp \
+           3rdparty/Cutehacks/gel/jsonlistmodel.cpp
+
+HEADERS += 3rdparty/Cutehacks/gel/gel.h \
+3rdparty/Cutehacks/gel/collection.h \
+3rdparty/Cutehacks/gel/jsonlistmodel.h \
+3rdparty/Cutehacks/gel/jsvalueiterator.h
+
 
 OTHER_FILES += qml/BerlinVegan.qml \
     qml/cover/CoverPage.qml \
@@ -26,15 +34,12 @@ OTHER_FILES += qml/BerlinVegan.qml \
     rpm/BerlinVegan.yaml \
     translations/*.ts \
     BerlinVegan.desktop \
-    qml/components/IconToolBar.qml \
-    qml/JSONListModel/JSONListModel.qml \
-    qml/JSONListModel/Example.qml \
     qml/pages/GastroLocations.json \
     qml/pages/GastroLocationList.qml \
     qml/pages/GastroLocationDescription.qml \
     qml/components/IconToolBar.qml \
-    qml/components/distance.js \
-    qml/components/CollapsibleItem.qml
+    qml/components/CollapsibleItem.qml \
+    qml/components/distance.js
 
 # to disable building translations every time, comment out the
 # following CONFIG line
