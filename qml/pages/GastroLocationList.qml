@@ -61,15 +61,22 @@ Page {
         id: positionSource
     }
 
-    JsonListModel {
-        id: jsonModel
-        dynamicRoles: true
+    Collection {
+        id: jsonModelCollection
+        model: JsonListModel {
+            id: jsonModel
+            dynamicRoles: true
+        }
 
+        comparator: function lessThan(a, b) {
+            return positionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
+            < positionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
+        }
     }
 
     SilicaListView {
         id: listView
-        model: jsonModel
+        model: jsonModelCollection
         anchors.fill: parent
         header: PageHeader {
             title: qsTr("Vegan friendly venues")
