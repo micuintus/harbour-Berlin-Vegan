@@ -147,43 +147,23 @@ Page {
                     text: "Opening hours"
                 }
 
-                DetailItem {
-                    label: qsTr("Monday")
-                    value: restaurant.otMon
-                }
+                ListView {
+                    width: parent.width
+                    height: contentHeight
 
-                DetailItem {
-                    label: qsTr("Tuesday")
-                    value: restaurant.otTue
-                }
+                    interactive: false
 
-                DetailItem {
-                    label: qsTr("Wednesday")
-                    value: restaurant.otWed
-                }
+                    model: OpeningHoursModel {
+                        restaurant: page.restaurant
+                    }
 
-                DetailItem {
-                    label: qsTr("Thursday")
-                    value: restaurant.otThu
-                }
-
-                DetailItem {
-                    label: qsTr("Friday")
-                    value: restaurant.otFri
-                }
-
-                DetailItem {
-                    label: qsTr("Saturday")
-                    value: restaurant.otSat
-                }
-
-                DetailItem {
-                    label: qsTr("Sunday")
-                    value: restaurant.otSun
+                    delegate: DetailItem {
+                        label: model.day
+                        value: model.hours
+                    }
                 }
             }
         }
-
 
 
         Label {

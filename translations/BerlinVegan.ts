@@ -24,7 +24,14 @@
     </message>
 </context>
 <context>
-    <name>GastroLocationDescription</name>
+    <name>GastroLocationList</name>
+    <message>
+        <source>Vegan friendly venues</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpeningHoursModel</name>
     <message>
         <source>Monday</source>
         <translation type="unfinished"></translation>
@@ -51,13 +58,6 @@
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>GastroLocationList</name>
-    <message>
-        <source>Vegan friendly venues</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
