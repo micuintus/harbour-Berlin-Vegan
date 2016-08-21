@@ -122,14 +122,13 @@ Page {
 
             }
 
-
             opacity: flicka.scrolledUpRatio
         }
 
         CollapsibleItem {
             id: detailscollapsible
 
-            collapsedHeight: columnheader.height*3
+            collapsedHeight: page.height / 6
             expandedHeight: openinghours.implicitHeight
 
             anchors {
@@ -143,13 +142,20 @@ Page {
                 anchors.fill: parent
 
                 SectionHeader {
-                    id: columnheader
-                    text: "Opening hours"
+                    text: qsTr("Details")
                 }
 
-                ListView {
-                    width: parent.width
+                SilicaListView {
+
+                    id: openinghourslistview
                     height: contentHeight
+
+                    header: SectionHeader {
+                        text: qsTr("Opening hours")
+                        font.pixelSize: Theme.fontSizeExtraSmall
+                    }
+
+                    width: parent.width
 
                     interactive: false
 
@@ -164,7 +170,6 @@ Page {
                 }
             }
         }
-
 
         Label {
             id: dalabel

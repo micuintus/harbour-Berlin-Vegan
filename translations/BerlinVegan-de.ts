@@ -24,6 +24,17 @@
     </message>
 </context>
 <context>
+    <name>GastroLocationDescription</name>
+    <message>
+        <source>Opening hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GastroLocationList</name>
     <message>
         <source>Vegan friendly venues</source>
