@@ -4,6 +4,7 @@ import Sailfish.Silica 1.0
 import QtPositioning 5.2
 
 import "../components/distance.js" as Distance
+import "../components/OpeningHoursModelAlgorithms.js" as OpeningHoursModelAlgorithms
 import "../components"
 
 Page {
@@ -52,6 +53,7 @@ Page {
             radius: 5
             color: Theme.highlightDimmerColor
             opacity: initialOpacity  * flicka.scrolledUpRatio
+
         }
 
         PageHeader {
@@ -141,6 +143,7 @@ Page {
                 id: openinghours
                 anchors.fill: parent
 
+
                 SectionHeader {
                     text: qsTr("Details")
                 }
@@ -148,7 +151,7 @@ Page {
                 SilicaListView {
 
                     id: openinghourslistview
-                    height: contentHeight
+                    height: openinghourslistview.contentHeight
 
                     header: SectionHeader {
                         text: qsTr("Opening hours")
@@ -160,7 +163,10 @@ Page {
                     interactive: false
 
                     model: OpeningHoursModel {
+                        id: openinghoursmodel
                         restaurant: page.restaurant
+
+                        Component.onCompleted: OpeningHoursModelAlgorithms.condenseOpeningHoursModel(openinghoursmodel)
                     }
 
                     delegate: DetailItem {
@@ -182,7 +188,7 @@ Page {
                 left: parent.left
                 right: parent.right
                 top: detailscollapsible.bottom
-                margins:  Theme.paddingLarge
+                margins: Theme.paddingLarge
             }
         }
     }

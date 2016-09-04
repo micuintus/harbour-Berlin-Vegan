@@ -40,6 +40,7 @@ OTHER_FILES += qml/BerlinVegan.qml \
     qml/components/IconToolBar.qml \
     qml/components/CollapsibleItem.qml \
     qml/components/OpeningHoursModel.qml \
+    qml/components/OpeningHoursModelAlgorithms.js \
     qml/components/distance.js
 
 # to disable building translations every time, comment out the

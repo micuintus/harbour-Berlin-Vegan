@@ -26,11 +26,11 @@
 <context>
     <name>GastroLocationDescription</name>
     <message>
-        <source>Opening hours</source>
+        <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Details</source>
+        <source>Opening hours</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -69,6 +69,13 @@
     </message>
     <message>
         <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpeningHoursModelAlgorithms</name>
+    <message>
+        <source>closed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
