@@ -56,9 +56,10 @@ Page {
         xhr.send();
     }
 
-
     PositionSource {
         id: positionSource
+        updateInterval: 1000
+        onPositionChanged: jsonModelCollection.setModel(jsonModel)
     }
 
     Collection {
