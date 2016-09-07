@@ -24,7 +24,7 @@ Page {
         id: flicka
         anchors.fill: parent
         property real nonDescriptionHeaderHeight: image.initalHeight + icontoolbar.height
-        contentHeight: nonDescriptionHeaderHeight + dalabel.height
+        contentHeight: nonDescriptionHeaderHeight + longdescriptiontext.height + detailscollapsible.height
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
 
         VerticalScrollDecorator {}
@@ -180,7 +180,7 @@ Page {
         }
 
         Label {
-            id: dalabel
+            id: longdescriptiontext
             font.pixelSize: Theme.fontSizeSmall
             text: restaurant.comment
             wrapMode: Text.WordWrap
