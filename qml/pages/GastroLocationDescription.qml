@@ -97,8 +97,10 @@ Page {
 
         Label {
             id: distance
-            text: Distance.humanReadableDistanceString(positionSource.position.coordinate,
-                                                       QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord))
+            text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
+                  ? Distance.humanReadableDistanceString(positionSource.position.coordinate,
+                                                         QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord))
+                  : ""
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.highlightColor
 

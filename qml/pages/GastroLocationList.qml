@@ -106,8 +106,9 @@ Page {
 
             Label {
                 id: distance
-                text: Distance.humanReadableDistanceString(positionSource.position.coordinate,
-                                                           QtPositioning.coordinate(model.latCoord, model.longCoord))
+                text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
+                Distance.humanReadableDistanceString(positionSource.position.coordinate,
+                                                           QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
                 color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 horizontalAlignment: Text.AlignRight
