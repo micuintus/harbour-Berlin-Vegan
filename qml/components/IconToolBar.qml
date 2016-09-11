@@ -33,7 +33,7 @@ Column {
         Layout.fillWidth: true
         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-        Layout.maximumWidth: column.width/3
+        Layout.maximumWidth: column.width/2
 
         width: column.width
 
@@ -54,6 +54,8 @@ Column {
                          : Theme.primaryColor)
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            enabled: false
+            visible: false
         }
 
 
