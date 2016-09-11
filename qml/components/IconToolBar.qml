@@ -46,6 +46,7 @@ Column {
             onClicked: voicecall.dial(restaurant.telephone)
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            enabled: typeof restaurant["telephone"] !== "undefined"
         }
 
         IconButton {
@@ -69,6 +70,7 @@ Column {
                                             : "http://" + restaurant.website)
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            enabled: typeof restaurant["website"] !== "undefined"
         }
 
     }
