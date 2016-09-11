@@ -37,9 +37,6 @@ Column {
 
         width: column.width
 
-
-        opacity: 1 - flicka.contentY / (page.height/3)
-
         IconButton {
             icon.source: "image://theme/icon-l-answer?" + (pressed
                          ? Theme.highlightColor
@@ -55,7 +52,6 @@ Column {
             icon.source: "image://theme/icon-m-favorite?" + (pressed
                          ? Theme.highlightColor
                          : Theme.primaryColor)
-            onClicked: console.log("Play clicked!")
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
@@ -66,7 +62,7 @@ Column {
                          ? Theme.highlightColor
                          : Theme.primaryColor)
 
-            onClicked: Qt.openUrlExternally(restaurant.website.slice(0,4) == "http"
+            onClicked: Qt.openUrlExternally(restaurant.website.slice(0,4) === "http"
                                             ?             restaurant.website
                                             : "http://" + restaurant.website)
             Layout.fillWidth: true

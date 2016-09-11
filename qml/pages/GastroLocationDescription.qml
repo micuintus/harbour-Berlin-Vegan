@@ -18,8 +18,6 @@ Page {
 
     property var restaurant
 
-    anchors.fill: parent
-
     SilicaFlickable {
         id: flicka
         anchors.fill: parent
@@ -32,7 +30,9 @@ Page {
         Image {
             id: image
 
-            source: restaurant.pictures[0].url
+            source: typeof restaurant["pictures"] !== "undefined"
+                    ? restaurant.pictures[0].url
+                    : ""
             property real initalHeight: page.height/3
 
             fillMode: Image.PreserveAspectCrop
