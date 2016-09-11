@@ -5,14 +5,15 @@ function cleanUpOpeningHoursModel(openingHoursModel)
     var count = openingHoursModel.count;
     for (var i = 0; i < count; i++)
     {
-        if (openingHoursModel.get(i).hours === "")
-        {
-            openingHoursModel.set(i, {"hours":qsTr("closed")});
-        }
-        else while (i < count && openingHoursModel.get(i).hours === "flagDeleteDummy")
+        while (i < count && openingHoursModel.get(i).hours === "flagDeleteDummy")
         {
             openingHoursModel.remove(i);
             count--;
+        }
+
+        if (openingHoursModel.get(i).hours === "")
+        {
+            openingHoursModel.set(i, {"hours":qsTr("closed")});
         }
     }
 }
@@ -58,7 +59,6 @@ function condenseOpeningHoursModel(openingHoursModel)
             {
                 mergeElements(openingHoursModel, lastEqualItemIndex, i + 1);
             }
-
         }
         else
         {
