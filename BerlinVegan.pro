@@ -32,7 +32,7 @@ OTHER_FILES += qml/BerlinVegan.qml \
     rpm/BerlinVegan.changes.in \
     rpm/BerlinVegan.spec \
     rpm/BerlinVegan.yaml \
-    translations/*.ts \
+    translations/BerlinVegan-de.ts \
     BerlinVegan.desktop \
     qml/pages/GastroLocations.json \
     qml/pages/GastroLocationList.qml \

@@ -9,21 +9,6 @@
     </message>
 </context>
 <context>
-    <name>FirstPage</name>
-    <message>
-        <source>Show Page 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>UI Template</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hello Sailors</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>GastroLocationDescription</name>
     <message>
         <source>Details</source>
@@ -37,7 +22,7 @@
 <context>
     <name>GastroLocationList</name>
     <message>
-        <source>Vegan friendly venues</source>
+        <source>Vegan food nearby</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

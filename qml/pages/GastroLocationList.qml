@@ -80,7 +80,7 @@ Page {
         model: jsonModelCollection
         anchors.fill: parent
         header: PageHeader {
-            title: qsTr("Vegan friendly venues")
+            title: qsTr("Vegan food nearby")
         }
 
         delegate: ListItem {

@@ -9,74 +9,59 @@
     </message>
 </context>
 <context>
-    <name>FirstPage</name>
-    <message>
-        <source>Show Page 2</source>
-        <translation>Zur Seite 2</translation>
-    </message>
-    <message>
-        <source>UI Template</source>
-        <translation>UI-Vorlage</translation>
-    </message>
-    <message>
-        <source>Hello Sailors</source>
-        <translation>Hallo Matrosen</translation>
-    </message>
-</context>
-<context>
     <name>GastroLocationDescription</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Details</translation>
     </message>
     <message>
         <source>Opening hours</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffungszeiten</translation>
     </message>
 </context>
 <context>
     <name>GastroLocationList</name>
     <message>
-        <source>Vegan friendly venues</source>
-        <translation type="unfinished"></translation>
+        <source>Vegan food nearby</source>
+        <translation>Veganes Essen in der Nähe</translation>
     </message>
 </context>
 <context>
     <name>OpeningHoursModel</name>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Montag</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Dienstag</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittwoch</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Donnerstag</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Freitag</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Samstag</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonntag</translation>
     </message>
 </context>
 <context>
     <name>OpeningHoursModelAlgorithms</name>
     <message>
         <source>closed</source>
-        <translation type="unfinished"></translation>
+        <translation>geschlossen</translation>
     </message>
 </context>
 </TS>
