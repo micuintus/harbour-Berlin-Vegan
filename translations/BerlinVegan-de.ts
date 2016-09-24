@@ -16,7 +16,35 @@
     </message>
     <message>
         <source>Opening hours</source>
-        <translation>Öffungszeiten</translation>
+        <translation>Öffnungszeiten</translation>
+    </message>
+    <message>
+        <source>Vegan category</source>
+        <translation>Restaurantkategorie</translation>
+    </message>
+    <message>
+        <source>omnivore</source>
+        <translation>omnivor</translation>
+    </message>
+    <message>
+        <source>omnivore (vegan declared)</source>
+        <translation>omnivor (vegan deklariert)</translation>
+    </message>
+    <message>
+        <source>vegetarian</source>
+        <translation>vegetarisch</translation>
+    </message>
+    <message>
+        <source>vegetarian (vegan declared)</source>
+        <translation>vegetarisch (vegan deklariert)</translation>
+    </message>
+    <message>
+        <source>vegan</source>
+        <translation>vegan</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>unbekannt</translation>
     </message>
 </context>
 <context>

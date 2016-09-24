@@ -145,11 +145,6 @@ Page {
                 id: openinghours
                 anchors.fill: parent
 
-
-                SectionHeader {
-                    text: qsTr("Details")
-                }
-
                 SilicaListView {
 
                     id: openinghourslistview
@@ -157,7 +152,6 @@ Page {
 
                     header: SectionHeader {
                         text: qsTr("Opening hours")
-                        font.pixelSize: Theme.fontSizeExtraSmall
                     }
 
                     width: parent.width
@@ -174,6 +168,25 @@ Page {
                     delegate: DetailItem {
                         label: model.day
                         value: model.hours
+                    }
+                }
+
+                SectionHeader {
+                    text: qsTr("Details")
+                }
+
+                DetailItem {
+                    label: qsTr("Vegan category")
+                    value: {
+                        switch(restaurant.vegan)
+                        {
+                            case 1: qsTr("omnivore"); break;
+                            case 2: qsTr("omnivore (vegan declared)"); break;
+                            case 3: qsTr("vegetarian"); break;
+                            case 4: qsTr("vegetarian (vegan declared)"); break;
+                            case 5: qsTr("vegan"); break;
+                            default: qsTr("unknown"); break;
+                        }
                     }
                 }
             }

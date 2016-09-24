@@ -18,6 +18,34 @@
         <source>Opening hours</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Vegan category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>omnivore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>omnivore (vegan declared)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>vegetarian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>vegetarian (vegan declared)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>vegan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GastroLocationList</name>
