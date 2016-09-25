@@ -172,19 +172,159 @@ Page {
                 }
 
                 SectionHeader {
-                    text: qsTr("Details")
+                    text: qsTr("Food details")
                 }
 
                 DetailItem {
-                    label: qsTr("Vegan category")
+                    label: qsTr("Category")
                     value: {
                         switch(restaurant.vegan)
                         {
                             case 1: qsTr("omnivore"); break;
-                            case 2: qsTr("omnivore (vegan declared)"); break;
+                            case 2: qsTr("omnivore \n(vegan declared)"); break;
                             case 3: qsTr("vegetarian"); break;
-                            case 4: qsTr("vegetarian (vegan declared)"); break;
-                            case 5: qsTr("vegan"); break;
+                            case 4: qsTr("vegetarian \n(vegan declared)"); break;
+                            case 5: qsTr("100% vegan"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("Cert. organic offers")
+                    value: {
+                        switch (restaurant.organic)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("Gluten-free options")
+                    value: {
+                        switch (restaurant.glutenFree)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+                SectionHeader {
+                    text: qsTr("Accessibility")
+                }
+
+
+                DetailItem {
+                    label: qsTr("Wheelchair-friendly")
+                    value: {
+                        switch (restaurant.handicappedAccessible)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("Wheelchair-accessible WC")
+                    value: {
+                        switch (restaurant.handicappedAccessibleWc)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("High chair")
+                    value: {
+                        switch (restaurant.childChair)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("Dogs allowed")
+                    value: {
+                        switch (restaurant.dog)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+
+                SectionHeader {
+                    text: qsTr("Venue features")
+                }
+
+                DetailItem {
+                    label: qsTr("WiFi")
+                    value: {
+                        switch (restaurant.wlan)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("Seats outdoor")
+                    value: {
+                        switch (restaurant.seatsOutdoor)
+                        {
+                            case -1: qsTr("unknown"); break;
+                            case  0: qsTr("no"); break;
+                            default: restaurant.seatsOutdoor; break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("Seats indoor")
+                    value: {
+                        switch (restaurant.seatsIndoor)
+                        {
+                            case -1: qsTr("unknown"); break;
+                            case  0: qsTr("no"); break;
+                            default: restaurant.seatsIndoor; break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("Catering")
+                    value: {
+                        switch (restaurant.catering)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
+                            default: qsTr("unknown"); break;
+                        }
+                    }
+                }
+
+                DetailItem {
+                    label: qsTr("Delivery service")
+                    value: {
+                        switch (restaurant.delivery)
+                        {
+                            case 1: qsTr("yes"); break;
+                            case 0: qsTr("no"); break;
                             default: qsTr("unknown"); break;
                         }
                     }
