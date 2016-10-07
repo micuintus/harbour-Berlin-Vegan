@@ -15,26 +15,6 @@
         <translation>Öffnungszeiten</translation>
     </message>
     <message>
-        <source>omnivore</source>
-        <translation>omnivor</translation>
-    </message>
-    <message>
-        <source>vegetarian</source>
-        <translation>vegetarisch</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>unbekannt</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation>Ja</translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation>Nein</translation>
-    </message>
-    <message>
         <source>Food details</source>
         <translation>Essen</translation>
     </message>
@@ -87,10 +67,6 @@
         <translation>Kategorie</translation>
     </message>
     <message>
-        <source>100% vegan</source>
-        <translation>100% vegan</translation>
-    </message>
-    <message>
         <source>Seats outdoor</source>
         <translation>Sitzplätze im Freien</translation>
     </message>
@@ -98,17 +74,44 @@
         <source>Seats indoor</source>
         <translation>Sitzplätze im Inneren</translation>
     </message>
+</context>
+<context>
+    <name>GastroLocationDescriptionAlgorithms</name>
+    <message>
+        <source>omnivore</source>
+        <translation type="unfinished">omnivor</translation>
+    </message>
     <message>
         <source>omnivore 
 (vegan declared)</source>
-        <translation>omnivor
+        <translation type="unfinished">omnivor
 (vegan deklariert)</translation>
+    </message>
+    <message>
+        <source>vegetarian</source>
+        <translation type="unfinished">vegetarisch</translation>
     </message>
     <message>
         <source>vegetarian 
 (vegan declared)</source>
-        <translation>vegetarisch
+        <translation type="unfinished">vegetarisch
 (vegan deklariert)</translation>
+    </message>
+    <message>
+        <source>100% vegan</source>
+        <translation type="unfinished">100% vegan</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation type="unfinished">unbekannt</translation>
+    </message>
+    <message>
+        <source>yes</source>
+        <translation type="unfinished">Ja</translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation type="unfinished">Nein</translation>
     </message>
 </context>
 <context>

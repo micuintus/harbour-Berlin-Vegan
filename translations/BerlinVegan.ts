@@ -15,26 +15,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>omnivore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>vegetarian</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Food details</source>
         <translation type="unfinished"></translation>
     </message>
@@ -87,15 +67,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>100% vegan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Seats outdoor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Seats indoor</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GastroLocationDescriptionAlgorithms</name>
+    <message>
+        <source>omnivore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -104,8 +87,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>vegetarian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>vegetarian 
 (vegan declared)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>100% vegan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
