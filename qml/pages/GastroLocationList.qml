@@ -58,8 +58,8 @@ Page {
 
     PositionSource {
         id: positionSource
-        updateInterval: 1000
-        onPositionChanged: jsonModelCollection.setModel(jsonModel)
+        updateInterval: 5000
+        onPositionChanged: jsonModelCollection.reSort()
     }
 
     Collection {
