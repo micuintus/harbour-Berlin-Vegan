@@ -79,39 +79,39 @@
     <name>GastroLocationDescriptionAlgorithms</name>
     <message>
         <source>omnivore</source>
-        <translation type="unfinished">omnivor</translation>
+        <translation>omnivor</translation>
     </message>
     <message>
         <source>omnivore 
 (vegan declared)</source>
-        <translation type="unfinished">omnivor
+        <translation>omnivor
 (vegan deklariert)</translation>
     </message>
     <message>
         <source>vegetarian</source>
-        <translation type="unfinished">vegetarisch</translation>
+        <translation>vegetarisch</translation>
     </message>
     <message>
         <source>vegetarian 
 (vegan declared)</source>
-        <translation type="unfinished">vegetarisch
+        <translation>vegetarisch
 (vegan deklariert)</translation>
     </message>
     <message>
         <source>100% vegan</source>
-        <translation type="unfinished">100% vegan</translation>
+        <translation>100% vegan</translation>
     </message>
     <message>
         <source>unknown</source>
-        <translation type="unfinished">unbekannt</translation>
+        <translation>unbekannt</translation>
     </message>
     <message>
         <source>yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>no</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
 </context>
 <context>
@@ -119,6 +119,10 @@
     <message>
         <source>Vegan food nearby</source>
         <translation>Veganes Essen in der Nähe</translation>
+    </message>
+    <message>
+        <source>Update sorting</source>
+        <translation>Sortierung aktualisieren</translation>
     </message>
 </context>
 <context>

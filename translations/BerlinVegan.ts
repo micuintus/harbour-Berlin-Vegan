@@ -118,6 +118,10 @@
         <source>Vegan food nearby</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Update sorting</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OpeningHoursModel</name>

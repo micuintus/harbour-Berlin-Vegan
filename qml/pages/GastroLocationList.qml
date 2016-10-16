@@ -58,8 +58,7 @@ Page {
 
     PositionSource {
         id: positionSource
-        updateInterval: 5000
-        onPositionChanged: jsonModelCollection.reSort()
+        updateInterval: 10000
     }
 
     Collection {
@@ -79,6 +78,14 @@ Page {
         id: listView
         model: jsonModelCollection
         anchors.fill: parent
+
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Update sorting")
+                onClicked: jsonModelCollection.invalidate()
+            }
+        }
+
         header: PageHeader {
             title: qsTr("Vegan food nearby")
         }
