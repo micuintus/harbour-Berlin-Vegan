@@ -32,23 +32,63 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 CoverBackground {
-    Label {
-        id: label
-        anchors.centerIn: parent
-        text: qsTr("My Cover")
-    }
+
+    property var jsonModelCollection
+    property var positionSource
+    readonly property double listStretch: 1.2
 
     CoverActionList {
-        id: coverAction
+        id: actionlist
+
+        iconBackground: true
 
         CoverAction {
-            iconSource: "image://theme/icon-cover-next"
-        }
-
-        CoverAction {
-            iconSource: "image://theme/icon-cover-pause"
+            iconSource: "image://theme/icon-cover-refresh"
+            onTriggered: {
+                positionSource.update();
+                jsonModelCollection.invalidate();
+            }
         }
     }
+
+    SilicaListView {
+        id: listView
+        model: jsonModelCollection
+
+        anchors {
+            left: parent.left
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+            margins: Theme.paddingMedium
+        }
+
+        header: Label {
+            text: qsTr("Berlin vegan")
+            color: Theme.highlightColor
+            height: contentHeight * listStretch
+        }
+
+        delegate: ListItem {
+            id: delegate
+
+            contentHeight: namelabel.height * listStretch
+            contentWidth: parent.width
+
+            Label {
+                id: namelabel
+                text: model.name
+
+                width: parent.width
+
+                font.pixelSize: Theme.fontSizeSmall
+                truncationMode: TruncationMode.Fade
+                anchors.margins: Theme.paddingSmall
+
+            }
+
+        }
+
+    }
+
 }
-
-

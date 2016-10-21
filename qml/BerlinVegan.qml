@@ -30,12 +30,67 @@
 
 import QtQuick 2.2
 import Sailfish.Silica 1.0
+import QtPositioning 5.2
+
+import com.cutehacks.gel 1.0
+
 import "pages"
+import "cover"
 
 ApplicationWindow
 {
-    initialPage: Component { GastroLocationList { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    id: app
+
+    Component.onCompleted: {
+        globalPositionSource.start()
+
+        var json
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET","pages/GastroLocations.json" )
+        xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE)
+                {
+                    json = xhr.responseText;
+                    jsonModel.add(JSON.parse(json));
+                }
+        }
+
+        xhr.send();
+    }
+
+    PositionSource {
+        id: globalPositionSource
+        updateInterval: 10000
+    }
+
+
+
+    Collection {
+        id: gjsonModelCollection
+
+
+        model: JsonListModel {
+            id: jsonModel
+            dynamicRoles: true
+        }
+
+        comparator: function lessThan(a, b) {
+            return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
+            < globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
+        }
+    }
+
+    initialPage: Component { GastroLocationList {
+        jsonModelCollection: gjsonModelCollection
+        positionSource: globalPositionSource
+        id: listPage
+    } }
+
+    cover: Component { CoverPage {
+        id: cover
+        jsonModelCollection: gjsonModelCollection
+        positionSource: globalPositionSource
+    } }
 }
 
 

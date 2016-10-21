@@ -39,40 +39,9 @@ Page {
 
     id: page
 
-    Component.onCompleted: {
-        positionSource.start()
+    property var jsonModelCollection
+    property var positionSource
 
-        var json
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET","../pages/GastroLocations.json" )
-        xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE)
-                {
-                    json = xhr.responseText;
-                    jsonModel.add(JSON.parse(json));
-                }
-        }
-
-        xhr.send();
-    }
-
-    PositionSource {
-        id: positionSource
-        updateInterval: 10000
-    }
-
-    Collection {
-        id: jsonModelCollection
-        model: JsonListModel {
-            id: jsonModel
-            dynamicRoles: true
-        }
-
-        comparator: function lessThan(a, b) {
-            return positionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
-            < positionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
-        }
-    }
 
     SilicaListView {
         id: listView

@@ -4,7 +4,7 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
+        <source>Berlin vegan</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -115,11 +115,11 @@
 <context>
     <name>GastroLocationList</name>
     <message>
-        <source>Vegan food nearby</source>
+        <source>Update sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update sorting</source>
+        <source>Vegan food nearby</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
