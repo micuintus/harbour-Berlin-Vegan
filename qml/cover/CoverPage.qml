@@ -90,12 +90,10 @@ CoverBackground {
                     left: parent.left
                     rightMargin: Theme.paddingSmall
                     verticalCenter: parent.verticalCenter
-
                 }
 
                 font.pixelSize: Theme.fontSizeSmall
                 truncationMode: TruncationMode.Fade
-
             }
 
             Label {
@@ -110,11 +108,6 @@ CoverBackground {
                     verticalCenter: parent.verticalCenter
                 }
             }
-
         }
-
-
-
     }
-
 }

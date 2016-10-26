@@ -12,10 +12,6 @@ Item {
         id: positionSource
     }
 
-    Component.onCompleted: {
-        positionSource.start()
-    }
-
     property string name
     property string street
     property var restaurantCoordinate

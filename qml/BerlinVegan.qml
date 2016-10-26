@@ -42,8 +42,6 @@ ApplicationWindow
     id: app
 
     Component.onCompleted: {
-        globalPositionSource.start()
-
         var json
         var xhr = new XMLHttpRequest();
         xhr.open("GET","pages/GastroLocations.json" )
@@ -60,14 +58,20 @@ ApplicationWindow
 
     PositionSource {
         id: globalPositionSource
-        updateInterval: 10000
+        updateInterval: 5000
     }
 
-
+    onApplicationActiveChanged: {
+        if (Qt.application.state === Qt.ApplicationActive) {
+            globalPositionSource.start();
+        }
+        else {
+            globalPositionSource.stop();
+        }
+    }
 
     Collection {
         id: gjsonModelCollection
-
 
         model: JsonListModel {
             id: jsonModel

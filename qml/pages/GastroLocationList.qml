@@ -42,7 +42,6 @@ Page {
     property var jsonModelCollection
     property var positionSource
 
-
     SilicaListView {
         id: listView
         model: jsonModelCollection
