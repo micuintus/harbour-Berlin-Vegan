@@ -28,8 +28,12 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.2
+import "../components/distance.js" as Distance
+
 import Sailfish.Silica 1.0
+import QtPositioning 5.2
+import QtQuick 2.2
+
 
 CoverBackground {
 
@@ -91,9 +95,25 @@ CoverBackground {
 
                 font.pixelSize: Theme.fontSizeSmall
                 truncationMode: TruncationMode.Fade
+
+            }
+
+            Label {
+                id: distance
+                text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
+                Distance.humanReadableDistanceString(positionSource.position.coordinate,
+                                                     QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
+                font.pixelSize: Theme.fontSizeExtraSmall
+                horizontalAlignment: Text.AlignRight
+                anchors {
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
             }
 
         }
+
+
 
     }
 
