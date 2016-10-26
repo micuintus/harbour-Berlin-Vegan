@@ -35,7 +35,8 @@ CoverBackground {
 
     property var jsonModelCollection
     property var positionSource
-    readonly property double listStretch: 1.2
+    readonly property double listStretch: 1.15
+
 
     CoverActionList {
         id: actionlist
@@ -55,12 +56,13 @@ CoverBackground {
         id: listView
         model: jsonModelCollection
 
+        height: parent.height * 0.6
+
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
-            bottom: parent.bottom
-            margins: Theme.paddingMedium
+            margins: Theme.paddingLarge
         }
 
         header: Label {
@@ -79,12 +81,16 @@ CoverBackground {
                 id: namelabel
                 text: model.name
 
-                width: parent.width
+                anchors {
+                    right: distance.left
+                    left: parent.left
+                    rightMargin: Theme.paddingSmall
+                    verticalCenter: parent.verticalCenter
+
+                }
 
                 font.pixelSize: Theme.fontSizeSmall
                 truncationMode: TruncationMode.Fade
-                anchors.margins: Theme.paddingSmall
-
             }
 
         }
