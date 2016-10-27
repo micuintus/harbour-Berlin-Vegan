@@ -70,7 +70,7 @@ CoverBackground {
         }
 
         header: Label {
-            text: qsTr("Berlin vegan")
+            text: qsTr("Berlin-Vegan")
             color: Theme.highlightColor
             height: contentHeight * listStretch
         }

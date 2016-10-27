@@ -4,7 +4,7 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>Berlin vegan</source>
+        <source>Berlin-Vegan</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
