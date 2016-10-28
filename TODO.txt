@@ -7,6 +7,10 @@ for javafile in `find -name \*.java`; do  cat licenseHeader.txt $javafile > temp
 
 * Transfer bascially this file to Gitlab / Github issue list (linkability between tickets and git commits)
   * Find out a way to sync gitlab and github projects (including issue numbers in the best case!)
+* Description height issue (Bindining loop ++ sometimes wrong)
+* Opening hours small to few to see
+* Opening hours sunday-tuesday issue
+------------------------------------
 
 * Implement list ordered by position
   --> Find a solution for the case a position is not available
