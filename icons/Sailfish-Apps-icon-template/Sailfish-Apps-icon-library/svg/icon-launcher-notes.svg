@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="86px"
+	 height="86px" viewBox="0 0 86 86" enable-background="new 0 0 86 86" xml:space="preserve">
+<g id="Layer_2" display="none">
+</g>
+<g id="Layer_1">
+	<g>
+		<path fill="#FFC8A0" d="M41.423,85.606c-0.195-0.009-0.407-0.02-0.635-0.033C40.996,85.588,41.21,85.596,41.423,85.606z"/>
+		<path fill="#FFC8A0" d="M41.812,85.623c0.38,0.01,0.757,0.029,1.139,0.029c-0.526,0-1.028-0.021-1.528-0.045
+			C41.564,85.613,41.69,85.618,41.812,85.623z"/>
+		<path fill="#FFC8A0" d="M0.378,45.164c-0.013-0.228-0.024-0.44-0.033-0.635C0.355,44.741,0.364,44.955,0.378,45.164z"/>
+		<path fill="#FFC8A0" d="M0.329,44.139c0.005,0.123,0.01,0.249,0.016,0.389C0.321,44.028,0.3,43.526,0.3,43
+			C0.3,43.382,0.319,43.759,0.329,44.139z"/>
+	</g>
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="12.7851" y1="73.1519" x2="85.1792" y2="0.7578">
+		<stop  offset="0" style="stop-color:#F5E7B8"/>
+		<stop  offset="0.9951" style="stop-color:#E6D695"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M85.603,1.77c0-0.785-0.637-1.422-1.422-1.422H1.722C0.937,0.349,0.3,0.985,0.3,1.77V43
+		c0,23.556,19.096,42.651,42.651,42.651h41.23c0.785,0,1.422-0.696,1.422-1.481V1.77z"/>
+	<g>
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="18.2452" y1="32.6486" x2="67.6576" y2="-16.7638">
+			<stop  offset="0" style="stop-color:#00A89A"/>
+			<stop  offset="1" style="stop-color:#00CFBD"/>
+		</linearGradient>
+		<path fill="url(#SVGID_2_)" d="M84.181,0.349H1.722C0.937,0.349,0.3,0.985,0.3,1.77v12.933h85.303V1.77
+			C85.603,0.985,84.966,0.349,84.181,0.349z"/>
+	</g>
+	<g>
+		<rect x="9.918" y="64.374" opacity="0.1" width="75.782" height="1.943"/>
+		<rect x="9.918" y="54.659" opacity="0.1" width="75.782" height="1.943"/>
+		<path opacity="0.1" d="M17.52,77.005H85.7v-1.943H15.748C16.326,75.729,16.915,76.379,17.52,77.005z"/>
+		<rect x="9.918" y="44.943" opacity="0.1" width="75.782" height="1.943"/>
+		<rect x="9.918" y="24.54" opacity="0.1" width="75.782" height="1.943"/>
+		<rect x="9.918" y="35.227" opacity="0.1" width="75.782" height="1.943"/>
+	</g>
+	
+		<path opacity="0.5" fill="none" stroke="#A0A2A4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+		M20.678,65.274c0,0,30.503-21.463,18.757-39.858c-6.566-10.284-17.864,37.574,2.28,33.225
+		c12.359-2.668,15.008-21.865,13.541-26.726c-2.145-7.104-2.429,11.712,4.86,8.068c7.288-3.644,5.137-13.216,11.53-14.758"/>
+</g>
+</svg>

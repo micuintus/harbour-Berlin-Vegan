@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="86px"
+	 height="86px" viewBox="0 0 86 86" enable-background="new 0 0 86 86" xml:space="preserve">
+<g id="Layer_2" display="none">
+</g>
+<g id="Layer_1">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="1277.1947" y1="602.0194" x2="1362.157" y2="517.0571" gradientTransform="matrix(0 -1 1 0 -516.5383 1362.6759)">
+		<stop  offset="0" style="stop-color:#E8CF13"/>
+		<stop  offset="0.9897" style="stop-color:#24A89E"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M0.1,1.53V43c0,23.693,19.208,42.9,42.9,42.9h41.47c0.79,0,1.43-0.64,1.43-1.43V43
+		C85.9,19.306,66.692,0.1,43,0.1H1.53C0.74,0.1,0.1,0.74,0.1,1.53z"/>
+	<g>
+		<polygon fill="#FFFFFF" points="32.78,51.551 35.432,54.201 30.504,59.128 35.432,64.055 32.78,66.704 27.855,61.777 
+			22.928,66.704 20.279,64.055 25.207,59.128 20.279,54.201 22.928,51.551 27.855,56.479 		"/>
+	</g>
+	<g>
+		<polygon fill="#FFFFFF" points="36.159,25.41 36.159,29.319 29.319,29.319 29.319,36.16 25.41,36.16 25.41,29.319 18.569,29.319 
+			18.569,25.41 25.41,25.41 25.41,18.569 29.319,18.569 29.319,25.41 		"/>
+	</g>
+	<g>
+		<rect x="51.795" y="25.41" fill="#FFFFFF" width="15.635" height="3.909"/>
+		<circle fill="#FFFFFF" cx="59.608" cy="21.505" r="2.416"/>
+		<circle fill="#FFFFFF" cx="59.608" cy="33.273" r="2.416"/>
+	</g>
+	<g>
+		<path fill="#F3B344" d="M43.05,44.477c0-0.788,0.639-1.427,1.427-1.427h39.947c0.788,0,1.427,0.639,1.427,1.427v39.947
+			c0,0.788-0.639,1.427-1.427,1.427H44.477c-0.788,0-1.427-0.639-1.427-1.427V44.477z"/>
+	</g>
+	<path fill="#FFFFFF" d="M52.772,57.658v-3.909H67.43v3.909H52.772z M52.772,64.499V60.59H67.43v3.909H52.772z"/>
+</g>
+</svg>

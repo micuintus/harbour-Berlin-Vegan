@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="86px"
+	 height="86px" viewBox="0 0 86 86" enable-background="new 0 0 86 86" xml:space="preserve">
+<g id="Layer_2" display="none">
+</g>
+<g id="Layer_1">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="671.8545" y1="85.2831" x2="756.4207" y2="0.7169" gradientTransform="matrix(1 0 0 1 -671.1376 0)">
+		<stop  offset="0" style="stop-color:#F7D6B3"/>
+		<stop  offset="0.5" style="stop-color:#777F81"/>
+		<stop  offset="0.9951" style="stop-color:#F6FFE4"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M84.277,0.3H43C19.417,0.3,0.3,19.418,0.3,43v41.277c0,0.786,0.637,1.423,1.423,1.423H43
+		c23.583,0,42.7-19.118,42.7-42.7V1.723C85.7,0.937,85.063,0.3,84.277,0.3z"/>
+	<g>
+		<circle fill="#32332F" cx="43" cy="43" r="32.025"/>
+	</g>
+	<g>
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="61.8601" y1="61.8597" x2="24.1403" y2="24.1399">
+			<stop  offset="0" style="stop-color:#686A6A"/>
+			<stop  offset="0.3645" style="stop-color:#181B1D"/>
+		</linearGradient>
+		<circle fill="url(#SVGID_2_)" cx="43" cy="43" r="26.672"/>
+	</g>
+	<g>
+		<circle fill="#002D8F" cx="42.985" cy="43.045" r="21.35"/>
+	</g>
+	<g>
+		<circle fill="#471E00" cx="43" cy="43" r="11.07"/>
+	</g>
+	<g>
+		<circle opacity="0.7" fill="#E85CFF" cx="51.543" cy="50.042" r="5.639"/>
+	</g>
+	<g opacity="0.9">
+		<path opacity="0.8" fill="#8BFFFF" d="M38.257,35.819c1.196-0.811,2.519-1.276,4.042-1.396c0.542-0.044,0.686-0.562,0.686-0.808
+			l0.014-6.444c0-0.231-0.276-0.643-0.825-0.617c-3.616,0.179-6.804,1.43-9.438,3.574c-0.326,0.265-0.25,0.822-0.002,1.043
+			l4.469,4.469C37.363,35.882,37.959,36.021,38.257,35.819z"/>
+		<path opacity="0.8" fill="#8BFFFF" d="M30.131,32.732c-2.174,2.684-3.455,5.849-3.587,9.541c-0.018,0.474,0.461,0.726,0.793,0.726
+			h6.327c0.169,0.001,0.707-0.139,0.737-0.607c0.094-1.51,0.574-2.838,1.348-4.038c0.385-0.597,0.154-0.914-0.019-1.063
+			l-4.596-4.595C30.946,32.501,30.389,32.412,30.131,32.732z"/>
+	</g>
+</g>
+</svg>
