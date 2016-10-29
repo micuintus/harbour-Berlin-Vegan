@@ -96,7 +96,10 @@ Page {
 
 
             onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDescription.qml"),
-                                      {restaurant : model } )
+                                      {
+                                          restaurant     : model,
+                                          positionSource : page.positionSource
+                                      } )
         }
         VerticalScrollDecorator {}
     }

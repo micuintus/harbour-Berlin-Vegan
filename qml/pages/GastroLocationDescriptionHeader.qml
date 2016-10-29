@@ -7,15 +7,11 @@ import "../components/distance.js" as Distance
 
 Item {
 
-
-    PositionSource {
-        id: positionSource
-    }
-
     property string name
     property string street
     property var restaurantCoordinate
     property var pictures
+    property var positionSource
     property real shrinkHeightBy
 
 

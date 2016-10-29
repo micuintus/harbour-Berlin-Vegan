@@ -11,8 +11,8 @@ Page {
 
     id: page
 
-
     property var restaurant
+    property var positionSource
 
     SilicaFlickable {
         id: flicka
@@ -29,6 +29,7 @@ Page {
             street: restaurant.street
             pictures: restaurant.pictures
             restaurantCoordinate: QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord)
+            positionSource: page.positionSource
 
             opacity: flicka.scrolledUpRatio
             height: page.height / 3
