@@ -12,19 +12,17 @@
 # The name of your application
 TARGET = BerlinVegan
 
-QT +=  positioning
-
 CONFIG += sailfishapp
+QT += positioning
 
 SOURCES += src/BerlinVegan.cpp \
            3rdparty/Cutehacks/gel/collection.cpp \
            3rdparty/Cutehacks/gel/jsonlistmodel.cpp
 
 HEADERS += 3rdparty/Cutehacks/gel/gel.h \
-3rdparty/Cutehacks/gel/collection.h \
-3rdparty/Cutehacks/gel/jsonlistmodel.h \
-3rdparty/Cutehacks/gel/jsvalueiterator.h
-
+           3rdparty/Cutehacks/gel/collection.h \
+           3rdparty/Cutehacks/gel/jsonlistmodel.h \
+           3rdparty/Cutehacks/gel/jsvalueiterator.h
 
 OTHER_FILES += qml/BerlinVegan.qml \
     qml/cover/CoverPage.qml \
@@ -36,6 +34,7 @@ OTHER_FILES += qml/BerlinVegan.qml \
     BerlinVegan.desktop \
     qml/pages/GastroLocations.json \
     qml/pages/GastroLocationList.qml \
+    qml/pages/GastroLocationDescriptionHeader.qml \
     qml/pages/GastroLocationDescription.qml \
     qml/components/IconToolBar.qml \
     qml/components/CollapsibleItem.qml \
@@ -43,6 +42,7 @@ OTHER_FILES += qml/BerlinVegan.qml \
     qml/components/OpeningHoursModelAlgorithms.js \
     qml/components/GastroLocationDescriptionAlgorithms.js \
     qml/components/distance.js
+
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -53,6 +53,3 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/BerlinVegan-de.ts
-
-DISTFILES += \
-    qml/pages/GastroLocationDescriptionHeader.qml

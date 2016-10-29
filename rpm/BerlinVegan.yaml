@@ -1,5 +1,5 @@
 Name: BerlinVegan
-Summary: Berlin vegan guide
+Summary: Berlin-Vegan food guide
 Version: 0.1
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
@@ -12,7 +12,15 @@ License: LICENSE
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |
-  Short description of my SailfishOS Application
+    With the Berlin-Vegan guide, you have got quick access to an overview of the vegan
+    food and shopping possibilities in Berlin, Germany --- even while you are out and about.
+
+    The app contains over 300 entries of restaurants, snack bars and takeaways with
+    vegan declared offers from the www.berlin-vegan.de website.
+
+    The guide is not just suitable for vegetarians and vegans but also for all people who are
+    trying to live their life in a greener and more animal friendly way.
+
 Configure: none
 # The qtc5 builder inserts macros to allow QtCreator to have fine
 # control over qmake/make execution
@@ -25,15 +33,17 @@ PkgConfigBR:
   - Qt5Core
   - Qt5Qml
   - Qt5Quick
+  - Qt5Positioning
 
 # Build dependencies without a pkgconfig setup can be listed here
 # PkgBR:
-#   - package-needed-to-build
+#  - qt5-qtdeclarative-import-positioning
 
 # Runtime dependencies which are not automatically detected
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
-
+  - qt5-qtpositioning
+  - qt5-qtdeclarative-import-positioning
 # All installed files
 Files:
   - '%{_bindir}'

@@ -1,6 +1,6 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
-import QtPositioning 5.2
+import QtPositioning 5.0
 
 
 import "../components/OpeningHoursModelAlgorithms.js" as OpeningHoursModelAlgorithms
@@ -39,7 +39,6 @@ Page {
                 right: parent.right
                 top: parent.top
             }
-
         }
 
         IconToolBar {

@@ -12,7 +12,7 @@ Name:       BerlinVegan
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-Summary:    Berlin vegan guide
+Summary:    Berlin-Vegan food guide
 Version:    0.1
 Release:    1
 Group:      Qt/Qt
@@ -21,14 +21,24 @@ URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  BerlinVegan.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
+Requires:   qt5-qtpositioning
+Requires:   qt5-qtdeclarative-import-positioning
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my SailfishOS Application
+With the Berlin-Vegan guide, you have got quick access to an overview of the vegan
+food and shopping possibilities in Berlin, Germany --- even while you are out and about.
+
+The app contains over 300 entries of restaurants, snack bars and takeaways with
+vegan declared offers from the www.berlin-vegan.de website.
+
+The guide is not just suitable for vegetarians and vegans but also for all people who are
+trying to live their life in a greener and more animal friendly way.
 
 
 %prep
