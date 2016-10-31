@@ -35,6 +35,7 @@ OTHER_FILES += qml/BerlinVegan.qml \
     qml/pages/GastroLocations.json \
     qml/pages/GastroLocationList.qml \
     qml/pages/GastroLocationDescriptionHeader.qml \
+    qml/components/GastroLocationDetails.qml \
     qml/pages/GastroLocationDescription.qml \
     qml/components/IconToolBar.qml \
     qml/components/CollapsibleItem.qml \
@@ -53,3 +54,4 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/BerlinVegan-de.ts
+

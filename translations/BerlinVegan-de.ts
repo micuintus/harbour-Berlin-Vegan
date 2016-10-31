@@ -9,7 +9,46 @@
     </message>
 </context>
 <context>
-    <name>GastroLocationDescription</name>
+    <name>GastroLocationDescriptionAlgorithms</name>
+    <message>
+        <source>omnivore</source>
+        <translation>omnivor</translation>
+    </message>
+    <message>
+        <source>omnivore 
+(vegan declared)</source>
+        <translation>omnivor
+(vegan deklariert)</translation>
+    </message>
+    <message>
+        <source>vegetarian</source>
+        <translation>vegetarisch</translation>
+    </message>
+    <message>
+        <source>vegetarian 
+(vegan declared)</source>
+        <translation>vegetarisch
+(vegan deklariert)</translation>
+    </message>
+    <message>
+        <source>100% vegan</source>
+        <translation>100% vegan</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>unbekannt</translation>
+    </message>
+    <message>
+        <source>yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation>Nein</translation>
+    </message>
+</context>
+<context>
+    <name>GastroLocationDetails</name>
     <message>
         <source>Opening hours</source>
         <translation>Öffnungszeiten</translation>
@@ -73,45 +112,6 @@
     <message>
         <source>Seats indoor</source>
         <translation>Sitzplätze im Inneren</translation>
-    </message>
-</context>
-<context>
-    <name>GastroLocationDescriptionAlgorithms</name>
-    <message>
-        <source>omnivore</source>
-        <translation>omnivor</translation>
-    </message>
-    <message>
-        <source>omnivore 
-(vegan declared)</source>
-        <translation>omnivor
-(vegan deklariert)</translation>
-    </message>
-    <message>
-        <source>vegetarian</source>
-        <translation>vegetarisch</translation>
-    </message>
-    <message>
-        <source>vegetarian 
-(vegan declared)</source>
-        <translation>vegetarisch
-(vegan deklariert)</translation>
-    </message>
-    <message>
-        <source>100% vegan</source>
-        <translation>100% vegan</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>unbekannt</translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation>Ja</translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation>Nein</translation>
     </message>
 </context>
 <context>

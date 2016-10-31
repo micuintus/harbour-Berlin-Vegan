@@ -9,73 +9,6 @@
     </message>
 </context>
 <context>
-    <name>GastroLocationDescription</name>
-    <message>
-        <source>Opening hours</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Food details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gluten-free options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cert. organic offers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Venue features</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accessibility</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>High chair</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dogs allowed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wheelchair-friendly</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wheelchair-accessible WC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Catering</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delivery service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>WiFi</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seats outdoor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Seats indoor</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>GastroLocationDescriptionAlgorithms</name>
     <message>
         <source>omnivore</source>
@@ -109,6 +42,73 @@
     </message>
     <message>
         <source>no</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>GastroLocationDetails</name>
+    <message>
+        <source>Opening hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Food details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cert. organic offers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gluten-free options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accessibility</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wheelchair-friendly</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wheelchair-accessible WC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High chair</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dogs allowed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Venue features</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WiFi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seats outdoor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seats indoor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Catering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delivery service</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
