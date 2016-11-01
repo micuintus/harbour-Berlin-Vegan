@@ -32,10 +32,10 @@ OTHER_FILES += qml/BerlinVegan.qml \
     rpm/BerlinVegan.yaml \
     translations/BerlinVegan-de.ts \
     BerlinVegan.desktop \
-    qml/pages/VenueDescriptionHeader.qml \
     qml/pages/VenueList.qml \
     qml/pages/VenueDescription.qml \
     qml/pages/GastroLocations.json \
+    qml/components/VenueDescriptionHeader.qml \
     qml/components/IconToolBar.qml \
     qml/components/CollapsibleItem.qml \
     qml/components/OpeningHoursModel.qml \

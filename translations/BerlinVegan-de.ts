@@ -61,18 +61,6 @@
         <translation>100% vegan</translation>
     </message>
     <message>
-        <source>omnivore 
-(vegan declared)</source>
-    <translation>omnivor 
-(vegan deklariert)</translation>
-    </message>
-    <message>
-        <source>vegetarian 
-(vegan declared)</source>
-    <translation>vegetarisch 
-(vegan deklariert)</translation>
-    </message>
-    <message>
         <source>unknown</source>
         <translation>unbekannt</translation>
     </message>
@@ -85,6 +73,17 @@
         <translation>Nein</translation>
     </message>
     <message>
+        <source>omnivore 
+(vegan declared)</source>
+        <translation>omnivor
+(vegan deklariert)</translation>
+    </message>
+    <message>
+        <source>vegetarian 
+(vegan declared)</source>
+        <translation>vegetarisch
+(vegan deklariert)</translation>
+    </message>
 </context>
 <context>
     <name>VenueDetails</name>
