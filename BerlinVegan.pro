@@ -32,18 +32,17 @@ OTHER_FILES += qml/BerlinVegan.qml \
     rpm/BerlinVegan.yaml \
     translations/BerlinVegan-de.ts \
     BerlinVegan.desktop \
+    qml/pages/VenueDescriptionHeader.qml \
+    qml/pages/VenueList.qml \
+    qml/pages/VenueDescription.qml \
     qml/pages/GastroLocations.json \
-    qml/pages/GastroLocationList.qml \
-    qml/pages/GastroLocationDescriptionHeader.qml \
-    qml/components/GastroLocationDetails.qml \
-    qml/pages/GastroLocationDescription.qml \
     qml/components/IconToolBar.qml \
     qml/components/CollapsibleItem.qml \
     qml/components/OpeningHoursModel.qml \
+    qml/components/VenueDetails.qml \
     qml/components/OpeningHoursModelAlgorithms.js \
-    qml/components/GastroLocationDescriptionAlgorithms.js \
+    qml/components/VenueDescriptionAlgorithms.js \
     qml/components/distance.js
-
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -54,4 +53,3 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/BerlinVegan-de.ts
-

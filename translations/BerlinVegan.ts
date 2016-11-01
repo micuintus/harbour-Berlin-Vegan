@@ -9,7 +9,57 @@
     </message>
 </context>
 <context>
-    <name>GastroLocationDescriptionAlgorithms</name>
+    <name>OpeningHoursModel</name>
+    <message>
+        <source>Monday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wednesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thursday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saturday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpeningHoursModelAlgorithms</name>
+    <message>
+        <source>closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VenueDescriptionAlgorithms</name>
+    <message>
+        <source>yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>omnivore</source>
         <translation type="unfinished"></translation>
@@ -32,21 +82,9 @@
         <source>100% vegan</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>unknown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>no</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
-    <name>GastroLocationDetails</name>
+    <name>VenueDetails</name>
     <message>
         <source>Opening hours</source>
         <translation type="unfinished"></translation>
@@ -113,51 +151,13 @@
     </message>
 </context>
 <context>
-    <name>GastroLocationList</name>
+    <name>VenueList</name>
     <message>
         <source>Update sorting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Vegan food nearby</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OpeningHoursModel</name>
-    <message>
-        <source>Monday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuesday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wednesday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thursday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Friday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Saturday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sunday</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OpeningHoursModelAlgorithms</name>
-    <message>
-        <source>closed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

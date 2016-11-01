@@ -95,7 +95,7 @@ Page {
             }
 
 
-            onClicked: pageStack.push(Qt.resolvedUrl("GastroLocationDescription.qml"),
+            onClicked: pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                       {
                                           restaurant     : model,
                                           positionSource : page.positionSource

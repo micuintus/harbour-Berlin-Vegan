@@ -84,7 +84,7 @@ ApplicationWindow
         }
     }
 
-    initialPage: Component { GastroLocationList {
+    initialPage: Component { VenueList {
         jsonModelCollection: gjsonModelCollection
         positionSource: globalPositionSource
         id: listPage

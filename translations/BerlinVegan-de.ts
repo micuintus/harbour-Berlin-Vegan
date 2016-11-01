@@ -9,30 +9,68 @@
     </message>
 </context>
 <context>
-    <name>GastroLocationDescriptionAlgorithms</name>
+    <name>OpeningHoursModel</name>
+    <message>
+        <source>Monday</source>
+        <translation>Montag</translation>
+    </message>
+    <message>
+        <source>Tuesday</source>
+        <translation>Dienstag</translation>
+    </message>
+    <message>
+        <source>Wednesday</source>
+        <translation>Mittwoch</translation>
+    </message>
+    <message>
+        <source>Thursday</source>
+        <translation>Donnerstag</translation>
+    </message>
+    <message>
+        <source>Friday</source>
+        <translation>Freitag</translation>
+    </message>
+    <message>
+        <source>Saturday</source>
+        <translation>Samstag</translation>
+    </message>
+    <message>
+        <source>Sunday</source>
+        <translation>Sonntag</translation>
+    </message>
+</context>
+<context>
+    <name>OpeningHoursModelAlgorithms</name>
+    <message>
+        <source>closed</source>
+        <translation>geschlossen</translation>
+    </message>
+</context>
+<context>
+    <name>VenueDescriptionAlgorithms</name>
     <message>
         <source>omnivore</source>
         <translation>omnivor</translation>
-    </message>
-    <message>
-        <source>omnivore 
-(vegan declared)</source>
-        <translation>omnivor
-(vegan deklariert)</translation>
     </message>
     <message>
         <source>vegetarian</source>
         <translation>vegetarisch</translation>
     </message>
     <message>
-        <source>vegetarian 
+        <source>100% vegan</source>
+        <translation>100% vegan</translation>
+    </message>
+    <message>
+        <source>omnivore 
 (vegan declared)</source>
-        <translation>vegetarisch
+    <translation>omnivor 
 (vegan deklariert)</translation>
     </message>
     <message>
-        <source>100% vegan</source>
-        <translation>100% vegan</translation>
+        <source>vegetarian 
+(vegan declared)</source>
+    <translation>vegetarisch 
+(vegan deklariert)</translation>
     </message>
     <message>
         <source>unknown</source>
@@ -46,9 +84,10 @@
         <source>no</source>
         <translation>Nein</translation>
     </message>
+    <message>
 </context>
 <context>
-    <name>GastroLocationDetails</name>
+    <name>VenueDetails</name>
     <message>
         <source>Opening hours</source>
         <translation>Öffnungszeiten</translation>
@@ -115,7 +154,7 @@
     </message>
 </context>
 <context>
-    <name>GastroLocationList</name>
+    <name>VenueList</name>
     <message>
         <source>Update sorting</source>
         <translation>Sortierung aktualisieren</translation>
@@ -123,44 +162,6 @@
     <message>
         <source>Vegan food nearby</source>
         <translation>Veganes Essen in der Nähe</translation>
-    </message>
-</context>
-<context>
-    <name>OpeningHoursModel</name>
-    <message>
-        <source>Monday</source>
-        <translation>Montag</translation>
-    </message>
-    <message>
-        <source>Tuesday</source>
-        <translation>Dienstag</translation>
-    </message>
-    <message>
-        <source>Wednesday</source>
-        <translation>Mittwoch</translation>
-    </message>
-    <message>
-        <source>Thursday</source>
-        <translation>Donnerstag</translation>
-    </message>
-    <message>
-        <source>Friday</source>
-        <translation>Freitag</translation>
-    </message>
-    <message>
-        <source>Saturday</source>
-        <translation>Samstag</translation>
-    </message>
-    <message>
-        <source>Sunday</source>
-        <translation>Sonntag</translation>
-    </message>
-</context>
-<context>
-    <name>OpeningHoursModelAlgorithms</name>
-    <message>
-        <source>closed</source>
-        <translation>geschlossen</translation>
     </message>
 </context>
 </TS>

@@ -20,7 +20,7 @@ Page {
 
         VerticalScrollDecorator {}
 
-        GastroLocationDescriptionHeader {
+        VenueDescriptionHeader {
             id: locationheader
             name: restaurant.name
             street: restaurant.street
@@ -65,7 +65,7 @@ Page {
                 top: icontoolbar.bottom
             }
 
-            contentItem: GastroLocationDetails {
+            contentItem: VenueDetails {
                 id: venueDetails
                 restaurant: page.restaurant
 
