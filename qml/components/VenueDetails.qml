@@ -27,7 +27,7 @@ Item {
             }
 
             width: parent.width
-            height: contentHeight
+            height: contentItem.height
 
             interactive: false
 
