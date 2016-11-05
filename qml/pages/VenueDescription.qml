@@ -14,8 +14,8 @@ Page {
     SilicaFlickable {
         id: flicka
         anchors.fill: parent
-        readonly property real nonDescriptionHeaderHeight: locationheader.height + icontoolbar.height
-        contentHeight: nonDescriptionHeaderHeight + longdescriptiontext.height + detailscollapsible.height
+        readonly property var nonDescriptionHeaderHeight: locationheader.height + icontoolbar.height
+        contentHeight: longdescriptiontext.y + longdescriptiontext.height + Theme.paddingLarge
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
 
         VerticalScrollDecorator {}
