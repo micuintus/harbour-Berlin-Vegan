@@ -14,8 +14,8 @@ Page {
     SilicaFlickable {
         id: flicka
         anchors.fill: parent
-        readonly property var nonDescriptionHeaderHeight: locationheader.height + icontoolbar.height
-        contentHeight: longdescriptiontext.y + longdescriptiontext.height + Theme.paddingLarge
+        readonly property var nonDescriptionHeaderHeight: locationheader.height + iconToolBar.height
+        contentHeight: descriptionText.y + descriptionText.height + Theme.paddingLarge
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
 
         VerticalScrollDecorator {}
@@ -40,7 +40,7 @@ Page {
         }
 
         IconToolBar {
-            id: icontoolbar
+            id: iconToolBar
             restaurant: page.restaurant
 
             anchors {
@@ -54,7 +54,7 @@ Page {
         }
 
         CollapsibleItem {
-            id: detailscollapsible
+            id: detailsCollapsible
 
             collapsedHeight: venueDetails.collapsedHeight
             expandedHeight: venueDetails.expandedHeight
@@ -62,7 +62,7 @@ Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: icontoolbar.bottom
+                top: iconToolBar.bottom
             }
 
             contentItem: VenueDetails {
@@ -74,7 +74,7 @@ Page {
         }
 
         Label {
-            id: longdescriptiontext
+            id: descriptionText
             font.pixelSize: Theme.fontSizeSmall
             text: restaurant.comment
             wrapMode: Text.WordWrap
@@ -83,7 +83,7 @@ Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: detailscollapsible.bottom
+                top: detailsCollapsible.bottom
                 margins: Theme.paddingLarge
             }
         }
