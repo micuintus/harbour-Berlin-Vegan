@@ -9,8 +9,8 @@ Item {
 
     id: venueDetails
     property var restaurant
-    property alias collapsedHeight : openinghourslistview.height // + foodDetailsHeader.height
-    property alias expandedHeight  : venueDetailsColum.implicitHeight
+    readonly property real collapsedHeight : openingHourListView.height + foodDetailsHeader.height
+    readonly property real expandedHeight  : venueDetailsColum.implicitHeight
 
     Column {
 
@@ -20,7 +20,7 @@ Item {
 
         ListView {
 
-            id: openinghourslistview
+            id: openingHourListView
 
             header: SectionHeader {
                 text: qsTr("Opening hours")
@@ -32,10 +32,10 @@ Item {
             interactive: false
 
             model: OpeningHoursModel {
-                id: openinghoursmodel
+                id: openingHoursModel
                 restaurant: venueDetails.restaurant
 
-                Component.onCompleted: OpeningHoursModelAlgorithms.condenseOpeningHoursModel(openinghoursmodel)
+                Component.onCompleted: OpeningHoursModelAlgorithms.condenseOpeningHoursModel(openingHoursModel)
             }
 
             delegate: DetailItem {
@@ -46,6 +46,7 @@ Item {
 
         SectionHeader {
             text: qsTr("Food details")
+            id: foodDetailsHeader
         }
 
         DetailItem {
