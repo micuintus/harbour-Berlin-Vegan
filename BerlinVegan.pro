@@ -26,7 +26,6 @@ HEADERS += 3rdparty/Cutehacks/gel/gel.h \
 
 OTHER_FILES += qml/BerlinVegan.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/FirstPage.qml \
     rpm/BerlinVegan.changes.in \
     rpm/BerlinVegan.spec \
     rpm/BerlinVegan.yaml \
@@ -35,6 +34,9 @@ OTHER_FILES += qml/BerlinVegan.qml \
     qml/pages/VenueList.qml \
     qml/pages/VenueDescription.qml \
     qml/pages/GastroLocations.json \
+    qml/pages/about/AboutBerlinVegan.qml \
+    qml/pages/about/LicenseViewer.qml \
+    qml/pages/about/BerlinVegan.svg \
     qml/components/VenueDescriptionHeader.qml \
     qml/components/IconToolBar.qml \
     qml/components/CollapsibleItem.qml \
@@ -53,3 +55,4 @@ CONFIG += sailfishapp_i18n
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/BerlinVegan-de.ts
+

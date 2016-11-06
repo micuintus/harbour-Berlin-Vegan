@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 Page {
@@ -36,12 +36,21 @@ Page {
     property string licenseFile: ""
 
     Component.onCompleted: {
-        Log.debug("LicenseViewer, file: " + licenseFile)
-    }
+        var json
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", licenseFile)
+        xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE)
+                {
+                    licenseText.text = xhr.responseText
+                    licenseText.text = licenseText.text.replace(/(\r\n|\n|\r){2}/gm,"micuParagraph")
+                    licenseText.text = licenseText.text.replace(/ *(\r\n|\n|\r) */gm," ")
+                    licenseText.text = licenseText.text.replace(/(micuParagraph)/gm,"\n\n")
 
-    onStatusChanged: {
-        if (status === PageStatus.Active)
-            requestCoverPage("Default.qml")
+                    licenseText.text = licenseText.text.trim()}
+        }
+
+        xhr.send();
     }
 
     SilicaFlickable {
@@ -55,17 +64,15 @@ Page {
             width: parent.width
 
             PageHeader {
-                //: License viewer page title
-                //% "License"
-                title: qsTrId("ytplayer-title-license-viewer")
+                title: qsTr("License " + licenseFile)
             }
+
             Text {
                 id: licenseText
                 width: parent.width
                 font.pixelSize: Theme.fontSizeExtraSmall
                 color: Theme.secondaryColor
-                text: YTUtils.getLicense(licenseFile)
-                wrapMode: Text.Wrap
+                wrapMode: Text.WordWrap
             }
         }
 
