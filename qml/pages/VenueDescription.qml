@@ -87,6 +87,8 @@ Page {
                 margins: Theme.paddingLarge
             }
         }
+        VerticalScrollDecorator {}
+
     }
 }
 

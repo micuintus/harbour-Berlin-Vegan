@@ -36,6 +36,11 @@ OTHER_FILES += qml/BerlinVegan.qml \
     qml/pages/GastroLocations.json \
     qml/pages/about/AboutBerlinVegan.qml \
     qml/pages/about/LicenseViewer.qml \
+    qml/pages/about/ThirdPartySoftware.qml \
+    qml/pages/about/LICENSE \
+    qml/pages/about/LICENSE.Cutehacks \
+    qml/pages/about/LICENSE.YTPlayer \
+    qml/pages/about/LICENSE.qml-utils \
     qml/pages/about/BerlinVegan.svg \
     qml/components/VenueDescriptionHeader.qml \
     qml/components/IconToolBar.qml \

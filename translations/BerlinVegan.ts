@@ -2,6 +2,35 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>AboutBerlinVegan</name>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Berlin-Vegan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View GPLv2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can view the source code here:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Berlin-Vegan guide is Free Software: you can redistribute it and/or modify it under the terms of the
+&lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt; as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apart from Qt and other parts of the Sailfish SDK, this application
+is greatfully derived from (or makes use of) the following Free Software projects:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>Berlin-Vegan</source>
@@ -43,6 +72,13 @@
     <name>OpeningHoursModelAlgorithms</name>
     <message>
         <source>closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ThirdPartySoftware</name>
+    <message>
+        <source>View license</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -158,6 +194,10 @@
     </message>
     <message>
         <source>Vegan food nearby</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

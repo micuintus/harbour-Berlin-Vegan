@@ -34,6 +34,7 @@ Page {
     allowedOrientations: Orientation.All
 
     property string licenseFile: ""
+    property string licenseName: ""
 
     Component.onCompleted: {
         var json
@@ -47,7 +48,8 @@ Page {
                     licenseText.text = licenseText.text.replace(/ *(\r\n|\n|\r) */gm," ")
                     licenseText.text = licenseText.text.replace(/(micuParagraph)/gm,"\n\n")
 
-                    licenseText.text = licenseText.text.trim()}
+                    licenseText.text = licenseText.text.trim()
+                }
         }
 
         xhr.send();
@@ -64,7 +66,7 @@ Page {
             width: parent.width
 
             PageHeader {
-                title: qsTr("License " + licenseFile)
+                title: qsTr("License: " + licenseName)
             }
 
             Text {

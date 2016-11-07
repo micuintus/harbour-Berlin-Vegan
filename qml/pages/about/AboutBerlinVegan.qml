@@ -5,103 +5,213 @@ Page {
 
     id: page
 
-    anchors.top: parent.top
-    width: parent.width
+    SilicaFlickable {
 
-    PageHeader {
-        id: pageHeader
-        title: qsTr("About")
-    }
+        anchors.fill: parent
 
-    Image  {
-        id: logo
-        source: "BerlinVegan.svg"
-        sourceSize.width: page.width / 3.5
-        sourceSize.height: page.width / 3.5
-        anchors {
-            top: pageHeader.bottom
-            horizontalCenter: parent.horizontalCenter
-            margins: Theme.paddingMedium
-        }
-    }
+        contentHeight: column.height
 
-    Label {
-        id: underLogoText
-        text: qsTr("Berlin-Vegan")
-        font.pixelSize: Theme.fontSizeLarge
+        Column {
+            id: column
+            width: page.width
 
-        color: Theme.highlightColor
+            PageHeader {
+                id: pageHeader
+                title: qsTr("About")
+            }
 
-        anchors {
-            top: logo.bottom
-            horizontalCenter: parent.horizontalCenter
-            margins: Theme.paddingMedium
-        }
-    }
+            Image  {
+                id: logo
+                source: "BerlinVegan.svg"
+                sourceSize.width: page.width / 3.2
+                sourceSize.height: page.width / 3.2
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
 
-    Label {
-        id: copyright
-        text: "Copyright \u00A9 by micu <micuintus.de>"
-        font.pixelSize: Theme.fontSizeSmall
-        color: Theme.highlightColor
-        anchors {
-            top: underLogoText.bottom
-            horizontalCenter: parent.horizontalCenter
-        }
-    }
+            Item {
+                width: parent.width
+                height: Theme.paddingSmall
+            }
 
-    Label {
-        id: freeSoftwareBla
-        text: qsTr("The Berlin-Vegan guide is Free Software: \
-you can redistribute it and/or modify it under the terms of the \
-<a href=\"http://kodkod\">GNU General Public License</a> as published by the Free Software Foundation, \
+            Label {
+                id: underLogoText
+                text: qsTr("Berlin-Vegan")
+                font.pixelSize: Theme.fontSizeLarge
+
+                color: Theme.highlightColor
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Label {
+                id: copyright
+                text: "Copyright \u00A9 2016 by micu &lt;<a href=\"micupage\">micuintus.de</a>\>"
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                textFormat: Text.StyledText
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+
+                onLinkActivated: Qt.openUrlExternally("http://www.micuintus.de/")
+                linkColor: Theme.highlightColor
+
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingLarge * 2
+            }
+
+            Label {
+                id: freeSoftwareBla
+                text: qsTr("The Berlin-Vegan guide is Free Software: \
+you can redistribute it and/or modify it under the terms of the
+<a href=\"GPL\">GNU General Public License</a> as published by the Free Software Foundation, \
 either version 2 of the license, or (at your option) any later version.")
-        wrapMode: Text.WordWrap
-        font.pixelSize: Theme.fontSizeExtraSmall
-        color: Theme.secondaryColor
-        textFormat: Text.StyledText
-        anchors {
-            top: copyright.bottom
-            left: parent.left
-            right: parent.right
-            margins: Theme.paddingLarge
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.secondaryColor
+                textFormat: Text.StyledText
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+
+                linkColor: Theme.highlightColor
+                onLinkActivated:  pageStack.push(Qt.resolvedUrl("LicenseViewer.qml"),
+                                                 {
+                                                     "licenseFile": "LICENSE",
+                                                     "licenseName": "GPLv2"
+                                                 })
+            }
+
+
+            Item {
+                width: parent.width
+                height: Theme.paddingLarge
+            }
+
+            Button {
+                id: gplButton
+                text: qsTr("View GPLv2")
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+
+                onClicked: pageStack.push(Qt.resolvedUrl("LicenseViewer.qml"),
+                                          {
+                                              "licenseFile": "LICENSE",
+                                              "licenseName": "GPLv2+"
+                                          })
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingLarge
+            }
+
+            Label {
+                id: sourceCodeInfo
+                text: qsTr("You can view the source code here:")
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.secondaryColor
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingSmall
+            }
+
+            Label {
+                id: gitHubURL
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                textFormat: Text.StyledText
+
+                text: "<a href=\"githubwebsite\">https://github.com/micuintus/harbour-Berlin-Vegan</a>"
+                linkColor: Theme.highlightColor
+                onLinkActivated: Qt.openUrlExternally("https://github.com/micuintus/harbour-Berlin-Vegan")
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingLarge * 1.3
+            }
+
+            Separator {
+                width: parent.width
+                horizontalAlignment: Qt.AlignCenter
+                color: Theme.secondaryHighlightColor
+                height: 2
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingLarge * 1.3
+            }
+
+            Label {
+                id: thirdParty
+                text: qsTr("Apart from Qt and other wonderful components of jolla's Sailfish SDK, this application
+is greatfully makes use of the following third party Free Software projects:")
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.secondaryColor
+                textFormat: Text.StyledText
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+            }
+
+
+            ThirdPartySoftware {
+
+               model: ListModel {
+                    ListElement {
+                        name: "Cutehacks Gel"
+                        url: "https://github.com/Cutehacks/gel/"
+                        licenseName: "MIT"
+                        licenseFile: "LICENSE.Cutehacks"
+                    }
+
+                    ListElement {
+                        name: "qml-utils"
+                        url: "https://github.com/kromain/qml-utils"
+                        licenseName: "MIT"
+                        licenseFile: "LICENSE.qml-utils"
+                    }
+
+                    ListElement {
+                        name: "YTPlayer"
+                        url: "https://github.com/tworaz/sailfish-ytplayer"
+                        licenseName: "3-clause BSD license (\"Modified BSD License\")"
+                        licenseFile: "LICENSE.YTPlayer"
+                    }
+                }
+            }
         }
 
-        onLinkActivated:  pageStack.push(Qt.resolvedUrl("LicenseViewer.qml"),
-                                         {
-                                         "licenseFile": "GPLv2"
-                                         })
-        linkColor: Theme.highlightColor
-
-
+        VerticalScrollDecorator {}
     }
-
-    Button {
-        text: qsTr("View GPLv2")
-        anchors {
-            top: freeSoftwareBla.bottom
-            horizontalCenter: parent.horizontalCenter
-            margins: Theme.paddingLarge
-        }
-
-        onClicked: pageStack.push(Qt.resolvedUrl("LicenseViewer.qml"),
-                                  {
-                                  "licenseFile": "GPLv2"
-                                  })
-    }
-
-    Label {
-        id: gitHubURL
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottom: parent.bottom
-            bottomMargin: Theme.paddingSmall
-        }
-
-        color: Theme.secondaryColor
-
-        font.pixelSize: Theme.fontSizeTiny
-
-        text: "https://github.com/micuintus/harbour-Berlin-Vegan"
-   }
 }
