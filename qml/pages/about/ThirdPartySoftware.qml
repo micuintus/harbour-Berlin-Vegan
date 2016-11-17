@@ -5,7 +5,6 @@ SilicaListView {
 
     width: parent.width
     height: contentItem.childrenRect.height
-    enabled: false
 
     delegate: ListItem {
 

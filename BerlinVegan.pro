@@ -41,6 +41,7 @@ OTHER_FILES += qml/BerlinVegan.qml \
     qml/pages/about/LICENSE.Cutehacks \
     qml/pages/about/LICENSE.YTPlayer \
     qml/pages/about/LICENSE.qml-utils \
+    qml/pages/about/CC-by-nc-legalcode.txt \
     qml/pages/about/BerlinVegan.svg \
     qml/components/VenueDescriptionHeader.qml \
     qml/components/IconToolBar.qml \

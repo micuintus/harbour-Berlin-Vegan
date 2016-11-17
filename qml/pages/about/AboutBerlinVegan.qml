@@ -69,7 +69,7 @@ Page {
 
             Label {
                 id: freeSoftwareBla
-                text: qsTr("The Berlin-Vegan guide is Free Software: \
+                text: qsTr("The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): \
 you can redistribute it and/or modify it under the terms of the
 <a href=\"GPL\">GNU General Public License</a> as published by the Free Software Foundation, \
 either version 2 of the license, or (at your option) any later version.")
@@ -170,9 +170,66 @@ either version 2 of the license, or (at your option) any later version.")
             }
 
             Label {
-                id: thirdParty
-                text: qsTr("Apart from Qt and other wonderful components of jolla's Sailfish SDK, this application
-is greatfully makes use of the following third party Free Software projects:")
+                text: qsTr("Many thanks goes to the <a href=\"berlinvegan\">editorial team of berlin-vegan.de</a> \
+for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. \
+This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).")
+                wrapMode: Text.WordWrap
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.secondaryColor
+                textFormat: Text.StyledText
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+
+                linkColor: Theme.highlightColor
+                onLinkActivated: Qt.openUrlExternally("http://www.berlin-vegan.de/team/kontakt/")
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingLarge
+            }
+
+            Button {
+                text: qsTr("View CC BY-NC")
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+
+                onClicked: pageStack.push(Qt.resolvedUrl("LicenseViewer.qml"),
+                                          {
+                                              "licenseFile": "CC-by-nc-legalcode.txt",
+                                              "licenseName": "CC BY-NC"
+                                          })
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingLarge * 1.3
+            }
+
+            Separator {
+                width: parent.width
+                horizontalAlignment: Qt.AlignCenter
+                color: Theme.secondaryHighlightColor
+                height: 2
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingLarge * 1.3
+            }
+
+
+            Label {
+                text: qsTr("Apart from Qt and other wonderful FOSS components of jolla's SailfishOS SDK, this application
+greatfully makes use of the following third party Free Software projects:")
                 wrapMode: Text.WordWrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.secondaryColor
@@ -207,6 +264,13 @@ is greatfully makes use of the following third party Free Software projects:")
                         url: "https://github.com/tworaz/sailfish-ytplayer"
                         licenseName: "3-clause BSD license (\"Modified BSD License\")"
                         licenseFile: "LICENSE.YTPlayer"
+                    }
+
+                    ListElement {
+                        name: "Berlin-Vegan (Android app)"
+                        url: "https://github.com/Berlin-Vegan/berlin-vegan-guide"
+                        licenseName: "GPLv2"
+                        licenseFile: "LICENSE"
                     }
                 }
             }
