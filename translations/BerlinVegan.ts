@@ -12,6 +12,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): you can redistribute it and/or modify it under the terms of the
+&lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt; as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>View GPLv2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20,13 +25,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The Berlin-Vegan guide is Free Software: you can redistribute it and/or modify it under the terms of the
-&lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt; as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
+        <source>Many thanks goes to the &lt;a href=&quot;berlinvegan&quot;&gt;editorial team of berlin-vegan.de&lt;/a&gt; for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Apart from Qt and other parts of the Sailfish SDK, this application
-is greatfully derived from (or makes use of) the following Free Software projects:</source>
+        <source>View CC BY-NC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apart from Qt and other wonderful FOSS components of jolla&apos;s SailfishOS SDK, this application
+greatfully makes use of the following third party Free Software projects:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

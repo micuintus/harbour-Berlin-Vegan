@@ -5,29 +5,39 @@
     <name>AboutBerlinVegan</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über diese App</translation>
     </message>
     <message>
         <source>Berlin-Vegan</source>
-        <translation type="unfinished">Berlin-Vegan</translation>
+        <translation>Berlin-Vegan</translation>
+    </message>
+    <message>
+        <source>The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): you can redistribute it and/or modify it under the terms of the
+&lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt; as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
+        <translation>Die Berlin-Vegan-Sailfish-App ist Freie Software (FOSS): Sie können sie unter den Bedingungen von Version 2 der &lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt;
+(oder optional jeder nachfolgenden, von der Free Software Foundation veröffentlichten Version dieser Lizenz) verwenden, verstehen, verändern und verbreiten.</translation>
     </message>
     <message>
         <source>View GPLv2</source>
-        <translation type="unfinished"></translation>
+        <translation>GPLv2 anzeigen</translation>
     </message>
     <message>
         <source>You can view the source code here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Den Quelltext der App finden Sie hier:</translation>
     </message>
     <message>
-        <source>The Berlin-Vegan guide is Free Software: you can redistribute it and/or modify it under the terms of the
-&lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt; as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
-        <translation type="unfinished"></translation>
+        <source>Many thanks goes to the &lt;a href=&quot;berlinvegan&quot;&gt;editorial team of berlin-vegan.de&lt;/a&gt; for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).</source>
+        <translation>Besonderer Dank geht an &lt;a href=&quot;berlinvegan&quot;&gt;die Redaktion von berlin-vegan.de&lt;/a&gt; dafür, dass sie das Berlin-Vegan-Projekt mit seiner hervorragenden Restaurantdatenbank, die diese App verwendet, ins Leben gerufen haben und seit vielen Jahren pflegen. Der Inhalt der Datenbasis ist lizenziert unter den Bedingungen der BY-NC-Creative-Commons-Lizenz.</translation>
     </message>
     <message>
-        <source>Apart from Qt and other parts of the Sailfish SDK, this application
-is greatfully derived from (or makes use of) the following Free Software projects:</source>
-        <translation type="unfinished"></translation>
+        <source>View CC BY-NC</source>
+        <translation>CC-BY-NC anzeigen</translation>
+    </message>
+    <message>
+        <source>Apart from Qt and other wonderful FOSS components of jolla&apos;s SailfishOS SDK, this application
+greatfully makes use of the following third party Free Software projects:</source>
+        <translation>Außer Qt und den anderen wundervollen FOSS-Komponenten von jollas SailfishOS SDK, macht diese Applikation
+mit großem Dank von den follgenden freien Software-Projekten Gebrauch:</translation>
     </message>
 </context>
 <context>
@@ -79,27 +89,11 @@ is greatfully derived from (or makes use of) the following Free Software project
     <name>ThirdPartySoftware</name>
     <message>
         <source>View license</source>
-        <translation type="unfinished"></translation>
+        <translation>Lizenz anzeigen</translation>
     </message>
 </context>
 <context>
     <name>VenueDescriptionAlgorithms</name>
-    <message>
-        <source>omnivore</source>
-        <translation>omnivor</translation>
-    </message>
-    <message>
-        <source>vegetarian</source>
-        <translation>vegetarisch</translation>
-    </message>
-    <message>
-        <source>100% vegan</source>
-        <translation>100% vegan</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>unbekannt</translation>
-    </message>
     <message>
         <source>yes</source>
         <translation>Ja</translation>
@@ -109,16 +103,32 @@ is greatfully derived from (or makes use of) the following Free Software project
         <translation>Nein</translation>
     </message>
     <message>
+        <source>unknown</source>
+        <translation>unbekannt</translation>
+    </message>
+    <message>
+        <source>omnivore</source>
+        <translation>omnivor</translation>
+    </message>
+    <message>
         <source>omnivore 
 (vegan declared)</source>
         <translation>omnivor
 (vegan deklariert)</translation>
     </message>
     <message>
+        <source>vegetarian</source>
+        <translation>vegetarisch</translation>
+    </message>
+    <message>
         <source>vegetarian 
 (vegan declared)</source>
         <translation>vegetarisch
 (vegan deklariert)</translation>
+    </message>
+    <message>
+        <source>100% vegan</source>
+        <translation>100% vegan</translation>
     </message>
 </context>
 <context>
@@ -200,7 +210,7 @@ is greatfully derived from (or makes use of) the following Free Software project
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Über diese App</translation>
     </message>
 </context>
 </TS>
