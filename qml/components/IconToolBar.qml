@@ -24,26 +24,12 @@
 
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
-import org.nemomobile.dbus 2.0
 import Sailfish.Silica 1.0
 
 Column {
     property var restaurant
 
     id: column
-
-
-    DBusInterface {
-        id: voicecall
-
-        service: "com.jolla.voicecall.ui"
-        path: "/"
-        iface: "com.jolla.voicecall.ui"
-
-        function dial(number) {
-            call('dial', number)
-        }
-    }
 
     Separator {
         width: column.width
@@ -67,7 +53,7 @@ Column {
                          : Theme.primaryColor)
             icon.scale: Theme.iconSizeMedium / Theme.iconSizeLarge
 
-            onClicked: voicecall.dial(restaurant.telephone)
+            onClicked: Qt.openUrlExternally("tel:/" + restaurant.telephone)
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             enabled: typeof restaurant["telephone"] !== "undefined"
