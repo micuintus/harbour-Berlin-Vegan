@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Many thanks goes to the &lt;a href=&quot;berlinvegan&quot;&gt;editorial team of berlin-vegan.de&lt;/a&gt; for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).</source>
-        <translation>Besonderer Dank geht an &lt;a href=&quot;berlinvegan&quot;&gt;die Redaktion von berlin-vegan.de&lt;/a&gt; dafür, dass sie das Berlin-Vegan-Projekt mit seiner hervorragenden Restaurantdatenbank, die diese App verwendet, ins Leben gerufen haben und seit vielen Jahren pflegen. Der Inhalt der Datenbasis ist lizenziert unter den Bedingungen der BY-NC-Creative-Commons-Lizenz.</translation>
+        <translation>Besonderer Dank geht an &lt;a href=&quot;berlinvegan&quot;&gt;die Redaktion von berlin-vegan.de&lt;/a&gt; dafür, dass sie das Berlin-Vegan-Projekt mit seiner hervorragenden Restaurantdatenbank, die diese App verwendet, ins Leben gerufen hat. Der Inhalt der Datenbasis ist lizenziert unter den Bedingungen der Creative-Commons-BY-NC-Lizenz.</translation>
     </message>
     <message>
         <source>View CC BY-NC</source>
@@ -36,7 +36,7 @@
     <message>
         <source>Apart from Qt and other wonderful FOSS components of jolla&apos;s SailfishOS SDK, this application
 greatfully makes use of the following third party Free Software projects:</source>
-        <translation>Abgesehen von Qt und den anderen wundervollen FOSS-Komponenten, aus denen SailfishOS SDK von jolla besteht, macht diese Applikation
+        <translation>Abgesehen von Qt und den anderen wundervollen FOSS-Komponenten, aus denen das SailfishOS SDK von jolla besteht, macht diese Applikation
 mit großem Dank von den folgenden freien Software-Projekten Gebrauch:</translation>
     </message>
 </context>
@@ -45,6 +45,13 @@ mit großem Dank von den folgenden freien Software-Projekten Gebrauch:</translat
     <message>
         <source>Berlin-Vegan</source>
         <translation>Berlin-Vegan</translation>
+    </message>
+</context>
+<context>
+    <name>LicenseViewer</name>
+    <message>
+        <source>License:</source>
+        <translation>Lizenz:</translation>
     </message>
 </context>
 <context>
