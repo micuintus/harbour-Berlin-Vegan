@@ -10,7 +10,7 @@
 #   - translation filenames have to be changed
 
 # The name of your application
-TARGET = BerlinVegan
+TARGET = harbour-berlin-vegan
 
 CONFIG += sailfishapp
 QT += positioning
@@ -24,13 +24,8 @@ HEADERS += 3rdparty/Cutehacks/gel/gel.h \
            3rdparty/Cutehacks/gel/jsonlistmodel.h \
            3rdparty/Cutehacks/gel/jsvalueiterator.h
 
-OTHER_FILES += qml/BerlinVegan.qml \
+OTHER_FILES += qml/harbour-berlin-vegan.qml \
     qml/cover/CoverPage.qml \
-    rpm/BerlinVegan.changes.in \
-    rpm/BerlinVegan.spec \
-    rpm/BerlinVegan.yaml \
-    translations/BerlinVegan-de.ts \
-    BerlinVegan.desktop \
     qml/pages/VenueList.qml \
     qml/pages/VenueDescription.qml \
     qml/pages/GastroLocations.json \
@@ -60,5 +55,5 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/BerlinVegan-de.ts
+TRANSLATIONS += translations/harbour-berlin-vegan-de.ts
 

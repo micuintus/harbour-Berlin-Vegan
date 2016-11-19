@@ -26,9 +26,8 @@
 #include <QtQuick>
 #endif
 
-#include <sailfishapp.h>
-
 #include <3rdparty/Cutehacks/gel/gel.h>
+#include <sailfishapp.h>
 
 int main(int argc, char *argv[])
 {
@@ -40,6 +39,12 @@ int main(int argc, char *argv[])
     //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
     //
     // To display the view, call "show()" (will show fullscreen on device).
+
+
+    qmlRegisterType<JsonListModel>("harbour.berlin.vegan.gel", 1, 0, "JsonListModel");
+    qmlRegisterType<Collection>("harbour.berlin.vegan.gel", 1, 0, "Collection");
+
+
     com::cutehacks::gel::registerEngine(NULL);
     return SailfishApp::main(argc, argv);
 }

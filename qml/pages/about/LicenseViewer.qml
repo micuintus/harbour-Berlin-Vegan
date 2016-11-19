@@ -64,7 +64,7 @@ Page {
             width: parent.width
 
             PageHeader {
-                title: qsTr("License: " + licenseName)
+                title: qsTr("License:") + " " + licenseName
             }
 
             Text {

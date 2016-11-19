@@ -26,7 +26,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 
-import com.cutehacks.gel 1.0
+import harbour.berlin.vegan.gel 1.0
 
 import "pages"
 import "cover"
