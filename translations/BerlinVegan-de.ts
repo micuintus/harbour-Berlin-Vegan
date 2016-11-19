@@ -14,7 +14,7 @@
     <message>
         <source>The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): you can redistribute it and/or modify it under the terms of the
 &lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt; as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
-        <translation>Die Berlin-Vegan-Sailfish-App ist Freie Software (FOSS): Sie können sie unter den Bedingungen von Version 2 der &lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt;
+        <translation>Berlin-Vegan (Sailfish-App) ist Freie Software (FOSS): Sie können die App unter den Bedingungen von Version 2 der &lt;a href=&quot;GPL&quot;&gt;GNU General Public License&lt;/a&gt;
 (oder optional jeder nachfolgenden, von der Free Software Foundation veröffentlichten Version dieser Lizenz) verwenden, verstehen, verändern und verbreiten.</translation>
     </message>
     <message>
@@ -36,8 +36,8 @@
     <message>
         <source>Apart from Qt and other wonderful FOSS components of jolla&apos;s SailfishOS SDK, this application
 greatfully makes use of the following third party Free Software projects:</source>
-        <translation>Außer Qt und den anderen wundervollen FOSS-Komponenten von jollas SailfishOS SDK, macht diese Applikation
-mit großem Dank von den follgenden freien Software-Projekten Gebrauch:</translation>
+        <translation>Abgesehen von Qt und den anderen wundervollen FOSS-Komponenten, aus denen SailfishOS SDK von jolla besteht, macht diese Applikation
+mit großem Dank von den folgenden freien Software-Projekten Gebrauch:</translation>
     </message>
 </context>
 <context>
