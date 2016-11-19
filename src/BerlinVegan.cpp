@@ -28,6 +28,7 @@
 
 #include <3rdparty/Cutehacks/gel/gel.h>
 #include <sailfishapp.h>
+#include <QGuiApplication>
 
 int main(int argc, char *argv[])
 {
@@ -44,6 +45,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<JsonListModel>("harbour.berlin.vegan.gel", 1, 0, "JsonListModel");
     qmlRegisterType<Collection>("harbour.berlin.vegan.gel", 1, 0, "Collection");
 
+    SailfishApp::application(argc, argv)->setApplicationVersion(APP_VERSION);
 
     com::cutehacks::gel::registerEngine(NULL);
     return SailfishApp::main(argc, argv);

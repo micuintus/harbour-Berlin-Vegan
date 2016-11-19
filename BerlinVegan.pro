@@ -57,3 +57,6 @@ CONFIG += sailfishapp_i18n
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-berlin-vegan-de.ts
 
+VERSION="0.8beta"
+
+DEFINES += APP_VERSION=\\\"$$VERSION\\\"

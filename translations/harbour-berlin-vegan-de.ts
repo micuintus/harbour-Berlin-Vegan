@@ -39,6 +39,10 @@ greatfully makes use of the following third party Free Software projects:</sourc
         <translation>Abgesehen von Qt und den anderen wundervollen FOSS-Komponenten, aus denen das SailfishOS SDK von jolla besteht, macht diese Applikation
 mit großem Dank von den folgenden freien Software-Projekten Gebrauch:</translation>
     </message>
+    <message>
+        <source>Version</source>
+        <translation>Version</translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

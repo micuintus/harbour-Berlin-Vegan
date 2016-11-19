@@ -56,7 +56,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingSmall
+                height: Theme.paddingMedium
             }
 
             Label {
@@ -71,9 +71,23 @@ Page {
                 }
             }
 
+
+            Item {
+                width: parent.width
+                height: Theme.paddingMedium
+            }
+
             Label {
-                id: copyright
-                text: "Copyright \u00A9 2016 by micu &lt;<a href=\"micupage\">micuintus.de</a>\>"
+                text: "Copyright \u00A9 2016 by micu"
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.highlightColor
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Label {
+                text: "&lt;<a href=\"micupage\">micuintus.de</a>\>"
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.highlightColor
                 textFormat: Text.StyledText
@@ -84,6 +98,22 @@ Page {
                 onLinkActivated: Qt.openUrlExternally("http://www.micuintus.de/")
                 linkColor: Theme.highlightColor
 
+            }
+
+            Item {
+                width: parent.width
+                height: Theme.paddingMedium
+            }
+
+            Label {
+                text: qsTr("Version") + ": " + Qt.application.version
+                font.pixelSize: Theme.fontSizeSmall
+
+                color: Theme.secondaryColor
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
             }
 
             Item {
