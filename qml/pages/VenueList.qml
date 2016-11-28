@@ -25,6 +25,8 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
+import QtLocation 5.0
+import "."
 
 import harbour.berlin.vegan.gel 1.0
 import "../components/distance.js" as Distance
@@ -94,11 +96,33 @@ Page {
             }
 
 
-            onClicked: pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
+            onClicked:
+            {
+                pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                       {
                                           restaurant     : model,
                                           positionSource : page.positionSource
-                                      } )
+                                      });
+
+                var mapPage = pageStack.pushAttached(Qt.resolvedUrl("VenueMapPage.qml"),
+                                       {
+                                           venueCoordinate: QtPositioning.coordinate(model.latCoord, model.longCoord),
+                                           positionSource: page.positionSource,
+                                           name: model.name
+                                       });
+
+                // TODO: Directly assigning a coordinate property to Map.center seems to be broken
+                // with the current Qt version (5.2)
+                mapPage.map.addMapItem(mapPage.venueMarker)
+                mapPage.map.addMapItem(mapPage.currentPosition)
+
+                mapPage.setMapCenter(mapPage.venueMarker.coordinate)
+
+                // Seems to be broken with the current version of Qt :/
+                mapPage.map.fitViewportToMapItems()
+            }
+
+
         }
         VerticalScrollDecorator {}
     }

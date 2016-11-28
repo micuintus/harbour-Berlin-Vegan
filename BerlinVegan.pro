@@ -13,7 +13,7 @@
 TARGET = harbour-berlin-vegan
 
 CONFIG += sailfishapp
-QT += positioning
+QT += positioning location
 
 SOURCES += src/BerlinVegan.cpp \
            3rdparty/Cutehacks/gel/collection.cpp \
@@ -25,9 +25,12 @@ HEADERS += 3rdparty/Cutehacks/gel/gel.h \
            3rdparty/Cutehacks/gel/jsvalueiterator.h
 
 OTHER_FILES += qml/harbour-berlin-vegan.qml \
+    rpm/BerlinVegan.yaml \
+    rpm/harbour-berlin-vegan.spec \
     qml/cover/CoverPage.qml \
     qml/pages/VenueList.qml \
     qml/pages/VenueDescription.qml \
+    qml/pages/VenueMapPage.qml \
     qml/pages/GastroLocations.json \
     qml/pages/about/AboutBerlinVegan.qml \
     qml/pages/about/LicenseViewer.qml \
