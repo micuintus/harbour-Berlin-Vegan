@@ -24,9 +24,11 @@ HEADERS += 3rdparty/Cutehacks/gel/gel.h \
            3rdparty/Cutehacks/gel/jsonlistmodel.h \
            3rdparty/Cutehacks/gel/jsvalueiterator.h
 
-OTHER_FILES += qml/harbour-berlin-vegan.qml \
+OTHER_FILES += harbour-berlin-vegan.desktop \
     rpm/BerlinVegan.yaml \
+    rpm/harbour-berlin-vegan.changes \
     rpm/harbour-berlin-vegan.spec \
+    qml/harbour-berlin-vegan.qml \
     qml/cover/CoverPage.qml \
     qml/pages/VenueList.qml \
     qml/pages/VenueDescription.qml \
@@ -60,6 +62,10 @@ CONFIG += sailfishapp_i18n
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-berlin-vegan-de.ts
 
-VERSION="0.8beta"
+VERSION="0.8.1"
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
+
+
+
+

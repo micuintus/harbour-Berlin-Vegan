@@ -12,3 +12,5 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Wed Dec 14 2016 micu <micuintus@gmx.de> 0.80.1-1
+- Add a first version of an extra map page for every venue's description
