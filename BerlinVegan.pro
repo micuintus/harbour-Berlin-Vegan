@@ -17,12 +17,27 @@ QT += positioning location
 
 SOURCES += src/BerlinVegan.cpp \
            3rdparty/Cutehacks/gel/collection.cpp \
-           3rdparty/Cutehacks/gel/jsonlistmodel.cpp
+           3rdparty/Cutehacks/gel/jsonlistmodel.cpp \
+           3rdparty/mapbox-gl-native/platform/qt/src/qquickmapboxglrenderer.cpp \
+           3rdparty/mapbox-gl-native/platform/qt/src/qquickmapboxglmapparameter.cpp \
+           3rdparty/mapbox-gl-native/platform/qt/src/qquickmapboxgl.cpp \
+           3rdparty/mapbox-gl-native/platform/qt/src/qmapboxgl.cpp \
+           3rdparty/mapbox-gl-native/platform/qt/src/qmapbox.cpp
+
 
 HEADERS += 3rdparty/Cutehacks/gel/gel.h \
            3rdparty/Cutehacks/gel/collection.h \
            3rdparty/Cutehacks/gel/jsonlistmodel.h \
-           3rdparty/Cutehacks/gel/jsvalueiterator.h
+           3rdparty/Cutehacks/gel/jsvalueiterator.h \
+           3rdparty/mapbox-gl-native/platform/qt/src/qquickmapboxglrenderer.hpp \
+           3rdparty/mapbox-gl-native/platform/qt/src/qquickmapboxglmapparameter.hpp \
+           3rdparty/mapbox-gl-native/platform/qt/src/qquickmapboxgl.hpp \
+           3rdparty/mapbox-gl-native/platform/qt/include/qmapbox.hpp \
+           3rdparty/mapbox-gl-native/platform/qt/include/qmapboxgl.hpp \
+           3rdparty/mapbox-gl-native/platform/qt/include/QMapbox \
+           3rdparty/mapbox-gl-native/include/mbgl/util/constants.hpp
+
+
 
 OTHER_FILES += harbour-berlin-vegan.desktop \
     rpm/BerlinVegan.yaml \
@@ -54,7 +69,7 @@ OTHER_FILES += harbour-berlin-vegan.desktop \
 
 # to disable building translations every time, comment out the
 # following CONFIG line
-CONFIG += sailfishapp_i18n
+CONFIG += sailfishapp_i18n c++11
 
 # German translation is enabled as an example. If you aren't
 # planning to localize your app, remember to comment out the
@@ -65,7 +80,6 @@ TRANSLATIONS += translations/harbour-berlin-vegan-de.ts
 VERSION="0.8.1"
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
-
 
 
 
