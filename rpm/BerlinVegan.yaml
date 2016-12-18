@@ -48,6 +48,7 @@ Requires:
   - qt5-plugin-geoservices-osm
   - qt5-qtdeclarative-import-location
   - qt5-qtdeclarative-import-positioning
+  - qt5-qtgraphicaleffects
 
 # All installed files
 Files:

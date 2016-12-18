@@ -2,6 +2,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtLocation 5.0
 import QtPositioning 5.2
+import QtGraphicalEffects 1.0
 
 Page {
 
@@ -69,6 +70,18 @@ Page {
             id: currentPosImage
             source: "image://theme/icon-cover-location?" + Theme.highlightBackgroundColor
         }
+    }
+
+    FastBlur {
+        anchors.fill: header
+        source: ShaderEffectSource {
+            sourceItem: map
+            sourceRect: Qt.rect(0, 0, header.width, header.height)
+        }
+
+        radius: 40
+        transparentBorder: true
+        z: 3
     }
 
     Map {
