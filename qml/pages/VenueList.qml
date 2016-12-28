@@ -98,18 +98,20 @@ Page {
 
             onClicked:
             {
+                var currRestaurant = jsonModelCollection.at(index)
                 pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
-                                      {
-                                          restaurant     : model,
-                                          positionSource : page.positionSource
-                                      });
+                               {
+                                   restaurant     : currRestaurant,
+                                   positionSource : page.positionSource
+                               });
 
                 var mapPage = pageStack.pushAttached(Qt.resolvedUrl("VenueMapPage.qml"),
-                                       {
-                                           venueCoordinate: QtPositioning.coordinate(model.latCoord, model.longCoord),
-                                           positionSource: page.positionSource,
-                                           name: model.name
-                                       });
+                               {
+                                   venueCoordinate: QtPositioning.coordinate(currRestaurant.latCoord,
+                                                                             currRestaurant.longCoord),
+                                   positionSource: page.positionSource,
+                                   name: currRestaurant.name
+                               });
 
                 // TODO: Directly assigning a coordinate property to Map.center seems to be broken
                 // with the current Qt version (5.2)
