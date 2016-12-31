@@ -48,11 +48,6 @@ Page {
                 text: qsTr("About")
                 onClicked: pageStack.push(Qt.resolvedUrl("about/AboutBerlinVegan.qml"))
             }
-
-            MenuItem {
-                text: qsTr("Update sorting")
-                onClicked: jsonModelCollection.invalidate()
-            }
         }
 
         header: PageHeader {

@@ -35,6 +35,28 @@ ApplicationWindow
 {
     id: app
 
+    JsonListModel {
+        id: jsonModel
+        dynamicRoles: true
+    }
+
+    Collection {
+        id: gjsonModelCollection
+
+        model: jsonModel
+
+        comparator: function lessThan(a, b) {
+            return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
+            < globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
+        }
+    }
+
+    PositionSource {
+        id: globalPositionSource
+        updateInterval: 15000
+        onPositionChanged:  gjsonModelCollection.reSort();
+    }
+
     Component.onCompleted: {
         var json
         var xhr = new XMLHttpRequest();
@@ -50,11 +72,6 @@ ApplicationWindow
         xhr.send();
     }
 
-    PositionSource {
-        id: globalPositionSource
-        updateInterval: 5000
-    }
-
     onApplicationActiveChanged: {
         if (Qt.application.state === Qt.ApplicationActive) {
             globalPositionSource.start();
@@ -64,19 +81,6 @@ ApplicationWindow
         }
     }
 
-    Collection {
-        id: gjsonModelCollection
-
-        model: JsonListModel {
-            id: jsonModel
-            dynamicRoles: true
-        }
-
-        comparator: function lessThan(a, b) {
-            return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
-            < globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
-        }
-    }
 
     initialPage: Component { VenueList {
         jsonModelCollection: gjsonModelCollection

@@ -212,10 +212,6 @@ mit großem Dank von den folgenden freien Software-Projekten Gebrauch:</translat
 <context>
     <name>VenueList</name>
     <message>
-        <source>Update sorting</source>
-        <translation>Sortierung aktualisieren</translation>
-    </message>
-    <message>
         <source>Vegan food nearby</source>
         <translation>Veganes Essen in der Nähe</translation>
     </message>
