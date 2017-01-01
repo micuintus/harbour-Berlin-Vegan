@@ -43,11 +43,20 @@ ApplicationWindow
     Collection {
         id: gjsonModelCollection
 
+        property string searchString: ""
+        property bool   activeFocus: false
+
+        onSearchStringChanged: reFilter()
+
         model: jsonModel
 
         comparator: function lessThan(a, b) {
             return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
             < globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
+        }
+
+        filter: function(item) {
+           return item.name.search(searchString) !== -1
         }
     }
 
@@ -80,7 +89,6 @@ ApplicationWindow
             globalPositionSource.stop();
         }
     }
-
 
     initialPage: Component { VenueList {
         jsonModelCollection: gjsonModelCollection

@@ -212,12 +212,20 @@ mit großem Dank von den folgenden freien Software-Projekten Gebrauch:</translat
 <context>
     <name>VenueList</name>
     <message>
-        <source>Vegan food nearby</source>
-        <translation>Veganes Essen in der Nähe</translation>
-    </message>
-    <message>
         <source>About</source>
         <translation>Über diese App</translation>
+    </message>
+    <message>
+        <source>Disable Search</source>
+        <translation>Suche ausblenden</translation>
+    </message>
+    <message>
+        <source>Enable Search</source>
+        <translation>Suche einblenden</translation>
+    </message>
+    <message>
+        <source>Vegan food nearby</source>
+        <translation>Veganes Essen in der Nähe</translation>
     </message>
 </context>
 </TS>

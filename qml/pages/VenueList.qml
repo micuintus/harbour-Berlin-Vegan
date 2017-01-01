@@ -29,6 +29,7 @@ import QtLocation 5.0
 import "."
 
 import harbour.berlin.vegan.gel 1.0
+
 import "../components/distance.js" as Distance
 
 Page {
@@ -38,21 +39,46 @@ Page {
     property var jsonModelCollection
     property var positionSource
 
+    property bool searchActivated: false
+
     SilicaListView {
         id: listView
         model: jsonModelCollection
         anchors.fill: parent
+
 
         PullDownMenu {
             MenuItem {
                 text: qsTr("About")
                 onClicked: pageStack.push(Qt.resolvedUrl("about/AboutBerlinVegan.qml"))
             }
+            MenuItem {
+                text: searchActivated ? qsTr("Disable Search") : qsTr("Enable Search")
+                onClicked: searchActivated = !searchActivated
+            }
         }
 
-        header: PageHeader {
+        currentIndex: -1
+
+        property  Component searchField:
+        SearchField {
+            id: searchField
+            width: page.width
+
+            property int test: listView.contentHeight
+
+            onTextChanged:
+            {
+                jsonModelCollection.searchString = searchField.text
+            }
+        }
+
+        property Component heading:
+        PageHeader {
             title: qsTr("Vegan food nearby")
         }
+
+        header: searchActivated ? searchField : heading
 
         delegate: ListItem {
             id: delegate
