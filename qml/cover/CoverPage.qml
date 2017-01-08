@@ -54,6 +54,8 @@ CoverBackground {
         id: listView
         model: jsonModelCollection
 
+        currentIndex: -1
+
         height: parent.height * 0.6
 
         anchors {
