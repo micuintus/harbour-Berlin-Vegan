@@ -62,8 +62,24 @@ ApplicationWindow
 
     PositionSource {
         id: globalPositionSource
-        updateInterval: 15000
-        onPositionChanged:  gjsonModelCollection.reSort();
+        updateInterval: 5000
+        property var oldPosition: QtPositioning.coordinate(0, 0)
+
+        onPositionChanged: {
+            console.log(oldPosition + " " + position.coordinate + " " + position.coordinate.distanceTo(oldPosition))
+            if (position.coordinate.distanceTo(oldPosition) > 100)
+            {
+                gjsonModelCollection.reSort();
+
+                oldPosition.latitude  = position.coordinate.latitude
+                oldPosition.longitude = position.coordinate.longitude
+            }
+        }
+
+        Component.onCompleted: {
+            oldPosition.latitude  = position.coordinate.latitude
+            oldPosition.longitude = position.coordinate.longitude
+        }
     }
 
     Component.onCompleted: {
