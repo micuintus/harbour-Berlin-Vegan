@@ -83,7 +83,9 @@ Page {
         delegate: ListItem {
             id: delegate
             width: page.width
-            height: childrenRect.height
+            contentHeight: namelabel.contentHeight
+                         + streetLabel.contentHeight
+                         + Theme.paddingSmall*3
 
             Label {
                 id: namelabel
@@ -93,11 +95,14 @@ Page {
                 font.pixelSize: Theme.fontSizeMedium
                 truncationMode: TruncationMode.Fade
                 anchors {
+                    top: parent.top
                     left: parent.left
                     right: distance.left
+
+                    topMargin: Theme.paddingSmall
                     rightMargin: Theme.paddingSmall
+                    bottomMargin: Theme.paddingSmall
                     leftMargin: Theme.horizontalPageMargin
-                    verticalCenter: parent.verticalCenter
                 }
             }
 
@@ -111,11 +116,36 @@ Page {
                 horizontalAlignment: Text.AlignRight
                 anchors {
                     right: parent.right
+
+                    baseline: namelabel.baseline
+
+                    topMargin: Theme.paddingSmall
+                    bottomMargin: Theme.paddingSmall
                     rightMargin: Theme.horizontalPageMargin
-                    verticalCenter: parent.verticalCenter
                 }
             }
 
+            Label {
+                id: streetLabel
+                text: model.street
+
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+
+                truncationMode: TruncationMode.Fade
+
+                anchors {
+                    top: namelabel.bottom
+                    bottom: parent.bottom
+                    left: parent.left
+                    right: namelabel.right
+
+                    leftMargin: Theme.horizontalPageMargin
+                    rightMargin: Theme.horizontalPageMargin
+
+                    bottomMargin: Theme.paddingSmall
+                }
+            }
 
             onClicked:
             {

@@ -37,7 +37,7 @@ Page {
 
     SilicaFlickable {
         id: flicka
-        anchors.fill: parent
+        anchors.fill: page
         readonly property var nonDescriptionHeaderHeight: locationheader.height + iconToolBar.height
         contentHeight: descriptionText.y + descriptionText.height + Theme.paddingLarge
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
