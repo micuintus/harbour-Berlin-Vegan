@@ -44,7 +44,7 @@ ApplicationWindow
         id: gjsonModelCollection
 
         property string searchString: ""
-        property bool   activeFocus: false
+        property bool   loaded: false
 
         onSearchStringChanged: reFilter()
 
@@ -85,12 +85,13 @@ ApplicationWindow
     Component.onCompleted: {
         var json
         var xhr = new XMLHttpRequest();
-        xhr.open("GET","pages/GastroLocations.json" )
+        xhr.open("GET","http://www.berlin-vegan.de/app/data/GastroLocations.json" )
         xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE)
                 {
                     json = xhr.responseText;
                     jsonModel.add(JSON.parse(json));
+                    gjsonModelCollection.loaded = true
                 }
         }
 

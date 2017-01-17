@@ -46,6 +46,13 @@ Page {
         model: jsonModelCollection
         anchors.fill: parent
 
+        BusyIndicator {
+            id: busyGuy
+            size: BusyIndicatorSize.Large
+            anchors.centerIn: parent
+            running: !jsonModelCollection.loaded
+        }
+
 
         PullDownMenu {
             MenuItem {
