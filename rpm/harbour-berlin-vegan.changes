@@ -12,5 +12,12 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Tue Jan 17 2017 micu <micuintus@gmx.de> 0.86-1
+- Provide a first search bar version, which can be enabled and disabled via the pulley menu.
+- Show street name in the main list view
+- Automatically update sorting based on the position ("Update sorting" entry is removed).
+- Make heading of map page blurry (iOS style)
+
 * Wed Dec 14 2016 micu <micuintus@gmx.de> 0.80.1-1
 - Add a first version of an extra map page for every venue's description
+
