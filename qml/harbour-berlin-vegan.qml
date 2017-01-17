@@ -56,7 +56,7 @@ ApplicationWindow
         }
 
         filter: function(item) {
-           return item.name.search(searchString) !== -1
+           return item.name.toLowerCase().search(searchString.toLowerCase()) !== -1
         }
     }
 
