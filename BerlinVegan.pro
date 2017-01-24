@@ -50,17 +50,20 @@ OTHER_FILES += harbour-berlin-vegan.desktop \
     qml/components/VenueDetails.qml \
     qml/components/OpeningHoursModelAlgorithms.js \
     qml/components/VenueDescriptionAlgorithms.js \
-    qml/components/distance.js
+    qml/components/distance.js \
+    translations/harbour-berlin-vegan-de.ts \
+    translations/harbour-berlin-vegan-en.ts
 
 # to disable building translations every time, comment out the
 # following CONFIG line
-CONFIG += sailfishapp_i18n
+CONFIG += sailfishapp_i18n sailfishapp_i18n_idbased
 
 # German translation is enabled as an example. If you aren't
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-berlin-vegan-de.ts
+TRANSLATIONS += translations/harbour-berlin-vegan-de.ts \
+                translations/harbour-berlin-vegan-en.ts
 
 VERSION="0.8.6"
 

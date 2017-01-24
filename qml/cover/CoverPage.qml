@@ -66,7 +66,8 @@ CoverBackground {
         }
 
         header: Label {
-            text: qsTr("Berlin-Vegan")
+                              //% "Berlin-Vegan"
+            text: qsTrId("id-cover-berlin-vegan")
             color: Theme.highlightColor
             height: contentHeight * listStretch
         }

@@ -32,17 +32,23 @@ ListModel
 
     Component.onCompleted: {
         /* NOTE: Unfortunately, we cannot go for static assignment here
-                 --- ListElement { day: qsTr("Monday), hours: restautant.otMon }, ...,
+                 --- ListElement { day: qsTrId("id-monday), hours: restautant.otMon }, ...,
                  because dynamic role values arent't supported in Qt 5.2;
-                 see http://stackoverflow.com/questions/7659442/listelement-fields-as-properties */
-
-        append({"day":qsTr("Monday"),    "hours": restaurant.otMon});
-        append({"day":qsTr("Tuesday"),   "hours": restaurant.otTue});
-        append({"day":qsTr("Wednesday"), "hours": restaurant.otWed});
-        append({"day":qsTr("Thursday"),  "hours": restaurant.otThu});
-        append({"day":qsTr("Friday"),    "hours": restaurant.otFri});
-        append({"day":qsTr("Saturday"),  "hours": restaurant.otSat});
-        append({"day":qsTr("Sunday"),    "hours": restaurant.otSun});
+                 see http://stackroverflow.com/questions/7659442/listelement-fields-as-properties */
+                             //% "Monday"
+        append({"day": qsTrId("id-monday"),    "hours": restaurant.otMon});
+                             //% "Tuesday"
+        append({"day": qsTrId("id-tuesday"),   "hours": restaurant.otTue});
+                             //% "Wednesday"
+        append({"day": qsTrId("id-wednesday"), "hours": restaurant.otWed});
+                             //% "Thursday"
+        append({"day": qsTrId("id-thursday"),  "hours": restaurant.otThu});
+                             //% "Friday"
+        append({"day": qsTrId("id-friday"),    "hours": restaurant.otFri});
+                             //% "Saturday"
+        append({"day": qsTrId("id-saturday"),  "hours": restaurant.otSat});
+                             //% "Sunday"
+        append({"day": qsTrId("id-sunday"),    "hours": restaurant.otSun});
     }
 }
 

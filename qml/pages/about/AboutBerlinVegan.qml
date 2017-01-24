@@ -41,7 +41,8 @@ Page {
 
             PageHeader {
                 id: pageHeader
-                title: qsTr("About")
+                             //% "About"
+                title: qsTrId("id-about-page-title")
             }
 
             Image  {
@@ -61,7 +62,8 @@ Page {
 
             Label {
                 id: underLogoText
-                text: qsTr("Berlin-Vegan")
+                            //% "Berlin-Vegan"
+                text: qsTrId("id-berlin-vegan")
                 font.pixelSize: Theme.fontSizeLarge
 
                 color: Theme.highlightColor
@@ -104,9 +106,9 @@ Page {
                 width: parent.width
                 height: Theme.paddingMedium
             }
-
             Label {
-                text: qsTr("Version") + ": " + Qt.application.version
+                            //% "Version"
+                text: qsTrId("id-version") + ": " + Qt.application.version
                 font.pixelSize: Theme.fontSizeSmall
 
                 color: Theme.secondaryColor
@@ -123,10 +125,12 @@ Page {
 
             Label {
                 id: freeSoftwareBla
-                text: qsTr("The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): \
-you can redistribute it and/or modify it under the terms of the
-<a href=\"GPL\">GNU General Public License</a> as published by the Free Software Foundation, \
-either version 2 of the license, or (at your option) any later version.")
+                //% "The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): "
+                //% "you can redistribute it and/or modify it under the terms of the "
+                //% "<a href=\"GPL\">GNU General Public License</a> as published by the "
+                //% "Free Software Foundation, either version 2 of the license, or "
+                //% "(at your option) any later version."
+                text: qsTrId("id-bvapp-is-free-software")
                 wrapMode: Text.WordWrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.secondaryColor
@@ -153,7 +157,8 @@ either version 2 of the license, or (at your option) any later version.")
 
             Button {
                 id: gplButton
-                text: qsTr("View GPLv2")
+                //% "View GPLv2"
+                text: qsTrId("id-view-gplv2")
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
@@ -172,7 +177,8 @@ either version 2 of the license, or (at your option) any later version.")
 
             Label {
                 id: sourceCodeInfo
-                text: qsTr("You can view the source code here:")
+                            //% "You can view the source code here:"
+                text: qsTrId("id-you-can-view-source-code-here")
                 wrapMode: Text.WordWrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.secondaryColor
@@ -224,9 +230,13 @@ either version 2 of the license, or (at your option) any later version.")
             }
 
             Label {
-                text: qsTr("Many thanks goes to the <a href=\"berlinvegan\">editorial team of berlin-vegan.de</a> \
-for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. \
-This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).")
+                //% "Many thanks goes to the <a href=\"berlinvegan\">editorial "
+                //% "team of berlin-vegan.de</a> for creating and maintaining the "
+                //% "Berlin-Vegan project with its marvelous restaurant database, "
+                //% "which this app uses. This content is released under the terms "
+                //% "of the Attribution-NonCommercial 4.0 International Creative "
+                //% "Commons license (CC BY-NC 4.0)."
+                text: qsTrId("id-many-thanks-to-bvapp-and-license")
                 wrapMode: Text.WordWrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.secondaryColor
@@ -247,7 +257,8 @@ This content is released under the terms of the Attribution-NonCommercial 4.0 In
             }
 
             Button {
-                text: qsTr("View CC BY-NC")
+                            //% "View CC BY-NC"
+                text: qsTrId("id-view-cc-by-nc")
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
@@ -282,8 +293,10 @@ This content is released under the terms of the Attribution-NonCommercial 4.0 In
 
 
             Label {
-                text: qsTr("Apart from Qt and other wonderful FOSS components of jolla's SailfishOS SDK, this application
-greatfully makes use of the following third party Free Software projects:")
+                //% "Apart from Qt and other wonderful FOSS components of jolla's "
+                //% "SailfishOS SDK, this application greatfully makes use of the "
+                //% "following third party Free Software projects:"
+                text: qsTrId("id-thanks-to-qt-and-other-3rd-party")
                 wrapMode: Text.WordWrap
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.secondaryColor

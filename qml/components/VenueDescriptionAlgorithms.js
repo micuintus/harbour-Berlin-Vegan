@@ -28,9 +28,12 @@ function defaultBooleanProperty(key)
 {
     switch (key)
     {
-        case 1:  return qsTr("yes");
-        case 0:  return qsTr("no");
-        default: return qsTr("unknown");
+                              //% "yes"
+        case 1:  return qsTrId("id-yes");
+                              //% "no"
+        case 0:  return qsTrId("id-no");
+                              //% "unknown"
+        default: return qsTrId("id-unknown");
     }
 }
 
@@ -38,12 +41,18 @@ function restaurantCategory(key)
 {
     switch(key)
     {
-        case 1:  return qsTr("omnivore");
-        case 2:  return qsTr("omnivore \n(vegan declared)");
-        case 3:  return qsTr("vegetarian");
-        case 4:  return qsTr("vegetarian \n(vegan declared)");
-        case 5:  return qsTr("100% vegan");
-        default: return qsTr("unknown");
+                              //% "omnivore"
+        case 1:  return qsTrId("id-omnivore");
+                              //% "omnivore \n(vegan declared)"
+        case 2:  return qsTrId("id-omnivore-declared");
+                              //% "vegetarian"
+        case 3:  return qsTrId("id-vegetarian");
+                              //% "vegetarian \n(vegan declared)"
+        case 4:  return qsTrId("id-vegetarian-declared");
+                         //% "100% vegan"
+        case 5:  return qsTrId("id-vegan");
+                              //% "unknown"
+        default: return qsTrId("id-unknown");
     }
 }
 
@@ -51,8 +60,10 @@ function seatProperty(key)
 {
     switch (key)
     {
-        case -1: return qsTr("unknown");
-        case  0: return qsTr("no");
+                              //% "unknown"
+        case -1: return qsTrId("id-unknown");
+                              //% "no"
+        case  0: return qsTrId("id-no");
         default: return key;
     }
 }

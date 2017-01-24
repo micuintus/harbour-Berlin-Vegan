@@ -49,11 +49,16 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: qsTr("About")
+                            //% "About"
+                text: qsTrId("id-about-venue-list")
                 onClicked: pageStack.push(Qt.resolvedUrl("about/AboutBerlinVegan.qml"))
             }
             MenuItem {
-                text: searchActivated ? qsTr("Disable Search") : qsTr("Enable Search")
+                text: searchActivated ?
+                                //% "Disable Search"
+                          qsTrId("id-disable-search") :
+                                //% "Enable Search"
+                          qsTrId("id-enable-search")
                 onClicked: searchActivated = !searchActivated
             }
         }
@@ -75,7 +80,8 @@ Page {
 
         property Component heading:
         PageHeader {
-            title: qsTr("Vegan food nearby")
+                         //% "Vegan food nearby"
+            title: qsTrId("id-vegan-food-nearby")
         }
 
         header: searchActivated ? searchField : heading

@@ -76,7 +76,8 @@ SilicaListView {
 
             Button {
                 id: gplButton
-                text: qsTr("View license")
+                            //% "View license"
+                text: qsTrId("id-view-license")
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }

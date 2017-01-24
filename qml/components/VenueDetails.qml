@@ -47,7 +47,8 @@ Item {
             id: openingHourListView
 
             header: SectionHeader {
-                text: qsTr("Opening hours")
+                            //% "Opening hours"
+                text: qsTrId("id-opening-hours")
             }
 
             width: parent.width
@@ -69,76 +70,91 @@ Item {
         }
 
         SectionHeader {
-            text: qsTr("Food details")
+                      //% "Food details"
+            text: qsTrId("id-food-details")
             id: foodDetailsHeader
         }
 
         DetailItem {
-            label: qsTr("Category")
+                                   //% "Category"
+            label: qsTrId("id-vegan-venue-category")
             value: PropertyStrings.restaurantCategory(restaurant.vegan)
         }
 
         DetailItem {
-            label: qsTr("Cert. organic offers")
+                   //% "Cert. organic offers"
+            label: qsTrId("id-organic")
             value: PropertyStrings.defaultBooleanProperty(restaurant.organic)
         }
 
         DetailItem {
-            label: qsTr("Gluten-free options")
+                         //% "Gluten-free options"
+            label: qsTrId("id-gluten-free")
             value: PropertyStrings.defaultBooleanProperty(restaurant.glutenFree)
         }
 
 
         SectionHeader {
-            text: qsTr("Accessibility")
+                        //% "Accessibility"
+            text: qsTrId("id-accessibility")
         }
 
         DetailItem {
-            label: qsTr("Wheelchair-friendly")
+                         //% "Wheelchair-friendly"
+            label: qsTrId("id-wheelchair")
             value: PropertyStrings.defaultBooleanProperty(restaurant.handicappedAccessible)
         }
 
         DetailItem {
-            label: qsTr("Wheelchair-accessible WC")
+              //% "Wheelchair-accessible WC"
+            label: qsTrId("id-wheelchair-wc")
             value: PropertyStrings.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
         }
 
         DetailItem {
-            label: qsTr("High chair")
+                         //% "High chair"
+            label: qsTrId("id-high-chair")
             value: PropertyStrings.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
         }
 
         DetailItem {
-            label: qsTr("Dogs allowed")
+                         //% "Dogs allowed"
+            label: qsTrId("id-dogs-allowed")
             value: PropertyStrings.defaultBooleanProperty(restaurant.dogs)
         }
 
         SectionHeader {
-            text: qsTr("Venue features")
+                        //% "Venue features"
+            text: qsTrId("id-venue-features")
         }
 
         DetailItem {
-            label: qsTr("WiFi")
+                         //% "WiFi"
+            label: qsTrId("id-wifi")
             value: PropertyStrings.defaultBooleanProperty(restaurant.wlan)
         }
 
         DetailItem {
-            label: qsTr("Seats outdoor")
+                   //% "Seats outdoor"
+            label: qsTrId("id-outdoor-seats")
             value: PropertyStrings.seatProperty(restaurant.seatsOutdoor)
         }
 
         DetailItem {
-            label: qsTr("Seats indoor")
+                   //% "Seats indoor"
+            label: qsTrId("id-indoor-seats")
             value: PropertyStrings.seatProperty(restaurant.seatsIndoor)
         }
 
         DetailItem {
-            label: qsTr("Catering")
+                         //% "Catering"
+            label: qsTrId("id-catering")
             value: PropertyStrings.defaultBooleanProperty(restaurant.catering)
         }
 
         DetailItem {
-            label: qsTr("Delivery service")
+                         //% "Delivery service"
+            label: qsTrId("id-delivery")
             value: PropertyStrings.defaultBooleanProperty(restaurant.delivery)
         }
     }

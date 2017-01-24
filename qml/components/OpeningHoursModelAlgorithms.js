@@ -37,7 +37,8 @@ function cleanUpOpeningHoursModel(openingHoursModel)
 
         if (openingHoursModel.get(i).hours === "")
         {
-            openingHoursModel.set(i, {"hours":qsTr("closed")});
+            //% "closed"
+            openingHoursModel.set(i, {"hours": qsTrId("id-closed")});
         }
     }
 }
