@@ -28,6 +28,8 @@ import QtPositioning 5.2
 
 import harbour.berlin.vegan.gel 1.0
 
+import "components/JSONDownloadHelper.js" as JSONDownloadHelper
+
 import "pages"
 import "cover"
 
@@ -83,19 +85,12 @@ ApplicationWindow
     }
 
     Component.onCompleted: {
-        var json
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET","http://www.berlin-vegan.de/app/data/GastroLocations.json" )
-        xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE)
-                {
-                    json = xhr.responseText;
-                    jsonModel.add(JSON.parse(json));
-                    gjsonModelCollection.loaded = true
-                }
-        }
-
-        xhr.send();
+        JSONDownloadHelper.loadVenueJSON(
+        function(json)
+        {
+            jsonModel.add(JSON.parse(json));
+            gjsonModelCollection.loaded = true
+        })
     }
 
     onApplicationActiveChanged: {
