@@ -48,10 +48,10 @@ OTHER_FILES += harbour-berlin-vegan.desktop \
     qml/components/CollapsibleItem.qml \
     qml/components/OpeningHoursModel.qml \
     qml/components/VenueDetails.qml \
+    qml/components/JsonDownloadHelper.qml \
     qml/components/OpeningHoursModelAlgorithms.js \
     qml/components/VenueDescriptionAlgorithms.js \
     qml/components/distance.js \
-    qml/components/JSONDownloadHelper.js \
     translations/harbour-berlin-vegan-de.ts \
     translations/harbour-berlin-vegan-en.ts
 
@@ -69,7 +69,3 @@ TRANSLATIONS += translations/harbour-berlin-vegan-de.ts \
 VERSION="0.8.6"
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
-
-
-
-

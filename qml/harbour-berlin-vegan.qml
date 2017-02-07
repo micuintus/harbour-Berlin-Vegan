@@ -28,8 +28,7 @@ import QtPositioning 5.2
 
 import harbour.berlin.vegan.gel 1.0
 
-import "components/JSONDownloadHelper.js" as JSONDownloadHelper
-
+import "components"
 import "pages"
 import "cover"
 
@@ -84,13 +83,18 @@ ApplicationWindow
         }
     }
 
-    Component.onCompleted: {
-        JSONDownloadHelper.loadVenueJSON(
+    JsonDownloadHelper {
+        id: downloadHelper
+        onFileLoaded:
         function(json)
         {
             jsonModel.add(JSON.parse(json));
             gjsonModelCollection.loaded = true
-        })
+        }
+    }
+
+    Component.onCompleted: {
+        downloadHelper.loadVenueJson()
     }
 
     onApplicationActiveChanged: {

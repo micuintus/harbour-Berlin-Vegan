@@ -22,23 +22,46 @@
  *
 **/
 
-.pragma library
+import QtQuick 2.2
 
-function loadVenueJSON(onFileLoaded)
-{
+Timer {
 
-    var json
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET","http://www.berlin-vegan.de/app/data/GastroLocations.json" )
-    xhr.onreadystatechange =
-    function()
+    property var request
+    property var onFileLoaded
+    interval: 5000
+
+    function _fileRequest(url)
     {
-            if (xhr.readyState === XMLHttpRequest.DONE)
+        var json
+        request = new XMLHttpRequest();
+        request.open("GET", url)
+        request.onreadystatechange =
+        function()
+        {
+            if (request.readyState === XMLHttpRequest.DONE)
             {
-                json = xhr.responseText;
-                onFileLoaded(json)
+                console.log("DONE!")
+                console.log(request.status)
+                if (request.status === 200 || request.status === 0)
+                {
+                    stop()
+                    json = request.responseText;
+                    onFileLoaded(json)
+                }
             }
+        };
+
+        request.send();
     }
 
-    xhr.send();
+    function loadVenueJson()
+    {
+        restart()
+        _fileRequest("http://www.berlin-vegan.de/app/data/GastroLocations.json")
+    }
+
+    onTriggered: {
+        request.abort();
+        _fileRequest("pages/GastroLocations.json")
+    }
 }
