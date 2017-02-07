@@ -97,12 +97,15 @@ ApplicationWindow
         downloadHelper.loadVenueJson()
     }
 
-    onApplicationActiveChanged: {
-        if (Qt.application.state === Qt.ApplicationActive) {
-            globalPositionSource.start();
-        }
-        else {
-            globalPositionSource.stop();
+    Connections {
+        target: Qt.application
+        onStateChanged: {
+            if (Qt.application.state === Qt.ApplicationActive) {
+                globalPositionSource.start();
+            }
+            else {
+                globalPositionSource.stop();
+            }
         }
     }
 
