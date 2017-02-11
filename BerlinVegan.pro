@@ -27,6 +27,11 @@ linux {
     DEPLOYMENTFOLDERS += wrapperFolder
 }
 
+ios {
+    QMAKE_INFO_PLIST = ios/Project-Info.plist
+    OTHER_FILES += $$QMAKE_INFO_PLIST
+}
+
 # Add more folders to ship with the application here
 
 RESOURCES += #    resources.qrc # uncomment for publishing
