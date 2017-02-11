@@ -48,7 +48,6 @@ Page {
 
         BusyIndicator {
             id: busyGuy
-            size: BusyIndicatorSize.Large
             anchors.centerIn: parent
             running: !jsonModelCollection.loaded
         }
