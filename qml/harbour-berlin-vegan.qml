@@ -76,11 +76,6 @@ ApplicationWindow
                 oldPosition.longitude = position.coordinate.longitude
             }
         }
-
-        Component.onCompleted: {
-            oldPosition.latitude  = position.coordinate.latitude
-            oldPosition.longitude = position.coordinate.longitude
-        }
     }
 
     JsonDownloadHelper {
