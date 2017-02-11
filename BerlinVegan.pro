@@ -22,6 +22,11 @@ CONFIG += v-play
 qmlFolder.source = qml
 DEPLOYMENTFOLDERS += qmlFolder # comment for publishing
 
+linux {
+    wrapperFolder.source = qml/Sailfish
+    DEPLOYMENTFOLDERS += wrapperFolder
+}
+
 # Add more folders to ship with the application here
 
 RESOURCES += #    resources.qrc # uncomment for publishing

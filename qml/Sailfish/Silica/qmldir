@@ -1,0 +1,2 @@
+module Sailfish.Silica
+ApplicationWindow 1.0 ApplicationWindow.qml
