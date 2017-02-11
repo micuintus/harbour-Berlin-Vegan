@@ -12,7 +12,30 @@
 # The name of your application
 TARGET = harbour-berlin-vegan
 
+packagesExist(sailfishapp) {
 CONFIG += sailfishapp
+
+DEFINES += Q_OS_SAILFISH
+} else {
+CONFIG += v-play
+
+qmlFolder.source = qml
+DEPLOYMENTFOLDERS += qmlFolder # comment for publishing
+
+# Add more folders to ship with the application here
+
+RESOURCES += #    resources.qrc # uncomment for publishing
+
+# NOTE: for PUBLISHING, perform the following steps:
+# 1. comment the DEPLOYMENTFOLDERS += qmlFolder line above, to avoid shipping your qml files with the application (instead they get compiled to the app binary)
+# 2. uncomment the resources.qrc file inclusion and add any qml subfolders to the .qrc file; this compiles your qml files and js files to the app binary and protects your source code
+# 3. change the setMainQmlFile() call in main.cpp to the one starting with "qrc:/" - this loads the qml files from the resources
+# for more details see the "Deployment Guides" in the V-Play Documentation
+
+# during development, use the qmlFolder deployment because you then get shorter compilation times (the qml files do not need to be compiled to the binary but are just copied)
+# also, for quickest deployment on Desktop disable the "Shadow Build" option in Projects/Builds - you can then select "Run Without Deployment" from the Build menu in Qt Creator if you only changed QML files; this speeds up application start, because your app is not copied & re-compiled but just re-interpreted
+}
+
 QT += positioning location
 
 SOURCES += src/BerlinVegan.cpp \
@@ -24,6 +47,7 @@ HEADERS += 3rdparty/Cutehacks/gel/gel.h \
            3rdparty/Cutehacks/gel/jsonlistmodel.h \
            3rdparty/Cutehacks/gel/jsvalueiterator.h
 
+packagesExist(sailfishapp) {
 OTHER_FILES += harbour-berlin-vegan.desktop \
     rpm/BerlinVegan.yaml \
     rpm/harbour-berlin-vegan.changes \
@@ -58,6 +82,7 @@ OTHER_FILES += harbour-berlin-vegan.desktop \
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n sailfishapp_i18n_idbased
+}
 
 # German translation is enabled as an example. If you aren't
 # planning to localize your app, remember to comment out the

@@ -25,8 +25,15 @@
 #include <QtQuick>
 
 #include <3rdparty/Cutehacks/gel/gel.h>
+#ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>
 #include <QGuiApplication>
+#else
+#include <QApplication>
+#include <VPApplication>
+
+#include <QQmlApplicationEngine>
+#endif
 
 namespace com { namespace cutehacks { namespace gel {
 
@@ -52,8 +59,33 @@ int main(int argc, char *argv[])
 
     com::cutehacks::gel::registerCutehacksgel();
 
+#ifdef Q_OS_SAILFISH
     SailfishApp::application(argc, argv)->setApplicationVersion(APP_VERSION);
     return SailfishApp::main(argc, argv);
+#else
+    QApplication app(argc, argv);
+    VPApplication vplay;
+
+    // Use platform-specific fonts instead of V-Play's default font
+    vplay.setPreservePlatformFonts(true);
+
+    QQmlApplicationEngine engine;
+    vplay.initialize(&engine);
+
+    // use this during development
+    // for PUBLISHING, use the entry point below
+    vplay.setMainQmlFileName(QStringLiteral("qml/harbour-berlin-vegan.qml"));
+
+    // use this instead of the above call to avoid deployment of the qml files and compile them into the binary with qt's resource system qrc
+    // this is the preferred deployment option for publishing games to the app stores, because then your qml files and js files are protected
+    // to avoid deployment of your qml files and images, also comment the DEPLOYMENTFOLDERS command in the .pro file
+    // also see the .pro file for more details
+    //vplay.setMainQmlFileName(QStringLiteral("qrc:/qml/harbour-berlin-vegan.qml"));
+
+    engine.load(QUrl(vplay.mainQmlFileName()));
+
+    return app.exec();
+#endif
 }
 
 
