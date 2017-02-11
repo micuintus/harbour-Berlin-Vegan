@@ -39,7 +39,7 @@ Page {
     property var jsonModelCollection
     property var positionSource
 
-    property bool searchActivated: false
+    property bool searchActivated: true
 
     SilicaListView {
         id: listView
@@ -48,7 +48,6 @@ Page {
 
         BusyIndicator {
             id: busyGuy
-            size: BusyIndicatorSize.Large
             anchors.centerIn: parent
             running: !jsonModelCollection.loaded
         }

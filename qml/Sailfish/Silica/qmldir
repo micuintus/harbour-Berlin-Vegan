@@ -1,0 +1,15 @@
+module Sailfish.Silica
+ApplicationWindow 1.0 ApplicationWindow.qml
+BusyIndicator 1.0 BusyIndicator.qml
+CoverAction 1.0 CoverAction.qml
+CoverActionList 1.0 CoverActionList.qml
+CoverBackground 1.0 CoverBackground.qml
+Label 1.0 Label.qml
+ListItem 1.0 ListItem.qml
+MenuItem 1.0 MenuItem.qml
+Page 1.0 Page.qml
+PageHeader 1.0 PageHeader.qml
+PullDownMenu 1.0 PullDownMenu.qml
+SearchField 1.0 SearchField.qml
+SilicaListView 1.0 SilicaListView.qml
+VerticalScrollDecorator 1.0 VerticalScrollDecorator.qml
