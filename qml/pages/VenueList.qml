@@ -39,7 +39,7 @@ Page {
     property var jsonModelCollection
     property var positionSource
 
-    property bool searchActivated: false
+    property bool searchActivated: true
 
     SilicaListView {
         id: listView
