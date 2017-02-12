@@ -1,5 +1,8 @@
-import QtQuick.Controls 1.4
+import VPlayApps 1.0
 
-BusyIndicator {
+AppActivityIndicator {
 
+    property bool running: false
+    animating: running
+    hidesWhenStopped: true
 }
