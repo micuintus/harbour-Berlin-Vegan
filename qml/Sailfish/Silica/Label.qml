@@ -4,6 +4,4 @@ Label {
 
     property var truncationMode
 
-    visible: false
-
 }

@@ -5,8 +5,12 @@ SimpleRow {
     signal clicked(int index)
 
     property var contentWidth
+    property var contentHeight
 
-    text: namelabel.text
-    detailText: "%1 %2".arg(streetLabel.text).arg(distance.text)
+    height: contentHeight
+
+    // HACK: Display arrow on the bottom right
+    text: " "
+    detailText: " "
 
 }
