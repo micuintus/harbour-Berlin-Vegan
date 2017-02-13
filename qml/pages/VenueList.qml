@@ -155,6 +155,7 @@ Page {
                     leftMargin: Theme.horizontalPageMargin
                     rightMargin: Theme.horizontalPageMargin
 
+                    topMargin: Theme.paddingSmall
                     bottomMargin: Theme.paddingSmall
                 }
             }

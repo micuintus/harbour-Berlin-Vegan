@@ -18,7 +18,7 @@ QtObject {
     property int fontSizeMedium: dp(Theme.listItem.fontSizeText)
     property int fontSizeExtraSmall: dp(Theme.listItem.fontSizeDetailText)
 
-    property int paddingSmall: dp(10)
-    property int horizontalPageMargin: dp(15)
+    property int paddingSmall: dp(12)
+    property int horizontalPageMargin: dp(16)
 
 }
