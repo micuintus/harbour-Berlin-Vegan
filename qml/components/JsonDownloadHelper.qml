@@ -40,9 +40,7 @@ Timer {
         {
             if (request.readyState === XMLHttpRequest.DONE)
             {
-                console.log("DONE!")
-                console.log(request.status)
-                if (request.status === 200 || request.status === 0)
+                if (request.status === 200)
                 {
                     stop()
                     json = request.responseText;
@@ -62,6 +60,6 @@ Timer {
 
     onTriggered: {
         request.abort();
-        _fileRequest("pages/GastroLocations.json")
+        _fileRequest("qrc:/qml/pages/GastroLocations.json")
     }
 }
