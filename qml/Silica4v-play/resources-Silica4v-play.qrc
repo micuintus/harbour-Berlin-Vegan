@@ -14,6 +14,7 @@
         <file>qmldir</file>
         <file>SearchField.qml</file>
         <file>SilicaListView.qml</file>
+        <file>TruncationMode.qml</file>
         <file>VerticalScrollDecorator.qml</file>
     </qresource>
 </RCC>

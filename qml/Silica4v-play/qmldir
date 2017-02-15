@@ -12,4 +12,5 @@ PageHeader 1.0 PageHeader.qml
 PullDownMenu 1.0 PullDownMenu.qml
 SearchField 1.0 SearchField.qml
 SilicaListView 1.0 SilicaListView.qml
+singleton TruncationMode 1.0 TruncationMode.qml
 VerticalScrollDecorator 1.0 VerticalScrollDecorator.qml
