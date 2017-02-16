@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/components/CollapsibleItem.qml</file>
+        <file>qml/components/distance.js</file>
+        <file>qml/components/IconToolBar.qml</file>
+        <file>qml/components/JsonDownloadHelper.qml</file>
+        <file>qml/components/OpeningHoursModel.qml</file>
+        <file>qml/components/OpeningHoursModelAlgorithms.js</file>
+        <file>qml/components/VenueDescriptionAlgorithms.js</file>
+        <file>qml/components/VenueDescriptionHeader.qml</file>
+        <file>qml/components/VenueDetails.qml</file>
+        <file>qml/cover/CoverPage.qml</file>
+        <file>qml/pages/about/AboutBerlinVegan.qml</file>
+        <file>qml/pages/about/BerlinVegan.svg</file>
+        <file>qml/pages/about/CC-by-nc-legalcode.txt</file>
+        <file>qml/pages/about/LICENSE</file>
+        <file>qml/pages/about/LICENSE.Cutehacks</file>
+        <file>qml/pages/about/LICENSE.qml-utils</file>
+        <file>qml/pages/about/LICENSE.YTPlayer</file>
+        <file>qml/pages/about/LicenseViewer.qml</file>
+        <file>qml/pages/about/ThirdPartySoftware.qml</file>
+        <file>qml/pages/GastroLocations.json</file>
+        <file>qml/pages/VenueDescription.qml</file>
+        <file>qml/pages/VenueList.qml</file>
+        <file>qml/pages/VenueMapPage.qml</file>
+        <file>qml/harbour-berlin-vegan.qml</file>
+        <file>translations/harbour-berlin-vegan-de.ts</file>
+        <file>translations/harbour-berlin-vegan-en.ts</file>
+        <file>translations/harbour-berlin-vegan.ts</file>
+    </qresource>
+</RCC>

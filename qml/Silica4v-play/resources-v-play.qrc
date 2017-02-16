@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/qt-project.org/imports/Sailfish/Silica">
+        <file>ApplicationWindow.qml</file>
+        <file>BusyIndicator.qml</file>
+        <file>CoverAction.qml</file>
+        <file>CoverActionList.qml</file>
+        <file>CoverBackground.qml</file>
+        <file>Label.qml</file>
+        <file>ListItem.qml</file>
+        <file>MenuItem.qml</file>
+        <file>Page.qml</file>
+        <file>PageHeader.qml</file>
+        <file>PullDownMenu.qml</file>
+        <file>qmldir</file>
+        <file>SearchField.qml</file>
+        <file>SilicaListView.qml</file>
+        <file>Theme.qml</file>
+        <file>VerticalScrollDecorator.qml</file>
+    </qresource>
+</RCC>
