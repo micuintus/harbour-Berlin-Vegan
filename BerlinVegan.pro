@@ -23,7 +23,7 @@ qmlFolder.source = qml
 DEPLOYMENTFOLDERS += qmlFolder # comment for publishing
 
 linux {
-    wrapperFolder.source = qml/Sailfish
+    wrapperFolder.source = qml/Silica4v-play/Sailfish
     DEPLOYMENTFOLDERS += wrapperFolder
 }
 
