@@ -1,4 +1,7 @@
 <RCC>
+    <qresource prefix="/">
+        <file>qml/config.json</file>
+    </qresource>
     <qresource prefix="/qt-project.org/imports/Sailfish/Silica">
         <file>ApplicationWindow.qml</file>
         <file>BusyIndicator.qml</file>
