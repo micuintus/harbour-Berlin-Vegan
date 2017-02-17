@@ -25,9 +25,9 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 
-import "../components/OpeningHoursModelAlgorithms.js" as OpeningHoursModelAlgorithms
-import "../components/VenueDescriptionAlgorithms.js" as PropertyStrings
-import "../components"
+import "../components-generic/OpeningHoursModelAlgorithms.js" as OpeningHoursModelAlgorithms
+import "../components-generic/VenueDescriptionAlgorithms.js" as PropertyStrings
+import "../components-generic"
 
 Item {
 

@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import QtLocation 5.0
 import QtPositioning 5.2
 import QtGraphicalEffects 1.0
+import BerlinVegan.components 1.0 as BVApp
 
 Page {
 
@@ -33,7 +34,7 @@ Page {
     Rectangle {
         id: rectangle
         anchors.fill: header
-        color: Theme.highlightDimmerColor
+        color: BVApp.Theme.highlightDimmerColor
         opacity: 0.6
         z: 4
     }
@@ -48,7 +49,7 @@ Page {
 
         sourceItem: IconButton {
             id: venueMarkerImage
-            icon.source: "image://theme/icon-m-location?" + Theme.highlightBackgroundColor
+            icon.source: "image://theme/icon-m-location?" + BVApp.Theme.highlightBackgroundColor
 
             icon.scale: 1.6
 
@@ -68,7 +69,7 @@ Page {
 
         sourceItem: Image {
             id: currentPosImage
-            source: "image://theme/icon-cover-location?" + Theme.highlightBackgroundColor
+            source: "image://theme/icon-cover-location?" + BVApp.Theme.highlightBackgroundColor
         }
     }
 

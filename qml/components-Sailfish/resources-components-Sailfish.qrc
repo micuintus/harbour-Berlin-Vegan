@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/qt-project.org/imports/BerlinVegan/components">
+        <file>Theme.qml</file>
+        <file>qmldir</file>
+    </qresource>
+</RCC>

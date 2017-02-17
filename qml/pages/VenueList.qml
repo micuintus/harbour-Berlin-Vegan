@@ -26,11 +26,12 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import QtLocation 5.0
+import BerlinVegan.components 1.0 as BVApp
 import "."
 
 import harbour.berlin.vegan.gel 1.0
 
-import "../components/distance.js" as Distance
+import "../components-generic/distance.js" as Distance
 
 Page {
 
@@ -97,24 +98,24 @@ Page {
             width: page.width
             contentHeight: namelabel.contentHeight
                          + streetLabel.contentHeight
-                         + Theme.paddingSmall*3
+                         + BVApp.Theme.paddingSmall*3
 
             Label {
                 id: namelabel
                 text: model.name
-                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+                color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.primaryColor
 
-                font.pixelSize: Theme.fontSizeMedium
+                font.pixelSize: BVApp.Theme.fontSizeMedium
                 truncationMode: TruncationMode.Fade
                 anchors {
                     top: parent.top
                     left: parent.left
                     right: distance.left
 
-                    topMargin: Theme.paddingSmall
-                    rightMargin: Theme.paddingSmall
-                    bottomMargin: Theme.paddingSmall
-                    leftMargin: Theme.horizontalPageMargin
+                    topMargin: BVApp.Theme.paddingSmall
+                    rightMargin: BVApp.Theme.paddingSmall
+                    bottomMargin: BVApp.Theme.paddingSmall
+                    leftMargin: BVApp.Theme.horizontalPageMargin
                 }
             }
 
@@ -123,17 +124,17 @@ Page {
                 text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                 Distance.humanReadableDistanceString(positionSource.position.coordinate,
                                                            QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
-                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
-                font.pixelSize: Theme.fontSizeExtraSmall
+                color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.primaryColor
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
                 horizontalAlignment: Text.AlignRight
                 anchors {
                     right: parent.right
 
                     baseline: namelabel.baseline
 
-                    topMargin: Theme.paddingSmall
-                    bottomMargin: Theme.paddingSmall
-                    rightMargin: Theme.horizontalPageMargin
+                    topMargin: BVApp.Theme.paddingSmall
+                    bottomMargin: BVApp.Theme.paddingSmall
+                    rightMargin: BVApp.Theme.horizontalPageMargin
                 }
             }
 
@@ -141,8 +142,8 @@ Page {
                 id: streetLabel
                 text: model.street
 
-                font.pixelSize: Theme.fontSizeExtraSmall
-                color: Theme.secondaryColor
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+                color: BVApp.Theme.secondaryColor
 
                 truncationMode: TruncationMode.Fade
 
@@ -152,11 +153,11 @@ Page {
                     left: parent.left
                     right: namelabel.right
 
-                    leftMargin: Theme.horizontalPageMargin
-                    rightMargin: Theme.horizontalPageMargin
+                    leftMargin: BVApp.Theme.horizontalPageMargin
+                    rightMargin: BVApp.Theme.horizontalPageMargin
 
-                    topMargin: Theme.paddingSmall
-                    bottomMargin: Theme.paddingSmall
+                    topMargin: BVApp.Theme.paddingSmall
+                    bottomMargin: BVApp.Theme.paddingSmall
                 }
             }
 

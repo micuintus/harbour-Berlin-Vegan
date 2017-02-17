@@ -2,7 +2,7 @@ import VPlayApps 1.0
 
 import QtQuick 2.7
 
-import "." as SilicaComponents
+import BerlinVegan.components 1.0 as BVApp
 
 App {
 
@@ -18,7 +18,7 @@ App {
 
     Component.onCompleted: {
         // We need to access the dp() function from the Theme component
-        SilicaComponents.Theme.myApp = app
+        BVApp.Theme.myApp = app
     }
 
 }
