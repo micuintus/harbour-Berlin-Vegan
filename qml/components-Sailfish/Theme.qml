@@ -22,5 +22,5 @@ QtObject {
     readonly property int paddingLarge: Silica.Theme.paddingLarge
 
     readonly property int horizontalPageMargin: Silica.Theme.horizontalPageMargin
-
+    readonly property int busyIndicatorSizeLarge: Silica.BusyIndicatorSize.Large
 }

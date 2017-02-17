@@ -20,4 +20,5 @@ QtObject {
     property int paddingSmall: dp(12)
     property int horizontalPageMargin: dp(16)
 
+    readonly property int busyIndicatorSizeLarge: 0
 }

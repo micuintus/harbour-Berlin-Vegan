@@ -51,6 +51,7 @@ Page {
             id: busyGuy
             anchors.centerIn: parent
             running: !jsonModelCollection.loaded
+            size: BVApp.Theme.busyIndicatorSizeLarge
         }
 
 
