@@ -133,10 +133,6 @@
         <source>Delivery service</source>
         <translation>Lieferdienst</translation>
     </message>
-    <message id="id-cover-berlin-vegan">
-        <source>Berlin-Vegan</source>
-        <translation>Berlin-Vegan</translation>
-    </message>
     <message id="id-about-page-title">
         <source>About</source>
         <translation>Über diese App</translation>
@@ -192,10 +188,6 @@
     <message id="id-enable-search">
         <source>Enable Search</source>
         <translation>Suche einblenden</translation>
-    </message>
-    <message id="id-vegan-food-nearby">
-        <source>Vegan food nearby</source>
-        <translation>Veganes Essen in der Nähe</translation>
     </message>
 </context>
 </TS>

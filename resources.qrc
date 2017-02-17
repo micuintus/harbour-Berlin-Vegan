@@ -15,7 +15,9 @@
         <file>qml/pages/VenueList.qml</file>
         <file>qml/pages/VenueMapPage.qml</file>
         <file>qml/harbour-berlin-vegan.qml</file>
+        <file>translations/harbour-berlin-vegan-de.qm</file>
         <file>translations/harbour-berlin-vegan-de.ts</file>
+        <file>translations/harbour-berlin-vegan-en.qm</file>
         <file>translations/harbour-berlin-vegan-en.ts</file>
         <file>translations/harbour-berlin-vegan.ts</file>
         <file>qml/components-generic/CollapsibleItem.qml</file>
