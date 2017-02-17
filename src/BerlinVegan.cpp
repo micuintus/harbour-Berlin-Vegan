@@ -29,6 +29,9 @@
 #include <sailfishapp.h>
 #include <QGuiApplication>
 #else
+#include <QTranslator>
+#include <QLocale>
+
 #include <QApplication>
 #include <VPApplication>
 
@@ -65,6 +68,17 @@ int main(int argc, char *argv[])
 #else
 
     QApplication app(argc, argv);
+
+    // Load translations
+    QTranslator translator;
+    // Look up e.g. :/translations/harbour-berlin-vegan-de.qm
+    if (translator.load(QLocale(), QLatin1String("harbour-berlin-vegan"), QLatin1String("-"), QLatin1String(":/translations"))) {
+        app.installTranslator(&translator);
+        qInfo() << "Translations loaded";
+    } else {
+        qInfo() << "Could not load translation";
+    }
+
     VPApplication vplay;
 
     // Use platform-specific fonts instead of V-Play's default font
