@@ -181,13 +181,5 @@
         <source>About</source>
         <translation>Über diese App</translation>
     </message>
-    <message id="id-disable-search">
-        <source>Disable Search</source>
-        <translation>Suche ausblenden</translation>
-    </message>
-    <message id="id-enable-search">
-        <source>Enable Search</source>
-        <translation>Suche einblenden</translation>
-    </message>
 </context>
 </TS>
