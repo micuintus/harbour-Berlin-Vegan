@@ -67,7 +67,7 @@ CoverBackground {
 
         header: Label {
                               //% "Berlin-Vegan"
-            text: qsTrId("id-cover-berlin-vegan")
+            text: qsTrId("id-berlin-vegan")
             color: BVApp.Theme.highlightColor
             height: contentHeight * listStretch
         }
