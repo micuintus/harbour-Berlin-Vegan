@@ -25,6 +25,7 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
+import BerlinVegan.components 1.0 as BVApp
 
 Column {
     property var restaurant
@@ -34,7 +35,7 @@ Column {
     Separator {
         width: column.width
         horizontalAlignment: Qt.AlignCenter
-        color: Theme.secondaryHighlightColor
+        color: BVApp.Theme.secondaryHighlightColor
         height: 2
     }
 
@@ -49,9 +50,9 @@ Column {
 
         IconButton {
             icon.source: "image://theme/icon-l-answer?" + (pressed
-                         ? Theme.highlightColor
-                         : Theme.primaryColor)
-            icon.scale: Theme.iconSizeMedium / Theme.iconSizeLarge
+                         ? BVApp.Theme.highlightColor
+                         : BVApp.Theme.primaryColor)
+            icon.scale: BVApp.Theme.iconSizeMedium / BVApp.Theme.iconSizeLarge
 
             onClicked: Qt.openUrlExternally("tel:/" + restaurant.telephone)
             Layout.fillWidth: true
@@ -61,8 +62,8 @@ Column {
 
         IconButton {
             icon.source: "image://theme/icon-m-favorite?" + (pressed
-                         ? Theme.highlightColor
-                         : Theme.primaryColor)
+                         ? BVApp.Theme.highlightColor
+                         : BVApp.Theme.primaryColor)
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             enabled: false
@@ -72,8 +73,8 @@ Column {
 
         IconButton {
             icon.source: "image://theme/icon-m-home?" + (pressed
-                         ? Theme.highlightColor
-                         : Theme.primaryColor)
+                         ? BVApp.Theme.highlightColor
+                         : BVApp.Theme.primaryColor)
 
             onClicked: Qt.openUrlExternally(restaurant.website.slice(0,4) === "http"
                                             ?             restaurant.website
@@ -88,7 +89,7 @@ Column {
     Separator {
         width: column.width
         horizontalAlignment: Qt.AlignCenter
-        color: Theme.secondaryHighlightColor
+        color: BVApp.Theme.secondaryHighlightColor
         height: 2
     }
 }

@@ -17,6 +17,9 @@ QtObject {
     readonly property int fontSizeExtraSmall: Silica.Theme.fontSizeExtraSmall
     readonly property int fontSizeSmall: Silica.Theme.fontSizeSmall
 
+    readonly property int iconSizeMedium : Silica.Theme.iconSizeMedium
+    readonly property int iconSizeLarge : Silica.Theme.iconSizeLarge
+
     readonly property int paddingSmall: Silica.Theme.paddingSmall
     readonly property int paddingMedium: Silica.Theme.paddingMedium
     readonly property int paddingLarge: Silica.Theme.paddingLarge
