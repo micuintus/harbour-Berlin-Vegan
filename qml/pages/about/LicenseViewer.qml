@@ -55,8 +55,8 @@ Page {
 
     SilicaFlickable {
         anchors.fill: parent
-        anchors.leftMargin: Theme.paddingMedium
-        anchors.rightMargin: Theme.paddingMedium
+        anchors.leftMargin: BVApp.Theme.paddingMedium
+        anchors.rightMargin: BVApp.Theme.paddingMedium
         contentHeight: column.height
 
         Column {
@@ -71,8 +71,8 @@ Page {
             Text {
                 id: licenseText
                 width: parent.width
-                font.pixelSize: Theme.fontSizeExtraSmall
-                color: Theme.secondaryColor
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+                color: BVApp.Theme.secondaryColor
                 wrapMode: Text.WordWrap
             }
         }

@@ -22,12 +22,12 @@
  *
 **/
 
-import "../components/distance.js" as Distance
+import "../components-generic/distance.js" as Distance
 
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import QtQuick 2.2
-
+import BerlinVegan.components 1.0 as BVApp
 
 CoverBackground {
 
@@ -62,13 +62,13 @@ CoverBackground {
             left: parent.left
             right: parent.right
             top: parent.top
-            margins: Theme.paddingLarge
+            margins: BVApp.Theme.paddingLarge
         }
 
         header: Label {
                               //% "Berlin-Vegan"
             text: qsTrId("id-cover-berlin-vegan")
-            color: Theme.highlightColor
+            color: BVApp.Theme.highlightColor
             height: contentHeight * listStretch
         }
 
@@ -85,11 +85,11 @@ CoverBackground {
                 anchors {
                     right: distance.left
                     left: parent.left
-                    rightMargin: Theme.paddingSmall
+                    rightMargin: BVApp.Theme.paddingSmall
                     verticalCenter: parent.verticalCenter
                 }
 
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: BVApp.Theme.fontSizeSmall
                 truncationMode: TruncationMode.Fade
             }
 
@@ -98,7 +98,7 @@ CoverBackground {
                 text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                 Distance.humanReadableDistanceString(positionSource.position.coordinate,
                                                      QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
-                font.pixelSize: Theme.fontSizeExtraSmall
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
                 horizontalAlignment: Text.AlignRight
                 anchors {
                     right: parent.right

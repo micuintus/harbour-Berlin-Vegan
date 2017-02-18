@@ -24,6 +24,7 @@
 
 import QtQuick 2.2
 import Sailfish.Silica 1.0
+import BerlinVegan.components 1.0 as BVApp
 
 Page {
 
@@ -57,16 +58,16 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingMedium
+                height: BVApp.Theme.paddingMedium
             }
 
             Label {
                 id: underLogoText
                             //% "Berlin-Vegan"
                 text: qsTrId("id-berlin-vegan")
-                font.pixelSize: Theme.fontSizeLarge
+                font.pixelSize: BVApp.Theme.fontSizeLarge
 
-                color: Theme.highlightColor
+                color: BVApp.Theme.highlightColor
 
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -76,13 +77,13 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingMedium
+                height: BVApp.Theme.paddingMedium
             }
 
             Label {
                 text: "Copyright \u00A9 2016 by micu"
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.highlightColor
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
@@ -90,28 +91,28 @@ Page {
 
             Label {
                 text: "&lt;<a href=\"micupage\">micuintus.de</a>\>"
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.highlightColor
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.highlightColor
                 textFormat: Text.StyledText
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
 
                 onLinkActivated: Qt.openUrlExternally("http://www.micuintus.de/")
-                linkColor: Theme.highlightColor
+                linkColor: BVApp.Theme.highlightColor
 
             }
 
             Item {
                 width: parent.width
-                height: Theme.paddingMedium
+                height: BVApp.Theme.paddingMedium
             }
             Label {
                             //% "Version"
                 text: qsTrId("id-version") + ": " + Qt.application.version
-                font.pixelSize: Theme.fontSizeSmall
+                font.pixelSize: BVApp.Theme.fontSizeSmall
 
-                color: Theme.secondaryColor
+                color: BVApp.Theme.secondaryColor
 
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -120,7 +121,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingLarge * 2
+                height: BVApp.Theme.paddingLarge * 2
             }
 
             Label {
@@ -132,16 +133,16 @@ Page {
                 //% "(at your option) any later version."
                 text: qsTrId("id-bvapp-is-free-software")
                 wrapMode: Text.WordWrap
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.secondaryColor
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
                 textFormat: Text.StyledText
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: Theme.paddingLarge
+                    margins: BVApp.Theme.paddingLarge
                 }
 
-                linkColor: Theme.highlightColor
+                linkColor: BVApp.Theme.highlightColor
                 onLinkActivated:  pageStack.push(Qt.resolvedUrl("LicenseViewer.qml"),
                                                  {
                                                      "licenseFile": "LICENSE",
@@ -152,7 +153,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingLarge
+                height: BVApp.Theme.paddingLarge
             }
 
             Button {
@@ -172,7 +173,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingLarge
+                height: BVApp.Theme.paddingLarge
             }
 
             Label {
@@ -180,8 +181,8 @@ Page {
                             //% "You can view the source code here:"
                 text: qsTrId("id-you-can-view-source-code-here")
                 wrapMode: Text.WordWrap
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.secondaryColor
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
@@ -190,7 +191,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingSmall
+                height: BVApp.Theme.paddingSmall
             }
 
             Label {
@@ -199,24 +200,24 @@ Page {
                     horizontalCenter: parent.horizontalCenter
                 }
 
-                font.pixelSize: Theme.fontSizeExtraSmall
-                color: Theme.secondaryColor
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+                color: BVApp.Theme.secondaryColor
                 textFormat: Text.StyledText
 
                 text: "<a href=\"githubwebsite\">https://github.com/micuintus/harbour-Berlin-Vegan</a>"
-                linkColor: Theme.highlightColor
+                linkColor: BVApp.Theme.highlightColor
                 onLinkActivated: Qt.openUrlExternally("https://github.com/micuintus/harbour-Berlin-Vegan")
             }
 
             Item {
                 width: parent.width
-                height: Theme.paddingLarge * 1.3
+                height: BVApp.Theme.paddingLarge * 1.3
             }
 
             Separator {
                 width: parent.width
                 horizontalAlignment: Qt.AlignCenter
-                color: Theme.secondaryHighlightColor
+                color: BVApp.Theme.secondaryHighlightColor
                 height: 2
 
                 anchors {
@@ -226,7 +227,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingLarge * 1.3
+                height: BVApp.Theme.paddingLarge * 1.3
             }
 
             Label {
@@ -238,22 +239,22 @@ Page {
                 //% "Commons license (CC BY-NC 4.0)."
                 text: qsTrId("id-many-thanks-to-bvapp-and-license")
                 wrapMode: Text.WordWrap
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.secondaryColor
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
                 textFormat: Text.StyledText
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: Theme.paddingLarge
+                    margins: BVApp.Theme.paddingLarge
                 }
 
-                linkColor: Theme.highlightColor
+                linkColor: BVApp.Theme.highlightColor
                 onLinkActivated: Qt.openUrlExternally("http://www.berlin-vegan.de/team/kontakt/")
             }
 
             Item {
                 width: parent.width
-                height: Theme.paddingLarge
+                height: BVApp.Theme.paddingLarge
             }
 
             Button {
@@ -272,13 +273,13 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingLarge * 1.3
+                height: BVApp.Theme.paddingLarge * 1.3
             }
 
             Separator {
                 width: parent.width
                 horizontalAlignment: Qt.AlignCenter
-                color: Theme.secondaryHighlightColor
+                color: BVApp.Theme.secondaryHighlightColor
                 height: 2
 
                 anchors {
@@ -288,7 +289,7 @@ Page {
 
             Item {
                 width: parent.width
-                height: Theme.paddingLarge * 1.3
+                height: BVApp.Theme.paddingLarge * 1.3
             }
 
 
@@ -298,13 +299,13 @@ Page {
                 //% "following third party Free Software projects:"
                 text: qsTrId("id-thanks-to-qt-and-other-3rd-party")
                 wrapMode: Text.WordWrap
-                font.pixelSize: Theme.fontSizeSmall
-                color: Theme.secondaryColor
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
                 textFormat: Text.StyledText
                 anchors {
                     left: parent.left
                     right: parent.right
-                    margins: Theme.paddingLarge
+                    margins: BVApp.Theme.paddingLarge
                 }
             }
 

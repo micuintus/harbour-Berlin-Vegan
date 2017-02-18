@@ -19,16 +19,21 @@ HEADERS += 3rdparty/Cutehacks/gel/gel.h \
 RESOURCES += resources.qrc
 
 packagesExist(sailfishapp) {
+DEFINES += Q_OS_SAILFISH
+
 CONFIG += sailfishapp
+CONFIG += sailfishapp_no_deploy_qml
+
+RESOURCES += qml/components-Sailfish/resources-components-Sailfish.qrc
 
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n sailfishapp_i18n_idbased
 
-DEFINES += Q_OS_SAILFISH
 } else {
-CONFIG += v-play
-RESOURCES += qml/Silica4v-play/resources-v-play.qrc
+CONFIG    += v-play
+RESOURCES += qml/Silica4v-play/resources-Silica4v-play.qrc \
+             qml/components-v-play/resources-components-v-play.qrc
 }
 
 ios {
@@ -36,11 +41,6 @@ ios {
     OTHER_FILES += $$QMAKE_INFO_PLIST
 }
 
-
-# German translation is enabled as an example. If you aren't
-# planning to localize your app, remember to comment out the
-# following TRANSLATIONS line. And also do not forget to
-# modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/harbour-berlin-vegan-de.ts \
                 translations/harbour-berlin-vegan-en.ts
 

@@ -48,21 +48,22 @@ static inline void registerCutehacksgel()
 
 int main(int argc, char *argv[])
 {
-    // SailfishApp::main() will display "qml/template.qml", if you need more
-    // control over initialization, you can use:
-    //
-    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
-    //   - SailfishApp::createView() to get a new QQuickView * instance
-    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
-    //
-    // To display the view, call "show()" (will show fullscreen on device).
-
     com::cutehacks::gel::registerCutehacksgel();
 
 #ifdef Q_OS_SAILFISH
-    SailfishApp::application(argc, argv)->setApplicationVersion(APP_VERSION);
-    return SailfishApp::main(argc, argv);
+    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+    QScopedPointer<QQuickView> view(SailfishApp::createView());
+
+    app->setApplicationVersion(APP_VERSION);
+
+    view->engine()->addImportPath(QStringLiteral("qrc:/qt-project.org/imports/"));
+    view->setSource(QStringLiteral("qrc:/qml/harbour-berlin-vegan.qml"));
+
+    view->show();
+
+    return app->exec();
 #else
+
     QApplication app(argc, argv);
     VPApplication vplay;
 

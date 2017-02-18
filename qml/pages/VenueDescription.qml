@@ -25,8 +25,9 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
+import BerlinVegan.components 1.0 as BVApp
+import "../components-generic"
 
-import "../components"
 
 Page {
 
@@ -39,7 +40,7 @@ Page {
         id: flicka
         anchors.fill: page
         readonly property var nonDescriptionHeaderHeight: locationheader.height + iconToolBar.height
-        contentHeight: descriptionText.y + descriptionText.height + Theme.paddingLarge
+        contentHeight: descriptionText.y + descriptionText.height + BVApp.Theme.paddingLarge
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
 
         VerticalScrollDecorator {}
@@ -71,7 +72,7 @@ Page {
                 left: parent.left
                 right: parent.right
                 top: locationheader.bottom
-                margins: Theme.paddingMedium
+                margins: BVApp.Theme.paddingMedium
             }
 
             opacity: flicka.scrolledUpRatio
@@ -99,16 +100,16 @@ Page {
 
         Label {
             id: descriptionText
-            font.pixelSize: Theme.fontSizeSmall
+            font.pixelSize: BVApp.Theme.fontSizeSmall
             text: restaurant.comment
             wrapMode: Text.WordWrap
-            color: Theme.primaryColor
+            color: BVApp.Theme.primaryColor
 
             anchors {
                 left: parent.left
                 right: parent.right
                 top: detailsCollapsible.bottom
-                margins: Theme.paddingLarge
+                margins: BVApp.Theme.paddingLarge
             }
         }
         VerticalScrollDecorator {}

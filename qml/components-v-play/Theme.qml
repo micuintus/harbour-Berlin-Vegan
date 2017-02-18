@@ -1,7 +1,6 @@
 pragma Singleton
 
 import QtQuick 2.7
-
 import VPlayApps 1.0
 
 QtObject {
@@ -21,4 +20,5 @@ QtObject {
     property int paddingSmall: dp(12)
     property int horizontalPageMargin: dp(16)
 
+    readonly property int busyIndicatorSizeLarge: 0
 }
