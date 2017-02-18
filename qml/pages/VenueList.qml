@@ -88,8 +88,8 @@ Page {
 
         property Component heading:
         PageHeader {
-                         //% "Vegan food nearby"
-            title: qsTrId("id-vegan-food-nearby")
+                         //% "Berlin-Vegan"
+            title: qsTrId("id-berlin-vegan")
         }
 
         header: searchActivated ? searchField : heading

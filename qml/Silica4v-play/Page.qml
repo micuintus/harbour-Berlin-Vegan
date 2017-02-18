@@ -2,7 +2,8 @@ import VPlayApps 1.0
 
 ListPage {
 
-    title: "Berlin Vegan Guide"
+                 //% "Berlin-Vegan"
+    title: qsTrId("id-berlin-vegan")
 
 }
 
