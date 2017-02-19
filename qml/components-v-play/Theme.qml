@@ -18,6 +18,7 @@ QtObject {
     property color secondaryHighlightColor: Theme.listItem.dividerColor
 
     property int fontSizeMedium: dp(Theme.listItem.fontSizeText)
+    property int fontSizeSmall: dp(Theme.listItem.fontSizeText)
     property int fontSizeExtraSmall: dp(Theme.listItem.fontSizeDetailText)
 
     readonly property int iconSizeMedium : dp(12)

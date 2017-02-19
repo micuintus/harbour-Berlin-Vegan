@@ -4,13 +4,18 @@ BusyIndicator 1.0 BusyIndicator.qml
 CoverAction 1.0 CoverAction.qml
 CoverActionList 1.0 CoverActionList.qml
 CoverBackground 1.0 CoverBackground.qml
+DetailItem 1.0 DetailItem.qml
 Label 1.0 Label.qml
 ListItem 1.0 ListItem.qml
 MenuItem 1.0 MenuItem.qml
+OpacityRampEffect 1.0 OpacityRampEffect.qml
 Page 1.0 Page.qml
 PageHeader 1.0 PageHeader.qml
 PullDownMenu 1.0 PullDownMenu.qml
 SearchField 1.0 SearchField.qml
+SectionHeader 1.0 SectionHeader.qml
+Separator 1.0 Separator.qml
+SilicaFlickable 1.0 SilicaFlickable.qml
 SilicaListView 1.0 SilicaListView.qml
 singleton TruncationMode 1.0 TruncationMode.qml
 VerticalScrollDecorator 1.0 VerticalScrollDecorator.qml

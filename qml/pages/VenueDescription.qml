@@ -38,7 +38,7 @@ Page {
 
     SilicaFlickable {
         id: flicka
-        anchors.fill: page
+        anchors.fill: parent
         readonly property var nonDescriptionHeaderHeight: locationheader.height + iconToolBar.height
         contentHeight: descriptionText.y + descriptionText.height + BVApp.Theme.paddingLarge
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)

@@ -49,6 +49,7 @@ Item {
         fillMode: Image.PreserveAspectCrop
 
         height: Math.max(parent.height - shrinkHeightBy,0)
+        width: parent.width
 
         // This eads to the effect that the image is being cropped
         // from both bottom and top by half a pixel per shrinkHeightBy
