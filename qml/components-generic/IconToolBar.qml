@@ -48,11 +48,9 @@ Column {
 
         width: column.width
 
-        IconButton {
-            icon.source: "image://theme/icon-l-answer?" + (pressed
-                         ? BVApp.Theme.highlightColor
-                         : BVApp.Theme.primaryColor)
-            icon.scale: BVApp.Theme.iconSizeMedium / BVApp.Theme.iconSizeLarge
+        BVApp.IconButton {
+            type: "answer"
+            scale: BVApp.Theme.iconSizeMedium / BVApp.Theme.iconSizeLarge
 
             onClicked: Qt.openUrlExternally("tel:/" + restaurant.telephone)
             Layout.fillWidth: true
@@ -60,10 +58,8 @@ Column {
             enabled: typeof restaurant["telephone"] !== "undefined"
         }
 
-        IconButton {
-            icon.source: "image://theme/icon-m-favorite?" + (pressed
-                         ? BVApp.Theme.highlightColor
-                         : BVApp.Theme.primaryColor)
+        BVApp.IconButton {
+            type: "favorite"
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             enabled: false
@@ -71,10 +67,8 @@ Column {
         }
 
 
-        IconButton {
-            icon.source: "image://theme/icon-m-home?" + (pressed
-                         ? BVApp.Theme.highlightColor
-                         : BVApp.Theme.primaryColor)
+        BVApp.IconButton {
+            type: "home"
 
             onClicked: Qt.openUrlExternally(restaurant.website.slice(0,4) === "http"
                                             ?             restaurant.website

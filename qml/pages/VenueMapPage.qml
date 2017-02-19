@@ -47,11 +47,11 @@ Page {
         anchorPoint.x: venueMarkerImage.width / 2
         anchorPoint.y: venueMarkerImage.height
 
-        sourceItem: IconButton {
+        sourceItem: BVApp.IconButton {
             id: venueMarkerImage
-            icon.source: "image://theme/icon-m-location?" + BVApp.Theme.highlightBackgroundColor
+            type: "location"
 
-            icon.scale: 1.6
+            scale: 1.6
 
             onClicked: Qt.openUrlExternally("geo:"
                                             + venueCoordinate.latitude + ","
