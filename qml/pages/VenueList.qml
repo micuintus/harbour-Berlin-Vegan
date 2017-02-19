@@ -171,6 +171,7 @@ Page {
                                    positionSource : page.positionSource
                                });
 
+                // v-play: TypeError: Property 'pushAttached' of object NavigationStack_QMLTYPE_59(0x7f9f0cb5ba90, "_NavigationStack") is not a function
                 var mapPage = pageStack.pushAttached(Qt.resolvedUrl("VenueMapPage.qml"),
                                {
                                    venueCoordinate: QtPositioning.coordinate(currRestaurant.latCoord,
