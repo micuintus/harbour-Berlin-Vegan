@@ -1,2 +1,3 @@
 module BerlinVegan.components
+IconButton 1.0 IconButton.qml
 singleton Theme 1.0 Theme.qml

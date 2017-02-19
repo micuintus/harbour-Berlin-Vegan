@@ -5,14 +5,19 @@
         <file>CoverAction.qml</file>
         <file>CoverActionList.qml</file>
         <file>CoverBackground.qml</file>
+        <file>DetailItem.qml</file>
         <file>Label.qml</file>
         <file>ListItem.qml</file>
         <file>MenuItem.qml</file>
+        <file>OpacityRampEffect.qml</file>
         <file>Page.qml</file>
         <file>PageHeader.qml</file>
         <file>PullDownMenu.qml</file>
         <file>qmldir</file>
         <file>SearchField.qml</file>
+        <file>SectionHeader.qml</file>
+        <file>Separator.qml</file>
+        <file>SilicaFlickable.qml</file>
         <file>SilicaListView.qml</file>
         <file>TruncationMode.qml</file>
         <file>VerticalScrollDecorator.qml</file>

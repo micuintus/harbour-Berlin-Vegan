@@ -8,6 +8,7 @@ App {
 
     id: app
 
+    property var pageStack: navigationStack
     property var initialPage
     property var cover
 

@@ -1,6 +1,10 @@
 import VPlayApps 1.0
 
+import QtQuick 2.7
+
 SimpleRow {
+
+    id: row
 
     signal clicked(int index)
 
@@ -28,4 +32,7 @@ SimpleRow {
     }
     */
 
+    Component.onCompleted: {
+        row.selected.connect(clicked)
+    }
 }

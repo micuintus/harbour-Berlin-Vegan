@@ -26,6 +26,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 
+import BerlinVegan.components 1.0 as BVApp
 import "../components-generic/distance.js" as Distance
 
 
@@ -48,6 +49,7 @@ Item {
         fillMode: Image.PreserveAspectCrop
 
         height: Math.max(parent.height - shrinkHeightBy,0)
+        width: parent.width
 
         // This eads to the effect that the image is being cropped
         // from both bottom and top by half a pixel per shrinkHeightBy
@@ -57,12 +59,14 @@ Item {
     Rectangle {
         property int xMargin: 10
         property int yMargin: 7
+        // v-play: TypeError: Cannot read property 'x' of undefined
         x: nameLabel.extraContent.x + nameLabel.extraContent.width - xMargin
         y: nameLabel.y + nameLabel.childrenRect.y - yMargin - shrinkHeightBy * 0.1
         height: nameLabel.childrenRect.height + yMargin*2
+        // v-play: TypeError: Cannot read property 'width' of undefined
         width: (nameLabel.childrenRect.width - nameLabel.extraContent.width) + xMargin*2
         radius: 5
-        color: Theme.highlightDimmerColor
+        color: BVApp.Theme.highlightDimmerColor
         opacity: 0.6
     }
 
@@ -82,7 +86,7 @@ Item {
             bottom: image.bottom
         }
 
-        color: Theme.highlightDimmerColor
+        color: BVApp.Theme.highlightDimmerColor
 
         // relative to parent opacity!
         opacity: 0.6
@@ -91,14 +95,14 @@ Item {
     Label {
         id: streetLabel
         text: street
-        font.pixelSize: Theme.fontSizeExtraSmall
-        color: Theme.highlightColor
+        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+        color: BVApp.Theme.highlightColor
         truncationMode: TruncationMode.Fade
 
         anchors {
             left: image.left
             right: distanceLabel.left
-            margins: Theme.paddingLarge
+            margins: BVApp.Theme.paddingLarge
         }
 
         y: parent.height - height
@@ -110,12 +114,12 @@ Item {
               ? Distance.humanReadableDistanceString(positionSource.position.coordinate,
                                                                restaurantCoordinate)
               : ""
-        font.pixelSize: Theme.fontSizeExtraSmall
-        color: Theme.highlightColor
+        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+        color: BVApp.Theme.highlightColor
 
         anchors {
             right: parent.right
-            margins:  Theme.paddingLarge
+            margins:  BVApp.Theme.paddingLarge
         }
 
         y: parent.height - height
