@@ -24,6 +24,7 @@
 
 import QtQuick 2.2
 import Sailfish.Silica 1.0
+import BerlinVegan.components 1.0 as BVApp
 
 Item {
     property bool collapsed: true
@@ -54,7 +55,7 @@ Item {
         anchors.fill: parent
         id: ramp
         sourceItem: contentItem
-        direction: OpacityRamp.TopToBottom
+        direction: BVApp.Theme.opacityRampDirection
         enabled: parent.collapsed
     }
 

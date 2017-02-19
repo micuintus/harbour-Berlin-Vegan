@@ -29,4 +29,6 @@ QtObject {
     property int horizontalPageMargin: dp(16)
 
     readonly property int busyIndicatorSizeLarge: 0
+    readonly property int opacityRampDirection: 0
+    readonly property int dividerHeight: dp(Theme.listItem.dividerHeight)
 }

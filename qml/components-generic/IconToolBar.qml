@@ -36,7 +36,7 @@ Column {
         width: column.width
         horizontalAlignment: Qt.AlignCenter
         color: BVApp.Theme.secondaryHighlightColor
-        height: 2
+        height: BVApp.Theme.dividerHeight
     }
 
     RowLayout {
@@ -84,7 +84,7 @@ Column {
         width: column.width
         horizontalAlignment: Qt.AlignCenter
         color: BVApp.Theme.secondaryHighlightColor
-        height: 2
+        height: BVApp.Theme.dividerHeight
     }
 }
 
