@@ -5,6 +5,19 @@ import VPlayApps 1.0
 
 QtObject {
 
+    function iconBy(type) {
+        switch (type) {
+        case "answer":
+            return IconType.phone
+        case "favorite":
+            return IconType.hearto
+        case "home":
+            return IconType.home
+        case "location":
+            return IconType.mapmarker
+        }
+    }
+
     function dp(x) {
         return myApp ? myApp.dp(x) : 0
     }

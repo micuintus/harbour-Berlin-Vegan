@@ -1,23 +1,11 @@
 import VPlayApps 1.0
+import "." as BVApp
 
 IconButton {
-
-    function iconBy(type) {
-        switch (type) {
-        case "answer":
-            return IconType.phone
-        case "favorite":
-            return IconType.hearto
-        case "home":
-            return IconType.home
-        case "location":
-            return IconType.mapmarker
-        }
-    }
 
     property string type
     property real scale
 
-    icon: iconBy(type)
+    icon: BVApp.Theme.iconBy(type)
 
 }

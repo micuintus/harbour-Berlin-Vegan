@@ -5,6 +5,25 @@ import QtQuick 2.2
 
 QtObject {
 
+    function iconBy(type) {
+        switch (type) {
+        case "answer":
+            return "image://theme/icon-l-answer?"+ (Silica.pressed
+                                                     ? Silica.Theme.highlightColor
+                                                     : Silica.Theme.primaryColor)
+        case "favorite":
+            return "image://theme/icon-m-favorite?" + (Silica.pressed
+                                                       ? Silica.Theme.highlightColor
+                                                       : Silica.Theme.primaryColor)
+        case "home":
+            return "image://theme/icon-m-home?" + (Silica.pressed
+                                                   ? Silica.Theme.highlightColor
+                                                   : Silica.Theme.primaryColor)
+        case "location":
+            return "image://theme/icon-m-location?" + Silica.Theme.highlightBackgroundColor
+        }
+    }
+
     readonly property color primaryColor: Silica.Theme.primaryColor
     readonly property color secondaryColor: Silica.Theme.secondaryColor
     readonly property color secondaryHighlightColor: Silica.Theme.secondaryHighlightColor
