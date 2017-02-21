@@ -36,6 +36,11 @@ RESOURCES += qml/Silica4v-play/resources-Silica4v-play.qrc \
              qml/components-v-play/resources-components-v-play.qrc
 }
 
+android {
+    ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+    OTHER_FILES += android/AndroidManifest.xml
+}
+
 ios {
     QMAKE_INFO_PLIST = ios/Project-Info.plist
     OTHER_FILES += $$QMAKE_INFO_PLIST
