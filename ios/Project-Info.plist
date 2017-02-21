@@ -13,9 +13,9 @@
 	<key>CFBundleExecutable</key>
 	<string>harbour-berlin-vegan</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.jmastr.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.jmastr.BerlinVegan</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>Berlin Vegan</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleShortVersionString</key>
