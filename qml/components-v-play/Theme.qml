@@ -28,6 +28,9 @@ QtObject {
 
     property var myApp
 
+    // from native Android app
+    readonly property color primary: "#8BC34A"
+
     property color primaryColor: Theme.textColor
     property color secondaryColor: Theme.secondaryTextColor
     property color highlightDimmerColor: "white"
