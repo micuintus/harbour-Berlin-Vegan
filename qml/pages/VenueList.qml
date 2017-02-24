@@ -36,6 +36,8 @@ import "../components-generic/distance.js" as Distance
 BVApp.Page {
 
     id: page
+                 //% "Berlin-Vegan"
+    title: qsTrId("id-berlin-vegan")
 
     property var jsonModelCollection
     property var positionSource

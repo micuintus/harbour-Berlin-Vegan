@@ -32,6 +32,7 @@ import "../components-generic"
 BVApp.Page {
 
     id: page
+    title: restaurant.name
 
     property var restaurant
     property var positionSource
