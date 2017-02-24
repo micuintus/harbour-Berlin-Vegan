@@ -1,6 +1,7 @@
 module Sailfish.Silica
 ApplicationWindow 1.0 ApplicationWindow.qml
 BusyIndicator 1.0 BusyIndicator.qml
+Button 1.0 Button.qml
 CoverAction 1.0 CoverAction.qml
 CoverActionList 1.0 CoverActionList.qml
 CoverBackground 1.0 CoverBackground.qml

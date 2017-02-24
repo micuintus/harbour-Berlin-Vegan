@@ -21,5 +21,6 @@
         <file>SilicaListView.qml</file>
         <file>TruncationMode.qml</file>
         <file>VerticalScrollDecorator.qml</file>
+        <file>Button.qml</file>
     </qresource>
 </RCC>

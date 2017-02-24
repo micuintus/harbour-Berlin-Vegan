@@ -177,6 +177,10 @@
         <source>View license</source>
         <translation>Lizenz anzeigen</translation>
     </message>
+    <message id="id-venue-list">
+        <source>List view</source>
+        <translation>Listenansicht</translation>
+    </message>
     <message id="id-about-venue-list">
         <source>About</source>
         <translation>Über diese App</translation>

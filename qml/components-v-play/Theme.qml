@@ -15,6 +15,10 @@ QtObject {
             return IconType.home
         case "location":
             return IconType.mapmarker
+        case "list":
+            return IconType.list
+        case "about":
+            return IconType.questioncircle
         }
     }
 
@@ -33,6 +37,7 @@ QtObject {
     property int fontSizeMedium: dp(Theme.listItem.fontSizeText)
     property int fontSizeSmall: dp(Theme.listItem.fontSizeText)
     property int fontSizeExtraSmall: dp(Theme.listItem.fontSizeDetailText)
+    readonly property int fontSizeLarge: dp(Theme.listItem.fontSizeText)
 
     readonly property int iconSizeMedium : dp(12)
     readonly property int iconSizeLarge : dp(12)

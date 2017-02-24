@@ -30,6 +30,7 @@ import BerlinVegan.components 1.0 as BVApp
 
 import "components-generic"
 import "pages"
+import "pages/about"
 import "cover"
 
 ApplicationWindow
@@ -104,17 +105,37 @@ ApplicationWindow
         }
     }
 
-    initialPage: Component { VenueList {
-        jsonModelCollection: gjsonModelCollection
-        positionSource: globalPositionSource
-        id: listPage
-    } }
-
     cover: Component { CoverPage {
         id: cover
         jsonModelCollection: gjsonModelCollection
         positionSource: globalPositionSource
     } }
+
+    initialPage: VenueList {
+        jsonModelCollection: gjsonModelCollection
+        positionSource: globalPositionSource
+        id: listPage
+    }
+
+   BVApp.NavigationMenu {
+        id: myMenu
+
+        flickable: initialPage.flickable
+
+        initialMenuItem: BVApp.MenuItem {
+                pageToVisit: initialPage
+                icon: BVApp.Theme.iconBy("list")
+                //% "List view"
+                text: qsTrId("id-venue-list")
+        }
+
+        BVApp.MenuItem {
+            pageToVisit: AboutBerlinVegan { }
+            icon: BVApp.Theme.iconBy("about")
+            //% "About"
+            text: qsTrId("id-about-venue-list")
+        }
+    }
 }
 
 

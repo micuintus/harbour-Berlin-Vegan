@@ -174,9 +174,9 @@
         <translation>About</translation>
     </message>
     <message id="id-berlin-vegan">
+        <location filename="../qml/Silica4v-play/Page.qml" line="7"/>
         <location filename="../qml/cover/CoverPage.qml" line="70"/>
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="67"/>
-        <location filename="../qml/Silica4v-play/Page.qml" line="6"/>
         <source>Berlin-Vegan</source>
         <translation>Berlin-Vegan</translation>
     </message>
@@ -219,7 +219,7 @@
         <translation>Apart from Qt and other wonderful FOSS components of jolla&apos;s SailfishOS SDK, this application greatfully makes use of the following third party Free Software projects:</translation>
     </message>
     <message id="id-license">
-        <location filename="../qml/pages/about/LicenseViewer.qml" line="68"/>
+        <location filename="../qml/pages/about/LicenseViewer.qml" line="69"/>
         <source>License:</source>
         <translation>License:</translation>
     </message>
@@ -228,8 +228,13 @@
         <source>View license</source>
         <translation>View license</translation>
     </message>
+    <message id="id-venue-list">
+        <location filename="../qml/harbour-berlin-vegan.qml" line="129"/>
+        <source>List view</source>
+        <translation>List view</translation>
+    </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/pages/VenueList.qml" line="59"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="136"/>
         <source>About</source>
         <translation>About</translation>
     </message>

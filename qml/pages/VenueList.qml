@@ -39,6 +39,7 @@ Page {
 
     property var jsonModelCollection
     property var positionSource
+    property alias flickable: listView
 
     SilicaListView {
         id: listView
@@ -50,15 +51,6 @@ Page {
             anchors.centerIn: parent
             running: !jsonModelCollection.loaded
             size: BVApp.Theme.busyIndicatorSizeLarge
-        }
-
-
-        PullDownMenu {
-            MenuItem {
-                            //% "About"
-                text: qsTrId("id-about-venue-list")
-                onClicked: pageStack.push(Qt.resolvedUrl("about/AboutBerlinVegan.qml"))
-            }
         }
 
         currentIndex: -1
