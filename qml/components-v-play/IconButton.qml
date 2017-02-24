@@ -7,5 +7,6 @@ IconButton {
     property real scale
 
     icon: BVApp.Theme.iconBy(type)
+    size: 30
 
 }
