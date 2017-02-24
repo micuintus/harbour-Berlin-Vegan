@@ -6,11 +6,12 @@ AppText {
     property var title
 
     text: title
+    color: BVApp.Theme.primary
 
     anchors {
         right: parent.right
 
-        rightMargin: BVApp.Theme.horizontalPageMargin
+        margins: BVApp.Theme.paddingLarge
     }
 
 }

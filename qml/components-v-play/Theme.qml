@@ -33,8 +33,8 @@ QtObject {
 
     property color primaryColor: Theme.textColor
     property color secondaryColor: Theme.secondaryTextColor
-    property color highlightDimmerColor: "white"
-    property color highlightColor: Theme.secondaryTextColor
+    property color highlightDimmerColor: primary
+    property color highlightColor: "white"
     property color secondaryHighlightColor: Theme.listItem.dividerColor
 
     property int fontSizeMedium: dp(Theme.listItem.fontSizeText)

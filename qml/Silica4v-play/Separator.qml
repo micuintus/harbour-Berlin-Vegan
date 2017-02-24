@@ -4,4 +4,7 @@ Rectangle {
 
     property color color
     property var horizontalAlignment
+
+    visible: false
+
 }
