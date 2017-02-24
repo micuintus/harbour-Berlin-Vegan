@@ -6,12 +6,10 @@
     <string></string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
-    <key>CFBundleGetInfoString</key>
-    <string>Created by Qt/QMake</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleExecutable</key>
-    <string>harbour-berlin-vegan</string>
+    <string>${EXECUTABLE_NAME}</string>
     <key>CFBundleIdentifier</key>
     <string>com.jmastr.BerlinVegan</string>
     <key>CFBundleDisplayName</key>
@@ -19,9 +17,9 @@
     <key>CFBundleName</key>
     <string>${PRODUCT_NAME}</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0</string>
+    <string>0.8.6</string>
     <key>CFBundleVersion</key>
-    <string>1.0</string>
+    <string>1</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>UIViewControllerBasedStatusBarAppearance</key>
@@ -32,8 +30,6 @@
     <array>
         <string>UIInterfaceOrientationPortrait</string>
         <string>UIInterfaceOrientationPortraitUpsideDown</string>
-        <string>UIInterfaceOrientationLandscapeLeft</string>
-        <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>${PRODUCT_NAME}</string>
