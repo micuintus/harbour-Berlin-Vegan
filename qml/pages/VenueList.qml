@@ -33,7 +33,7 @@ import harbour.berlin.vegan.gel 1.0
 
 import "../components-generic/distance.js" as Distance
 
-Page {
+BVApp.Page {
 
     id: page
 

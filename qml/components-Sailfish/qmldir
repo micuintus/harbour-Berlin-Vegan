@@ -1,5 +1,6 @@
 module BerlinVegan.components
 IconButton 1.0 IconButton.qml
+Page 1.0 Page.qml
 singleton Theme 1.0 Theme.qml
 NavigationMenu 1.0 NavigationMenu.qml
 MenuItem 1.0 MenuItem.qml

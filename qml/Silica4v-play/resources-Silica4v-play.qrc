@@ -13,7 +13,6 @@
         <file>ListItem.qml</file>
         <file>MenuItem.qml</file>
         <file>OpacityRampEffect.qml</file>
-        <file>Page.qml</file>
         <file>PageHeader.qml</file>
         <file>PullDownMenu.qml</file>
         <file>qmldir</file>

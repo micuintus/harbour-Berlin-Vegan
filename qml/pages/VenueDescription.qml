@@ -29,7 +29,7 @@ import BerlinVegan.components 1.0 as BVApp
 import "../components-generic"
 
 
-Page {
+BVApp.Page {
 
     id: page
 
