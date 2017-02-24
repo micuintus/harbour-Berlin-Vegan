@@ -26,7 +26,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import BerlinVegan.components 1.0 as BVApp
 
-Page {
+BVApp.Page {
 
     id: page
 

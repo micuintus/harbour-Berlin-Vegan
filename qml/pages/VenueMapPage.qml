@@ -5,7 +5,7 @@ import QtPositioning 5.2
 import QtGraphicalEffects 1.0
 import BerlinVegan.components 1.0 as BVApp
 
-Page {
+BVApp.Page {
 
     id: page
 
