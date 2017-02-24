@@ -137,6 +137,9 @@ Page {
 
             onClicked:
             {
+                // ios: keyboard stays visible, if user used search field before clicking and did not press Return key
+                Qt.inputMethod.hide();
+
                 var currRestaurant = jsonModelCollection.at(index)
                 pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                {
