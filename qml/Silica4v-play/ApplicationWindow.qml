@@ -8,18 +8,11 @@ App {
 
     id: app
 
-    property var pageStack: navigationStack
-    property var initialPage
     property var cover
-
-    NavigationStack {
-        id: navigationStack
-        initialPage: app.initialPage
-    }
+    property var initialPage
 
     Component.onCompleted: {
         // We need to access the dp() function from the Theme component
         BVApp.Theme.myApp = app
     }
-
 }

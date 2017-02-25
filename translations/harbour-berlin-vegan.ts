@@ -174,10 +174,9 @@
         <translation></translation>
     </message>
     <message id="id-berlin-vegan">
+        <location filename="../qml/Silica4v-play/Page.qml" line="7"/>
         <location filename="../qml/cover/CoverPage.qml" line="70"/>
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="67"/>
-        <location filename="../qml/pages/VenueList.qml" line="92"/>
-        <location filename="../qml/Silica4v-play/Page.qml" line="6"/>
         <source>Berlin-Vegan</source>
         <translation></translation>
     </message>
@@ -220,7 +219,7 @@
         <translation></translation>
     </message>
     <message id="id-license">
-        <location filename="../qml/pages/about/LicenseViewer.qml" line="68"/>
+        <location filename="../qml/pages/about/LicenseViewer.qml" line="69"/>
         <source>License:</source>
         <translation></translation>
     </message>
@@ -229,19 +228,14 @@
         <source>View license</source>
         <translation></translation>
     </message>
+    <message id="id-venue-list">
+        <location filename="../qml/harbour-berlin-vegan.qml" line="129"/>
+        <source>List view</source>
+        <translation></translation>
+    </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/pages/VenueList.qml" line="61"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="136"/>
         <source>About</source>
-        <translation></translation>
-    </message>
-    <message id="id-disable-search">
-        <location filename="../qml/pages/VenueList.qml" line="67"/>
-        <source>Disable Search</source>
-        <translation></translation>
-    </message>
-    <message id="id-enable-search">
-        <location filename="../qml/pages/VenueList.qml" line="69"/>
-        <source>Enable Search</source>
         <translation></translation>
     </message>
 </context>

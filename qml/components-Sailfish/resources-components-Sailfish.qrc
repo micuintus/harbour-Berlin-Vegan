@@ -3,5 +3,7 @@
         <file>IconButton.qml</file>
         <file>Theme.qml</file>
         <file>qmldir</file>
+        <file>NavigationMenu.qml</file>
+        <file>MenuItem.qml</file>
     </qresource>
 </RCC>

@@ -177,17 +177,13 @@
         <source>View license</source>
         <translation>Lizenz anzeigen</translation>
     </message>
+    <message id="id-venue-list">
+        <source>List view</source>
+        <translation>Listenansicht</translation>
+    </message>
     <message id="id-about-venue-list">
         <source>About</source>
         <translation>Über diese App</translation>
-    </message>
-    <message id="id-disable-search">
-        <source>Disable Search</source>
-        <translation>Suche ausblenden</translation>
-    </message>
-    <message id="id-enable-search">
-        <source>Enable Search</source>
-        <translation>Suche einblenden</translation>
     </message>
 </context>
 </TS>

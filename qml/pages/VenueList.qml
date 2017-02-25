@@ -39,8 +39,7 @@ Page {
 
     property var jsonModelCollection
     property var positionSource
-
-    property bool searchActivated: true
+    property alias flickable: listView
 
     SilicaListView {
         id: listView
@@ -54,27 +53,9 @@ Page {
             size: BVApp.Theme.busyIndicatorSizeLarge
         }
 
-
-        PullDownMenu {
-            MenuItem {
-                            //% "About"
-                text: qsTrId("id-about-venue-list")
-                onClicked: pageStack.push(Qt.resolvedUrl("about/AboutBerlinVegan.qml"))
-            }
-            MenuItem {
-                text: searchActivated ?
-                                //% "Disable Search"
-                          qsTrId("id-disable-search") :
-                                //% "Enable Search"
-                          qsTrId("id-enable-search")
-                onClicked: searchActivated = !searchActivated
-            }
-        }
-
         currentIndex: -1
 
-        property  Component searchField:
-        SearchField {
+        header: SearchField {
             id: searchField
             width: page.width
 
@@ -85,14 +66,6 @@ Page {
                 jsonModelCollection.searchString = searchField.text
             }
         }
-
-        property Component heading:
-        PageHeader {
-                         //% "Berlin-Vegan"
-            title: qsTrId("id-berlin-vegan")
-        }
-
-        header: searchActivated ? searchField : heading
 
         delegate: ListItem {
             id: delegate
