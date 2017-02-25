@@ -174,9 +174,10 @@
         <translation>About</translation>
     </message>
     <message id="id-berlin-vegan">
-        <location filename="../qml/Silica4v-play/Page.qml" line="7"/>
+        <location filename="../qml/components-v-play/Page.qml" line="7"/>
         <location filename="../qml/cover/CoverPage.qml" line="70"/>
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="67"/>
+        <location filename="../qml/pages/VenueList.qml" line="40"/>
         <source>Berlin-Vegan</source>
         <translation>Berlin-Vegan</translation>
     </message>
