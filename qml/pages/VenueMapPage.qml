@@ -11,17 +11,8 @@ BVApp.Page {
 
     property var venueCoordinate
     property var positionSource
-    property string name
+    property alias name : page.title
     property alias map : map
-
-    // TODO: Directly assigning a coordinate property to Map.center seems to be broken
-    // with the current Qt version (5.2)
-    function setMapCenter(mapCenter)
-    {
-        map.center = mapCenter
-        map.update()
-
-    }
 
     PageHeader {
         id: header
@@ -97,6 +88,11 @@ BVApp.Page {
             enabled: true
         }
 
+        Component.onCompleted: {
+            addMapItem(venueMarker)
+            addMapItem(currentPosition)
+            center = venueCoordinate
+        }
 
         zoomLevel: maximumZoomLevel - 1
     }

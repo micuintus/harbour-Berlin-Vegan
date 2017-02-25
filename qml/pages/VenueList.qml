@@ -149,27 +149,16 @@ BVApp.Page {
                                    positionSource : page.positionSource
                                });
 
-                // v-play: TypeError: Property 'pushAttached' of object NavigationStack_QMLTYPE_59(0x7f9f0cb5ba90, "_NavigationStack") is not a function
-                var mapPage = pageStack.pushAttached(Qt.resolvedUrl("VenueMapPage.qml"),
+                // The icon parameter is only used on v-play
+                pageStack.pushAttached(Qt.resolvedUrl("VenueMapPage.qml"),
                                {
                                    venueCoordinate: QtPositioning.coordinate(currRestaurant.latCoord,
                                                                              currRestaurant.longCoord),
                                    positionSource: page.positionSource,
                                    name: currRestaurant.name
-                               });
-
-                // TODO: Directly assigning a coordinate property to Map.center seems to be broken
-                // with the current Qt version (5.2)
-                mapPage.map.addMapItem(mapPage.venueMarker)
-                mapPage.map.addMapItem(mapPage.currentPosition)
-
-                mapPage.setMapCenter(mapPage.venueMarker.coordinate)
-
-                // Seems to be broken with the current version of Qt :/
-                mapPage.map.fitViewportToMapItems()
+                               }, BVApp.Theme.iconBy("mapmarker")
+                               );
             }
-
-
         }
         VerticalScrollDecorator {}
     }
