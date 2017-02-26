@@ -76,7 +76,7 @@ BVApp.Page {
         z: 3
     }
 
-    Map {
+    BVApp.Map {
         id: map
         anchors.fill: parent
 
