@@ -156,7 +156,7 @@ BVApp.Page {
                                                                              currRestaurant.longCoord),
                                    positionSource: page.positionSource,
                                    name: currRestaurant.name
-                               }, BVApp.Theme.iconBy("mapmarker")
+                               }, BVApp.Theme.iconBy("locationarrow")
                                );
             }
         }

@@ -19,8 +19,8 @@ QtObject {
             return IconType.list
         case "about":
             return IconType.questioncircle
-        case "mapmarker":
-            return IconType.mapmarker
+        case "locationarrow":
+            return IconType.locationarrow
         }
     }
 
