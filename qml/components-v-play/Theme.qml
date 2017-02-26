@@ -31,6 +31,9 @@ QtObject {
 
     property var myApp
 
+    readonly property bool isIos: Theme.isIos
+    readonly property bool isOSX: Theme.isOSX
+
     // from native Android app
     readonly property color primary: "#8BC34A"
 
