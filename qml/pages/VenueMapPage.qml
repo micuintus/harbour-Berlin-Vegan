@@ -46,9 +46,14 @@ BVApp.Page {
             // used only on v-play
             color: "red"
 
-            onClicked: Qt.openUrlExternally("geo:"
-                                            + venueCoordinate.latitude + ","
-                                            + venueCoordinate.longitude)
+            onClicked: {
+                var query = venueCoordinate.latitude + "," + venueCoordinate.longitude
+                if (BVApp.Theme.isIos || BVApp.Theme.isOSX) {
+                    Qt.openUrlExternally("https://maps.apple.com/?q=" + query)
+                } else {
+                    Qt.openUrlExternally("geo:" + query)
+                }
+            }
         }
     }
 
