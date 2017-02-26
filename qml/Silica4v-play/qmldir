@@ -8,10 +8,8 @@ CoverBackground 1.0 CoverBackground.qml
 DetailItem 1.0 DetailItem.qml
 Label 1.0 Label.qml
 ListItem 1.0 ListItem.qml
-MenuItem 1.0 MenuItem.qml
 OpacityRampEffect 1.0 OpacityRampEffect.qml
 PageHeader 1.0 PageHeader.qml
-PullDownMenu 1.0 PullDownMenu.qml
 SearchField 1.0 SearchField.qml
 SectionHeader 1.0 SectionHeader.qml
 Separator 1.0 Separator.qml

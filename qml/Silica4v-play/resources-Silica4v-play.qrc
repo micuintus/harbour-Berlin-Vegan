@@ -11,10 +11,8 @@
         <file>DetailItem.qml</file>
         <file>Label.qml</file>
         <file>ListItem.qml</file>
-        <file>MenuItem.qml</file>
         <file>OpacityRampEffect.qml</file>
         <file>PageHeader.qml</file>
-        <file>PullDownMenu.qml</file>
         <file>qmldir</file>
         <file>SearchField.qml</file>
         <file>SectionHeader.qml</file>
