@@ -21,6 +21,8 @@ QtObject {
                                                    : Silica.Theme.primaryColor)
         case "location":
             return "image://theme/icon-m-location?" + Silica.Theme.highlightBackgroundColor
+        case "cover-location":
+            return "image://theme/icon-cover-location?" + Silica.Theme.highlightBackgroundColor
         }
     }
 

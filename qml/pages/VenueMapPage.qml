@@ -60,9 +60,9 @@ BVApp.Page {
         anchorPoint.x: currentPosImage.width / 2
         anchorPoint.y: currentPosImage.height / 2
 
-        sourceItem: Image {
+        sourceItem: BVApp.IconButton {
             id: currentPosImage
-            source: "image://theme/icon-cover-location?" + BVApp.Theme.highlightBackgroundColor
+            type: "cover-location"
         }
     }
 
