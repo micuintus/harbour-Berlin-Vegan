@@ -43,6 +43,8 @@ BVApp.Page {
             type: "location"
 
             scale: 1.6
+            // used only on v-play
+            color: "red"
 
             onClicked: Qt.openUrlExternally("geo:"
                                             + venueCoordinate.latitude + ","
