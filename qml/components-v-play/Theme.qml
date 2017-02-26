@@ -14,6 +14,7 @@ QtObject {
         case "home":
             return IconType.home
         case "location":
+        case "cover-location":
             return IconType.mapmarker
         case "list":
             return IconType.list
