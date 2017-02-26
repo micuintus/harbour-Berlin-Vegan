@@ -5,6 +5,7 @@
         <file>Theme.qml</file>
         <file>qmldir</file>
         <file>NavigationMenu.qml</file>
+        <file>Map.qml</file>
         <file>MenuItem.qml</file>
     </qresource>
 </RCC>
