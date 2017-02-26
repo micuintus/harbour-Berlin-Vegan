@@ -94,6 +94,7 @@ BVApp.Page {
             addMapItem(venueMarker)
             addMapItem(currentPosition)
             center = venueCoordinate
+            fitViewportToMapItems()
         }
 
         zoomLevel: maximumZoomLevel - 1
