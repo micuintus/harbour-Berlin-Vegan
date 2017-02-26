@@ -31,10 +31,8 @@
 #else
 #include <QTranslator>
 #include <QLocale>
-
 #include <QApplication>
 #include <VPApplication>
-
 #include <QQmlApplicationEngine>
 #endif
 
@@ -52,28 +50,20 @@ static inline void registerCutehacksgel()
 int main(int argc, char *argv[])
 {
     com::cutehacks::gel::registerCutehacksgel();
+    auto const mainQMLFile = QString("qrc:/qml/harbour-berlin-vegan.qml");
 
 #ifdef Q_OS_SAILFISH
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
-
-    app->setApplicationVersion(APP_VERSION);
-
-    view->engine()->addImportPath(QStringLiteral("qrc:/qt-project.org/imports/"));
-    view->setSource(QStringLiteral("qrc:/qml/harbour-berlin-vegan.qml"));
-
-    view->show();
-
-    return app->exec();
+    auto& qmlEngine = *(view->engine());
 #else
-
-    QApplication app(argc, argv);
+    QScopedPointer<QApplication> app(new QApplication(argc, argv));
 
     // Load translations
     QTranslator translator;
     // Look up e.g. :/translations/harbour-berlin-vegan-de.qm
     if (translator.load(QLocale(), QLatin1String("harbour-berlin-vegan"), QLatin1String("-"), QLatin1String(":/translations"))) {
-        app.installTranslator(&translator);
+        app->installTranslator(&translator);
         qInfo() << "Translations loaded";
     } else {
         qInfo() << "Could not load translation";
@@ -84,16 +74,19 @@ int main(int argc, char *argv[])
     // Use platform-specific fonts instead of V-Play's default font
     vplay.setPreservePlatformFonts(true);
 
-    QQmlApplicationEngine engine;
-    vplay.initialize(&engine);
-
-    vplay.setMainQmlFileName(QStringLiteral("qrc:/qml/harbour-berlin-vegan.qml"));
-
-    engine.load(QUrl(vplay.mainQmlFileName()));
-
-    return app.exec();
+    QQmlApplicationEngine qmlEngine;
 #endif
+
+    qmlEngine.addImportPath(QStringLiteral("qrc:/imports/"));
+
+#ifdef Q_OS_SAILFISH
+    app->setApplicationVersion(APP_VERSION);
+    view->setSource(mainQMLFile);
+    view->show();
+#else
+    vplay.initialize(&qmlEngine);
+    vplay.setMainQmlFileName(mainQMLFile);
+    qmlEngine.load(QUrl(vplay.mainQmlFileName()));
+#endif
+    return app->exec();
 }
-
-
-

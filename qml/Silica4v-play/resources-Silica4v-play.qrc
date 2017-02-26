@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>qml/config.json</file>
     </qresource>
-    <qresource prefix="/qt-project.org/imports/Sailfish/Silica">
+    <qresource prefix="/imports/Sailfish/Silica">
         <file>ApplicationWindow.qml</file>
         <file>BusyIndicator.qml</file>
         <file>CoverAction.qml</file>
