@@ -79,6 +79,8 @@ BVApp.Page {
     BVApp.Map {
         id: map
         anchors.fill: parent
+        // v-play: it is as easy as that: the copyright notice is usually displayed in the bottom left corner.
+        copyrightsVisible: false
 
         plugin : Plugin {
             name: "osm"
