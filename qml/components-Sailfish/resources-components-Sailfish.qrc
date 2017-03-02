@@ -7,5 +7,6 @@
         <file>NavigationMenu.qml</file>
         <file>Map.qml</file>
         <file>MenuItem.qml</file>
+        <file>Platform.qml</file>
     </qresource>
 </RCC>
