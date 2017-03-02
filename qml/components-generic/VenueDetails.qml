@@ -25,9 +25,7 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 
-import "../components-generic/OpeningHoursModelAlgorithms.js" as OpeningHoursModelAlgorithms
-import "../components-generic/VenueDescriptionAlgorithms.js" as PropertyStrings
-import "../components-generic"
+import BerlinVegan.components.generic 1.0 as BVApp
 
 Item {
 
@@ -56,11 +54,11 @@ Item {
 
             interactive: false
 
-            model: OpeningHoursModel {
+            model: BVApp.OpeningHoursModel {
                 id: openingHoursModel
                 restaurant: venueDetails.restaurant
 
-                Component.onCompleted: OpeningHoursModelAlgorithms.condenseOpeningHoursModel(openingHoursModel)
+                Component.onCompleted: BVApp.OpeningHoursModelAlgorithms.condenseOpeningHoursModel(openingHoursModel)
             }
 
             delegate: DetailItem {
@@ -78,19 +76,19 @@ Item {
         DetailItem {
                                    //% "Category"
             label: qsTrId("id-vegan-venue-category")
-            value: PropertyStrings.restaurantCategory(restaurant.vegan)
+            value: BVApp.VenueDescriptionAlgorithms.restaurantCategory(restaurant.vegan)
         }
 
         DetailItem {
                    //% "Cert. organic offers"
             label: qsTrId("id-organic")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.organic)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
         }
 
         DetailItem {
                          //% "Gluten-free options"
             label: qsTrId("id-gluten-free")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.glutenFree)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.glutenFree)
         }
 
 
@@ -102,25 +100,25 @@ Item {
         DetailItem {
                          //% "Wheelchair-friendly"
             label: qsTrId("id-wheelchair")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.handicappedAccessible)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
         }
 
         DetailItem {
               //% "Wheelchair-accessible WC"
             label: qsTrId("id-wheelchair-wc")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
         }
 
         DetailItem {
                          //% "High chair"
             label: qsTrId("id-high-chair")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
         }
 
         DetailItem {
                          //% "Dogs allowed"
             label: qsTrId("id-dogs-allowed")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.dogs)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dogs)
         }
 
         SectionHeader {
@@ -131,31 +129,31 @@ Item {
         DetailItem {
                          //% "WiFi"
             label: qsTrId("id-wifi")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.wlan)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
         }
 
         DetailItem {
                    //% "Seats outdoor"
             label: qsTrId("id-outdoor-seats")
-            value: PropertyStrings.seatProperty(restaurant.seatsOutdoor)
+            value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
         }
 
         DetailItem {
                    //% "Seats indoor"
             label: qsTrId("id-indoor-seats")
-            value: PropertyStrings.seatProperty(restaurant.seatsIndoor)
+            value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
         }
 
         DetailItem {
                          //% "Catering"
             label: qsTrId("id-catering")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.catering)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
         }
 
         DetailItem {
                          //% "Delivery service"
             label: qsTrId("id-delivery")
-            value: PropertyStrings.defaultBooleanProperty(restaurant.delivery)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
         }
     }
 }

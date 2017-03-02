@@ -3,7 +3,7 @@ import Sailfish.Silica 1.0
 import QtLocation 5.0
 import QtPositioning 5.2
 import QtGraphicalEffects 1.0
-import BerlinVegan.components 1.0 as BVApp
+import BerlinVegan.components.platform 1.0 as BVApp
 
 BVApp.Page {
 

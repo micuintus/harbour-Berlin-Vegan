@@ -16,7 +16,8 @@ HEADERS += 3rdparty/Cutehacks/gel/gel.h \
            3rdparty/Cutehacks/gel/jsonlistmodel.h \
            3rdparty/Cutehacks/gel/jsvalueiterator.h
 
-RESOURCES += resources.qrc
+RESOURCES += resources.qrc \
+             qml/components-generic/resources-components-generic.qrc
 
 packagesExist(sailfishapp) {
 DEFINES += Q_OS_SAILFISH

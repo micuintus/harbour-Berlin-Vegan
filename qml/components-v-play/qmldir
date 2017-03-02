@@ -1,4 +1,4 @@
-module BerlinVegan.components
+module BerlinVegan.components.platform
 IconButton 1.0 IconButton.qml
 Page 1.0 Page.qml
 singleton Theme 1.0 Theme.qml

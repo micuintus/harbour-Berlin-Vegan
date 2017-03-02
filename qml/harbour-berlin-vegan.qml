@@ -26,9 +26,9 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import harbour.berlin.vegan.gel 1.0
-import BerlinVegan.components 1.0 as BVApp
+import BerlinVegan.components.platform 1.0 as BVApp
+import BerlinVegan.components.generic 1.0 as BVApp
 
-import "components-generic"
 import "pages"
 import "pages/about"
 import "cover"
@@ -79,7 +79,7 @@ ApplicationWindow
         }
     }
 
-    JsonDownloadHelper {
+    BVApp.JsonDownloadHelper {
         id: downloadHelper
         onFileLoaded:
         function(json)
