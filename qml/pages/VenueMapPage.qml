@@ -48,7 +48,7 @@ BVApp.Page {
 
             onClicked: {
                 var query = venueCoordinate.latitude + "," + venueCoordinate.longitude
-                if (BVApp.Theme.isIos || BVApp.Theme.isOSX) {
+                if (BVApp.Platform.isIos || BVApp.Platform.isMacOS) {
                     Qt.openUrlExternally("https://maps.apple.com/?q=" + query)
                 } else {
                     Qt.openUrlExternally("geo:" + query)

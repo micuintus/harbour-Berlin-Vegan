@@ -26,9 +26,6 @@ QtObject {
         }
     }
 
-    readonly property bool isIos: false
-    readonly property bool isOSX: false
-
     readonly property color primaryColor: Silica.Theme.primaryColor
     readonly property color secondaryColor: Silica.Theme.secondaryColor
     readonly property color secondaryHighlightColor: Silica.Theme.secondaryHighlightColor
