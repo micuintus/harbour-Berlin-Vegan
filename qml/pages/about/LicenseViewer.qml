@@ -29,7 +29,7 @@
 
 import QtQuick 2.2
 import Sailfish.Silica 1.0
-import BerlinVegan.components 1.0 as BVApp
+import BerlinVegan.components.platform 1.0 as BVApp
 
 BVApp.Page {
     property string licenseFile: ""

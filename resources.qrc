@@ -20,14 +20,5 @@
         <file>translations/harbour-berlin-vegan-en.qm</file>
         <file>translations/harbour-berlin-vegan-en.ts</file>
         <file>translations/harbour-berlin-vegan.ts</file>
-        <file>qml/components-generic/CollapsibleItem.qml</file>
-        <file>qml/components-generic/distance.js</file>
-        <file>qml/components-generic/IconToolBar.qml</file>
-        <file>qml/components-generic/JsonDownloadHelper.qml</file>
-        <file>qml/components-generic/OpeningHoursModel.qml</file>
-        <file>qml/components-generic/OpeningHoursModelAlgorithms.js</file>
-        <file>qml/components-generic/VenueDescriptionAlgorithms.js</file>
-        <file>qml/components-generic/VenueDescriptionHeader.qml</file>
-        <file>qml/components-generic/VenueDetails.qml</file>
     </qresource>
 </RCC>

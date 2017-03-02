@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/imports/BerlinVegan/components">
+    <qresource prefix="/imports/BerlinVegan/components/platform">
         <file>IconButton.qml</file>
         <file>Page.qml</file>
         <file>Theme.qml</file>

@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/imports/BerlinVegan/components/generic">
+        <file>CollapsibleItem.qml</file>
+        <file>distance.js</file>
+        <file>IconToolBar.qml</file>
+        <file>JsonDownloadHelper.qml</file>
+        <file>OpeningHoursModel.qml</file>
+        <file>OpeningHoursModelAlgorithms.js</file>
+        <file>qmldir</file>
+        <file>VenueDescriptionAlgorithms.js</file>
+        <file>VenueDescriptionHeader.qml</file>
+        <file>VenueDetails.qml</file>
+    </qresource>
+</RCC>

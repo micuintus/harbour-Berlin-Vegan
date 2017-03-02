@@ -26,8 +26,8 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 
-import BerlinVegan.components 1.0 as BVApp
-import "../components-generic/distance.js" as Distance
+import BerlinVegan.components.platform 1.0 as BVApp
+import BerlinVegan.components.generic 1.0 as BVApp
 
 
 Item {
@@ -111,7 +111,7 @@ Item {
     Label {
         id: distanceLabel
         text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
-              ? Distance.humanReadableDistanceString(positionSource.position.coordinate,
+              ? BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
                                                                restaurantCoordinate)
               : ""
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall

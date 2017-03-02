@@ -26,12 +26,12 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import QtLocation 5.0
-import BerlinVegan.components 1.0 as BVApp
+import BerlinVegan.components.platform 1.0 as BVApp
+import BerlinVegan.components.generic 1.0 as BVApp
+
 import "."
 
 import harbour.berlin.vegan.gel 1.0
-
-import "../components-generic/distance.js" as Distance
 
 BVApp.Page {
 
@@ -98,7 +98,7 @@ BVApp.Page {
             Label {
                 id: distance
                 text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
-                Distance.humanReadableDistanceString(positionSource.position.coordinate,
+                BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
                                                            QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
                 color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.primaryColor
                 font.pixelSize: BVApp.Theme.fontSizeExtraSmall

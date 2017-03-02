@@ -25,8 +25,8 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
-import BerlinVegan.components 1.0 as BVApp
-import "../components-generic"
+import BerlinVegan.components.platform 1.0 as BVApp
+import BerlinVegan.components.generic 1.0 as BVApp
 
 
 BVApp.Page {
@@ -46,7 +46,7 @@ BVApp.Page {
 
         VerticalScrollDecorator {}
 
-        VenueDescriptionHeader {
+        BVApp.VenueDescriptionHeader {
             id: locationheader
             name: restaurant.name
             street: restaurant.street
@@ -65,7 +65,7 @@ BVApp.Page {
             }
         }
 
-        IconToolBar {
+        BVApp.IconToolBar {
             id: iconToolBar
             restaurant: page.restaurant
 
@@ -79,7 +79,7 @@ BVApp.Page {
             opacity: flicka.scrolledUpRatio
         }
 
-        CollapsibleItem {
+        BVApp.CollapsibleItem {
             id: detailsCollapsible
 
             collapsedHeight: venueDetails.collapsedHeight
@@ -91,10 +91,9 @@ BVApp.Page {
                 top: iconToolBar.bottom
             }
 
-            contentItem: VenueDetails {
+            contentItem: BVApp.VenueDetails {
                 id: venueDetails
                 restaurant: page.restaurant
-
                 anchors.fill: parent
             }
         }
