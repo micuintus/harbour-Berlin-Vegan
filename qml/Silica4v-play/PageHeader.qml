@@ -34,6 +34,8 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import BerlinVegan.components.platform 1.0 as BVApp
+// import "private/Util.js" as Util
 
 Item {
     id: pageHeader
@@ -44,10 +46,10 @@ Item {
     property alias extraContent: extraContentPlaceholder
     property string description
     property Item page
-    property real leftMargin: Theme.horizontalPageMargin
-    property real rightMargin: Theme.horizontalPageMargin
+    property real leftMargin: BVApp.BVApp.Theme.horizontalPageMargin
+    property real rightMargin: BVApp.Theme.horizontalPageMargin
     property Item _descriptionLabel
-    property real _preferredHeight: page && page.isLandscape ? Theme.itemSizeSmall : Theme.itemSizeLarge
+    property real _preferredHeight: page && page.isLandscape ? BVApp.Theme.itemSizeSmall : BVApp.Theme.itemSizeLarge
 
     onDescriptionChanged: {
         if (description.length > 0 && !_descriptionLabel) {
@@ -60,30 +62,24 @@ Item {
         }
     }
 
-    Component.onCompleted: {
-        if (!page) {
-            page = Util.findPage(pageHeader)
-        }
-    }
-
     width: parent ? parent.width : Screen.width
     // set height that keeps the first line of text aligned with the page indicator
-    height: Math.max(_preferredHeight, headerText.y + headerText.height + (_descriptionLabel ? _descriptionLabel.height : 0) + Theme.paddingMedium)
+    height: Math.max(_preferredHeight, headerText.y + headerText.height + (_descriptionLabel ? _descriptionLabel.height : 0) + BVApp.Theme.paddingMedium)
 
     Label {
         id: headerText
         // Don't allow the label to extend over the page stack indicator
         width: Math.min(implicitWidth, parent.width - leftMargin - rightMargin)
         truncationMode: TruncationMode.Fade
-        color: Theme.highlightColor
+        color: BVApp.Theme.highlightColor
         y: _preferredHeight/2 - height/2
         anchors {
             right: parent.right
             rightMargin: pageHeader.rightMargin
         }
         font {
-            pixelSize: Theme.fontSizeLarge
-            family: Theme.fontFamilyHeading
+            pixelSize: BVApp.Theme.fontSizeLarge
+            family: BVApp.Theme.fontFamilyHeading
         }
     }
     Item {
