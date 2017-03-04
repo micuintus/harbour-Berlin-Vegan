@@ -34,9 +34,10 @@ SilicaListView {
     delegate: ListItem {
 
         width: parent.width
-        height: contentItem.childrenRect.height
+        contentHeight: column.height
 
         Column {
+            id: column
             width: parent.width
 
             Item {
