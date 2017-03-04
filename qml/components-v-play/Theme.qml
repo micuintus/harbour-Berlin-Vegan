@@ -31,16 +31,14 @@ QtObject {
 
     property var myApp
 
-    // from native Android app
-    readonly property color primary: "#8BC34A"
-
     readonly property color primaryColor: Theme.textColor
     readonly property color secondaryColor: Theme.secondaryTextColor
-    readonly property color highlightDimmerColor: primary
+    // from native Android app
+    readonly property color highlightDimmerColor: "#8BC34A"
     readonly property color highlightColor: "white"
     readonly property color secondaryHighlightColor: Theme.listItem.dividerColor
 
-    readonly property color linkColor: primary
+    readonly property color linkColor: highlightDimmerColor
 
     readonly property int fontSizeMedium: dp(Theme.listItem.fontSizeText)
     readonly property int fontSizeSmall: dp(Theme.listItem.fontSizeText)
