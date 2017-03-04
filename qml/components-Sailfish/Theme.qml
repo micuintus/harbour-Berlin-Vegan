@@ -34,6 +34,8 @@ QtObject {
     readonly property color highlightDimmerColor: Silica.Theme.highlightDimmerColor
     readonly property color highlightBackgroundColor: Silica.Theme.highlightBackgroundColor
 
+    readonly property color linkColor: Silica.Theme.highlightColor
+
     readonly property int fontSizeMedium: Silica.Theme.fontSizeMedium
     readonly property int fontSizeExtraSmall: Silica.Theme.fontSizeExtraSmall
     readonly property int fontSizeSmall: Silica.Theme.fontSizeSmall
