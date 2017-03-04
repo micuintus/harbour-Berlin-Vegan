@@ -40,6 +40,8 @@ QtObject {
     readonly property color highlightColor: "white"
     readonly property color secondaryHighlightColor: Theme.listItem.dividerColor
 
+    readonly property color linkColor: primary
+
     readonly property int fontSizeMedium: dp(Theme.listItem.fontSizeText)
     readonly property int fontSizeSmall: dp(Theme.listItem.fontSizeText)
     readonly property int fontSizeExtraSmall: dp(Theme.listItem.fontSizeDetailText)

@@ -67,7 +67,7 @@ BVApp.Page {
                 text: qsTrId("id-berlin-vegan")
                 font.pixelSize: BVApp.Theme.fontSizeLarge
 
-                color: BVApp.Theme.highlightColor
+                color: BVApp.Theme.linkColor
 
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -83,7 +83,7 @@ BVApp.Page {
             Label {
                 text: "Copyright \u00A9 2016 by micu"
                 font.pixelSize: BVApp.Theme.fontSizeSmall
-                color: BVApp.Theme.highlightColor
+                color: BVApp.Theme.linkColor
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
@@ -92,14 +92,14 @@ BVApp.Page {
             Label {
                 text: "&lt;<a href=\"micupage\">micuintus.de</a>\>"
                 font.pixelSize: BVApp.Theme.fontSizeSmall
-                color: BVApp.Theme.highlightColor
+                color: BVApp.Theme.linkColor
                 textFormat: Text.StyledText
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
 
                 onLinkActivated: Qt.openUrlExternally("http://www.micuintus.de/")
-                linkColor: BVApp.Theme.highlightColor
+                linkColor: BVApp.Theme.linkColor
 
             }
 
@@ -142,7 +142,7 @@ BVApp.Page {
                     margins: BVApp.Theme.paddingLarge
                 }
 
-                linkColor: BVApp.Theme.highlightColor
+                linkColor: BVApp.Theme.linkColor
                 onLinkActivated:  pageStack.push(Qt.resolvedUrl("LicenseViewer.qml"),
                                                  {
                                                      "licenseFile": "LICENSE",
@@ -205,7 +205,7 @@ BVApp.Page {
                 textFormat: Text.StyledText
 
                 text: "<a href=\"githubwebsite\">https://github.com/micuintus/harbour-Berlin-Vegan</a>"
-                linkColor: BVApp.Theme.highlightColor
+                linkColor: BVApp.Theme.linkColor
                 onLinkActivated: Qt.openUrlExternally("https://github.com/micuintus/harbour-Berlin-Vegan")
             }
 
@@ -248,7 +248,7 @@ BVApp.Page {
                     margins: BVApp.Theme.paddingLarge
                 }
 
-                linkColor: BVApp.Theme.highlightColor
+                linkColor: BVApp.Theme.linkColor
                 onLinkActivated: Qt.openUrlExternally("http://www.berlin-vegan.de/team/kontakt/")
             }
 
