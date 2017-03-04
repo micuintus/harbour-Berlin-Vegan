@@ -132,7 +132,7 @@ BVApp.Page {
                     leftMargin: BVApp.Theme.horizontalPageMargin
                     rightMargin: BVApp.Theme.horizontalPageMargin
 
-                    topMargin: BVApp.Theme.paddingSmall
+                    topMargin: BVApp.Platform.isSailfish ? 0 : BVApp.Theme.paddingSmall
                     bottomMargin: BVApp.Theme.paddingSmall
                 }
             }
