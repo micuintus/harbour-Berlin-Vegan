@@ -7,6 +7,8 @@ DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 QT += positioning location
 
+CONFIG += c++11
+
 SOURCES += src/BerlinVegan.cpp \
            3rdparty/Cutehacks/gel/collection.cpp \
            3rdparty/Cutehacks/gel/jsonlistmodel.cpp
