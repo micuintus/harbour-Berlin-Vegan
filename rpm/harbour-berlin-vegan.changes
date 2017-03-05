@@ -12,6 +12,10 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Sun Mar 05 2017 micu <micuintus@gmx.de> 0.90-1
+- Remove search bar toggle
+- Code changes under the hood for enabling a v-play/iOS port (internal maintenance release)
+
 * Tue Jan 17 2017 micu <micuintus@gmx.de> 0.86-1
 - Provide a first search bar version, which can be enabled and disabled via the pulley menu.
 - Show street name in the main list view
