@@ -36,6 +36,8 @@ Item {
     property string street
     property var restaurantCoordinate
     property var pictures
+    property var pictureAvailable: typeof pictures !== "undefined"
+                                       && pictures.length !== 0
     property var positionSource
     property real shrinkHeightBy
 
@@ -43,9 +45,10 @@ Item {
     Image {
         id: image
 
-        source: typeof pictures !== "undefined"
+        source: pictureAvailable
                 ? pictures[0].url
                 : ""
+
         fillMode: Image.PreserveAspectCrop
 
         height: Math.max(parent.height - shrinkHeightBy,0)
