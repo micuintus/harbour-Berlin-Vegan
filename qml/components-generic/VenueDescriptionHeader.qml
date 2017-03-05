@@ -93,6 +93,7 @@ Item {
 
         // relative to parent opacity!
         opacity: 0.6
+        visible: !BVApp.Platform.isSailfish || pictureAvailable
     }
 
     Label {
