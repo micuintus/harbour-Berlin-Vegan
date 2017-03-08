@@ -13,6 +13,7 @@
 # - Hoisted the sails
 
 * Sun Mar 05 2017 micu <micuintus@gmx.de> 0.90-1
+- Retrieve newest venue database from the internet
 - Remove search bar toggle
 - Code changes under the hood for enabling a v-play/iOS port (internal maintenance release)
 
