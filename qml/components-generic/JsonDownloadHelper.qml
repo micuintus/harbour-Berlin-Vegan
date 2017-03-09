@@ -55,7 +55,7 @@ Timer {
     function loadVenueJson()
     {
         restart()
-        _fileRequest("http://www.berlin-vegan.de/app/data/GastroLocations.json")
+        _fileRequest("https://www.berlin-vegan.de/app/data/GastroLocations.json")
     }
 
     onTriggered: {
