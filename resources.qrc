@@ -11,6 +11,7 @@
         <file>qml/pages/about/LicenseViewer.qml</file>
         <file>qml/pages/about/ThirdPartySoftware.qml</file>
         <file>qml/pages/GastroLocations.json</file>
+        <file>qml/pages/ShoppingLocations.json</file>
         <file>qml/pages/VenueDescription.qml</file>
         <file>qml/pages/VenueList.qml</file>
         <file>qml/pages/VenueMapPage.qml</file>
