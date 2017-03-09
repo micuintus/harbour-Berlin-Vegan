@@ -16,8 +16,8 @@ QtObject {
         case "location":
         case "cover-location":
             return IconType.mapmarker
-        case "list":
-            return IconType.list
+        case "food":
+            return IconType.cutlery
         case "about":
             return IconType.questioncircle
         case "locationarrow":
