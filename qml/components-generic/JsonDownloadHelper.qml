@@ -28,6 +28,7 @@ Timer {
 
     property var request
     property var onFileLoaded
+    property bool isVenue
     interval: 5000
 
     function _fileRequest(url)
@@ -55,11 +56,23 @@ Timer {
     function loadVenueJson()
     {
         restart()
+        isVenue = true
         _fileRequest("https://www.berlin-vegan.de/app/data/GastroLocations.json")
+    }
+
+    function loadShoppingJson()
+    {
+        restart()
+        isVenue = false
+        _fileRequest("https://www.berlin-vegan.de/app/data/ShoppingLocations.json")
     }
 
     onTriggered: {
         request.abort();
-        _fileRequest("qrc:/qml/pages/GastroLocations.json")
+        if (isVenue) {
+            _fileRequest("qrc:/qml/pages/GastroLocations.json")
+        } else {
+            _fileRequest("qrc:/qml/pages/ShoppingLocations.json")
+        }
     }
 }

@@ -18,6 +18,8 @@ QtObject {
             return IconType.mapmarker
         case "food":
             return IconType.cutlery
+        case "shopping":
+            return IconType.shoppingcart
         case "about":
             return IconType.questioncircle
         case "locationarrow":

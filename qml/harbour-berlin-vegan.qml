@@ -62,6 +62,31 @@ ApplicationWindow
         }
     }
 
+    JsonListModel {
+        id: jsonShoppingModel
+        dynamicRoles: true
+    }
+
+    Collection {
+        id: gjsonShoppingModelCollection
+
+        property string searchString: ""
+        property bool   loaded: false
+
+        onSearchStringChanged: reFilter()
+
+        model: jsonShoppingModel
+
+        comparator: function lessThan(a, b) {
+            return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
+            < globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
+        }
+
+        filter: function(item) {
+           return item.name.toLowerCase().search(searchString.toLowerCase()) !== -1
+        }
+    }
+
     PositionSource {
         id: globalPositionSource
         updateInterval: 5000
@@ -72,6 +97,7 @@ ApplicationWindow
             if (position.coordinate.distanceTo(oldPosition) > 100)
             {
                 gjsonVenueModelCollection.reSort();
+                gjsonShoppingModelCollection.reSort();
 
                 oldPosition.latitude  = position.coordinate.latitude
                 oldPosition.longitude = position.coordinate.longitude
@@ -89,8 +115,19 @@ ApplicationWindow
         }
     }
 
+    BVApp.JsonDownloadHelper {
+        id: shoppingDownloadHelper
+        onFileLoaded:
+        function(json)
+        {
+            jsonShoppingModel.add(JSON.parse(json));
+            gjsonShoppingModelCollection.loaded = true
+        }
+    }
+
     Component.onCompleted: {
         venueDownloadHelper.loadVenueJson()
+        shoppingDownloadHelper.loadShoppingJson()
     }
 
     Connections {
@@ -127,6 +164,17 @@ ApplicationWindow
                 icon: BVApp.Theme.iconBy("food")
                 //% "Food"
                 text: qsTrId("id-venue-list")
+        }
+
+        BVApp.MenuItem {
+            pageToVisit: VenueList {
+                jsonModelCollection: gjsonShoppingModelCollection
+                positionSource: globalPositionSource
+                id: shoppingPage
+            }
+            icon: BVApp.Theme.iconBy("shopping")
+            //% "Shopping"
+            text: qsTrId("id-shopping-venue-list")
         }
 
         BVApp.MenuItem {
