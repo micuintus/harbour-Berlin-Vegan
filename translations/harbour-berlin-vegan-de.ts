@@ -178,8 +178,8 @@
         <translation>Lizenz anzeigen</translation>
     </message>
     <message id="id-venue-list">
-        <source>List view</source>
-        <translation>Listenansicht</translation>
+        <source>Food</source>
+        <translation>Gastronomie</translation>
     </message>
     <message id="id-about-venue-list">
         <source>About</source>

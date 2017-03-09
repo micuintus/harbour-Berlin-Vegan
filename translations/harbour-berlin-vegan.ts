@@ -231,8 +231,8 @@
     </message>
     <message id="id-venue-list">
         <location filename="../qml/harbour-berlin-vegan.qml" line="129"/>
-        <source>List view</source>
-        <translation></translation>
+        <source>Food</source>
+        <translation>Food</translation>
     </message>
     <message id="id-about-venue-list">
         <location filename="../qml/harbour-berlin-vegan.qml" line="136"/>

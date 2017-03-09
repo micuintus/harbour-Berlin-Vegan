@@ -124,8 +124,8 @@ ApplicationWindow
 
         initialMenuItem: BVApp.MenuItem {
                 pageToVisit: initialPage
-                icon: BVApp.Theme.iconBy("list")
-                //% "List view"
+                icon: BVApp.Theme.iconBy("food")
+                //% "Food"
                 text: qsTrId("id-venue-list")
         }
 
