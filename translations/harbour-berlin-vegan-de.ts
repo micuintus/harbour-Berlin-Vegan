@@ -185,5 +185,9 @@
         <source>About</source>
         <translation>Über diese App</translation>
     </message>
+    <message id="id-shopping-venue-list">
+        <source>Shopping</source>
+        <translation>Einkaufen</translation>
+    </message>
 </context>
 </TS>

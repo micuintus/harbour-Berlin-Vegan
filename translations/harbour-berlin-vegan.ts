@@ -225,17 +225,22 @@
         <translation></translation>
     </message>
     <message id="id-view-license">
-        <location filename="../qml/pages/about/ThirdPartySoftware.qml" line="81"/>
+        <location filename="../qml/pages/about/ThirdPartySoftware.qml" line="82"/>
         <source>View license</source>
         <translation></translation>
     </message>
     <message id="id-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="129"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="166"/>
         <source>Food</source>
         <translation>Food</translation>
     </message>
+    <message id="id-shopping-venue-list">
+        <location filename="../qml/harbour-berlin-vegan.qml" line="177"/>
+        <source>Shopping</source>
+        <translation>Shopping</translation>
+    </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="136"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="184"/>
         <source>About</source>
         <translation></translation>
     </message>
