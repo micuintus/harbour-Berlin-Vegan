@@ -38,19 +38,19 @@ ApplicationWindow
     id: app
 
     JsonListModel {
-        id: jsonModel
+        id: jsonVenueModel
         dynamicRoles: true
     }
 
     Collection {
-        id: gjsonModelCollection
+        id: gjsonVenueModelCollection
 
         property string searchString: ""
         property bool   loaded: false
 
         onSearchStringChanged: reFilter()
 
-        model: jsonModel
+        model: jsonVenueModel
 
         comparator: function lessThan(a, b) {
             return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
@@ -71,7 +71,7 @@ ApplicationWindow
             console.log(oldPosition + " " + position.coordinate + " " + position.coordinate.distanceTo(oldPosition))
             if (position.coordinate.distanceTo(oldPosition) > 100)
             {
-                gjsonModelCollection.reSort();
+                gjsonVenueModelCollection.reSort();
 
                 oldPosition.latitude  = position.coordinate.latitude
                 oldPosition.longitude = position.coordinate.longitude
@@ -80,17 +80,17 @@ ApplicationWindow
     }
 
     BVApp.JsonDownloadHelper {
-        id: downloadHelper
+        id: venueDownloadHelper
         onFileLoaded:
         function(json)
         {
-            jsonModel.add(JSON.parse(json));
-            gjsonModelCollection.loaded = true
+            jsonVenueModel.add(JSON.parse(json));
+            gjsonVenueModelCollection.loaded = true
         }
     }
 
     Component.onCompleted: {
-        downloadHelper.loadVenueJson()
+        venueDownloadHelper.loadVenueJson()
     }
 
     Connections {
@@ -107,12 +107,12 @@ ApplicationWindow
 
     cover: Component { CoverPage {
         id: cover
-        jsonModelCollection: gjsonModelCollection
+        jsonModelCollection: gjsonVenueModelCollection
         positionSource: globalPositionSource
     } }
 
     initialPage: VenueList {
-        jsonModelCollection: gjsonModelCollection
+        jsonModelCollection: gjsonVenueModelCollection
         positionSource: globalPositionSource
         id: listPage
     }
