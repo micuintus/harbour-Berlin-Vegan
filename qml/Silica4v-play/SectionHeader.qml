@@ -6,7 +6,7 @@ AppText {
     property var title
 
     text: title
-    color: BVApp.Theme.primary
+    color: BVApp.Theme.highlightDimmerColor
 
     anchors {
         right: parent.right
