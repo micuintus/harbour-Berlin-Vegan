@@ -22,5 +22,6 @@
         <file>TruncationMode.qml</file>
         <file>VerticalScrollDecorator.qml</file>
         <file>Button.qml</file>
+        <file>OpacityRampEffectBase.qml</file>
     </qresource>
 </RCC>
