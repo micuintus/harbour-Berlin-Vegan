@@ -91,6 +91,10 @@ BVApp.Page {
 
         plugin : Plugin {
             name: "osm"
+            parameters: [ PluginParameter {
+                    name: "osm.mapping.highdpi_tiles"
+                    value: "true"
+                }]
         }
 
         gesture {
