@@ -50,6 +50,11 @@ QtObject {
 
     readonly property int horizontalPageMargin: Silica.Theme.horizontalPageMargin
     readonly property int busyIndicatorSizeLarge: Silica.BusyIndicatorSize.Large
-    readonly property int opacityRampDirection: Silica.OpacityRamp.TopToBottom
+
+    readonly property int opacityRampLeftToRight: Silica.OpacityRamp.LeftToRight
+    readonly property int opacityRampRightToLeft: Silica.OpacityRamp.RightToLeft
+    readonly property int opacityRampTopToBottom: Silica.OpacityRamp.TopToBottom
+    readonly property int opacityRampBottomToTop: Silica.OpacityRamp.BottomToTop
+
     readonly property int dividerHeight: 2
 }

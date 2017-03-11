@@ -55,7 +55,7 @@ Item {
         anchors.fill: parent
         id: ramp
         sourceItem: contentItem
-        direction: BVApp.Theme.opacityRampDirection
+        direction: BVApp.Theme.opacityRampTopToBottom
         enabled: parent.collapsed
     }
 

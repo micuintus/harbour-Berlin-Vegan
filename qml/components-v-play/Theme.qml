@@ -54,6 +54,14 @@ QtObject {
     readonly property int horizontalPageMargin: dp(16)
 
     readonly property int busyIndicatorSizeLarge: 0
-    readonly property int opacityRampDirection: 0
+
+    // From OpacityRampEffectBase.qml:
+    //     LtR = 0, RtL = 1, TtB = 2, BtT = 3
+    //     property int direction: 0 // default = LeftToRight-OpaqueToTranslucentLtR = 0, RtL = 1, TtB = 2, BtT = 3
+    readonly property int opacityRampLeftToRight: 0
+    readonly property int opacityRampRightToLeft: 1
+    readonly property int opacityRampTopToBottom: 2
+    readonly property int opacityRampBottomToTop: 3
+
     readonly property int dividerHeight: dp(Theme.listItem.dividerHeight)
 }
