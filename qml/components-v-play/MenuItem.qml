@@ -5,6 +5,7 @@ NavigationItem {
     id: item
     property var pageToVisit
     property alias text: item.title
+
     NavigationStack {
         id: stack
         initialPage: pageToVisit

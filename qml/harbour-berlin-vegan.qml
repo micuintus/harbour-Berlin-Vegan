@@ -142,6 +142,7 @@ ApplicationWindow
                 positionSource: globalPositionSource
                 id: shoppingPage
             }
+            rootMenuItem: myMenu
             icon: BVApp.Theme.iconBy("shopping")
             //% "Shopping"
             text: qsTrId("id-shopping-venue-list")
