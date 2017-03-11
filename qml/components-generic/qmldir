@@ -1,4 +1,5 @@
 module BerlinVegan.components.generic
+Collection 1.0 Collection.qml
 CollapsibleItem 1.0 CollapsibleItem.qml
 IconToolBar 1.0 IconToolBar.qml
 JsonDownloadHelper 1.0 JsonDownloadHelper.qml

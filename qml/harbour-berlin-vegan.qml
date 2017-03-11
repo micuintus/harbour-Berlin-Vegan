@@ -42,7 +42,7 @@ ApplicationWindow
         dynamicRoles: true
     }
 
-    Collection {
+    BVApp.Collection {
         id: gjsonVenueModelCollection
 
         property string searchString: ""
@@ -67,7 +67,7 @@ ApplicationWindow
         dynamicRoles: true
     }
 
-    Collection {
+    BVApp.Collection {
         id: gjsonShoppingModelCollection
 
         property string searchString: ""
