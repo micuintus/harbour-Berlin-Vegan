@@ -44,22 +44,7 @@ ApplicationWindow
 
     BVApp.Collection {
         id: gjsonVenueModelCollection
-
-        property string searchString: ""
-        property bool   loaded: false
-
-        onSearchStringChanged: reFilter()
-
         model: jsonVenueModel
-
-        comparator: function lessThan(a, b) {
-            return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
-            < globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
-        }
-
-        filter: function(item) {
-           return item.name.toLowerCase().search(searchString.toLowerCase()) !== -1
-        }
     }
 
     JsonListModel {
@@ -69,22 +54,7 @@ ApplicationWindow
 
     BVApp.Collection {
         id: gjsonShoppingModelCollection
-
-        property string searchString: ""
-        property bool   loaded: false
-
-        onSearchStringChanged: reFilter()
-
         model: jsonShoppingModel
-
-        comparator: function lessThan(a, b) {
-            return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
-            < globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
-        }
-
-        filter: function(item) {
-           return item.name.toLowerCase().search(searchString.toLowerCase()) !== -1
-        }
     }
 
     PositionSource {
