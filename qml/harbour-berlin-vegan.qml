@@ -69,6 +69,11 @@ ApplicationWindow
             {
                 jsonVenueModel.add(JSON.parse(json));
                 gjsonVenueModelCollection.loaded = true
+                for (var i = 0; i < favorite_ids.rows.length; i++) {
+                    // if favorite_id is actually a shopping location, nothing happens
+                    jsonFavoritesModel.add(jsonVenueModel.get(favorite_ids.rows.item(i).favorite_id))
+                }
+                gjsonFavoritesModelCollection.loaded = true
             }
     }
 
@@ -79,7 +84,22 @@ ApplicationWindow
             {
                 jsonShoppingModel.add(JSON.parse(json));
                 gjsonShoppingModelCollection.loaded = true
+                for (var i = 0; i < favorite_ids.rows.length; i++) {
+                    // if favorite_id is actually a venue, nothing happens
+                    jsonFavoritesModel.add(jsonShoppingModel.get(favorite_ids.rows.item(i).favorite_id))
+                }
+                gjsonFavoritesModelCollection.loaded = true
             }
+    }
+
+    JsonListModel {
+        id: jsonFavoritesModel
+        dynamicRoles: true
+    }
+
+    BVApp.Collection {
+        id: gjsonFavoritesModelCollection
+        model: jsonFavoritesModel
     }
 
     PositionSource {
@@ -92,6 +112,7 @@ ApplicationWindow
             {
                 gjsonVenueModelCollection.reSort();
                 gjsonShoppingModelCollection.reSort();
+                gjsonFavoritesModelCollection.reSort();
 
                 oldPosition.latitude  = position.coordinate.latitude
                 oldPosition.longitude = position.coordinate.longitude
@@ -163,6 +184,19 @@ ApplicationWindow
             onClicked: {
                 app.jsonModelCollection  = gjsonShoppingModelCollection
                 page.searchString = gjsonShoppingModelCollection.searchString
+            }
+
+            pageComponent: app.initialPage
+        }
+
+        BVApp.ActionMenuItem {
+            icon: BVApp.Theme.iconBy("favorite")
+            //% "Favorites"
+            text: qsTrId("id-favorites-venue-list")
+
+            onClicked: {
+                app.jsonModelCollection  = gjsonFavoritesModelCollection
+                page.searchString = gjsonFavoritesModelCollection.searchString
             }
 
             pageComponent: app.initialPage
