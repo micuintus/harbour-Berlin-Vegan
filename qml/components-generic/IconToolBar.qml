@@ -59,7 +59,7 @@ Column {
         }
 
         BVApp.IconButton {
-            type: "favorite"
+            type: "favorite-o"
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             enabled: false
