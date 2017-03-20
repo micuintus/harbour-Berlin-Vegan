@@ -23,6 +23,7 @@
 **/
 
 import QtQuick 2.2
+import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import harbour.berlin.vegan.gel 1.0
@@ -38,6 +39,9 @@ ApplicationWindow
     id: app
 
     property var jsonModelCollection: gjsonVenueModelCollection
+    property var db
+    property var favorite_ids
+
     JsonListModel {
         id: jsonVenueModel
         dynamicRoles: true
@@ -97,6 +101,11 @@ ApplicationWindow
 
 
     Component.onCompleted: {
+        db = LocalStorage.openDatabaseSync("BerlinVeganDB", "0.1", "Berlin Vegan SQL!", 1000000);
+        db.transaction(function(tx) {
+            tx.executeSql("CREATE TABLE IF NOT EXISTS BerlinVegan(favorite_id TEXT)");
+            favorite_ids = tx.executeSql("SELECT favorite_id FROM BerlinVegan");
+        })
         venueDownloadHelper.loadVenueJson()
         shoppingDownloadHelper.loadShoppingJson()
     }
