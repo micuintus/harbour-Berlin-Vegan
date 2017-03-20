@@ -189,5 +189,9 @@
         <source>Shopping</source>
         <translation>Einkaufen</translation>
     </message>
+    <message id="id-favorites-venue-list">
+        <source>Favorites</source>
+        <translation>Favoriten</translation>
+    </message>
 </context>
 </TS>

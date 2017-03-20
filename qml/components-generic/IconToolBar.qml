@@ -59,11 +59,45 @@ Column {
         }
 
         BVApp.IconButton {
-            type: "favorite-o"
+            function contains() {
+                var rs
+                db.transaction(function(tx) {
+                    rs = tx.executeSql("SELECT * FROM BerlinVegan WHERE favorite_id == ?", [ restaurant.id ]);
+                })
+                if (rs.rows.length) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            type: contains() ? "favorite" : "favorite-o"
+            onClicked: {
+                switch (type) {
+                case "favorite-o":
+                    type = "favorite"
+                    db.transaction(function(tx) {
+                        tx.executeSql("INSERT INTO BerlinVegan VALUES(?)", [ restaurant.id ]);
+                    })
+                    // if favorite_id is actually a shopping location, nothing happens
+                    jsonFavoritesModel.add(jsonVenueModel.get(restaurant.id))
+                    // if favorite_id is actually a venue, nothing happens
+                    jsonFavoritesModel.add(jsonShoppingModel.get(restaurant.id))
+                    break
+                case "favorite":
+                    type = "favorite-o"
+                    db.transaction(function(tx) {
+                        tx.executeSql("DELETE FROM BerlinVegan WHERE favorite_id == ?", [ restaurant.id ]);
+                    })
+                    if (typeof jsonVenueModel.get(restaurant.id) !== "undefined") {
+                        jsonFavoritesModel.remove(jsonVenueModel.get(restaurant.id))
+                    } else if (typeof jsonShoppingModel.get(restaurant.id) !== "undefined") {
+                        jsonFavoritesModel.remove(jsonShoppingModel.get(restaurant.id))
+                    }
+                    break
+                }
+            }
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            enabled: false
-            visible: false
         }
 
 
