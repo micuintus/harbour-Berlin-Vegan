@@ -12,6 +12,10 @@ QtObject {
                                                      ? Silica.Theme.highlightColor
                                                      : Silica.Theme.primaryColor)
         case "favorite":
+            return "image://theme/icon-m-favorite-selected?" + (Silica.pressed
+                                                       ? Silica.Theme.highlightColor
+                                                       : Silica.Theme.primaryColor)
+        case "favorite-o":
             return "image://theme/icon-m-favorite?" + (Silica.pressed
                                                        ? Silica.Theme.highlightColor
                                                        : Silica.Theme.primaryColor)

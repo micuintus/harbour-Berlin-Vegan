@@ -11,6 +11,8 @@ QtObject {
             return "phone"
         case "favorite":
             return "star"
+        case "favorite-o":
+            return "star_border"
         case "home":
             return "public"
         case "location":
