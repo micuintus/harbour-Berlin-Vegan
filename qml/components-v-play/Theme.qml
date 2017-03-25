@@ -8,11 +8,11 @@ QtObject {
     function iconBy(type) {
         switch (type) {
         case "answer":
-            return IconType.phone
+            return "phone"
         case "favorite":
             return "star"
         case "home":
-            return IconType.home
+            return "public"
         case "location":
         case "cover-location":
             return IconType.mapmarker
