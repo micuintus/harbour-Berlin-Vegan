@@ -1,17 +1,23 @@
+import QtQuick 2.7
 import VPlayApps 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 
-AppText {
+Rectangle {
+
+    id: header
 
     property var title
+    property string text
 
-    text: title
-    color: BVApp.Theme.highlightDimmerColor
+    width: parent.width
+    height: txt.height
 
-    anchors {
-        right: parent.right
+    AppText {
+        id: txt
+        text: header.text
+        color: BVApp.Theme.highlightDimmerColor
 
-        margins: BVApp.Theme.paddingLarge
+        anchors.right: parent.right
+        anchors.margins: BVApp.Theme.paddingLarge
     }
-
 }
