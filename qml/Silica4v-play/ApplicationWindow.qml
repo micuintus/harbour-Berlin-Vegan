@@ -24,8 +24,18 @@ App {
         Theme.colors.statusBarStyle = Theme.colors.statusBarStyleWhite
     }
 
+    FontLoader {
+        id: material
+        source: "qrc:/icons/MaterialIcons-Regular.ttf"
+    }
+
     Component.onCompleted: {
         // We need to access the dp() function from the Theme component
         BVApp.Theme.myApp = app
+        if (material.status == FontLoader.Ready) {
+            console.log("Loaded font: '" + material.name + "'")
+        } else {
+            console.error("Could not load font: '" + material.name + "'")
+        }
     }
 }
