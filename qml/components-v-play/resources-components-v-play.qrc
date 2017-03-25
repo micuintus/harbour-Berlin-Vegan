@@ -8,5 +8,6 @@
         <file>Map.qml</file>
         <file>MenuItem.qml</file>
         <file>Platform.qml</file>
+        <file>SectionHeader.qml</file>
     </qresource>
 </RCC>
