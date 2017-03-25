@@ -10,18 +10,18 @@ QtObject {
         case "answer":
             return IconType.phone
         case "favorite":
-            return IconType.hearto
+            return "star"
         case "home":
             return IconType.home
         case "location":
         case "cover-location":
             return IconType.mapmarker
         case "food":
-            return IconType.cutlery
+            return "restaurant_menu"
         case "shopping":
-            return IconType.shoppingcart
+            return "shopping_cart"
         case "about":
-            return IconType.questioncircle
+            return "info"
         case "locationarrow":
             return IconType.locationarrow
         }

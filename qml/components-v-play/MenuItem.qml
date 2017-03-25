@@ -34,4 +34,8 @@ NavigationItem {
             attachedButton.icon  = icon
         }
     }
+
+    Component.onCompleted: {
+        item.iconFont = "Material Icons"
+    }
 }
