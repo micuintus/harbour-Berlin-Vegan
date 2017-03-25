@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>icons/MaterialIcons-Regular.ttf</file>
         <file>qml/cover/CoverPage.qml</file>
         <file>qml/pages/about/AboutBerlinVegan.qml</file>
         <file>qml/pages/about/BerlinVegan.svg</file>
