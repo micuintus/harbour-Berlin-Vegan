@@ -26,6 +26,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.platform 1.0 as BVPlatform
 
 Item {
 
@@ -44,7 +45,7 @@ Item {
 
             id: openingHourListView
 
-            header: SectionHeader {
+            header: BVPlatform.SectionHeader {
                             //% "Opening hours"
                 text: qsTrId("id-opening-hours")
             }
@@ -67,7 +68,7 @@ Item {
             }
         }
 
-        SectionHeader {
+        BVPlatform.SectionHeader {
                       //% "Food details"
             text: qsTrId("id-food-details")
             id: foodDetailsHeader
@@ -92,7 +93,7 @@ Item {
         }
 
 
-        SectionHeader {
+        BVPlatform.SectionHeader {
                         //% "Accessibility"
             text: qsTrId("id-accessibility")
         }
@@ -121,7 +122,7 @@ Item {
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dogs)
         }
 
-        SectionHeader {
+        BVPlatform.SectionHeader {
                         //% "Venue features"
             text: qsTrId("id-venue-features")
         }
