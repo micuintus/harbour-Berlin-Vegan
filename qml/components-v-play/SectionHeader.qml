@@ -8,9 +8,20 @@ Rectangle {
 
     property var title
     property string text
+    property string icon
 
     width: parent.width
     height: txt.height
+
+    AppText {
+        text: header.icon
+        color: BVApp.Theme.highlightDimmerColor
+
+        font.family: "Material Icons"
+
+        anchors.left: parent.left
+        anchors.margins: BVApp.Theme.paddingLarge
+    }
 
     AppText {
         id: txt
