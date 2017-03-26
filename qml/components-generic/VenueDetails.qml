@@ -48,6 +48,7 @@ Item {
             header: BVPlatform.SectionHeader {
                             //% "Opening hours"
                 text: qsTrId("id-opening-hours")
+                icon: BVPlatform.Theme.iconBy("schedule")
             }
 
             width: parent.width
@@ -71,6 +72,7 @@ Item {
         BVPlatform.SectionHeader {
                       //% "Food details"
             text: qsTrId("id-food-details")
+            icon: BVPlatform.Theme.iconBy("details")
             id: foodDetailsHeader
         }
 
@@ -96,6 +98,7 @@ Item {
         BVPlatform.SectionHeader {
                         //% "Accessibility"
             text: qsTrId("id-accessibility")
+            icon: BVPlatform.Theme.iconBy("accessible")
         }
 
         DetailItem {
@@ -125,6 +128,7 @@ Item {
         BVPlatform.SectionHeader {
                         //% "Venue features"
             text: qsTrId("id-venue-features")
+            icon: BVPlatform.Theme.iconBy("more_vert")
         }
 
         DetailItem {

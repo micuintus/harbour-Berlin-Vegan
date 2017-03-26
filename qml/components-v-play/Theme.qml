@@ -24,6 +24,14 @@ QtObject {
             return "info"
         case "locationarrow":
             return IconType.locationarrow
+        case "schedule":
+            return "schedule"
+        case "details":
+            return "details"
+        case "accessible":
+            return "accessible"
+        case "more_vert":
+            return "more_vert"
         }
     }
 
