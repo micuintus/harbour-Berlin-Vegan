@@ -26,7 +26,7 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 
 import BerlinVegan.components.generic 1.0 as BVApp
-import BerlinVegan.components.platform 1.0 as BVPlatform
+import BerlinVegan.components.platform 1.0 as BVApp
 
 Item {
 
@@ -45,10 +45,10 @@ Item {
 
             id: openingHourListView
 
-            header: BVPlatform.SectionHeader {
+            header: BVApp.SectionHeader {
                             //% "Opening hours"
                 text: qsTrId("id-opening-hours")
-                icon: BVPlatform.Theme.iconBy("schedule")
+                icon: BVApp.Theme.iconBy("schedule")
             }
 
             width: parent.width
@@ -69,10 +69,10 @@ Item {
             }
         }
 
-        BVPlatform.SectionHeader {
+        BVApp.SectionHeader {
                       //% "Food details"
             text: qsTrId("id-food-details")
-            icon: BVPlatform.Theme.iconBy("details")
+            icon: BVApp.Theme.iconBy("details")
             id: foodDetailsHeader
         }
 
@@ -95,10 +95,10 @@ Item {
         }
 
 
-        BVPlatform.SectionHeader {
+        BVApp.SectionHeader {
                         //% "Accessibility"
             text: qsTrId("id-accessibility")
-            icon: BVPlatform.Theme.iconBy("accessible")
+            icon: BVApp.Theme.iconBy("accessible")
         }
 
         DetailItem {
@@ -125,10 +125,10 @@ Item {
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dogs)
         }
 
-        BVPlatform.SectionHeader {
+        BVApp.SectionHeader {
                         //% "Venue features"
             text: qsTrId("id-venue-features")
-            icon: BVPlatform.Theme.iconBy("more_vert")
+            icon: BVApp.Theme.iconBy("more_vert")
         }
 
         DetailItem {
