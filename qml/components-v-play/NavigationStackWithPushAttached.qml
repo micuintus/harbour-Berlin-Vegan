@@ -3,7 +3,6 @@ import VPlayApps 1.0
 
 NavigationStack {
     id: stack
-    initialPage: pageToVisit
 
     navigationBar.rightBarItem: IconButtonBarItem {
         id: attachedButton

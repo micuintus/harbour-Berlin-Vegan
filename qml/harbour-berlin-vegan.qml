@@ -37,6 +37,25 @@ ApplicationWindow
 {
     id: app
 
+    property var jsonModelCollection: gjsonVenueModelCollection
+
+    states: [
+        State {
+            name: "food"
+            PropertyChanges {
+                target: app
+                jsonModelCollection: gjsonVenueModelCollection
+            }
+        },
+        State {
+            name: "shopping"
+            PropertyChanges {
+                target: app
+                jsonModelCollection: gjsonShoppingModelCollection
+            }
+        }
+    ]
+
     JsonListModel {
         id: jsonVenueModel
         dynamicRoles: true
@@ -55,24 +74,6 @@ ApplicationWindow
     BVApp.Collection {
         id: gjsonShoppingModelCollection
         model: jsonShoppingModel
-    }
-
-    PositionSource {
-        id: globalPositionSource
-        updateInterval: 5000
-        property var oldPosition: QtPositioning.coordinate(0, 0)
-
-        onPositionChanged: {
-            console.log(oldPosition + " " + position.coordinate + " " + position.coordinate.distanceTo(oldPosition))
-            if (position.coordinate.distanceTo(oldPosition) > 100)
-            {
-                gjsonVenueModelCollection.reSort();
-                gjsonShoppingModelCollection.reSort();
-
-                oldPosition.latitude  = position.coordinate.latitude
-                oldPosition.longitude = position.coordinate.longitude
-            }
-        }
     }
 
     BVApp.JsonDownloadHelper {
@@ -95,6 +96,25 @@ ApplicationWindow
         }
     }
 
+    PositionSource {
+        id: globalPositionSource
+        updateInterval: 5000
+        property var oldPosition: QtPositioning.coordinate(0, 0)
+
+        onPositionChanged: {
+            console.log(oldPosition + " " + position.coordinate + " " + position.coordinate.distanceTo(oldPosition))
+            if (position.coordinate.distanceTo(oldPosition) > 100)
+            {
+                gjsonVenueModelCollection.reSort();
+                gjsonShoppingModelCollection.reSort();
+
+                oldPosition.latitude  = position.coordinate.latitude
+                oldPosition.longitude = position.coordinate.longitude
+            }
+        }
+    }
+
+
     Component.onCompleted: {
         venueDownloadHelper.loadVenueJson()
         shoppingDownloadHelper.loadShoppingJson()
@@ -112,46 +132,44 @@ ApplicationWindow
         }
     }
 
+
     cover: Component { CoverPage {
         id: cover
-        jsonModelCollection: gjsonVenueModelCollection
+        jsonModelCollection: app.jsonModelCollection
         positionSource: globalPositionSource
     } }
 
-    initialPage: VenueList {
-        jsonModelCollection: gjsonVenueModelCollection
-        positionSource: globalPositionSource
-        id: listPage
-    }
+    initialPage: Component { VenueList {
+            id: venueList
+            positionSource: globalPositionSource
+            jsonModelCollection: app.jsonModelCollection
+   } }
 
    BVApp.NavigationMenu {
-        id: myMenu
 
-        flickable: initialPage.flickable
+       BVApp.ActionMenuItem {
+            icon: BVApp.Theme.iconBy("food")
+            //% "Food"
+            text: qsTrId("id-venue-list")
 
-        initialMenuItem: BVApp.MenuItem {
-                pageToVisit: initialPage
-                icon: BVApp.Theme.iconBy("food")
-                //% "Food"
-                text: qsTrId("id-venue-list")
-        }
+            onClicked: app.state = "food"
+       }
 
-        BVApp.MenuItem {
-            pageToVisit: VenueList {
-                jsonModelCollection: gjsonShoppingModelCollection
-                positionSource: globalPositionSource
-                id: shoppingPage
-            }
-            icon: BVApp.Theme.iconBy("shopping")
-            //% "Shopping"
-            text: qsTrId("id-shopping-venue-list")
-        }
+       BVApp.ActionMenuItem {
+           icon: BVApp.Theme.iconBy("shopping")
+           //% "Shopping"
+           text: qsTrId("id-shopping-venue-list")
 
-        BVApp.MenuItem {
-            pageToVisit: AboutBerlinVegan { }
+           onClicked: app.state = "shopping"
+       }
+
+       BVApp.MenuItem {
             icon: BVApp.Theme.iconBy("about")
             //% "About"
             text: qsTrId("id-about-venue-list")
+
+            pageToVisit: AboutBerlinVegan { }
+
         }
     }
 }

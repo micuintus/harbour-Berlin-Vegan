@@ -11,6 +11,16 @@ App {
     property var cover
     property var initialPage
 
+    // For some reason, App isn't an Item,
+    // which is why we need to statify it.
+    property alias states: stategroup.states
+    property alias state: stategroup.state
+
+    StateGroup {
+        id: stategroup
+    }
+
+
     onInitTheme: {
         Theme.navigationBar.backgroundColor = BVApp.Theme.highlightDimmerColor
         Theme.navigationBar.titleColor = "white"
