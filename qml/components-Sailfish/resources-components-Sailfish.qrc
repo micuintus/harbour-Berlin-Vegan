@@ -9,5 +9,6 @@
         <file>MenuItem.qml</file>
         <file>Platform.qml</file>
         <file>SectionHeader.qml</file>
+        <file>ActionMenuItem.qml</file>
     </qresource>
 </RCC>
