@@ -39,13 +39,12 @@ BVApp.Page {
                  //% "Berlin-Vegan"
     title: qsTrId("id-berlin-vegan")
 
-    property var jsonModelCollection
+    property alias jsonModelCollection: listView.model
     property var positionSource
     property alias flickable: listView
 
     SilicaListView {
         id: listView
-        model: jsonModelCollection
         anchors.fill: parent
 
         BusyIndicator {
