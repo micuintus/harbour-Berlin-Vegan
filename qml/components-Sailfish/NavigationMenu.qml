@@ -4,6 +4,9 @@ import QtQuick 2.2
 Silica.PullDownMenu {
     id: menu
 
+    property Item menuPage
+    flickable: menuPage.flickable
+
     // Always keep the menu on the current root page
     data: [
     Connections {
@@ -14,13 +17,7 @@ Silica.PullDownMenu {
                  && "undefined" !== typeof(pageStack.currentPage.flickable)
                  && pageStack.depth === 1)
             {
-                menu.flickable = pageStack.currentPage.flickable
-                pageStack.currentPage.flickableChanged.connect(function() {
-                    if ("undefined" !== typeof(pageStack.currentPage.flickable))
-                    {
-                        menu.flickable = pageStack.currentPage.flickable
-                    }
-                })
+                menuPage = pageStack.currentPage
             }
         }
     }]
