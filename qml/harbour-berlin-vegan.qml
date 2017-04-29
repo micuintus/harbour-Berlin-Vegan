@@ -38,24 +38,6 @@ ApplicationWindow
     id: app
 
     property var jsonModelCollection: gjsonVenueModelCollection
-
-    states: [
-        State {
-            name: "food"
-            PropertyChanges {
-                target: app
-                jsonModelCollection: gjsonVenueModelCollection
-            }
-        },
-        State {
-            name: "shopping"
-            PropertyChanges {
-                target: app
-                jsonModelCollection: gjsonShoppingModelCollection
-            }
-        }
-    ]
-
     JsonListModel {
         id: jsonVenueModel
         dynamicRoles: true
@@ -152,7 +134,9 @@ ApplicationWindow
             //% "Food"
             text: qsTrId("id-venue-list")
 
-            onClicked: app.state = "food"
+            onClicked: {
+                app.jsonModelCollection  = gjsonVenueModelCollection
+            }
        }
 
        BVApp.ActionMenuItem {
@@ -160,7 +144,9 @@ ApplicationWindow
            //% "Shopping"
            text: qsTrId("id-shopping-venue-list")
 
-           onClicked: app.state = "shopping"
+           onClicked: {
+               app.jsonModelCollection  = gjsonShoppingModelCollection
+           }
        }
 
        BVApp.MenuItem {
