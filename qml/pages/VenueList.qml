@@ -42,17 +42,14 @@ BVApp.Page {
     property alias jsonModelCollection: listView.model
     property var positionSource
     property alias flickable: listView
+    property alias searchString: searchField.text
+
 
     BVApp.SearchField {
-        id: searchField
-        width: page.width
+       id: searchField
+       width: page.width
 
-        flickableForSailfish: listView
-
-        onTextChanged:
-        {
-            jsonModelCollection.searchString = searchField.text
-        }
+       flickableForSailfish: listView
     }
 
     SilicaListView {
@@ -169,6 +166,7 @@ BVApp.Page {
                                );
             }
         }
+
         VerticalScrollDecorator {}
     }
 }

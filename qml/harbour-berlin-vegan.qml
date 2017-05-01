@@ -124,6 +124,11 @@ ApplicationWindow
             id: venueList
             positionSource: globalPositionSource
             jsonModelCollection: app.jsonModelCollection
+
+            onSearchStringChanged: {
+                gjsonShoppingModelCollection.searchString = searchString
+                gjsonVenueModelCollection.searchString    = searchString
+            }
    } }
 
    BVApp.NavigationMenu {
@@ -135,6 +140,7 @@ ApplicationWindow
 
             onClicked: {
                 app.jsonModelCollection  = gjsonVenueModelCollection
+                pageToVisit.searchString = gjsonVenueModelCollection.searchString
             }
        }
 
@@ -145,6 +151,7 @@ ApplicationWindow
 
            onClicked: {
                app.jsonModelCollection  = gjsonShoppingModelCollection
+               pageToVisit.searchString = gjsonShoppingModelCollection.searchString
            }
        }
 
