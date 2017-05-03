@@ -84,7 +84,6 @@ ApplicationWindow
         property var oldPosition: QtPositioning.coordinate(0, 0)
 
         onPositionChanged: {
-            console.log(oldPosition + " " + position.coordinate + " " + position.coordinate.distanceTo(oldPosition))
             if (position.coordinate.distanceTo(oldPosition) > 100)
             {
                 gjsonVenueModelCollection.reSort();
