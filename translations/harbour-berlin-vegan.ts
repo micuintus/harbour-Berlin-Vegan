@@ -230,17 +230,17 @@
         <translation></translation>
     </message>
     <message id="id-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="153"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="135"/>
         <source>Food</source>
         <translation>Food</translation>
     </message>
     <message id="id-shopping-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="161"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="145"/>
         <source>Shopping</source>
         <translation>Shopping</translation>
     </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="169"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="155"/>
         <source>About</source>
         <translation></translation>
     </message>

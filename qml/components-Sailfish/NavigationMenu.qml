@@ -4,7 +4,7 @@ import QtQuick 2.2
 Silica.PullDownMenu {
     id: menu
 
-    property Item menuPage
+    property Page menuPage
     flickable: menuPage.flickable
 
     // Always keep the menu on the current root page

@@ -10,7 +10,6 @@ Label 1.0 Label.qml
 ListItem 1.0 ListItem.qml
 OpacityRampEffect 1.0 OpacityRampEffect.qml
 PageHeader 1.0 PageHeader.qml
-SearchField 1.0 SearchField.qml
 Separator 1.0 Separator.qml
 SilicaFlickable 1.0 SilicaFlickable.qml
 SilicaListView 1.0 SilicaListView.qml
