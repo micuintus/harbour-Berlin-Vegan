@@ -3,4 +3,5 @@ import QtQuick 2.2
 
 Silica.MenuItem {
     property var icon
+    property Page pageToVisit: parent.parent.menuPage
 }

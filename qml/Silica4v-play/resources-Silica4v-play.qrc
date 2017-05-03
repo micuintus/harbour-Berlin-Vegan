@@ -14,7 +14,6 @@
         <file>OpacityRampEffect.qml</file>
         <file>PageHeader.qml</file>
         <file>qmldir</file>
-        <file>SearchField.qml</file>
         <file>Separator.qml</file>
         <file>SilicaFlickable.qml</file>
         <file>SilicaListView.qml</file>

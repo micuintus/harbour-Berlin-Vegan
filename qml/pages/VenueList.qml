@@ -43,9 +43,26 @@ BVApp.Page {
     property var positionSource
     property alias flickable: listView
 
+    BVApp.SearchField {
+        id: searchField
+        width: page.width
+
+        flickableForSailfish: listView
+
+        onTextChanged:
+        {
+            jsonModelCollection.searchString = searchField.text
+        }
+    }
+
     SilicaListView {
         id: listView
-        anchors.fill: parent
+        anchors {
+            top: searchField.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
 
         BusyIndicator {
             id: busyGuy
@@ -54,23 +71,12 @@ BVApp.Page {
             size: BVApp.Theme.busyIndicatorSizeLarge
         }
 
-        header: SearchField {
-            id: searchField
-            width: page.width
-
-            property int test: listView.contentHeight
-
-            onTextChanged:
-            {
-                jsonModelCollection.searchString = searchField.text
-            }
-        }
-
         // Required to hinder the virtual
         // keyboard from disappearing while typing
         onModelChanged: {
             currentIndex = -1
         }
+
 
         delegate: ListItem {
             id: delegate
