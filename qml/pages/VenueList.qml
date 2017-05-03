@@ -54,8 +54,6 @@ BVApp.Page {
             size: BVApp.Theme.busyIndicatorSizeLarge
         }
 
-        currentIndex: -1
-
         header: SearchField {
             id: searchField
             width: page.width
@@ -66,6 +64,12 @@ BVApp.Page {
             {
                 jsonModelCollection.searchString = searchField.text
             }
+        }
+
+        // Required to hinder the virtual
+        // keyboard from disappearing while typing
+        onModelChanged: {
+            currentIndex = -1
         }
 
         delegate: ListItem {
