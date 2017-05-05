@@ -140,7 +140,7 @@ ApplicationWindow
 
             onClicked: {
                 app.jsonModelCollection  = gjsonVenueModelCollection
-                pageToVisit.searchString = gjsonVenueModelCollection.searchString
+                page.searchString = gjsonVenueModelCollection.searchString
             }
        }
 
@@ -151,7 +151,7 @@ ApplicationWindow
 
            onClicked: {
                app.jsonModelCollection  = gjsonShoppingModelCollection
-               pageToVisit.searchString = gjsonShoppingModelCollection.searchString
+               page.searchString = gjsonShoppingModelCollection.searchString
            }
        }
 
@@ -160,7 +160,7 @@ ApplicationWindow
             //% "About"
             text: qsTrId("id-about-venue-list")
 
-            pageToVisit: AboutBerlinVegan { }
+            page: AboutBerlinVegan { }
 
         }
     }
