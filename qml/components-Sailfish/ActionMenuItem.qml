@@ -3,5 +3,11 @@ import QtQuick 2.2
 
 Silica.MenuItem {
     property var icon
-    property Page page: parent.parent.menuPage
+    property Component pageComponent
+    property Page page
+
+    onClicked: {
+        pageStack.clear()
+        page = pageStack.replaceAbove(null, pageComponent)
+    }
 }

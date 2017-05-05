@@ -3,10 +3,10 @@ import VPlayApps 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 
 BVApp.MenuItem {
-    property Component initialPageComponent: initialPage
-    onInitialPageComponentChanged:
+    property Component pageComponent
+    onPageComponentChanged:
     {
-        page = initialPage.createObject()
+        page = pageComponent.createObject()
     }
 
     signal clicked
