@@ -6,7 +6,7 @@ BVApp.MenuItem {
     property Component initialPageComponent: initialPage
     onInitialPageComponentChanged:
     {
-        pageToVisit = initialPage.createObject()
+        page = initialPage.createObject()
     }
 
     signal clicked

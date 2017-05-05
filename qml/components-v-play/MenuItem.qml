@@ -4,12 +4,12 @@ import BerlinVegan.components.platform 1.0 as BVApp
 
 NavigationItem {
     id: item
-    property var pageToVisit
+    property var page
     property alias text: item.title
 
     BVApp.NavigationStackWithPushAttached
     {
-        initialPage: pageToVisit
+        initialPage: page
     }
 
     Component.onCompleted: {
