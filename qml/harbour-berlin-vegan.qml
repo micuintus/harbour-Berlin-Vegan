@@ -142,6 +142,8 @@ ApplicationWindow
                 app.jsonModelCollection  = gjsonVenueModelCollection
                 page.searchString = gjsonVenueModelCollection.searchString
             }
+
+            pageComponent: app.initialPage
        }
 
        BVApp.ActionMenuItem {
@@ -153,6 +155,8 @@ ApplicationWindow
                app.jsonModelCollection  = gjsonShoppingModelCollection
                page.searchString = gjsonShoppingModelCollection.searchString
            }
+
+           pageComponent: app.initialPage
        }
 
        BVApp.MenuItem {
@@ -161,7 +165,6 @@ ApplicationWindow
             text: qsTrId("id-about-venue-list")
 
             page: AboutBerlinVegan { }
-
         }
     }
 }
