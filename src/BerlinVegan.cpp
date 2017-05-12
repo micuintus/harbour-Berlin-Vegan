@@ -24,7 +24,9 @@
 
 #include <QtQuick>
 
+#include "VenueSortFilterProxyModel.h"
 #include <3rdparty/Cutehacks/gel/gel.h>
+
 #ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>
 #include <QGuiApplication>
@@ -41,8 +43,6 @@ namespace com { namespace cutehacks { namespace gel {
 static inline void registerCutehacksgel()
 {
     qmlRegisterType<JsonListModel>("harbour.berlin.vegan.gel", 1, 0, "JsonListModel");
-    qmlRegisterType<Collection>("harbour.berlin.vegan.gel", 1, 0, "Collection");
-
 }
 
 } } }
@@ -50,6 +50,7 @@ static inline void registerCutehacksgel()
 int main(int argc, char *argv[])
 {
     com::cutehacks::gel::registerCutehacksgel();
+    qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan.gel", 1, 0, "VenueSortFilterProxyModel");
     auto const mainQMLFile = QString("qrc:/qml/harbour-berlin-vegan.qml");
 
 #ifdef Q_OS_SAILFISH

@@ -25,20 +25,13 @@
 import QtPositioning 5.2
 import harbour.berlin.vegan.gel 1.0
 
-Collection {
+VenueSortFilterProxyModel {
 
     property string searchString: ""
     property bool   loaded: false
 
     onSearchStringChanged: reFilter()
 
-    comparator: function lessThan(a, b) {
-        return globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(a.latCoord, a.longCoord))
-                < globalPositionSource.position.coordinate.distanceTo(QtPositioning.coordinate(b.latCoord, b.longCoord));
-    }
 
-    filter: function(item) {
-        return item.name.toLowerCase().search(searchString.toLowerCase()) !== -1
-    }
 
 }
