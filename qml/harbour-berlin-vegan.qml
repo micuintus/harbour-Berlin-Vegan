@@ -65,21 +65,21 @@ ApplicationWindow
     BVApp.JsonDownloadHelper {
         id: venueDownloadHelper
         onFileLoaded:
-        function(json)
-        {
-            jsonVenueModel.add(JSON.parse(json));
-            gjsonVenueModelCollection.loaded = true
-        }
+            function(json)
+            {
+                jsonVenueModel.add(JSON.parse(json));
+                gjsonVenueModelCollection.loaded = true
+            }
     }
 
     BVApp.JsonDownloadHelper {
         id: shoppingDownloadHelper
         onFileLoaded:
-        function(json)
-        {
-            jsonShoppingModel.add(JSON.parse(json));
-            gjsonShoppingModelCollection.loaded = true
-        }
+            function(json)
+            {
+                jsonShoppingModel.add(JSON.parse(json));
+                gjsonShoppingModelCollection.loaded = true
+            }
     }
 
     PositionSource {
@@ -124,10 +124,10 @@ ApplicationWindow
 
 
     cover: Component { CoverPage {
-        id: cover
-        jsonModelCollection: app.jsonModelCollection
-        positionSource: globalPositionSource
-    } }
+            id: cover
+            jsonModelCollection: app.jsonModelCollection
+            positionSource: globalPositionSource
+        } }
 
     initialPage: Component { VenueList {
             id: venueList
@@ -138,11 +138,11 @@ ApplicationWindow
                 gjsonShoppingModelCollection.searchString = searchString
                 gjsonVenueModelCollection.searchString    = searchString
             }
-   } }
+        } }
 
-   BVApp.NavigationMenu {
+    BVApp.NavigationMenu {
 
-       BVApp.ActionMenuItem {
+        BVApp.ActionMenuItem {
             icon: BVApp.Theme.iconBy("food")
             //% "Food"
             text: qsTrId("id-venue-list")
@@ -153,22 +153,22 @@ ApplicationWindow
             }
 
             pageComponent: app.initialPage
-       }
+        }
 
-       BVApp.ActionMenuItem {
-           icon: BVApp.Theme.iconBy("shopping")
-           //% "Shopping"
-           text: qsTrId("id-shopping-venue-list")
+        BVApp.ActionMenuItem {
+            icon: BVApp.Theme.iconBy("shopping")
+            //% "Shopping"
+            text: qsTrId("id-shopping-venue-list")
 
-           onClicked: {
-               app.jsonModelCollection  = gjsonShoppingModelCollection
-               page.searchString = gjsonShoppingModelCollection.searchString
-           }
+            onClicked: {
+                app.jsonModelCollection  = gjsonShoppingModelCollection
+                page.searchString = gjsonShoppingModelCollection.searchString
+            }
 
-           pageComponent: app.initialPage
-       }
+            pageComponent: app.initialPage
+        }
 
-       BVApp.MenuItem {
+        BVApp.MenuItem {
             icon: BVApp.Theme.iconBy("about")
             //% "About"
             text: qsTrId("id-about-venue-list")
@@ -177,5 +177,3 @@ ApplicationWindow
         }
     }
 }
-
-
