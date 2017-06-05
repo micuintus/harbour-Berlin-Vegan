@@ -38,7 +38,7 @@ ApplicationWindow
     id: app
 
     property var jsonModelCollection: gjsonVenueModelCollection
-    JsonListModel {
+    VenueModel {
         id: jsonVenueModel
         dynamicRoles: true
     }
@@ -48,7 +48,7 @@ ApplicationWindow
         model: jsonVenueModel
     }
 
-    JsonListModel {
+    VenueModel {
         id: jsonShoppingModel
         dynamicRoles: true
     }

@@ -3,28 +3,28 @@
 #include <QtCore/QSortFilterProxyModel>
 #include <QtQml/QJSValue>
 
-#include <3rdparty/Cutehacks/gel/jsonlistmodel.h>
+#include "VenueModel.h"
 
 
 class VenueSortFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(com::cutehacks::gel::JsonListModel* model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
 
 public:
     VenueSortFilterProxyModel(QObject *parent = 0);
 
-    com::cutehacks::gel::JsonListModel* model() const;
+    VenueModel* model() const;
 
     Q_INVOKABLE QJSValue at(int) const;
 
 
 public slots:
-    void setModel(com::cutehacks::gel::JsonListModel* model);
+    void setModel(VenueModel* model);
 
 signals:
-    void modelChanged(com::cutehacks::gel::JsonListModel* model);
+    void modelChanged(VenueModel* model);
 
 protected:
     void updateModel();

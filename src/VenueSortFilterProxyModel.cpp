@@ -5,14 +5,14 @@ VenueSortFilterProxyModel::VenueSortFilterProxyModel(QObject *parent) : QSortFil
     sort(0);
 }
 
-com::cutehacks::gel::JsonListModel *VenueSortFilterProxyModel::model() const
+VenueModel *VenueSortFilterProxyModel::model() const
 {
-    return qobject_cast<com::cutehacks::gel::JsonListModel*>(sourceModel());
+    return qobject_cast<VenueModel*>(sourceModel());
 }
 
-void VenueSortFilterProxyModel::setModel(com::cutehacks::gel::JsonListModel *model)
+void VenueSortFilterProxyModel::setModel(VenueModel *model)
 {
-    com::cutehacks::gel::JsonListModel *oldModel = qobject_cast<com::cutehacks::gel::JsonListModel*>(sourceModel());
+    VenueModel *oldModel = qobject_cast<VenueModel*>(sourceModel());
     if (oldModel == model)
         return;
 
