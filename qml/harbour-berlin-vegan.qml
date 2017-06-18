@@ -40,7 +40,6 @@ ApplicationWindow
     property var jsonModelCollection: gjsonVenueModelCollection
     VenueModel {
         id: jsonVenueModel
-        dynamicRoles: true
     }
 
     BVApp.Collection {
@@ -50,7 +49,6 @@ ApplicationWindow
 
     VenueModel {
         id: jsonShoppingModel
-        dynamicRoles: true
     }
 
     BVApp.Collection {
@@ -63,7 +61,7 @@ ApplicationWindow
         onFileLoaded:
         function(json)
         {
-            jsonVenueModel.add(JSON.parse(json));
+            jsonVenueModel.importFromJson(JSON.parse(json));
             gjsonVenueModelCollection.loaded = true
         }
     }
@@ -73,7 +71,7 @@ ApplicationWindow
         onFileLoaded:
         function(json)
         {
-            jsonShoppingModel.add(JSON.parse(json));
+            jsonShoppingModel.importFromJson(JSON.parse(json));
             gjsonShoppingModelCollection.loaded = true
         }
     }

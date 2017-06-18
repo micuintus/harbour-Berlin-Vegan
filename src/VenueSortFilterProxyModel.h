@@ -17,8 +17,6 @@ public:
 
     VenueModel* model() const;
 
-    Q_INVOKABLE QJSValue at(int) const;
-
 
 public slots:
     void setModel(VenueModel* model);
