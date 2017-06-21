@@ -42,18 +42,20 @@ ApplicationWindow
         id: jsonVenueModel
     }
 
-    BVApp.Collection {
+    VenueSortFilterProxyModel {
         id: gjsonVenueModelCollection
         model: jsonVenueModel
+        property alias loaded: jsonVenueModel.loaded
     }
 
     VenueModel {
         id: jsonShoppingModel
     }
 
-    BVApp.Collection {
+    VenueSortFilterProxyModel {
         id: gjsonShoppingModelCollection
         model: jsonShoppingModel
+        property alias loaded: jsonShoppingModel.loaded
     }
 
     BVApp.JsonDownloadHelper {
@@ -62,7 +64,6 @@ ApplicationWindow
         function(json)
         {
             jsonVenueModel.importFromJson(JSON.parse(json));
-            gjsonVenueModelCollection.loaded = true
         }
     }
 
@@ -72,7 +73,6 @@ ApplicationWindow
         function(json)
         {
             jsonShoppingModel.importFromJson(JSON.parse(json));
-            gjsonShoppingModelCollection.loaded = true
         }
     }
 

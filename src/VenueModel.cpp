@@ -54,6 +54,9 @@ void VenueModel::importFromJson(const QJSValue &item)
             root->appendRow(venueItem);
         }
     }
+
+    m_loaded = true;
+    emit loadedChanged(true);
 }
 
 QHash<int, QByteArray> VenueModel::roleNames() const
@@ -103,6 +106,11 @@ QHash<int, QByteArray> VenueModel::roleNames() const
 QString VenueModel::idAttribute() const
 {
     return m_idAttribute;
+}
+
+bool VenueModel::loaded() const
+{
+    return m_loaded;
 }
 
 void VenueModel::setIdAttribute(QString idAttribute)

@@ -13,6 +13,7 @@ class VenueModel : public QStandardItemModel
     Q_OBJECT
 
     Q_PROPERTY(QString idAttribute READ idAttribute WRITE setIdAttribute NOTIFY idAttributeChanged)
+    Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
 
 public:
     enum VenueModelRoles
@@ -57,6 +58,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     QString idAttribute() const;
 
+    bool loaded() const;
 
 
 public slots:
@@ -65,9 +67,11 @@ public slots:
 
 signals:
     void idAttributeChanged(QString idAttribute);
+    void loadedChanged(bool);
 
 private:
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
     QString m_idAttribute;
+    bool m_loaded;
 };
 
