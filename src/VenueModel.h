@@ -14,6 +14,7 @@ class VenueModel : public QStandardItemModel
 
     Q_PROPERTY(QString idAttribute READ idAttribute WRITE setIdAttribute NOTIFY idAttributeChanged)
 
+public:
     enum VenueModelRoles
     {
         Name = Qt::UserRole + 1,
@@ -50,7 +51,6 @@ class VenueModel : public QStandardItemModel
         OtSun
     };
 
-public:
     VenueModel(QObject *parent = 0);
 
     Q_INVOKABLE void importFromJson(const QJSValue&);
