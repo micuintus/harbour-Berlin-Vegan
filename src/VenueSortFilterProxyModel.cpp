@@ -30,6 +30,13 @@ void VenueSortFilterProxyModel::setSearchString(QString searchString)
     m_searchString = searchString;
     emit searchStringChanged(m_searchString);
     invalidateFilter();
+
+}
+
+void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
+{
+    m_currentPosition = position;
+    reSort();
 }
 
 
@@ -54,7 +61,37 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
 
 bool VenueSortFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
 {
+    QVariant leftLat, leftLong, rightLat, rightLong;
+
+    if (   !m_currentPosition.isValid()
+        || !source_left.isValid() || !source_right.isValid())
+        goto err;
+
+    leftLat   = source_left.data(VenueModel::VenueModelRoles::LatCoord);
+    leftLong  = source_left.data(VenueModel::VenueModelRoles::LongCoord);
+    rightLat  = source_right.data(VenueModel::VenueModelRoles::LatCoord);
+    rightLong = source_right.data(VenueModel::VenueModelRoles::LongCoord);
+
+    if (!leftLat.canConvert<double>() || !leftLong.canConvert<double>() ||
+        !rightLat.canConvert<double>() || !rightLong.canConvert<double>())
+        goto err;
+
+    return   m_currentPosition.distanceTo(QGeoCoordinate(leftLat.toDouble(), leftLong.toDouble()))
+           < m_currentPosition.distanceTo(QGeoCoordinate(rightLat.toDouble(), rightLong.toDouble()));
+
+err:
     return QSortFilterProxyModel::lessThan(source_left, source_right);
+}
+
+void VenueSortFilterProxyModel::reSort()
+{
+    if (dynamicSortFilter()) {
+        // Workaround: If dynamic_sortfilter == true, sort(0) will not (always)
+        // result in d->sort() being called, but setDynamicSortFilter(true) will.
+        setDynamicSortFilter(true);
+    } else {
+        sort(0);
+    }
 }
 
 

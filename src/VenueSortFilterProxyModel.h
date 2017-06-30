@@ -4,7 +4,7 @@
 #include <QtCore/QSortFilterProxyModel>
 #include <QtQml/QJSValue>
 #include <QString>
-
+#include <QGeoCoordinate>
 
 class VenueSortFilterProxyModel : public QSortFilterProxyModel
 {
@@ -12,6 +12,7 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
 
     Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(QString searchString MEMBER m_searchString WRITE setSearchString NOTIFY searchStringChanged)
+    Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
 
 
 public:
@@ -23,6 +24,7 @@ public:
 public slots:
     void setModel(VenueModel* model);
     void setSearchString(QString searchString);
+    void setCurrentPosition(QGeoCoordinate position);
 
 signals:
     void modelChanged(VenueModel* model);
@@ -33,5 +35,8 @@ protected:
     bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
 
 private:
+    void reSort();
+
     QString m_searchString;
+    QGeoCoordinate m_currentPosition;
 };

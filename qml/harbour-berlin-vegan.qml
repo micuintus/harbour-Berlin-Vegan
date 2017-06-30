@@ -42,9 +42,17 @@ ApplicationWindow
         id: jsonVenueModel
     }
 
+    PositionSource {
+        id: globalPositionSource
+        updateInterval: 5000
+        property var oldPosition: QtPositioning.coordinate(0, 0)
+
+     }
+
     VenueSortFilterProxyModel {
         id: gjsonVenueModelCollection
         model: jsonVenueModel
+        currentPosition: globalPositionSource.position.coordinate
         property alias loaded: jsonVenueModel.loaded
     }
 
@@ -55,6 +63,7 @@ ApplicationWindow
     VenueSortFilterProxyModel {
         id: gjsonShoppingModelCollection
         model: jsonShoppingModel
+        currentPosition: globalPositionSource.position.coordinate
         property alias loaded: jsonShoppingModel.loaded
     }
 
@@ -73,23 +82,6 @@ ApplicationWindow
         function(json)
         {
             jsonShoppingModel.importFromJson(JSON.parse(json));
-        }
-    }
-
-    PositionSource {
-        id: globalPositionSource
-        updateInterval: 5000
-        property var oldPosition: QtPositioning.coordinate(0, 0)
-
-        onPositionChanged: {
-            if (position.coordinate.distanceTo(oldPosition) > 100)
-            {
-                gjsonVenueModelCollection.reSort();
-                gjsonShoppingModelCollection.reSort();
-
-                oldPosition.latitude  = position.coordinate.latitude
-                oldPosition.longitude = position.coordinate.longitude
-            }
         }
     }
 
