@@ -5,9 +5,26 @@ VenueSortFilterProxyModel::VenueSortFilterProxyModel(QObject *parent) : QSortFil
     sort(0);
 }
 
-VenueModel *VenueSortFilterProxyModel::model() const
+VenueModel* VenueSortFilterProxyModel::model() const
 {
     return qobject_cast<VenueModel*>(sourceModel());
+}
+
+QVariantMap VenueSortFilterProxyModel::item(int row) const
+{
+    QVariantMap ret;
+
+    QModelIndex m = index(row, 0);
+    QModelIndex source = mapToSource(m);
+    QStandardItem* item = model()->itemFromIndex(source);
+    const QHash<int, QByteArray>& roleNames = model()->roleNames();
+
+    for (auto roleKey = roleNames.keyBegin(); roleKey != roleNames.keyEnd(); roleKey++)
+    {
+        ret.insert(roleNames[*roleKey], item->data(*roleKey));
+    }
+
+    return ret;
 }
 
 void VenueSortFilterProxyModel::setModel(VenueModel *model)

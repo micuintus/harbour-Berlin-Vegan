@@ -18,8 +18,8 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
 public:
     VenueSortFilterProxyModel(QObject *parent = 0);
 
-    VenueModel* model() const;
-
+    Q_INVOKABLE VenueModel* model() const;
+    Q_INVOKABLE QVariantMap item(int row) const;
 
 public slots:
     void setModel(VenueModel* model);

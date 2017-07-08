@@ -230,12 +230,12 @@
         <translation>View license</translation>
     </message>
     <message id="id-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="135"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="129"/>
         <source>Food</source>
         <translation>Food</translation>
     </message>
     <message id="id-shopping-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="145"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="142"/>
         <source>Shopping</source>
         <translation>Shopping</translation>
     </message>
