@@ -1,5 +1,6 @@
-import QtLocation 5.0
+import QtLocation 5.9
 
 Map {
 
+    plugin: Plugin { name: "mapboxgl" }
 }
