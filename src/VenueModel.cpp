@@ -57,6 +57,25 @@ void VenueModel::importFromJson(const QJSValue &item, VenueModelCategory categor
     emit loadedChanged(true);
 }
 
+void VenueModel::setFavorite(const QString &id, bool favorite)
+{
+    auto const index = indexFromID(id);
+    if (index.isValid())
+    {
+        setData(index, favorite, VenueModelRoles::Favorite);
+    }
+}
+
+QModelIndex VenueModel::indexFromID(const QString& id) const
+{
+    auto const index = match(this->index(0,0), VenueModelRoles::ID, id, 1, Qt::MatchExactly);
+    if (index.size() == 1)
+    {
+        return index[0];
+    }
+    else return QModelIndex();
+}
+
 QHash<int, QByteArray> VenueModel::roleNames() const
 {
     static const auto roles =
@@ -64,8 +83,9 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     {
         { VenueModelRoles::ID,            "id"          },
         { VenueModelRoles::Name,          "name"        },
+        { VenueModelRoles::Favorite,      "favorite"    },
         { VenueModelRoles::Street,        "street"      },
-        { VenueModelRoles::Description ,  "comment"     },
+        { VenueModelRoles::Description,   "comment"     },
         { VenueModelRoles::Website,       "website"     },
         { VenueModelRoles::Telephone,     "telephone"   },
         { VenueModelRoles::Pictures,      "pictures"    },

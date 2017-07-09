@@ -20,7 +20,7 @@ public:
         Food,
         Shopping
     };
-    Q_ENUMS(VenueModelCategory)
+    Q_ENUM(VenueModelCategory)
 
     enum VenueModelRoles
     {
@@ -29,6 +29,7 @@ public:
 
         // Model Category
         ModelCategory,
+        Favorite,
 
         Street,
         Description,
@@ -66,6 +67,7 @@ public:
     VenueModel(QObject *parent = 0);
 
     Q_INVOKABLE void importFromJson(const QJSValue&, VenueModelCategory);
+    Q_INVOKABLE void setFavorite(const QString& id, bool favorite = true);
     QHash<int, QByteArray> roleNames() const override;
 
     bool loaded() const;
@@ -74,6 +76,7 @@ signals:
     void loadedChanged(bool);
 
 private:
+    QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
     bool m_loaded;
 };

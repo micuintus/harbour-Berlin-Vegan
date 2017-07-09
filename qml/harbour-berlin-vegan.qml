@@ -23,6 +23,7 @@
 **/
 
 import QtQuick 2.2
+import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import harbour.berlin.vegan.gel 1.0
@@ -37,6 +38,8 @@ ApplicationWindow
 {
     id: app
 
+    property var db
+    property var favorite_ids
 
     VenueModel {
         id: jsonVenueModel
@@ -46,7 +49,6 @@ ApplicationWindow
         id: globalPositionSource
         updateInterval: 5000
         property var oldPosition: QtPositioning.coordinate(0, 0)
-
      }
 
     VenueSortFilterProxyModel {
@@ -55,6 +57,31 @@ ApplicationWindow
         currentPosition: globalPositionSource.position.coordinate
         property alias loaded: jsonVenueModel.loaded
     }
+    
+    function openDataBase() {
+        db = LocalStorage.openDatabaseSync("BerlinVeganDB", "0.1", "Berlin Vegan SQL!", 1000000);
+        db.transaction(function(tx) {
+            tx.executeSql("CREATE TABLE IF NOT EXISTS BerlinVegan(favorite_id TEXT)");
+            favorite_ids = tx.executeSql("SELECT favorite_id FROM BerlinVegan");
+        });
+    }
+
+    function applyFavoritesFromDataBase()
+    {
+       for (var i = 0; i < favorite_ids.rows.length; i++) {
+           jsonVenueModel.setFavorite(favorite_ids.rows.item(i).favorite_id, true);
+       }
+    }
+
+    property int jsonFilesToLoad: 2
+    function favoritesHook()
+    {
+        jsonFilesToLoad--;
+        if (jsonFilesToLoad === 0)
+        {
+            applyFavoritesFromDataBase();
+        }
+    }
 
     BVApp.JsonDownloadHelper {
         id: venueDownloadHelper
@@ -62,6 +89,7 @@ ApplicationWindow
         function(json)
         {
             jsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Food);
+            favoritesHook();
         }
     }
 
@@ -71,13 +99,14 @@ ApplicationWindow
         function(json)
         {
             jsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shopping);
+            favoritesHook();
         }
     }
 
-
     Component.onCompleted: {
-        venueDownloadHelper.loadVenueJson()
-        shoppingDownloadHelper.loadShoppingJson()
+        openDataBase();
+        venueDownloadHelper.loadVenueJson();
+        shoppingDownloadHelper.loadShoppingJson();
     }
 
     Connections {
@@ -94,9 +123,9 @@ ApplicationWindow
 
 
     cover: Component { CoverPage {
-        id: cover
-        jsonModelCollection: app.jsonModelCollection
-        positionSource: globalPositionSource
+            id: cover
+            jsonModelCollection: app.jsonModelCollection
+            positionSource: globalPositionSource
     } }
 
     initialPage: Component { VenueList {
@@ -107,37 +136,53 @@ ApplicationWindow
             onSearchStringChanged: {
                 gjsonCollection.searchString = searchString
             }
-   } }
+    } }
 
-   BVApp.NavigationMenu {
+    BVApp.NavigationMenu {
 
-       BVApp.ActionMenuItem {
+        BVApp.ActionMenuItem {
             icon: BVApp.Theme.iconBy("food")
             //% "Food"
             text: qsTrId("id-venue-list")
 
             onClicked: {
+                gjsonCollection.filterFavorites = false;
                 gjsonCollection.filterModelCategory = VenueModel.Food;
                 page.searchString = gjsonCollection.searchString
             }
 
             pageComponent: app.initialPage
-       }
+        }
 
-       BVApp.ActionMenuItem {
-           icon: BVApp.Theme.iconBy("shopping")
-           //% "Shopping"
-           text: qsTrId("id-shopping-venue-list")
+        BVApp.ActionMenuItem {
+            icon: BVApp.Theme.iconBy("shopping")
+            //% "Shopping"
+            text: qsTrId("id-shopping-venue-list")
 
            onClicked: {
+               gjsonCollection.filterFavorites = false;
                gjsonCollection.filterModelCategory = VenueModel.Shopping;
                page.searchString = gjsonCollection.searchString
            }
 
            pageComponent: app.initialPage
-       }
 
-       BVApp.MenuItem {
+        }
+
+        BVApp.ActionMenuItem {
+            icon: BVApp.Theme.iconBy("favorite")
+            //% "Favorites"
+            text: qsTrId("id-favorites-venue-list")
+
+            onClicked: {
+                gjsonCollection.filterFavorites = true;
+                page.searchString = gjsonCollection.searchString;
+            }
+
+            pageComponent: app.initialPage
+        }
+
+        BVApp.MenuItem {
             icon: BVApp.Theme.iconBy("about")
             //% "About"
             text: qsTrId("id-about-venue-list")
@@ -146,5 +191,3 @@ ApplicationWindow
         }
     }
 }
-
-

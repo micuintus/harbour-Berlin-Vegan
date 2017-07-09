@@ -26,6 +26,7 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
+import harbour.berlin.vegan.gel 1.0
 
 Column {
     property var restaurant
@@ -59,11 +60,31 @@ Column {
         }
 
         BVApp.IconButton {
-            type: "favorite"
+            type: restaurant.favorite ? "favorite" : "favorite-o"
+            onClicked: {
+                switch (type) {
+                case "favorite-o":
+                    type = "favorite"
+                    db.transaction(function(tx) {
+                        tx.executeSql("INSERT INTO BerlinVegan VALUES(?)", [ restaurant.id ]);
+                    })
+
+                    // we cannot do restaurant.favorite = true here, because we are working on copied data
+                    jsonVenueModel.setFavorite(restaurant.id, true);
+
+                    break
+                case "favorite":
+                    type = "favorite-o"
+                    db.transaction(function(tx) {
+                        tx.executeSql("DELETE FROM BerlinVegan WHERE favorite_id == ?", [ restaurant.id ]);
+                    })
+                    // we cannot do restaurant.favorite = false here, because we are working on copied data
+                    jsonVenueModel.setFavorite(restaurant.id, false);
+                    break
+                }
+            }
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            enabled: false
-            visible: false
         }
 
 

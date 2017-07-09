@@ -57,6 +57,13 @@ void VenueSortFilterProxyModel::setFilterModelCategory(VenueModel::VenueModelCat
     invalidateFilter();
 }
 
+void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
+{
+    m_filterFavorites = filterFavorites;
+    emit filterFavoritesChanged(m_filterFavorites);
+    invalidateFilter();
+}
+
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 {
     m_currentPosition = position;
@@ -127,14 +134,31 @@ bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) co
 
 bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) const
 {
-    auto valueRole = index.data( VenueModel::VenueModelRoles::ModelCategory );
-    if (valueRole.isValid() && valueRole.canConvert<int>())
+    if (m_filterFavorites)
     {
-        auto value = valueRole.toInt();
-        return value == m_filterModelCategory;
+        auto valueRole = index.data( VenueModel::VenueModelRoles::Favorite);
+        if (valueRole.isValid() && valueRole.canConvert<bool>())
+        {
+            return valueRole.toBool();
+        }
+        else
+        {
+            return false;
+        }
     }
-
-    return false;
+    else
+    {
+        auto valueRole = index.data( VenueModel::VenueModelRoles::ModelCategory );
+        if (valueRole.isValid() && valueRole.canConvert<int>())
+        {
+            auto value = valueRole.toInt();
+            return value == m_filterModelCategory;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 
 
