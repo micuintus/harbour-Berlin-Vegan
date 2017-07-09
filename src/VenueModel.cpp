@@ -13,11 +13,8 @@ using namespace com::cutehacks::gel;
 typedef QJSValueIterator JSValueIterator;
 #endif
 
-static const int BASE_ROLE = Qt::UserRole + 1;
-
 VenueModel::VenueModel(QObject *parent) :
-    QStandardItemModel(parent),
-    m_idAttribute("id")
+    QStandardItemModel(parent)
 {
 
 }
@@ -64,6 +61,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     static const auto roles =
     QHash<int, QByteArray>
     {
+        { VenueModelRoles::ID,            "id"          },
         { VenueModelRoles::Name,          "name"        },
         { VenueModelRoles::Street,        "street"      },
         { VenueModelRoles::Description ,  "comment"     },
@@ -103,23 +101,8 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     return roles;
 }
 
-QString VenueModel::idAttribute() const
-{
-    return m_idAttribute;
-}
-
 bool VenueModel::loaded() const
 {
     return m_loaded;
 }
-
-void VenueModel::setIdAttribute(QString idAttribute)
-{
-    if (m_idAttribute == idAttribute)
-        return;
-
-    m_idAttribute = idAttribute;
-    emit idAttributeChanged(idAttribute);
-}
-
 
