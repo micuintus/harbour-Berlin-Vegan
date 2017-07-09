@@ -37,7 +37,7 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
     return item;
 }
 
-void VenueModel::importFromJson(const QJSValue &item)
+void VenueModel::importFromJson(const QJSValue &item, VenueModelCategory category)
 {
     if (item.isArray()) {
         auto root = this->invisibleRootItem();
@@ -48,6 +48,7 @@ void VenueModel::importFromJson(const QJSValue &item)
                 break; // last value in array is an int with the length
 
             auto venueItem = jsonItem2QStandardItem(array.value());
+            venueItem->setData(category, VenueModelRoles::ModelCategory);
             root->appendRow(venueItem);
         }
     }

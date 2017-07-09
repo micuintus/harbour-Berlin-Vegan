@@ -15,10 +15,21 @@ class VenueModel : public QStandardItemModel
     Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
 
 public:
+    enum VenueModelCategory
+    {
+        Food,
+        Shopping
+    };
+    Q_ENUMS(VenueModelCategory)
+
     enum VenueModelRoles
     {
         ID = Qt::UserRole + 1,
         Name,
+
+        // Model Category
+        ModelCategory,
+
         Street,
         Description,
         Website,
@@ -54,7 +65,7 @@ public:
 
     VenueModel(QObject *parent = 0);
 
-    Q_INVOKABLE void importFromJson(const QJSValue&);
+    Q_INVOKABLE void importFromJson(const QJSValue&, VenueModelCategory);
     QHash<int, QByteArray> roleNames() const override;
 
     bool loaded() const;

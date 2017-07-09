@@ -37,7 +37,7 @@ ApplicationWindow
 {
     id: app
 
-    property var jsonModelCollection: gjsonVenueModelCollection
+
     VenueModel {
         id: jsonVenueModel
     }
@@ -50,21 +50,10 @@ ApplicationWindow
      }
 
     VenueSortFilterProxyModel {
-        id: gjsonVenueModelCollection
+        id: gjsonCollection
         model: jsonVenueModel
         currentPosition: globalPositionSource.position.coordinate
         property alias loaded: jsonVenueModel.loaded
-    }
-
-    VenueModel {
-        id: jsonShoppingModel
-    }
-
-    VenueSortFilterProxyModel {
-        id: gjsonShoppingModelCollection
-        model: jsonShoppingModel
-        currentPosition: globalPositionSource.position.coordinate
-        property alias loaded: jsonShoppingModel.loaded
     }
 
     BVApp.JsonDownloadHelper {
@@ -72,7 +61,7 @@ ApplicationWindow
         onFileLoaded:
         function(json)
         {
-            jsonVenueModel.importFromJson(JSON.parse(json));
+            jsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Food);
         }
     }
 
@@ -81,7 +70,7 @@ ApplicationWindow
         onFileLoaded:
         function(json)
         {
-            jsonShoppingModel.importFromJson(JSON.parse(json));
+            jsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shopping);
         }
     }
 
@@ -113,11 +102,10 @@ ApplicationWindow
     initialPage: Component { VenueList {
             id: venueList
             positionSource: globalPositionSource
-            jsonModelCollection: app.jsonModelCollection
+            jsonModelCollection: gjsonCollection
 
             onSearchStringChanged: {
-                gjsonShoppingModelCollection.searchString = searchString
-                gjsonVenueModelCollection.searchString    = searchString
+                gjsonCollection.searchString = searchString
             }
    } }
 
@@ -129,8 +117,8 @@ ApplicationWindow
             text: qsTrId("id-venue-list")
 
             onClicked: {
-                app.jsonModelCollection  = gjsonVenueModelCollection
-                page.searchString = gjsonVenueModelCollection.searchString
+                gjsonCollection.filterModelCategory = VenueModel.Food;
+                page.searchString = gjsonCollection.searchString
             }
 
             pageComponent: app.initialPage
@@ -142,8 +130,8 @@ ApplicationWindow
            text: qsTrId("id-shopping-venue-list")
 
            onClicked: {
-               app.jsonModelCollection  = gjsonShoppingModelCollection
-               page.searchString = gjsonShoppingModelCollection.searchString
+               gjsonCollection.filterModelCategory = VenueModel.Shopping;
+               page.searchString = gjsonCollection.searchString
            }
 
            pageComponent: app.initialPage

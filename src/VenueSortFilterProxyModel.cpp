@@ -50,6 +50,13 @@ void VenueSortFilterProxyModel::setSearchString(QString searchString)
 
 }
 
+void VenueSortFilterProxyModel::setFilterModelCategory(VenueModel::VenueModelCategory category)
+{
+    m_filterModelCategory = category;
+    emit filterModelCategoryChanged(m_filterModelCategory);
+    invalidateFilter();
+}
+
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 {
     m_currentPosition = position;
@@ -62,14 +69,9 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
     if ( sourceModel() != nullptr )
     {
         auto index = sourceModel()->index( source_row, 0, source_parent );
-        if ( index.isValid() )
+        if (index.isValid())
         {
-            auto valueRole = index.data( VenueModel::VenueModelRoles::Name );
-            if ( valueRole.isValid() )
-            {
-                auto value = valueRole.toString();
-                return value.contains(m_searchString, Qt::CaseInsensitive);
-            }
+            return searchStringMatches(index) && modelCategoryMatches(index);
         }
     }
 
@@ -109,6 +111,30 @@ void VenueSortFilterProxyModel::reSort()
     } else {
         sort(0);
     }
+}
+
+bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) const
+{
+    auto valueRole = index.data( VenueModel::VenueModelRoles::Name );
+    if (valueRole.isValid() && valueRole.canConvert<QString>())
+    {
+        auto value = valueRole.toString();
+        return value.contains(m_searchString, Qt::CaseInsensitive);
+    }
+
+    return false;
+}
+
+bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) const
+{
+    auto valueRole = index.data( VenueModel::VenueModelRoles::ModelCategory );
+    if (valueRole.isValid() && valueRole.canConvert<int>())
+    {
+        auto value = valueRole.toInt();
+        return value == m_filterModelCategory;
+    }
+
+    return false;
 }
 
 
