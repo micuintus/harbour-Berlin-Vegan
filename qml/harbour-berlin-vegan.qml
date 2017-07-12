@@ -55,7 +55,7 @@ ApplicationWindow
         id: gjsonCollection
         model: jsonVenueModel
         currentPosition: globalPositionSource.position.coordinate
-        property alias loaded: jsonVenueModel.loaded
+        property alias loadedCategory: jsonVenueModel.loadedCategory
     }
     
     function openDataBase() {

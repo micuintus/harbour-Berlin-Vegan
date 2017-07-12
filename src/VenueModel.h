@@ -12,14 +12,16 @@ class VenueModel : public QStandardItemModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool loaded READ loaded NOTIFY loadedChanged)
+    Q_PROPERTY(LoadedVenueCategory loadedCategory READ loadedCategory NOTIFY loadedCategoryChanged)
 
 public:
     enum VenueModelCategory
     {
-        Food,
-        Shopping
+        Food = 0x01,
+        Shopping = 0x10
     };
+    Q_DECLARE_FLAGS(LoadedVenueCategory, VenueModelCategory)
+    Q_FLAG(LoadedVenueCategory)
     Q_ENUM(VenueModelCategory)
 
     enum VenueModelRoles
@@ -70,14 +72,15 @@ public:
     Q_INVOKABLE void setFavorite(const QString& id, bool favorite = true);
     QHash<int, QByteArray> roleNames() const override;
 
-    bool loaded() const;
+    LoadedVenueCategory loadedCategory() const;
 
 signals:
-    void loadedChanged(bool);
+    void loadedCategoryChanged(LoadedVenueCategory);
 
 private:
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
-    bool m_loaded;
+    LoadedVenueCategory m_loaded;
+
 };
 

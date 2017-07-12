@@ -64,7 +64,7 @@ BVApp.Page {
         BusyIndicator {
             id: busyGuy
             anchors.centerIn: parent
-            running: !jsonModelCollection.loaded
+            running: !(jsonModelCollection.loadedCategory & jsonModelCollection.filterModelCategory) // not 100% corret -> favorites!
             size: BVApp.Theme.busyIndicatorSizeLarge
         }
 

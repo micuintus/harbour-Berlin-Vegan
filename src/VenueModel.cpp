@@ -53,8 +53,8 @@ void VenueModel::importFromJson(const QJSValue &item, VenueModelCategory categor
         }
     }
 
-    m_loaded = true;
-    emit loadedChanged(true);
+    m_loaded |= category;
+    emit loadedCategoryChanged(m_loaded);
 }
 
 void VenueModel::setFavorite(const QString &id, bool favorite)
@@ -122,7 +122,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     return roles;
 }
 
-bool VenueModel::loaded() const
+VenueModel::LoadedVenueCategory VenueModel::loadedCategory() const
 {
     return m_loaded;
 }
