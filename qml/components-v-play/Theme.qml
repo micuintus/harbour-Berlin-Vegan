@@ -17,7 +17,7 @@ QtObject {
             return "public"
         case "location":
         case "cover-location":
-            return IconType.mapmarker
+            return "location_on"
         case "food":
             return "restaurant_menu"
         case "shopping":

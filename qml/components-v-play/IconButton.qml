@@ -5,8 +5,11 @@ import "." as BVApp
 
 IconButton {
 
+    id: iconButton
+
     property string type
     property string icon
+    property string color
     property real scale
     property real size
 
@@ -19,7 +22,7 @@ IconButton {
         width: parent.width
 
         text: icon
-        color: BVApp.Theme.highlightDimmerColor
+        color: iconButton.color ? iconButton.color : BVApp.Theme.highlightDimmerColor
 
         font.family: "Material Icons"
         font.pixelSize: size
