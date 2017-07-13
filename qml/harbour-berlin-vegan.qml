@@ -124,8 +124,8 @@ ApplicationWindow
 
     cover: Component { CoverPage {
             id: cover
-            jsonModelCollection: app.jsonModelCollection
             positionSource: globalPositionSource
+            jsonModelCollection: gjsonCollection
     } }
 
     initialPage: Component { VenueList {
