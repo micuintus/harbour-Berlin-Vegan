@@ -230,22 +230,22 @@
         <translation>View license</translation>
     </message>
     <message id="id-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="169"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="146"/>
         <source>Food</source>
         <translation>Food</translation>
     </message>
-    <message id="id-favorites-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="195"/>
-        <source>Favorites</source>
-        <translation>Favorites</translation>
-    </message>
     <message id="id-shopping-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="182"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="160"/>
         <source>Shopping</source>
         <translation>Shopping</translation>
     </message>
+    <message id="id-favorites-venue-list">
+        <location filename="../qml/harbour-berlin-vegan.qml" line="175"/>
+        <source>Favorites</source>
+        <translation>Favorites</translation>
+    </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="208"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="188"/>
         <source>About</source>
         <translation>About</translation>
     </message>

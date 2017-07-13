@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/imports/BerlinVegan/components/generic">
         <file>CollapsibleItem.qml</file>
-        <file>Collection.qml</file>
         <file>distance.js</file>
         <file>IconToolBar.qml</file>
         <file>JsonDownloadHelper.qml</file>

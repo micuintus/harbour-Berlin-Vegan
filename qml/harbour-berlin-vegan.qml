@@ -38,97 +38,75 @@ ApplicationWindow
 {
     id: app
 
-    property var jsonModelCollection: gjsonVenueModelCollection
     property var db
     property var favorite_ids
 
-    JsonListModel {
+    VenueModel {
         id: jsonVenueModel
-        dynamicRoles: true
-    }
-
-    BVApp.Collection {
-        id: gjsonVenueModelCollection
-        model: jsonVenueModel
-    }
-
-    JsonListModel {
-        id: jsonShoppingModel
-        dynamicRoles: true
-    }
-
-    BVApp.Collection {
-        id: gjsonShoppingModelCollection
-        model: jsonShoppingModel
-    }
-
-    BVApp.JsonDownloadHelper {
-        id: venueDownloadHelper
-        onFileLoaded:
-            function(json)
-            {
-                jsonVenueModel.add(JSON.parse(json));
-                gjsonVenueModelCollection.loaded = true
-                for (var i = 0; i < favorite_ids.rows.length; i++) {
-                    // if favorite_id is actually a shopping location, nothing happens
-                    jsonFavoritesModel.add(jsonVenueModel.get(favorite_ids.rows.item(i).favorite_id))
-                }
-                gjsonFavoritesModelCollection.loaded = true
-            }
-    }
-
-    BVApp.JsonDownloadHelper {
-        id: shoppingDownloadHelper
-        onFileLoaded:
-            function(json)
-            {
-                jsonShoppingModel.add(JSON.parse(json));
-                gjsonShoppingModelCollection.loaded = true
-                for (var i = 0; i < favorite_ids.rows.length; i++) {
-                    // if favorite_id is actually a venue, nothing happens
-                    jsonFavoritesModel.add(jsonShoppingModel.get(favorite_ids.rows.item(i).favorite_id))
-                }
-                gjsonFavoritesModelCollection.loaded = true
-            }
-    }
-
-    JsonListModel {
-        id: jsonFavoritesModel
-        dynamicRoles: true
-    }
-
-    BVApp.Collection {
-        id: gjsonFavoritesModelCollection
-        model: jsonFavoritesModel
     }
 
     PositionSource {
         id: globalPositionSource
         updateInterval: 5000
         property var oldPosition: QtPositioning.coordinate(0, 0)
+     }
 
-        onPositionChanged: {
-            if (position.coordinate.distanceTo(oldPosition) > 100)
-            {
-                gjsonVenueModelCollection.reSort();
-                gjsonShoppingModelCollection.reSort();
-                gjsonFavoritesModelCollection.reSort();
-
-                oldPosition.latitude  = position.coordinate.latitude
-                oldPosition.longitude = position.coordinate.longitude
-            }
-        }
+    VenueSortFilterProxyModel {
+        id: gjsonCollection
+        model: jsonVenueModel
+        currentPosition: globalPositionSource.position.coordinate
+        property alias loadedCategory: jsonVenueModel.loadedCategory
     }
-
-
-    Component.onCompleted: {
+    
+    function openDataBase() {
         db = LocalStorage.openDatabaseSync("BerlinVeganDB", "0.1", "Berlin Vegan SQL!", 1000000);
         db.transaction(function(tx) {
             tx.executeSql("CREATE TABLE IF NOT EXISTS BerlinVegan(favorite_id TEXT)");
             favorite_ids = tx.executeSql("SELECT favorite_id FROM BerlinVegan");
-        })
-        venueDownloadHelper.loadVenueJson()
-        shoppingDownloadHelper.loadShoppingJson()
+        });
+    }
+
+    function applyFavoritesFromDataBase()
+    {
+       for (var i = 0; i < favorite_ids.rows.length; i++) {
+           jsonVenueModel.setFavorite(favorite_ids.rows.item(i).favorite_id, true);
+       }
+    }
+
+    property int jsonFilesToLoad: 2
+    function favoritesHook()
+    {
+        jsonFilesToLoad--;
+        if (jsonFilesToLoad === 0)
+        {
+            applyFavoritesFromDataBase();
+        }
+    }
+
+    BVApp.JsonDownloadHelper {
+        id: venueDownloadHelper
+        onFileLoaded:
+        function(json)
+        {
+            jsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Food);
+            favoritesHook();
+        }
+    }
+
+    BVApp.JsonDownloadHelper {
+        id: shoppingDownloadHelper
+        onFileLoaded:
+        function(json)
+        {
+            jsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shopping);
+            favoritesHook();
+        }
+    }
+
+    Component.onCompleted: {
+        openDataBase();
+        venueDownloadHelper.loadVenueJson();
+        shoppingDownloadHelper.loadShoppingJson();
     }
 
     Connections {
@@ -146,20 +124,19 @@ ApplicationWindow
 
     cover: Component { CoverPage {
             id: cover
-            jsonModelCollection: app.jsonModelCollection
             positionSource: globalPositionSource
-        } }
+            jsonModelCollection: gjsonCollection
+    } }
 
     initialPage: Component { VenueList {
             id: venueList
             positionSource: globalPositionSource
-            jsonModelCollection: app.jsonModelCollection
+            jsonModelCollection: gjsonCollection
 
             onSearchStringChanged: {
-                gjsonShoppingModelCollection.searchString = searchString
-                gjsonVenueModelCollection.searchString    = searchString
+                gjsonCollection.searchString = searchString
             }
-        } }
+    } }
 
     BVApp.NavigationMenu {
 
@@ -169,8 +146,9 @@ ApplicationWindow
             text: qsTrId("id-venue-list")
 
             onClicked: {
-                app.jsonModelCollection  = gjsonVenueModelCollection
-                page.searchString = gjsonVenueModelCollection.searchString
+                gjsonCollection.filterFavorites = false;
+                gjsonCollection.filterModelCategory = VenueModel.Food;
+                page.searchString = gjsonCollection.searchString
             }
 
             pageComponent: app.initialPage
@@ -181,12 +159,14 @@ ApplicationWindow
             //% "Shopping"
             text: qsTrId("id-shopping-venue-list")
 
-            onClicked: {
-                app.jsonModelCollection  = gjsonShoppingModelCollection
-                page.searchString = gjsonShoppingModelCollection.searchString
-            }
+           onClicked: {
+               gjsonCollection.filterFavorites = false;
+               gjsonCollection.filterModelCategory = VenueModel.Shopping;
+               page.searchString = gjsonCollection.searchString
+           }
 
-            pageComponent: app.initialPage
+           pageComponent: app.initialPage
+
         }
 
         BVApp.ActionMenuItem {
@@ -195,8 +175,8 @@ ApplicationWindow
             text: qsTrId("id-favorites-venue-list")
 
             onClicked: {
-                app.jsonModelCollection  = gjsonFavoritesModelCollection
-                page.searchString = gjsonFavoritesModelCollection.searchString
+                gjsonCollection.filterFavorites = true;
+                page.searchString = gjsonCollection.searchString;
             }
 
             pageComponent: app.initialPage

@@ -10,12 +10,11 @@ QT += positioning location
 CONFIG += c++11
 
 SOURCES += src/BerlinVegan.cpp \
-           3rdparty/Cutehacks/gel/collection.cpp \
-           3rdparty/Cutehacks/gel/jsonlistmodel.cpp
+           src/VenueModel.cpp \
+           src/VenueSortFilterProxyModel.cpp
 
-HEADERS += 3rdparty/Cutehacks/gel/gel.h \
-           3rdparty/Cutehacks/gel/collection.h \
-           3rdparty/Cutehacks/gel/jsonlistmodel.h \
+HEADERS += src/VenueModel.h \
+           src/VenueSortFilterProxyModel.h \
            3rdparty/Cutehacks/gel/jsvalueiterator.h
 
 RESOURCES += resources.qrc \

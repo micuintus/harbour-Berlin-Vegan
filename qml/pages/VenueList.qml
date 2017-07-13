@@ -64,7 +64,7 @@ BVApp.Page {
         BusyIndicator {
             id: busyGuy
             anchors.centerIn: parent
-            running: !jsonModelCollection.loaded
+            running: !(jsonModelCollection.loadedCategory & jsonModelCollection.filterModelCategory) // not 100% corret -> favorites!
             size: BVApp.Theme.busyIndicatorSizeLarge
         }
 
@@ -148,7 +148,7 @@ BVApp.Page {
                 // ios: keyboard stays visible, if user used search field before clicking and did not press Return key
                 Qt.inputMethod.hide();
 
-                var currRestaurant = jsonModelCollection.at(index)
+                var currRestaurant = jsonModelCollection.item(index);
                 pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                {
                                    restaurant     : currRestaurant,
