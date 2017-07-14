@@ -12,6 +12,11 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Fri Jul 14 2017 micu <micuintus@gmx.de> 0.91-1
+- Offer option to set favorite food and shopping venues and show them in a separate list
+- In addition to the list of restaurant and bistro venues, also offer a list of vegan shopping possibilities
+- Port a larger portion of the backend to C++ (performance improvements)
+
 * Sun Mar 05 2017 micu <micuintus@gmx.de> 0.90-1
 - Retrieve newest venue database from the internet
 - Remove search bar toggle
