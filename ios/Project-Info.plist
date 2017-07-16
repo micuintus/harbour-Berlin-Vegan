@@ -34,7 +34,7 @@
     <key>CFBundleExecutable</key>
     <string>${EXECUTABLE_NAME}</string>
     <key>CFBundleIdentifier</key>
-    <string>com.jmastr.BerlinVegan</string>
+    <string>com.jmastr.harbour-berlin-vegan</string>
     <key>CFBundleDisplayName</key>
     <string>Berlin Vegan</string>
     <key>CFBundleName</key>
