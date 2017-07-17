@@ -60,5 +60,9 @@
     <string>${PRODUCT_NAME}</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>$(PRODUCT_NAME) location use.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>$(PRODUCT_NAME) photos and video use.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>$(PRODUCT_NAME) camera use.</string>
 </dict>
 </plist>
