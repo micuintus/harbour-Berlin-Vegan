@@ -6,34 +6,59 @@ import VPlayApps 1.0
 QtObject {
 
     function iconBy(type) {
+        // default
+        var fontFamily = "Material Icons";
+        var icon = "";
+
         switch (type) {
         case "answer":
-            return "phone"
+            icon = "phone";
+            break;
         case "favorite":
-            return "star"
+            icon = "star";
+            break;
         case "favorite-o":
-            return "star_border"
+            icon = "star_border";
+            break;
         case "home":
-            return "public"
+            icon = "public";
+            break;
+        case "leaf":
+            return IconType.leaf
         case "location":
         case "cover-location":
-            return "location_on"
+            icon = "location_on";
+            break;
         case "food":
-            return "restaurant_menu"
+            icon = "restaurant_menu";
+            break;
         case "shopping":
-            return "shopping_cart"
+            icon = "shopping_cart";
+            break;
         case "about":
-            return "info"
+            icon = "info";
+            break;
         case "locationarrow":
-            return IconType.locationarrow
+            icon       = IconType.locationarrow;
+            fontFamily = "FontAwesome";
+            break;
         case "schedule":
-            return "schedule"
+            icon = "schedule";
+            break;
         case "details":
-            return "details"
+            icon = "details";
+            break;
         case "accessible":
-            return "accessible"
+            icon = "accessible";
+            break;
         case "more_vert":
-            return "more_vert"
+            icon = "more_vert";
+            break;
+        }
+
+        return {
+            iconString: icon,
+            fontFamily: fontFamily
         }
     }
 

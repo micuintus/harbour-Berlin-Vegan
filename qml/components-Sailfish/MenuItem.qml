@@ -3,7 +3,7 @@ import QtQuick 2.2
 
 Silica.MenuItem {
     property var page
-    property var icon
+    property var menuIcon
 
     onClicked: pageStack.push(page)
 }
