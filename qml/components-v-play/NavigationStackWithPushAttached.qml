@@ -26,6 +26,6 @@ NavigationStack {
         attachedButton.attachedTo = stack.currentPage
         attachedButton.attachedPage = page
         attachedButton.props = props
-        attachedButton.icon  = icon
+        attachedButton.icon  = icon.iconString
     }
 }

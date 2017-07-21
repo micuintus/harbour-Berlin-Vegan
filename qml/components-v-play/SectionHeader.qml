@@ -8,17 +8,21 @@ Rectangle {
 
     property var title
     property string text
-    property string icon
+    property var icon
+
 
     width: parent.width
     height: txt.height
 
-    AppText {
-        text: header.icon
+    Icon {
+        id: iconItem
+        icon: header.icon.iconString
+
+        Component.onCompleted: {
+            iconItem.textItem.font.family = header.icon.fontFamily
+        }
+
         color: BVApp.Theme.highlightDimmerColor
-
-        font.family: "Material Icons"
-
         anchors.left: parent.left
         anchors.margins: BVApp.Theme.paddingLarge
     }
