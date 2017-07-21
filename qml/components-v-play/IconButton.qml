@@ -8,12 +8,10 @@ IconButton {
     id: iconButton
 
     property string type
-    property string icon
     property string color
     property real scale
     property real size
 
-    icon: BVApp.Theme.iconBy(type)
     // dp(22) = 29 on 1334 x 750 (iPhone 6/6S)
     size: scale ? dp(22) * scale : dp(22)
 
@@ -21,10 +19,11 @@ IconButton {
         id: icn
         anchors.fill: parent
 
-        text: icon
-        color: iconButton.color ? iconButton.color : BVApp.Theme.highlightDimmerColor
+        text: BVApp.Theme.iconBy(type).iconString
 
-        font.family: "Material Icons"
+        color: iconButton.color ? iconButton.color : BVApp.Theme.highlightDimmerColor
+        font.family: BVApp.Theme.iconBy(type).fontFamily
+
         font.pixelSize: size
         horizontalAlignment: Text.AlignHCenter
     }
