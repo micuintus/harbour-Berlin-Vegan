@@ -51,6 +51,7 @@ public:
         HandicappedAccessibleWc,
         Catering,
         Organic,
+        GlutenFree,
         Delivery,
         SeatsOutdoor,
         SeatsIndoor,
