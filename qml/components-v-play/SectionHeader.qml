@@ -10,21 +10,24 @@ Rectangle {
     property string text
     property var icon
 
-
     width: parent.width
-    height: txt.height
+    height: 1.7 * txt.height
 
     Icon {
         id: iconItem
         icon: header.icon.iconString
+        color: BVApp.Theme.highlightDimmerColor
 
         Component.onCompleted: {
             iconItem.textItem.font.family = header.icon.fontFamily
         }
 
-        color: BVApp.Theme.highlightDimmerColor
-        anchors.left: parent.left
-        anchors.margins: BVApp.Theme.paddingLarge
+        anchors {
+            left: header.left
+            bottom: header.bottom
+            margins: BVApp.Theme.paddingLarge
+            bottomMargin: 0.25 * BVApp.Theme.paddingLarge
+        }
     }
 
     AppText {
@@ -32,7 +35,11 @@ Rectangle {
         text: header.text
         color: BVApp.Theme.highlightDimmerColor
 
-        anchors.right: parent.right
-        anchors.margins: BVApp.Theme.paddingLarge
+        anchors {
+            right: header.right
+            bottom: header.bottom
+            margins: BVApp.Theme.paddingLarge
+            bottomMargin: 0.25 * BVApp.Theme.paddingLarge
+        }
     }
 }
