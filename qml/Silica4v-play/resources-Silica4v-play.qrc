@@ -20,5 +20,6 @@
         <file>VerticalScrollDecorator.qml</file>
         <file>Button.qml</file>
         <file>OpacityRampEffectBase.qml</file>
+        <file>TextSwitch.qml</file>
     </qresource>
 </RCC>
