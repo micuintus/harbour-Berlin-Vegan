@@ -116,13 +116,13 @@ Item {
         DetailItem {
                          //% "High chair"
             label: qsTrId("id-high-chair")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
         }
 
         DetailItem {
                          //% "Dogs allowed"
             label: qsTrId("id-dogs-allowed")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dogs)
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
         }
 
         BVApp.SectionHeader {
