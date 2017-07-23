@@ -19,18 +19,20 @@ IconButton {
 
     AppText {
         id: icn
-        width: parent.width
+        anchors.fill: parent
 
         text: icon
         color: iconButton.color ? iconButton.color : BVApp.Theme.highlightDimmerColor
 
         font.family: "Material Icons"
         font.pixelSize: size
+        horizontalAlignment: Text.AlignHCenter
     }
 
     Component.onCompleted: {
-        if (Layout.alignment) {
-            icn.horizontalAlignment = Layout.alignment
+        // HACK: if we are not the IconToolBar, we are the VenueMapPage
+        if (!Layout.alignment) {
+            icn.verticalAlignment = Text.AlignBottom
         }
     }
 }
