@@ -57,9 +57,9 @@
         <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>${PRODUCT_NAME}</string>
+    <string>Your location is used to constantly show you the closest food and shopping venues.</string>
     <key>NSLocationAlwaysUsageDescription</key>
-    <string>$(PRODUCT_NAME) location use.</string>
+    <string>Your location is used to constantly show you the closest food and shopping venues.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>$(PRODUCT_NAME) photos and video use.</string>
     <key>NSCameraUsageDescription</key>
