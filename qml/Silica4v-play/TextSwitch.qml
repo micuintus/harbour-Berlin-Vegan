@@ -4,7 +4,7 @@ import BerlinVegan.components.platform 1.0 as BVApp
 
 AppCheckBox {
     id: checkbox
-    x: parent.width/4
+    x: parent.width/6
 
     height: BVApp.Theme.iconSizeLarge * 2.2
     spacing: BVApp.Theme.paddingLarge
