@@ -133,7 +133,7 @@ BVApp.Page {
                     top: namelabel.bottom
                     bottom: parent.bottom
                     left: parent.left
-                    right: namelabel.right
+                    right: parent.right
 
                     leftMargin: BVApp.Theme.horizontalPageMargin
                     rightMargin: BVApp.Theme.horizontalPageMargin
