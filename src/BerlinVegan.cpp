@@ -31,6 +31,8 @@
 #include <sailfishapp.h>
 #include <QGuiApplication>
 #else
+#include "TruncationMode.h"
+
 #include <QTranslator>
 #include <QLocale>
 #include <QApplication>
@@ -49,6 +51,9 @@ int main(int argc, char *argv[])
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     auto& qmlEngine = *(view->engine());
 #else
+    qRegisterMetaType<TruncationMode::Modes>("TruncationMode::Modes");
+    qmlRegisterType<TruncationMode>("Sailfish.Silica", 1, 0, "TruncationMode");
+
     QScopedPointer<QApplication> app(new QApplication(argc, argv));
 
     // Load translations

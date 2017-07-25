@@ -17,7 +17,6 @@
         <file>Separator.qml</file>
         <file>SilicaFlickable.qml</file>
         <file>SilicaListView.qml</file>
-        <file>TruncationMode.qml</file>
         <file>VerticalScrollDecorator.qml</file>
         <file>Button.qml</file>
         <file>OpacityRampEffectBase.qml</file>
