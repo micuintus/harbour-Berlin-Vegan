@@ -263,7 +263,7 @@
         <translation>Filter</translation>
     </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="198"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="197"/>
         <source>About</source>
         <translation>About</translation>
     </message>
