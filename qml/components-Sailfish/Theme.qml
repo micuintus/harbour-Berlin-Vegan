@@ -5,7 +5,7 @@ import QtQuick 2.2
 
 QtObject {
 
-    function iconBy(type) {
+    function iconFor(type) {
         switch (type) {
         case "answer":
             return "image://theme/icon-l-answer?"+ (Silica.pressed

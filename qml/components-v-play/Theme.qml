@@ -5,7 +5,7 @@ import VPlayApps 1.0
 
 QtObject {
 
-    function iconBy(type) {
+    function iconFor(type) {
         // default
         var fontFamily = "Material Icons";
         var icon = "";
