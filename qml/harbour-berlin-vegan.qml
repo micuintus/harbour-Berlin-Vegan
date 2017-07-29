@@ -141,7 +141,7 @@ ApplicationWindow
     BVApp.NavigationMenu {
 
         BVApp.ActionMenuItem {
-            menuIcon: BVApp.Theme.iconBy("food")
+            menuIcon: BVApp.Theme.iconFor("food")
             //% "Food"
             text: qsTrId("id-venue-list")
 
@@ -155,7 +155,7 @@ ApplicationWindow
         }
 
         BVApp.ActionMenuItem {
-            menuIcon: BVApp.Theme.iconBy("shopping")
+            menuIcon: BVApp.Theme.iconFor("shopping")
             //% "Shopping"
             text: qsTrId("id-shopping-venue-list")
 
@@ -170,7 +170,7 @@ ApplicationWindow
         }
 
         BVApp.ActionMenuItem {
-            menuIcon: BVApp.Theme.iconBy("favorite")
+            menuIcon: BVApp.Theme.iconFor("favorite")
             //% "Favorites"
             text: qsTrId("id-favorites-venue-list")
 
@@ -183,7 +183,7 @@ ApplicationWindow
         }
 
         BVApp.MenuItem {
-            menuIcon: BVApp.Theme.iconBy("filter")
+            menuIcon: BVApp.Theme.iconFor("filter")
             //% "Filter"
             text: qsTrId("id-filter")
             page: VenueFilterSettings {
@@ -192,7 +192,7 @@ ApplicationWindow
         }
 
         BVApp.MenuItem {
-            menuIcon: BVApp.Theme.iconBy("about")
+            menuIcon: BVApp.Theme.iconFor("about")
             //% "About"
             text: qsTrId("id-about-venue-list")
 

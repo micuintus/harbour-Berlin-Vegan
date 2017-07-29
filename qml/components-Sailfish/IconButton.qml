@@ -7,7 +7,7 @@ IconButton {
     property real scale
     property color color
 
-    icon.source: BVApp.Theme.iconBy(type)
+    icon.source: BVApp.Theme.iconFor(type)
     icon.scale: scale ? scale : 1
 
 }

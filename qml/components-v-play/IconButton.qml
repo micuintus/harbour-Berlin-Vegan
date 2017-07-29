@@ -19,10 +19,10 @@ IconButton {
         id: icn
         anchors.fill: parent
 
-        text: BVApp.Theme.iconBy(type).iconString
+        text: BVApp.Theme.iconFor(type).iconString
 
         color: iconButton.color ? iconButton.color : BVApp.Theme.highlightDimmerColor
-        font.family: BVApp.Theme.iconBy(type).fontFamily
+        font.family: BVApp.Theme.iconFor(type).fontFamily
 
         font.pixelSize: size
         horizontalAlignment: Text.AlignHCenter

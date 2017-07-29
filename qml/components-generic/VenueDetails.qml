@@ -48,7 +48,7 @@ Item {
             header: BVApp.SectionHeader {
                             //% "Opening hours"
                 text: qsTrId("id-opening-hours")
-                icon: BVApp.Theme.iconBy("schedule")
+                icon: BVApp.Theme.iconFor("schedule")
             }
 
             width: parent.width
@@ -72,7 +72,7 @@ Item {
         BVApp.SectionHeader {
                       //% "Food details"
             text: qsTrId("id-food-details")
-            icon: BVApp.Theme.iconBy("details")
+            icon: BVApp.Theme.iconFor("details")
             id: foodDetailsHeader
         }
 
@@ -98,7 +98,7 @@ Item {
         BVApp.SectionHeader {
                         //% "Accessibility"
             text: qsTrId("id-accessibility")
-            icon: BVApp.Theme.iconBy("accessible")
+            icon: BVApp.Theme.iconFor("accessible")
         }
 
         DetailItem {
@@ -128,7 +128,7 @@ Item {
         BVApp.SectionHeader {
                         //% "Venue features"
             text: qsTrId("id-venue-features")
-            icon: BVApp.Theme.iconBy("more_vert")
+            icon: BVApp.Theme.iconFor("more_vert")
         }
 
         DetailItem {
