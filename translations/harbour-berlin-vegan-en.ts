@@ -63,6 +63,7 @@
     </message>
     <message id="id-omnivore">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="45"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="71"/>
         <source>omnivore</source>
         <translation>ominvore</translation>
     </message>
@@ -74,6 +75,7 @@
     </message>
     <message id="id-vegetarian">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="49"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="62"/>
         <source>vegetarian</source>
         <translation>vegetarian</translation>
     </message>
@@ -85,6 +87,7 @@
     </message>
     <message id="id-vegan">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="53"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="52"/>
         <source>100% vegan</source>
         <translation>100% vegan</translation>
     </message>
@@ -244,10 +247,26 @@
         <source>Favorites</source>
         <translation>Favorites</translation>
     </message>
-    <message id="id-about-venue-list">
+    <message id="id-filter">
         <location filename="../qml/harbour-berlin-vegan.qml" line="188"/>
+        <source>Filter</source>
+        <translation>Filter</translation>
+    </message>
+    <message id="id-about-venue-list">
+        <location filename="../qml/harbour-berlin-vegan.qml" line="198"/>
         <source>About</source>
         <translation>About</translation>
+    </message>
+    <message id="id-filter-page-title">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="42"/>
+        <source>Filter settings</source>
+        <oldsource>Filter</oldsource>
+        <translation>Filter</translation>
+    </message>
+    <message id="id-filter-vegan-category">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="47"/>
+        <source>Veg*an Category</source>
+        <translation>Veg*an Category</translation>
     </message>
 </context>
 </TS>

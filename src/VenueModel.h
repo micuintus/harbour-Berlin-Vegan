@@ -24,6 +24,7 @@ public:
     Q_FLAG(LoadedVenueCategory)
     Q_ENUM(VenueModelCategory)
 
+
     enum VenueModelRoles
     {
         ID = Qt::UserRole + 1,

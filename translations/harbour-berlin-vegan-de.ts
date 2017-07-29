@@ -193,5 +193,18 @@
         <source>Favorites</source>
         <translation>Favoriten</translation>
     </message>
+    <message id="id-filter">
+        <source>Filter</source>
+        <translation>Filter</translation>
+    </message>
+    <message id="id-filter-page-title">
+        <source>Filter settings</source>
+        <oldsource>Filter</oldsource>
+        <translation>Filter</translation>
+    </message>
+    <message id="id-filter-vegan-category">
+        <source>Veg*an Category</source>
+        <translation>Veg*an-Kategorie</translation>
+    </message>
 </context>
 </TS>
