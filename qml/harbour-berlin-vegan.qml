@@ -182,7 +182,7 @@ ApplicationWindow
             pageComponent: app.initialPage
         }
 
-        BVApp.ActionMenuItem {
+        BVApp.MenuItem {
             menuIcon: BVApp.Theme.iconBy("filter")
             //% "Filter"
             text: qsTrId("id-filter")
