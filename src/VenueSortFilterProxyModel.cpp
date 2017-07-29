@@ -27,6 +27,26 @@ QVariantMap VenueSortFilterProxyModel::item(int row) const
     return ret;
 }
 
+VenueSortFilterProxyModel::VenueVeganCategories VenueSortFilterProxyModel::filterVeganCategory() const
+{
+    return m_filterVeganCategory;
+}
+
+void VenueSortFilterProxyModel::setVeganCategoryFilterFlag(VenueVeganCategory flag, bool on)
+{
+    if (on)
+    {
+        m_filterVeganCategory |= flag;
+    }
+    else
+    {
+        m_filterVeganCategory &= ~flag;
+    }
+
+    emit filterVeganCategoryChanged(m_filterVeganCategory);
+    invalidateFilter();
+}
+
 void VenueSortFilterProxyModel::setModel(VenueModel *model)
 {
     VenueModel *oldModel = qobject_cast<VenueModel*>(sourceModel());
@@ -78,7 +98,9 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
         auto index = sourceModel()->index( source_row, 0, source_parent );
         if (index.isValid())
         {
-            return searchStringMatches(index) && modelCategoryMatches(index);
+            return searchStringMatches(index)
+                && modelCategoryMatches(index)
+                && veganCategoryMatches(index);
         }
     }
 
@@ -122,10 +144,10 @@ void VenueSortFilterProxyModel::reSort()
 
 bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) const
 {
-    auto valueRole = index.data( VenueModel::VenueModelRoles::Name );
+    const auto valueRole = index.data( VenueModel::VenueModelRoles::Name );
     if (valueRole.isValid() && valueRole.canConvert<QString>())
     {
-        auto value = valueRole.toString();
+        const auto value = valueRole.toString();
         return value.contains(m_searchString, Qt::CaseInsensitive);
     }
 
@@ -136,7 +158,7 @@ bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) c
 {
     if (m_filterFavorites)
     {
-        auto valueRole = index.data( VenueModel::VenueModelRoles::Favorite);
+        const auto valueRole = index.data( VenueModel::VenueModelRoles::Favorite);
         if (valueRole.isValid() && valueRole.canConvert<bool>())
         {
             return valueRole.toBool();
@@ -148,10 +170,10 @@ bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) c
     }
     else
     {
-        auto valueRole = index.data( VenueModel::VenueModelRoles::ModelCategory );
+        const auto valueRole = index.data( VenueModel::VenueModelRoles::ModelCategory );
         if (valueRole.isValid() && valueRole.canConvert<int>())
         {
-            auto value = valueRole.toInt();
+            const auto value = valueRole.toInt();
             return value == m_filterModelCategory;
         }
         else
@@ -159,6 +181,19 @@ bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) c
             return false;
         }
     }
+}
+
+bool VenueSortFilterProxyModel::veganCategoryMatches(const QModelIndex &index) const
+{
+    auto valueRole = index.data( VenueModel::VenueModelRoles::VeganCategory );
+    if (valueRole.isValid())
+    {
+        const auto value = valueRole.toInt();
+        return m_filterVeganCategory.testFlag(VenueSortFilterProxyModel::VenueVeganCategory( keyToFlag(value)));
+    }
+
+    return false;
+
 }
 
 
