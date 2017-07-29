@@ -61,6 +61,7 @@ BVApp.Page {
                     jsonModelCollection.setVeganCategoryFilterFlag(VenueSortFilterProxyModel.Vegan, checked);
                 }
 
+                icon: BVApp.Theme.iconBy("vine").iconString
                 Component.onCompleted: checked = jsonModelCollection.filterVeganCategory & VenueSortFilterProxyModel.Vegan;
 
             }
@@ -71,6 +72,7 @@ BVApp.Page {
                     jsonModelCollection.setVeganCategoryFilterFlag(VenueSortFilterProxyModel.Vegetarian, checked);
                 }
 
+                icon: BVApp.Theme.iconBy("tree").iconString
                 Component.onCompleted: checked = jsonModelCollection.filterVeganCategory & VenueSortFilterProxyModel.Vegetarian;
             }
 

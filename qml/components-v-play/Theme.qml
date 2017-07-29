@@ -30,6 +30,14 @@ QtObject {
             icon       = IconType.leaf;
             fontFamily = "FontAwesome";
             break;
+        case "tree":
+            icon       = IconType.tree;
+            fontFamily = "FontAwesome";
+            break;
+        case "vine":
+            icon       = IconType.vine;
+            fontFamily = "FontAwesome";
+            break;
         case "location":
         case "cover-location":
             icon = "location_on";
