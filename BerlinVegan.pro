@@ -47,6 +47,9 @@ android {
 ios {
     QMAKE_INFO_PLIST = ios/Project-Info.plist
     OTHER_FILES += $$QMAKE_INFO_PLIST
+
+    app_launch_images.files = $$PWD/ios/Launch.xib $$files($$PWD/ios/Splashscreen_1242x2208_mit-Schriftzug.jpg)
+    QMAKE_BUNDLE_DATA += app_launch_images
 }
 
 TRANSLATIONS += translations/harbour-berlin-vegan-de.ts \
