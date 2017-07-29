@@ -23,8 +23,13 @@ QtObject {
         case "home":
             icon = "public";
             break;
+        case "filter":
+            icon = "filter_list";
+            break;
         case "leaf":
-            return IconType.leaf
+            icon       = IconType.leaf;
+            fontFamily = "FontAwesome";
+            break;
         case "location":
         case "cover-location":
             icon = "location_on";

@@ -182,6 +182,14 @@ ApplicationWindow
             pageComponent: app.initialPage
         }
 
+        BVApp.MenuItem {
+            menuIcon: BVApp.Theme.iconBy("filter")
+            //% "Filter"
+            text: qsTrId("id-filter")
+            page: VenueFilterSettings {
+                jsonModelCollection: gjsonCollection
+            }
+        }
 
         BVApp.MenuItem {
             menuIcon: BVApp.Theme.iconBy("about")
