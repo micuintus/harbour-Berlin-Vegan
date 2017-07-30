@@ -85,14 +85,15 @@ BVApp.Page {
             Label {
                 id: namelabel
                 text: model.name
-                color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.primaryColor
+                color: delegate.highlighted ? BVApp.Theme.highlightColor :
+                                              (BVApp.Platform.isSailfish ? BVApp.Theme.primaryColor : BVApp.Theme.secondaryColor)
 
-                font.pixelSize: BVApp.Theme.fontSizeMedium
+                font.pixelSize: BVApp.Theme.fontSizeLarge
                 truncationMode: TruncationMode.Fade
                 anchors {
                     top: parent.top
                     left: parent.left
-                    right: distance.left
+                    right: parent.right
 
                     topMargin: BVApp.Theme.paddingSmall
                     rightMargin: BVApp.Theme.paddingSmall
@@ -106,13 +107,13 @@ BVApp.Page {
                 text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                 BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
                                                            QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
-                color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.primaryColor
+                color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.highlightDimmerColor
                 font.pixelSize: BVApp.Theme.fontSizeExtraSmall
                 horizontalAlignment: Text.AlignRight
                 anchors {
                     right: parent.right
 
-                    baseline: namelabel.baseline
+                    baseline: streetLabel.baseline
 
                     topMargin: BVApp.Theme.paddingSmall
                     bottomMargin: BVApp.Theme.paddingSmall
@@ -128,16 +129,14 @@ BVApp.Page {
                 color: BVApp.Theme.secondaryColor
 
                 truncationMode: TruncationMode.Fade
-
                 anchors {
                     top: namelabel.bottom
                     bottom: parent.bottom
                     left: parent.left
-                    right: parent.right
+                    right: distance.left
 
                     leftMargin: BVApp.Theme.horizontalPageMargin
                     rightMargin: BVApp.Theme.horizontalPageMargin
-
                     topMargin: BVApp.Platform.isSailfish ? 0 : BVApp.Theme.paddingSmall
                     bottomMargin: BVApp.Theme.paddingSmall
                 }

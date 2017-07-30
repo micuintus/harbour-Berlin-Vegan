@@ -84,15 +84,16 @@ Item {
     Rectangle {
         anchors {
             top: streetLabel.top
+            topMargin: -BVApp.Theme.paddingMedium
             left: image.left
             right: image.right
             bottom: image.bottom
         }
 
-        color: BVApp.Theme.highlightDimmerColor
+        color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightDimmerColor : BVApp.Theme.highlightColor
 
         // relative to parent opacity!
-        opacity: 0.6
+        opacity: BVApp.Platform.isSailfish ? 0.6 : 1
         visible: !BVApp.Platform.isSailfish || pictureAvailable
     }
 
@@ -100,7 +101,7 @@ Item {
         id: streetLabel
         text: street
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        color: BVApp.Theme.highlightColor
+        color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightColor : BVApp.Theme.secondaryColor
         truncationMode: TruncationMode.Fade
 
         anchors {
@@ -119,7 +120,7 @@ Item {
                                                                restaurantCoordinate)
               : ""
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        color: BVApp.Theme.highlightColor
+        color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightColor : BVApp.Theme.highlightDimmerColor
 
         anchors {
             right: parent.right

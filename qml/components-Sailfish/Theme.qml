@@ -60,5 +60,6 @@ QtObject {
     readonly property int opacityRampTopToBottom: Silica.OpacityRamp.TopToBottom
     readonly property int opacityRampBottomToTop: Silica.OpacityRamp.BottomToTop
 
+    readonly property color dividerColor: Silica.Theme.secondaryHighlightColor
     readonly property int dividerHeight: 2
 }

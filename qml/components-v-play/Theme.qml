@@ -73,19 +73,20 @@ QtObject {
 
     property var myApp
 
-    readonly property color primaryColor: Theme.textColor
-    readonly property color secondaryColor: Theme.secondaryTextColor
     // from native Android app
+    readonly property color primaryColor: "#212121"
+    readonly property color secondaryColor: "#727272"
     readonly property color highlightDimmerColor: "#8BC34A"
     readonly property color highlightColor: "white"
-    readonly property color secondaryHighlightColor: Theme.listItem.dividerColor
+    readonly property color secondaryHighlightColor: "#E4E4E4"
+    readonly property color dividerColor: "#B6B6B6"
 
     readonly property color linkColor: highlightDimmerColor
 
-    readonly property int fontSizeMedium: dp(Theme.listItem.fontSizeText)
-    readonly property int fontSizeSmall: dp(Theme.listItem.fontSizeText)
-    readonly property int fontSizeExtraSmall: dp(Theme.listItem.fontSizeDetailText)
-    readonly property int fontSizeLarge: dp(Theme.listItem.fontSizeText)
+    readonly property int fontSizeMedium: dp(17)
+    readonly property int fontSizeSmall: dp(16) // Theme.listItem.fontSizeText
+    readonly property int fontSizeExtraSmall: dp(15) // Theme.listItem.fontSizeDetailText
+    readonly property int fontSizeLarge: dp(18)
 
     readonly property int iconSizeMedium : dp(12)
     readonly property int iconSizeLarge : dp(12)
@@ -105,5 +106,5 @@ QtObject {
     readonly property int opacityRampTopToBottom: 2
     readonly property int opacityRampBottomToTop: 3
 
-    readonly property int dividerHeight: dp(Theme.listItem.dividerHeight)
+    readonly property int dividerHeight: dp(1)
 }
