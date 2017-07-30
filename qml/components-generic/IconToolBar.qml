@@ -36,7 +36,7 @@ Column {
     Separator {
         width: column.width
         horizontalAlignment: Qt.AlignCenter
-        color: BVApp.Theme.secondaryHighlightColor
+        color: BVApp.Theme.dividerColor
         height: BVApp.Theme.dividerHeight
     }
 
@@ -104,7 +104,7 @@ Column {
     Separator {
         width: column.width
         horizontalAlignment: Qt.AlignCenter
-        color: BVApp.Theme.secondaryHighlightColor
+        color: BVApp.Theme.dividerColor
         height: BVApp.Theme.dividerHeight
     }
 }

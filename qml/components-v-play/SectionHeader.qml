@@ -10,8 +10,13 @@ Rectangle {
     property string text
     property var icon
 
-    width: parent.width
-    height: 1.7 * txt.height
+    width: parent.width - 2*BVApp.Theme.paddingLarge
+    height: txt.height + 2*BVApp.Theme.paddingLarge
+
+    anchors {
+        left: parent.left
+        margins: BVApp.Theme.paddingLarge
+    }
 
     Icon {
         id: iconItem
@@ -24,9 +29,7 @@ Rectangle {
 
         anchors {
             left: header.left
-            bottom: header.bottom
-            margins: BVApp.Theme.paddingLarge
-            bottomMargin: 0.25 * BVApp.Theme.paddingLarge
+            verticalCenter: header.verticalCenter
         }
     }
 
@@ -36,10 +39,9 @@ Rectangle {
         color: BVApp.Theme.highlightDimmerColor
 
         anchors {
-            right: header.right
-            bottom: header.bottom
-            margins: BVApp.Theme.paddingLarge
-            bottomMargin: 0.25 * BVApp.Theme.paddingLarge
+            left: header.left
+            leftMargin: 2*BVApp.Theme.paddingLarge
+            verticalCenter: header.verticalCenter
         }
     }
 }

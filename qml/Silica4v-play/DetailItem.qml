@@ -20,6 +20,7 @@ Rectangle {
     AppText {
         id: keyText
         text: label
+        color: BVApp.Theme.primaryColor
 
         anchors.left: parent.left
         anchors.leftMargin: 2*BVApp.Theme.paddingLarge
