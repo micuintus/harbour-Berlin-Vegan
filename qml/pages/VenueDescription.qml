@@ -98,6 +98,20 @@ BVApp.Page {
             }
         }
 
+        Separator {
+            id: separator
+            width: parent.width
+            horizontalAlignment: Qt.AlignCenter
+            color: BVApp.Theme.dividerColor
+            height: BVApp.Theme.dividerHeight
+
+            anchors {
+                left: descriptionText.left
+                right: descriptionText.right
+                top: detailsCollapsible.bottom
+            }
+        }
+
         Label {
             id: descriptionText
             font.pixelSize: BVApp.Theme.fontSizeSmall
@@ -108,7 +122,7 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: detailsCollapsible.bottom
+                top: separator.bottom
                 margins: BVApp.Theme.paddingLarge
             }
         }
