@@ -83,12 +83,13 @@ BVApp.Page {
             id: detailsCollapsible
 
             collapsedHeight: venueDetails.collapsedHeight
-            expandedHeight: venueDetails.expandedHeight
+            expandedHeight: venueDetails.expandedHeight + BVApp.Theme.paddingLarge
 
             anchors {
                 left: parent.left
                 right: parent.right
                 top: iconToolBar.bottom
+
             }
 
             contentItem: BVApp.VenueDetails {
