@@ -21,7 +21,7 @@ IconButton {
 
         text: BVApp.Theme.iconFor(type).iconString
 
-        color: iconButton.color ? iconButton.color : BVApp.Theme.highlightDimmerColor
+        color: iconButton.color ? iconButton.color : BVApp.Theme.highlightColor
         font.family: BVApp.Theme.iconFor(type).fontFamily
 
         font.pixelSize: size

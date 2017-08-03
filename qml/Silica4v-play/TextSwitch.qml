@@ -8,4 +8,6 @@ AppCheckBox {
 
     height: BVApp.Theme.iconSizeLarge * 2.2
     spacing: BVApp.Theme.paddingLarge
+
+    labelColorOff: BVApp.Theme.primaryColor
 }

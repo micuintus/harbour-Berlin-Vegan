@@ -74,7 +74,6 @@ BVApp.Page {
             currentIndex = -1
         }
 
-
         delegate: ListItem {
             id: delegate
             width: page.width
@@ -85,8 +84,7 @@ BVApp.Page {
             Label {
                 id: namelabel
                 text: model.name
-                color: delegate.highlighted ? BVApp.Theme.highlightColor :
-                                              (BVApp.Platform.isSailfish ? BVApp.Theme.primaryColor : BVApp.Theme.secondaryColor)
+                color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.primaryColor
 
                 font.pixelSize: BVApp.Theme.fontSizeLarge
                 truncationMode: TruncationMode.Fade
@@ -107,7 +105,7 @@ BVApp.Page {
                 text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                 BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
                                                            QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
-                color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.highlightDimmerColor
+                color: BVApp.Theme.highlightColor
                 font.pixelSize: BVApp.Theme.fontSizeExtraSmall
                 horizontalAlignment: Text.AlignRight
                 anchors {

@@ -90,7 +90,7 @@ Item {
             bottom: image.bottom
         }
 
-        color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightDimmerColor : BVApp.Theme.highlightColor
+        color: BVApp.Theme.highlightDimmerColor
 
         // relative to parent opacity!
         opacity: BVApp.Platform.isSailfish ? 0.6 : 1
@@ -120,7 +120,7 @@ Item {
                                                                restaurantCoordinate)
               : ""
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightColor : BVApp.Theme.highlightDimmerColor
+        color: BVApp.Theme.highlightColor
 
         anchors {
             right: parent.right
