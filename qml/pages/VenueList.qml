@@ -86,7 +86,7 @@ BVApp.Page {
                 text: model.name
                 color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.primaryColor
 
-                font.pixelSize: BVApp.Theme.fontSizeLarge
+                font.pixelSize: BVApp.Platform.isSailfish ? BVApp.Theme.fontSizeMedium : BVApp.Theme.fontSizeLarge
                 truncationMode: TruncationMode.Fade
                 anchors {
                     top: parent.top
