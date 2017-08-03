@@ -21,7 +21,7 @@ Rectangle {
     Icon {
         id: iconItem
         icon: header.icon.iconString
-        color: BVApp.Theme.highlightDimmerColor
+        color: BVApp.Theme.highlightColor
 
         Component.onCompleted: {
             iconItem.textItem.font.family = header.icon.fontFamily
@@ -36,7 +36,7 @@ Rectangle {
     AppText {
         id: txt
         text: header.text
-        color: BVApp.Theme.highlightDimmerColor
+        color: BVApp.Theme.highlightColor
 
         anchors {
             left: header.left
