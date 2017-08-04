@@ -76,7 +76,7 @@ QtObject {
     readonly property color primaryColor: "#727272" // "#212121"
     readonly property color secondaryColor: "#727272"
     readonly property color highlightDimmerColor: "white"
-    readonly property color highlightColor: "#8BC34A"
+    readonly property color highlightColor: "#97BF0F"
     readonly property color secondaryHighlightColor: "#E4E4E4"
     readonly property color dividerColor: "#B6B6B6"
 
