@@ -11,7 +11,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.jmastr.harbour-berlin-vegan</string>
 	<key>CFBundleDisplayName</key>
-	<string>Berlin Vegan</string>
+	<string>Berlin-Vegan</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleShortVersionString</key>
