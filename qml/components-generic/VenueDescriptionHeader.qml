@@ -54,7 +54,7 @@ Item {
         height: Math.max(parent.height - shrinkHeightBy,0)
         width: parent.width
 
-        // This eads to the effect that the image is being cropped
+        // This leads to the effect that the image is being cropped
         // from both bottom and top by half a pixel per shrinkHeightBy
         y: shrinkHeightBy
     }
@@ -81,53 +81,6 @@ Item {
         y: initalY + shrinkHeightBy * 0.5
     }
 
-    Rectangle {
-        anchors {
-            top: streetLabel.top
-            topMargin: -BVApp.Theme.paddingMedium
-            left: image.left
-            right: image.right
-            bottom: image.bottom
-        }
 
-        color: BVApp.Theme.highlightDimmerColor
-
-        // relative to parent opacity!
-        opacity: BVApp.Platform.isSailfish ? 0.6 : 1
-        visible: !BVApp.Platform.isSailfish || pictureAvailable
-    }
-
-    Label {
-        id: streetLabel
-        text: street
-        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightColor : BVApp.Theme.secondaryColor
-        truncationMode: TruncationMode.Fade
-
-        anchors {
-            left: image.left
-            right: distanceLabel.left
-            margins: BVApp.Theme.paddingLarge
-        }
-
-        y: parent.height - height
-    }
-
-    Label {
-        id: distanceLabel
-        text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
-              ? BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
-                                                               restaurantCoordinate)
-              : ""
-        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        color: BVApp.Theme.highlightColor
-
-        anchors {
-            right: parent.right
-            margins:  BVApp.Theme.paddingLarge
-        }
-
-        y: parent.height - height
-    }
 }
 
