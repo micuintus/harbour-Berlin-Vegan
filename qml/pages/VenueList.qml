@@ -84,7 +84,8 @@ BVApp.Page {
             Label {
                 id: namelabel
                 text: model.name
-                color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.primaryColor
+                color: delegate.highlighted ? BVApp.Theme.highlightColor :
+                                              BVApp.Platform.isSailfish ? BVApp.Theme.primaryColor : BVApp.Theme.secondaryColor
 
                 font.pixelSize: BVApp.Platform.isSailfish ? BVApp.Theme.fontSizeMedium : BVApp.Theme.fontSizeLarge
                 truncationMode: TruncationMode.Fade

@@ -73,7 +73,7 @@ QtObject {
 
     property var myApp
 
-    readonly property color primaryColor: "#727272" // "#212121"
+    readonly property color primaryColor: "#212121"
     readonly property color secondaryColor: "#727272"
     readonly property color highlightDimmerColor: "white"
     readonly property color highlightColor: "#97BF0F"
