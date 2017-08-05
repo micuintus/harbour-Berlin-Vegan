@@ -92,12 +92,22 @@ BVApp.Page {
                 anchors {
                     top: parent.top
                     left: parent.left
-                    right: parent.right
 
                     topMargin: BVApp.Theme.paddingSmall
-                    rightMargin: BVApp.Theme.paddingSmall
                     bottomMargin: BVApp.Theme.paddingSmall
                     leftMargin: BVApp.Theme.horizontalPageMargin
+                }
+            }
+
+            BVApp.Icon {
+                icon: BVApp.Theme.iconFor("leaf").iconString
+                color: BVApp.Theme.highlightColor
+                visible: model.vegan === 5
+
+                anchors {
+                    top: namelabel.top
+                    left: namelabel.right
+                    leftMargin: BVApp.Theme.paddingSmall
                 }
             }
 
