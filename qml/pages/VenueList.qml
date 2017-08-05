@@ -74,6 +74,11 @@ BVApp.Page {
             currentIndex = -1
         }
 
+        onContentYChanged: {
+            // ios: keyboard stays visible, if user used search field before scrolling and did not press Return key
+            Qt.inputMethod.hide();
+        }
+
         delegate: ListItem {
             id: delegate
             width: page.width
