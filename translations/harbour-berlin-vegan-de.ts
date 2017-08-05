@@ -206,5 +206,9 @@
         <source>Veg*an Category</source>
         <translation>Veg*an-Kategorie</translation>
     </message>
+    <message id="id-search">
+        <source>Search...</source>
+        <translation>Suche...</translation>
+    </message>
 </context>
 </TS>
