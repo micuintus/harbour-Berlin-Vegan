@@ -278,5 +278,10 @@
         <source>Veg*an Category</source>
         <translation>Veg*an Category</translation>
     </message>
+    <message id="id-search">
+        <location filename="../qml/components-v-play/SearchField.qml" line="15"/>
+        <source>Search...</source>
+        <translation>Search...</translation>
+    </message>
 </context>
 </TS>

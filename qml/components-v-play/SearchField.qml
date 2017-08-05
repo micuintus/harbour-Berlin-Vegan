@@ -11,6 +11,9 @@ SearchBar {
     // this integrates better on iOS with the overall background color
     barBackgroundColor: "white"
 
+                           //% "Search..."
+    placeHolderText: qsTrId("id-search")
+
     property Item flickableForSailfish
 
     Rectangle {
