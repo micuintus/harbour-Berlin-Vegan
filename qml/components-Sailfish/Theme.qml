@@ -6,27 +6,41 @@ import QtQuick 2.2
 QtObject {
 
     function iconFor(type) {
+        var icon = "";
+
         switch (type) {
         case "answer":
-            return "image://theme/icon-l-answer?"+ (Silica.pressed
+            icon = "image://theme/icon-l-answer?"+ (Silica.pressed
                                                      ? Silica.Theme.highlightColor
                                                      : Silica.Theme.primaryColor)
+            break;
         case "favorite":
-            return "image://theme/icon-m-favorite-selected?" + (Silica.pressed
+            icon = "image://theme/icon-m-favorite-selected?" + (Silica.pressed
                                                        ? Silica.Theme.highlightColor
                                                        : Silica.Theme.primaryColor)
+            break;
         case "favorite-o":
-            return "image://theme/icon-m-favorite?" + (Silica.pressed
+            icon = "image://theme/icon-m-favorite?" + (Silica.pressed
                                                        ? Silica.Theme.highlightColor
                                                        : Silica.Theme.primaryColor)
+            break;
         case "home":
-            return "image://theme/icon-m-home?" + (Silica.pressed
+            icon = "image://theme/icon-m-home?" + (Silica.pressed
                                                    ? Silica.Theme.highlightColor
                                                    : Silica.Theme.primaryColor)
+            break;
         case "location":
-            return "image://theme/icon-m-location?" + Silica.Theme.highlightBackgroundColor
+            icon = "image://theme/icon-m-location?" + Silica.Theme.highlightBackgroundColor
+            break;
         case "cover-location":
-            return "image://theme/icon-cover-location?" + Silica.Theme.highlightBackgroundColor
+            icon = "image://theme/icon-cover-location?" + Silica.Theme.highlightBackgroundColor
+            break;
+        default:
+            break;
+        }
+
+        return {
+            iconString: icon
         }
     }
 
