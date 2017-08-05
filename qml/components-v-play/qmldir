@@ -1,6 +1,7 @@
 module BerlinVegan.components.platform
 singleton Theme 1.0 Theme.qml
 singleton Platform 1.0 Platform.qml
+Icon 1.0 Icon.qml
 IconButton 1.0 IconButton.qml
 Page 1.0 Page.qml
 NavigationStackWithPushAttached 1.0 NavigationStackWithPushAttached.qml
