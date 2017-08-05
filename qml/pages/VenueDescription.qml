@@ -49,9 +49,7 @@ BVApp.Page {
         BVApp.VenueDescriptionHeader {
             id: locationheader
             name: restaurant.name
-            street: restaurant.street
             pictures: restaurant.pictures
-            restaurantCoordinate: QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord)
             positionSource: page.positionSource
 
             opacity: flicka.scrolledUpRatio
@@ -62,7 +60,52 @@ BVApp.Page {
                 left: parent.left
                 right: parent.right
                 top: parent.top
+
+                bottomMargin: BVApp.Theme.paddingMedium
             }
+        }
+
+        Label {
+            id: streetLabel
+            text: restaurant.street
+            font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+            color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightColor : BVApp.Theme.secondaryColor
+            truncationMode: TruncationMode.Fade
+
+            anchors {
+                left: parent.left
+                right: distanceLabel.left
+                top: locationheader.bottom
+
+                leftMargin: BVApp.Theme.horizontalPageMargin
+                rightMargin: BVApp.Theme.horizontalPageMargin
+                topMargin: BVApp.Theme.paddingMedium
+                bottomMargin: BVApp.Theme.paddingMedium
+            }
+
+            opacity: flicka.scrolledUpRatio
+        }
+
+        Label {
+            id: distanceLabel
+            text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
+                  ? BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
+                    QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord))
+                  : ""
+            font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+            color: BVApp.Theme.highlightColor
+
+            anchors {
+                right: parent.right
+                top: locationheader.bottom
+
+                leftMargin: BVApp.Theme.horizontalPageMargin
+                rightMargin: BVApp.Theme.horizontalPageMargin
+                topMargin: BVApp.Theme.paddingMedium
+                bottomMargin: BVApp.Theme.paddingMedium
+            }
+
+            opacity: flicka.scrolledUpRatio
         }
 
         BVApp.IconToolBar {
@@ -72,8 +115,11 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: locationheader.bottom
-                margins: BVApp.Theme.paddingMedium
+                top: distanceLabel.bottom
+
+                leftMargin: BVApp.Theme.horizontalPageMargin
+                rightMargin: BVApp.Theme.horizontalPageMargin
+                topMargin: BVApp.Theme.paddingMedium
             }
 
             opacity: flicka.scrolledUpRatio
