@@ -1,6 +1,8 @@
 import QtQuick 2.7
 import VPlayApps 1.0
 
+import BerlinVegan.components.platform 1.0 as BVApp
+
 NavigationStack {
     id: stack
 
@@ -28,5 +30,6 @@ NavigationStack {
         attachedButton.props = props
         attachedButton.text = icon.iconString
         attachedButton.textItem.font.family = icon.fontFamily
+        attachedButton.textItem.font.pixelSize = BVApp.Theme.iconSizeExtraLarge
     }
 }

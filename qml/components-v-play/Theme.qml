@@ -88,6 +88,7 @@ QtObject {
 
     readonly property int iconSizeMedium : dp(12)
     readonly property int iconSizeLarge : dp(12)
+    readonly property int iconSizeExtraLarge : dp(32)
 
     readonly property int paddingSmall: dp(12)
     readonly property int paddingMedium: dp(12)
