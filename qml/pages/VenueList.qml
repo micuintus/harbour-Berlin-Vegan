@@ -84,7 +84,7 @@ BVApp.Page {
             width: page.width
             contentHeight: namelabel.contentHeight
                          + streetLabel.contentHeight
-                         + BVApp.Theme.paddingSmall*3
+                         + BVApp.Theme.paddingSmall + 2 * BVApp.Theme.paddingMedium
 
             Label {
                 id: namelabel
@@ -99,8 +99,7 @@ BVApp.Page {
                     left: parent.left
                     right: parent.right
 
-                    topMargin: BVApp.Theme.paddingSmall
-                    rightMargin: BVApp.Theme.paddingSmall
+                    topMargin: BVApp.Theme.paddingMedium
                     bottomMargin: BVApp.Theme.paddingSmall
                     leftMargin: BVApp.Theme.horizontalPageMargin
                 }
@@ -118,9 +117,7 @@ BVApp.Page {
                     right: parent.right
 
                     baseline: streetLabel.baseline
-
                     topMargin: BVApp.Theme.paddingSmall
-                    bottomMargin: BVApp.Theme.paddingSmall
                     rightMargin: BVApp.Theme.horizontalPageMargin
                 }
             }
@@ -141,8 +138,8 @@ BVApp.Page {
 
                     leftMargin: BVApp.Theme.horizontalPageMargin
                     rightMargin: BVApp.Theme.horizontalPageMargin
-                    topMargin: BVApp.Platform.isSailfish ? 0 : BVApp.Theme.paddingSmall
-                    bottomMargin: BVApp.Theme.paddingSmall
+                    topMargin: BVApp.Theme.paddingSmall
+                    bottomMargin: BVApp.Theme.paddingMedium
                 }
             }
 

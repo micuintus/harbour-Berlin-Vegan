@@ -90,10 +90,10 @@ QtObject {
     readonly property int iconSizeMedium : dp(12)
     readonly property int iconSizeLarge : dp(12)
 
-    readonly property int paddingSmall: dp(12)
-    readonly property int paddingMedium: dp(12)
-    readonly property int paddingLarge: dp(12)
-    readonly property int horizontalPageMargin: dp(16)
+    readonly property int paddingSmall: dp(6)
+    readonly property int paddingMedium: dp(11)
+    readonly property int paddingLarge: dp(15)
+    readonly property int horizontalPageMargin: dp(15)
 
     readonly property int busyIndicatorSizeLarge: 0
 
