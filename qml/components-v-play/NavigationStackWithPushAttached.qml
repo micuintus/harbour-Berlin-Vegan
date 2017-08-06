@@ -4,7 +4,7 @@ import VPlayApps 1.0
 NavigationStack {
     id: stack
 
-    navigationBar.rightBarItem: IconButtonBarItem {
+    navigationBar.rightBarItem: TextButtonBarItem {
         id: attachedButton
 
         property var attachedPage
@@ -26,6 +26,7 @@ NavigationStack {
         attachedButton.attachedTo = stack.currentPage
         attachedButton.attachedPage = page
         attachedButton.props = props
-        attachedButton.icon  = icon.iconString
+        attachedButton.text = icon.iconString
+        attachedButton.textItem.font.family = icon.fontFamily
     }
 }
