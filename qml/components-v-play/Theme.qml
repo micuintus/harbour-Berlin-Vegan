@@ -44,8 +44,7 @@ QtObject {
             icon = "info";
             break;
         case "locationarrow":
-            icon       = IconType.locationarrow;
-            fontFamily = "FontAwesome";
+            icon = "directions";
             break;
         case "schedule":
             icon = "schedule";
