@@ -68,6 +68,7 @@ BVApp.Page {
         sourceItem: BVApp.IconButton {
             id: currentPosImage
             type: "cover-location"
+            color: "blue"
         }
     }
 

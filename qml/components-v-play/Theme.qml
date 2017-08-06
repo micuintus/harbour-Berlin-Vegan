@@ -31,8 +31,11 @@ QtObject {
             fontFamily = "FontAwesome";
             break;
         case "location":
-        case "cover-location":
             icon = "place";
+            break;
+        case "cover-location":
+            icon       = IconType.dotcircleo;
+            fontFamily = "FontAwesome";
             break;
         case "food":
             icon = "restaurant_menu";
