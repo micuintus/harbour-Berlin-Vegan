@@ -32,7 +32,7 @@ QtObject {
             break;
         case "location":
         case "cover-location":
-            icon = "location_on";
+            icon = "place";
             break;
         case "food":
             icon = "restaurant_menu";
