@@ -51,12 +51,19 @@ Item {
 
         fillMode: Image.PreserveAspectCrop
 
-        height: Math.max(parent.height - shrinkHeightBy,0)
+        height: Math.max(parent.height - streetLabel.height * 0.1 - shrinkHeightBy,0)
         width: parent.width
 
         // This eads to the effect that the image is being cropped
         // from both bottom and top by half a pixel per shrinkHeightBy
         y: shrinkHeightBy
+    }
+
+    OpacityRampEffect {
+        anchors.fill: image
+        id: ramp
+        sourceItem: image
+        direction: BVApp.Theme.opacityRampTopToBottom
     }
 
     Rectangle {
@@ -81,36 +88,19 @@ Item {
         y: initalY + shrinkHeightBy * 0.5
     }
 
-    Rectangle {
-        anchors {
-            top: streetLabel.top
-            topMargin: -BVApp.Theme.paddingMedium
-            left: image.left
-            right: image.right
-            bottom: image.bottom
-        }
-
-        color: BVApp.Theme.highlightDimmerColor
-
-        // relative to parent opacity!
-        opacity: BVApp.Platform.isSailfish ? 0.6 : 1
-        visible: !BVApp.Platform.isSailfish || pictureAvailable
-    }
-
     Label {
         id: streetLabel
         text: street
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightColor : BVApp.Theme.secondaryColor
+        color: BVApp.Theme.highlightColor
         truncationMode: TruncationMode.Fade
 
         anchors {
             left: image.left
             right: distanceLabel.left
-            margins: BVApp.Theme.paddingLarge
+            bottom: parent.bottom
+            leftMargin: BVApp.Theme.paddingLarge // BVApp.Theme.horizontalPageMargin
         }
-
-        y: parent.height - height
     }
 
     Label {
@@ -124,10 +114,9 @@ Item {
 
         anchors {
             right: parent.right
-            margins:  BVApp.Theme.paddingLarge
+            bottom: parent.bottom
+            rightMargin: BVApp.Theme.paddingLarge // BVApp.Theme.horizontalPageMargin
         }
-
-        y: parent.height - height
     }
 }
 
