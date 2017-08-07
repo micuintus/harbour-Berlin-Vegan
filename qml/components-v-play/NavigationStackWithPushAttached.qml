@@ -30,6 +30,6 @@ NavigationStack {
         attachedButton.props = props
         attachedButton.text = icon.iconString
         attachedButton.textItem.font.family = icon.fontFamily
-        attachedButton.textItem.font.pixelSize = BVApp.Theme.iconSizeExtraLarge
+        attachedButton.textItem.font.pixelSize = BVApp.Theme.iconSizeLarge;
     }
 }

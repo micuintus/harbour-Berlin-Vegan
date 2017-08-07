@@ -6,7 +6,7 @@ AppCheckBox {
     id: checkbox
     x: parent.width/6
 
-    height: BVApp.Theme.iconSizeLarge * 2.2
+    height: BVApp.Theme.iconSizeLarge
     spacing: BVApp.Theme.paddingLarge
 
     labelColorOff: BVApp.Theme.primaryColor

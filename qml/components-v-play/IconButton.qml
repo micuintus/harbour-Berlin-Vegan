@@ -12,8 +12,7 @@ IconButton {
     property real scale
     property real size
 
-    // dp(22) = 29 on 1334 x 750 (iPhone 6/6S)
-    size: scale ? dp(22) * scale : dp(22)
+    size: scale ? BVApp.Theme.iconSizeLarge * scale : BVApp.Theme.iconSizeLarge
 
     AppText {
         id: icn
