@@ -36,6 +36,7 @@ import QtQuick 2.7
 import QtQuick.Window 2.2
 
 import Sailfish.Silica 1.0
+import BerlinVegan.components.platform 1.0 as BVApp
 
 Text {
     id: root
@@ -53,8 +54,8 @@ Text {
                                                                                                          : Text.ElideMiddle))
                           : Text.ElideNone
 
-    color: Theme.primaryColor
-    font.pixelSize: Theme.fontSizeMedium
+    color: BVApp.Theme.primaryColor
+    font.pixelSize: BVApp.Theme.fontSizeMedium
 
     Item {
         parent: root.parent
