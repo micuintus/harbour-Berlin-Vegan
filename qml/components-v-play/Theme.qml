@@ -90,8 +90,9 @@ QtObject {
     readonly property int fontSizeLarge: dp(18)
 
     // HACK: only used in IconToolBar so far, we want to keep scale at 1 ATM
-    readonly property int iconSizeMedium : dp(26)
-    readonly property int iconSizeLarge : dp(26)
+    readonly property int iconSizeMedium: dp(26)
+    readonly property int iconSizeLarge: dp(26)
+    readonly property int iconSizeExtraLarge: dp(28)
 
     readonly property int paddingSmall: dp(6)
     readonly property int paddingMedium: dp(11)

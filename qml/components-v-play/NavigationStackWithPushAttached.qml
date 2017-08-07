@@ -30,6 +30,6 @@ NavigationStack {
         attachedButton.props = props;
         attachedButton.text = icon.iconString;
         attachedButton.textItem.font.family = icon.fontFamily;
-        attachedButton.textItem.font.pixelSize = Qt.binding(function() { return BVApp.Theme.iconSizeLarge });
+        attachedButton.textItem.font.pixelSize = Qt.binding(function() { return BVApp.Theme.iconSizeExtraLarge });
     }
 }
