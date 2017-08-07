@@ -10,9 +10,7 @@ IconButton {
     property string type
     property string color
     property real scale
-    property real size
 
-    size: scale ? BVApp.Theme.iconSizeLarge * scale : BVApp.Theme.iconSizeLarge
 
     AppText {
         id: icn
@@ -23,14 +21,10 @@ IconButton {
         color: iconButton.color ? iconButton.color : BVApp.Theme.highlightColor
         font.family: BVApp.Theme.iconFor(type).fontFamily
 
-        font.pixelSize: size
+        font.pixelSize: scale ? BVApp.Theme.iconSizeLarge * scale : BVApp.Theme.iconSizeLarge
         horizontalAlignment: Text.AlignHCenter
-    }
-
-    Component.onCompleted: {
-        // HACK: if we are not the IconToolBar, we are the VenueMapPage
-        if (!Layout.alignment) {
-            icn.verticalAlignment = Text.AlignBottom
-        }
+        verticalAlignment:   iconButton.Layout.alignment ?
+                                 Text.AlignVCenter
+                               : Text.AlignBottom
     }
 }
