@@ -18,18 +18,18 @@ NavigationStack {
         onClicked: {
             if (visible)
             {
-                stack.push(attachedPage, props)
+                stack.push(attachedPage, props);
             }
         }
     }
 
     function pushAttached(page, props, icon)
     {
-        attachedButton.attachedTo = stack.currentPage
-        attachedButton.attachedPage = page
-        attachedButton.props = props
-        attachedButton.text = icon.iconString
-        attachedButton.textItem.font.family = icon.fontFamily
-        attachedButton.textItem.font.pixelSize = BVApp.Theme.iconSizeLarge;
+        attachedButton.attachedTo = stack.currentPage;
+        attachedButton.attachedPage = page;
+        attachedButton.props = props;
+        attachedButton.text = icon.iconString;
+        attachedButton.textItem.font.family = icon.fontFamily;
+        attachedButton.textItem.font.pixelSize = Qt.binding(function() { return BVApp.Theme.iconSizeLarge });
     }
 }
