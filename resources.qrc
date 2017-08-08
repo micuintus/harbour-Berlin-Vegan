@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>icons/MaterialIcons-Regular.ttf</file>
+        <file>images/Platzhalter_v2_mitSchriftzug.jpg</file>
         <file>qml/cover/CoverPage.qml</file>
         <file>qml/pages/about/AboutBerlinVegan.qml</file>
         <file>qml/pages/about/BerlinVegan.svg</file>
