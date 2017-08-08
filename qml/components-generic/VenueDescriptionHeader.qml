@@ -47,7 +47,7 @@ Item {
 
         source: pictureAvailable
                 ? pictures[0].url
-                : ""
+                : "qrc:/images/Platzhalter_v2_mitSchriftzug.jpg"
 
         fillMode: Image.PreserveAspectCrop
 
