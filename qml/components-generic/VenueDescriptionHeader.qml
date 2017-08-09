@@ -51,7 +51,7 @@ Item {
 
         fillMode: Image.PreserveAspectCrop
 
-        height: Math.max(parent.height - streetLabel.height * 0.1 - shrinkHeightBy,0)
+        height: Math.max(parent.height - streetLabel.height * 0.15 - shrinkHeightBy,0)
         width: parent.width
 
         // This eads to the effect that the image is being cropped
@@ -61,9 +61,10 @@ Item {
 
     OpacityRampEffect {
         anchors.fill: image
-        id: ramp
         sourceItem: image
         direction: BVApp.Theme.opacityRampTopToBottom
+        offset: 0.56
+        slope: 2.3
     }
 
     Rectangle {

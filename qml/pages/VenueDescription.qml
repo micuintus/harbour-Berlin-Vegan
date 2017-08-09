@@ -55,7 +55,7 @@ BVApp.Page {
             positionSource: page.positionSource
 
             opacity: flicka.scrolledUpRatio
-            height: page.height / 2.7
+            height: page.height / 2.56
             shrinkHeightBy: flicka.contentY
 
             anchors {
