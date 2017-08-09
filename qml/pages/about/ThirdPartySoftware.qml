@@ -62,7 +62,7 @@ SilicaListView {
                    horizontalCenter: parent.horizontalCenter
                }
 
-               font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+               font.pixelSize: BVApp.Theme.smallLinkFontSize
                color: BVApp.Theme.secondaryColor
                textFormat: Text.StyledText
 

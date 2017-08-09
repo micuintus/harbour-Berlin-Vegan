@@ -53,6 +53,7 @@ QtObject {
     readonly property color highlightBackgroundColor: Silica.Theme.highlightBackgroundColor
 
     readonly property color linkColor: Silica.Theme.highlightColor
+    readonly property int smallLinkFontSize: Silica.Theme.fontSizeExtraSmall
 
     readonly property int fontSizeMedium: Silica.Theme.fontSizeMedium
     readonly property int fontSizeExtraSmall: Silica.Theme.fontSizeExtraSmall
