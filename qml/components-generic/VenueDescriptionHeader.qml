@@ -60,6 +60,7 @@ Item {
     }
 
     OpacityRampEffect {
+        enabled: pictureAvailable || BVApp.Theme.isSailfish
         anchors.fill: image
         sourceItem: image
         direction: BVApp.Theme.opacityRampTopToBottom
