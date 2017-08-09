@@ -183,7 +183,7 @@
     </message>
     <message id="id-about-venue-list">
         <source>About</source>
-        <translation>Über diese App</translation>
+        <translation>Über</translation>
     </message>
     <message id="id-shopping-venue-list">
         <source>Shopping</source>
