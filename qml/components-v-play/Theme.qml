@@ -83,6 +83,7 @@ QtObject {
     readonly property color dividerColor: "#B6B6B6"
 
     readonly property color linkColor: highlightColor
+    readonly property int smallLinkFontSize: dp(12)
 
     readonly property int fontSizeMedium: dp(17)
     readonly property int fontSizeSmall: dp(16) // Theme.listItem.fontSizeText
