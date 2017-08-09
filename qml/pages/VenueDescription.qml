@@ -55,13 +55,15 @@ BVApp.Page {
             positionSource: page.positionSource
 
             opacity: flicka.scrolledUpRatio
-            height: page.height / 3
+            height: page.height / 2.56
             shrinkHeightBy: flicka.contentY
 
             anchors {
                 left: parent.left
                 right: parent.right
                 top: parent.top
+
+                bottomMargin: BVApp.Theme.paddingSmall
             }
         }
 
@@ -73,7 +75,11 @@ BVApp.Page {
                 left: parent.left
                 right: parent.right
                 top: locationheader.bottom
-                margins: BVApp.Theme.paddingMedium
+
+                leftMargin: BVApp.Theme.horizontalPageMargin
+                rightMargin: BVApp.Theme.horizontalPageMargin
+                topMargin: BVApp.Theme.paddingSmall
+                bottomMargin: BVApp.Theme.paddingLarge
             }
 
             opacity: flicka.scrolledUpRatio
