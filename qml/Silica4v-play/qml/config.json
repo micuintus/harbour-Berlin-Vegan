@@ -1,6 +1,6 @@
 {
   "title": "Berlin-Vegan",
-  "identifier": "com.jmastr.harbour-berlin-vegan",
+  "identifier": "org.berlin-vegan.bvapp",
   "orientation": "auto",
   "versioncode": 1,
   "versionname": "0.9.8-alpha",

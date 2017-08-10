@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.jmastr.harbour-berlin-vegan</string>
+	<string>org.berlin-vegan.bvapp</string>
 	<key>CFBundleDisplayName</key>
 	<string>Berlin-Vegan</string>
 	<key>CFBundleName</key>
