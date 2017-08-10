@@ -66,7 +66,7 @@ SilicaListView {
                color: BVApp.Theme.secondaryColor
                textFormat: Text.StyledText
 
-               text: "<a href=\"URL\">" + model.url + "</a>"
+               text: "<a href='URL'>" + model.url + "</a>"
                linkColor: BVApp.Theme.linkColor
                onLinkActivated: Qt.openUrlExternally(model.url)
             }

@@ -189,48 +189,76 @@
     <message id="id-berlin-vegan">
         <location filename="../qml/components-v-play/Page.qml" line="7"/>
         <location filename="../qml/cover/CoverPage.qml" line="71"/>
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="67"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="72"/>
         <location filename="../qml/pages/VenueList.qml" line="40"/>
         <source>Berlin-Vegan</source>
         <translation>Berlin-Vegan</translation>
     </message>
+    <message id="id-about-cross-platform-app">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="89"/>
+        <source>Cross-platform app</source>
+        <translation>Cross-platform app</translation>
+    </message>
+    <message id="id-about-for-sailfish-and-ios">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="99"/>
+        <source>for SailfishOS and iOS</source>
+        <translation>for SailfishOS and iOS</translation>
+    </message>
     <message id="id-version">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="112"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="114"/>
         <source>Version</source>
         <translation>Version</translation>
     </message>
+    <message id="id-development">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="132"/>
+        <source>Development:</source>
+        <translation>Development:</translation>
+    </message>
+    <message id="id-ui-design">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="170"/>
+        <source>UI design:</source>
+        <translation>UI design:</translation>
+    </message>
     <message id="id-bvapp-is-free-software">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="134"/>
-        <source>The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): you can redistribute it and/or modify it under the terms of the &lt;a href=\&quot;GPL\&quot;&gt;GNU General Public License&lt;/a&gt; as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
-        <oldsource>The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS):</oldsource>
-        <translation>The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): you can redistribute it and/or modify it under the terms of the &lt;a href=\&quot;GPL\&quot;&gt;GNU General Public License&lt;/a&gt; as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</translation>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="201"/>
+        <source>Berlin-Vegan for SailfishOS and iOS is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
+        <oldsource>Berlin-Vegan for SailfishOS and iOS is &lt;a href=&amp;quot;refyou can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</oldsource>
+        <translation>Berlin-Vegan for SailfishOS and iOS is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</translation>
     </message>
     <message id="id-view-gplv2">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="162"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="224"/>
         <source>View GPLv2</source>
         <translation>View GPLv2</translation>
     </message>
     <message id="id-you-can-view-source-code-here">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="182"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="244"/>
         <source>You can view the source code here:</source>
         <translation>You can view the source code here:</translation>
     </message>
     <message id="id-many-thanks-to-bvapp-and-license">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="240"/>
-        <source>Many thanks goes to the &lt;a href=\&quot;berlinvegan\&quot;&gt;editorial team of berlin-vegan.de&lt;/a&gt; for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).</source>
-        <oldsource>Many thanks goes to the &lt;a href=\&quot;berlinvegan\&quot;&gt;editorial team of berlin-vegan.de&lt;/a&gt; </oldsource>
-        <translation>Many thanks goes to the &lt;a href=\&quot;berlinvegan\&quot;&gt;editorial team of berlin-vegan.de&lt;/a&gt; for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).</translation>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="302"/>
+        <source>Many thanks goes to the &lt;a href=&apos;ref&apos;&gt;editorial team of berlin-vegan.de&lt;/a&gt; for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).</source>
+        <translation>Many thanks goes to the &lt;a href=&apos;ref&apos;&gt;editorial team of berlin-vegan.de&lt;/a&gt; for creating and maintaining the Berlin-Vegan project with its marvelous restaurant database, which this app uses. This content is released under the terms of the Attribution-NonCommercial 4.0 International Creative Commons license (CC BY-NC 4.0).</translation>
     </message>
     <message id="id-view-cc-by-nc">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="262"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="325"/>
         <source>View CC BY-NC</source>
         <translation>View CC BY-NC</translation>
     </message>
-    <message id="id-thanks-to-qt-and-other-3rd-party">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="300"/>
-        <source>Apart from Qt and other wonderful FOSS components of jolla&apos;s SailfishOS SDK, this application greatfully makes use of the following third party Free Software projects:</source>
-        <oldsource>Apart from Qt and other wonderful FOSS components of jolla&apos;s SailfishOS SDK, this application</oldsource>
-        <translation>Apart from Qt and other wonderful FOSS components of jolla&apos;s SailfishOS SDK, this application greatfully makes use of the following third party Free Software projects:</translation>
+    <message id="id-thanks-to-qt">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="364"/>
+        <source>Berlin-Vegan for iOS and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS it is realized with the cross-platform V-Play Engine.</source>
+        <translation>Berlin-Vegan for iOS and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS it is realized with the cross-platform V-Play Engine.</translation>
+    </message>
+    <message id="id-thanks-to-mapbox">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="390"/>
+        <source>We would like to thank Mapbox for donating &lt;a href=&apos;ref&apos;&gt;their astonishing Mapbox GL Plugin&lt;/a&gt; to the Qt project, which makes hardware accelerated vector maps possible for this app.</source>
+        <translation>We would like to thank Mapbox for donating &lt;a href=&apos;ref&apos;&gt;their astonishing Mapbox GL Plugin&lt;/a&gt; to the Qt project, which makes hardware accelerated vector maps possible for this app.</translation>
+    </message>
+    <message id="id-thanks-to-other-3rd-party-sw">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="432"/>
+        <source>Moreover, this application greatfully makes use of the following third party Free Software projects:</source>
+        <translation>Moreover, this application greatfully makes use of the following third party Free Software projects:</translation>
     </message>
     <message id="id-license">
         <location filename="../qml/pages/about/LicenseViewer.qml" line="69"/>
