@@ -46,6 +46,11 @@ BVApp.Page {
                 title: qsTrId("id-about-page-title")
             }
 
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge
+            }
+
             Image  {
                 id: logo
                 source: "BerlinVegan.svg"
@@ -67,13 +72,12 @@ BVApp.Page {
                 text: qsTrId("id-berlin-vegan")
                 font.pixelSize: BVApp.Theme.fontSizeLarge
 
-                color: BVApp.Theme.linkColor
+                color: BVApp.Theme.highlightColor
 
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
             }
-
 
             Item {
                 width: parent.width
@@ -81,32 +85,30 @@ BVApp.Page {
             }
 
             Label {
-                text: "Copyright \u00A9 2016 by micu"
+                          //% "Cross-platform app"
+                text: qsTrId("id-about-cross-platform-app")
                 font.pixelSize: BVApp.Theme.fontSizeSmall
-                color: BVApp.Theme.linkColor
+                color: BVApp.Theme.highlightColor
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
             }
 
             Label {
-                text: "&lt;<a href=\"micupage\">micuintus.de</a>\>"
+                        //% "for SailfishOS and iOS"
+                text: qsTrId("id-about-for-sailfish-and-ios")
                 font.pixelSize: BVApp.Theme.fontSizeSmall
-                color: BVApp.Theme.linkColor
-                textFormat: Text.StyledText
+                color: BVApp.Theme.highlightColor
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
-
-                onLinkActivated: Qt.openUrlExternally("http://www.micuintus.de/")
-                linkColor: BVApp.Theme.linkColor
-
             }
 
             Item {
                 width: parent.width
-                height: BVApp.Theme.paddingMedium
+                height: BVApp.Theme.paddingSmall
             }
+
             Label {
                             //% "Version"
                 text: qsTrId("id-version") + ": " + Qt.application.version
@@ -119,6 +121,71 @@ BVApp.Page {
                 }
             }
 
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge*2
+            }
+
+            Label {
+                    //% "Development:"
+                text: qsTrId("id-development")
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Label {
+                text: "micu <a href='ref'>&lt;www.micuintus.de&gt;</a>"
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.highlightColor
+                textFormat: Text.StyledText
+                linkColor: BVApp.Theme.linkColor
+                onLinkActivated: Qt.openUrlExternally("http://www.micuintus.de")
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Label {
+                text: "Julian <julian@veggi.es>"
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.highlightColor
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge
+
+            }
+
+            Label {
+                         //% "UI design:"
+                text: qsTrId("id-ui-design")
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+
+            Label {
+                text: "Robin <robin@siebzehn3.de>"
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.highlightColor
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+
             Item {
                 width: parent.width
                 height: BVApp.Theme.paddingLarge * 2
@@ -126,28 +193,23 @@ BVApp.Page {
 
             Label {
                 id: freeSoftwareBla
-                //% "The Berlin-Vegan guide (SailfishOS app) is Free Software (FOSS): "
+                //% "Berlin-Vegan for SailfishOS and iOS is <a href='ref'>Free Software</a>: "
                 //% "you can redistribute it and/or modify it under the terms of the "
-                //% "<a href=\"GPL\">GNU General Public License</a> as published by the "
+                //% "GNU General Public License as published by the "
                 //% "Free Software Foundation, either version 2 of the license, or "
                 //% "(at your option) any later version."
                 text: qsTrId("id-bvapp-is-free-software")
                 wrapMode: Text.WordWrap
                 font.pixelSize: BVApp.Theme.fontSizeSmall
                 color: BVApp.Theme.secondaryColor
+                linkColor: BVApp.Theme.linkColor
                 textFormat: Text.StyledText
                 anchors {
                     left: parent.left
                     right: parent.right
                     margins: BVApp.Theme.paddingLarge
                 }
-
-                linkColor: BVApp.Theme.linkColor
-                onLinkActivated:  pageStack.push(Qt.resolvedUrl("LicenseViewer.qml"),
-                                                 {
-                                                     "licenseFile": "LICENSE",
-                                                     "licenseName": "GPLv2"
-                                                 })
+                onLinkActivated:  Qt.openUrlExternally("http://www.micuintus.de/2010/10/27/die-gesellschaftliche-bedeutung-freier-software-und-offener-standards/")
             }
 
 
@@ -202,10 +264,10 @@ BVApp.Page {
 
                 font.pixelSize: BVApp.Theme.smallLinkFontSize
                 color: BVApp.Theme.secondaryColor
+                linkColor: BVApp.Theme.linkColor
                 textFormat: Text.StyledText
 
-                text: "<a href=\"githubwebsite\">https://github.com/micuintus/harbour-Berlin-Vegan</a>"
-                linkColor: BVApp.Theme.linkColor
+                text: "<a href='ref'>https://github.com/micuintus/harbour-Berlin-Vegan</a>"
                 onLinkActivated: Qt.openUrlExternally("https://github.com/micuintus/harbour-Berlin-Vegan")
             }
 
@@ -231,7 +293,7 @@ BVApp.Page {
             }
 
             Label {
-                //% "Many thanks goes to the <a href=\"berlinvegan\">editorial "
+                //% "Many thanks goes to the <a href='ref'>editorial "
                 //% "team of berlin-vegan.de</a> for creating and maintaining the "
                 //% "Berlin-Vegan project with its marvelous restaurant database, "
                 //% "which this app uses. This content is released under the terms "
@@ -241,6 +303,8 @@ BVApp.Page {
                 wrapMode: Text.WordWrap
                 font.pixelSize: BVApp.Theme.fontSizeSmall
                 color: BVApp.Theme.secondaryColor
+                linkColor: BVApp.Theme.linkColor
+
                 textFormat: Text.StyledText
                 anchors {
                     left: parent.left
@@ -248,8 +312,7 @@ BVApp.Page {
                     margins: BVApp.Theme.paddingLarge
                 }
 
-                linkColor: BVApp.Theme.linkColor
-                onLinkActivated: Qt.openUrlExternally("http://www.berlin-vegan.de/team/kontakt/")
+                onLinkActivated: Qt.openUrlExternally("http://www.berlin-vegan.de/team/wir/")
             }
 
             Item {
@@ -294,10 +357,79 @@ BVApp.Page {
 
 
             Label {
-                //% "Apart from Qt and other wonderful FOSS components of jolla's "
-                //% "SailfishOS SDK, this application greatfully makes use of the "
+                //% "Berlin-Vegan for iOS and SailfishOS is being developed "
+                //% "with the free and open source cross-platform framework <a href='ref'>Qt</a>. "
+                //% "While the app uses jolla's native Qt-based SDK on SailfishOS, "
+                //% "on iOS it is realized with the cross-platform V-Play Engine."
+                text: qsTrId("id-thanks-to-qt")
+                wrapMode: Text.WordWrap
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
+                linkColor: BVApp.Theme.linkColor
+
+                textFormat: Text.StyledText
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: BVApp.Theme.paddingLarge
+                }
+
+                onLinkActivated: Qt.openUrlExternally("https://www.qt.io/")
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingMedium
+                visible: BVApp.Platform.isVPlay
+            }
+
+            Label {
+                //% "We would like to thank Mapbox for donating <a href='ref'>their astonishing "
+                //% "Mapbox GL Plugin</a> to the Qt project, which makes hardware accelerated vector maps "
+                //% "possible for this app."
+                text: qsTrId("id-thanks-to-mapbox")
+
+                visible: BVApp.Platform.isVPlay
+
+                wrapMode: Text.WordWrap
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
+                linkColor: BVApp.Theme.linkColor
+                textFormat: Text.StyledText
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: BVApp.Theme.paddingLarge
+                }
+
+                onLinkActivated: Qt.openUrlExternally("http://blog.qt.io/blog/2016/10/04/customizable-vector-maps-with-the-mapbox-qt-sdk")
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge * 1.3
+            }
+
+            Separator {
+                width: parent.width
+                horizontalAlignment: Qt.AlignCenter
+                color: BVApp.Theme.secondaryHighlightColor
+                height: 2
+
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge * 1.3
+            }
+
+            Label {
+                //% "Moreover, this application greatfully makes use of the "
                 //% "following third party Free Software projects:"
-                text: qsTrId("id-thanks-to-qt-and-other-3rd-party")
+                text: qsTrId("id-thanks-to-other-3rd-party-sw")
                 wrapMode: Text.WordWrap
                 font.pixelSize: BVApp.Theme.fontSizeSmall
                 color: BVApp.Theme.secondaryColor
@@ -308,7 +440,6 @@ BVApp.Page {
                     margins: BVApp.Theme.paddingLarge
                 }
             }
-
 
             ThirdPartySoftware {
 
