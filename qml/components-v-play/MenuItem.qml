@@ -18,4 +18,8 @@ NavigationItem {
     {
         initialPage: page
     }
+
+    onSelected: {
+        navigationStack.popAllExceptFirst()
+    }
 }
