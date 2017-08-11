@@ -109,8 +109,8 @@
     <message id="id-organic">
         <location filename="../qml/components-generic/VenueDetails.qml" line="87"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="93"/>
-        <source>Cert. organic offers</source>
-        <translation>Cert. organic offers</translation>
+        <source>Organic products</source>
+        <translation>Organic products</translation>
     </message>
     <message id="id-gluten-free">
         <location filename="../qml/components-generic/VenueDetails.qml" line="93"/>
@@ -232,8 +232,8 @@
     </message>
     <message id="id-filter-vegan-category">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="54"/>
-        <source>Veg*an Category</source>
-        <translation>Veg*an Category</translation>
+        <source>Veg*an category</source>
+        <translation>Veg*an category</translation>
     </message>
     <message id="id-search">
         <location filename="../qml/components-v-play/SearchField.qml" line="15"/>

@@ -82,8 +82,8 @@
         <translation>Kategorie</translation>
     </message>
     <message id="id-organic">
-        <source>Cert. organic offers</source>
-        <translation>Bio-zert. Optionen</translation>
+        <source>Organic products</source>
+        <translation>Bioware</translation>
     </message>
     <message id="id-gluten-free">
         <source>Gluten-free options</source>
@@ -170,7 +170,7 @@
         <translation>Filter</translation>
     </message>
     <message id="id-filter-vegan-category">
-        <source>Veg*an Category</source>
+        <source>Veg*an category</source>
         <translation>Veg*an-Kategorie</translation>
     </message>
     <message id="id-search">

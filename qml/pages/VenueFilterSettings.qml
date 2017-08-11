@@ -50,7 +50,7 @@ BVApp.Page {
             }
 
             BVApp.SectionHeader {
-                //% "Veg*an Category"
+                //% "Veg*an category"
                 text: qsTrId("id-filter-vegan-category")
                 icon: BVApp.Theme.iconFor("leaf")
             }
