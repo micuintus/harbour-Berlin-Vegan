@@ -444,33 +444,41 @@ BVApp.Page {
             ThirdPartySoftware {
 
                model: ListModel {
-                    ListElement {
-                        name: "Cutehacks Gel"
-                        url: "https://github.com/Cutehacks/gel/"
-                        licenseName: "MIT"
+
+                   ListElement {
+                       name: "Sailfish Silica"
+                       url: "https://github.com/dm8tbr/sailfishsilica-qt5"
+                       licenseName: "MIT"
+                       licenseFile: "qrc:/imports/Sailfish/Silica/OpacityRampEffectBase.qml"
+                   }
+
+                   ListElement {
+                       name: "Berlin-Vegan (Android app)"
+                       url: "https://github.com/Berlin-Vegan/berlin-vegan-guide"
+                       licenseName: "GPLv2"
+                       licenseFile: "LICENSE"
+                   }
+
+                   ListElement {
+                       name: "Cutehacks Gel"
+                       url: "https://github.com/Cutehacks/gel/"
+                       licenseName: "MIT"
                         licenseFile: "LICENSE.Cutehacks"
-                    }
+                   }
 
-                    ListElement {
-                        name: "qml-utils"
-                        url: "https://github.com/kromain/qml-utils"
-                        licenseName: "MIT"
-                        licenseFile: "LICENSE.qml-utils"
-                    }
+                   ListElement {
+                       name: "qml-utils"
+                       url: "https://github.com/kromain/qml-utils"
+                       licenseName: "MIT"
+                       licenseFile: "LICENSE.qml-utils"
+                   }
 
-                    ListElement {
-                        name: "YTPlayer"
-                        url: "https://github.com/tworaz/sailfish-ytplayer"
-                        licenseName: "3-clause BSD license (\"Modified BSD License\")"
-                        licenseFile: "LICENSE.YTPlayer"
-                    }
-
-                    ListElement {
-                        name: "Berlin-Vegan (Android app)"
-                        url: "https://github.com/Berlin-Vegan/berlin-vegan-guide"
-                        licenseName: "GPLv2"
-                        licenseFile: "LICENSE"
-                    }
+                   ListElement {
+                       name: "YTPlayer"
+                       url: "https://github.com/tworaz/sailfish-ytplayer"
+                       licenseName: "3-clause BSD license (\"Modified BSD License\")"
+                       licenseFile: "LICENSE.YTPlayer"
+                   }
                 }
             }
         }
