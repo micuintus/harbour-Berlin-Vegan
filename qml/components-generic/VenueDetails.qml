@@ -83,7 +83,7 @@ Item {
         }
 
         DetailItem {
-                   //% "Cert. organic offers"
+                   //% "Organic products"
             label: qsTrId("id-organic")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
         }
