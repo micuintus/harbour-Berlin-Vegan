@@ -29,11 +29,12 @@ import BerlinVegan.components.platform 1.0 as BVApp
 BVApp.Page {
 
     id: page
+                //% "About"
+    title: qsTrId("id-about-page-title")
 
     SilicaFlickable {
 
         anchors.fill: parent
-
         contentHeight: column.height
 
         Column {
@@ -42,17 +43,14 @@ BVApp.Page {
 
             PageHeader {
                 id: pageHeader
-                             //% "About"
-                title: qsTrId("id-about-page-title")
-            }
-
-            Item {
-                width: parent.width
-                height: BVApp.Theme.paddingLarge
+                visible: BVApp.Platform.isSailfish
+                title: page.title
             }
 
             Image  {
                 id: logo
+                visible: BVApp.Platform.isSailfish
+
                 source: "BerlinVegan.svg"
                 sourceSize.width: page.width / 3.2
                 sourceSize.height: page.width / 3.2
@@ -61,52 +59,90 @@ BVApp.Page {
                 }
             }
 
+            // Semi-hack to make different Layouts on Sailfish and V-Play possible
             Item {
-                width: parent.width
-                height: BVApp.Theme.paddingMedium
-            }
+                width: page.width
+                height: BVApp.Platform.isVPlay ?
+                            vPlayHeaderPicture.height * 0.95
+                          : titleColumn.height
 
-            Label {
-                id: underLogoText
-                            //% "Berlin-Vegan"
-                text: qsTrId("id-berlin-vegan")
-                font.pixelSize: BVApp.Theme.fontSizeLarge
+                Image  {
+                    id: vPlayHeaderPicture
+                    visible: BVApp.Platform.isVPlay
 
-                color: BVApp.Theme.highlightColor
+                    fillMode: Image.PreserveAspectCrop
+                    source: "qrc:/images/Platzhalter_v2_mitSchriftzug.jpg"
+                    sourceSize.width: parent.width
+                    width: parent.width
+                }
 
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
+                Column {
+                    id: titleColumn
+                    width: parent.width
+
+                    Item {
+                        width: parent.width
+                        height: BVApp.Platform.isVPlay ?
+                                    vPlayHeaderPicture.width * 0.04
+                                  : BVApp.Theme.paddingMedium
+                    }
+
+                    Label {
+                                    //% "Berlin-Vegan"
+                        text: qsTrId("id-berlin-vegan")
+                        font.pixelSize: BVApp.Platform.isVPlay ?
+                                          BVApp.Theme.fontSizeExtraLarge
+                                        : BVApp.Theme.fontSizeLarge
+
+                        color: BVApp.Platform.isVPlay ?
+                                 BVApp.Theme.highlightDimmerColor
+                               : BVApp.Theme.highlightColor
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                        }
+                    }
+
+                    Item {
+                        width: parent.width
+                        height: BVApp.Platform.isVPlay ?
+                                    vPlayHeaderPicture.width * 0.02
+                                  : BVApp.Theme.paddingMedium
+                    }
+
+                    Label {
+                                  //% "Cross-platform app"
+                        text: qsTrId("id-about-cross-platform-app")
+                        font.pixelSize: BVApp.Platform.isVPlay ?
+                                          BVApp.Theme.fontSizeExtraSmall
+                                        : BVApp.Theme.fontSizeSmall
+                        color: BVApp.Platform.isVPlay ?
+                                 BVApp.Theme.highlightDimmerColor
+                               : BVApp.Theme.highlightColor
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                        }
+                    }
+
+                    Label {
+                                //% "for SailfishOS and iOS"
+                        text: qsTrId("id-about-for-sailfish-and-ios")
+                        font.pixelSize: BVApp.Platform.isVPlay ?
+                                          BVApp.Theme.fontSizeExtraSmall
+                                        : BVApp.Theme.fontSizeSmall
+                        color: BVApp.Platform.isVPlay ?
+                                 BVApp.Theme.highlightDimmerColor
+                               : BVApp.Theme.highlightColor
+                        anchors {
+                            horizontalCenter: parent.horizontalCenter
+                        }
+                    }
                 }
             }
 
             Item {
+                visible: BVApp.Platform.isSailfish
                 width: parent.width
-                height: BVApp.Theme.paddingMedium
-            }
-
-            Label {
-                          //% "Cross-platform app"
-                text: qsTrId("id-about-cross-platform-app")
-                font.pixelSize: BVApp.Theme.fontSizeSmall
-                color: BVApp.Theme.highlightColor
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                }
-            }
-
-            Label {
-                        //% "for SailfishOS and iOS"
-                text: qsTrId("id-about-for-sailfish-and-ios")
-                font.pixelSize: BVApp.Theme.fontSizeSmall
-                color: BVApp.Theme.highlightColor
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                }
-            }
-
-            Item {
-                width: parent.width
-                height: BVApp.Theme.paddingSmall
+                height: BVApp.Theme.paddingMedium * 1.3
             }
 
             Label {
@@ -184,7 +220,6 @@ BVApp.Page {
                     horizontalCenter: parent.horizontalCenter
                 }
             }
-
 
             Item {
                 width: parent.width
