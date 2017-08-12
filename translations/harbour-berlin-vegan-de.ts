@@ -233,5 +233,9 @@
         <source>Moreover, this application greatfully makes use of the following third party Free Software projects:</source>
         <translation>Darüber hinaus macht diese Applikation mit großem Dank von den folgenden Freien-Software-Projekten Gebrauch:</translation>
     </message>
+    <message id="id-no-results">
+        <source>No filter or search results</source>
+        <translation>Keine Filter- oder Suchergebnisse</translation>
+    </message>
 </context>
 </TS>

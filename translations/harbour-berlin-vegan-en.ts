@@ -310,5 +310,10 @@
         <source>Moreover, this application greatfully makes use of the following third party Free Software projects:</source>
         <translation>Moreover, this application greatfully makes use of the following third party Free Software projects:</translation>
     </message>
+    <message id="id-no-results">
+        <location filename="../qml/pages/VenueList.qml" line="68"/>
+        <source>No filter or search results</source>
+        <translation>No filter or search results</translation>
+    </message>
 </context>
 </TS>

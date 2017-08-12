@@ -61,6 +61,23 @@ BVApp.Page {
             bottom: parent.bottom
         }
 
+        Label {
+            id: emptyText
+            anchors.fill: parent
+                        //% "No filter or search results"
+            text: qsTrId("id-no-results")
+            wrapMode: Text.WordWrap
+
+            color: BVApp.Theme.secondaryColor
+            font.pixelSize: BVApp.Theme.fontSizeMedium
+
+            // Bug: does not trigger on first start on Desktop, but works on Sailfish and iOS
+            visible: listView.count === 0 && !busyGuy.running
+
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
+
         BusyIndicator {
             id: busyGuy
             anchors.centerIn: parent
