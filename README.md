@@ -1,7 +1,8 @@
-# harbour-Berlin-Vegan
+# Berlin-Vegan for SailfishOS and iOS
 
-harbour-Berlin-Vegan is the [SailfishOS](https://en.wikipedia.org/wiki/Sailfish_OS) version
-of the Berlin-Vegan guide. There is also a [FOSS Android version](https://github.com/Berlin-Vegan/berlin-vegan-guide).
+Berlin-Vegan is a Qt-based cross-platform app for [SailfishOS](https://en.wikipedia.org/wiki/Sailfish_OS) and iOS.
+
+There is also a [FOSS Android version](https://github.com/Berlin-Vegan/berlin-vegan-guide).
 
 With the Berlin-Vegan guide, you have got quick access to an overview of the vegan
 food and shopping possibilities in Berlin, Germany --- even while you are out and about.
@@ -14,7 +15,7 @@ trying to live their life in a greener and more animal friendly way.
 
 ----
 
-The harbour-Berlin-Vegan guide is [Free Software](http://www.micuintus.de/2010/10/27/die-gesellschaftliche-bedeutung-freier-software-und-offener-standards/):
+Berlin-Vegan guide is [Free Software](http://www.micuintus.de/2010/10/27/die-gesellschaftliche-bedeutung-freier-software-und-offener-standards/):
 
 You can redistribute it and/or modify it under the terms of the
 [GNU General Public License](https://github.com/micuintus/harbour-Berlin-Vegan/blob/master/qml/pages/about/LICENSE)
@@ -29,6 +30,7 @@ This content is released under the terms of the [Attribution-NonCommercial 4.0 I
 
 ----
 
-Apart from Qt and other wonderful FOSS components of jolla's SailfishOS SDK, this application
-greatfully makes use of [third party Free Software projects](https://github.com/micuintus/harbour-Berlin-Vegan/blob/master/qml/pages/about/AboutBerlinVegan.qml#L299).
+Berlin-Vegan for iOS and SailfishOS is being developed with the free and open source cross-platform framework [Qt](https://www.qt.io/). While the app uses jolla's native Qt-based SDK on SailfishOS, on iOS it is realized with the cross-platform [V-Play Engine](https://v-play.net/).
+
+Moreover, this application greatfully makes use of [third party Free Software projects](https://github.com/micuintus/harbour-Berlin-Vegan/blob/master/qml/pages/about/AboutBerlinVegan.qml#L299).
 
