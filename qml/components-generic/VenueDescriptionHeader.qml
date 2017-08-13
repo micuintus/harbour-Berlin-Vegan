@@ -51,8 +51,9 @@ Item {
 
         source: pictureAvailable
                 ? pictures[0].url
-                : "qrc:/images/Platzhalter_v2_mitSchriftzug.jpg"
-
+                : "qrc:/images/Platzhalter_v2_mitSchriftzug" + (BVApp.Platform.isSailfish ?
+                                                                  "_alpha.png"
+                                                                : ".jpg")
         fillMode: Image.PreserveAspectCrop
 
         visible: pictureAvailable || BVApp.Platform.isVPlay
@@ -76,14 +77,14 @@ Item {
     }
 
     Colorize {
-        property color color: BVApp.Theme.highlightColor
-        anchors.fill: image
+        readonly property color srcColor: BVApp.Theme.highlightColor
+        hue: TinyColor.rgbToHsl(srcColor.r, srcColor.g, srcColor.b).h
         source: ramp
         visible: !pictureAvailable && BVApp.Platform.isSailfish
-        hue: TinyColor.rgbToHsl(color.r, color.g, color.b).h;
-        saturation: 0.8
+        anchors.fill: image
         cached: true
     }
+
 
     Rectangle {
         property int xMargin: 10
@@ -106,7 +107,6 @@ Item {
         title : name
         y: initalY + shrinkHeightBy * 0.5
     }
-
 
 }
 
