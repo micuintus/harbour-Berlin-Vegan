@@ -26,8 +26,12 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 
+import QtGraphicalEffects 1.0
+
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
+
+import "tinycolor.js" as TinyColor
 
 
 Item {
@@ -51,6 +55,8 @@ Item {
 
         fillMode: Image.PreserveAspectCrop
 
+        visible: pictureAvailable || BVApp.Platform.isVPlay
+
         height: Math.max(parent.height - shrinkHeightBy,0)
         width: parent.width
 
@@ -60,12 +66,23 @@ Item {
     }
 
     OpacityRampEffect {
+        id: ramp
         enabled: BVApp.Platform.isSailfish
         anchors.fill: image
         sourceItem: image
         direction: BVApp.Theme.opacityRampTopToBottom
         offset: 0.54
         slope: 2.24
+    }
+
+    Colorize {
+        property color color: BVApp.Theme.highlightColor
+        anchors.fill: image
+        source: ramp
+        visible: !pictureAvailable && BVApp.Platform.isSailfish
+        hue: TinyColor.rgbToHsl(color.r, color.g, color.b).h;
+        saturation: 0.8
+        cached: true
     }
 
     Rectangle {
