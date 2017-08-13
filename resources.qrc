@@ -24,5 +24,6 @@
         <file>translations/harbour-berlin-vegan-en.ts</file>
         <file>translations/harbour-berlin-vegan.ts</file>
         <file>qml/pages/VenueFilterSettings.qml</file>
+        <file>qml/pages/about/LICENSE.TinyColor</file>
     </qresource>
 </RCC>

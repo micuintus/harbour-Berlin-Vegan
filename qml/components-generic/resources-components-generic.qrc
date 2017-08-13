@@ -10,5 +10,6 @@
         <file>VenueDescriptionAlgorithms.js</file>
         <file>VenueDescriptionHeader.qml</file>
         <file>VenueDetails.qml</file>
+        <file>tinycolor.js</file>
     </qresource>
 </RCC>

@@ -495,6 +495,13 @@ BVApp.Page {
                    }
 
                    ListElement {
+                       name: "TinyColor"
+                       url: "https://github.com/bgrins/TinyColor"
+                       licenseName: "MIT"
+                       licenseFile: "LICENSE.TinyColor"
+                   }
+
+                   ListElement {
                        name: "qml-utils"
                        url: "https://github.com/kromain/qml-utils"
                        licenseName: "MIT"
