@@ -34,7 +34,9 @@ SilicaListView {
     delegate: ListItem {
 
         width: parent.width
-        contentHeight: column.height
+        contentHeight: model.filterOut ?
+                         0
+                       : column.height
 
         Column {
             id: column
