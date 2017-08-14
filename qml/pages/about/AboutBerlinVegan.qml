@@ -481,6 +481,7 @@ BVApp.Page {
                model: ListModel {
 
                    ListElement {
+                       filterOut: BVApp.Platform.isSailfish
                        name: "Sailfish Silica"
                        url: "https://github.com/dm8tbr/sailfishsilica-qt5"
                        licenseName: "MIT"
