@@ -66,8 +66,8 @@
 (vegan deklariert)</translation>
     </message>
     <message id="id-vegan">
-        <source>100% vegan</source>
-        <translation>100% vegan</translation>
+        <source>vegan</source>
+        <translation>vegan</translation>
     </message>
     <message id="id-opening-hours">
         <source>Opening hours</source>

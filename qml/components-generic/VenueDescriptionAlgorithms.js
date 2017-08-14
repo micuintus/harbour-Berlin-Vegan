@@ -49,7 +49,7 @@ function restaurantCategory(key)
         case 3:  return qsTrId("id-vegetarian");
                               //% "vegetarian \n(vegan declared)"
         case 4:  return qsTrId("id-vegetarian-declared");
-                         //% "100% vegan"
+                         //% "vegan"
         case 5:  return qsTrId("id-vegan");
                               //% "unknown"
         default: return qsTrId("id-unknown");
