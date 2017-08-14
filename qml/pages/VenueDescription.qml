@@ -40,14 +40,14 @@ BVApp.Page {
     SilicaFlickable {
         id: flicka
         anchors.fill: parent
-        readonly property var nonDescriptionHeaderHeight: locationheader.height + iconToolBar.height
         contentHeight: descriptionText.y + descriptionText.height + BVApp.Theme.paddingLarge
+        readonly property real nonDescriptionHeaderHeight: locationHeader.height
+                                                          + underHeaderBar.height
+                                                          + iconToolBar.height
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
 
-        VerticalScrollDecorator {}
-
         BVApp.VenueDescriptionHeader {
-            id: locationheader
+            id: locationHeader
             name: restaurant.name
             pictures: restaurant.pictures
             positionSource: page.positionSource
@@ -65,47 +65,55 @@ BVApp.Page {
             }
         }
 
-        Label {
-            id: streetLabel
-            text: restaurant.street
-            font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-            color: BVApp.Platform.isSailfish ? BVApp.Theme.highlightColor : BVApp.Theme.secondaryColor
-            truncationMode: TruncationMode.Fade
+        Item {
+            id: underHeaderBar
+
+            opacity: flicka.scrolledUpRatio
+            width: parent.width
+            height: streetLabel.height
 
             anchors {
-                left: parent.left
-                right: distanceLabel.left
-                top: locationheader.bottom
+                top: locationHeader.bottom
 
-                leftMargin: BVApp.Theme.horizontalPageMargin
-                rightMargin: BVApp.Theme.horizontalPageMargin
                 topMargin: BVApp.Theme.paddingMedium
                 bottomMargin: BVApp.Theme.paddingMedium
             }
 
-            opacity: flicka.scrolledUpRatio
-        }
+            Label {
+                id: streetLabel
+                text: restaurant.street
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+                color: BVApp.Platform.isSailfish ?
+                         BVApp.Theme.highlightColor
+                       : BVApp.Theme.secondaryColor
+                truncationMode: TruncationMode.Fade
 
-        Label {
-            id: distanceLabel
-            text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
-                  ? BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
-                    QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord))
-                  : ""
-            font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-            color: BVApp.Theme.highlightColor
+                anchors {
+                    top: parent.top
+                    left: parent.left
 
-            anchors {
-                right: parent.right
-                top: locationheader.bottom
-
-                leftMargin: BVApp.Theme.horizontalPageMargin
-                rightMargin: BVApp.Theme.horizontalPageMargin
-                topMargin: BVApp.Theme.paddingMedium
-                bottomMargin: BVApp.Theme.paddingMedium
+                    leftMargin: BVApp.Theme.horizontalPageMargin
+                }
             }
 
-            opacity: flicka.scrolledUpRatio
+            Label {
+                id: distanceLabel
+                text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
+                      ? BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
+                        QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord))
+                      : ""
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+                color: BVApp.Theme.highlightColor
+                horizontalAlignment: Text.AlignRight
+
+                anchors {
+                    top: parent.top
+                    right: parent.right
+                    left: streetLabel.right
+
+                    rightMargin: BVApp.Theme.horizontalPageMargin
+                }
+            }
         }
 
         BVApp.IconToolBar {
@@ -115,7 +123,7 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: distanceLabel.bottom
+                top: underHeaderBar.bottom
 
                 leftMargin: BVApp.Theme.horizontalPageMargin
                 rightMargin: BVApp.Theme.horizontalPageMargin
@@ -173,8 +181,6 @@ BVApp.Page {
                 margins: BVApp.Theme.paddingLarge
             }
         }
-        VerticalScrollDecorator {}
-
     }
 }
 
