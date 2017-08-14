@@ -88,8 +88,8 @@
     <message id="id-vegan">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="53"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="59"/>
-        <source>100% vegan</source>
-        <translation>100% vegan</translation>
+        <source>vegan</source>
+        <translation>vegan</translation>
     </message>
     <message id="id-opening-hours">
         <location filename="../qml/components-generic/VenueDetails.qml" line="50"/>
