@@ -59,6 +59,15 @@ Item {
         y: shrinkHeightBy
     }
 
+    OpacityRampEffect {
+        enabled: BVApp.Platform.isSailfish
+        anchors.fill: image
+        sourceItem: image
+        direction: BVApp.Theme.opacityRampTopToBottom
+        offset: 0.54
+        slope: 2.24
+    }
+
     Rectangle {
         property int xMargin: 10
         property int yMargin: 7

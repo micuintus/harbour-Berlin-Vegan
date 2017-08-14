@@ -53,7 +53,9 @@ BVApp.Page {
             positionSource: page.positionSource
 
             opacity: flicka.scrolledUpRatio
-            height: page.height / 3
+            height: BVApp.Platform.isSailfish ?
+                      page.height / 2.6
+                    : page.height / 3
             shrinkHeightBy: flicka.contentY
 
             anchors {
@@ -73,7 +75,12 @@ BVApp.Page {
             height: streetLabel.height
 
             anchors {
-                top: locationHeader.bottom
+                top:    BVApp.Platform.isVPlay ?
+                          locationHeader.bottom
+                        : undefined
+                bottom: BVApp.Platform.isSailfish ?
+                          locationHeader.bottom
+                        : undefined
 
                 topMargin: BVApp.Theme.paddingMedium
                 bottomMargin: BVApp.Theme.paddingMedium
