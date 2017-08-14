@@ -481,13 +481,6 @@ BVApp.Page {
                model: ListModel {
 
                    ListElement {
-                       name: "Sailfish Silica"
-                       url: "https://github.com/dm8tbr/sailfishsilica-qt5"
-                       licenseName: "MIT"
-                       licenseFile: "qrc:/imports/Sailfish/Silica/OpacityRampEffectBase.qml"
-                   }
-
-                   ListElement {
                        name: "Berlin-Vegan (Android app)"
                        url: "https://github.com/Berlin-Vegan/berlin-vegan-guide"
                        licenseName: "GPLv2"
@@ -498,7 +491,7 @@ BVApp.Page {
                        name: "Cutehacks Gel"
                        url: "https://github.com/Cutehacks/gel/"
                        licenseName: "MIT"
-                        licenseFile: "LICENSE.Cutehacks"
+                       licenseFile: "LICENSE.Cutehacks"
                    }
 
                    ListElement {
@@ -514,6 +507,22 @@ BVApp.Page {
                        licenseName: "3-clause BSD license (\"Modified BSD License\")"
                        licenseFile: "LICENSE.YTPlayer"
                    }
+
+                   Component.onCompleted:
+                   {
+                       // HACK B/C ListElement doesn't support 'real' properties
+                       // and we only want to include this ...
+                       if (BVApp.Platform.isVPlay)
+                       {
+                           insert(0,
+                           {
+                               "name": "Sailfish Silica",
+                               "url": "https://github.com/dm8tbr/sailfishsilica-qt5",
+                               "licenseName": "MIT",
+                               "licenseFile": "qrc:/imports/Sailfish/Silica/OpacityRampEffectBase.qml",
+                            });
+                        }
+                    }
                 }
             }
         }
