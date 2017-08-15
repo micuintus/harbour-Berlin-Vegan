@@ -21,7 +21,7 @@ IconButton {
         color: iconButton.color ? iconButton.color : BVApp.Theme.highlightColor
         font.family: BVApp.Theme.iconFor(type).fontFamily
 
-        font.pixelSize: scale ? BVApp.Theme.iconSizeLarge * scale : BVApp.Theme.iconSizeLarge
+        font.pixelSize: iconButton.scale ? BVApp.Theme.iconSizeLarge * iconButton.scale : BVApp.Theme.iconSizeLarge
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment:   iconButton.Layout.alignment ?
                                  Text.AlignVCenter
