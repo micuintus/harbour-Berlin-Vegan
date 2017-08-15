@@ -64,7 +64,7 @@ BVApp.Page {
         coordinate: positionSource.position.coordinate
 
         anchorPoint.x: currentPosImage.width / 2
-        anchorPoint.y: currentPosImage.height
+        anchorPoint.y: currentPosImage.height / 2
 
         sourceItem: BVApp.IconButton {
             id: currentPosImage
