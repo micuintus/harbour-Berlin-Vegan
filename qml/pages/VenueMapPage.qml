@@ -45,6 +45,7 @@ BVApp.Page {
             scale: 1.6
             // used only on v-play
             color: "red"
+            verticalAlignment: Text.AlignBottom
 
             onClicked: {
                 var query = venueCoordinate.latitude + "," + venueCoordinate.longitude

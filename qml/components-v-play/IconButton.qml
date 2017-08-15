@@ -10,6 +10,7 @@ IconButton {
     property string type
     property string color
     property real scale
+    property int verticalAlignment: Text.AlignVCenter
 
 
     AppText {
@@ -23,8 +24,7 @@ IconButton {
 
         font.pixelSize: iconButton.scale ? BVApp.Theme.iconSizeLarge * iconButton.scale : BVApp.Theme.iconSizeLarge
         horizontalAlignment: Text.AlignHCenter
-        verticalAlignment:   iconButton.Layout.alignment ?
-                                 Text.AlignVCenter
-                               : Text.AlignBottom
+        verticalAlignment: iconButton.verticalAlignment
     }
+
 }
