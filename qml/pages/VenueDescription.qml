@@ -187,10 +187,16 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                margins: BVApp.Theme.paddingLarge
                 top: BVApp.Platform.isVPlay ?
                        separator.bottom
                      : detailsCollapsible.bottom
+
+                topMargin:    BVApp.Platform.isSailfish ?
+                                BVApp.Theme.paddingSmall
+                              : BVApp.Theme.paddingLarge
+                bottomMargin: BVApp.Theme.paddingLarge
+                leftMargin:   BVApp.Theme.horizontalPageMargin
+                rightMargin:  BVApp.Theme.horizontalPageMargin
             }
         }
     }
