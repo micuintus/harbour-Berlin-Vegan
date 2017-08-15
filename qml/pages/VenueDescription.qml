@@ -162,6 +162,9 @@ BVApp.Page {
 
         Separator {
             id: separator
+
+            visible: BVApp.Platform.isVPlay
+
             width: parent.width
             horizontalAlignment: Qt.AlignCenter
             color: BVApp.Theme.dividerColor
@@ -184,8 +187,10 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: separator.bottom
                 margins: BVApp.Theme.paddingLarge
+                top: BVApp.Platform.isVPlay ?
+                       separator.bottom
+                     : detailsCollapsible.bottom
             }
         }
     }
