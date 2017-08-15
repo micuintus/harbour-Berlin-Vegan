@@ -55,7 +55,6 @@ Column {
 
             onClicked: Qt.openUrlExternally("tel:/" + restaurant.telephone)
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             enabled: typeof restaurant["telephone"] !== "undefined"
         }
 
@@ -84,7 +83,6 @@ Column {
                 }
             }
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
 
 
@@ -95,7 +93,6 @@ Column {
                                             ?             restaurant.website
                                             : "http://" + restaurant.website)
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             enabled: typeof restaurant["website"] !== "undefined"
         }
 
