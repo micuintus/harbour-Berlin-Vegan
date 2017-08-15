@@ -98,8 +98,10 @@ BVApp.Page {
                 anchors {
                     top: parent.top
                     left: parent.left
+                    right: distanceLabel.left
 
-                    leftMargin: BVApp.Theme.horizontalPageMargin
+                    leftMargin:  BVApp.Theme.horizontalPageMargin
+                    rightMargin: BVApp.Theme.paddingSmall
                 }
             }
 
@@ -116,7 +118,6 @@ BVApp.Page {
                 anchors {
                     top: parent.top
                     right: parent.right
-                    left: streetLabel.right
 
                     rightMargin: BVApp.Theme.horizontalPageMargin
                 }
