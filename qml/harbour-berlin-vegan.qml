@@ -42,7 +42,7 @@ ApplicationWindow
     property var favorite_ids
 
     VenueModel {
-        id: jsonVenueModel
+        id: gJsonVenueModel
     }
 
     PositionSource {
@@ -52,10 +52,9 @@ ApplicationWindow
      }
 
     VenueSortFilterProxyModel {
-        id: gjsonCollection
-        model: jsonVenueModel
+        id: gJsonCollection
+        model: gJsonVenueModel
         currentPosition: globalPositionSource.position.coordinate
-        property alias loadedCategory: jsonVenueModel.loadedCategory
     }
     
     function openDataBase() {
@@ -69,7 +68,7 @@ ApplicationWindow
     function applyFavoritesFromDataBase()
     {
        for (var i = 0; i < favorite_ids.rows.length; i++) {
-           jsonVenueModel.setFavorite(favorite_ids.rows.item(i).favorite_id, true);
+           gJsonVenueModel.setFavorite(favorite_ids.rows.item(i).favorite_id, true);
        }
     }
 
@@ -88,7 +87,7 @@ ApplicationWindow
         onFileLoaded:
         function(json)
         {
-            jsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Food);
+            gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Food);
             favoritesHook();
         }
     }
@@ -98,7 +97,7 @@ ApplicationWindow
         onFileLoaded:
         function(json)
         {
-            jsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shopping);
+            gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shopping);
             favoritesHook();
         }
     }
@@ -125,16 +124,19 @@ ApplicationWindow
     cover: Component { CoverPage {
             id: cover
             positionSource: globalPositionSource
-            jsonModelCollection: gjsonCollection
+            jsonModelCollection: gJsonCollection
     } }
 
     initialPage: Component { VenueList {
             id: venueList
             positionSource: globalPositionSource
-            jsonModelCollection: gjsonCollection
+            jsonModelCollection: gJsonCollection
+            currentCategoryLoaded: function () {
+                return gJsonVenueModel.loadedCategory & gJsonCollection.filterModelCategory;
+            }
 
             onSearchStringChanged: {
-                gjsonCollection.searchString = searchString
+                gJsonCollection.searchString = searchString
             }
     } }
 
@@ -146,9 +148,9 @@ ApplicationWindow
             text: qsTrId("id-venue-list")
 
             onClicked: {
-                gjsonCollection.filterFavorites = false;
-                gjsonCollection.filterModelCategory = VenueModel.Food;
-                page.searchString = gjsonCollection.searchString
+                gJsonCollection.filterFavorites = false;
+                gJsonCollection.filterModelCategory = VenueModel.Food;
+                page.searchString = gJsonCollection.searchString
             }
 
             pageComponent: app.initialPage
@@ -160,9 +162,9 @@ ApplicationWindow
             text: qsTrId("id-shopping-venue-list")
 
            onClicked: {
-               gjsonCollection.filterFavorites = false;
-               gjsonCollection.filterModelCategory = VenueModel.Shopping;
-               page.searchString = gjsonCollection.searchString
+               gJsonCollection.filterFavorites = false;
+               gJsonCollection.filterModelCategory = VenueModel.Shopping;
+               page.searchString = gJsonCollection.searchString
            }
 
            pageComponent: app.initialPage
@@ -175,8 +177,8 @@ ApplicationWindow
             text: qsTrId("id-favorites-venue-list")
 
             onClicked: {
-                gjsonCollection.filterFavorites = true;
-                page.searchString = gjsonCollection.searchString;
+                gJsonCollection.filterFavorites = true;
+                page.searchString = gJsonCollection.searchString;
             }
 
             pageComponent: app.initialPage
@@ -187,7 +189,7 @@ ApplicationWindow
             //% "Filter"
             text: qsTrId("id-filter")
             page: VenueFilterSettings {
-                jsonModelCollection: gjsonCollection
+                jsonModelCollection: gJsonCollection
             }
         }
 
