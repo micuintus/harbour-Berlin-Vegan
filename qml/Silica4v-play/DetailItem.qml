@@ -12,23 +12,25 @@ Rectangle {
     property var rightMargin
     property var value
 
-    width: parent.width - 2*BVApp.Theme.paddingLarge
+    width: parent.width
     height: valueText.height
-
-    anchors {
-        left: parent.left
-        margins: BVApp.Theme.paddingLarge
-    }
 
     Label {
         id: keyText
         text: label
         color: BVApp.Theme.primaryColor
 
+        font.pixelSize: BVApp.Theme.fontSizeSmall
+
         anchors.left: parent.left
         anchors.right: valueText.left
 
-        anchors.leftMargin: 2*BVApp.Theme.paddingLarge
+                          // padding to the left edge
+        anchors.leftMargin: BVApp.Theme.horizontalPageMargin
+                         // + SectionHeader icon
+                            + BVApp.Theme.fontSizeSmall
+                         // + Distance between icon and text
+                            + BVApp.Theme.paddingMedium
         anchors.rightMargin: BVApp.Theme.paddingSmall
 
         truncationMode: TruncationMode.Fade
@@ -39,11 +41,16 @@ Rectangle {
         text: value
         color: BVApp.Theme.secondaryColor
 
-        anchors.right: parent.right
+        font.pixelSize: BVApp.Theme.fontSizeSmall
+
+        anchors {
+            right: parent.right
+            rightMargin: BVApp.Theme.horizontalPageMargin
+        }
+
         horizontalAlignment: AppText.AlignRight
 
         truncationMode: TruncationMode.Fade
-
     }
 
 }
