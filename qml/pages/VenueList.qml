@@ -40,6 +40,7 @@ BVApp.Page {
     title: qsTrId("id-berlin-vegan")
 
     property alias jsonModelCollection: listView.model
+    property bool currentCategoryLoaded: false
     property var positionSource
     property alias flickable: listView
     property alias searchString: searchField.text
@@ -71,8 +72,7 @@ BVApp.Page {
             color: BVApp.Theme.secondaryColor
             font.pixelSize: BVApp.Theme.fontSizeMedium
 
-            // Bug: does not trigger on first start on Desktop, but works on Sailfish and iOS
-            visible: listView.count === 0 && !busyGuy.running
+            visible: listView.count === 0 && currentCategoryLoaded
 
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -81,7 +81,7 @@ BVApp.Page {
         BusyIndicator {
             id: busyGuy
             anchors.centerIn: parent
-            running: !(jsonModelCollection.loadedCategory & jsonModelCollection.filterModelCategory) // not 100% corret -> favorites!
+            running: !currentCategoryLoaded
             size: BVApp.Theme.busyIndicatorSizeLarge
         }
 

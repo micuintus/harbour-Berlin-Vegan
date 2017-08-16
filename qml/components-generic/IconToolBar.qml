@@ -69,7 +69,7 @@ Column {
                     })
 
                     // we cannot do restaurant.favorite = true here, because we are working on copied data
-                    jsonVenueModel.setFavorite(restaurant.id, true);
+                    gJsonVenueModel.setFavorite(restaurant.id, true);
 
                     break
                 case "favorite":
@@ -78,7 +78,7 @@ Column {
                         tx.executeSql("DELETE FROM BerlinVegan WHERE favorite_id == ?", [ restaurant.id ]);
                     })
                     // we cannot do restaurant.favorite = false here, because we are working on copied data
-                    jsonVenueModel.setFavorite(restaurant.id, false);
+                    gJsonVenueModel.setFavorite(restaurant.id, false);
                     break
                 }
             }
