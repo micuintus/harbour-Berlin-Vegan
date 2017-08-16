@@ -99,8 +99,8 @@ QtObject {
 
     readonly property int paddingSmall: dp(6)
     readonly property int paddingMedium: dp(11)
-    readonly property int paddingLarge: dp(15)
-    readonly property int horizontalPageMargin: dp(15)
+    readonly property int paddingLarge: fontSizeSmall
+    readonly property int horizontalPageMargin: paddingLarge
 
     readonly property int busyIndicatorSizeLarge: 0
 
