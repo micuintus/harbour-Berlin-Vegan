@@ -19,12 +19,20 @@ IconButton {
 
         text: BVApp.Theme.iconFor(type).iconString
 
-        color: iconButton.color ? iconButton.color : BVApp.Theme.highlightColor
+        color: setColor()
         font.family: BVApp.Theme.iconFor(type).fontFamily
 
         font.pixelSize: iconButton.scale ? BVApp.Theme.iconSizeLarge * iconButton.scale : BVApp.Theme.iconSizeLarge
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: iconButton.verticalAlignment
+
+        function setColor() {
+            if (iconButton.color) {
+                return iconButton.color;
+            }
+
+            return BVApp.Theme.highlightColor;
+        }
     }
 
 }
