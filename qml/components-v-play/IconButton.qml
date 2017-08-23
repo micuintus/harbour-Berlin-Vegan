@@ -27,6 +27,10 @@ IconButton {
         verticalAlignment: iconButton.verticalAlignment
 
         function setColor() {
+            if (!iconButton.enabled) {
+                return BVApp.Theme.secondaryColor;
+            }
+
             if (iconButton.color) {
                 return iconButton.color;
             }
