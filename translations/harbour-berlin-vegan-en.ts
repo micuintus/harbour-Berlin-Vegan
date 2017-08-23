@@ -65,7 +65,7 @@
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="45"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="78"/>
         <source>omnivore</source>
-        <translation>ominvore</translation>
+        <translation>omnivore</translation>
     </message>
     <message id="id-omnivore-declared">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="47"/>
@@ -200,27 +200,27 @@
         <translation>View license</translation>
     </message>
     <message id="id-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="146"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="148"/>
         <source>Food</source>
         <translation>Food</translation>
     </message>
     <message id="id-shopping-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="160"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="162"/>
         <source>Shopping</source>
         <translation>Shopping</translation>
     </message>
     <message id="id-favorites-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="175"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="177"/>
         <source>Favorites</source>
         <translation>Favorites</translation>
     </message>
     <message id="id-filter">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="188"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="190"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="197"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="199"/>
         <source>About</source>
         <translation>About</translation>
     </message>
@@ -311,7 +311,7 @@
         <translation>Moreover, this application greatfully makes use of the following third party Free Software projects:</translation>
     </message>
     <message id="id-no-results">
-        <location filename="../qml/pages/VenueList.qml" line="68"/>
+        <location filename="../qml/pages/VenueList.qml" line="69"/>
         <source>No filter or search results</source>
         <translation>No filter or search results</translation>
     </message>
