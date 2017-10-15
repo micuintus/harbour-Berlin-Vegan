@@ -81,6 +81,12 @@ BVApp.Page {
                     id: venueMarkerImage
                     type: "location"
 
+                    property var currRestaurant: mapItemView.model.item(index);
+                    color: currRestaurant.vegan === 5 ?
+                             "green"
+                           : ( currRestaurant.vegan > 2 ?
+                                 "orange"
+                               : "red")
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {
