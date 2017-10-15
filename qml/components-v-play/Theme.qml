@@ -37,6 +37,12 @@ QtObject {
             icon       = IconType.dotcircleo;
             fontFamily = "FontAwesome";
             break;
+        case "locationarrow":
+            icon = "directions";
+            break;
+        case "map":
+            icon = "map";
+            break;
         case "food":
             icon = "restaurant_menu";
             break;
@@ -46,9 +52,7 @@ QtObject {
         case "about":
             icon = "info";
             break;
-        case "locationarrow":
-            icon = "directions";
-            break;
+
         case "schedule":
             icon = "schedule";
             break;

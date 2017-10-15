@@ -1,7 +1,9 @@
 import VPlayApps 1.0
 
 ListPage {
-    property var pageStack: navigationStack
+    id: page
+    property alias pageStack: page.navigationStack
+
 
                  //% "Berlin-Vegan"
     title: qsTrId("id-berlin-vegan")
