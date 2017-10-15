@@ -186,9 +186,12 @@ BVApp.Page {
 
         VerticalScrollDecorator {}
     }
+
+    onPushed: pageStack.pushAttached("qrc:/qml/pages/VenueMapOverviewPage.qml",
+                            {
+                                "positionSource": globalPositionSource,
+                                "model": gJsonCollection
+                            }, BVApp.Theme.iconFor("map")
+                        );
 }
-
-
-
-
 

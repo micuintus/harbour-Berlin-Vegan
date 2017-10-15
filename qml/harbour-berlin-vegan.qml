@@ -134,7 +134,6 @@ ApplicationWindow
             currentCategoryLoaded: function () {
                 return gJsonVenueModel.loadedCategory & gJsonCollection.filterModelCategory;
             }
-
             onSearchStringChanged: {
                 gJsonCollection.searchString = searchString
             }
