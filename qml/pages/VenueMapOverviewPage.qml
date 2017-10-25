@@ -1,7 +1,7 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtLocation 5.0
-import QtPositioning 5.2
+import QtPositioning 5.0
 import QtGraphicalEffects 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 
@@ -42,7 +42,7 @@ BVApp.Page {
         sourceItem: BVApp.IconButton {
             id: currentPosImage
             type: "cover-location"
-            color: "blue"
+            color: BVApp.Theme.ownLocationColor
         }
     }
 

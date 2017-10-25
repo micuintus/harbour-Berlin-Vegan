@@ -1,14 +1,15 @@
-import Sailfish.Silica 1.0
+import Sailfish.Silica 1.0 as Silica
 import "." as BVApp
 
-IconButton {
+Silica.IconButton {
 
     property string type
     property real scale
-    property color color
+    property color color: BVApp.Theme.defaultIconColor()
     property int verticalAlignment
 
-    icon.source: BVApp.Theme.iconFor(type).iconString
+
+    icon.source: BVApp.Theme.iconFor(type).iconString + color
     icon.scale: scale ? scale : 1
 
 }
