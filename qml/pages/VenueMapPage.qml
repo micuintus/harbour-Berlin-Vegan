@@ -43,8 +43,7 @@ BVApp.Page {
             type: "location"
 
             scale: 1.6
-            // used only on v-play
-            color: "red"
+            color: BVApp.Theme.venueMarkerColor
             verticalAlignment: Text.AlignBottom
 
             onClicked: {
@@ -69,7 +68,7 @@ BVApp.Page {
         sourceItem: BVApp.IconButton {
             id: currentPosImage
             type: "cover-location"
-            color: "blue"
+            color: BVApp.Theme.ownLocationColor
         }
     }
 

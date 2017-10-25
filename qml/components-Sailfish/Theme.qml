@@ -5,35 +5,34 @@ import QtQuick 2.2
 
 QtObject {
 
+    function defaultIconColor()
+    {
+        return (Silica.pressed
+                ? highlightColor
+                : primaryColor);
+    }
+
     function iconFor(type) {
         var icon = "";
 
         switch (type) {
         case "answer":
-            icon = "image://theme/icon-l-answer?"+ (Silica.pressed
-                                                     ? Silica.Theme.highlightColor
-                                                     : Silica.Theme.primaryColor)
+            icon = "image://theme/icon-l-answer?"
             break;
         case "favorite":
-            icon = "image://theme/icon-m-favorite-selected?" + (Silica.pressed
-                                                       ? Silica.Theme.highlightColor
-                                                       : Silica.Theme.primaryColor)
+            icon = "image://theme/icon-m-favorite-selected?"
             break;
         case "favorite-o":
-            icon = "image://theme/icon-m-favorite?" + (Silica.pressed
-                                                       ? Silica.Theme.highlightColor
-                                                       : Silica.Theme.primaryColor)
+            icon = "image://theme/icon-m-favorite?"
             break;
         case "home":
-            icon = "image://theme/icon-m-home?" + (Silica.pressed
-                                                   ? Silica.Theme.highlightColor
-                                                   : Silica.Theme.primaryColor)
+            icon = "image://theme/icon-m-home?"
             break;
         case "location":
-            icon = "image://theme/icon-m-location?" + Silica.Theme.highlightBackgroundColor
+            icon = "image://theme/icon-m-location?"
             break;
         case "cover-location":
-            icon = "image://theme/icon-cover-location?" + Silica.Theme.highlightBackgroundColor
+            icon = "image://theme/icon-cover-location?"
             break;
         default:
             break;
@@ -43,6 +42,9 @@ QtObject {
             iconString: icon
         }
     }
+
+    readonly property color venueMarkerColor: Silica.Theme.highlightBackgroundColor
+    readonly property color ownLocationColor: Silica.Theme.highlightBackgroundColor
 
     readonly property color primaryColor: Silica.Theme.primaryColor
     readonly property color secondaryColor: Silica.Theme.secondaryColor
