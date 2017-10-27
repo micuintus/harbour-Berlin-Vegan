@@ -26,6 +26,7 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
+import BerlinVegan.components.generic 1.0 as BVApp
 import harbour.berlin.vegan.gel 1.0
 
 Column {
@@ -64,19 +65,13 @@ Column {
                 switch (type) {
                 case "favorite-o":
                     type = "favorite"
-                    db.transaction(function(tx) {
-                        tx.executeSql("INSERT INTO BerlinVegan VALUES(?)", [ restaurant.id ]);
-                    })
-
+                    BVApp.Database.dbInsertFavoriteId(restaurant.id);
                     // we cannot do restaurant.favorite = true here, because we are working on copied data
                     gJsonVenueModel.setFavorite(restaurant.id, true);
-
                     break
                 case "favorite":
                     type = "favorite-o"
-                    db.transaction(function(tx) {
-                        tx.executeSql("DELETE FROM BerlinVegan WHERE favorite_id == ?", [ restaurant.id ]);
-                    })
+                    BVApp.Database.dbDeleteFavoriteId(restaurant.id);
                     // we cannot do restaurant.favorite = false here, because we are working on copied data
                     gJsonVenueModel.setFavorite(restaurant.id, false);
                     break
