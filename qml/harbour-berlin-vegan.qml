@@ -23,7 +23,6 @@
 **/
 
 import QtQuick 2.2
-import QtQuick.LocalStorage 2.0
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import harbour.berlin.vegan.gel 1.0
@@ -37,9 +36,6 @@ import "cover"
 ApplicationWindow
 {
     id: app
-
-    property var db
-    property var favorite_ids
 
     VenueModel {
         id: gJsonVenueModel
@@ -56,21 +52,6 @@ ApplicationWindow
         model: gJsonVenueModel
         currentPosition: globalPositionSource.position.coordinate
     }
-    
-    function openDataBase() {
-        db = LocalStorage.openDatabaseSync("BerlinVeganDB", "0.1", "Berlin Vegan SQL!", 1000000);
-        db.transaction(function(tx) {
-            tx.executeSql("CREATE TABLE IF NOT EXISTS BerlinVegan(favorite_id TEXT)");
-            favorite_ids = tx.executeSql("SELECT favorite_id FROM BerlinVegan");
-        });
-    }
-
-    function applyFavoritesFromDataBase()
-    {
-       for (var i = 0; i < favorite_ids.rows.length; i++) {
-           gJsonVenueModel.setFavorite(favorite_ids.rows.item(i).favorite_id, true);
-       }
-    }
 
     property int jsonFilesToLoad: 2
     function favoritesHook()
@@ -78,7 +59,10 @@ ApplicationWindow
         jsonFilesToLoad--;
         if (jsonFilesToLoad === 0)
         {
-            applyFavoritesFromDataBase();
+            var favorite_ids = BVApp.Database.dbGetFavoriteIds();
+            for (var i = 0; i < favorite_ids.rows.length; i++) {
+                gJsonVenueModel.setFavorite(favorite_ids.rows.item(i).favorite_id, true);
+            }
         }
     }
 
@@ -103,7 +87,7 @@ ApplicationWindow
     }
 
     Component.onCompleted: {
-        openDataBase();
+        BVApp.Database.dbInit();
         venueDownloadHelper.loadVenueJson();
         shoppingDownloadHelper.loadShoppingJson();
     }
