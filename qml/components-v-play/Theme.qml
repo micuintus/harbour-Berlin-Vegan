@@ -5,6 +5,18 @@ import VPlayApps 1.0
 
 QtObject {
 
+    function colorFor(type) {
+        switch (type) {
+        case 3:
+        case 4:
+            return "orange";
+        case 5:
+            return "green";
+        default:
+            return "red";
+        }
+    }
+
     function iconFor(type) {
         // default
         var fontFamily = "Material Icons";

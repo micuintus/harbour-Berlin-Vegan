@@ -5,6 +5,18 @@ import QtQuick 2.2
 
 QtObject {
 
+    function colorFor(type) {
+        switch (type) {
+        case 3:
+        case 4:
+            return "orange";
+        case 5:
+            return "green";
+        default:
+            return "red";
+        }
+    }
+
     function defaultIconColor()
     {
         return (Silica.pressed
