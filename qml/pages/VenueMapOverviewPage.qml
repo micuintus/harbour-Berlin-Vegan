@@ -4,6 +4,7 @@ import QtLocation 5.0
 import QtPositioning 5.0
 import QtGraphicalEffects 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
+import BerlinVegan.components.generic 1.0 as BVApp
 
 BVApp.Page {
 
@@ -82,11 +83,7 @@ BVApp.Page {
                     type: "location"
 
                     property var currRestaurant: mapItemView.model.item(index);
-                    color: currRestaurant.vegan === 5 ?
-                             "green"
-                           : ( currRestaurant.vegan > 2 ?
-                                 "orange"
-                               : "red")
+                    color: BVApp.Theme.colorFor(currRestaurant.vegan)
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {
