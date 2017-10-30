@@ -11,6 +11,7 @@ BVApp.Page {
 
     property var venueCoordinate
     property var positionSource
+    property var vegan
     property alias name : page.title
     property alias map : map
 
@@ -43,7 +44,7 @@ BVApp.Page {
             type: "location"
 
             scale: 1.6
-            color: BVApp.Theme.venueMarkerColor
+            color: BVApp.Theme.colorFor(vegan)
             verticalAlignment: Text.AlignBottom
 
             onClicked: {

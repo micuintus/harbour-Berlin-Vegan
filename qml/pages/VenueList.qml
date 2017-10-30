@@ -178,6 +178,7 @@ BVApp.Page {
                                    venueCoordinate: QtPositioning.coordinate(currRestaurant.latCoord,
                                                                              currRestaurant.longCoord),
                                    positionSource: page.positionSource,
+                                   vegan: currRestaurant.vegan,
                                    name: currRestaurant.name
                                }, BVApp.Theme.iconFor("locationarrow")
                                );

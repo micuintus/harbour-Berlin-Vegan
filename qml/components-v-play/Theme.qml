@@ -91,7 +91,6 @@ QtObject {
 
     property var myApp
 
-    readonly property color venueMarkerColor: "red"
     readonly property color ownLocationColor: "blue"
 
     readonly property color primaryColor: "#212121"

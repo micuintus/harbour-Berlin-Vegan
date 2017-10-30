@@ -55,7 +55,6 @@ QtObject {
         }
     }
 
-    readonly property color venueMarkerColor: Silica.Theme.highlightBackgroundColor
     readonly property color ownLocationColor: Silica.Theme.highlightBackgroundColor
 
     readonly property color primaryColor: Silica.Theme.primaryColor
