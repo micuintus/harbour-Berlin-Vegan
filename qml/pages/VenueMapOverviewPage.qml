@@ -103,6 +103,6 @@ BVApp.Page {
             center = currentPosition.coordinate
         }
 
-        zoomLevel: maximumZoomLevel - 3
+        zoomLevel: maximumZoomLevel - 9
     }
 }
