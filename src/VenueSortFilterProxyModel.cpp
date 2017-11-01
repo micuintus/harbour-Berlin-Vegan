@@ -34,17 +34,17 @@ QVariantMap VenueSortFilterProxyModel::item(int row) const
     return ret;
 }
 
-VenueSortFilterProxyModel::VenueVeganCategories VenueSortFilterProxyModel::filterVeganCategory() const
+VenueSortFilterProxyModel::VenueVeganCategoryFlags VenueSortFilterProxyModel::filterVeganCategory() const
 {
     return m_filterVeganCategory;
 }
 
-VenueSortFilterProxyModel::VenueProperties VenueSortFilterProxyModel::filterVenueProperty() const
+VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterVenueProperty() const
 {
     return m_filterVenueProperty;
 }
 
-void VenueSortFilterProxyModel::setVeganCategoryFilterFlag(VenueVeganCategory flag, bool on)
+void VenueSortFilterProxyModel::setVeganCategoryFilterFlag(VenueVeganCategoryFlag flag, bool on)
 {
     if (on)
     {
@@ -55,11 +55,11 @@ void VenueSortFilterProxyModel::setVeganCategoryFilterFlag(VenueVeganCategory fl
         m_filterVeganCategory &= ~flag;
     }
 
-    emit filterVeganCategoryChanged(m_filterVeganCategory);
+    emit filterVeganCategoryChanged();
     invalidateFilter();
 }
 
-void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenueProperty flag, bool on)
+void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on)
 {
     if (on)
     {
@@ -70,7 +70,7 @@ void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenueProperty flag, b
         m_filterVenueProperty &= ~flag;
     }
 
-    emit filterVenuePropertyChanged(m_filterVenueProperty);
+    emit filterVenuePropertyChanged();
     invalidateFilter();
 }
 
@@ -97,10 +97,10 @@ void VenueSortFilterProxyModel::setSearchString(QString searchString)
 
 }
 
-void VenueSortFilterProxyModel::setFilterModelCategory(VenueModel::VenueModelCategory category)
+void VenueSortFilterProxyModel::setFilterModelCategory(VenueModel::VenueModelCategoryFlags category)
 {
     m_filterModelCategory = category;
-    emit filterModelCategoryChanged(m_filterModelCategory);
+    emit filterModelCategoryChanged();
     invalidateFilter();
 }
 
@@ -182,6 +182,19 @@ bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) co
     return false;
 }
 
+template <typename FilterFlags>
+bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles role, const FilterFlags& filterFlags)
+{
+    const auto valueRole = index.data(role);
+    if (valueRole.isValid() && valueRole.canConvert<int>())
+    {
+        const auto value = valueRole.toInt();
+        return filterFlags.testFlag((typename FilterFlags::enum_type) keyToFlag(value));
+    }
+
+    return false;
+}
+
 bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) const
 {
     if (m_filterFavorites)
@@ -198,29 +211,13 @@ bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) c
     }
     else
     {
-        const auto valueRole = index.data( VenueModel::VenueModelRoles::ModelCategory );
-        if (valueRole.isValid() && valueRole.canConvert<int>())
-        {
-            const auto value = valueRole.toInt();
-            return value == m_filterModelCategory;
-        }
-        else
-        {
-            return false;
-        }
+        return testCategoryFilter(index, VenueModel::VenueModelRoles::ModelCategory, m_filterModelCategory);
     }
 }
 
 bool VenueSortFilterProxyModel::veganCategoryMatches(const QModelIndex &index) const
 {
-    const auto valueRole = index.data( VenueModel::VenueModelRoles::VeganCategory );
-    if (valueRole.isValid() && valueRole.canConvert<int>())
-    {
-        const auto value = valueRole.toInt();
-        return m_filterVeganCategory.testFlag(VenueSortFilterProxyModel::VenueVeganCategory(keyToFlag(value)));
-    }
-
-    return false;
+    return testCategoryFilter(index, VenueModel::VenueModelRoles::VeganCategory, m_filterVeganCategory);
 }
 
 
@@ -228,7 +225,7 @@ bool VenueSortFilterProxyModel::venuePropertyMatches(const QModelIndex &index) c
 {
     for (int roleKey = 0; roleKey <= VenueModel::ChildChair - VenueModel::Wlan; roleKey++)
     {
-        if (m_filterVenueProperty.testFlag(VenueSortFilterProxyModel::VenueProperty(keyToFlag(roleKey))))
+        if (m_filterVenueProperty.testFlag(VenueSortFilterProxyModel::VenuePropertyFlag(keyToFlag(roleKey))))
         {
             const auto roleValue = index.data(roleKey + VenueModel::Wlan);
             if (roleValue.isValid() && roleValue.canConvert<int>() && roleValue.toInt() == 1)
