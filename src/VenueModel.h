@@ -8,22 +8,33 @@
 class QReadWriteLock;
 class QQmlEngine;
 
+constexpr inline int keyToFlag(int key)
+{
+    return 1 << key;
+}
+
 class VenueModel : public QStandardItemModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(LoadedVenueCategory loadedCategory READ loadedCategory NOTIFY loadedCategoryChanged)
+    Q_PROPERTY(VenueModelCategoryFlags loadedCategory READ loadedCategory NOTIFY loadedCategoryChanged)
 
 public:
     enum VenueModelCategory
     {
-        Food = 0x01,
-        Shopping = 0x10
+        Food,
+        Shopping
     };
-    Q_DECLARE_FLAGS(LoadedVenueCategory, VenueModelCategory)
-    Q_FLAG(LoadedVenueCategory)
     Q_ENUM(VenueModelCategory)
 
+    enum VenueModelCategoryFlag
+    {
+        FoodFlag = keyToFlag(VenueModelCategory::Food),
+        ShoppingFlag = keyToFlag(VenueModelCategory::Shopping)
+    };
+    Q_DECLARE_FLAGS(VenueModelCategoryFlags, VenueModelCategoryFlag)
+    Q_FLAG(VenueModelCategoryFlags)
+    Q_ENUM(VenueModelCategoryFlag)
 
     enum VenueModelRoles
     {
@@ -74,15 +85,16 @@ public:
     Q_INVOKABLE void setFavorite(const QString& id, bool favorite = true);
     QHash<int, QByteArray> roleNames() const override;
 
-    LoadedVenueCategory loadedCategory() const;
+    VenueModelCategoryFlags loadedCategory() const;
 
 signals:
-    void loadedCategoryChanged(LoadedVenueCategory);
+    void loadedCategoryChanged();
 
 private:
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
-    LoadedVenueCategory m_loaded;
+    VenueModelCategoryFlags m_loaded;
 
 };
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(VenueModel::VenueModelCategoryFlags)

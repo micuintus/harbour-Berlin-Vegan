@@ -132,7 +132,7 @@ ApplicationWindow
 
             onClicked: {
                 gJsonCollection.filterFavorites = false;
-                gJsonCollection.filterModelCategory = VenueModel.Food;
+                gJsonCollection.filterModelCategory = VenueModel.FoodFlag;
                 page.searchString = gJsonCollection.searchString
             }
 
@@ -146,7 +146,7 @@ ApplicationWindow
 
            onClicked: {
                gJsonCollection.filterFavorites = false;
-               gJsonCollection.filterModelCategory = VenueModel.Shopping;
+               gJsonCollection.filterModelCategory = VenueModel.ShoppingFlag;
                page.searchString = gJsonCollection.searchString
            }
 
