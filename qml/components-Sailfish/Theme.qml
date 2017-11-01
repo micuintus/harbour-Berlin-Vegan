@@ -9,11 +9,11 @@ QtObject {
         switch (type) {
         case 3:
         case 4:
-            return "orange";
+            return "#fd9827";
         case 5:
-            return "green";
+            return "#97bf0f";
         default:
-            return "red";
+            return "#f9776e";
         }
     }
 
