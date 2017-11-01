@@ -46,6 +46,9 @@ QtObject {
         case "cover-location":
             icon = "image://theme/icon-cover-location?"
             break;
+        case "leaf":
+            icon = "image://theme/icon-m-down?"
+            break;
         default:
             break;
         }
