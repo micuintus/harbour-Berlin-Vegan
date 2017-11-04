@@ -8,9 +8,9 @@
 class QReadWriteLock;
 class QQmlEngine;
 
-constexpr inline int keyToFlag(int key)
+constexpr inline int keyToFlag(const int key, const int keyOffset = 0)
 {
-    return 1 << key;
+    return 1 << (key - keyOffset);
 }
 
 class VenueModel : public QStandardItemModel
