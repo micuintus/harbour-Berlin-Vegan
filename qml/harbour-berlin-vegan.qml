@@ -161,6 +161,7 @@ ApplicationWindow
 
             onClicked: {
                 gJsonCollection.filterFavorites = true;
+                gJsonCollection.filterVenueType = VenueModel.FoodFlag | VenueModel.ShoppingFlag;
                 page.searchString = gJsonCollection.searchString;
             }
 

@@ -79,6 +79,7 @@ private:
     void reSort();
 
     bool searchStringMatches(const QModelIndex& index) const;
+    bool favoriteStatusMatches(const QModelIndex& index) const;
     bool venueTypeMatches(const QModelIndex& index) const;
     bool vegCategoryMatches(const QModelIndex& index) const;
     bool venuePropertiesMatch(const QModelIndex& index) const;
