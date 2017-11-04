@@ -17,7 +17,7 @@ class VenueModel : public QStandardItemModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(VenueVenueTypeFlags loadedVenueType READ loadedVenueType NOTIFY loadedVenueTypeChanged)
+    Q_PROPERTY(VenueTypeFlags loadedVenueType READ loadedVenueType NOTIFY loadedVenueTypeChanged)
 
 public:
     enum VenueVegCategory
@@ -33,21 +33,21 @@ public:
     };
     Q_ENUM(VenueVegCategory)
 
-    enum VenueVenueType
+    enum VenueType
     {
         Food,
-        Shopping
+        Shopping,
     };
-    Q_ENUM(VenueVenueType)
+    Q_ENUM(VenueType)
 
-    enum VenueVenueTypeFlag
+    enum VenueTypeFlag
     {
-        FoodFlag     = keyToFlag(VenueVenueType::Food),
-        ShoppingFlag = keyToFlag(VenueVenueType::Shopping)
+        FoodFlag     = keyToFlag(VenueType::Food),
+        ShoppingFlag = keyToFlag(VenueType::Shopping)
     };
-    Q_DECLARE_FLAGS(VenueVenueTypeFlags, VenueVenueTypeFlag)
-    Q_FLAG(VenueVenueTypeFlags)
-    Q_ENUM(VenueVenueTypeFlag)
+    Q_DECLARE_FLAGS(VenueTypeFlags, VenueTypeFlag)
+    Q_FLAG(VenueTypeFlags)
+    Q_ENUM(VenueTypeFlag)
 
     enum VenueModelRoles
     {
@@ -55,7 +55,7 @@ public:
         Name,
 
         // Model Category
-        VenueType,
+        VenueTypeRole,
         Favorite,
 
         Street,
@@ -96,11 +96,11 @@ public:
 
     VenueModel(QObject *parent = 0);
 
-    Q_INVOKABLE void importFromJson(const QJSValue&, VenueVenueType);
+    Q_INVOKABLE void importFromJson(const QJSValue&, VenueType venueType);
     Q_INVOKABLE void setFavorite(const QString& id, bool favorite = true);
     QHash<int, QByteArray> roleNames() const override;
 
-    VenueVenueTypeFlags loadedVenueType() const;
+    VenueTypeFlags loadedVenueType() const;
 
 signals:
     void loadedVenueTypeChanged();
@@ -108,8 +108,8 @@ signals:
 private:
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
-    VenueVenueTypeFlags m_loadedVenueType;
+    VenueTypeFlags m_loadedVenueType;
 
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(VenueModel::VenueVenueTypeFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(VenueModel::VenueTypeFlags)
