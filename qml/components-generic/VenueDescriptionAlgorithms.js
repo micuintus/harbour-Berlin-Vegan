@@ -23,6 +23,8 @@
 **/
 
 .pragma library
+.import harbour.berlin.vegan.gel 1.0 as BVApp
+
 
 function defaultBooleanProperty(key)
 {
@@ -41,16 +43,26 @@ function restaurantCategory(key)
 {
     switch(key)
     {
-                              //% "omnivore"
-        case 1:  return qsTrId("id-omnivore");
-                              //% "omnivore \n(vegan declared)"
-        case 2:  return qsTrId("id-omnivore-declared");
-                              //% "vegetarian"
-        case 3:  return qsTrId("id-vegetarian");
-                              //% "vegetarian \n(vegan declared)"
-        case 4:  return qsTrId("id-vegetarian-declared");
-                         //% "vegan"
-        case 5:  return qsTrId("id-vegan");
+        case BVApp.VenueModel.Omnivore:
+                      //% "omnivore"
+            return qsTrId("id-omnivore");
+
+        case BVApp.VenueModel.OmnivoreVeganDeclared:
+                      //% "omnivore \n(vegan declared)"
+            return qsTrId("id-omnivore-declared");
+
+        case BVApp.VenueModel.Vegetarian:
+                      //% "vegetarian"
+            return qsTrId("id-vegetarian");
+
+        case BVApp.VenueModel.VegetarianVeganDeclared:
+                      //% "vegetarian \n(vegan declared)"
+            return qsTrId("id-vegetarian-declared");
+
+        case BVApp.VenueModel.Vegan:
+                      //% "vegan"
+            return qsTrId("id-vegan");
+
                               //% "unknown"
         default: return qsTrId("id-unknown");
     }

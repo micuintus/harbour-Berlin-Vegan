@@ -127,7 +127,7 @@ BVApp.Page {
                 id: veganMark
                 icon: BVApp.Theme.iconFor("leaf").iconString
                 color: BVApp.Theme.colorFor(model.vegan)
-                visible: model.vegan >= 3
+                visible: model.vegan >= VenueModel.Vegetarian
 
                 anchors {
                     top: namelabel.top

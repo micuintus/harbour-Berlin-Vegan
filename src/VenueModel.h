@@ -20,6 +20,19 @@ class VenueModel : public QStandardItemModel
     Q_PROPERTY(VenueModelCategoryFlags loadedCategory READ loadedCategory NOTIFY loadedCategoryChanged)
 
 public:
+    enum VenueVegCategory
+    {
+        Unkown                  = 0,
+        // Defined by the GastroLocations.json format
+        // which comes from the berlin-vegan.de backend
+        Omnivore                = 1,
+        OmnivoreVeganDeclared   = 2,
+        Vegetarian              = 3,
+        VegetarianVeganDeclared = 4,
+        Vegan                   = 5,
+    };
+    Q_ENUM(VenueVegCategory)
+
     enum VenueModelCategory
     {
         Food,

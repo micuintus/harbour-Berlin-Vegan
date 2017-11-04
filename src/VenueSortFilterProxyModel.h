@@ -14,21 +14,20 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(QString searchString MEMBER m_searchString WRITE setSearchString NOTIFY searchStringChanged)
     Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
     Q_PROPERTY(VenueModel::VenueModelCategoryFlags filterModelCategory MEMBER m_filterModelCategory WRITE setFilterModelCategory NOTIFY filterModelCategoryChanged)
-    Q_PROPERTY(VenueSortFilterProxyModel::VenueVeganCategoryFlags filterVeganCategory READ filterVeganCategory NOTIFY filterVeganCategoryChanged)
-    Q_PROPERTY(VenueSortFilterProxyModel::VenuePropertyFlags filterVenueProperty READ filterVenueProperty NOTIFY filterVenuePropertyChanged)
+    Q_PROPERTY(VenueVegCategoryFlags filterVeganCategory READ filterVeganCategory NOTIFY filterVeganCategoryChanged)
+    Q_PROPERTY(VenuePropertyFlags filterVenueProperty READ filterVenueProperty NOTIFY filterVenuePropertyChanged)
     Q_PROPERTY(bool filterFavorites MEMBER m_filterFavorites WRITE setFilterFavorites NOTIFY filterFavoritesChanged)
 
 public:
 
-    // See components-generic/VenueDescriptionAlgorithms.js:40
-    enum VenueVeganCategoryFlag {
-        Omnivore   = keyToFlag(1) | keyToFlag(2),
-        Vegetarian = keyToFlag(3) | keyToFlag(4),
-        Vegan      = keyToFlag(5)
+    enum VenueVegCategoryFlag {
+        OmnivoreFlag   = keyToFlag(VenueModel::Omnivore)   | keyToFlag(VenueModel::OmnivoreVeganDeclared),
+        VegetarianFlag = keyToFlag(VenueModel::Vegetarian) | keyToFlag(VenueModel::VegetarianVeganDeclared),
+        VeganFlag      = keyToFlag(VenueModel::Vegan)
     };
-    Q_DECLARE_FLAGS(VenueVeganCategoryFlags, VenueVeganCategoryFlag)
-    Q_FLAG(VenueVeganCategoryFlags)
-    Q_ENUM(VenueVeganCategoryFlag)
+    Q_DECLARE_FLAGS(VenueVegCategoryFlags, VenueVegCategoryFlag)
+    Q_FLAG(VenueVegCategoryFlags)
+    Q_ENUM(VenueVegCategoryFlag)
 
     enum VenuePropertyFlag {
                                   // Make sure we start with bit 0 and not with bit VenueModel::FirstPropertyRole
@@ -49,11 +48,11 @@ public:
     VenueSortFilterProxyModel(QObject *parent = 0);
 
     Q_INVOKABLE VenueModel* model() const;
-    Q_INVOKABLE VenueVeganCategoryFlags filterVeganCategory() const;
+    Q_INVOKABLE VenueVegCategoryFlags filterVeganCategory() const;
     Q_INVOKABLE VenuePropertyFlags filterVenueProperty() const;
 
     Q_INVOKABLE QVariantMap item(int row) const;
-    Q_INVOKABLE void setVeganCategoryFilterFlag(VenueVeganCategoryFlag flag, bool on);
+    Q_INVOKABLE void setVeganCategoryFilterFlag(VenueVegCategoryFlag flag, bool on);
     Q_INVOKABLE void setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on);
 
 
@@ -88,7 +87,7 @@ private:
     QGeoCoordinate m_currentPosition;
     VenueModel::VenueModelCategoryFlags m_filterModelCategory = VenueModel::FoodFlag;
     // positive filter
-    VenueVeganCategoryFlags m_filterVeganCategory = { VenueVeganCategoryFlag::Vegan | VenueVeganCategoryFlag::Vegetarian | VenueVeganCategoryFlag::Omnivore };
+    VenueVegCategoryFlags m_filterVeganCategory = { VeganFlag | VegetarianFlag | OmnivoreFlag };
     // negative filter
     VenuePropertyFlags m_filterVenueProperty = { };
 
