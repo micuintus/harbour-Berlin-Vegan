@@ -189,7 +189,7 @@ bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles ro
     if (valueRole.isValid() && valueRole.canConvert<int>())
     {
         const auto value = valueRole.toInt();
-        return filterFlags.testFlag((typename FilterFlags::enum_type) keyToFlag(value));
+        return filterFlags.testFlag(static_cast<typename FilterFlags::enum_type>(keyToFlag(value)));
     }
 
     return false;
