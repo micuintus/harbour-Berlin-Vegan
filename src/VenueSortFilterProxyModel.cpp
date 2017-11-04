@@ -126,6 +126,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
         if (index.isValid())
         {
             return searchStringMatches(index)
+                && favoriteStatusMatches(index)
                 && venueTypeMatches(index)
                 && vegCategoryMatches(index)
                 && venuePropertiesMatch(index);
@@ -182,20 +183,7 @@ bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) co
     return false;
 }
 
-template <typename FilterFlags>
-bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles role, const FilterFlags& filterFlags)
-{
-    const auto valueRole = index.data(role);
-    if (valueRole.isValid() && valueRole.canConvert<int>())
-    {
-        const auto value = valueRole.toInt();
-        return filterFlags.testFlag(static_cast<typename FilterFlags::enum_type>(keyToFlag(value)));
-    }
-
-    return false;
-}
-
-bool VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
+bool VenueSortFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) const
 {
     if (m_filterFavorites)
     {
@@ -211,8 +199,26 @@ bool VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
     }
     else
     {
-        return testCategoryFilter(index, VenueModel::VenueModelRoles::VenueType, m_filterVenueType);
+        return true;
     }
+}
+
+template <typename FilterFlags>
+bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles role, const FilterFlags& filterFlags)
+{
+    const auto valueRole = index.data(role);
+    if (valueRole.isValid() && valueRole.canConvert<int>())
+    {
+        const auto value = valueRole.toInt();
+        return filterFlags.testFlag(static_cast<typename FilterFlags::enum_type>(keyToFlag(value)));
+    }
+
+    return false;
+}
+
+bool VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
+{
+    return testCategoryFilter(index, VenueModel::VenueModelRoles::VenueType, m_filterVenueType);
 }
 
 bool VenueSortFilterProxyModel::vegCategoryMatches(const QModelIndex &index) const
