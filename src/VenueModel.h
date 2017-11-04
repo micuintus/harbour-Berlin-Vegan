@@ -17,7 +17,7 @@ class VenueModel : public QStandardItemModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(VenueModelCategoryFlags loadedCategory READ loadedCategory NOTIFY loadedCategoryChanged)
+    Q_PROPERTY(VenueVenueTypeFlags loadedVenueType READ loadedVenueType NOTIFY loadedVenueTypeChanged)
 
 public:
     enum VenueVegCategory
@@ -33,21 +33,21 @@ public:
     };
     Q_ENUM(VenueVegCategory)
 
-    enum VenueModelCategory
+    enum VenueVenueType
     {
         Food,
         Shopping
     };
-    Q_ENUM(VenueModelCategory)
+    Q_ENUM(VenueVenueType)
 
-    enum VenueModelCategoryFlag
+    enum VenueVenueTypeFlag
     {
-        FoodFlag = keyToFlag(VenueModelCategory::Food),
-        ShoppingFlag = keyToFlag(VenueModelCategory::Shopping)
+        FoodFlag     = keyToFlag(VenueVenueType::Food),
+        ShoppingFlag = keyToFlag(VenueVenueType::Shopping)
     };
-    Q_DECLARE_FLAGS(VenueModelCategoryFlags, VenueModelCategoryFlag)
-    Q_FLAG(VenueModelCategoryFlags)
-    Q_ENUM(VenueModelCategoryFlag)
+    Q_DECLARE_FLAGS(VenueVenueTypeFlags, VenueVenueTypeFlag)
+    Q_FLAG(VenueVenueTypeFlags)
+    Q_ENUM(VenueVenueTypeFlag)
 
     enum VenueModelRoles
     {
@@ -55,7 +55,7 @@ public:
         Name,
 
         // Model Category
-        ModelCategory,
+        VenueType,
         Favorite,
 
         Street,
@@ -96,20 +96,20 @@ public:
 
     VenueModel(QObject *parent = 0);
 
-    Q_INVOKABLE void importFromJson(const QJSValue&, VenueModelCategory);
+    Q_INVOKABLE void importFromJson(const QJSValue&, VenueVenueType);
     Q_INVOKABLE void setFavorite(const QString& id, bool favorite = true);
     QHash<int, QByteArray> roleNames() const override;
 
-    VenueModelCategoryFlags loadedCategory() const;
+    VenueVenueTypeFlags loadedVenueType() const;
 
 signals:
-    void loadedCategoryChanged();
+    void loadedVenueTypeChanged();
 
 private:
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
-    VenueModelCategoryFlags m_loaded;
+    VenueVenueTypeFlags m_loadedVenueType;
 
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(VenueModel::VenueModelCategoryFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(VenueModel::VenueVenueTypeFlags)

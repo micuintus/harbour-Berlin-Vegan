@@ -97,10 +97,10 @@ void VenueSortFilterProxyModel::setSearchString(QString searchString)
 
 }
 
-void VenueSortFilterProxyModel::setFilterModelCategory(VenueModel::VenueModelCategoryFlags category)
+void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueVenueTypeFlags filterVenueTypeFlags)
 {
-    m_filterModelCategory = category;
-    emit filterModelCategoryChanged();
+    m_filterVenueType = filterVenueTypeFlags;
+    emit filterVenueTypeChanged();
     invalidateFilter();
 }
 
@@ -126,7 +126,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
         if (index.isValid())
         {
             return searchStringMatches(index)
-                && modelCategoryMatches(index)
+                && venueTypeMatches(index)
                 && vegCategoryMatches(index)
                 && venuePropertyMatches(index);
         }
@@ -195,7 +195,7 @@ bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles ro
     return false;
 }
 
-bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) const
+bool VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
 {
     if (m_filterFavorites)
     {
@@ -211,7 +211,7 @@ bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) c
     }
     else
     {
-        return testCategoryFilter(index, VenueModel::VenueModelRoles::ModelCategory, m_filterModelCategory);
+        return testCategoryFilter(index, VenueModel::VenueModelRoles::VenueType, m_filterVenueType);
     }
 }
 
