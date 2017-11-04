@@ -225,7 +225,7 @@ bool VenueSortFilterProxyModel::venuePropertyMatches(const QModelIndex &index) c
 {
     for (int roleKey = VenueModel::FirstPropertyRole; roleKey <= VenueModel::LastPropertyRole; roleKey++)
     {
-        if (m_filterVenueProperty.testFlag(VenuePropertyFlag(keyToFlag(roleKey - VenueModel::FirstPropertyRole))))
+        if (m_filterVenueProperty.testFlag(VenuePropertyFlag(keyToFlag(roleKey, VenueModel::FirstPropertyRole))))
         {
             const auto roleValue = index.data(roleKey);
             if (roleValue.isValid() && roleValue.canConvert<int>() && roleValue.toInt() == 1)
