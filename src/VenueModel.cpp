@@ -96,7 +96,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
 
         // Properties
         { VenueModelRoles::Wlan,          "wlan" },
-        { VenueModelRoles::VeganCategory, "vegan" },
+        { VenueModelRoles::VegCategory, "vegan" },
         { VenueModelRoles::HandicappedAccessible,
                                           "handicappedAccessible" },
         { VenueModelRoles::HandicappedAccessibleWc,

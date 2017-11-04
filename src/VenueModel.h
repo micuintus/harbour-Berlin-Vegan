@@ -71,7 +71,7 @@ public:
         // Properties
         FirstPropertyRole,
         Wlan = FirstPropertyRole,
-        VeganCategory,
+        VegCategory,
         HandicappedAccessible,
         HandicappedAccessibleWc,
         Catering,
