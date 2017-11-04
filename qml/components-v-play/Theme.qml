@@ -1,5 +1,6 @@
 pragma Singleton
 
+import harbour.berlin.vegan.gel 1.0
 import QtQuick 2.7
 import VPlayApps 1.0
 
@@ -7,10 +8,10 @@ QtObject {
 
     function colorFor(type) {
         switch (type) {
-        case 3:
-        case 4:
+        case VenueModel.Vegetarian:
+        case VenueModel.VegetarianVeganDeclared:
             return "#fd9827";
-        case 5:
+        case VenueModel.Vegan:
             return highlightColor;
         default:
             return "#f9776e";

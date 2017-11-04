@@ -34,7 +34,7 @@ QVariantMap VenueSortFilterProxyModel::item(int row) const
     return ret;
 }
 
-VenueSortFilterProxyModel::VenueVeganCategoryFlags VenueSortFilterProxyModel::filterVeganCategory() const
+VenueSortFilterProxyModel::VenueVegCategoryFlags VenueSortFilterProxyModel::filterVeganCategory() const
 {
     return m_filterVeganCategory;
 }
@@ -44,7 +44,7 @@ VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterV
     return m_filterVenueProperty;
 }
 
-void VenueSortFilterProxyModel::setVeganCategoryFilterFlag(VenueVeganCategoryFlag flag, bool on)
+void VenueSortFilterProxyModel::setVeganCategoryFilterFlag(VenueVegCategoryFlag flag, bool on)
 {
     if (on)
     {
