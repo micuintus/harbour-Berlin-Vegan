@@ -37,7 +37,7 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
     return item;
 }
 
-void VenueModel::importFromJson(const QJSValue &item, VenueModelCategory category)
+void VenueModel::importFromJson(const QJSValue &item, VenueVenueType venueType)
 {
     if (item.isArray()) {
         auto root = this->invisibleRootItem();
@@ -48,13 +48,13 @@ void VenueModel::importFromJson(const QJSValue &item, VenueModelCategory categor
                 break; // last value in array is an int with the length
 
             auto venueItem = jsonItem2QStandardItem(array.value());
-            venueItem->setData(category, VenueModelRoles::ModelCategory);
+            venueItem->setData(venueType, VenueModelRoles::VenueType);
             root->appendRow(venueItem);
         }
     }
 
-    m_loaded |= VenueModelCategoryFlag(keyToFlag(category));
-    emit loadedCategoryChanged();
+    m_loadedVenueType |= VenueVenueTypeFlag(keyToFlag(venueType));
+    emit loadedVenueTypeChanged();
 }
 
 void VenueModel::setFavorite(const QString &id, bool favorite)
@@ -96,7 +96,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
 
         // Properties
         { VenueModelRoles::Wlan,          "wlan" },
-        { VenueModelRoles::VegCategory, "vegan" },
+        { VenueModelRoles::VegCategory,   "vegan" },
         { VenueModelRoles::HandicappedAccessible,
                                           "handicappedAccessible" },
         { VenueModelRoles::HandicappedAccessibleWc,
@@ -124,8 +124,8 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     return roles;
 }
 
-VenueModel::VenueModelCategoryFlags VenueModel::loadedCategory() const
+VenueModel::VenueVenueTypeFlags VenueModel::loadedVenueType() const
 {
-    return m_loaded;
+    return m_loadedVenueType;
 }
 

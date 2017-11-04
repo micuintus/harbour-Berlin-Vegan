@@ -13,7 +13,7 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(QString searchString MEMBER m_searchString WRITE setSearchString NOTIFY searchStringChanged)
     Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
-    Q_PROPERTY(VenueModel::VenueModelCategoryFlags filterModelCategory MEMBER m_filterModelCategory WRITE setFilterModelCategory NOTIFY filterModelCategoryChanged)
+    Q_PROPERTY(VenueModel::VenueVenueTypeFlags filterVenueType MEMBER m_filterVenueType WRITE setFilterVenueType NOTIFY filterVenueTypeChanged)
     Q_PROPERTY(VenueVegCategoryFlags filterVegCategory READ filterVegCategory NOTIFY filterVegCategoryChanged)
     Q_PROPERTY(VenuePropertyFlags filterVenueProperty READ filterVenueProperty NOTIFY filterVenuePropertyChanged)
     Q_PROPERTY(bool filterFavorites MEMBER m_filterFavorites WRITE setFilterFavorites NOTIFY filterFavoritesChanged)
@@ -60,13 +60,13 @@ public slots:
     void setModel(VenueModel* model);
     void setSearchString(QString searchString);
     void setFilterFavorites(bool);
-    void setFilterModelCategory(VenueModel::VenueModelCategoryFlags category);
+    void setFilterVenueType(VenueModel::VenueVenueTypeFlags);
     void setCurrentPosition(QGeoCoordinate position);
 
 signals:
     void modelChanged(VenueModel* model);
     void searchStringChanged(QString);
-    void filterModelCategoryChanged();
+    void filterVenueTypeChanged();
     void filterVegCategoryChanged();
     void filterVenuePropertyChanged();
     void filterFavoritesChanged(bool);
@@ -79,13 +79,13 @@ private:
     void reSort();
 
     bool searchStringMatches(const QModelIndex& index) const;
-    bool modelCategoryMatches(const QModelIndex& index) const;
+    bool venueTypeMatches(const QModelIndex& index) const;
     bool vegCategoryMatches(const QModelIndex& index) const;
     bool venuePropertyMatches(const QModelIndex& index) const;
 
     QString m_searchString;
     QGeoCoordinate m_currentPosition;
-    VenueModel::VenueModelCategoryFlags m_filterModelCategory = VenueModel::FoodFlag;
+    VenueModel::VenueVenueTypeFlags m_filterVenueType = VenueModel::FoodFlag;
     // positive filter
     VenueVegCategoryFlags m_filterVegCategory = { VeganFlag | VegetarianFlag | OmnivoreFlag };
     // negative filter

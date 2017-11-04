@@ -116,7 +116,7 @@ ApplicationWindow
             positionSource: globalPositionSource
             jsonModelCollection: gJsonCollection
             currentCategoryLoaded: function () {
-                return gJsonVenueModel.loadedCategory & gJsonCollection.filterModelCategory;
+                return gJsonVenueModel.loadedVenueType & gJsonCollection.filterVenueType;
             }
             onSearchStringChanged: {
                 gJsonCollection.searchString = searchString
@@ -132,7 +132,7 @@ ApplicationWindow
 
             onClicked: {
                 gJsonCollection.filterFavorites = false;
-                gJsonCollection.filterModelCategory = VenueModel.FoodFlag;
+                gJsonCollection.filterVenueType = VenueModel.FoodFlag;
                 page.searchString = gJsonCollection.searchString
             }
 
@@ -146,7 +146,7 @@ ApplicationWindow
 
            onClicked: {
                gJsonCollection.filterFavorites = false;
-               gJsonCollection.filterModelCategory = VenueModel.ShoppingFlag;
+               gJsonCollection.filterVenueType = VenueModel.ShoppingFlag;
                page.searchString = gJsonCollection.searchString
            }
 
