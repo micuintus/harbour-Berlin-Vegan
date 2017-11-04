@@ -56,7 +56,8 @@ public:
         LongCoord,
 
         // Properties
-        Wlan,
+        FirstPropertyRole,
+        Wlan = FirstPropertyRole,
         VeganCategory,
         HandicappedAccessible,
         HandicappedAccessibleWc,
@@ -68,6 +69,7 @@ public:
         SeatsIndoor,
         Dog,
         ChildChair,
+        LastPropertyRole = ChildChair,
 
         // OpeningHours
         OtMon,

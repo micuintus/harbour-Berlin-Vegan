@@ -31,15 +31,16 @@ public:
     Q_ENUM(VenueVeganCategoryFlag)
 
     enum VenuePropertyFlag {
-        Wlan                    = keyToFlag(VenueModel::Wlan - VenueModel::Wlan),
-        HandicappedAccessible   = keyToFlag(VenueModel::HandicappedAccessible - VenueModel::Wlan),
-        HandicappedAccessibleWc = keyToFlag(VenueModel::HandicappedAccessibleWc - VenueModel::Wlan),
-        Catering                = keyToFlag(VenueModel::Catering - VenueModel::Wlan),
-        Organic                 = keyToFlag(VenueModel::Organic - VenueModel::Wlan),
-        GlutenFree              = keyToFlag(VenueModel::GlutenFree - VenueModel::Wlan),
-        Delivery                = keyToFlag(VenueModel::Delivery - VenueModel::Wlan),
-        Dog                     = keyToFlag(VenueModel::Dog - VenueModel::Wlan),
-        ChildChair              = keyToFlag(VenueModel::ChildChair - VenueModel::Wlan)
+                                  // Make sure we start with bit 0 and not with bit VenueModel::FirstPropertyRole
+        Wlan                    = keyToFlag(VenueModel::Wlan                    - VenueModel::FirstPropertyRole),
+        HandicappedAccessible   = keyToFlag(VenueModel::HandicappedAccessible   - VenueModel::FirstPropertyRole),
+        HandicappedAccessibleWc = keyToFlag(VenueModel::HandicappedAccessibleWc - VenueModel::FirstPropertyRole),
+        Catering                = keyToFlag(VenueModel::Catering                - VenueModel::FirstPropertyRole),
+        Organic                 = keyToFlag(VenueModel::Organic                 - VenueModel::FirstPropertyRole),
+        GlutenFree              = keyToFlag(VenueModel::GlutenFree              - VenueModel::FirstPropertyRole),
+        Delivery                = keyToFlag(VenueModel::Delivery                - VenueModel::FirstPropertyRole),
+        Dog                     = keyToFlag(VenueModel::Dog                     - VenueModel::FirstPropertyRole),
+        ChildChair              = keyToFlag(VenueModel::ChildChair              - VenueModel::FirstPropertyRole),
     };
     Q_DECLARE_FLAGS(VenuePropertyFlags, VenuePropertyFlag)
     Q_FLAG(VenuePropertyFlags)

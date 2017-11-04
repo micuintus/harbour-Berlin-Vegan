@@ -223,11 +223,11 @@ bool VenueSortFilterProxyModel::veganCategoryMatches(const QModelIndex &index) c
 
 bool VenueSortFilterProxyModel::venuePropertyMatches(const QModelIndex &index) const
 {
-    for (int roleKey = 0; roleKey <= VenueModel::ChildChair - VenueModel::Wlan; roleKey++)
+    for (int roleKey = VenueModel::FirstPropertyRole; roleKey <= VenueModel::LastPropertyRole; roleKey++)
     {
-        if (m_filterVenueProperty.testFlag(VenueSortFilterProxyModel::VenuePropertyFlag(keyToFlag(roleKey))))
+        if (m_filterVenueProperty.testFlag(VenuePropertyFlag(keyToFlag(roleKey - VenueModel::FirstPropertyRole))))
         {
-            const auto roleValue = index.data(roleKey + VenueModel::Wlan);
+            const auto roleValue = index.data(roleKey);
             if (roleValue.isValid() && roleValue.canConvert<int>() && roleValue.toInt() == 1)
             {
                 continue;
