@@ -81,7 +81,7 @@ private:
     bool searchStringMatches(const QModelIndex& index) const;
     bool venueTypeMatches(const QModelIndex& index) const;
     bool vegCategoryMatches(const QModelIndex& index) const;
-    bool venuePropertyMatches(const QModelIndex& index) const;
+    bool venuePropertiesMatch(const QModelIndex& index) const;
 
     QString m_searchString;
     QGeoCoordinate m_currentPosition;

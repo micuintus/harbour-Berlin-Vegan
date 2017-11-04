@@ -128,7 +128,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
             return searchStringMatches(index)
                 && venueTypeMatches(index)
                 && vegCategoryMatches(index)
-                && venuePropertyMatches(index);
+                && venuePropertiesMatch(index);
         }
     }
 
@@ -221,7 +221,7 @@ bool VenueSortFilterProxyModel::vegCategoryMatches(const QModelIndex &index) con
 }
 
 
-bool VenueSortFilterProxyModel::venuePropertyMatches(const QModelIndex &index) const
+bool VenueSortFilterProxyModel::venuePropertiesMatch(const QModelIndex &index) const
 {
     for (int roleKey = VenueModel::FirstPropertyRole; roleKey <= VenueModel::LastPropertyRole; roleKey++)
     {
