@@ -37,7 +37,7 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
     return item;
 }
 
-void VenueModel::importFromJson(const QJSValue &item, VenueVenueType venueType)
+void VenueModel::importFromJson(const QJSValue &item, VenueType venueType)
 {
     if (item.isArray()) {
         auto root = this->invisibleRootItem();
@@ -48,12 +48,12 @@ void VenueModel::importFromJson(const QJSValue &item, VenueVenueType venueType)
                 break; // last value in array is an int with the length
 
             auto venueItem = jsonItem2QStandardItem(array.value());
-            venueItem->setData(venueType, VenueModelRoles::VenueType);
+            venueItem->setData(venueType, VenueModelRoles::VenueTypeRole);
             root->appendRow(venueItem);
         }
     }
 
-    m_loadedVenueType |= VenueVenueTypeFlag(keyToFlag(venueType));
+    m_loadedVenueType |= VenueTypeFlag(keyToFlag(venueType));
     emit loadedVenueTypeChanged();
 }
 
@@ -124,7 +124,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     return roles;
 }
 
-VenueModel::VenueVenueTypeFlags VenueModel::loadedVenueType() const
+VenueModel::VenueTypeFlags VenueModel::loadedVenueType() const
 {
     return m_loadedVenueType;
 }

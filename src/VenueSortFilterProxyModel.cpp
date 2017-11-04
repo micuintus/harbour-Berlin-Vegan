@@ -97,7 +97,7 @@ void VenueSortFilterProxyModel::setSearchString(QString searchString)
 
 }
 
-void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueVenueTypeFlags filterVenueTypeFlags)
+void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags filterVenueTypeFlags)
 {
     m_filterVenueType = filterVenueTypeFlags;
     emit filterVenueTypeChanged();
@@ -218,14 +218,13 @@ bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles ro
 
 bool VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
 {
-    return testCategoryFilter(index, VenueModel::VenueModelRoles::VenueType, m_filterVenueType);
+    return testCategoryFilter(index, VenueModel::VenueModelRoles::VenueTypeRole, m_filterVenueType);
 }
 
 bool VenueSortFilterProxyModel::vegCategoryMatches(const QModelIndex &index) const
 {
     return testCategoryFilter(index, VenueModel::VenueModelRoles::VegCategory, m_filterVegCategory);
 }
-
 
 bool VenueSortFilterProxyModel::venuePropertiesMatch(const QModelIndex &index) const
 {
