@@ -58,29 +58,29 @@ BVApp.Page {
             TextSwitch {
                 text: qsTrId("id-vegan")
                 onCheckedChanged: {
-                    jsonModelCollection.setVeganCategoryFilterFlag(VenueSortFilterProxyModel.VeganFlag, checked);
+                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VeganFlag, checked);
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVeganCategory & VenueSortFilterProxyModel.VeganFlag;
+                Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VeganFlag;
 
             }
 
             TextSwitch {
                 text: qsTrId("id-vegetarian")
                 onCheckedChanged: {
-                    jsonModelCollection.setVeganCategoryFilterFlag(VenueSortFilterProxyModel.VegetarianFlag, checked);
+                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VegetarianFlag, checked);
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVeganCategory & VenueSortFilterProxyModel.VegetarianFlag;
+                Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VegetarianFlag;
             }
 
             TextSwitch {
                 text: qsTrId("id-omnivore")
                 onCheckedChanged: {
-                    jsonModelCollection.setVeganCategoryFilterFlag(VenueSortFilterProxyModel.OmnivoreFlag, checked);
+                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.OmnivoreFlag, checked);
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVeganCategory & VenueSortFilterProxyModel.OmnivoreFlag;
+                Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivoreFlag;
 
             }
 

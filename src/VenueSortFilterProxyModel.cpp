@@ -34,9 +34,9 @@ QVariantMap VenueSortFilterProxyModel::item(int row) const
     return ret;
 }
 
-VenueSortFilterProxyModel::VenueVegCategoryFlags VenueSortFilterProxyModel::filterVeganCategory() const
+VenueSortFilterProxyModel::VenueVegCategoryFlags VenueSortFilterProxyModel::filterVegCategory() const
 {
-    return m_filterVeganCategory;
+    return m_filterVegCategory;
 }
 
 VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterVenueProperty() const
@@ -44,18 +44,18 @@ VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterV
     return m_filterVenueProperty;
 }
 
-void VenueSortFilterProxyModel::setVeganCategoryFilterFlag(VenueVegCategoryFlag flag, bool on)
+void VenueSortFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on)
 {
     if (on)
     {
-        m_filterVeganCategory |= flag;
+        m_filterVegCategory |= flag;
     }
     else
     {
-        m_filterVeganCategory &= ~flag;
+        m_filterVegCategory &= ~flag;
     }
 
-    emit filterVeganCategoryChanged();
+    emit filterVegCategoryChanged();
     invalidateFilter();
 }
 
@@ -127,7 +127,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
         {
             return searchStringMatches(index)
                 && modelCategoryMatches(index)
-                && veganCategoryMatches(index)
+                && vegCategoryMatches(index)
                 && venuePropertyMatches(index);
         }
     }
@@ -215,9 +215,9 @@ bool VenueSortFilterProxyModel::modelCategoryMatches(const QModelIndex &index) c
     }
 }
 
-bool VenueSortFilterProxyModel::veganCategoryMatches(const QModelIndex &index) const
+bool VenueSortFilterProxyModel::vegCategoryMatches(const QModelIndex &index) const
 {
-    return testCategoryFilter(index, VenueModel::VenueModelRoles::VeganCategory, m_filterVeganCategory);
+    return testCategoryFilter(index, VenueModel::VenueModelRoles::VegCategory, m_filterVegCategory);
 }
 
 
