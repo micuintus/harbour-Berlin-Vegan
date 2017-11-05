@@ -8,9 +8,9 @@
 class QReadWriteLock;
 class QQmlEngine;
 
-constexpr inline int keyToFlag(const int key, const int keyOffset = 0)
+constexpr inline int enumValueToFlag(const int enumValue, const int enumOffset = 0)
 {
-    return 1 << (key - keyOffset);
+    return 1 << (enumValue - enumOffset);
 }
 
 class VenueModel : public QStandardItemModel
@@ -42,8 +42,8 @@ public:
 
     enum VenueTypeFlag
     {
-        FoodFlag     = keyToFlag(VenueType::Food),
-        ShoppingFlag = keyToFlag(VenueType::Shopping)
+        FoodFlag     = enumValueToFlag(VenueType::Food),
+        ShoppingFlag = enumValueToFlag(VenueType::Shopping)
     };
     Q_DECLARE_FLAGS(VenueTypeFlags, VenueTypeFlag)
     Q_FLAG(VenueTypeFlags)

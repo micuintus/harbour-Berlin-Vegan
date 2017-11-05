@@ -53,7 +53,7 @@ void VenueModel::importFromJson(const QJSValue &item, VenueType venueType)
         }
     }
 
-    m_loadedVenueType |= VenueTypeFlag(keyToFlag(venueType));
+    m_loadedVenueType |= VenueTypeFlag(enumValueToFlag(venueType));
     emit loadedVenueTypeChanged();
 }
 
