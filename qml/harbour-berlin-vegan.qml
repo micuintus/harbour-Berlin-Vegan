@@ -161,6 +161,7 @@ ApplicationWindow
 
             onClicked: {
                 gJsonCollection.filterFavorites = true;
+                // favorites can be both food and shopping venues and should both be shown in the favorites tab
                 gJsonCollection.filterVenueType = VenueModel.FoodFlag | VenueModel.ShoppingFlag;
                 page.searchString = gJsonCollection.searchString;
             }

@@ -8,6 +8,8 @@
 class QReadWriteLock;
 class QQmlEngine;
 
+// Turn a value of an enum to a bitmask, which has only the bit at the position of
+// that enum value set to 1. At your option, rebase the enumValue to enumOffset.
 constexpr inline int enumValueToFlag(const int enumValue, const int enumOffset = 0)
 {
     return 1 << (enumValue - enumOffset);
