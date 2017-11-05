@@ -78,6 +78,7 @@ QtObject {
     readonly property int fontSizeExtraLarge: Silica.Theme.fontSizeExtraLarge
 
     readonly property int pageIndicatorSmall: Silica.Theme.paddingSmall
+    readonly property int pageIndicatorPadding: 2*Silica.Theme.paddingLarge
     readonly property color pageIndicatorColor: Silica.Theme.highlightColor
 
     readonly property int iconSizeMedium : Silica.Theme.iconSizeMedium
