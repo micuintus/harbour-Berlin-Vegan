@@ -36,6 +36,8 @@ import "tinycolor.js" as TinyColor
 
 Item {
 
+    id: root
+
     property string name
     property string street
     property var restaurantCoordinate
@@ -46,31 +48,48 @@ Item {
     property real shrinkHeightBy
 
 
-    Image {
-        id: image
+    BVApp.SwipeView {
+        id: images
 
-        source: pictureAvailable
-                ? pictures[0].url
-                : "qrc:/images/Platzhalter_v2_mitSchriftzug" + (BVApp.Platform.isSailfish ?
-                                                                  "_alpha.png"
-                                                                : ".jpg")
-        fillMode: Image.PreserveAspectCrop
+        anchors.fill: parent
 
-        visible: pictureAvailable || BVApp.Platform.isVPlay
+        // '1' so we see the placeholder image
+        model: pictures.length ? pictures.length : 1
 
-        height: Math.max(parent.height - shrinkHeightBy,0)
-        width: parent.width
+        delegate: Image {
 
-        // This leads to the effect that the image is being cropped
-        // from both bottom and top by half a pixel per shrinkHeightBy
-        y: shrinkHeightBy
+            source: pictureAvailable
+                    ? pictures[index].url
+                    : "qrc:/images/Platzhalter_v2_mitSchriftzug" + (BVApp.Platform.isSailfish ?
+                                                                        "_alpha.png"
+                                                                      : ".jpg")
+            fillMode: Image.PreserveAspectCrop
+
+            height: Math.max(root.height - shrinkHeightBy,0)
+            width: root.width
+
+            // This leads to the effect that the image is being cropped
+            // from both bottom and top by half a pixel per shrinkHeightBy
+            y: shrinkHeightBy
+        }
+    }
+
+    BVApp.PageIndicator {
+        visible: images.count > 1
+
+        model: images.count
+        currentIndex: images.currentIndex
+
+        anchors.bottom: images.bottom
+        anchors.bottomMargin: BVApp.Theme.pageIndicatorPadding
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
     OpacityRampEffect {
         id: ramp
         enabled: BVApp.Platform.isSailfish
-        anchors.fill: image
-        sourceItem: image
+        anchors.fill: images
+        sourceItem: images
         direction: BVApp.Theme.opacityRampTopToBottom
         offset: 0.54
         slope: 2.24
@@ -81,7 +100,7 @@ Item {
         hue: TinyColor.rgbToHsl(srcColor.r, srcColor.g, srcColor.b).h
         source: ramp
         visible: !pictureAvailable && BVApp.Platform.isSailfish
-        anchors.fill: image
+        anchors.fill: images
         cached: true
     }
 

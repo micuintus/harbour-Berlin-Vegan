@@ -111,6 +111,7 @@ QtObject {
     readonly property int fontSizeExtraLarge: dp(23)
 
     readonly property int pageIndicatorSmall: dp(6)
+    readonly property int pageIndicatorPadding: dp(6)
     readonly property color pageIndicatorColor: "white"
 
     // HACK: only used in IconToolBar so far, we want to keep scale at 1 ATM
