@@ -21,9 +21,9 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
 public:
 
     enum VenueVegCategoryFlag {
-        OmnivoreFlag   = keyToFlag(VenueModel::Omnivore)   | keyToFlag(VenueModel::OmnivoreVeganDeclared),
-        VegetarianFlag = keyToFlag(VenueModel::Vegetarian) | keyToFlag(VenueModel::VegetarianVeganDeclared),
-        VeganFlag      = keyToFlag(VenueModel::Vegan)
+        OmnivoreFlag   = enumValueToFlag(VenueModel::Omnivore)   | enumValueToFlag(VenueModel::OmnivoreVeganDeclared),
+        VegetarianFlag = enumValueToFlag(VenueModel::Vegetarian) | enumValueToFlag(VenueModel::VegetarianVeganDeclared),
+        VeganFlag      = enumValueToFlag(VenueModel::Vegan)
     };
     Q_DECLARE_FLAGS(VenueVegCategoryFlags, VenueVegCategoryFlag)
     Q_FLAG(VenueVegCategoryFlags)
@@ -31,15 +31,15 @@ public:
 
     enum VenuePropertyFlag {
                                   // Make sure we start with bit 0 and not with bit VenueModel::FirstPropertyRole
-        Wlan                    = keyToFlag(VenueModel::Wlan,                    VenueModel::FirstPropertyRole),
-        HandicappedAccessible   = keyToFlag(VenueModel::HandicappedAccessible,   VenueModel::FirstPropertyRole),
-        HandicappedAccessibleWc = keyToFlag(VenueModel::HandicappedAccessibleWc, VenueModel::FirstPropertyRole),
-        Catering                = keyToFlag(VenueModel::Catering,                VenueModel::FirstPropertyRole),
-        Organic                 = keyToFlag(VenueModel::Organic,                 VenueModel::FirstPropertyRole),
-        GlutenFree              = keyToFlag(VenueModel::GlutenFree,              VenueModel::FirstPropertyRole),
-        Delivery                = keyToFlag(VenueModel::Delivery,                VenueModel::FirstPropertyRole),
-        Dog                     = keyToFlag(VenueModel::Dog,                     VenueModel::FirstPropertyRole),
-        ChildChair              = keyToFlag(VenueModel::ChildChair,              VenueModel::FirstPropertyRole),
+        Wlan                    = enumValueToFlag(VenueModel::Wlan,                    VenueModel::FirstPropertyRole),
+        HandicappedAccessible   = enumValueToFlag(VenueModel::HandicappedAccessible,   VenueModel::FirstPropertyRole),
+        HandicappedAccessibleWc = enumValueToFlag(VenueModel::HandicappedAccessibleWc, VenueModel::FirstPropertyRole),
+        Catering                = enumValueToFlag(VenueModel::Catering,                VenueModel::FirstPropertyRole),
+        Organic                 = enumValueToFlag(VenueModel::Organic,                 VenueModel::FirstPropertyRole),
+        GlutenFree              = enumValueToFlag(VenueModel::GlutenFree,              VenueModel::FirstPropertyRole),
+        Delivery                = enumValueToFlag(VenueModel::Delivery,                VenueModel::FirstPropertyRole),
+        Dog                     = enumValueToFlag(VenueModel::Dog,                     VenueModel::FirstPropertyRole),
+        ChildChair              = enumValueToFlag(VenueModel::ChildChair,              VenueModel::FirstPropertyRole),
     };
     Q_DECLARE_FLAGS(VenuePropertyFlags, VenuePropertyFlag)
     Q_FLAG(VenuePropertyFlags)

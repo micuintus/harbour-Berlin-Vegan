@@ -210,7 +210,7 @@ bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles ro
     if (valueRole.isValid() && valueRole.canConvert<int>())
     {
         const auto value = valueRole.toInt();
-        return filterFlags.testFlag(static_cast<typename FilterFlags::enum_type>(keyToFlag(value)));
+        return filterFlags.testFlag(static_cast<typename FilterFlags::enum_type>(enumValueToFlag(value)));
     }
 
     return false;
@@ -230,7 +230,7 @@ bool VenueSortFilterProxyModel::venuePropertiesMatch(const QModelIndex &index) c
 {
     for (int roleKey = VenueModel::FirstPropertyRole; roleKey <= VenueModel::LastPropertyRole; roleKey++)
     {
-        if (m_filterVenueProperty.testFlag(VenuePropertyFlag(keyToFlag(roleKey, VenueModel::FirstPropertyRole))))
+        if (m_filterVenueProperty.testFlag(VenuePropertyFlag(enumValueToFlag(roleKey, VenueModel::FirstPropertyRole))))
         {
             const auto roleValue = index.data(roleKey);
             if (roleValue.isValid() && roleValue.canConvert<int>() && roleValue.toInt() == 1)
