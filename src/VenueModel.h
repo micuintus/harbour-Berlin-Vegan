@@ -22,7 +22,7 @@ class VenueModel : public QStandardItemModel
 public:
     enum VenueVegCategory
     {
-        Unkown                  = 0,
+        Unknown                 = 0,
         // Defined by the GastroLocations.json format
         // which comes from the berlin-vegan.de backend
         Omnivore                = 1,
