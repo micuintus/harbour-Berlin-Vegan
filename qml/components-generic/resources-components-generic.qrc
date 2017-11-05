@@ -12,5 +12,7 @@
         <file>VenueDescriptionHeader.qml</file>
         <file>VenueDetails.qml</file>
         <file>tinycolor.js</file>
+        <file>SwipeView.qml</file>
+        <file>PageIndicator.qml</file>
     </qresource>
 </RCC>
