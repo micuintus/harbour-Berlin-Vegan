@@ -115,7 +115,7 @@ ApplicationWindow
             id: venueList
             positionSource: globalPositionSource
             jsonModelCollection: gJsonCollection
-            currentCategoryLoaded: function () {
+            currentCategoryLoaded: {
                 return gJsonVenueModel.loadedVenueType & gJsonCollection.filterVenueType;
             }
             onSearchStringChanged: {
