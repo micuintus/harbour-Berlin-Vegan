@@ -115,9 +115,7 @@ ApplicationWindow
             id: venueList
             positionSource: globalPositionSource
             jsonModelCollection: gJsonCollection
-            currentCategoryLoaded: function () {
-                return gJsonVenueModel.loadedVenueType & gJsonCollection.filterVenueType;
-            }
+            currentCategoryLoaded: gJsonVenueModel.loadedVenueType & gJsonCollection.filterVenueType;
             onSearchStringChanged: {
                 gJsonCollection.searchString = searchString
             }
@@ -173,7 +171,7 @@ ApplicationWindow
             menuIcon: BVApp.Theme.iconFor("filter")
             //% "Filter"
             text: qsTrId("id-filter")
-            page: VenueFilterSettings {
+            pageComponent: VenueFilterSettings {
                 jsonModelCollection: gJsonCollection
             }
         }
@@ -183,7 +181,7 @@ ApplicationWindow
             //% "About"
             text: qsTrId("id-about-venue-list")
 
-            page: AboutBerlinVegan { }
+            pageComponent: AboutBerlinVegan { }
         }
     }
 }
