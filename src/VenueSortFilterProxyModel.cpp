@@ -55,8 +55,8 @@ void VenueSortFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag fl
         m_filterVegCategory &= ~flag;
     }
 
-    emit filterVegCategoryChanged();
     invalidateFilter();
+    emit filterVegCategoryChanged();
 }
 
 void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on)
@@ -70,8 +70,8 @@ void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenuePropertyFlag fla
         m_filterVenueProperty &= ~flag;
     }
 
-    emit filterVenuePropertyChanged();
     invalidateFilter();
+    emit filterVenuePropertyChanged();
 }
 
 void VenueSortFilterProxyModel::setModel(VenueModel *model)
@@ -92,23 +92,22 @@ void VenueSortFilterProxyModel::setModel(VenueModel *model)
 void VenueSortFilterProxyModel::setSearchString(QString searchString)
 {
     m_searchString = searchString;
-    emit searchStringChanged();
     invalidateFilter();
-
+    emit searchStringChanged();
 }
 
 void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags filterVenueTypeFlags)
 {
     m_filterVenueType = filterVenueTypeFlags;
-    emit filterVenueTypeChanged();
     invalidateFilter();
+    emit filterVenueTypeChanged();
 }
 
 void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
 {
     m_filterFavorites = filterFavorites;
-    emit filterFavoritesChanged();
     invalidateFilter();
+    emit filterFavoritesChanged();
 }
 
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
