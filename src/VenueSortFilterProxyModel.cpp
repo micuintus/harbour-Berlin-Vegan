@@ -46,6 +46,11 @@ VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterV
 
 void VenueSortFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on)
 {
+    if (m_filterVegCategory.testFlag(flag) == on)
+    {
+        return;
+    }
+
     if (on)
     {
         m_filterVegCategory |= flag;
@@ -61,6 +66,11 @@ void VenueSortFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag fl
 
 void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on)
 {
+    if (m_filterVenueProperty.testFlag(flag) == on)
+    {
+        return;
+    }
+
     if (on)
     {
         m_filterVenueProperty |= flag;
@@ -91,6 +101,11 @@ void VenueSortFilterProxyModel::setModel(VenueModel *model)
 
 void VenueSortFilterProxyModel::setSearchString(QString searchString)
 {
+    if (m_searchString == searchString)
+    {
+        return;
+    }
+
     m_searchString = searchString;
     invalidateFilter();
     emit searchStringChanged();
@@ -98,6 +113,11 @@ void VenueSortFilterProxyModel::setSearchString(QString searchString)
 
 void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags filterVenueTypeFlags)
 {
+    if (m_filterVenueType == filterVenueTypeFlags)
+    {
+        return;
+    }
+
     m_filterVenueType = filterVenueTypeFlags;
     invalidateFilter();
     emit filterVenueTypeChanged();
@@ -105,6 +125,11 @@ void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags fi
 
 void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
 {
+    if (m_filterFavorites == filterFavorites)
+    {
+        return;
+    }
+
     m_filterFavorites = filterFavorites;
     invalidateFilter();
     emit filterFavoritesChanged();
@@ -112,6 +137,11 @@ void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
 
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 {
+    if (m_currentPosition == position)
+    {
+        return;
+    }
+
     m_currentPosition = position;
     reSort();
 }
