@@ -31,7 +31,7 @@ import BerlinVegan.components.generic 1.0 as BVApp
 
 import "."
 
-import harbour.berlin.vegan.gel 1.0
+import harbour.berlin.vegan 1.0
 
 BVApp.Page {
 

@@ -42,8 +42,8 @@
 
 int main(int argc, char *argv[])
 {
-    qmlRegisterType<VenueModel>("harbour.berlin.vegan.gel", 1, 0, "VenueModel");
-    qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan.gel", 1, 0, "VenueSortFilterProxyModel");
+    qmlRegisterType<VenueModel>("harbour.berlin.vegan", 1, 0, "VenueModel");
+    qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan", 1, 0, "VenueSortFilterProxyModel");
     auto const mainQMLFile = QString("qrc:/qml/harbour-berlin-vegan.qml");
 
 #ifdef Q_OS_SAILFISH

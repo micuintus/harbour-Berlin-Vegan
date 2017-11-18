@@ -27,7 +27,7 @@ import QtQuick.Layouts 1.1
 import Sailfish.Silica 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
-import harbour.berlin.vegan.gel 1.0
+import harbour.berlin.vegan 1.0
 
 Column {
     property var restaurant
