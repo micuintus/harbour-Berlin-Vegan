@@ -113,6 +113,6 @@ BVApp.Page {
             center = currentPosition.coordinate
         }
 
-        zoomLevel: maximumZoomLevel - 9
+        zoomLevel: maximumZoomLevel - (BVApp.Platform.isSailfish ? 3 : 9)
     }
 }
