@@ -86,13 +86,13 @@ void VenueSortFilterProxyModel::setModel(VenueModel *model)
     }
 
     setSourceModel(model);
-    emit modelChanged(model);
+    emit modelChanged();
 }
 
 void VenueSortFilterProxyModel::setSearchString(QString searchString)
 {
     m_searchString = searchString;
-    emit searchStringChanged(m_searchString);
+    emit searchStringChanged();
     invalidateFilter();
 
 }
@@ -107,7 +107,7 @@ void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags fi
 void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
 {
     m_filterFavorites = filterFavorites;
-    emit filterFavoritesChanged(m_filterFavorites);
+    emit filterFavoritesChanged();
     invalidateFilter();
 }
 

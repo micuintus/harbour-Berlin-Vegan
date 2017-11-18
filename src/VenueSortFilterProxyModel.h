@@ -64,12 +64,12 @@ public slots:
     void setCurrentPosition(QGeoCoordinate position);
 
 signals:
-    void modelChanged(VenueModel* model);
-    void searchStringChanged(QString);
+    void modelChanged();
+    void searchStringChanged();
     void filterVenueTypeChanged();
     void filterVegCategoryChanged();
     void filterVenuePropertyChanged();
-    void filterFavoritesChanged(bool);
+    void filterFavoritesChanged();
 
 protected:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
