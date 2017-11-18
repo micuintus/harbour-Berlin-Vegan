@@ -44,44 +44,35 @@ VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterV
     return m_filterVenueProperty;
 }
 
-void VenueSortFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on)
+template <typename FilterFlags, typename SignalType>
+void VenueSortFilterProxyModel::setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType filterChangedSignal)
 {
-    if (m_filterVegCategory.testFlag(flag) == on)
+    if (filterFlagMask.testFlag(flag) == on)
     {
         return;
     }
 
     if (on)
     {
-        m_filterVegCategory |= flag;
+        filterFlagMask |= flag;
     }
     else
     {
-        m_filterVegCategory &= ~flag;
+        filterFlagMask &= ~flag;
     }
 
     invalidateFilter();
-    emit filterVegCategoryChanged();
+    emit (this->*filterChangedSignal)();
+}
+
+void VenueSortFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on)
+{
+    setFilterFlag(m_filterVegCategory, flag, on, &VenueSortFilterProxyModel::filterVegCategoryChanged);
 }
 
 void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on)
 {
-    if (m_filterVenueProperty.testFlag(flag) == on)
-    {
-        return;
-    }
-
-    if (on)
-    {
-        m_filterVenueProperty |= flag;
-    }
-    else
-    {
-        m_filterVenueProperty &= ~flag;
-    }
-
-    invalidateFilter();
-    emit filterVenuePropertyChanged();
+    setFilterFlag(m_filterVenueProperty, flag, on, &VenueSortFilterProxyModel::filterVenuePropertyChanged);
 }
 
 void VenueSortFilterProxyModel::setModel(VenueModel *model)

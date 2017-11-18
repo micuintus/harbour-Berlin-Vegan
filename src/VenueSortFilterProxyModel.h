@@ -84,6 +84,9 @@ private:
     bool vegCategoryMatches(const QModelIndex& index) const;
     bool venuePropertiesMatch(const QModelIndex& index) const;
 
+    template <typename FilterFlags, typename SignalType>
+    void setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType changedSignal);
+
     QString m_searchString;
     QGeoCoordinate m_currentPosition;
     VenueModel::VenueTypeFlags m_filterVenueType = VenueModel::FoodFlag;
