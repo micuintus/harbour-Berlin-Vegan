@@ -3,15 +3,9 @@
 #include <QStandardItem>
 #include <QtQml/qqml.h>
 #include <QtQml/QQmlEngine>
+#include <QtQml/QJSValueIterator>
 #include <iostream>
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 6, 0)
-#include <3rdparty/Cutehacks/gel/jsvalueiterator.h>
-using namespace com::cutehacks::gel;
-#else
-#include <QtQml/QJSValueIterator>
-typedef QJSValueIterator JSValueIterator;
-#endif
 
 VenueModel::VenueModel(QObject *parent) :
     QStandardItemModel(parent)
@@ -41,7 +35,7 @@ void VenueModel::importFromJson(const QJSValue &item, VenueType venueType)
 {
     if (item.isArray()) {
         auto root = this->invisibleRootItem();
-        JSValueIterator array(item);
+        QJSValueIterator array(item);
 
         while (array.next()) {
             if (!array.hasNext())
