@@ -12,5 +12,6 @@
         <file>SectionHeader.qml</file>
         <file>SearchField.qml</file>
         <file>ActionMenuItem.qml</file>
+        <file>RadioButton.qml</file>
     </qresource>
 </RCC>
