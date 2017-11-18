@@ -56,8 +56,8 @@ QtObject {
         case "map":
             icon = "map";
             break;
-        case "food":
-            icon = "restaurant_menu";
+        case "list":
+            icon = "view_list";
             break;
         case "shopping":
             icon = "shopping_cart";

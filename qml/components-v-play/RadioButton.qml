@@ -25,7 +25,7 @@ Quick2.RadioButton {
 
     indicator: Item {
         implicitWidth: dp(20)
-        implicitHeight: dp(28)
+        implicitHeight: dp(32)
         x: parent.leftPadding
         y: parent.height / 2 - height / 2
         Rectangle {

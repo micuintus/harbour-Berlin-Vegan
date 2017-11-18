@@ -50,6 +50,44 @@ BVApp.Page {
             }
 
             BVApp.SectionHeader {
+                //% "Venue category"
+                text: qsTrId("id-venue-category")
+                icon: BVApp.Theme.iconFor("list")
+            }
+
+            BVApp.RadioButton {
+                id: foodButton
+                      //% "Food"
+                text: qsTrId("id-food")
+
+                onCheckedChanged: {
+                    if (checked) {
+                        // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
+                        shoppingButton.checked = false;
+                        jsonModelCollection.filterVenueType = VenueModel.FoodFlag;
+                    }
+                }
+
+                Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.FoodFlag;
+            }
+
+            BVApp.RadioButton {
+                id: shoppingButton
+                      //% "Shopping"
+                text: qsTrId("id-shopping")
+
+                onCheckedChanged: {
+                    if (checked) {
+                        // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
+                        foodButton.checked = false;
+                        jsonModelCollection.filterVenueType = VenueModel.ShoppingFlag;
+                    }
+                }
+
+                Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.ShoppingFlag;
+            }
+
+            BVApp.SectionHeader {
                 //% "Veg*an category"
                 text: qsTrId("id-filter-vegan-category")
                 icon: BVApp.Theme.iconFor("leaf")
