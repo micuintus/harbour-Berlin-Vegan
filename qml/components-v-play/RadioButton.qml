@@ -1,6 +1,7 @@
 import VPlayApps 1.0
 import QtQuick 2.5
 import QtQuick.Controls 2.0 as Quick2
+import BerlinVegan.components.platform 1.0 as BVApp
 
 Quick2.RadioButton {
     id: radioButton
@@ -11,17 +12,20 @@ Quick2.RadioButton {
     leftPadding: 0
     rightPadding: 0
 
+    // align with TextSwitch implementation
+    x: parent.width/6
+    spacing: BVApp.Theme.paddingLarge
+
     // overwrite style for density-independent sizes
     contentItem: AppText {
         text: parent.text
-        font.pixelSize: sp(12)
         anchors.left: parent.left
         anchors.leftMargin: parent.indicator.width + parent.indicator.x + parent.spacing
     }
 
     indicator: Item {
-        implicitWidth: dp(36)
-        implicitHeight: implicitWidth
+        implicitWidth: dp(20)
+        implicitHeight: dp(28)
         x: parent.leftPadding
         y: parent.height / 2 - height / 2
         Rectangle {
