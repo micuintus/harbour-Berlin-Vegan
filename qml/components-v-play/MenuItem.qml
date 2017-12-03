@@ -7,7 +7,7 @@ NavigationItem {
     property var menuIcon
     property alias text: item.title
     property Component pageComponent
-    property Page page
+    property Page currentPage
 
     icon: menuIcon.iconString
 
@@ -15,17 +15,22 @@ NavigationItem {
         iconFont = menuIcon.fontFamily
     }
 
-    BVApp.NavigationStackWithPushAttached
-    {  }
-
-    onLoaded:
-    {
-        if (pageComponent)
+    function loadPage() {
+        if (pageComponent && navigationStack)
         {
             navigationStack.push(pageComponent);
-            page = navigationStack.getPage(0);
+            currentPage = navigationStack.getPage(0);
+            console.log(currentPage)
         }
     }
+
+    onLoaded: { console.log("loaded!"); loadPage(); }
+    onNavigationStackChanged: { console.log("NavigationStackChanged!"); loadPage(); }
+    onPageComponentChanged: {console.log("pageComponentChanged!"); loadPage(); }
+
+
+    BVApp.NavigationStackWithPushAttached
+    {  }
 
 
     onSelected: {

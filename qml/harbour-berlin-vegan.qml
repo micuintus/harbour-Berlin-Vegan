@@ -131,7 +131,7 @@ ApplicationWindow
             onClicked: {
                 gJsonCollection.filterFavorites = false;
                 gJsonCollection.filterVenueType = VenueModel.FoodFlag;
-                page.searchString = gJsonCollection.searchString
+                currentPage.searchString = gJsonCollection.searchString
             }
 
             pageComponent: app.initialPage
@@ -145,11 +145,10 @@ ApplicationWindow
            onClicked: {
                gJsonCollection.filterFavorites = false;
                gJsonCollection.filterVenueType = VenueModel.ShoppingFlag;
-               page.searchString = gJsonCollection.searchString
+               currentPage.searchString = gJsonCollection.searchString
            }
 
            pageComponent: app.initialPage
-
         }
 
         BVApp.ActionMenuItem {
@@ -161,7 +160,7 @@ ApplicationWindow
                 gJsonCollection.filterFavorites = true;
                 // favorites can be both food and shopping venues and should both be shown in the favorites tab
                 gJsonCollection.filterVenueType = VenueModel.FoodFlag | VenueModel.ShoppingFlag;
-                page.searchString = gJsonCollection.searchString;
+                currentPage.searchString = gJsonCollection.searchString;
             }
 
             pageComponent: app.initialPage
@@ -171,6 +170,7 @@ ApplicationWindow
             menuIcon: BVApp.Theme.iconFor("filter")
             //% "Filter"
             text: qsTrId("id-filter")
+
             pageComponent: VenueFilterSettings {
                 jsonModelCollection: gJsonCollection
             }

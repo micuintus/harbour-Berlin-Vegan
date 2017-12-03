@@ -4,5 +4,8 @@ import BerlinVegan.components.platform 1.0 as BVApp
 
 BVApp.MenuItem {
     signal clicked
-    onSelected: clicked()
+    onSelected: {
+        console.log("Cliiiicked")
+        clicked()
+    }
 }
