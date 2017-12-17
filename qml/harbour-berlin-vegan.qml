@@ -128,10 +128,15 @@ ApplicationWindow
             //% "Food"
             text: qsTrId("id-venue-list")
 
+            onPageChanged: page.searchString = gJsonCollection.searchString;
+
             onClicked: {
                 gJsonCollection.filterFavorites = false;
                 gJsonCollection.filterVenueType = VenueModel.FoodFlag;
-                page.searchString = gJsonCollection.searchString
+                if (page)
+                {
+                    page.searchString = gJsonCollection.searchString;
+                }
             }
 
             pageComponent: app.initialPage
@@ -142,14 +147,18 @@ ApplicationWindow
             //% "Shopping"
             text: qsTrId("id-shopping-venue-list")
 
-           onClicked: {
+            onPageChanged: page.searchString = gJsonCollection.searchString;
+
+            onClicked: {
                gJsonCollection.filterFavorites = false;
                gJsonCollection.filterVenueType = VenueModel.ShoppingFlag;
-               page.searchString = gJsonCollection.searchString
+               if (page)
+               {
+                   page.searchString = gJsonCollection.searchString;
+               }
            }
 
            pageComponent: app.initialPage
-
         }
 
         BVApp.ActionMenuItem {
@@ -157,11 +166,16 @@ ApplicationWindow
             //% "Favorites"
             text: qsTrId("id-favorites-venue-list")
 
+            onPageChanged: page.searchString = gJsonCollection.searchString;
+
             onClicked: {
                 gJsonCollection.filterFavorites = true;
                 // favorites can be both food and shopping venues and should both be shown in the favorites tab
                 gJsonCollection.filterVenueType = VenueModel.FoodFlag | VenueModel.ShoppingFlag;
-                page.searchString = gJsonCollection.searchString;
+                if (page)
+                {
+                    page.searchString = gJsonCollection.searchString;
+                }
             }
 
             pageComponent: app.initialPage
