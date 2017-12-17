@@ -11,24 +11,31 @@ NavigationItem {
 
     icon: menuIcon.iconString
 
-    Component.onCompleted: {
-        iconFont = menuIcon.fontFamily
-    }
-
     BVApp.NavigationStackWithPushAttached
     {  }
 
-    onLoaded:
-    {
-        if (pageComponent)
+    function tryLoadPage() {
+        if (pageComponent && navigationStack)
         {
             navigationStack.push(pageComponent);
             page = navigationStack.getPage(0);
         }
     }
 
+    Component.onCompleted: {
+        iconFont = menuIcon.fontFamily
+        tryLoadPage();
+    }
+
+    onLoaded: tryLoadPage()
+    onNavigationStackChanged: tryLoadPage()
+    onPageComponentChanged: tryLoadPage()
+
 
     onSelected: {
-        navigationStack.popAllExceptFirst()
+        if (navigationStack)
+        {
+            navigationStack.popAllExceptFirst();
+        }
     }
 }
