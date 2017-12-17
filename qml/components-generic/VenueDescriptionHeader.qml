@@ -54,7 +54,7 @@ Item {
         anchors.fill: parent
 
         // '1' so we see the placeholder image
-        model: pictures.length ? pictures.length : 1
+        model: pictureAvailable ? pictures.length : 1
 
         delegate: Image {
 
