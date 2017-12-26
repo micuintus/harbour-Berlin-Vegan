@@ -12,8 +12,8 @@ BVApp.Page {
     property var venueCoordinate
     property var positionSource
     property var vegan
-    property alias name : page.title
-    property alias map : map
+    property alias name: page.title
+    property alias map: map
 
     PageHeader {
         id: header
@@ -91,17 +91,12 @@ BVApp.Page {
         // v-play: it is as easy as that: the copyright notice is usually displayed in the bottom left corner.
         copyrightsVisible: false
 
-        gesture {
-            enabled: true
-        }
-
         Component.onCompleted: {
-            addMapItem(venueMarker)
-            addMapItem(currentPosition)
-            center = venueCoordinate
-            fitViewportToMapItems()
-        }
 
-        zoomLevel: maximumZoomLevel - 1
+            //  addMapItem(venueMarker)
+            //   addMapItem(currentPosition)
+            // center = venueCoordinate
+            // fitViewportToMapItems()
+        }
     }
 }

@@ -65,9 +65,7 @@ BVApp.Page {
         // v-play: it is as easy as that: the copyright notice is usually displayed in the bottom left corner.
         copyrightsVisible: false
 
-        gesture {
-            enabled: true
-        }
+
 
         MapItemView {
             id: mapItemView
@@ -109,10 +107,9 @@ BVApp.Page {
         }
 
         Component.onCompleted: {
-            addMapItem(currentPosition)
-            center = currentPosition.coordinate
-        }
+            // addMapItem(currentPosition)
 
+        }
         zoomLevel: maximumZoomLevel - (BVApp.Platform.isSailfish ? 3 : 9)
     }
 }

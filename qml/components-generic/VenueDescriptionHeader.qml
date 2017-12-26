@@ -27,6 +27,7 @@ import Sailfish.Silica 1.0
 import QtPositioning 5.2
 
 import QtGraphicalEffects 1.0
+import harbour.berlin.vegan 1.0
 
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
@@ -34,7 +35,7 @@ import BerlinVegan.components.generic 1.0 as BVApp
 import "tinycolor.js" as TinyColor
 
 
-Item {
+MouseStealingProtector {
 
     id: root
 
