@@ -24,6 +24,7 @@
 
 #include <QtQuick>
 
+#include "FileIO.h"
 #include "VenueSortFilterProxyModel.h"
 #include "VenueModel.h"
 
@@ -75,15 +76,18 @@ int main(int argc, char *argv[])
 #endif
 
     qmlEngine.addImportPath(QStringLiteral("qrc:/imports/"));
+    FileIO fileIO;
 
 #ifdef Q_OS_SAILFISH
     app->setApplicationVersion(APP_VERSION);
     view->setSource(mainQMLFile);
     view->show();
+    view->rootContext()->setContextProperty("FileIO", &fileIO);
 #else
     vplay.initialize(&qmlEngine);
     vplay.setMainQmlFileName(mainQMLFile);
     qmlEngine.load(QUrl(vplay.mainQmlFileName()));
+    qmlEngine.rootContext()->setContextProperty("FileIO", &fileIO);
 #endif
     return app->exec();
 }
