@@ -51,6 +51,18 @@ public:
     Q_FLAG(VenueTypeFlags)
     Q_ENUM(VenueTypeFlag)
 
+    enum VenueSubTypeFlag
+    {
+        NoneFlag       = 0x0,
+        RestaurantFlag = 0x1,
+        FastFoodFlag   = 0x2,
+        CafeFlag       = 0x4,
+        IceCreamFlag   = 0x8
+    };
+    Q_DECLARE_FLAGS(VenueSubTypeFlags, VenueSubTypeFlag)
+    Q_FLAG(VenueSubTypeFlags)
+    Q_ENUM(VenueSubTypeFlag)
+
     enum VenueModelRoles
     {
         ID = Qt::UserRole + 1,
@@ -58,6 +70,8 @@ public:
 
         // Model Category
         VenueTypeRole,
+        // Restaurant, Imbiss, Cafe, Eiscafe
+        VenueSubTypeRole,
         Favorite,
 
         Street,
@@ -115,3 +129,4 @@ private:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(VenueModel::VenueTypeFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(VenueModel::VenueSubTypeFlags)

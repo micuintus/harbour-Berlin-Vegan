@@ -4,15 +4,59 @@
 #include <QtQml/qqml.h>
 #include <QtQml/QQmlEngine>
 #include <QtQml/QJSValueIterator>
-#include <iostream>
 
 
 VenueModel::VenueModel(QObject *parent) :
     QStandardItemModel(parent)
-{
+{ }
 
+VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
+{
+    static const auto subTypeStringLookup
+    = QHash<QString, VenueModel::VenueSubTypeFlag>
+    {
+        { "Restaurant" , VenueModel::RestaurantFlag },
+        { "Imbiss"     , VenueModel::FastFoodFlag   },
+        { "Cafe"       , VenueModel::CafeFlag       },
+        { "Eiscafe"    , VenueModel::IceCreamFlag   }
+    };
+
+    auto const it = subTypeStringLookup.find(name);
+    if (it != subTypeStringLookup.end())
+    {
+        return *it;
+    }
+    else
+    {
+        return VenueModel::NoneFlag;
+    }
 }
 
+VenueModel::VenueSubTypeFlags extractVenueSubType(const QJSValue& from)
+{
+    VenueModel::VenueSubTypeFlags ret;
+    if (!from.hasProperty("tags"))
+    {
+        return ret;
+    }
+
+    auto const tagsProperty = from.property("tags");
+    if (!tagsProperty.isArray())
+    {
+        return ret;
+    }
+
+    for (auto const& tagVariant : tagsProperty.toVariant().toList())
+    {
+        if (tagVariant.canConvert<QString>())
+        {
+            auto const flag = subTypeStringToFlag(tagVariant.toString());
+            ret.setFlag(flag);
+        }
+    }
+
+    return ret;
+}
 
 QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
 {
@@ -27,6 +71,9 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
             item->setData(value.toVariant(), roleKey);
         }
     }
+
+    auto const venueSubType = extractVenueSubType(from);
+    item->setData(QVariant::fromValue(static_cast<int>(venueSubType)), VenueModelRoles::VenueSubTypeRole);
 
     return item;
 }
