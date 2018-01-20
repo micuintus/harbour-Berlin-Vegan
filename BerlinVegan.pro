@@ -15,7 +15,8 @@ SOURCES += src/BerlinVegan.cpp \
 
 HEADERS += src/VenueModel.h \
            src/VenueSortFilterProxyModel.h \
-           src/TruncationMode.h
+           src/TruncationMode.h \
+           src/StealingFreeListView.h
 
 RESOURCES += resources.qrc \
              qml/components-generic/resources-components-generic.qrc

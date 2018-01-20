@@ -26,6 +26,7 @@
 
 #include "VenueSortFilterProxyModel.h"
 #include "VenueModel.h"
+#include "StealingFreeListView.h"
 
 #ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>
@@ -44,11 +45,13 @@ int main(int argc, char *argv[])
 {
     qmlRegisterType<VenueModel>("harbour.berlin.vegan", 1, 0, "VenueModel");
     qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan", 1, 0, "VenueSortFilterProxyModel");
+    qmlRegisterType<MouseStealingProtector>("harbour.berlin.vegan", 1, 0, "MouseStealingProtector");
     auto const mainQMLFile = QString("qrc:/qml/harbour-berlin-vegan.qml");
 
 #ifdef Q_OS_SAILFISH
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
+
     auto& qmlEngine = *(view->engine());
 #else
     qRegisterMetaType<TruncationMode::Modes>("TruncationMode::Modes");
