@@ -87,7 +87,6 @@ BVApp.Page {
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {
-                        var currRestaurant = mapItemView.model.item(index);
                         pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                        {
                                            restaurant     : currRestaurant,
