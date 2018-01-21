@@ -11,3 +11,4 @@ MenuItem 1.0 MenuItem.qml
 SectionHeader 1.0 SectionHeader.qml
 SearchField 1.0 SearchField.qml
 ActionMenuItem 1.0 ActionMenuItem.qml
+RadioButton 1.0 RadioButton.qml

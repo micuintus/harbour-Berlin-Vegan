@@ -146,16 +146,12 @@
         <translation>Lizenz anzeigen</translation>
     </message>
     <message id="id-venue-list">
-        <source>Food</source>
-        <translation>Gastronomie</translation>
+        <source>Venues</source>
+        <translation>Läden</translation>
     </message>
     <message id="id-about-venue-list">
         <source>About</source>
         <translation>Über</translation>
-    </message>
-    <message id="id-shopping-venue-list">
-        <source>Shopping</source>
-        <translation>Einkaufen</translation>
     </message>
     <message id="id-favorites-venue-list">
         <source>Favorites</source>
@@ -256,6 +252,18 @@
     <message id="id-venue-subtype-icecream">
         <source>Ice cream parlor</source>
         <translation>Eisdiele</translation>
+    </message>
+    <message id="id-food">
+        <source>Food</source>
+        <translation>Gastronomie</translation>
+    </message>
+    <message id="id-shopping">
+        <source>Shopping</source>
+        <translation>Einkaufen</translation>
+    </message>
+    <message id="id-venue-category">
+        <source>Venue category</source>
+        <translation>Laden-Kategorie</translation>
     </message>
 </context>
 </TS>
