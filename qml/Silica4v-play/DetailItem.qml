@@ -7,17 +7,16 @@ import BerlinVegan.components.platform 1.0 as BVApp
 
 Rectangle {
 
-    property var label
-    property var leftMargin
-    property var rightMargin
-    property var value
+    property alias label: keyText.text
+    property int leftMargin
+    property int rightMargin
+    property alias value: valueText.text
 
     width: parent.width
     height: valueText.height
 
     Label {
         id: keyText
-        text: label
         color: BVApp.Theme.primaryColor
 
         font.pixelSize: BVApp.Theme.fontSizeSmall
@@ -38,7 +37,6 @@ Rectangle {
 
     Label {
         id: valueText
-        text: value
         color: BVApp.Theme.secondaryColor
 
         font.pixelSize: BVApp.Theme.fontSizeSmall
