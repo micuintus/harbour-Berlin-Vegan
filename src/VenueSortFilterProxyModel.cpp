@@ -236,11 +236,22 @@ bool VenueSortFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) 
 
 bool VenueSortFilterProxyModel::venueSubTypeMatches(const QModelIndex &index) const
 {
-    const auto valueRole = index.data(VenueModel::VenueModelRoles::VenueSubTypeRole);
-    if (valueRole.isValid() && valueRole.canConvert<int>())
+    // Shopping venues don't have a sub type -> alwas true
+    const auto venueTypeRole = index.data(VenueModel::VenueModelRoles::VenueTypeRole);
+    if (venueTypeRole.isValid() && venueTypeRole.canConvert<int>())
     {
-        const auto value = valueRole.toInt();
-        return m_filterVenueSubType & static_cast<typename VenueModel::VenueSubTypeFlags>(value);
+        const auto venueTypeFlag = static_cast<VenueModel::VenueType>(venueTypeRole.toInt());
+        if (venueTypeFlag == VenueModel::Shopping)
+        {
+            return true;
+        }
+    }
+
+    const auto venueSubTypeRole = index.data(VenueModel::VenueModelRoles::VenueSubTypeRole);
+    if (venueSubTypeRole.isValid() && venueSubTypeRole.canConvert<int>())
+    {
+        const auto venueSubTypeFlag = venueSubTypeRole.toInt();
+        return m_filterVenueSubType & static_cast<typename VenueModel::VenueSubTypeFlags>(venueSubTypeFlag);
     }
 
     return false;
