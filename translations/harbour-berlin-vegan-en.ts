@@ -228,8 +228,8 @@
     </message>
     <message id="id-venue-category">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="54"/>
-        <source>Venue category</source>
-        <translation>Venue category</translation>
+        <source>Venue type</source>
+        <translation>Venue type</translation>
     </message>
     <message id="id-food">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="61"/>

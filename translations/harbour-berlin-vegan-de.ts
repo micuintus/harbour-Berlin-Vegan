@@ -262,7 +262,8 @@
         <translation>Einkaufen</translation>
     </message>
     <message id="id-venue-category">
-        <source>Venue category</source>
+        <source>Venue type</source>
+        <oldsource>Venue category</oldsource>
         <translation>Laden-Kategorie</translation>
     </message>
 </context>

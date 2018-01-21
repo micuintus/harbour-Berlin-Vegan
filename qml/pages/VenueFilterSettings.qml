@@ -50,7 +50,7 @@ BVApp.Page {
             }
 
             BVApp.SectionHeader {
-                //% "Venue category"
+                //% "Venue type"
                 text: qsTrId("id-venue-category")
                 icon: BVApp.Theme.iconFor("list")
             }
