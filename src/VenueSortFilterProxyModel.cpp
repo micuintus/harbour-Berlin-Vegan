@@ -39,6 +39,11 @@ VenueSortFilterProxyModel::VenueVegCategoryFlags VenueSortFilterProxyModel::filt
     return m_filterVegCategory;
 }
 
+VenueModel::VenueSubTypeFlags VenueSortFilterProxyModel::filterVenueSubType() const
+{
+    return m_filterVenueSubType;
+}
+
 VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterVenueProperty() const
 {
     return m_filterVenueProperty;
@@ -73,6 +78,11 @@ void VenueSortFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag fl
 void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on)
 {
     setFilterFlag(m_filterVenueProperty, flag, on, &VenueSortFilterProxyModel::filterVenuePropertyChanged);
+}
+
+void VenueSortFilterProxyModel::setVenueSubTypeFilterFlag(int flag, bool on)
+{
+    setFilterFlag(m_filterVenueSubType, static_cast<VenueModel::VenueSubTypeFlag>(flag), on, &VenueSortFilterProxyModel::filterVenueSubTypeChanged);
 }
 
 void VenueSortFilterProxyModel::setModel(VenueModel *model)
@@ -148,6 +158,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
             return searchStringMatches(index)
                 && favoriteStatusMatches(index)
                 && venueTypeMatches(index)
+                && venueSubTypeMatches(index)
                 && vegCategoryMatches(index)
                 && venuePropertiesMatch(index);
         }
@@ -223,6 +234,18 @@ bool VenueSortFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) 
     }
 }
 
+bool VenueSortFilterProxyModel::venueSubTypeMatches(const QModelIndex &index) const
+{
+    const auto valueRole = index.data(VenueModel::VenueModelRoles::VenueSubTypeRole);
+    if (valueRole.isValid() && valueRole.canConvert<int>())
+    {
+        const auto value = valueRole.toInt();
+        return m_filterVenueSubType & static_cast<typename VenueModel::VenueSubTypeFlags>(value);
+    }
+
+    return false;
+}
+
 template <typename FilterFlags>
 bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles role, const FilterFlags& filterFlags)
 {
@@ -240,6 +263,7 @@ bool VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
 {
     return testCategoryFilter(index, VenueModel::VenueModelRoles::VenueTypeRole, m_filterVenueType);
 }
+
 
 bool VenueSortFilterProxyModel::vegCategoryMatches(const QModelIndex &index) const
 {

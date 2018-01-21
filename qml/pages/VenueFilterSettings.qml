@@ -85,6 +85,52 @@ BVApp.Page {
             }
 
             BVApp.SectionHeader {
+                //% "Venue sub type"
+                text: qsTrId("id-filter-venue-sub-type")
+                icon: BVApp.Theme.iconFor("coffee")
+            }
+
+            TextSwitch {
+                //% "Restaurant"
+                text: qsTrId("id-venue-subtype-restaurant")
+                onCheckedChanged: {
+                    jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.RestaurantFlag, checked);
+                }
+
+                Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.RestaurantFlag;
+            }
+
+            TextSwitch {
+                //% "Snack bar"
+                text: qsTrId("id-venue-subtype-fastfood")
+                onCheckedChanged: {
+                    jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.FastFoodFlag, checked);
+                }
+
+                Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.FastFoodFlag;
+            }
+
+            TextSwitch {
+                //% "Café"
+                text: qsTrId("id-venue-subtype-cafe")
+                onCheckedChanged: {
+                    jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.CafeFlag, checked);
+                }
+
+                Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.CafeFlag;
+            }
+
+            TextSwitch {
+                //% "Ice cream parlor"
+                text: qsTrId("id-venue-subtype-icecream")
+                onCheckedChanged: {
+                    jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.IceCreamFlag, checked);
+                }
+
+                Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.IceCreamFlag;
+            }
+
+            BVApp.SectionHeader {
                 text: qsTrId("id-venue-features")
                 icon: BVApp.Theme.iconFor("more_vert")
             }
