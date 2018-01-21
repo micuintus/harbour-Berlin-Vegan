@@ -31,7 +31,7 @@ Timer {
     property bool isVenue
     interval: 5000
 
-    function _fileRequest(url)
+    function _fileRequest(url, save)
     {
         var json
         request = new XMLHttpRequest();
@@ -46,6 +46,24 @@ Timer {
                     stop()
                     json = request.responseText;
                     onFileLoaded(json)
+
+                    if (!save)
+                    {
+                        return;
+                    }
+
+                    // e.g. GastroLocations.json
+                    var filename = url.substr(url.lastIndexOf('/') + 1);
+
+                    // write JSON to disk
+                    if (FileIO.write(filename, json))
+                    {
+                        console.log("Successfully written " + filename + " to disk")
+                    }
+                    else
+                    {
+                        console.error("Error writing: " + filename)
+                    }
                 }
             }
         };
@@ -57,22 +75,37 @@ Timer {
     {
         restart()
         isVenue = true
-        _fileRequest("https://www.berlin-vegan.de/app/data/GastroLocations.json")
+        _fileRequest("https://www.berlin-vegan.de/app/data/GastroLocations.json", true)
     }
 
     function loadShoppingJson()
     {
         restart()
         isVenue = false
-        _fileRequest("https://www.berlin-vegan.de/app/data/ShoppingLocations.json")
+        _fileRequest("https://www.berlin-vegan.de/app/data/ShoppingLocations.json", true)
     }
 
     onTriggered: {
         request.abort();
-        if (isVenue) {
-            _fileRequest("qrc:/qml/pages/GastroLocations.json")
-        } else {
-            _fileRequest("qrc:/qml/pages/ShoppingLocations.json")
+        var filename;
+        if (isVenue)
+        {
+            filename = "GastroLocations.json";
+        } else
+        {
+            filename = "ShoppingLocations.json";
         }
+
+        // use file from disk
+        if (FileIO.exists(filename))
+        {
+            var json = FileIO.read(filename);
+            onFileLoaded(json);
+            console.log("Successfully loaded " + filename + " from disk")
+            return;
+        }
+
+        console.log("Fall back to resource collection file for " + filename)
+        _fileRequest("qrc:/qml/pages/" + filename, false)
     }
 }
