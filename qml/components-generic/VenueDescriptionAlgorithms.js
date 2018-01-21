@@ -70,9 +70,13 @@ function restaurantCategory(key)
 
 function seatProperty(key)
 {
+    if (typeof key === "undefined")
+    {             //% "unknown"
+        return qsTrId("id-unknown");
+    }
+
     switch (key)
-    {
-                              //% "unknown"
+    {                      //% "unknown"
         case -1: return qsTrId("id-unknown");
                               //% "no"
         case  0: return qsTrId("id-no");
