@@ -139,6 +139,7 @@ BVApp.Page {
                 }
             }
 
+
             BVApp.SectionHeader {
                 //% "Veg*an category"
                 text: qsTrId("id-filter-vegan-category")
@@ -171,95 +172,98 @@ BVApp.Page {
                 }
 
                 Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivoreFlag;
-
             }
 
+            Column {
 
-            BVApp.SectionHeader {
-                text: qsTrId("id-venue-features")
-                icon: BVApp.Theme.iconFor("more_vert")
-            }
+                visible: jsonModelCollection.filterVenueType & VenueModel.FoodFlag
+                width: parent.width
 
-            TextSwitch {
-                text: qsTrId("id-organic")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Organic, checked);
+                BVApp.SectionHeader {
+                    text: qsTrId("id-venue-features")
+                    icon: BVApp.Theme.iconFor("more_vert")
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Organic;
+                TextSwitch {
+                    text: qsTrId("id-organic")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Organic, checked);
+                    }
 
-            }
-
-            TextSwitch {
-                text: qsTrId("id-gluten-free")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.GlutenFree, checked);
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Organic;
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.GlutenFree;
-            }
+                TextSwitch {
+                    text: qsTrId("id-gluten-free")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.GlutenFree, checked);
+                    }
 
-            TextSwitch {
-                text: qsTrId("id-wheelchair")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessible, checked);
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.GlutenFree;
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.HandicappedAccessible;
-            }
+                TextSwitch {
+                    text: qsTrId("id-wheelchair")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessible, checked);
+                    }
 
-            TextSwitch {
-                text: qsTrId("id-wheelchair-wc")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessibleWc , checked);
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.HandicappedAccessible;
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.HandicappedAccessibleWc;
-            }
+                TextSwitch {
+                    text: qsTrId("id-wheelchair-wc")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessibleWc , checked);
+                    }
 
-            TextSwitch {
-                text: qsTrId("id-high-chair")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.ChildChair, checked);
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.HandicappedAccessibleWc;
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.ChildChair;
-            }
+                TextSwitch {
+                    text: qsTrId("id-high-chair")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.ChildChair, checked);
+                    }
 
-            TextSwitch {
-                text: qsTrId("id-dogs-allowed")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Dog, checked);
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.ChildChair;
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Dog;
-            }
+                TextSwitch {
+                    text: qsTrId("id-dogs-allowed")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Dog, checked);
+                    }
 
-            TextSwitch {
-                text: qsTrId("id-wifi")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Wlan, checked);
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Dog;
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Wlan;
-            }
+                TextSwitch {
+                    text: qsTrId("id-wifi")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Wlan, checked);
+                    }
 
-            TextSwitch {
-                text: qsTrId("id-catering")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Catering, checked);
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Wlan;
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Catering
-            }
+                TextSwitch {
+                    text: qsTrId("id-catering")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Catering, checked);
+                    }
 
-            TextSwitch {
-                text: qsTrId("id-delivery")
-                onCheckedChanged: {
-                    jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Delivery, checked);
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Catering
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Delivery;
+                TextSwitch {
+                    text: qsTrId("id-delivery")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Delivery, checked);
+                    }
+
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Delivery;
+                }
             }
         }
     }
