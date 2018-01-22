@@ -10,11 +10,13 @@ QT += positioning location
 CONFIG += c++11
 
 SOURCES += src/BerlinVegan.cpp \
+           src/FileIO.cpp \
            src/VenueModel.cpp \
            src/VenueSortFilterProxyModel.cpp
 
 HEADERS += src/VenueModel.h \
            src/VenueSortFilterProxyModel.h \
+           src/FileIO.h \
            src/TruncationMode.h
 
 RESOURCES += resources.qrc \
