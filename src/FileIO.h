@@ -1,6 +1,3 @@
-#ifndef FILEIO_H
-#define FILEIO_H
-
 #pragma once
 
 #include <QObject>
@@ -24,5 +21,3 @@ public:
 private:
     QString getWritableLocation();
 };
-
-#endif // FILEIO_H
