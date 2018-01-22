@@ -51,7 +51,7 @@ VenueModel::VenueSubTypeFlags extractVenueSubType(const QJSValue& from)
         if (tagVariant.canConvert<QString>())
         {
             auto const flag = subTypeStringToFlag(tagVariant.toString());
-            ret.setFlag(flag);
+            ret |= flag;
         }
     }
 
