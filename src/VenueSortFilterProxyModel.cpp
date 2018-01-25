@@ -150,21 +150,38 @@ void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 
 bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-    if ( sourceModel() != nullptr )
+    if (sourceModel() == nullptr)
     {
-        auto index = sourceModel()->index( source_row, 0, source_parent );
-        if (index.isValid())
-        {
-            return searchStringMatches(index)
-                && favoriteStatusMatches(index)
-                && venueTypeMatches(index)
-                && venueSubTypeMatches(index)
-                && vegCategoryMatches(index)
-                && venuePropertiesMatch(index);
-        }
+        return false;
     }
 
-    return false;
+    auto index = sourceModel()->index( source_row, 0, source_parent );
+    if (!index.isValid())
+    {
+        return false;
+    }
+
+    if (m_filterFavorites)
+    {
+        return favoriteStatusMatches(index) && searchStringMatches(index);
+    }
+    else
+    {
+        const auto venueTypeRole = index.data(VenueModel::VenueModelRoles::VenueTypeRole);
+        if (!(venueTypeRole.isValid() && venueTypeRole.canConvert<int>()))
+        {
+            return false;
+        }
+
+        const auto venueType = static_cast<VenueModel::VenueType>(venueTypeRole.toInt());
+
+        return venueTypeMatches(venueType)
+            && vegCategoryMatches(index)
+            // Only Food venues are filtered for sub type and properties
+            && (venueType == VenueModel::Shopping || (venueSubTypeMatches(index) && venuePropertiesMatch(index)))
+            // Filter search string last => slowest
+            && searchStringMatches(index);
+    }
 }
 
 bool VenueSortFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
@@ -216,36 +233,25 @@ bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) co
 
 bool VenueSortFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) const
 {
-    if (m_filterFavorites)
+    const auto valueRole = index.data( VenueModel::VenueModelRoles::Favorite);
+    if (valueRole.isValid() && valueRole.canConvert<bool>())
     {
-        const auto valueRole = index.data( VenueModel::VenueModelRoles::Favorite);
-        if (valueRole.isValid() && valueRole.canConvert<bool>())
-        {
-            return valueRole.toBool();
-        }
-        else
-        {
-            return false;
-        }
+        return valueRole.toBool();
     }
     else
     {
-        return true;
+        return false;
     }
 }
 
+bool VenueSortFilterProxyModel::venueTypeMatches(const VenueModel::VenueType& venueType) const
+{
+    return m_filterVenueType.testFlag(static_cast<VenueModel::VenueTypeFlag>(enumValueToFlag(venueType)));
+}
+
+
 bool VenueSortFilterProxyModel::venueSubTypeMatches(const QModelIndex &index) const
 {
-    // Shopping venues don't have a sub type -> alwas true
-    const auto venueTypeRole = index.data(VenueModel::VenueModelRoles::VenueTypeRole);
-    if (venueTypeRole.isValid() && venueTypeRole.canConvert<int>())
-    {
-        const auto venueTypeFlag = static_cast<VenueModel::VenueType>(venueTypeRole.toInt());
-        if (venueTypeFlag == VenueModel::Shopping)
-        {
-            return true;
-        }
-    }
 
     const auto venueSubTypeRole = index.data(VenueModel::VenueModelRoles::VenueSubTypeRole);
     if (venueSubTypeRole.isValid() && venueSubTypeRole.canConvert<int>())
@@ -268,11 +274,6 @@ bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles ro
     }
 
     return false;
-}
-
-bool VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
-{
-    return testCategoryFilter(index, VenueModel::VenueModelRoles::VenueTypeRole, m_filterVenueType);
 }
 
 
