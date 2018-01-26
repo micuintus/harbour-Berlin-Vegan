@@ -146,16 +146,12 @@
         <translation>Lizenz anzeigen</translation>
     </message>
     <message id="id-venue-list">
-        <source>Food</source>
-        <translation>Gastronomie</translation>
+        <source>Venues</source>
+        <translation>Läden</translation>
     </message>
     <message id="id-about-venue-list">
         <source>About</source>
         <translation>Über</translation>
-    </message>
-    <message id="id-shopping-venue-list">
-        <source>Shopping</source>
-        <translation>Einkaufen</translation>
     </message>
     <message id="id-favorites-venue-list">
         <source>Favorites</source>
@@ -236,6 +232,39 @@
     <message id="id-no-results">
         <source>No filter or search results</source>
         <translation>Keine Filter- oder Suchergebnisse</translation>
+    </message>
+    <message id="id-filter-venue-sub-type">
+        <source>Venue sub type</source>
+        <translation>Unterkategorie</translation>
+    </message>
+    <message id="id-venue-subtype-restaurant">
+        <source>Restaurant</source>
+        <translation>Restaurant</translation>
+    </message>
+    <message id="id-venue-subtype-fastfood">
+        <source>Snack bar</source>
+        <translation>Imbiss</translation>
+    </message>
+    <message id="id-venue-subtype-cafe">
+        <source>Café</source>
+        <translation>Café</translation>
+    </message>
+    <message id="id-venue-subtype-icecream">
+        <source>Ice cream parlor</source>
+        <translation>Eisdiele</translation>
+    </message>
+    <message id="id-food">
+        <source>Food</source>
+        <translation>Gastronomie</translation>
+    </message>
+    <message id="id-shopping">
+        <source>Shopping</source>
+        <translation>Einkaufen</translation>
+    </message>
+    <message id="id-venue-category">
+        <source>Venue type</source>
+        <oldsource>Venue category</oldsource>
+        <translation>Laden-Kategorie</translation>
     </message>
 </context>
 </TS>

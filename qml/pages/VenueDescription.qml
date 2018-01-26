@@ -25,6 +25,8 @@
 import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
+
+import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
 
@@ -36,6 +38,8 @@ BVApp.Page {
 
     property var restaurant
     property var positionSource
+    readonly property bool isFoodVenue: restaurant.venueType === VenueModel.Food
+
 
     SilicaFlickable {
         id: flicka
@@ -144,6 +148,7 @@ BVApp.Page {
         BVApp.CollapsibleItem {
             id: detailsCollapsible
 
+            collapsed: isFoodVenue
             collapsedHeight: venueDetails.collapsedHeight
             expandedHeight: venueDetails.expandedHeight + BVApp.Theme.paddingLarge
 
@@ -157,6 +162,7 @@ BVApp.Page {
             contentItem: BVApp.VenueDetails {
                 id: venueDetails
                 restaurant: page.restaurant
+                isFoodVenue: page.isFoodVenue
                 anchors.fill: parent
             }
         }
@@ -180,8 +186,11 @@ BVApp.Page {
 
         Label {
             id: descriptionText
+
+            visible: isFoodVenue
+
             font.pixelSize: BVApp.Theme.fontSizeSmall
-            text: restaurant.comment
+            text: isFoodVenue ? restaurant.comment : ""
             wrapMode: Text.WordWrap
             color: BVApp.Theme.primaryColor
 

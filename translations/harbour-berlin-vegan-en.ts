@@ -44,145 +44,146 @@
         <translation>closed</translation>
     </message>
     <message id="id-yes">
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="32"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="34"/>
         <source>yes</source>
         <translation>yes</translation>
     </message>
     <message id="id-no">
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="34"/>
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="66"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="36"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="82"/>
         <source>no</source>
         <translation>no</translation>
     </message>
     <message id="id-unknown">
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="36"/>
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="55"/>
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="64"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="38"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="67"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="75"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="80"/>
         <source>unknown</source>
         <translation>unknown</translation>
     </message>
     <message id="id-omnivore">
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="45"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="78"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="48"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="116"/>
         <source>omnivore</source>
         <translation>omnivore</translation>
     </message>
     <message id="id-omnivore-declared">
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="47"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="52"/>
         <source>omnivore \n(vegan declared)</source>
         <translation>omnivore
 (vegan declared)</translation>
     </message>
     <message id="id-vegetarian">
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="49"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="69"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="56"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="107"/>
         <source>vegetarian</source>
         <translation>vegetarian</translation>
     </message>
     <message id="id-vegetarian-declared">
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="51"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="60"/>
         <source>vegetarian \n(vegan declared)</source>
         <translation>vegetarian
 (vegan declared)</translation>
     </message>
     <message id="id-vegan">
-        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="53"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="59"/>
+        <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="64"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="97"/>
         <source>vegan</source>
         <translation>vegan</translation>
     </message>
     <message id="id-opening-hours">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="50"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="53"/>
         <source>Opening hours</source>
         <translation>Opening hours</translation>
     </message>
     <message id="id-food-details">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="74"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="77"/>
         <source>Food details</source>
         <translation>Food details</translation>
     </message>
     <message id="id-vegan-venue-category">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="81"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="84"/>
         <source>Category</source>
         <translation>Category</translation>
     </message>
     <message id="id-organic">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="87"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="93"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="90"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="177"/>
         <source>Organic products</source>
         <translation>Organic products</translation>
     </message>
     <message id="id-gluten-free">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="93"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="103"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="97"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="187"/>
         <source>Gluten-free options</source>
         <translation>Gluten-free options</translation>
     </message>
     <message id="id-accessibility">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="100"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="110"/>
         <source>Accessibility</source>
         <translation>Accessibility</translation>
     </message>
     <message id="id-wheelchair">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="106"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="112"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="116"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="196"/>
         <source>Wheelchair-friendly</source>
         <translation>Wheelchair-friendly</translation>
     </message>
     <message id="id-wheelchair-wc">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="112"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="121"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="122"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="205"/>
         <source>Wheelchair-accessible WC</source>
         <translation>Wheelchair-accessible WC</translation>
     </message>
     <message id="id-high-chair">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="118"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="130"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="128"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="214"/>
         <source>High chair</source>
         <translation>High chair</translation>
     </message>
     <message id="id-dogs-allowed">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="124"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="139"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="134"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="223"/>
         <source>Dogs allowed</source>
         <translation>Dogs allowed</translation>
     </message>
     <message id="id-venue-features">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="130"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="88"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="140"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="172"/>
         <source>Venue features</source>
         <translation>Venue features</translation>
     </message>
     <message id="id-wifi">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="136"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="148"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="146"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="232"/>
         <source>WiFi</source>
         <translation>WiFi</translation>
     </message>
     <message id="id-outdoor-seats">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="142"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="152"/>
         <source>Seats outdoor</source>
         <translation>Seats outdoor</translation>
     </message>
     <message id="id-indoor-seats">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="148"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="158"/>
         <source>Seats indoor</source>
         <translation>Seats indoor</translation>
     </message>
     <message id="id-catering">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="154"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="157"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="164"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="241"/>
         <source>Catering</source>
         <translation>Catering</translation>
     </message>
     <message id="id-delivery">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="160"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="166"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="170"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="250"/>
         <source>Delivery service</source>
         <translation>Delivery service</translation>
     </message>
     <message id="id-berlin-vegan">
-        <location filename="../qml/components-v-play/Page.qml" line="7"/>
+        <location filename="../qml/components-v-play/Page.qml" line="9"/>
         <location filename="../qml/cover/CoverPage.qml" line="71"/>
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="92"/>
         <location filename="../qml/pages/VenueList.qml" line="40"/>
@@ -200,27 +201,22 @@
         <translation>View license</translation>
     </message>
     <message id="id-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="148"/>
-        <source>Food</source>
-        <translation>Food</translation>
-    </message>
-    <message id="id-shopping-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="162"/>
-        <source>Shopping</source>
-        <translation>Shopping</translation>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="129"/>
+        <source>Venues</source>
+        <translation>Venues</translation>
     </message>
     <message id="id-favorites-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="177"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="148"/>
         <source>Favorites</source>
         <translation>Favorites</translation>
     </message>
     <message id="id-filter">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="190"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="168"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="199"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="177"/>
         <source>About</source>
         <translation>About</translation>
     </message>
@@ -230,10 +226,50 @@
         <oldsource>Filter</oldsource>
         <translation>Filter</translation>
     </message>
-    <message id="id-filter-vegan-category">
+    <message id="id-venue-category">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="54"/>
+        <source>Venue type</source>
+        <translation>Venue type</translation>
+    </message>
+    <message id="id-food">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="61"/>
+        <source>Food</source>
+        <translation>Food</translation>
+    </message>
+    <message id="id-shopping">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="77"/>
+        <source>Shopping</source>
+        <translation>Shopping</translation>
+    </message>
+    <message id="id-filter-vegan-category">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="92"/>
         <source>Veg*an category</source>
         <translation>Veg*an category</translation>
+    </message>
+    <message id="id-filter-venue-sub-type">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="127"/>
+        <source>Venue sub type</source>
+        <translation>Venue sub type</translation>
+    </message>
+    <message id="id-venue-subtype-restaurant">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="133"/>
+        <source>Restaurant</source>
+        <translation>Restaurant</translation>
+    </message>
+    <message id="id-venue-subtype-fastfood">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="143"/>
+        <source>Snack bar</source>
+        <translation>Snack bar</translation>
+    </message>
+    <message id="id-venue-subtype-cafe">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="153"/>
+        <source>Café</source>
+        <translation>Café</translation>
+    </message>
+    <message id="id-venue-subtype-icecream">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="163"/>
+        <source>Ice cream parlor</source>
+        <translation>Ice cream parlor</translation>
     </message>
     <message id="id-search">
         <location filename="../qml/components-v-play/SearchField.qml" line="15"/>

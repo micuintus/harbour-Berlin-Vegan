@@ -32,6 +32,9 @@ Item {
 
     id: venueDetails
     property var restaurant
+    property bool isFoodVenue
+
+    // internal
     readonly property real collapsedHeight : openingHourListView.height + foodDetailsHeader.height
     readonly property real expandedHeight  : venueDetailsColum.implicitHeight
 
@@ -86,79 +89,87 @@ Item {
                    //% "Organic products"
             label: qsTrId("id-organic")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
+            visible: isFoodVenue
         }
 
         DetailItem {
                          //% "Gluten-free options"
             label: qsTrId("id-gluten-free")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.glutenFree)
+            visible: isFoodVenue
         }
 
+        Column {
 
-        BVApp.SectionHeader {
-                        //% "Accessibility"
-            text: qsTrId("id-accessibility")
-            icon: BVApp.Theme.iconFor("accessible")
-        }
+            width: parent.width
+            visible: isFoodVenue
 
-        DetailItem {
-                         //% "Wheelchair-friendly"
-            label: qsTrId("id-wheelchair")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
-        }
 
-        DetailItem {
-              //% "Wheelchair-accessible WC"
-            label: qsTrId("id-wheelchair-wc")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
-        }
+            BVApp.SectionHeader {
+                            //% "Accessibility"
+                text: qsTrId("id-accessibility")
+                icon: BVApp.Theme.iconFor("accessible")
+            }
 
-        DetailItem {
-                         //% "High chair"
-            label: qsTrId("id-high-chair")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
-        }
+            DetailItem {
+                             //% "Wheelchair-friendly"
+                label: qsTrId("id-wheelchair")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
+            }
 
-        DetailItem {
-                         //% "Dogs allowed"
-            label: qsTrId("id-dogs-allowed")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
-        }
+            DetailItem {
+                  //% "Wheelchair-accessible WC"
+                label: qsTrId("id-wheelchair-wc")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
+            }
 
-        BVApp.SectionHeader {
-                        //% "Venue features"
-            text: qsTrId("id-venue-features")
-            icon: BVApp.Theme.iconFor("more_vert")
-        }
+            DetailItem {
+                             //% "High chair"
+                label: qsTrId("id-high-chair")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
+            }
 
-        DetailItem {
-                         //% "WiFi"
-            label: qsTrId("id-wifi")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
-        }
+            DetailItem {
+                             //% "Dogs allowed"
+                label: qsTrId("id-dogs-allowed")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
+            }
 
-        DetailItem {
-                   //% "Seats outdoor"
-            label: qsTrId("id-outdoor-seats")
-            value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
-        }
+            BVApp.SectionHeader {
+                            //% "Venue features"
+                text: qsTrId("id-venue-features")
+                icon: BVApp.Theme.iconFor("more_vert")
+            }
 
-        DetailItem {
-                   //% "Seats indoor"
-            label: qsTrId("id-indoor-seats")
-            value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
-        }
+            DetailItem {
+                             //% "WiFi"
+                label: qsTrId("id-wifi")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
+            }
 
-        DetailItem {
-                         //% "Catering"
-            label: qsTrId("id-catering")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
-        }
+            DetailItem {
+                       //% "Seats outdoor"
+                label: qsTrId("id-outdoor-seats")
+                value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
+            }
 
-        DetailItem {
-                         //% "Delivery service"
-            label: qsTrId("id-delivery")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
+            DetailItem {
+                       //% "Seats indoor"
+                label: qsTrId("id-indoor-seats")
+                value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
+            }
+
+            DetailItem {
+                             //% "Catering"
+                label: qsTrId("id-catering")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
+            }
+
+            DetailItem {
+                             //% "Delivery service"
+                label: qsTrId("id-delivery")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
+            }
         }
     }
 }
