@@ -60,11 +60,14 @@ BVApp.Page {
                       //% "Food"
                 text: qsTrId("id-food")
 
-                onCheckedChanged: {
+                onClicked: {
+                    // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
                     if (checked) {
-                        // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
                         shoppingButton.checked = false;
                         jsonModelCollection.filterVenueType = VenueModel.FoodFlag;
+                    }
+                    else {
+                        foodButton.checked = true;
                     }
                 }
 
@@ -76,11 +79,14 @@ BVApp.Page {
                       //% "Shopping"
                 text: qsTrId("id-shopping")
 
-                onCheckedChanged: {
+                onClicked: {
+                    // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
                     if (checked) {
-                        // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
                         foodButton.checked = false;
                         jsonModelCollection.filterVenueType = VenueModel.ShoppingFlag;
+                    }
+                    else {
+                        shoppingButton.checked = true;
                     }
                 }
 
