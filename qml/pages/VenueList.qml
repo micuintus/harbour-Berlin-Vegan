@@ -101,9 +101,9 @@ BVApp.Page {
         delegate: ListItem {
             id: delegate
             width: page.width
-            contentHeight: namelabel.contentHeight
-                         + streetLabel.contentHeight
-                         + BVApp.Theme.paddingSmall + 2 * BVApp.Theme.paddingMedium
+            contentHeight: namelabel.anchors.topMargin + namelabel.contentHeight
+                         + streetLabel.anchors.topMargin + streetLabel.contentHeight
+                         + namelabel.anchors.topMargin // <<- We'd like to have the same padding on the bottom as on the top
 
             Label {
                 id: namelabel
@@ -121,10 +121,8 @@ BVApp.Page {
                     top: parent.top
                     left: parent.left
 
-                    leftMargin: BVApp.Theme.horizontalPageMargin
-
                     topMargin: BVApp.Theme.paddingMedium
-                    bottomMargin: BVApp.Theme.paddingSmall
+                    leftMargin: BVApp.Theme.horizontalPageMargin
                 }
             }
 
