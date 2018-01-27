@@ -14,5 +14,6 @@
         <file>tinycolor.js</file>
         <file>SwipeView.qml</file>
         <file>PageIndicator.qml</file>
+        <file>VeganMarker.qml</file>
     </qresource>
 </RCC>

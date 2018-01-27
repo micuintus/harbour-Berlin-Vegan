@@ -26,7 +26,6 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import QtLocation 5.0
-import QtGraphicalEffects 1.0
 
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
@@ -126,16 +125,13 @@ BVApp.Page {
                 }
             }
 
-            Image {
+            BVApp.VeganMarker {
                 id: veganMark
-                visible: false
-                source: "qrc:/images/ic_100provegan_black_48dp.png"
-                smooth: true
 
-                sourceSize {
-                    height: namelabel.font.pixelSize * 0.92
-                    width:  namelabel.font.pixelSize * 0.92
-                }
+                markerSize: namelabel.font.pixelSize * 0.92
+                color: BVApp.Theme.colorFor(model.vegan)
+
+                visible: model.vegan >= VenueModel.Vegetarian
 
                 anchors {
                     left: namelabel.right
@@ -143,13 +139,6 @@ BVApp.Page {
 
                     leftMargin: height * 0.16
                 }
-            }
-
-            ColorOverlay {
-                anchors.fill: veganMark
-                source: veganMark
-                color:  BVApp.Theme.colorFor(model.vegan)
-                visible: model.vegan >= VenueModel.Vegetarian
             }
 
             Label {
