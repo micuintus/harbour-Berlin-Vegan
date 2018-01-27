@@ -35,7 +35,7 @@ Item {
     Image {
         id: image
         visible: false
-        source: "qrc:/images/ic_100provegan_black_48dp.png"
+        source: "qrc:/icons/ic_100provegan_black_265px.png"
         smooth: true
 
         sourceSize.height: markerSize
