@@ -26,6 +26,8 @@ import QtQuick 2.2
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 import QtLocation 5.0
+import QtGraphicalEffects 1.0
+
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
 
@@ -109,30 +111,47 @@ BVApp.Page {
                 color: delegate.highlighted ? BVApp.Theme.highlightColor :
                                               BVApp.Platform.isSailfish ? BVApp.Theme.primaryColor : BVApp.Theme.secondaryColor
 
+                width: Math.min(namelabel.contentWidth,
+                                delegate.width
+                                - (namelabel.anchors.leftMargin + veganMark.anchors.leftMargin + veganMark.width + distance.anchors.rightMargin))
+
                 font.pixelSize: BVApp.Platform.isSailfish ? BVApp.Theme.fontSizeMedium : BVApp.Theme.fontSizeLarge
                 truncationMode: TruncationMode.Fade
                 anchors {
                     top: parent.top
                     left: parent.left
-                    right: veganMark.left
+
+                    leftMargin: BVApp.Theme.horizontalPageMargin
 
                     topMargin: BVApp.Theme.paddingMedium
                     bottomMargin: BVApp.Theme.paddingSmall
-                    leftMargin: BVApp.Theme.horizontalPageMargin
-                    rightMargin: BVApp.Theme.paddingSmall
                 }
             }
 
-            BVApp.Icon {
+            Image {
                 id: veganMark
-                icon: BVApp.Theme.iconFor("leaf").iconString
-                color: BVApp.Theme.colorFor(model.vegan)
-                visible: model.vegan >= VenueModel.Vegetarian
+                visible: false
+                source: "qrc:/images/ic_100provegan_black_48dp.png"
+                smooth: true
+
+                sourceSize {
+                    height: namelabel.font.pixelSize * 0.92
+                    width:  namelabel.font.pixelSize * 0.92
+                }
 
                 anchors {
+                    left: namelabel.right
                     top: namelabel.top
-                    right: distance.right
+
+                    leftMargin: height * 0.16
                 }
+            }
+
+            ColorOverlay {
+                anchors.fill: veganMark
+                source: veganMark
+                color:  BVApp.Theme.colorFor(model.vegan)
+                visible: model.vegan >= VenueModel.Vegetarian
             }
 
             Label {
