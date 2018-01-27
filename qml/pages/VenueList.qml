@@ -30,8 +30,6 @@ import QtLocation 5.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
 
-import "."
-
 import harbour.berlin.vegan 1.0
 
 BVApp.Page {
