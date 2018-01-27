@@ -5,6 +5,7 @@ JsonDownloadHelper 1.0 JsonDownloadHelper.qml
 OpeningHoursModel 1.0 OpeningHoursModel.qml
 VenueDescriptionHeader 1.0 VenueDescriptionHeader.qml
 VenueDetails 1.0 VenueDetails.qml
+VenueListItem 1.0 VenueListItem.qml
 VeganMarker 1.0 VeganMarker.qml
 Database 1.0 Database.js
 DistanceAlgorithms 1.0 distance.js

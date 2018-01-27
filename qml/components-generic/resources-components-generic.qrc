@@ -15,5 +15,6 @@
         <file>SwipeView.qml</file>
         <file>PageIndicator.qml</file>
         <file>VeganMarker.qml</file>
+        <file>VenueListItem.qml</file>
     </qresource>
 </RCC>
