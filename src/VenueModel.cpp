@@ -1,10 +1,11 @@
 #include "VenueModel.h"
 
-#include <QStandardItem>
 #include <QtQml/qqml.h>
 #include <QtQml/QQmlEngine>
 #include <QtQml/QJSValueIterator>
 
+#include <QStandardItem>
+#include <QRegularExpression>
 
 VenueModel::VenueModel(QObject *parent) :
     QStandardItemModel(parent)
@@ -58,6 +59,34 @@ VenueModel::VenueSubTypeFlags extractVenueSubType(const QJSValue& from)
     return ret;
 }
 
+QString filterName(const QString& name)
+{
+    // Filter out trailing whitespaces and newlines and the end
+    const QRegularExpression ret("^(?<name>.*)( +| *\n)$");
+    const auto match = ret.match(name);
+    if (match.hasMatch())
+    {
+        return match.captured("name");
+    }
+    else
+    {
+        return name;
+    }
+}
+
+QJSValue filterName(const QJSValue& nameJS)
+{
+    if (!nameJS.isString())
+    {
+        // We don't perform any proper type checking
+        // for any of the values anyhow. It's JSON, after all...
+        return nameJS;
+    }
+
+    const auto name = nameJS.toString();
+    return filterName(name);
+}
+
 QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
 {
     auto item = new QStandardItem;
@@ -67,7 +96,11 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
         auto roleName = QString(roleNames[roleKey]);
         if (from.hasProperty(roleName))
         {
-            auto const value = from.property(roleName);
+            auto value = from.property(roleName);
+            if (roleKey == VenueModelRoles::Name)
+            {
+                value = filterName(value);
+            }
             item->setData(value.toVariant(), roleKey);
         }
     }
