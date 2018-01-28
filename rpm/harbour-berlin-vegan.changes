@@ -12,6 +12,15 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Sun Jan 28 2018 micu <micuintus@gmx.de> 3.2-1
+- First synchronized iOS and SailfishOS release (version jump to align with native Android and iOS variant)
+- Add possibilities to filter venues (vegan/vegetarian/omnivore, Café/restaurant/snack bar/ice cream parlor,...)
+- Provide map overview, which lets you show (filtered) nearby venues on a map
+- Mark purely vegan and vegetarian venues in list view with a colored "v"
+- Show a skyline placeholder if a venue does not have a picture
+- Allow swiping through the pictures if a venue has more than one picture
+- Various bug fixes
+
 * Fri Jul 14 2017 micu <micuintus@gmx.de> 0.91-1
 - Offer option to set favorite food and shopping venues and show them in a separate list
 - In addition to the list of restaurant and bistro venues, also offer a list of vegan shopping possibilities
