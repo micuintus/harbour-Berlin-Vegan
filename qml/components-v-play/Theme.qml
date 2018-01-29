@@ -39,9 +39,9 @@ QtObject {
         case "filter":
             icon = "filter_list";
             break;
-        case "leaf":
-            icon       = IconType.leaf;
-            fontFamily = "FontAwesome";
+        case "vegan":
+            icon       = "\ue900";
+            fontFamily = "icomoon";
             break;
         case "location":
             icon = "place";
