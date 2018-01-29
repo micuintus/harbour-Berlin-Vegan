@@ -27,6 +27,6 @@
         <file>qml/pages/VenueFilterSettings.qml</file>
         <file>qml/pages/about/LICENSE.TinyColor</file>
         <file>images/Platzhalter_v2_mitSchriftzug_alpha.png</file>
-        <file>icons/ic_100provegan_black_265px.png</file>
+        <file>icons/icomoon.ttf</file>
     </qresource>
 </RCC>

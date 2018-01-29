@@ -23,28 +23,16 @@
 +**/
 
 import QtQuick 2.2
-import QtGraphicalEffects 1.0
 
-Item {
-    property int markerSize
-    property alias color: colorOverlay.color
+Text {
+    id: marker
+    property alias markerSize: marker.font.pixelSize
 
-    width: markerSize
-    height: markerSize
+    font.family: icomoon.name
+    text: "\ue900"
 
-    Image {
-        id: image
-        visible: false
-        source: "qrc:/icons/ic_100provegan_black_265px.png"
-        smooth: true
-
-        sourceSize.height: markerSize
-        sourceSize.width: markerSize
-    }
-
-    ColorOverlay {
-        id: colorOverlay
-        anchors.fill: image
-        source: image
+    FontLoader {
+        id: icomoon
+        source: "qrc:/icons/icomoon.ttf"
     }
 }
