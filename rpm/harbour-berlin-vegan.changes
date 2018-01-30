@@ -19,6 +19,7 @@
 - Mark purely vegan and vegetarian venues in list view with a colored "v"
 - Show a skyline placeholder if a venue does not have a picture
 - Allow swiping through the pictures if a venue has more than one picture
+- Store downloaded venue database for later use in the case there is no network connectivity
 - Various bug fixes
 
 * Fri Jul 14 2017 micu <micuintus@gmx.de> 0.91-1
