@@ -1,7 +1,7 @@
 # The name of your application
 TARGET = harbour-berlin-vegan
 
-VERSION="3.2"
+VERSION="3.2.1alpha"
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
