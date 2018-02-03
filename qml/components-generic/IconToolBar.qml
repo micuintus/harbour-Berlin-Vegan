@@ -1,7 +1,7 @@
 /**
  *
  *  This file is part of the Berlin-Vegan guide (SailfishOS app version),
- *  Copyright 2015-2016 (c) by micu <micuintus.de> (micuintus@gmx.de).
+ *  Copyright 2015-2018 (c) by micu <micuintus.de> (micuintus@gmx.de).
  *
  *      <https://github.com/micuintus/harbour-Berlin-vegan>.
  *
