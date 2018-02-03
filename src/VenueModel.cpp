@@ -5,7 +5,6 @@
 #include <QtQml/QJSValueIterator>
 
 #include <QStandardItem>
-#include <QRegularExpression>
 
 VenueModel::VenueModel(QObject *parent) :
     QStandardItemModel(parent)
@@ -59,20 +58,6 @@ VenueModel::VenueSubTypeFlags extractVenueSubType(const QJSValue& from)
     return ret;
 }
 
-QString filterName(const QString& name)
-{
-    // Filter out trailing whitespaces and newlines and the end
-    const QRegularExpression ret("^(?<name>.*)( +| *\n)$");
-    const auto match = ret.match(name);
-    if (match.hasMatch())
-    {
-        return match.captured("name");
-    }
-    else
-    {
-        return name;
-    }
-}
 
 QJSValue filterName(const QJSValue& nameJS)
 {
@@ -83,8 +68,7 @@ QJSValue filterName(const QJSValue& nameJS)
         return nameJS;
     }
 
-    const auto name = nameJS.toString();
-    return filterName(name);
+    return nameJS.toString().simplified();
 }
 
 QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
