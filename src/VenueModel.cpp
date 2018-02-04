@@ -59,16 +59,16 @@ VenueModel::VenueSubTypeFlags extractVenueSubType(const QJSValue& from)
 }
 
 
-QJSValue filterName(const QJSValue& nameJS)
+QJSValue simplify(const QJSValue& stringJS)
 {
-    if (!nameJS.isString())
+    if (!stringJS.isString())
     {
         // We don't perform any proper type checking
         // for any of the values anyhow. It's JSON, after all...
-        return nameJS;
+        return stringJS;
     }
 
-    return nameJS.toString().simplified();
+    return stringJS.toString().simplified();
 }
 
 QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
@@ -81,9 +81,10 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
         if (from.hasProperty(roleName))
         {
             auto value = from.property(roleName);
-            if (roleKey == VenueModelRoles::Name)
+            if (   roleKey == VenueModelRoles::Name
+                || roleKey == VenueModelRoles::Street)
             {
-                value = filterName(value);
+                value = simplify(value);
             }
             item->setData(value.toVariant(), roleKey);
         }
