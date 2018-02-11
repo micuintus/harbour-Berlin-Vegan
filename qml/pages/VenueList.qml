@@ -113,17 +113,6 @@ BVApp.Page {
                                    restaurant     : currRestaurant,
                                    positionSource : page.positionSource
                                });
-
-                // The icon parameter is only used on v-play
-                pageStack.pushAttached(Qt.resolvedUrl("VenueMapPage.qml"),
-                               {
-                                   venueCoordinate: QtPositioning.coordinate(currRestaurant.latCoord,
-                                                                             currRestaurant.longCoord),
-                                   positionSource: page.positionSource,
-                                   vegan: currRestaurant.vegan,
-                                   name: currRestaurant.name
-                               }, BVApp.Theme.iconFor("locationarrow")
-                               );
             }
         }
 
