@@ -185,6 +185,28 @@ BVApp.Page {
             }
         }
 
+        VenueMapPage {
+            id: map
+
+            venueCoordinate: QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord)
+            vegan: restaurant.vegan
+            positionSource: page.positionSource
+
+            height: BVApp.Theme.mapHeight
+
+            anchors {
+                left: descriptionText.left
+                right: descriptionText.right
+                top: BVApp.Platform.isVPlay ?
+                       separator.bottom
+                     : detailsCollapsible.bottom
+                topMargin:    BVApp.Platform.isSailfish ?
+                                BVApp.Theme.paddingSmall
+                              : BVApp.Theme.paddingLarge
+                bottomMargin: BVApp.Theme.paddingLarge
+            }
+        }
+
         Label {
             id: descriptionText
 
@@ -198,9 +220,7 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: BVApp.Platform.isVPlay ?
-                       separator.bottom
-                     : detailsCollapsible.bottom
+                top: map.bottom
 
                 topMargin:    BVApp.Platform.isSailfish ?
                                 BVApp.Theme.paddingSmall
