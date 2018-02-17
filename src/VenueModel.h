@@ -92,6 +92,7 @@ public:
         SimplifiedSearchStreet,
         Description,
         SimplifiedSearchDescription,
+        DescriptionEn,
         Website,
         Telephone,
         Pictures,
