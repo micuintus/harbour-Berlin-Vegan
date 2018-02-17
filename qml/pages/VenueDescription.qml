@@ -222,9 +222,7 @@ BVApp.Page {
                 right: parent.right
                 top: map.bottom
 
-                topMargin:    BVApp.Platform.isSailfish ?
-                                BVApp.Theme.paddingSmall
-                              : BVApp.Theme.paddingLarge
+                topMargin:    BVApp.Theme.paddingLarge
                 bottomMargin: BVApp.Theme.paddingLarge
                 leftMargin:   BVApp.Theme.horizontalPageMargin
                 rightMargin:  BVApp.Theme.horizontalPageMargin
