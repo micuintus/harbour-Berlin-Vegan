@@ -102,12 +102,13 @@ void VenueSortFilterProxyModel::setModel(VenueModel *model)
 
 void VenueSortFilterProxyModel::setSearchString(QString searchString)
 {
-    if (m_searchString == searchString)
+    QString simplifiedSearchString = simplifySearchString(searchString);
+    if (m_simplifiedSearchString == simplifiedSearchString)
     {
         return;
     }
 
-    m_searchString = searchString;
+    m_simplifiedSearchString.swap(simplifiedSearchString);
     invalidateFilter();
     emit searchStringChanged();
 }
@@ -221,11 +222,11 @@ void VenueSortFilterProxyModel::reSort()
 
 bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) const
 {
-    const auto valueRole = index.data( VenueModel::VenueModelRoles::Name );
+    const auto valueRole = index.data( VenueModel::VenueModelRoles::SimplifiedSearchName );
     if (valueRole.isValid() && valueRole.canConvert<QString>())
     {
-        const auto value = valueRole.toString();
-        return value.contains(m_searchString, Qt::CaseInsensitive);
+        auto const value = valueRole.toString();
+        return value.contains(m_simplifiedSearchString);
     }
 
     return false;

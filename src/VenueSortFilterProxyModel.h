@@ -11,7 +11,7 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_OBJECT
 
     Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
-    Q_PROPERTY(QString searchString MEMBER m_searchString WRITE setSearchString NOTIFY searchStringChanged)
+    Q_PROPERTY(QString searchString MEMBER m_simplifiedSearchString WRITE setSearchString NOTIFY searchStringChanged)
     Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
     Q_PROPERTY(VenueModel::VenueTypeFlags filterVenueType MEMBER m_filterVenueType WRITE setFilterVenueType NOTIFY filterVenueTypeChanged)
     Q_PROPERTY(VenueModel::VenueSubTypeFlags filterVenueSubType READ filterVenueSubType NOTIFY filterVenueSubTypeChanged)
@@ -95,7 +95,7 @@ private:
     template <typename FilterFlags, typename SignalType>
     void setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType changedSignal);
 
-    QString m_searchString;
+    QString m_simplifiedSearchString;
     QGeoCoordinate m_currentPosition;
 
     // Positive filter / OR filter: Filter in if any category matches

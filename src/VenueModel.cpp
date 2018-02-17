@@ -58,8 +58,19 @@ VenueModel::VenueSubTypeFlags extractVenueSubType(const QJSValue& from)
     return ret;
 }
 
+QVariant extractSimplifiedSearchName(const QJSValue& stringJS)
+{
+    if (!stringJS.isString())
+    {
+        // We don't perform any proper type checking
+        // for any of the values anyhow. It's JSON, after all...
+        return stringJS.toVariant();
+    }
 
-QJSValue simplify(const QJSValue& stringJS)
+    return simplifySearchString(stringJS.toString());
+}
+
+QJSValue stripWhiteSpaces(const QJSValue& stringJS)
 {
     if (!stringJS.isString())
     {
@@ -84,8 +95,15 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
             if (   roleKey == VenueModelRoles::Name
                 || roleKey == VenueModelRoles::Street)
             {
-                value = simplify(value);
+                value = stripWhiteSpaces(value);
             }
+
+            if (roleKey == VenueModelRoles::Name)
+            {
+                auto const simplifiedSearchName = extractSimplifiedSearchName(value);
+                item->setData(simplifiedSearchName, VenueModelRoles::SimplifiedSearchName);
+            }
+
             item->setData(value.toVariant(), roleKey);
         }
     }

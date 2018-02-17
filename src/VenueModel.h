@@ -15,6 +15,17 @@ constexpr inline int enumValueToFlag(const int enumValue, const int enumOffset =
     return 1 << (enumValue - enumOffset);
 }
 
+inline QString simplifySearchString(const QString searchString)
+{
+    auto simplifiedString = searchString.toLower();
+    return simplifiedString.replace(L'é', QLatin1Char('e'), Qt::CaseInsensitive)
+                           .replace(L'è', QLatin1Char('e'), Qt::CaseInsensitive)
+                           .replace(L'ü', QLatin1Char('u'), Qt::CaseInsensitive)
+                           .replace(L'ö', QLatin1Char('o'), Qt::CaseInsensitive)
+                           .replace(L'ä', QLatin1Char('a'), Qt::CaseInsensitive)
+                           .replace(L'ß', QLatin1String("ss"), Qt::CaseInsensitive);
+}
+
 class VenueModel : public QStandardItemModel
 {
     Q_OBJECT
@@ -67,6 +78,7 @@ public:
     {
         ID = Qt::UserRole + 1,
         Name,
+        SimplifiedSearchName,
 
         // Model Category
         VenueTypeRole,
