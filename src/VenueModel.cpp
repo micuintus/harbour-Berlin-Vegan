@@ -175,6 +175,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
         { VenueModelRoles::Favorite,      "favorite"    },
         { VenueModelRoles::Street,        "street"      },
         { VenueModelRoles::Description,   "comment"     },
+        { VenueModelRoles::DescriptionEn, "commentEnglish" },
         { VenueModelRoles::Website,       "website"     },
         { VenueModelRoles::Telephone,     "telephone"   },
         { VenueModelRoles::Pictures,      "pictures"    },
