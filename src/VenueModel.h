@@ -20,9 +20,11 @@ inline QString simplifySearchString(const QString searchString)
     auto simplifiedString = searchString.toLower();
     return simplifiedString.replace(L'é', QLatin1Char('e'), Qt::CaseInsensitive)
                            .replace(L'è', QLatin1Char('e'), Qt::CaseInsensitive)
+                           .replace(L'ê', QLatin1Char('e'), Qt::CaseInsensitive)
                            .replace(L'ü', QLatin1Char('u'), Qt::CaseInsensitive)
                            .replace(L'ö', QLatin1Char('o'), Qt::CaseInsensitive)
                            .replace(L'ä', QLatin1Char('a'), Qt::CaseInsensitive)
+                           .replace(QLatin1Char('c'), QLatin1Char('k'), Qt::CaseInsensitive)
                            .replace(L'ß', QLatin1String("ss"), Qt::CaseInsensitive);
 }
 
