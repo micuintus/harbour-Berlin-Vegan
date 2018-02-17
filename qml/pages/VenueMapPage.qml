@@ -60,8 +60,9 @@ Rectangle {
         // v-play: it is as easy as that: the copyright notice is usually displayed in the bottom left corner.
         copyrightsVisible: false
 
+        // user shall not move the map, but click to open the coordinates in the dedicated map app.
         gesture {
-            enabled: true
+            enabled: false
         }
 
         Component.onCompleted: {
@@ -69,6 +70,8 @@ Rectangle {
             addMapItem(currentPosition)
             center = venueCoordinate
             fitViewportToMapItems()
+            // HACK: after fitViewportToMapItems() the icons may not be visible
+            zoomLevel = zoomLevel - 1
         }
 
         zoomLevel: maximumZoomLevel - 1

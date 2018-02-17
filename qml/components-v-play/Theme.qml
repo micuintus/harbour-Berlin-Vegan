@@ -136,4 +136,6 @@ QtObject {
     readonly property int opacityRampBottomToTop: 3
 
     readonly property int dividerHeight: dp(1)
+
+    readonly property int mapHeight: dp(200)
 }
