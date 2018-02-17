@@ -27,15 +27,6 @@ Rectangle {
             scale: 1.6
             color: BVApp.Theme.colorFor(vegan)
             verticalAlignment: Text.AlignBottom
-
-            onClicked: {
-                var query = venueCoordinate.latitude + "," + venueCoordinate.longitude
-                if (BVApp.Platform.isIos || BVApp.Platform.isMacOS) {
-                    Qt.openUrlExternally("https://maps.apple.com/?q=" + query)
-                } else {
-                    Qt.openUrlExternally("geo:" + query)
-                }
-            }
         }
     }
 
@@ -75,5 +66,18 @@ Rectangle {
         }
 
         zoomLevel: maximumZoomLevel - 1
+
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                var query = venueCoordinate.latitude + "," + venueCoordinate.longitude
+                if (BVApp.Platform.isIos || BVApp.Platform.isMacOS) {
+                    Qt.openUrlExternally("https://maps.apple.com/?q=" + query)
+                } else {
+                    Qt.openUrlExternally("geo:" + query)
+                }
+            }
+        }
     }
 }
