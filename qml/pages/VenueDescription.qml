@@ -213,7 +213,10 @@ BVApp.Page {
             visible: isFoodVenue
 
             font.pixelSize: BVApp.Theme.fontSizeSmall
-            text: isFoodVenue ? restaurant.comment : ""
+            text: isFoodVenue ?
+                      (Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
+                           restaurant.comment :
+                           restaurant.commentEnglish) : ""
             wrapMode: Text.WordWrap
             color: BVApp.Theme.primaryColor
 
