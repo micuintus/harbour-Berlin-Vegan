@@ -117,11 +117,8 @@ ApplicationWindow
             positionSource: globalPositionSource
             jsonModelCollection: gJsonCollection
             currentCategoryLoaded: gJsonVenueModel.loadedVenueType & gJsonCollection.filterVenueType;
-
-            Binding {
-                target: gJsonCollection
-                property: "searchString"
-                value: venueList.searchString
+            onSearchStringChanged: {
+                gJsonCollection.searchString = searchString
             }
     } }
 
@@ -132,14 +129,15 @@ ApplicationWindow
             //% "Venues"
             text: qsTrId("id-venue-list")
 
+            onPageChanged: page.searchString = gJsonCollection.searchString;
+
             onClicked: {
+                gJsonCollection.filterFavorites = false;
+
                 if (page)
                 {
-                    page.searchString = "";
+                    page.searchString = gJsonCollection.searchString;
                 }
-                gJsonCollection.searchString = "";
-
-                gJsonCollection.filterFavorites = false;
             }
 
             pageComponent: app.initialPage
@@ -150,14 +148,14 @@ ApplicationWindow
             //% "Favorites"
             text: qsTrId("id-favorites-venue-list")
 
+            onPageChanged: page.searchString = gJsonCollection.searchString;
+
             onClicked: {
+                gJsonCollection.filterFavorites = true;
                 if (page)
                 {
-                    page.searchString = "";
+                    page.searchString = gJsonCollection.searchString;
                 }
-                gJsonCollection.searchString = "";
-
-                gJsonCollection.filterFavorites = true;
             }
 
             pageComponent: app.initialPage
