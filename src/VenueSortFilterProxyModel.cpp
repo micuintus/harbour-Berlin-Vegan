@@ -222,6 +222,11 @@ void VenueSortFilterProxyModel::reSort()
 
 bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) const
 {
+    if (m_simplifiedSearchString.isEmpty())
+    {
+        return true;
+    }
+
     auto valueRole = index.data( VenueModel::VenueModelRoles::SimplifiedSearchName );
     if (valueRole.isValid() && valueRole.canConvert<QString>())
     {
