@@ -89,7 +89,9 @@ public:
         Favorite,
 
         Street,
+        SimplifiedSearchStreet,
         Description,
+        SimplifiedSearchDescription,
         Website,
         Telephone,
         Pictures,
