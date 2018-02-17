@@ -222,11 +222,34 @@ void VenueSortFilterProxyModel::reSort()
 
 bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) const
 {
-    const auto valueRole = index.data( VenueModel::VenueModelRoles::SimplifiedSearchName );
+    auto valueRole = index.data( VenueModel::VenueModelRoles::SimplifiedSearchName );
     if (valueRole.isValid() && valueRole.canConvert<QString>())
     {
         auto const value = valueRole.toString();
-        return value.contains(m_simplifiedSearchString);
+        if (value.contains(m_simplifiedSearchString))
+        {
+            return true;
+        }
+    }
+
+    valueRole = index.data( VenueModel::VenueModelRoles::SimplifiedSearchStreet);
+    if (valueRole.isValid() && valueRole.canConvert<QString>())
+    {
+        auto const value = valueRole.toString();
+        if (value.contains(m_simplifiedSearchString))
+        {
+            return true;
+        }
+    }
+
+    valueRole = index.data( VenueModel::VenueModelRoles::SimplifiedSearchDescription);
+    if (valueRole.isValid() && valueRole.canConvert<QString>())
+    {
+        auto const value = valueRole.toString();
+        if (value.contains(m_simplifiedSearchString))
+        {
+            return true;
+        }
     }
 
     return false;

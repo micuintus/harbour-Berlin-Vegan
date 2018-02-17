@@ -104,6 +104,17 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
                 item->setData(simplifiedSearchName, VenueModelRoles::SimplifiedSearchName);
             }
 
+            if (roleKey == VenueModelRoles::Street)
+            {
+                auto const simplifiedSearchName = extractSimplifiedSearchName(value);
+                item->setData(simplifiedSearchName, VenueModelRoles::SimplifiedSearchStreet);
+            }
+
+            if (roleKey == VenueModelRoles::Description)
+            {
+                auto const simplifiedSearchName = extractSimplifiedSearchName(value);
+                item->setData(simplifiedSearchName, VenueModelRoles::SimplifiedSearchDescription);
+            }
             item->setData(value.toVariant(), roleKey);
         }
     }
