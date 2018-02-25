@@ -77,13 +77,17 @@ BVApp.Page {
                 anchorPoint.y: venueMarkerImage.height
 
                 coordinate: QtPositioning.coordinate(model.latCoord, model.longCoord)
+                property string myName: model.name
+                onMyNameChanged: console.log(myName)
+                property int myVegan: model.vegan
+                onMyVeganChanged: console.log(myVegan)
 
                 sourceItem: BVApp.IconButton {
                     id: venueMarkerImage
                     type: "location"
 
                     property var currRestaurant: mapItemView.model.item(index);
-                    color: BVApp.Theme.colorFor(currRestaurant.vegan)
+                    color: BVApp.Theme.colorFor(vegan)
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {

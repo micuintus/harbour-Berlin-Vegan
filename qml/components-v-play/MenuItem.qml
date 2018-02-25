@@ -35,7 +35,7 @@ NavigationItem {
     onSelected: {
         if (navigationStack)
         {
-            navigationStack.popAllExceptFirst();
+            // navigationStack.popAllExceptFirst();
         }
     }
 }

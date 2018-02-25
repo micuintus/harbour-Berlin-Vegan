@@ -12,7 +12,7 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
 
     Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(QString searchString MEMBER m_simplifiedSearchString WRITE setSearchString NOTIFY searchStringChanged)
-    Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
+    Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition NOTIFY currentPositionChanged)
     Q_PROPERTY(VenueModel::VenueTypeFlags filterVenueType MEMBER m_filterVenueType WRITE setFilterVenueType NOTIFY filterVenueTypeChanged)
     Q_PROPERTY(VenueModel::VenueSubTypeFlags filterVenueSubType READ filterVenueSubType NOTIFY filterVenueSubTypeChanged)
     Q_PROPERTY(VenueVegCategoryFlags filterVegCategory READ filterVegCategory NOTIFY filterVegCategoryChanged)
@@ -77,6 +77,7 @@ signals:
     void filterVegCategoryChanged();
     void filterVenuePropertyChanged();
     void filterFavoritesChanged();
+    void currentPositionChanged();
 
 protected:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;

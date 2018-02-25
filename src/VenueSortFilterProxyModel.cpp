@@ -2,7 +2,6 @@
 
 VenueSortFilterProxyModel::VenueSortFilterProxyModel(QObject *parent) : QSortFilterProxyModel(parent)
 {
-    sort(0);
 }
 
 VenueModel* VenueSortFilterProxyModel::model() const
@@ -145,7 +144,9 @@ void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
     }
 
     m_currentPosition = position;
-    reSort();
+    invalidate();
+    sort(0);
+    emit currentPositionChanged();
 }
 
 
@@ -209,16 +210,6 @@ err:
     return QSortFilterProxyModel::lessThan(source_left, source_right);
 }
 
-void VenueSortFilterProxyModel::reSort()
-{
-    if (dynamicSortFilter()) {
-        // Workaround: If dynamic_sortfilter == true, sort(0) will not (always)
-        // result in d->sort() being called, but setDynamicSortFilter(true) will.
-        setDynamicSortFilter(true);
-    } else {
-        sort(0);
-    }
-}
 
 bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) const
 {
