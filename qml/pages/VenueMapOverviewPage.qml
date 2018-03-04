@@ -82,14 +82,13 @@ BVApp.Page {
                     id: venueMarkerImage
                     type: "location"
 
-                    property var currRestaurant: mapItemView.model.item(index);
-                    color: BVApp.Theme.colorFor(currRestaurant.vegan)
+                    color: BVApp.Theme.colorFor(model.vegan)
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                        {
-                                           restaurant     : currRestaurant,
+                                           restaurant     : model,
                                            positionSource : page.positionSource
                                        });
                     }
