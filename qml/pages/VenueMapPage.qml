@@ -66,17 +66,17 @@ Rectangle {
         }
 
         zoomLevel: maximumZoomLevel - 1
+    }
 
-        MouseArea {
-            anchors.fill: parent
+    MouseArea {
+        anchors.fill: parent
 
-            onClicked: {
-                var query = venueCoordinate.latitude + "," + venueCoordinate.longitude
-                if (BVApp.Platform.isIos || BVApp.Platform.isMacOS) {
-                    Qt.openUrlExternally("https://maps.apple.com/?q=" + query)
-                } else {
-                    Qt.openUrlExternally("geo:" + query)
-                }
+        onClicked: {
+            var query = venueCoordinate.latitude + "," + venueCoordinate.longitude
+            if (BVApp.Platform.isIos || BVApp.Platform.isMacOS) {
+                Qt.openUrlExternally("https://maps.apple.com/?q=" + query)
+            } else {
+                Qt.openUrlExternally("geo:" + query)
             }
         }
     }
