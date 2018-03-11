@@ -47,7 +47,7 @@ ListItem {
 
         width: Math.min(namelabel.contentWidth,
                         delegate.width
-                        - (namelabel.anchors.leftMargin + veganMark.anchors.leftMargin + veganMark.width + distance.anchors.rightMargin))
+                        - (namelabel.anchors.leftMargin + veganMark.anchors.leftMargin + veganMark.width + distance.anchors.rightMargin + closing.contentWidth))
 
         font.pixelSize: BVApp.Platform.isSailfish ? BVApp.Theme.fontSizeMedium : BVApp.Theme.fontSizeLarge
         truncationMode: TruncationMode.Fade
@@ -76,12 +76,31 @@ ListItem {
         }
     }
 
+    Text {
+        id: closing
+
+        // wrap the content
+        width: contentWidth
+        maximumLineCount: 2
+        wrapMode: Text.Wrap
+
+        font.pixelSize: BVApp.Theme.smallLinkFontSize
+        horizontalAlignment: Text.AlignHCenter
+        anchors {
+            top: parent.top
+            right: parent.right
+            topMargin: BVApp.Theme.paddingSmall
+            rightMargin: BVApp.Theme.horizontalPageMargin
+        }
+    }
+
     Label {
         id: distance
 
+        width: closing.width
         color: BVApp.Theme.highlightColor
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        horizontalAlignment: Text.AlignRight
+        horizontalAlignment: Text.AlignHCenter
         anchors {
             right: parent.right
 
