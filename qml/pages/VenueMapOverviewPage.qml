@@ -10,7 +10,7 @@ BVApp.Page {
 
     id: page
 
-    property alias model: mapItemView.model
+    property var model
     property var positionSource
     property alias name : page.title
     property alias map : map
@@ -59,9 +59,15 @@ BVApp.Page {
         z: 3
     }
 
+    onActivated: if (map.dirty) map.repopulateMap()
+
     BVApp.Map {
         id: map
         anchors.fill: parent
+        // Work around QTBUG-47366;
+        // remove once SFOS is on QtLocation > 5.6
+        property bool dirty: false
+
         // v-play: it is as easy as that: the copyright notice is usually displayed in the bottom left corner.
         copyrightsVisible: false
 
@@ -69,8 +75,26 @@ BVApp.Page {
             enabled: true
         }
 
+        // Work around QTBUG-47366;
+        // remove once SFOS is on QtLocation > 5.6
+        function repopulateMap() {
+            // triggers a map repopulation
+            mapItemView.model = 'undefined';
+            mapItemView.model = page.model;
+            map.dirty = false;
+        }
+
+        // Work around QTBUG-47366;
+        // remove once SFOS is on QtLocation > 5.6
+        Connections {
+            target: mapItemView.model
+            onRowsRemoved: map.dirty = true
+        }
+
         MapItemView {
             id: mapItemView
+            model: page.model
+
             delegate: MapQuickItem {
 
                 anchorPoint.x: venueMarkerImage.width / 2
@@ -97,8 +121,8 @@ BVApp.Page {
         }
 
         Component.onCompleted: {
-            addMapItem(currentPosition)
-            center = currentPosition.coordinate
+            addMapItem(currentPosition);
+            center = currentPosition.coordinate;
         }
 
         zoomLevel: maximumZoomLevel - (BVApp.Platform.isSailfish ? 3 : 9)
