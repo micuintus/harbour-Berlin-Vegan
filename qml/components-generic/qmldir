@@ -8,7 +8,6 @@ VenueListItem 1.0 VenueListItem.qml
 VeganMarker 1.0 VeganMarker.qml
 Database 1.0 Database.js
 DistanceAlgorithms 1.0 distance.js
-OpeningHoursModelAlgorithms 1.0 OpeningHoursModelAlgorithms.js
 VenueDescriptionAlgorithms 1.0 VenueDescriptionAlgorithms.js
 SwipeView 1.0 SwipeView.qml
 PageIndicator 1.0 PageIndicator.qml

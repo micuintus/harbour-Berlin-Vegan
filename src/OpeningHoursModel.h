@@ -18,6 +18,7 @@ public:
     Q_INVOKABLE QMap<QString, QVariant> get(const int index) const;
     Q_INVOKABLE void set(const int index, const QMap<QString, QVariant> map);
     Q_INVOKABLE bool remove(const int index);
+    Q_INVOKABLE void condenseOpeningHoursModel();
 
     OpeningHoursModel(QObject *parent = 0);
 
@@ -33,6 +34,9 @@ private:
     int count() const { return m_data.size(); }
 
     void setRestaurant(const QJSValue& restaurant);
+
+    void mergeElements(const int from, const int to);
+    void cleanUpOpeningHoursModel();
 
     QJSValue m_restaurant;
 
