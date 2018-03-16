@@ -13,11 +13,17 @@ SOURCES += src/BerlinVegan.cpp \
            src/FileIO.cpp \
            src/VenueModel.cpp \
            src/VenueSortFilterProxyModel.cpp
+packagesExist(sailfishapp) {
+SOURCES += src/SailfishAndroidBridge.cpp
+}
 
 HEADERS += src/VenueModel.h \
            src/VenueSortFilterProxyModel.h \
            src/FileIO.h \
            src/TruncationMode.h
+packagesExist(sailfishapp) {
+HEADERS += src/SailfishAndroidBridge.h
+}
 
 RESOURCES += resources.qrc \
              qml/components-generic/resources-components-generic.qrc

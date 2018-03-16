@@ -32,6 +32,8 @@
 #ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>
 #include <QGuiApplication>
+
+#include "SailfishAndroidBridge.h"
 #else
 #include "TruncationMode.h"
 
@@ -78,17 +80,20 @@ int main(int argc, char *argv[])
 
     qmlEngine.addImportPath(QStringLiteral("qrc:/imports/"));
     FileIO fileIO;
+    qmlEngine.rootContext()->setContextProperty("FileIO", &fileIO);
 
 #ifdef Q_OS_SAILFISH
+    SailfishAndroidBridge androidBridge;
+    androidBridge.initBridge();
+    qmlEngine.rootContext()->setContextProperty("SailfishAndroidBridge", &androidBridge);
+
     app->setApplicationVersion(APP_VERSION);
     view->setSource(mainQMLFile);
     view->show();
-    view->rootContext()->setContextProperty("FileIO", &fileIO);
 #else
     vplay.initialize(&qmlEngine);
     vplay.setMainQmlFileName(mainQMLFile);
     qmlEngine.load(QUrl(vplay.mainQmlFileName()));
-    qmlEngine.rootContext()->setContextProperty("FileIO", &fileIO);
 #endif
     return app->exec();
 }

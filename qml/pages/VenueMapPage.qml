@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import QtLocation 5.0
 import QtPositioning 5.2
 import BerlinVegan.components.platform 1.0 as BVApp
+import harbour.berlin.vegan 1.0
 
 Rectangle {
 
@@ -76,7 +77,7 @@ Rectangle {
             if (BVApp.Platform.isIos || BVApp.Platform.isMacOS) {
                 Qt.openUrlExternally("https://maps.apple.com/?q=" + query)
             } else {
-                Qt.openUrlExternally("geo:" + query)
+                SailfishAndroidBridge.startURIIntent("android.intent.action.VIEW", "geo:" + query);
             }
         }
     }
