@@ -66,7 +66,7 @@ Item {
                 id: openingHoursModel
                 restaurant: venueDetails.restaurant
 
-                Component.onCompleted: BVApp.OpeningHoursModelAlgorithms.condenseOpeningHoursModel(openingHoursModel)
+                Component.onCompleted: condenseOpeningHoursModel()
             }
 
             delegate: DetailItem {

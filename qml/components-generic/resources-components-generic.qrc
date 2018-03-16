@@ -5,7 +5,6 @@
         <file>distance.js</file>
         <file>IconToolBar.qml</file>
         <file>JsonDownloadHelper.qml</file>
-        <file>OpeningHoursModelAlgorithms.js</file>
         <file>qmldir</file>
         <file>VenueDescriptionAlgorithms.js</file>
         <file>VenueDescriptionHeader.qml</file>
