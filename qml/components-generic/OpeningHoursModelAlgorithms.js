@@ -35,7 +35,11 @@ function cleanUpOpeningHoursModel(openingHoursModel)
             openingHoursModel.remove(i);
             count--;
         }
+    }
 
+    // Fix: OpeningHoursModelAlgorithms.js:39: TypeError: Cannot read property 'hours' of undefined
+    for (i = 0; i < count; i++)
+    {
         if (openingHoursModel.get(i).hours === "")
         {
             //% "closed"
