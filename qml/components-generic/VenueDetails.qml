@@ -29,6 +29,8 @@ import Sailfish.Silica 1.0
 import BerlinVegan.components.generic 1.0 as BVApp
 import BerlinVegan.components.platform 1.0 as BVApp
 
+import harbour.berlin.vegan 1.0
+
 Item {
 
     id: venueDetails
@@ -60,7 +62,7 @@ Item {
 
             interactive: false
 
-            model: BVApp.OpeningHoursModel {
+            model: OpeningHoursModel {
                 id: openingHoursModel
                 restaurant: venueDetails.restaurant
 
