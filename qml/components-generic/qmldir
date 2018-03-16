@@ -2,7 +2,6 @@ module BerlinVegan.components.generic
 CollapsibleItem 1.0 CollapsibleItem.qml
 IconToolBar 1.0 IconToolBar.qml
 JsonDownloadHelper 1.0 JsonDownloadHelper.qml
-OpeningHoursModel 1.0 OpeningHoursModel.qml
 VenueDescriptionHeader 1.0 VenueDescriptionHeader.qml
 VenueDetails 1.0 VenueDetails.qml
 VenueListItem 1.0 VenueListItem.qml

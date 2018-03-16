@@ -26,6 +26,7 @@
 #include <QtQuick>
 
 #include "FileIO.h"
+#include "OpeningHoursModel.h"
 #include "VenueSortFilterProxyModel.h"
 #include "VenueModel.h"
 
@@ -44,6 +45,7 @@
 
 int main(int argc, char *argv[])
 {
+    qmlRegisterType<OpeningHoursModel>("harbour.berlin.vegan", 1, 0, "OpeningHoursModel");
     qmlRegisterType<VenueModel>("harbour.berlin.vegan", 1, 0, "VenueModel");
     qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan", 1, 0, "VenueSortFilterProxyModel");
     auto const mainQMLFile = QString("qrc:/qml/harbour-berlin-vegan.qml");
