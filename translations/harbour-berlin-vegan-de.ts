@@ -266,5 +266,11 @@
         <oldsource>Venue category</oldsource>
         <translation>Laden-Kategorie</translation>
     </message>
+    <message id="id-venue-closed">
+        <source>closed at the
+moment</source>
+        <translation>derzeit
+geschlossen</translation>
+    </message>
 </context>
 </TS>

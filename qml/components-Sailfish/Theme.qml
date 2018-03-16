@@ -97,6 +97,8 @@ QtObject {
     readonly property color dividerColor: Silica.Theme.secondaryHighlightColor
     readonly property int dividerHeight: 2
 
+    readonly property color disabledColor: "#B6B6B6"
+
     // Silica.Theme.paddingLarge = 32 on emulator
     readonly property int mapHeight: 12.5*Silica.Theme.paddingLarge
 }

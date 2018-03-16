@@ -109,7 +109,8 @@ void OpeningHoursModel::condenseOpeningHoursModel()
 }
 
 OpeningHoursModel::OpeningHoursModel(QObject *parent) :
-    QStringListModel(parent)
+    QStringListModel(parent),
+    m_isOpen(false)
 {
 }
 
@@ -158,6 +159,35 @@ int OpeningHoursModel::rowCount(const QModelIndex &parent) const
     return m_data.size();
 }
 
+void OpeningHoursModel::isOpen()
+{
+    const auto dateTime = QDateTime::currentDateTime();
+    // isOpen
+    const auto currentHour = dateTime.time().hour();
+    auto currentMinute = currentHour * 60 + dateTime.time().minute();
+    // getOpeningHours
+    const auto sundayIndex = 6;
+    auto dayOfWeek = dateTime.date().dayOfWeek() - 1; // Friday is 5, but we count from 0, so we need 4
+
+    if (isAfterMidnight(dateTime))
+    {
+        currentMinute += 24 * 60; // add a complete day
+        dayOfWeek = dayOfWeek - 1; // its short after midnight, so we use the opening hour from the day before
+        if (dayOfWeek == -1)
+        {
+            dayOfWeek = sundayIndex; // sunday
+        }
+    }
+
+    if (isPublicHoliday(dateTime)) // it is a holiday so take the opening hours from sunday
+    {
+        dayOfWeek = sundayIndex;
+    }
+
+    m_isOpen = isInRange(get(dayOfWeek).value("hours").toString(), currentMinute);
+    emit isOpenChanged();
+}
+
 void OpeningHoursModel::setRestaurant(const QJSValue& restaurant)
 {
     m_restaurant = restaurant;
@@ -184,6 +214,8 @@ void OpeningHoursModel::setRestaurant(const QJSValue& restaurant)
                          //% "Sunday"
     m_data[6][0] = qtTrId("id-sunday");
     m_data[6][1] = map.value("otSun").toString();
+
+    isOpen();
 }
 
 void OpeningHoursModel::mergeElements(const int from, const int to)
@@ -232,3 +264,129 @@ void OpeningHoursModel::cleanUpOpeningHoursModel()
         }
     }
 }
+
+// Start: Port from Android app
+bool OpeningHoursModel::isAfterMidnight(const QDateTime &dateTime) const
+{
+    const auto currentHour = dateTime.time().hour();
+    return currentHour >= 0 && currentHour <= 6;
+}
+
+bool OpeningHoursModel::isPublicHoliday(const QDateTime &dateTime) const
+{
+    // calulate easter date
+    // https://stackoverflow.com/a/1284335
+    const auto Y = dateTime.date().year();
+    const auto C = qFloor(Y/100);
+    const auto N = Y - 19*qFloor(Y/19);
+    const auto K = qFloor((C - 17)/25);
+    auto I = C - qFloor(C/4) - qFloor((C - K)/3) + 19*N + 15;
+    I = I - 30*qFloor((I/30));
+    I = I - qFloor(I/28)*(1 - qFloor(I/28)*qFloor(29/(I + 1))*qFloor((21 - N)/11));
+    auto J = Y + qFloor(Y/4) + I + 2 - C + qFloor(C/4);
+    J = J - 7*qFloor(J/7);
+    const auto L = I - J;
+    const auto M = 3 + qFloor((L + 40)/44);
+    const auto D = L + 28 - 31*qFloor(M/4);
+    // easter sunday
+    const QDate es(Y, M, D);
+
+    // form https://publicholidays.de/berlin/2018-dates/
+    // new year's eve
+    const QDate ny(Y, 1, 1);
+    // good friday
+    const QDate gf(es.addDays(-2));
+    // easter monday
+    const QDate em(es.addDays(1));
+    // labour day
+    const QDate ld(es.addDays(30));
+    // ascension day
+    const QDate as(es.addDays(39));
+    // whit monday
+    const QDate wm(es.addDays(50));
+    // day of german unity
+    const QDate gu(Y, 10, 3);
+    // christmas day
+    const QDate cd(Y, 12, 25);
+    // 2nd day of christmas
+    const QDate dc(Y, 12, 26);
+
+    // C++ doesn't allow for non-integral types in switch statements
+    const auto date = dateTime.date();
+    if (date == ny)
+        return true;
+    else if (date == gf)
+        return true;
+    else if (date == em)
+        return true;
+    else if (date == ld)
+        return true;
+    else if (date == as)
+        return true;
+    else if (date == wm)
+        return true;
+    else if (date == gu)
+        return true;
+    else if (date == cd)
+        return true;
+    else if (date == dc)
+        return true;
+    return false;
+}
+
+bool OpeningHoursModel::isInRange(const QString openingHours, const int currentMinute) const
+{
+    auto startMinute = 0;
+    auto endMinute = 0;
+    if (openingHours.contains("-"))
+    {
+        const auto parts = openingHours.split("-");
+        const auto startTime = parts[0];
+        startMinute = getMinute(startTime);
+        if (parts.size() > 1)
+        {
+            const auto endTime = parts[1];
+            endMinute = getMinute(endTime);
+            if (startMinute != 0 && endMinute == 0)
+            {
+                endMinute = 24 * 60;
+            }
+        }
+        else if (startMinute != 0)
+        {
+            endMinute = 24 * 60;
+        }
+    }
+
+    auto endMinutes = endMinute;
+    if (endMinute < startMinute) // closing time is after midnight
+    {
+        endMinutes = endMinutes + 24 * 60;
+    }
+
+    return currentMinute >= startMinute && currentMinute <= endMinutes;
+}
+
+int OpeningHoursModel::getMinute(const QString time) const
+{
+    if (time == NULL || time.isEmpty())
+    {
+        return 0;
+    }
+
+    auto hour = 0;
+    auto minute = 0;
+    if (time.contains(":"))
+    {
+        const auto parts = time.split(":");
+        hour = parts[0].trimmed().toInt();
+        minute = parts[1].trimmed().toInt();
+    }
+    else
+    {
+        hour = time.trimmed().toInt();
+    }
+
+    return hour * 60 + minute;
+}
+// End: Port from Android app

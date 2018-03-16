@@ -99,6 +99,8 @@ BVApp.Page {
         delegate: BVApp.VenueListItem {
             width: page.width
 
+            currRestaurant: jsonModelCollection.item(index);
+
             distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                       BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
                                                                  QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""

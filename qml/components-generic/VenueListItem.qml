@@ -33,6 +33,12 @@ import harbour.berlin.vegan 1.0
 
 ListItem {
     id: delegate
+    property var currRestaurant
+    // may not be a function, because otherwise re-evaluating of the property binding won't work,
+    // because the NOTIFY-signal is missing
+    //
+    // See: http://blog.mardy.it/2016/11/qml-trick-force-re-evaluation-of.html
+    property bool isOpen: openingHoursModel.isOpen
     property alias distanceText: distance.text
 
     contentHeight: namelabel.anchors.topMargin + namelabel.contentHeight
@@ -76,8 +82,20 @@ ListItem {
         }
     }
 
+    OpeningHoursModel {
+        id: openingHoursModel
+        restaurant: currRestaurant
+    }
+
     Text {
         id: closing
+
+        /*% "closed at the
+moment"
+         */
+        text: qsTrId("id-venue-closed")
+        visible: !isOpen
+        color: isOpen ? namelabel.color : BVApp.Theme.disabledColor
 
         // wrap the content
         width: contentWidth
@@ -98,7 +116,7 @@ ListItem {
         id: distance
 
         width: closing.width
-        color: BVApp.Theme.highlightColor
+        color: isOpen ? BVApp.Theme.highlightColor : BVApp.Theme.disabledColor
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
         horizontalAlignment: Text.AlignHCenter
         anchors {
