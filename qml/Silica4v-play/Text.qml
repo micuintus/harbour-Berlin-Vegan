@@ -25,11 +25,17 @@
 
 import QtQuick 2.7
 
+import BerlinVegan.components.platform 1.0 as BVApp
+
 Text {
 
     // Qt 5.10.1 changed the default font family on iOS changed from ".SF UI Text"
     // to "System Font Regular" for unknown reasons, which looks really bad.
     // See: https://github.com/micuintus/harbour-Berlin-Vegan/issues/207
-    font.family: ".SF UI Text"
+    Component.onCompleted: {
+        if (BVApp.Platform.isIos) {
+            font.family = ".SF UI Text";
+        }
+    }
 
 }
