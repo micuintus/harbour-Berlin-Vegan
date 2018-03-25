@@ -53,7 +53,8 @@ ListItem {
 
         width: Math.min(namelabel.contentWidth,
                         delegate.width
-                        - (namelabel.anchors.leftMargin + veganMark.anchors.leftMargin + veganMark.width + distance.anchors.rightMargin + closing.contentWidth))
+                        - (namelabel.anchors.leftMargin + veganMark.anchors.leftMargin + veganMark.width + distance.anchors.rightMargin
+                           + (isOpen ? 0 : (closing.width + closing.anchors.leftMargin))))
 
         font.pixelSize: BVApp.Platform.isSailfish ? BVApp.Theme.fontSizeMedium : BVApp.Theme.fontSizeLarge
         truncationMode: TruncationMode.Fade
@@ -93,21 +94,19 @@ ListItem {
         /*% "closed at the
 moment"
          */
-        text: qsTrId("id-venue-closed")
         visible: !isOpen
-        color: isOpen ? namelabel.color : BVApp.Theme.disabledColor
+        text: qsTrId("id-venue-closed")
+        color: BVApp.Theme.disabledColor
 
-        // wrap the content
-        width: contentWidth
-        maximumLineCount: 2
-        wrapMode: Text.Wrap
+        width: !isOpen ? contentWidth : 0
 
         font.pixelSize: BVApp.Theme.smallLinkFontSize
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: Text.AlignRight
         anchors {
             top: parent.top
             right: parent.right
             topMargin: BVApp.Theme.paddingSmall
+            leftMargin: BVApp.Theme.horizontalPageMargin*2
             rightMargin: BVApp.Theme.horizontalPageMargin
         }
     }
@@ -115,10 +114,9 @@ moment"
     Label {
         id: distance
 
-        width: closing.width
         color: isOpen ? BVApp.Theme.highlightColor : BVApp.Theme.disabledColor
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: Text.AlignRight
         anchors {
             right: parent.right
 
