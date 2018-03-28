@@ -267,8 +267,7 @@
         <translation>Laden-Kategorie</translation>
     </message>
     <message id="id-venue-closed">
-        <source>closed at the
-moment</source>
+        <source>closed\nnow</source>
         <translation>derzeit
 geschlossen</translation>
     </message>

@@ -352,11 +352,10 @@
         <translation>No filter or search results</translation>
     </message>
     <message id="id-venue-closed">
-        <location filename="../qml/components-generic/VenueListItem.qml" line="96"/>
-        <source>closed at the
-moment</source>
-        <translation>closed at the
-moment</translation>
+        <location filename="../qml/components-generic/VenueListItem.qml" line="106"/>
+        <source>closed\nnow</source>
+        <translation>closed
+now</translation>
     </message>
 </context>
 </TS>

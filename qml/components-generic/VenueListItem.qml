@@ -24,7 +24,7 @@
 **/
 
 import QtQuick 2.2
-import QtQuick.Layouts 1.3
+import QtQuick.Layouts 1.1
 
 import Sailfish.Silica 1.0
 
@@ -43,19 +43,30 @@ ListItem {
     property bool isOpen: openingHoursModel.isOpen
     property alias distanceText: distance.text
 
+    contentHeight: column.height
+
     OpeningHoursModel {
         id: openingHoursModel
         restaurant: currRestaurant
     }
 
-    height: column.height
-
     Column {
         id: column
         width: parent.width
 
+        Item {
+            id: column1TopMargin
+            width: parent.width
+            height: BVApp.Theme.paddingMedium
+        }
+
         RowLayout {
             width: parent.width
+
+            Item {
+                id: column1LeftMargin
+                width: BVApp.Theme.horizontalPageMargin
+            }
 
             Label {
                 id: namelabel
@@ -63,10 +74,9 @@ ListItem {
                 color: delegate.highlighted ? BVApp.Theme.highlightColor :
                                               BVApp.Platform.isSailfish ? BVApp.Theme.primaryColor : BVApp.Theme.secondaryColor
                 Layout.fillWidth: true
+                Layout.fillHeight: true
                 Layout.maximumWidth: namelabel.contentWidth + 1
-
-                Layout.topMargin: BVApp.Theme.paddingMedium
-                Layout.leftMargin: BVApp.Theme.horizontalPageMargin
+                Layout.minimumWidth: 1
 
                 font.pixelSize: BVApp.Platform.isSailfish ? BVApp.Theme.fontSizeMedium : BVApp.Theme.fontSizeLarge
                 truncationMode: TruncationMode.Fade
@@ -79,11 +89,14 @@ ListItem {
                 color: BVApp.Theme.colorFor(model.vegan)
 
                 visible: model.vegan >= VenueModel.Vegetarian
+
+                Layout.alignment: Qt.AlignTop
             }
 
             Item {
                 id: dummyFiller1
                 Layout.fillWidth: true
+                Layout.fillHeight: true
                 Layout.preferredWidth: 0
             }
 
@@ -94,31 +107,44 @@ ListItem {
                 color: BVApp.Theme.disabledColor
 
                 Layout.maximumWidth: !isOpen ? contentWidth : 0
-
-                Layout.topMargin: BVApp.Theme.paddingMedium
-                Layout.rightMargin: isOpen ? 0 : BVApp.Theme.horizontalPageMargin
+                Layout.fillHeight: true
 
                 opacity: isOpen ? 0 : 1
 
-                font.pixelSize: BVApp.Theme.smallLinkFontSize
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
                 horizontalAlignment: Text.AlignRight
             }
+
+            Item {
+                id: column1RightMargin
+                width: isOpen ? 0 : BVApp.Theme.horizontalPageMargin
+                Layout.fillHeight: true
+            }
+        }
+
+        Item {
+            id: spacerBetweenColumn1And2
+            width: parent.width
+            height: BVApp.Theme.paddingSmall
         }
 
         RowLayout {
             width: parent.width
+
+            Item {
+                id: column2LeftMargin
+                width: BVApp.Theme.horizontalPageMargin
+                Layout.fillHeight: true
+            }
 
             Label {
                 id: streetLabel
                 text: model.street
 
                 Layout.fillWidth: true
+                Layout.fillHeight: true
+
                 Layout.maximumWidth: streetLabel.contentWidth + 1
-
-                Layout.topMargin: BVApp.Theme.paddingSmall
-
-                Layout.bottomMargin: BVApp.Theme.paddingMedium
-                Layout.leftMargin: BVApp.Theme.horizontalPageMargin
 
                 font.pixelSize: BVApp.Theme.fontSizeExtraSmall
                 color: BVApp.Theme.secondaryColor
@@ -128,7 +154,10 @@ ListItem {
 
             Item {
                 id: dummyFiller2
+
+                Layout.fillHeight: true
                 Layout.fillWidth: true
+
                 Layout.preferredWidth: 0
             }
 
@@ -139,8 +168,21 @@ ListItem {
                 font.pixelSize: BVApp.Theme.fontSizeExtraSmall
                 horizontalAlignment: Text.AlignRight
 
-                Layout.rightMargin: BVApp.Theme.horizontalPageMargin
+                Layout.fillHeight: true
+            }
+
+            Item {
+                id: column2RightMargin
+                Layout.fillHeight: true
+                width: BVApp.Theme.horizontalPageMargin
             }
         }
+
+        Item {
+            id: colum2BottomMargin
+            height: BVApp.Theme.paddingMedium
+            width: parent.width
+        }
+
     }
 }
