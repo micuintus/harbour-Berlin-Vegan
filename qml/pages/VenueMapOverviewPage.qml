@@ -68,9 +68,6 @@ BVApp.Page {
         // remove once SFOS is on QtLocation > 5.6
         property bool dirty: false
 
-        // v-play: it is as easy as that: the copyright notice is usually displayed in the bottom left corner.
-        copyrightsVisible: false
-
         gesture {
             enabled: true
         }
