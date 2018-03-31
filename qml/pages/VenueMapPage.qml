@@ -48,8 +48,6 @@ Rectangle {
     BVApp.Map {
         id: map
         anchors.fill: parent
-        // v-play: it is as easy as that: the copyright notice is usually displayed in the bottom left corner.
-        copyrightsVisible: false
 
         // user shall not move the map, but click to open the coordinates in the dedicated map app.
         gesture {
