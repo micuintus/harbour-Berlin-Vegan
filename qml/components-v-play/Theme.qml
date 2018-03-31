@@ -47,8 +47,8 @@ QtObject {
             icon = "place";
             break;
         case "cover-location":
-            icon       = IconType.dotcircleo;
-            fontFamily = "FontAwesome";
+            // needs to be empty in favour of 'showUserPosition'. we still use 'currentPostion' for calculation placement and zoom level of the map.
+            icon = "";
             break;
         case "coffee":
             icon       = IconType.coffee;
