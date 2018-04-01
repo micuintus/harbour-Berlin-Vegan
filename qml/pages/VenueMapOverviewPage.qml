@@ -118,10 +118,14 @@ BVApp.Page {
         }
 
         Component.onCompleted: {
-            addMapItem(currentPosition);
-            center = currentPosition.coordinate;
+            centerAndZoom();
         }
 
-        zoomLevel: maximumZoomLevel - (BVApp.Platform.isSailfish ? 3 : 9)
+        function centerAndZoom()
+        {
+            addMapItem(currentPosition);
+            center = currentPosition.coordinate;
+            zoomLevel = maximumZoomLevel - (BVApp.Platform.isSailfish ? 3 : 9);
+        }
     }
 }
