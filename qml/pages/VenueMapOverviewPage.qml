@@ -128,4 +128,41 @@ BVApp.Page {
             zoomLevel = maximumZoomLevel - (BVApp.Platform.isSailfish ? 3 : 9);
         }
     }
+
+    Rectangle {
+        id: circle
+        width: myLocation.width
+        height: width
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: BVApp.Theme.paddingLarge
+        anchors.bottomMargin: BVApp.Theme.paddingLarge
+        color: "white"
+        radius: width * 0.5
+
+        BVApp.IconButton {
+            id: myLocation
+            type: "my_location"
+
+            // SFOS map has no 'userPositionAvailable'
+            enabled: positionSource.position.coordinate.isValid
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+
+            onClicked: {
+                map.centerAndZoom();
+            }
+        }
+    }
+
+    // http://doc.qt.io/qt-5/qml-qtgraphicaleffects-dropshadow.html
+    DropShadow {
+        anchors.fill: circle
+        verticalOffset: 3
+        radius: 8.0
+        samples: 17
+        color: "#80000000"
+        source: circle
+    }
 }

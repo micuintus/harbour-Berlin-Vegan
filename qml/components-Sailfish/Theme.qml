@@ -41,6 +41,9 @@ QtObject {
         case "home":
             icon = "image://theme/icon-m-home?"
             break;
+        case "my_location":
+            icon = "image://theme/icon-m-dot?"
+            break;
         case "location":
             icon = "image://theme/icon-m-location?"
             break;
