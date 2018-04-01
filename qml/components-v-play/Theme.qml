@@ -43,6 +43,9 @@ QtObject {
             icon       = "\ue900";
             fontFamily = "icomoon";
             break;
+        case "my_location":
+            icon = "my_location";
+            break;
         case "location":
             icon = "place";
             break;
