@@ -91,10 +91,8 @@ ListItem {
     Text {
         id: closing
 
-        /*% "closed at the
-moment"
-         */
         visible: !isOpen
+                 //% "closed now"
         text: qsTrId("id-venue-closed")
         color: BVApp.Theme.disabledColor
 
