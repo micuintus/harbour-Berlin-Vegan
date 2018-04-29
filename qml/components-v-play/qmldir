@@ -6,6 +6,7 @@ Page 1.0 Page.qml
 NavigationStackWithPushAttached 1.0 NavigationStackWithPushAttached.qml
 NavigationMenu 1.0 NavigationMenu.qml
 Map 1.0 Map.qml
+MapReCenterButton 1.0 MapReCenterButton.qml
 MenuItem 1.0 MenuItem.qml
 SectionHeader 1.0 SectionHeader.qml
 SearchField 1.0 SearchField.qml
