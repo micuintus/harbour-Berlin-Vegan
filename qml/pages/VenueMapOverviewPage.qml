@@ -118,12 +118,12 @@ BVApp.Page {
         }
 
         Component.onCompleted: {
+            addMapItem(currentPosition);
             centerAndZoom();
         }
 
         function centerAndZoom()
         {
-            addMapItem(currentPosition);
             center = currentPosition.coordinate;
             zoomLevel = maximumZoomLevel - (BVApp.Platform.isSailfish ? 3 : 9);
         }
@@ -150,9 +150,7 @@ BVApp.Page {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
 
-            onClicked: {
-                map.centerAndZoom();
-            }
+            onClicked: map.centerAndZoom()
         }
     }
 
