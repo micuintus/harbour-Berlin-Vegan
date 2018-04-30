@@ -41,8 +41,11 @@ ListItem {
     property bool isOpen: openingHoursModel.isOpen
     property alias distanceText: distance.text
 
-    contentHeight: namelabel.anchors.topMargin + namelabel.contentHeight
-                 + streetLabel.anchors.topMargin + streetLabel.contentHeight
+    contentHeight: namelabel.anchors.topMargin +
+                            // first column:  namelabel and streetLabel
+                   Math.max(namelabel.height + streetLabel.anchors.topMargin + streetLabel.height,
+                            // second coulmn: closing info and distance
+                            closing.height + distance.anchors.topMargin + distance.height)
                  + namelabel.anchors.topMargin // <<- We'd like to have the same padding on the bottom as on the top
 
     Label {
@@ -52,9 +55,13 @@ ListItem {
                                       BVApp.Platform.isSailfish ? BVApp.Theme.primaryColor : BVApp.Theme.secondaryColor
 
         width: Math.min(namelabel.contentWidth,
+                        // space that is left after substracting all the other elements from the available width
                         delegate.width
-                        - (namelabel.anchors.leftMargin + veganMark.anchors.leftMargin + veganMark.width + distance.anchors.rightMargin
-                           + (isOpen ? 0 : (closing.width + closing.anchors.leftMargin))))
+                        - (namelabel.anchors.leftMargin
+                           + (veganMark.visible ? veganMark.anchors.leftMargin + veganMark.width  : 0)
+                           + (veganMark.visible && closing.visible ? veganMark.anchors.rightMargin : 0)
+                           + (closing.visible ? closing.width + closing.anchors.leftMargin : 0)
+                           + distance.anchors.rightMargin))
 
         font.pixelSize: BVApp.Platform.isSailfish ? BVApp.Theme.fontSizeMedium : BVApp.Theme.fontSizeLarge
         truncationMode: TruncationMode.Fade
@@ -80,6 +87,7 @@ ListItem {
             top: namelabel.top
 
             leftMargin: height * 0.16
+            rightMargin: BVApp.Theme.horizontalPageMargin
         }
     }
 
@@ -88,7 +96,7 @@ ListItem {
         restaurant: currRestaurant
     }
 
-    Text {
+    Label {
         id: closing
 
         visible: !isOpen
@@ -98,13 +106,13 @@ ListItem {
 
         width: !isOpen ? contentWidth : 0
 
-        font.pixelSize: BVApp.Theme.smallLinkFontSize
+        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
         horizontalAlignment: Text.AlignRight
         anchors {
-            top: parent.top
+            top: namelabel.top
             right: parent.right
-            topMargin: BVApp.Theme.paddingSmall
-            leftMargin: BVApp.Theme.horizontalPageMargin*2
+
+            leftMargin: BVApp.Theme.horizontalPageMargin
             rightMargin: BVApp.Theme.horizontalPageMargin
         }
     }
@@ -118,9 +126,12 @@ ListItem {
         anchors {
             right: parent.right
 
-            baseline: streetLabel.baseline
-            topMargin: BVApp.Theme.paddingSmall
+            top: closing.bottom
+
+            topMargin: BVApp.Theme.paddingMedium
             rightMargin: BVApp.Theme.horizontalPageMargin
+
+            bottomMargin: namelabel.anchors.topMargin
         }
     }
 
@@ -133,15 +144,19 @@ ListItem {
 
         truncationMode: TruncationMode.Fade
         anchors {
-            top: namelabel.bottom
-            bottom: parent.bottom
             left: parent.left
             right: distance.left
 
+            baseline: distance.baseline
+
+            top: namelabel.top
+            bottom: parent.bottom
+
             leftMargin: BVApp.Theme.horizontalPageMargin
             rightMargin: BVApp.Theme.horizontalPageMargin
-            topMargin: BVApp.Theme.paddingSmall
-            bottomMargin: BVApp.Theme.paddingMedium
+
+            topMargin: BVApp.Theme.paddingMedium
+            bottomMargin: namelabel.anchors.topMargin
         }
     }
 }
