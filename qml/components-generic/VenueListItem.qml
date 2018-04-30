@@ -41,12 +41,7 @@ ListItem {
     property bool isOpen: openingHoursModel.isOpen
     property alias distanceText: distance.text
 
-    contentHeight: namelabel.anchors.topMargin +
-                            // first column:  namelabel and streetLabel
-                   Math.max(namelabel.height + streetLabel.anchors.topMargin + streetLabel.height,
-                            // second coulmn: closing info and distance
-                            closing.height + distance.anchors.topMargin + distance.height)
-                 + namelabel.anchors.topMargin // <<- We'd like to have the same padding on the bottom as on the top
+    contentHeight: streetLabel.y + streetLabel.height + streetLabel.anchors.bottomMargin
 
     Label {
         id: namelabel
@@ -118,24 +113,6 @@ ListItem {
     }
 
     Label {
-        id: distance
-
-        color: isOpen ? BVApp.Theme.highlightColor : BVApp.Theme.disabledColor
-        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        horizontalAlignment: Text.AlignRight
-        anchors {
-            right: parent.right
-
-            top: closing.bottom
-
-            topMargin: BVApp.Theme.paddingMedium
-            rightMargin: BVApp.Theme.horizontalPageMargin
-
-            bottomMargin: namelabel.anchors.topMargin
-        }
-    }
-
-    Label {
         id: streetLabel
         text: model.street
 
@@ -147,16 +124,31 @@ ListItem {
             left: parent.left
             right: distance.left
 
-            baseline: distance.baseline
-
-            top: namelabel.top
-            bottom: parent.bottom
+            top: namelabel.y + namelabel.height > closing.y + closing.height ?
+                     namelabel.bottom
+                   : closing.bottom
 
             leftMargin: BVApp.Theme.horizontalPageMargin
             rightMargin: BVApp.Theme.horizontalPageMargin
 
-            topMargin: BVApp.Theme.paddingMedium
-            bottomMargin: namelabel.anchors.topMargin
+            topMargin: BVApp.Theme.paddingSmall
+            bottomMargin: namelabel.anchors.topMargin // <<- We'd like to have the same padding on the bottom as on the top
         }
     }
+
+
+    Label {
+        id: distance
+
+        color: isOpen ? BVApp.Theme.highlightColor : BVApp.Theme.disabledColor
+        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+        horizontalAlignment: Text.AlignRight
+        anchors {
+            right: parent.right
+            rightMargin: BVApp.Theme.horizontalPageMargin
+
+            baseline: streetLabel.baseline
+        }
+    }
+
 }
