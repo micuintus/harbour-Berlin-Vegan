@@ -93,6 +93,7 @@ public:
         Description,
         SimplifiedSearchDescription,
         DescriptionEn,
+        SimplifiedSearchDescriptionEn,
         Website,
         Telephone,
         Pictures,
