@@ -99,8 +99,6 @@ BVApp.Page {
         delegate: BVApp.VenueListItem {
             width: page.width
 
-            currRestaurant: jsonModelCollection.item(index);
-
             distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                       BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
                                                                  QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
@@ -109,10 +107,9 @@ BVApp.Page {
                 // ios: keyboard stays visible, if user used search field before clicking and did not press Return key
                 Qt.inputMethod.hide();
 
-                var currRestaurant = jsonModelCollection.item(index);
                 pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                {
-                                   restaurant     : currRestaurant,
+                                   restaurant     : jsonModelCollection.item(id),
                                    positionSource : page.positionSource
                                });
             }
