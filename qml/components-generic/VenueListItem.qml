@@ -33,7 +33,7 @@ import harbour.berlin.vegan 1.0
 
 ListItem {
     id: delegate
-    property var currRestaurant
+    property alias openingData: openingHoursModel.openingData
     // may not be a function, because otherwise re-evaluating of the property binding won't work,
     // because the NOTIFY-signal is missing
     //
@@ -88,7 +88,6 @@ ListItem {
 
     OpeningHoursModel {
         id: openingHoursModel
-        openingData: currRestaurant
     }
 
     Label {
