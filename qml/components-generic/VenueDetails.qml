@@ -64,7 +64,15 @@ Item {
 
             model: OpeningHoursModel {
                 id: openingHoursModel
-                restaurant: venueDetails.restaurant
+                restaurant: {
+                    "otMon": venueDetails.restaurant.otMon,
+                    "otTue": venueDetails.restaurant.otTue,
+                    "otWed": venueDetails.restaurant.otWed,
+                    "otThu": venueDetails.restaurant.otThu,
+                    "otFri": venueDetails.restaurant.otFri,
+                    "otSat": venueDetails.restaurant.otSat,
+                    "otSun": venueDetails.restaurant.otSun
+                }
 
                 Component.onCompleted: condenseOpeningHoursModel()
             }
