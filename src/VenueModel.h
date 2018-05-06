@@ -135,12 +135,12 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     VenueTypeFlags loadedVenueType() const;
+    QModelIndex indexFromID(const QString& id) const;
 
 signals:
     void loadedVenueTypeChanged();
 
 private:
-    QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
     VenueTypeFlags m_loadedVenueType;
 

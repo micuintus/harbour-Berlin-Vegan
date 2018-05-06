@@ -55,7 +55,7 @@ public:
     Q_INVOKABLE VenueModel::VenueSubTypeFlags filterVenueSubType() const;
     Q_INVOKABLE VenuePropertyFlags filterVenueProperty() const;
 
-    Q_INVOKABLE QVariantMap item(int row) const;
+    Q_INVOKABLE QVariantMap item(const QString& id) const;
     Q_INVOKABLE void setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on);
     Q_INVOKABLE void setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on);
     // Note: Int because of QTBUG-58454:

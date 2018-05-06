@@ -10,16 +10,15 @@ VenueModel* VenueSortFilterProxyModel::model() const
     return qobject_cast<VenueModel*>(sourceModel());
 }
 
-QVariantMap VenueSortFilterProxyModel::item(int row) const
+QVariantMap VenueSortFilterProxyModel::item(const QString& id) const
 {
     QVariantMap ret;
 
     const auto model = this->model();
     if (model)
     {
-        QModelIndex m = index(row, 0);
-        QModelIndex source = mapToSource(m);
-        QStandardItem* item = model->itemFromIndex(source);
+        QModelIndex sourceIndex = model->indexFromID(id);
+        QStandardItem* item = model->itemFromIndex(sourceIndex);
 
         if (item)
         {
