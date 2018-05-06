@@ -64,7 +64,7 @@ Item {
 
             model: OpeningHoursModel {
                 id: openingHoursModel
-                restaurant: {
+                openingData: {
                     "otMon": venueDetails.restaurant.otMon,
                     "otTue": venueDetails.restaurant.otTue,
                     "otWed": venueDetails.restaurant.otWed,

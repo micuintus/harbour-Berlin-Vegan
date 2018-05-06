@@ -88,7 +88,7 @@ ListItem {
 
     OpeningHoursModel {
         id: openingHoursModel
-        restaurant: currRestaurant
+        openingData: currRestaurant
     }
 
     Label {

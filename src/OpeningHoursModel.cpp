@@ -188,11 +188,11 @@ void OpeningHoursModel::isOpen()
     emit isOpenChanged();
 }
 
-void OpeningHoursModel::setRestaurant(const QJSValue& restaurant)
+void OpeningHoursModel::setOpeningData(const QJSValue& openingData)
 {
-    m_restaurant = restaurant;
+    m_openingData = openingData;
 
-    QMap<QString, QVariant> map = m_restaurant.toVariant().toMap();
+    QMap<QString, QVariant> map = m_openingData.toVariant().toMap();
                          //% "Monday"
     m_data[0][0] = qtTrId("id-monday");
     m_data[0][1] = map.value("otMon").toString();
