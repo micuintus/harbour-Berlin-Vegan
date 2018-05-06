@@ -13,7 +13,7 @@ class OpeningHoursModel : public QStringListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(QJSValue openingData READ  openingData WRITE setOpeningData)
+    Q_PROPERTY(QJSValue openingData READ openingData WRITE setOpeningData)
     Q_PROPERTY(int count READ count)
     Q_PROPERTY(bool isOpen MEMBER m_isOpen NOTIFY isOpenChanged)
 
