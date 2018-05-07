@@ -12,7 +12,17 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
-* Sun Jan 28 2018 micu <micuintus@gmx.de> 3.2-1
+* Thu May 10 2018 micu <post@micuintus.de> 3.3-1
+- Mark opening state in the venue list, i.e. indicate that a venue is closed if that is currently the case
+- Add a button to the map overview that allows re-centering the map to the current position of the user
+- Show English venue description if the OS language is set to English
+- Search filter not only applies to the venue names, but also to their description and the street they are located in
+- Search is more forgiving in the sense that it doesn't differentiate between 'é' and 'e', 'ü' and 'u', etc.
+- Integrate the map for a specific venue into its portrait page (as opposed to having an extra page for that attached)
+- iPhone X support
+- Fix map overview bug
+
+* Sun Jan 28 2018 micu <post@micuintus.de> 3.2-1
 - First synchronized iOS and SailfishOS release (version jump to align with native Android and iOS variant)
 - Add possibilities to filter venues (vegan/vegetarian/omnivore, Café/restaurant/snack bar/ice cream parlor,...)
 - Provide map overview, which lets you show (filtered) nearby venues on a map
@@ -22,22 +32,22 @@
 - Store downloaded venue database for later use in the case there is no network connectivity
 - Various bug fixes
 
-* Fri Jul 14 2017 micu <micuintus@gmx.de> 0.91-1
+* Fri Jul 14 2017 micu <post@micuintus.de> 0.91-1
 - Offer option to set favorite food and shopping venues and show them in a separate list
 - In addition to the list of restaurant and bistro venues, also offer a list of vegan shopping possibilities
 - Port a larger portion of the backend to C++ (performance improvements)
 
-* Sun Mar 05 2017 micu <micuintus@gmx.de> 0.90-1
+* Sun Mar 05 2017 micu <post@micuintus.de> 0.90-1
 - Retrieve newest venue database from the internet
 - Remove search bar toggle
 - Code changes under the hood for enabling a v-play/iOS port (internal maintenance release)
 
-* Tue Jan 17 2017 micu <micuintus@gmx.de> 0.86-1
+* Tue Jan 17 2017 micu <post@micuintus.de> 0.86-1
 - Provide a first search bar version, which can be enabled and disabled via the pulley menu.
 - Show street name in the main list view
 - Automatically update sorting based on the position ("Update sorting" entry is removed).
 - Make heading of map page blurry (iOS style)
 
-* Wed Dec 14 2016 micu <micuintus@gmx.de> 0.80.1-1
+* Wed Dec 14 2016 micu <post@micuintus.de> 0.80.1-1
 - Add a first version of an extra map page for every venue's description
 
