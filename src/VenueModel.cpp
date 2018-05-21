@@ -1,5 +1,7 @@
 #include "VenueModel.h"
 
+#include "OpeningHoursAlgorithms.h"
+
 #include <QtQml/qqml.h>
 #include <QtQml/QQmlEngine>
 #include <QtQml/QJSValueIterator>
@@ -128,6 +130,8 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
     auto const venueSubType = extractVenueSubType(from);
     item->setData(QVariant::fromValue(static_cast<int>(venueSubType)), VenueModelRoles::VenueSubTypeRole);
 
+    extractAndProcessOpenHoursData(*item, from);
+
     return item;
 }
 
@@ -207,6 +211,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
         { VenueModelRoles::ChildChair,    "childChair"   },
 
         // OpeningHours
+        { VenueModelRoles::CondensedOpeningHours,         "condensedOpeningHours"  },
         { VenueModelRoles::OtMon,         "otMon"  },
         { VenueModelRoles::OtTue,         "otTue"  },
         { VenueModelRoles::OtWed,         "otWed"  },

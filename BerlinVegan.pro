@@ -19,6 +19,7 @@ HEADERS += src/VenueModel.h \
            src/VenueSortFilterProxyModel.h \
            src/FileIO.h \
            src/OpeningHoursModel.h \
+           src/OpeningHoursAlgorithms.h \
            src/TruncationMode.h
 
 RESOURCES += resources.qrc \
