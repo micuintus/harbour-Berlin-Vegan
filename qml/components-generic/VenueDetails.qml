@@ -62,24 +62,11 @@ Item {
 
             interactive: false
 
-            model: OpeningHoursModel {
-                id: openingHoursModel
-                openingData: {
-                    "otMon": venueDetails.restaurant.otMon,
-                    "otTue": venueDetails.restaurant.otTue,
-                    "otWed": venueDetails.restaurant.otWed,
-                    "otThu": venueDetails.restaurant.otThu,
-                    "otFri": venueDetails.restaurant.otFri,
-                    "otSat": venueDetails.restaurant.otSat,
-                    "otSun": venueDetails.restaurant.otSun
-                }
-
-                Component.onCompleted: condenseOpeningHoursModel()
-            }
+            model: restaurant.condensedOpeningHours.length
 
             delegate: DetailItem {
-                label: model.day
-                value: model.hours
+                label: restaurant.condensedOpeningHours[index]["day"]
+                value: restaurant.condensedOpeningHours[index]["hours"]
             }
         }
 

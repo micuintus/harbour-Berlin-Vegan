@@ -119,6 +119,7 @@ public:
         LastPropertyRole = ChildChair,
 
         // OpeningHours
+        CondensedOpeningHours,
         OtMon,
         OtTue,
         OtWed,
