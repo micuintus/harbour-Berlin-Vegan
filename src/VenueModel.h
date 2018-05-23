@@ -120,6 +120,7 @@ public:
 
         // OpeningHours
         CondensedOpeningHours,
+        OpeningMinutes,
         OtMon,
         OtTue,
         OtWed,
