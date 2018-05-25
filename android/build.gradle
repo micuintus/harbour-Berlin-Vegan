@@ -38,7 +38,7 @@ android {
     compileSdkVersion androidCompileSdkVersion.toInteger()
     buildToolsVersion androidBuildToolsVersion
 
-    defaultConfig.applicationId = 'org.berlin-vegan.bvapp'
+    defaultConfig.applicationId = 'org.berlin_vegan.bvapp'
 
     sourceSets {
         main {
