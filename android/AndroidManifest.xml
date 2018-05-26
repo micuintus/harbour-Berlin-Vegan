@@ -45,6 +45,8 @@
             <meta-data android:name="android.app.auto_screen_scale_factor" android:value="false"/>
             <!-- auto screen scale factor -->
         </activity>
+        <!-- support 18:9 ratio -->
+        <meta-data android:name="android.max_aspect" android:value="2.1"/>
     </application>
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="16"/>
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:anyDensity="true" android:smallScreens="true"/>
