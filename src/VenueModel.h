@@ -119,6 +119,7 @@ public:
         LastPropertyRole = ChildChair,
 
         // OpeningHours
+        Open,
         CondensedOpeningHours,
         OpeningMinutes,
         OtMon,
@@ -142,9 +143,14 @@ signals:
     void loadedVenueTypeChanged();
 
 private:
+    // Need to override for opening hours
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
     VenueTypeFlags m_loadedVenueType;
+    int m_dayOfWeek = -1;
+    unsigned m_currentMinute = 0;
 
 };
 

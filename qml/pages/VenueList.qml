@@ -99,15 +99,6 @@ BVApp.Page {
         delegate: BVApp.VenueListItem {
             width: page.width
 
-            openingData: {
-                "otMon": model.otMon,
-                "otTue": model.otTue,
-                "otWed": model.otWed,
-                "otThu": model.otThu,
-                "otFri": model.otFri,
-                "otSat": model.otSat,
-                "otSun": model.otSun
-            }
 
             distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                       BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,

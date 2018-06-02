@@ -6,11 +6,36 @@
 #include <QtQml/QQmlEngine>
 #include <QtQml/QJSValueIterator>
 
+#include <QDateTime>
+
 #include <QStandardItem>
 
 VenueModel::VenueModel(QObject *parent) :
     QStandardItemModel(parent)
-{ }
+{
+    const auto dateTime = QDateTime::currentDateTime();
+    // isOpen
+    const auto currentHour = dateTime.time().hour();
+    m_currentMinute = currentHour * 60 + dateTime.time().minute();
+    // getOpeningHours
+    const auto sundayIndex = 6;
+    m_dayOfWeek = dateTime.date().dayOfWeek() - 1; // Friday is 5, but we count from 0, so we need 4
+
+    if (isAfterMidnight(dateTime))
+    {
+        m_currentMinute += 24 * 60; // add a complete day
+        m_dayOfWeek = m_dayOfWeek - 1; // its short after midnight, so we use the opening hour from the day before
+        if (m_dayOfWeek == -1)
+        {
+            m_dayOfWeek = sundayIndex; // sunday
+        }
+    }
+
+    if (isPublicHoliday(dateTime)) // it is a holiday so take the opening hours from sunday
+    {
+        m_dayOfWeek = sundayIndex;
+    }
+}
 
 VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
 {
@@ -212,6 +237,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
 
         // OpeningHours
         { VenueModelRoles::CondensedOpeningHours,         "condensedOpeningHours"  },
+        { VenueModelRoles::Open,          "open"   },
         { VenueModelRoles::OtMon,         "otMon"  },
         { VenueModelRoles::OtTue,         "otTue"  },
         { VenueModelRoles::OtWed,         "otWed"  },
@@ -228,5 +254,22 @@ QHash<int, QByteArray> VenueModel::roleNames() const
 VenueModel::VenueTypeFlags VenueModel::loadedVenueType() const
 {
     return m_loadedVenueType;
+}
+
+QVariant VenueModel::data(const QModelIndex &index, int role) const
+{
+    if (role == VenueModelRoles::Open)
+    {
+        const auto openingMinutesVar = QStandardItemModel::data(index, VenueModel::OpeningMinutes);
+        if (!openingMinutesVar.isValid())
+        {
+            return QVariant::fromValue(false);
+        }
+
+        auto const openingMinutes = openingMinutesVar.toList();
+        return isInRange(openingMinutes[m_dayOfWeek].toMap(), m_currentMinute);
+    }
+
+    return QStandardItemModel::data(index, role);
 }
 

@@ -6,6 +6,9 @@
 #include <QVariant>
 #include <QtQml/QJSValue>
 
+#include <QDateTime>
+#include <QtMath>
+
 // Condense opening hours part --->
 
 QVariantMap mergeElements(const QVariantList& openingHours, const unsigned from, const unsigned until)
@@ -167,8 +170,85 @@ QVariantList extractOpeningMinutes(const QVariantList& openingHours)
     return openingMinutes;
 }
 
-
 // <--- Extract machine readable hours part
+
+// Opening state calculations --->
+
+bool isAfterMidnight(const QDateTime &dateTime)
+{
+    const auto currentHour = dateTime.time().hour();
+    return currentHour >= 0 && currentHour <= 6;
+}
+
+bool isPublicHoliday(const QDateTime &dateTime)
+{
+    // calulate easter date
+    // https://stackoverflow.com/a/1284335
+    const auto Y = dateTime.date().year();
+    const auto C = qFloor(Y/100);
+    const auto N = Y - 19*qFloor(Y/19);
+    const auto K = qFloor((C - 17)/25);
+    auto I = C - qFloor(C/4) - qFloor((C - K)/3) + 19*N + 15;
+    I = I - 30*qFloor((I/30));
+    I = I - qFloor(I/28)*(1 - qFloor(I/28)*qFloor(29/(I + 1))*qFloor((21 - N)/11));
+    auto J = Y + qFloor(Y/4) + I + 2 - C + qFloor(C/4);
+    J = J - 7*qFloor(J/7);
+    const auto L = I - J;
+    const auto M = 3 + qFloor((L + 40)/44);
+    const auto D = L + 28 - 31*qFloor(M/4);
+    // easter sunday
+    const QDate es(Y, M, D);
+
+    // form https://publicholidays.de/berlin/2018-dates/
+    // new year's eve
+    const QDate ny(Y, 1, 1);
+    // good friday
+    const QDate gf(es.addDays(-2));
+    // easter monday
+    const QDate em(es.addDays(1));
+    // labour day
+    const QDate ld(es.addDays(30));
+    // ascension day
+    const QDate as(es.addDays(39));
+    // whit monday
+    const QDate wm(es.addDays(50));
+    // day of german unity
+    const QDate gu(Y, 10, 3);
+    // christmas day
+    const QDate cd(Y, 12, 25);
+    // 2nd day of christmas
+    const QDate dc(Y, 12, 26);
+
+    // C++ doesn't allow for non-integral types in switch statements
+    const auto date = dateTime.date();
+    if (date == ny)
+        return true;
+    else if (date == gf)
+        return true;
+    else if (date == em)
+        return true;
+    else if (date == ld)
+        return true;
+    else if (date == as)
+        return true;
+    else if (date == wm)
+        return true;
+    else if (date == gu)
+        return true;
+    else if (date == cd)
+        return true;
+    else if (date == dc)
+        return true;
+    return false;
+}
+
+bool isInRange(const QVariantMap& openingMinutes, const unsigned currentMinute)
+{
+    return currentMinute >= openingMinutes["startMinute"].toUInt() && currentMinute <= openingMinutes["endMinute"].toUInt();
+}
+
+// <--- Opening state calculations
+
 
 void extractAndProcessOpenHoursData(QStandardItem& to, const QJSValue& from)
 {
