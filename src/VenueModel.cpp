@@ -13,28 +13,7 @@
 VenueModel::VenueModel(QObject *parent) :
     QStandardItemModel(parent)
 {
-    const auto dateTime = QDateTime::currentDateTime();
-    // isOpen
-    const auto currentHour = dateTime.time().hour();
-    m_currentMinute = currentHour * MINUTES_PER_HOUR + dateTime.time().minute();
-    // getOpeningHours
-    const auto sundayIndex = 6;
-    m_dayOfWeek = dateTime.date().dayOfWeek() - 1; // Friday is 5, but we count from 0, so we need 4
-
-    if (isAfterMidnight(dateTime))
-    {
-        m_currentMinute += MINUTES_PER_DAY; // add a complete day
-        m_dayOfWeek = m_dayOfWeek - 1; // its short after midnight, so we use the opening hour from the day before
-        if (m_dayOfWeek == -1)
-        {
-            m_dayOfWeek = sundayIndex; // sunday
-        }
-    }
-
-    if (isPublicHoliday(dateTime)) // it is a holiday so take the opening hours from sunday
-    {
-        m_dayOfWeek = sundayIndex;
-    }
+    updateDayOfWeekAndCurrentMinute();
 }
 
 VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
@@ -158,6 +137,11 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
     extractAndProcessOpenHoursData(*item, from);
 
     return item;
+}
+
+void VenueModel::updateDayOfWeekAndCurrentMinute()
+{
+    std::tie(m_dayOfWeek, m_currentMinute) = dayOfWeekAndCurrentMinute();
 }
 
 void VenueModel::importFromJson(const QJSValue &item, VenueType venueType)

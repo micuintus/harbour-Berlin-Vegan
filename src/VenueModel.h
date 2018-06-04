@@ -148,6 +148,9 @@ private:
 
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
+
+    void updateDayOfWeekAndCurrentMinute();
+
     VenueTypeFlags m_loadedVenueType;
     int m_dayOfWeek = -1;
     unsigned m_currentMinute = 0;
