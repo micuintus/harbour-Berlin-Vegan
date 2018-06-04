@@ -11,9 +11,13 @@
 #include <QStandardItem>
 
 VenueModel::VenueModel(QObject *parent) :
-    QStandardItemModel(parent)
+    QStandardItemModel(parent) ,
+    m_openStateUpdateTimer(this)
 {
-    updateDayOfWeekAndCurrentMinute();
+    updateOpenState();
+
+    connect(&m_openStateUpdateTimer, &QTimer::timeout, this, &VenueModel::updateOpenState);
+    m_openStateUpdateTimer.start(MICROSECONDS_PER_SECOND * SECONDS_PER_MINUTE/2);
 }
 
 VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
@@ -139,10 +143,6 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
     return item;
 }
 
-void VenueModel::updateDayOfWeekAndCurrentMinute()
-{
-    std::tie(m_dayOfWeek, m_currentMinute) = dayOfWeekAndCurrentMinute();
-}
 
 void VenueModel::importFromJson(const QJSValue &item, VenueType venueType)
 {
@@ -238,6 +238,12 @@ QHash<int, QByteArray> VenueModel::roleNames() const
 VenueModel::VenueTypeFlags VenueModel::loadedVenueType() const
 {
     return m_loadedVenueType;
+}
+
+void VenueModel::updateOpenState()
+{
+    std::tie(m_dayOfWeek, m_currentMinute) = dayOfWeekAndCurrentMinute();
+    emit dataChanged(index(0, 0), index(rowCount() - 1, 0), { VenueModelRoles::Open });
 }
 
 QVariant VenueModel::data(const QModelIndex &index, int role) const

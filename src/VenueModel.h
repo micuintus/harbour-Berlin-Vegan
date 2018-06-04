@@ -2,8 +2,12 @@
 
 #include <QtCore/QHash>
 #include <QtCore/QSet>
-#include <QStandardItemModel>
 #include <QtQml/QJSValue>
+
+#include <QStandardItemModel>
+
+#include <QTimer>
+
 
 class QReadWriteLock;
 class QQmlEngine;
@@ -142,6 +146,9 @@ public:
 signals:
     void loadedVenueTypeChanged();
 
+private slots:
+    void updateOpenState();
+
 private:
     // Need to override for opening hours
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
@@ -149,7 +156,7 @@ private:
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
 
-    void updateDayOfWeekAndCurrentMinute();
+    QTimer m_openStateUpdateTimer;
 
     VenueTypeFlags m_loadedVenueType;
     int m_dayOfWeek = -1;
