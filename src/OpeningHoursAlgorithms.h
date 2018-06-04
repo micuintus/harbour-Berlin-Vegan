@@ -17,7 +17,9 @@
 
 // Condense opening hours part --->
 
-QVariantMap mergeElements(const QVariantList& openingHours, const unsigned from, const unsigned until)
+QVariantMap mergeElements(const QVariantList& openingHours,
+                          const unsigned from,
+                          const unsigned until)
 {
     if (from == until)
     {
@@ -27,11 +29,12 @@ QVariantMap mergeElements(const QVariantList& openingHours, const unsigned from,
     {
         QVariantMap result;
 
-        const auto& fromDay  = openingHours[from].toMap()["day"].toString();
+        const auto& fromDay  = openingHours[from]. toMap()["day"].toString();
         const auto& untilDay = openingHours[until].toMap()["day"].toString();
 
-        result["day"]   =  fromDay + " - " + untilDay;
+        result["day"]   = fromDay + " - " + untilDay;
         result["hours"] = openingHours[from].toMap()["hours"];
+
         return result;
     }
 }
@@ -64,7 +67,8 @@ QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours)
 
 QString hoursString(const QJSValue& from, const QString& property)
 {
-    QString hoursString = from.property(property).toVariant().toString();
+    const QString& hoursString = from.property(property).toVariant().toString();
+
     if (hoursString.isEmpty())
     {
                   //% "closed"
@@ -103,20 +107,21 @@ QVariantList extractOpenHoursData(const QJSValue& from)
 
 // Extract machine readable hours part --->
 
-int getMinute(const QString time)
+unsigned minute(const QString& time)
 {
     if (time == nullptr || time.isEmpty())
     {
         return 0;
     }
 
-    auto hour = 0;
-    auto minute = 0;
+    unsigned hour   = 0;
+    unsigned minute = 0;
+
     if (time.contains(":"))
     {
-        const auto parts = time.split(":");
-        hour = parts[0].trimmed().toInt();
-        minute = parts[1].trimmed().toInt();
+        const QStringList parts = time.split(":");
+        hour   = parts[0].trimmed().toUInt();
+        minute = parts[1].trimmed().toUInt();
     }
     else
     {
@@ -129,16 +134,20 @@ int getMinute(const QString time)
 QVariantMap parseOpeningMinutes(const QString& openingString)
 {
     unsigned startMinute = 0;
-    unsigned endMinute = 0;
+    unsigned endMinute   = 0;
+
     if (openingString.contains("-"))
     {
-        const auto parts = openingString.split("-");
-        const auto startTime = parts[0];
-        startMinute = getMinute(startTime);
+        const QStringList parts  = openingString.split("-");
+        const QString& startTime = parts[0];
+
+        startMinute = minute(startTime);
+
         if (parts.size() > 1)
         {
-            const auto endTime = parts[1];
-            endMinute = getMinute(endTime);
+            const QString& endTime = parts[1];
+            endMinute = minute(endTime);
+
             if (startMinute != 0 && endMinute == 0)
             {
                 endMinute = MINUTES_PER_DAY;
@@ -179,9 +188,9 @@ QVariantList extractOpeningMinutes(const QVariantList& openingHours)
 
 // Opening state calculations --->
 
-bool isAfterMidnight(const QDateTime &dateTime)
+bool isAfterMidnight(const QDateTime& dateTime)
 {
-    const auto currentHour = dateTime.time().hour();
+    const int currentHour = dateTime.time().hour();
     return currentHour >= 0 && currentHour <= 6;
 }
 
