@@ -16,14 +16,14 @@ VenueModel::VenueModel(QObject *parent) :
     const auto dateTime = QDateTime::currentDateTime();
     // isOpen
     const auto currentHour = dateTime.time().hour();
-    m_currentMinute = currentHour * 60 + dateTime.time().minute();
+    m_currentMinute = currentHour * MINUTES_PER_HOUR + dateTime.time().minute();
     // getOpeningHours
     const auto sundayIndex = 6;
     m_dayOfWeek = dateTime.date().dayOfWeek() - 1; // Friday is 5, but we count from 0, so we need 4
 
     if (isAfterMidnight(dateTime))
     {
-        m_currentMinute += 24 * 60; // add a complete day
+        m_currentMinute += MINUTES_PER_DAY; // add a complete day
         m_dayOfWeek = m_dayOfWeek - 1; // its short after midnight, so we use the opening hour from the day before
         if (m_dayOfWeek == -1)
         {

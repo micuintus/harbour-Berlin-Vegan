@@ -9,6 +9,12 @@
 #include <QDateTime>
 #include <QtMath>
 
+
+#define HOURS_PER_DAY 24
+#define MINUTES_PER_HOUR 60
+#define MINUTES_PER_DAY (HOURS_PER_DAY * MINUTES_PER_HOUR)
+
+
 // Condense opening hours part --->
 
 QVariantMap mergeElements(const QVariantList& openingHours, const unsigned from, const unsigned until)
@@ -99,7 +105,7 @@ QVariantList extractOpenHoursData(const QJSValue& from)
 
 int getMinute(const QString time)
 {
-    if (time == NULL || time.isEmpty())
+    if (time == nullptr || time.isEmpty())
     {
         return 0;
     }
@@ -117,7 +123,7 @@ int getMinute(const QString time)
         hour = time.trimmed().toInt();
     }
 
-    return hour * 60 + minute;
+    return hour * MINUTES_PER_HOUR + minute;
 }
 
 QVariantMap parseOpeningMinutes(const QString& openingString)
@@ -135,25 +141,24 @@ QVariantMap parseOpeningMinutes(const QString& openingString)
             endMinute = getMinute(endTime);
             if (startMinute != 0 && endMinute == 0)
             {
-                endMinute = 24 * 60;
+                endMinute = MINUTES_PER_DAY;
             }
         }
         else if (startMinute != 0)
         {
-            endMinute = 24 * 60;
+            endMinute = MINUTES_PER_DAY;
         }
     }
 
-    auto endMinutes = endMinute;
     if (endMinute < startMinute) // closing time is after midnight
     {
-        endMinutes = endMinutes + 24 * 60;
+        endMinute = endMinute + MINUTES_PER_DAY;
     }
 
     return QVariantMap
     {
-        { "startMinute", startMinute},
-        { "endMinute",   endMinutes }
+        { "startMinute", startMinute },
+        { "endMinute",   endMinute   }
     };
 }
 
@@ -244,7 +249,8 @@ bool isPublicHoliday(const QDateTime &dateTime)
 
 bool isInRange(const QVariantMap& openingMinutes, const unsigned currentMinute)
 {
-    return currentMinute >= openingMinutes["startMinute"].toUInt() && currentMinute <= openingMinutes["endMinute"].toUInt();
+    return currentMinute >= openingMinutes["startMinute"].toUInt()
+        && currentMinute <= openingMinutes["endMinute"].toUInt();
 }
 
 // <--- Opening state calculations
