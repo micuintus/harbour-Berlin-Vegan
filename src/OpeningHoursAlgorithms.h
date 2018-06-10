@@ -45,12 +45,12 @@ QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours)
 {
     QVariantList condensedOpeningHours;
 
-    unsigned curr, next = 1;
+    unsigned curr = 1;
     const unsigned numElements = uncondensedOpeningHours.size();
 
     while (curr < numElements)
     {
-        next = curr + 1;
+        unsigned next = curr + 1;
 
         while (next < numElements
                &&    uncondensedOpeningHours[curr].toMap()["hours"]
@@ -163,7 +163,7 @@ QVariantMap parseOpeningMinutes(const QString& openingString)
 
     if (endMinute < startMinute) // closing time is after midnight
     {
-        endMinute = endMinute + MINUTES_PER_DAY;
+        endMinute += MINUTES_PER_DAY;
     }
 
     return QVariantMap
