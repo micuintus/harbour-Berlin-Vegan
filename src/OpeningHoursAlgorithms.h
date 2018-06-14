@@ -200,65 +200,55 @@ QDate easterSunday(int year)
 {
     // calulate easter date
     // https://stackoverflow.com/a/1284335
-    const auto Y = year;
-    const auto C = qFloor(Y/100);
-    const auto N = Y - 19*qFloor(Y/19);
+    const auto C = qFloor(year/100);
+    const auto N = year - 19*qFloor(year/19);
     const auto K = qFloor((C - 17)/25);
     auto I = C - qFloor(C/4) - qFloor((C - K)/3) + 19*N + 15;
     I = I - 30*qFloor((I/30));
     I = I - qFloor(I/28)*(1 - qFloor(I/28)*qFloor(29/(I + 1))*qFloor((21 - N)/11));
-    auto J = Y + qFloor(Y/4) + I + 2 - C + qFloor(C/4);
+    auto J = year + qFloor(year/4) + I + 2 - C + qFloor(C/4);
     J = J - 7*qFloor(J/7);
     const auto L = I - J;
-    const auto M = 3 + qFloor((L + 40)/44);
-    const auto D = L + 28 - 31*qFloor(M/4);
+    const auto month = 3 + qFloor((L + 40)/44);
+    const auto day = L + 28 - 31*qFloor(month/4);
 
     // easter sunday
-    return QDate{Y, M, D};
+    return QDate{year, month, day};
 }
 
 bool isPublicHoliday(const QDate &date)
 {
-    const auto Y = date.year();
-    auto const es = easterSunday(Y);
+    const auto year = date.year();
+    auto const es = easterSunday(year);
 
-    // new year's day
-    const QDate ny(Y, 1, 1);
-    // good friday
-    const QDate gf(es.addDays(-2));
-    // easter monday
-    const QDate em(es.addDays(1));
-    // labour day
-    const QDate ld{Y, 05, 01};
-    // ascension day
-    const QDate as(es.addDays(39));
-    // whit monday
-    const QDate wm(es.addDays(50));
-    // day of german unity
-    const QDate gu(Y, 10, 3);
-    // christmas day
-    const QDate cd(Y, 12, 25);
-    // 2nd day of christmas
-    const QDate dc(Y, 12, 26);
+    const QDate newYearsDay(year, 1, 1);
+    const QDate goodFriday(es.addDays(-2));
+    const QDate easterMonday(es.addDays(1));
+    const QDate labourDay{year, 05, 01};
+    const QDate ascensionDay(es.addDays(39));
+    const QDate whitMonday(es.addDays(50));
+    const QDate dayOfGermanUnity(year, 10, 3);
+    const QDate firstChristmasDay(year, 12, 25);
+    const QDate secondChristmasDay(year, 12, 26);
 
     // C++ doesn't allow for non-integral types in switch statements
-    if (date == ny)
+    if (date == newYearsDay)
         return true;
-    else if (date == gf)
+    else if (date == goodFriday)
         return true;
-    else if (date == em)
+    else if (date == easterMonday)
         return true;
-    else if (date == ld)
+    else if (date == labourDay)
         return true;
-    else if (date == as)
+    else if (date == ascensionDay)
         return true;
-    else if (date == wm)
+    else if (date == whitMonday)
         return true;
-    else if (date == gu)
+    else if (date == dayOfGermanUnity)
         return true;
-    else if (date == cd)
+    else if (date == firstChristmasDay)
         return true;
-    else if (date == dc)
+    else if (date == secondChristmasDay)
         return true;
     return false;
 }
