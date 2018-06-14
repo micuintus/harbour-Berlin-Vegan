@@ -215,15 +215,14 @@ bool isPublicHoliday(const QDate &date)
     // easter sunday
     const QDate es(Y, M, D);
 
-    // form https://publicholidays.de/berlin/2018-dates/
-    // new year's eve
+    // new year's day
     const QDate ny(Y, 1, 1);
     // good friday
     const QDate gf(es.addDays(-2));
     // easter monday
     const QDate em(es.addDays(1));
     // labour day
-    const QDate ld(es.addDays(30));
+    const QDate ld{Y, 05, 01};
     // ascension day
     const QDate as(es.addDays(39));
     // whit monday
