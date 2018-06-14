@@ -196,11 +196,11 @@ bool isAfterMidnight(const QDateTime& dateTime)
     return currentHour >= 0 && currentHour <= 6;
 }
 
-bool isPublicHoliday(const QDate &date)
+QDate easterSunday(int year)
 {
     // calulate easter date
     // https://stackoverflow.com/a/1284335
-    const auto Y = date.year();
+    const auto Y = year;
     const auto C = qFloor(Y/100);
     const auto N = Y - 19*qFloor(Y/19);
     const auto K = qFloor((C - 17)/25);
@@ -212,8 +212,15 @@ bool isPublicHoliday(const QDate &date)
     const auto L = I - J;
     const auto M = 3 + qFloor((L + 40)/44);
     const auto D = L + 28 - 31*qFloor(M/4);
+
     // easter sunday
-    const QDate es(Y, M, D);
+    return QDate{Y, M, D};
+}
+
+bool isPublicHoliday(const QDate &date)
+{
+    const auto Y = date.year();
+    auto const es = easterSunday(Y);
 
     // new year's day
     const QDate ny(Y, 1, 1);
