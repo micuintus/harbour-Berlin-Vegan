@@ -11,4 +11,5 @@ private slots:
     void Test2018Holidays();
     void Test2019Holidays();
     void Test2020Holidays();
+    void TestRandomWorkDaySamples();
 };

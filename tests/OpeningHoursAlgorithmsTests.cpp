@@ -88,3 +88,28 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::Test2020Holidays()
     QVERIFY(isPublicHoliday(christmasDay));
     QVERIFY(isPublicHoliday(secondChristmasDay));
 }
+
+void OpeningHoursAlgorithms_TestIsPublicHoliday::TestRandomWorkDaySamples()
+{
+    // SETUP
+
+    std::vector<QDate> workDays;
+
+    workDays.push_back(QDate{2020, 01, 02});
+    workDays.push_back(QDate{2019, 05, 02});
+    workDays.push_back(QDate{2018, 06, 14});
+    workDays.push_back(QDate{2018, 06, 15});
+    workDays.push_back(QDate{2019, 05, 29});
+    workDays.push_back(QDate{2018, 05, 22});
+    workDays.push_back(QDate{2018, 10, 02});
+    workDays.push_back(QDate{2019, 10, 02});
+    workDays.push_back(QDate{2019, 10, 02});
+
+
+    // EXECUTE and VERIFY
+
+    for (auto const workDay : workDays)
+    {
+        QVERIFY(!isPublicHoliday(workDay));
+    }
+}
