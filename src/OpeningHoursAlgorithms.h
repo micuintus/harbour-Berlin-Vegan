@@ -196,11 +196,11 @@ bool isAfterMidnight(const QDateTime& dateTime)
     return currentHour >= 0 && currentHour <= 6;
 }
 
-bool isPublicHoliday(const QDateTime &dateTime)
+bool isPublicHoliday(const QDate &date)
 {
     // calulate easter date
     // https://stackoverflow.com/a/1284335
-    const auto Y = dateTime.date().year();
+    const auto Y = date.year();
     const auto C = qFloor(Y/100);
     const auto N = Y - 19*qFloor(Y/19);
     const auto K = qFloor((C - 17)/25);
@@ -236,7 +236,6 @@ bool isPublicHoliday(const QDateTime &dateTime)
     const QDate dc(Y, 12, 26);
 
     // C++ doesn't allow for non-integral types in switch statements
-    const auto date = dateTime.date();
     if (date == ny)
         return true;
     else if (date == gf)
@@ -279,7 +278,7 @@ std::pair<int, unsigned> dayOfWeekAndCurrentMinute()
         }
     }
 
-    if (isPublicHoliday(dateTime)) // it is a holiday so take the opening hours from sunday
+    if (isPublicHoliday(dateTime.date())) // it is a holiday so take the opening hours from sunday
     {
         dayOfWeek = sundayIndex;
     }
