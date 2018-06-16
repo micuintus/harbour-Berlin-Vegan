@@ -192,8 +192,7 @@ QVariantList extractOpeningMinutes(const QVariantList& openingHours)
 
 bool isShortAfterMidnight(const QDateTime& dateTime)
 {
-    const int currentHour = dateTime.time().hour();
-    return currentHour >= 0 && currentHour <= 6;
+    return dateTime.time() < QTime(6, 0, 0);
 }
 
 QDate easterSunday(int year)
