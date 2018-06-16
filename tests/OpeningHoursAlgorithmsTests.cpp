@@ -113,3 +113,40 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::TestRandomWorkDaySamples()
         QVERIFY(!isPublicHoliday(workDay));
     }
 }
+
+void OpeningHoursAlgorithms_TestIsShortAfterMidnight::before6oClockShouldReturnTrue()
+{
+    // SETUP
+
+    std::vector<QDateTime> shortAfterMidnightDateTimes;
+
+    shortAfterMidnightDateTimes.push_back(QDateTime{QDate{2017, 12, 01}, QTime{02, 20, 00}});
+    shortAfterMidnightDateTimes.push_back(QDateTime{QDate{2022, 11, 01}, QTime{00, 00, 01}});
+    shortAfterMidnightDateTimes.push_back(QDateTime{QDate{2018, 01, 01}, QTime{01, 00, 01}});
+
+
+    // EXECUTE and VERIFY
+
+    for (auto const dateTime : shortAfterMidnightDateTimes)
+    {
+        QVERIFY(isShortAfterMidnight(dateTime));
+    }
+}
+
+void OpeningHoursAlgorithms_TestIsShortAfterMidnight::after6oClockShouldReturnFalse()
+{
+    // SETUP
+
+    std::vector<QDateTime> notShortAfterMidnightDateTimes;
+
+    notShortAfterMidnightDateTimes.push_back(QDateTime{QDate{2018, 02, 12}, QTime{23, 22, 49}});
+    notShortAfterMidnightDateTimes.push_back(QDateTime{QDate{2019, 02, 23}, QTime{06, 00, 00}});
+
+
+    // EXECUTE and VERIFY
+
+    for (auto const dateTime : notShortAfterMidnightDateTimes)
+    {
+        QVERIFY(!isShortAfterMidnight(dateTime));
+    }
+}
