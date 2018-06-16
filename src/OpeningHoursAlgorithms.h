@@ -190,7 +190,7 @@ QVariantList extractOpeningMinutes(const QVariantList& openingHours)
 
 // Opening state calculations --->
 
-bool isAfterMidnight(const QDateTime& dateTime)
+bool isShortAfterMidnight(const QDateTime& dateTime)
 {
     const int currentHour = dateTime.time().hour();
     return currentHour >= 0 && currentHour <= 6;
@@ -263,7 +263,7 @@ std::pair<int, unsigned> dayOfWeekAndCurrentMinute()
     const unsigned sundayIndex = 6;
     int dayOfWeek = dateTime.date().dayOfWeek() - 1; // Friday is 5, but we count from 0, so we need 4
 
-    if (isAfterMidnight(dateTime))
+    if (isShortAfterMidnight(dateTime))
     {
         currentMinute += MINUTES_PER_DAY; // add a complete day
         dayOfWeek--; // its short after midnight, so we use the opening hour from the day before
