@@ -13,3 +13,16 @@ private slots:
     void Test2020Holidays();
     void TestRandomWorkDaySamples();
 };
+
+
+class OpeningHoursAlgorithms_TestIsShortAfterMidnight : public QObject
+{
+    Q_OBJECT
+
+private slots:
+
+    void before6oClockShouldReturnTrue();
+    void after6oClockShouldReturnFalse();
+
+
+};
