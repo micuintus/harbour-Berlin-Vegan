@@ -252,33 +252,31 @@ bool isPublicHoliday(const QDate &date)
     return false;
 }
 
-std::pair<int, unsigned> dayOfWeekAndCurrentMinute()
+std::pair<unsigned char, unsigned> extractDayIndexAndMinute(const QDateTime& dateTime)
 {
-    const auto dateTime = QDateTime::currentDateTime();
-
     const unsigned currentHour = dateTime.time().hour();
     unsigned currentMinute = currentHour * MINUTES_PER_HOUR + dateTime.time().minute();
 
     const unsigned sundayIndex = 6;
-    int dayOfWeek = dateTime.date().dayOfWeek() - 1; // Friday is 5, but we count from 0, so we need 4
+    char dayIndex = static_cast<unsigned char>(dateTime.date().dayOfWeek() - 1); // Friday is 5, but we count from 0, so we need 4
 
     if (isShortAfterMidnight(dateTime))
     {
         currentMinute += MINUTES_PER_DAY; // add a complete day
-        dayOfWeek--; // its short after midnight, so we use the opening hour from the day before
+        dayIndex--; // its short after midnight, so we use the opening hour from the day before
 
-        if (dayOfWeek == -1)
+        if (dayIndex == -1)
         {
-            dayOfWeek = sundayIndex; // sunday
+            dayIndex = sundayIndex; // sunday
         }
     }
 
     if (isPublicHoliday(dateTime.date())) // it is a holiday so take the opening hours from sunday
     {
-        dayOfWeek = sundayIndex;
+        dayIndex = sundayIndex;
     }
 
-    return { dayOfWeek, currentMinute };
+    return { dayIndex, currentMinute };
 }
 
 bool isInRange(const QVariantMap& openingMinutes, const unsigned currentMinute)
