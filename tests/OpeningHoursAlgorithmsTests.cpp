@@ -7,15 +7,15 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::test2018Holidays()
     // SETUP
 
     // see https://publicholidays.de/berlin/2018-dates/
-    QDate newYearsDay       {2018, 01, 01};
-    QDate goodFriday        {2018, 03, 30};
-    QDate easterMonday      {2018, 04, 02};
-    QDate labourDay         {2018, 05, 01};
-    QDate ascensionDay      {2018, 05, 10};
-    QDate whitMonday        {2018, 05, 21};
-    QDate germanUnityDay    {2018, 10, 03};
-    QDate christmasDay      {2018, 12, 25};
-    QDate secondChristmasDay{2018, 12, 26};
+    const QDate newYearsDay       {2018, 01, 01};
+    const QDate goodFriday        {2018, 03, 30};
+    const QDate easterMonday      {2018, 04, 02};
+    const QDate labourDay         {2018, 05, 01};
+    const QDate ascensionDay      {2018, 05, 10};
+    const QDate whitMonday        {2018, 05, 21};
+    const QDate germanUnityDay    {2018, 10, 03};
+    const QDate christmasDay      {2018, 12, 25};
+    const QDate secondChristmasDay{2018, 12, 26};
 
 
     // EXECUTE AND VERIFY
@@ -36,15 +36,15 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::test2019Holidays()
     // SETUP
 
     // see https://publicholidays.de/berlin/2019-dates/
-    QDate newYearsDay       {2019, 01, 01};
-    QDate goodFriday        {2019, 04, 19};
-    QDate easterMonday      {2019, 04, 22};
-    QDate labourDay         {2019, 05, 01};
-    QDate ascensionDay      {2019, 05, 30};
-    QDate whitMonday        {2019, 06, 10};
-    QDate germanUnityDay    {2019, 10, 03};
-    QDate christmasDay      {2019, 12, 25};
-    QDate secondChristmasDay{2019, 12, 26};
+    const QDate newYearsDay       {2019, 01, 01};
+    const QDate goodFriday        {2019, 04, 19};
+    const QDate easterMonday      {2019, 04, 22};
+    const QDate labourDay         {2019, 05, 01};
+    const QDate ascensionDay      {2019, 05, 30};
+    const QDate whitMonday        {2019, 06, 10};
+    const QDate germanUnityDay    {2019, 10, 03};
+    const QDate christmasDay      {2019, 12, 25};
+    const QDate secondChristmasDay{2019, 12, 26};
 
 
     // EXECUTE AND VERIFY
@@ -65,15 +65,15 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::test2020Holidays()
     // SETUP
 
     // see https://publicholidays.de/berlin/2019-dates/
-    QDate newYearsDay       {2020, 01, 01};
-    QDate goodFriday        {2020, 04, 10};
-    QDate easterMonday      {2020, 04, 13};
-    QDate labourDay         {2020, 05, 01};
-    QDate ascensionDay      {2020, 05, 21};
-    QDate whitMonday        {2020, 06, 01};
-    QDate germanUnityDay    {2020, 10, 03};
-    QDate christmasDay      {2020, 12, 25};
-    QDate secondChristmasDay{2020, 12, 26};
+    const QDate newYearsDay       {2020, 01, 01};
+    const QDate goodFriday        {2020, 04, 10};
+    const QDate easterMonday      {2020, 04, 13};
+    const QDate labourDay         {2020, 05, 01};
+    const QDate ascensionDay      {2020, 05, 21};
+    const QDate whitMonday        {2020, 06, 01};
+    const QDate germanUnityDay    {2020, 10, 03};
+    const QDate christmasDay      {2020, 12, 25};
+    const QDate secondChristmasDay{2020, 12, 26};
 
 
     // EXECUTE AND VERIFY
@@ -157,8 +157,8 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::nonSundayHoldidayRetur
 {
     // SETUP
 
-    QDate goodFriday2018        {2018, 03, 30};
-    QDate goodFriday2020        {2020, 04, 10};
+    const QDate goodFriday2018        {2018, 03, 30};
+    const QDate goodFriday2020        {2020, 04, 10};
 
     QTEST_ASSERT(goodFriday2018.dayOfWeek() != 7);
     QTEST_ASSERT(goodFriday2020.dayOfWeek() != 7);
@@ -183,7 +183,7 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::sundayHolidayAlsoRetun
 {
     // SETUP
 
-    QDate firstXMasDay2016{2016, 12, 25};
+    const QDate firstXMasDay2016{2016, 12, 25};
 
     QTEST_ASSERT(firstXMasDay2016.dayOfWeek() == 7);
     QTEST_ASSERT(isPublicHoliday(firstXMasDay2016));
@@ -203,9 +203,9 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::workDayReturnsDayIndex
 {
     // SETUP
 
-    QDate goodSaturday2018 {2018, 03, 31};
-    QDate goodSaturday2020 {2020, 04, 11};
-    QDate j2018_06_26      {2018, 06, 26};
+    const QDate goodSaturday2018 {2018, 03, 31};
+    const QDate goodSaturday2020 {2020, 04, 11};
+    const QDate j2018_06_26      {2018, 06, 26};
 
     QTEST_ASSERT(goodSaturday2018.dayOfWeek() == 6);
     QTEST_ASSERT(goodSaturday2020.dayOfWeek() == 6);
