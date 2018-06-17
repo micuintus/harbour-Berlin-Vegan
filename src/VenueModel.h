@@ -159,7 +159,7 @@ private:
     QTimer m_openStateUpdateTimer;
 
     VenueTypeFlags m_loadedVenueType;
-    int m_dayOfWeek = -1;
+    char m_currendDayIndex = -1;
     unsigned m_currentMinute = 0;
 
 };

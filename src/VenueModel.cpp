@@ -242,7 +242,8 @@ VenueModel::VenueTypeFlags VenueModel::loadedVenueType() const
 
 void VenueModel::updateOpenState()
 {
-    std::tie(m_dayOfWeek, m_currentMinute) = dayOfWeekAndCurrentMinute();
+    const auto currentDateTime = QDateTime::currentDateTime();
+    std::tie(m_currendDayIndex, m_currentMinute) = extractDayIndexAndMinute(currentDateTime);
     emit dataChanged(index(0, 0), index(rowCount() - 1, 0), { VenueModelRoles::Open });
 }
 
@@ -257,7 +258,7 @@ QVariant VenueModel::data(const QModelIndex &index, int role) const
         }
 
         auto const openingMinutes = openingMinutesVar.toList();
-        return isInRange(openingMinutes[m_dayOfWeek].toMap(), m_currentMinute);
+        return isInRange(openingMinutes[m_currendDayIndex].toMap(), m_currentMinute);
     }
 
     return QStandardItemModel::data(index, role);
