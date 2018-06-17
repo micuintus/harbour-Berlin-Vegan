@@ -8,10 +8,10 @@ class OpeningHoursAlgorithms_TestIsPublicHoliday : public QObject
 
 private slots:
 
-    void Test2018Holidays();
-    void Test2019Holidays();
-    void Test2020Holidays();
-    void TestRandomWorkDaySamples();
+    void test2018Holidays();
+    void test2019Holidays();
+    void test2020Holidays();
+    void testRandomWorkDaySamples();
 };
 
 
