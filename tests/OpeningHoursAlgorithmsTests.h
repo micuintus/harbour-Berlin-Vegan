@@ -23,6 +23,17 @@ private slots:
 
     void before6oClockShouldReturnTrue();
     void after6oClockShouldReturnFalse();
+};
 
 
+class OpeningHoursAlgorithms_TestExtractDayIndexAndMinute : public QObject
+{
+    Q_OBJECT
+
+private slots:
+
+    void nonSundayHoldidayReturnsSundayIndex();
+    void sundayHolidayAlsoRetunsSundayIndex();
+
+    void workDayReturnsDayIndex();
 };
