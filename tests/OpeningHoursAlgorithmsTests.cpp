@@ -2,7 +2,7 @@
 #include <tests/OpeningHoursAlgorithmsTests.h>
 #include <src/OpeningHoursAlgorithms.h>
 
-void OpeningHoursAlgorithms_TestIsPublicHoliday::Test2018Holidays()
+void OpeningHoursAlgorithms_TestIsPublicHoliday::test2018Holidays()
 {
     // SETUP
 
@@ -31,7 +31,7 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::Test2018Holidays()
     QVERIFY(isPublicHoliday(secondChristmasDay));
 }
 
-void OpeningHoursAlgorithms_TestIsPublicHoliday::Test2019Holidays()
+void OpeningHoursAlgorithms_TestIsPublicHoliday::test2019Holidays()
 {
     // SETUP
 
@@ -60,7 +60,7 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::Test2019Holidays()
     QVERIFY(isPublicHoliday(secondChristmasDay));
 }
 
-void OpeningHoursAlgorithms_TestIsPublicHoliday::Test2020Holidays()
+void OpeningHoursAlgorithms_TestIsPublicHoliday::test2020Holidays()
 {
     // SETUP
 
@@ -89,7 +89,7 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::Test2020Holidays()
     QVERIFY(isPublicHoliday(secondChristmasDay));
 }
 
-void OpeningHoursAlgorithms_TestIsPublicHoliday::TestRandomWorkDaySamples()
+void OpeningHoursAlgorithms_TestIsPublicHoliday::testRandomWorkDaySamples()
 {
     // SETUP
 
