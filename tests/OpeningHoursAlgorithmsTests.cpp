@@ -114,6 +114,7 @@ void OpeningHoursAlgorithms_TestIsPublicHoliday::testRandomWorkDaySamples()
     }
 }
 
+
 void OpeningHoursAlgorithms_TestIsShortAfterMidnight::before6oClockShouldReturnTrue()
 {
     // SETUP
@@ -149,4 +150,82 @@ void OpeningHoursAlgorithms_TestIsShortAfterMidnight::after6oClockShouldReturnFa
     {
         QVERIFY(!isShortAfterMidnight(dateTime));
     }
+}
+
+
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::nonSundayHoldidayReturnsSundayIndex()
+{
+    // SETUP
+
+    QDate goodFriday2018        {2018, 03, 30};
+    QDate goodFriday2020        {2020, 04, 10};
+
+    QTEST_ASSERT(goodFriday2018.dayOfWeek() != 7);
+    QTEST_ASSERT(goodFriday2020.dayOfWeek() != 7);
+
+    QTEST_ASSERT(isPublicHoliday(goodFriday2018));
+    QTEST_ASSERT(isPublicHoliday(goodFriday2020));
+
+
+    // EXECUTE
+
+    const auto goodFriday2018Res = extractDayIndexAndMinute(QDateTime{goodFriday2018, QTime{13, 00, 00}});
+    const auto goodFriday2020Res = extractDayIndexAndMinute(QDateTime{goodFriday2020, QTime{13, 00, 00}});
+
+
+    // VERIFY
+
+    QCOMPARE(SUNDAY_INDEX, goodFriday2018Res.first);
+    QCOMPARE(SUNDAY_INDEX, goodFriday2020Res.first);
+}
+
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::sundayHolidayAlsoRetunsSundayIndex()
+{
+    // SETUP
+
+    QDate firstXMasDay2016{2016, 12, 25};
+
+    QTEST_ASSERT(firstXMasDay2016.dayOfWeek() == 7);
+    QTEST_ASSERT(isPublicHoliday(firstXMasDay2016));
+
+
+    // EXECUTE
+
+    const auto res = extractDayIndexAndMinute(QDateTime{firstXMasDay2016, QTime{13, 00, 00}});
+
+
+    // VERIFY
+
+    QCOMPARE(SUNDAY_INDEX, res.first);
+}
+
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::workDayReturnsDayIndex()
+{
+    // SETUP
+
+    QDate goodSaturday2018 {2018, 03, 31};
+    QDate goodSaturday2020 {2020, 04, 11};
+    QDate j2018_06_26      {2018, 06, 26};
+
+    QTEST_ASSERT(goodSaturday2018.dayOfWeek() == 6);
+    QTEST_ASSERT(goodSaturday2020.dayOfWeek() == 6);
+    QTEST_ASSERT(j2018_06_26.dayOfWeek() == 2); // It's a Tuesday
+
+    QTEST_ASSERT(!isPublicHoliday(goodSaturday2018));
+    QTEST_ASSERT(!isPublicHoliday(goodSaturday2020));
+    QTEST_ASSERT(!isPublicHoliday(j2018_06_26));
+
+
+    // EXECUTE
+
+    const auto goodSaturday2018Res = extractDayIndexAndMinute(QDateTime{goodSaturday2018, QTime{13, 00, 00}});
+    const auto goodSaturday2020Res = extractDayIndexAndMinute(QDateTime{goodSaturday2020, QTime{13, 00, 00}});
+    const auto j2018_06_26Res      = extractDayIndexAndMinute(QDateTime{j2018_06_26,      QTime{13, 00, 00}});
+
+
+    // VERIFY
+
+    QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 1), goodSaturday2018Res.first);
+    QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 1), goodSaturday2020Res.first);
+    QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 5), j2018_06_26Res.first); // It's a Tuesday
 }

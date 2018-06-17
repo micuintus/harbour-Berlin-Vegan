@@ -16,6 +16,8 @@
 #define MINUTES_PER_HOUR 60
 #define MINUTES_PER_DAY (HOURS_PER_DAY * MINUTES_PER_HOUR)
 
+#define SUNDAY_INDEX static_cast<unsigned char>(6) // We starting counting from 0
+
 
 // Condense opening hours part --->
 
@@ -257,8 +259,7 @@ std::pair<unsigned char, unsigned> extractDayIndexAndMinute(const QDateTime& dat
     const unsigned currentHour = dateTime.time().hour();
     unsigned currentMinute = currentHour * MINUTES_PER_HOUR + dateTime.time().minute();
 
-    const unsigned sundayIndex = 6;
-    char dayIndex = static_cast<unsigned char>(dateTime.date().dayOfWeek() - 1); // Friday is 5, but we count from 0, so we need 4
+    char dayIndex = static_cast<unsigned char>(dateTime.date().dayOfWeek() - 1);
 
     if (isShortAfterMidnight(dateTime))
     {
@@ -267,13 +268,13 @@ std::pair<unsigned char, unsigned> extractDayIndexAndMinute(const QDateTime& dat
 
         if (dayIndex == -1)
         {
-            dayIndex = sundayIndex; // sunday
+            dayIndex = SUNDAY_INDEX; // sunday
         }
     }
 
     if (isPublicHoliday(dateTime.date())) // it is a holiday so take the opening hours from sunday
     {
-        dayIndex = sundayIndex;
+        dayIndex = SUNDAY_INDEX;
     }
 
     return { dayIndex, currentMinute };
