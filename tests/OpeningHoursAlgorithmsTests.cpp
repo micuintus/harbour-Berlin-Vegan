@@ -229,3 +229,59 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::workDayReturnsDayIndex
     QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 1), goodSaturday2020Res.first);
     QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 5), j2018_06_26Res.first); // It's a Tuesday
 }
+
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockReturnsDayIndexBefore()
+{
+    // SETUP
+
+    const QDateTime j2018_06_26__5_30 { QDate{2018, 06, 26}, QTime{05, 30, 00} };
+    QTEST_ASSERT(j2018_06_26__5_30.date().dayOfWeek() == 2); // It's a Tuesday
+
+
+    // EXECUTE
+
+    auto const res = extractDayIndexAndMinute(j2018_06_26__5_30);
+
+
+    // VERIFY
+
+    // Before 6 o Clock --> should return monday index
+    QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 6), res.first);
+}
+
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeAfter6oClockReturnsMinutes()
+{
+    // SETUP
+
+    const QDateTime j2018_06_26__6_30 { QDate{2018, 06, 26}, QTime{06, 30, 00} };
+
+
+    // EXECUTE
+
+    auto const res = extractDayIndexAndMinute(j2018_06_26__6_30);
+
+
+    // VERIFY
+
+    //                            time: 06 : 30
+    QCOMPARE(static_cast<unsigned>( 60 * 6 + 30), res.second);
+}
+
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockReturnsMinutesCountingFromDayBefore()
+{
+    // SETUP
+
+    const QDateTime j2018_06_26__2_24 { QDate{2018, 06, 26}, QTime{02, 24, 00} };
+
+
+    // EXECUTE
+
+    auto const res = extractDayIndexAndMinute(j2018_06_26__2_24);
+
+
+    // VERIFY
+
+    //                              count from day before;      time: 02 : 24
+    QCOMPARE(static_cast<unsigned>( 60 * 24                    +  60 * 2 + 24), res.second);
+}
+

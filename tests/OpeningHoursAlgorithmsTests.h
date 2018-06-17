@@ -36,4 +36,9 @@ private slots:
     void sundayHolidayAlsoRetunsSundayIndex();
 
     void workDayReturnsDayIndex();
+
+    void timeBefore6oClockReturnsDayIndexBefore();
+
+    void timeAfter6oClockReturnsMinutes();
+    void timeBefore6oClockReturnsMinutesCountingFromDayBefore();
 };
