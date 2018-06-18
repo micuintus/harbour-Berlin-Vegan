@@ -225,9 +225,9 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::workDayReturnsDayIndex
 
     // VERIFY
 
-    QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 1), goodSaturday2018Res.first);
-    QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 1), goodSaturday2020Res.first);
-    QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 5), j2018_06_26Res.first); // It's a Tuesday
+    QCOMPARE(SATURDAY_INDEX, goodSaturday2018Res.first);
+    QCOMPARE(SATURDAY_INDEX, goodSaturday2020Res.first);
+    QCOMPARE(TUESDAY_INDEX , j2018_06_26Res.first); // It's a Tuesday
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockReturnsDayIndexBefore()
@@ -246,7 +246,7 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockRetur
     // VERIFY
 
     // Before 6 o Clock --> should return monday index
-    QCOMPARE(static_cast<unsigned char>(SUNDAY_INDEX - 6), res.first);
+    QCOMPARE(MONDAY_INDEX, res.first);
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeAfter6oClockReturnsMinutes()
@@ -304,8 +304,7 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedI
 
 
     // VERIFY
-    //                                             Thursday
-    QCOMPARE(res.first, static_cast<unsigned char>(SUNDAY_INDEX - 3));
+    QCOMPARE(res.first, THURSDAY_INDEX);
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedIfShortAfterMidnightAndDayBeforeIsHoliday()
@@ -348,6 +347,6 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedI
     auto const res = extractDayIndexAndMinute(secondChristmasDay_2_o_clock);
 
 
-    // VERIFY           1st xmas day is holiday
+    // VERIFY           1st xmas day is a holiday
     QCOMPARE(res.first, SUNDAY_INDEX);
 }
