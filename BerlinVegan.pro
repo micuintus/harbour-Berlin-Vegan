@@ -57,7 +57,8 @@ ios {
 }
 
 TRANSLATIONS += translations/harbour-berlin-vegan-de.ts \
-                translations/harbour-berlin-vegan-en.ts
+                translations/harbour-berlin-vegan-en.ts \
+                translations/harbour-berlin-vegan-nl.ts
 
 
 
