@@ -175,8 +175,8 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::nonSundayHoldidayRetur
 
     // VERIFY
 
-    QCOMPARE(SUNDAY_INDEX, goodFriday2018Res.first);
-    QCOMPARE(SUNDAY_INDEX, goodFriday2020Res.first);
+    QCOMPARE(goodFriday2018Res.first, SUNDAY_INDEX);
+    QCOMPARE(goodFriday2020Res.first, SUNDAY_INDEX);
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::sundayHolidayAlsoRetunsSundayIndex()
@@ -196,7 +196,7 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::sundayHolidayAlsoRetun
 
     // VERIFY
 
-    QCOMPARE(SUNDAY_INDEX, res.first);
+    QCOMPARE(res.first, SUNDAY_INDEX);
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::workDayReturnsDayIndex()
@@ -225,9 +225,9 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::workDayReturnsDayIndex
 
     // VERIFY
 
-    QCOMPARE(SATURDAY_INDEX, goodSaturday2018Res.first);
-    QCOMPARE(SATURDAY_INDEX, goodSaturday2020Res.first);
-    QCOMPARE(TUESDAY_INDEX , j2018_06_26Res.first); // It's a Tuesday
+    QCOMPARE(goodSaturday2018Res.first, SATURDAY_INDEX);
+    QCOMPARE(goodSaturday2020Res.first, SATURDAY_INDEX);
+    QCOMPARE(j2018_06_26Res.first,      TUESDAY_INDEX);
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockReturnsDayIndexBefore()
@@ -246,7 +246,7 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockRetur
     // VERIFY
 
     // Before 6 o Clock --> should return monday index
-    QCOMPARE(MONDAY_INDEX, res.first);
+    QCOMPARE(res.first, MONDAY_INDEX);
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeAfter6oClockReturnsMinutes()
@@ -263,8 +263,8 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeAfter6oClockReturn
 
     // VERIFY
 
-    //                            time: 06 : 30
-    QCOMPARE(static_cast<unsigned>( 60 * 6 + 30), res.second);
+    //                                        time: 06 : 30
+    QCOMPARE(res.second, static_cast<unsigned>( 60 * 6 + 30));
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockReturnsMinutesCountingFromDayBefore()
@@ -281,8 +281,8 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockRetur
 
     // VERIFY
 
-    //                              count from day before;      time: 02 : 24
-    QCOMPARE(static_cast<unsigned>( 60 * 24                    +  60 * 2 + 24), res.second);
+    //                                          count from day before;      time: 02 : 24
+    QCOMPARE(res.second, static_cast<unsigned>( 60 * 24                    +  60 * 2 + 24));
 }
 
 void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedIfShortAfterMidnightAndCurrentDayIsHoliday()
