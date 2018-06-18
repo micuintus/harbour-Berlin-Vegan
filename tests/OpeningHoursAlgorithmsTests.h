@@ -41,4 +41,8 @@ private slots:
 
     void timeAfter6oClockReturnsMinutes();
     void timeBefore6oClockReturnsMinutesCountingFromDayBefore();
+
+    void rightDayIndexReturnedIfShortAfterMidnightAndCurrentDayIsHoliday();
+    void rightDayIndexReturnedIfShortAfterMidnightAndDayBeforeIsHoliday();
+    void rightDayIndexReturnedIfShortAfterMidnightAndTodayAndDayBeforeAreHolidays();
 };

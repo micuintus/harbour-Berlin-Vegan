@@ -285,3 +285,69 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::timeBefore6oClockRetur
     QCOMPARE(static_cast<unsigned>( 60 * 24                    +  60 * 2 + 24), res.second);
 }
 
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedIfShortAfterMidnightAndCurrentDayIsHoliday()
+{
+    // SETUP
+
+    const QDate     goodFriday2018          {2018, 03, 30};
+    const QDateTime goodFriday2018_2_o_clock{goodFriday2018, QTime{02, 00, 00}};
+
+    QTEST_ASSERT(isPublicHoliday(goodFriday2018));
+    QTEST_ASSERT(!isPublicHoliday(goodFriday2018.addDays(-1)));
+
+    QTEST_ASSERT(isShortAfterMidnight(goodFriday2018_2_o_clock));
+
+
+    // EXECUTE
+
+    auto const res = extractDayIndexAndMinute(goodFriday2018_2_o_clock);
+
+
+    // VERIFY
+    //                                             Thursday
+    QCOMPARE(res.first, static_cast<unsigned char>(SUNDAY_INDEX - 3));
+}
+
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedIfShortAfterMidnightAndDayBeforeIsHoliday()
+{
+    // SETUP
+
+    const QDate     goodSaturday2018          {2018, 03, 31};
+    const QDateTime goodSaturday2018_2_o_clock{goodSaturday2018, QTime{02, 00, 00}};
+
+    QTEST_ASSERT(!isPublicHoliday(goodSaturday2018));
+    QTEST_ASSERT(isPublicHoliday(goodSaturday2018.addDays(-1)));
+
+    QTEST_ASSERT(isShortAfterMidnight(goodSaturday2018_2_o_clock));
+
+
+    // EXECUTE
+
+    auto const res = extractDayIndexAndMinute(goodSaturday2018_2_o_clock);
+
+
+    // VERIFY           Good Friday is a holiday
+    QCOMPARE(res.first, SUNDAY_INDEX);
+}
+
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedIfShortAfterMidnightAndTodayAndDayBeforeAreHolidays()
+{
+    // SETUP
+
+    const QDate     secondChristmasDay          {2018, 12, 26};
+    const QDateTime secondChristmasDay_2_o_clock{secondChristmasDay, QTime{02, 30, 00}};
+
+    QTEST_ASSERT(isPublicHoliday(secondChristmasDay));
+    QTEST_ASSERT(isPublicHoliday(secondChristmasDay.addDays(-1)));
+
+    QTEST_ASSERT(isShortAfterMidnight(secondChristmasDay_2_o_clock));
+
+
+    // EXECUTE
+
+    auto const res = extractDayIndexAndMinute(secondChristmasDay_2_o_clock);
+
+
+    // VERIFY           1st xmas day is holiday
+    QCOMPARE(res.first, SUNDAY_INDEX);
+}
