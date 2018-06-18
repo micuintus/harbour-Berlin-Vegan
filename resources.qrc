@@ -28,5 +28,8 @@
         <file>qml/pages/about/LICENSE.TinyColor</file>
         <file>images/Platzhalter_v2_mitSchriftzug_alpha.png</file>
         <file>icons/icomoon.ttf</file>
+        <file>translations/harbour-berlin-vegan-nl.qm</file>
+        <file>translations/harbour-berlin-vegan-nl.ts</file>
+        <file>translations/harbour-berlin-vegan.qm</file>
     </qresource>
 </RCC>
