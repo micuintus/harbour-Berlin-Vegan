@@ -355,7 +355,7 @@
         <location filename="../qml/components-generic/VenueListItem.qml" line="104"/>
         <source>closed now</source>
         <oldsource>closed\nnow</oldsource>
-        <translation>momenteel gesloten</translation>
+        <translation>gesloten</translation>
     </message>
 </context>
 </TS>
