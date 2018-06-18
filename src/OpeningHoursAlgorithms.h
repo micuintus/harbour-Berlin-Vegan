@@ -265,18 +265,13 @@ std::pair<unsigned char, unsigned> extractDayIndexAndMinute(QDateTime dateTime)
     const unsigned currentHour = dateTime.time().hour();
     unsigned currentMinute = currentHour * MINUTES_PER_HOUR + dateTime.time().minute();
 
-    char dayIndex = static_cast<unsigned char>(dateTime.date().dayOfWeek() - 1);
+    unsigned char dayIndex = static_cast<unsigned char>(dateTime.date().dayOfWeek() - 1);
 
     if (isShortAfterMidnight(dateTime))    // If that is the case, we treat this time as if from the day before:
     {
         currentMinute += MINUTES_PER_DAY;  // We count the minutes starting from the day before
-        dayIndex--;                        // and we use the opening hour from the day before.
+        dayIndex = (dayIndex - 1) % 7;     // and we use the opening hour from the day before.
         dateTime = dateTime.addDays(-1);
-
-        if (dayIndex == -1)
-        {
-            dayIndex = SUNDAY_INDEX;
-        }
     }
 
     if (isPublicHoliday(dateTime.date()))
