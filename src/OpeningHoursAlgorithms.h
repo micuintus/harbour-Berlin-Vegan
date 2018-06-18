@@ -16,7 +16,13 @@
 #define MINUTES_PER_HOUR 60
 #define MINUTES_PER_DAY (HOURS_PER_DAY * MINUTES_PER_HOUR)
 
-#define SUNDAY_INDEX static_cast<unsigned char>(6) // We starting counting from 0
+#define MONDAY_INDEX    static_cast<unsigned char>(0)
+#define TUESDAY_INDEX   static_cast<unsigned char>(1)
+#define WEDNESDAY_INDEX static_cast<unsigned char>(2)
+#define THURSDAY_INDEX  static_cast<unsigned char>(3)
+#define FRIDAY_INDEX    static_cast<unsigned char>(4)
+#define SATURDAY_INDEX  static_cast<unsigned char>(5)
+#define SUNDAY_INDEX    static_cast<unsigned char>(6)
 
 
 // Condense opening hours part --->
