@@ -4,42 +4,42 @@
 <context>
     <name></name>
     <message id="id-monday">
-        <location filename="../src/OpeningHoursModel.cpp" line="197"/>
+        <location filename="../src/OpeningHoursAlgorithms.h" line="99"/>
         <source>Monday</source>
         <translation>Maandag</translation>
     </message>
     <message id="id-tuesday">
-        <location filename="../src/OpeningHoursModel.cpp" line="200"/>
+        <location filename="../src/OpeningHoursAlgorithms.h" line="101"/>
         <source>Tuesday</source>
         <translation>Dinsdag</translation>
     </message>
     <message id="id-wednesday">
-        <location filename="../src/OpeningHoursModel.cpp" line="203"/>
+        <location filename="../src/OpeningHoursAlgorithms.h" line="103"/>
         <source>Wednesday</source>
         <translation>Woensdag</translation>
     </message>
     <message id="id-thursday">
-        <location filename="../src/OpeningHoursModel.cpp" line="206"/>
+        <location filename="../src/OpeningHoursAlgorithms.h" line="105"/>
         <source>Thursday</source>
         <translation>Donderdag</translation>
     </message>
     <message id="id-friday">
-        <location filename="../src/OpeningHoursModel.cpp" line="209"/>
+        <location filename="../src/OpeningHoursAlgorithms.h" line="107"/>
         <source>Friday</source>
         <translation>Vrijdag</translation>
     </message>
     <message id="id-saturday">
-        <location filename="../src/OpeningHoursModel.cpp" line="212"/>
+        <location filename="../src/OpeningHoursAlgorithms.h" line="109"/>
         <source>Saturday</source>
         <translation>Zaterdag</translation>
     </message>
     <message id="id-sunday">
-        <location filename="../src/OpeningHoursModel.cpp" line="215"/>
+        <location filename="../src/OpeningHoursAlgorithms.h" line="111"/>
         <source>Sunday</source>
         <translation>Zondag</translation>
     </message>
     <message id="id-closed">
-        <location filename="../src/OpeningHoursModel.cpp" line="261"/>
+        <location filename="../src/OpeningHoursAlgorithms.h" line="86"/>
         <source>closed</source>
         <translation>gesloten</translation>
     </message>
@@ -98,86 +98,86 @@
         <translation>Openingstijden</translation>
     </message>
     <message id="id-food-details">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="80"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="75"/>
         <source>Food details</source>
         <translation>Voedselinformatie</translation>
     </message>
     <message id="id-vegan-venue-category">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="87"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="82"/>
         <source>Category</source>
         <translation>Categorie</translation>
     </message>
     <message id="id-organic">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="93"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="88"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="195"/>
         <source>Organic products</source>
         <translation>Biologische producten</translation>
     </message>
     <message id="id-gluten-free">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="100"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="95"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="204"/>
         <source>Gluten-free options</source>
         <translation>Glutenvrije opties</translation>
     </message>
     <message id="id-accessibility">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="113"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="108"/>
         <source>Accessibility</source>
         <translation>Toegankelijkheid</translation>
     </message>
     <message id="id-wheelchair">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="119"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="114"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="213"/>
         <source>Wheelchair-friendly</source>
         <translation>Rolstoeltoegankelijk</translation>
     </message>
     <message id="id-wheelchair-wc">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="125"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="120"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="222"/>
         <source>Wheelchair-accessible WC</source>
         <translation>Rolstoeltoegankelijk toilet</translation>
     </message>
     <message id="id-high-chair">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="131"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="126"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="231"/>
         <source>High chair</source>
         <translation>Kinderstoel</translation>
     </message>
     <message id="id-dogs-allowed">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="137"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="132"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="240"/>
         <source>Dogs allowed</source>
         <translation>Honden toegestaan</translation>
     </message>
     <message id="id-venue-features">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="143"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="138"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="190"/>
         <source>Venue features</source>
         <translation>Mogelijkheden</translation>
     </message>
     <message id="id-wifi">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="149"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="144"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="249"/>
         <source>WiFi</source>
         <translation>Wi-Fi</translation>
     </message>
     <message id="id-outdoor-seats">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="155"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="150"/>
         <source>Seats outdoor</source>
         <translation>Buiten zitten</translation>
     </message>
     <message id="id-indoor-seats">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="161"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="156"/>
         <source>Seats indoor</source>
         <translation>Binnen zitten</translation>
     </message>
     <message id="id-catering">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="167"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="162"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="258"/>
         <source>Catering</source>
         <translation>Catering</translation>
     </message>
     <message id="id-delivery">
-        <location filename="../qml/components-generic/VenueDetails.qml" line="173"/>
+        <location filename="../qml/components-generic/VenueDetails.qml" line="168"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="267"/>
         <source>Delivery service</source>
         <translation>Bezorgdienst</translation>
@@ -185,8 +185,8 @@
     <message id="id-berlin-vegan">
         <location filename="../qml/components-v-play/Page.qml" line="10"/>
         <location filename="../qml/cover/CoverPage.qml" line="72"/>
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="93"/>
         <location filename="../qml/pages/VenueList.qml" line="40"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="93"/>
         <source>Berlin-Vegan</source>
         <translation>Berlijn-Vegan</translation>
     </message>
@@ -352,10 +352,15 @@
         <translation>Geen filter- of zoekresultaten</translation>
     </message>
     <message id="id-venue-closed">
-        <location filename="../qml/components-generic/VenueListItem.qml" line="104"/>
+        <location filename="../qml/components-generic/VenueListItem.qml" line="88"/>
         <source>closed now</source>
         <oldsource>closed\nnow</oldsource>
         <translation>gesloten</translation>
+    </message>
+    <message id="id-venue-closes-soon">
+        <location filename="../qml/components-generic/VenueListItem.qml" line="90"/>
+        <source>closes soon</source>
+        <translation>sluit snel</translation>
     </message>
 </context>
 </TS>
