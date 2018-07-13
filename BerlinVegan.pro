@@ -56,7 +56,8 @@ ios {
     QMAKE_BUNDLE_DATA += app_launch_images
 }
 
-TRANSLATIONS += translations/harbour-berlin-vegan-de.ts \
+TRANSLATIONS += translations/harbour-berlin-vegan.ts \
+                translations/harbour-berlin-vegan-de.ts \
                 translations/harbour-berlin-vegan-en.ts \
                 translations/harbour-berlin-vegan-nl.ts
 
