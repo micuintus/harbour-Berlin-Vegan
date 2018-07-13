@@ -221,6 +221,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
 
         // OpeningHours
         { VenueModelRoles::CondensedOpeningHours,         "condensedOpeningHours"  },
+        { VenueModelRoles::ClosesSoon,    "closesSoon"  },
         { VenueModelRoles::Open,          "open"   },
         { VenueModelRoles::OtMon,         "otMon"  },
         { VenueModelRoles::OtTue,         "otTue"  },
@@ -249,7 +250,7 @@ void VenueModel::updateOpenState()
 
 QVariant VenueModel::data(const QModelIndex &index, int role) const
 {
-    if (role == VenueModelRoles::Open)
+    if (role == VenueModelRoles::Open || role == VenueModelRoles::ClosesSoon)
     {
         const auto openingMinutesVar = QStandardItemModel::data(index, VenueModel::OpeningMinutes);
         if (!openingMinutesVar.isValid())
@@ -258,7 +259,14 @@ QVariant VenueModel::data(const QModelIndex &index, int role) const
         }
 
         auto const openingMinutes = openingMinutesVar.toList();
-        return isInRange(openingMinutes[m_currendDayIndex].toMap(), m_currentMinute);
+
+        switch(role) {
+        case VenueModelRoles::Open:
+            return isInRange(openingMinutes[m_currendDayIndex].toMap(), m_currentMinute);
+        case VenueModelRoles::ClosesSoon:
+            // ClosesSoon holds true if venue is NOT open in half an hour from now
+            return !isInRange(openingMinutes[m_currendDayIndex].toMap(), m_currentMinute + MINUTES_CLOSES_SOON);
+        }
     }
 
     return QStandardItemModel::data(index, role);

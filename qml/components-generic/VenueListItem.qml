@@ -83,12 +83,14 @@ ListItem {
     Label {
         id: closing
 
-        visible: !(model.open)
-                 //% "closed now"
-        text: qsTrId("id-venue-closed")
-        color: BVApp.Theme.disabledColor
+        visible: !(model.open) || model.closesSoon
+                                    //% "closed now"
+        text: !(model.open) ? qsTrId("id-venue-closed") :
+                                    //% "closes soon"
+                              qsTrId("id-venue-closes-soon")
+        color: !(model.open) ? BVApp.Theme.disabledColor : BVApp.Theme.warningColor
 
-        width: !(model.open) ? contentWidth : 0
+        width: !(model.open) || model.closesSoon ? contentWidth : 0
 
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
         horizontalAlignment: Text.AlignRight

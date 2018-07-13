@@ -124,6 +124,7 @@ public:
 
         // OpeningHours
         Open,
+        ClosesSoon,
         CondensedOpeningHours,
         OpeningMinutes,
         OtMon,

@@ -15,6 +15,7 @@
 #define SECONDS_PER_MINUTE 60
 #define MINUTES_PER_HOUR 60
 #define MINUTES_PER_DAY (HOURS_PER_DAY * MINUTES_PER_HOUR)
+#define MINUTES_CLOSES_SOON 30
 
 #define MONDAY_INDEX    static_cast<unsigned char>(0)
 #define TUESDAY_INDEX   static_cast<unsigned char>(1)
