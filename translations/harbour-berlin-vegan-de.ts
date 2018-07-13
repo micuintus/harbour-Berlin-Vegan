@@ -271,5 +271,9 @@
         <oldsource>closed\nnow</oldsource>
         <translation>geschlossen</translation>
     </message>
+    <message id="id-venue-closes-soon">
+        <source>closes soon</source>
+        <translation>schließt bald</translation>
+    </message>
 </context>
 </TS>
