@@ -1,0 +1,16 @@
+sudo: required
+
+language: cpp
+
+install:
+  - sudo add-apt-repository --yes ppa:beineri/opt-qt591-trusty
+  - sudo apt-get update
+  - sudo apt-get install -y qt59-meta-full
+
+script:
+  - export QT_ENV_SCRIPT=$(find /opt -name 'qt*-env.sh')
+  - source $QT_ENV_SCRIPT
+  - qmake BerlinVeganTests.pro
+  - make
+  - ./BerlinVeganTests
+  - rm Makefile BerlinVeganTests *.o
