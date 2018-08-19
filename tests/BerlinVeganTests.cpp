@@ -6,4 +6,5 @@ int main(int argc, char *argv[])
     QTest::qExec(new OpeningHoursAlgorithms_TestIsPublicHoliday(), argc, argv);
     QTest::qExec(new OpeningHoursAlgorithms_TestIsShortAfterMidnight(), argc, argv);
     QTest::qExec(new OpeningHoursAlgorithms_TestExtractDayIndexAndMinute(), argc, argv);
+    QTest::qExec(new OpeningHoursAlgorithms_TestCondenseOpeningHours(), argc, argv);
 }
