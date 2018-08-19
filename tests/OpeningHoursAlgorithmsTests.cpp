@@ -350,3 +350,33 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedI
     // VERIFY           1st xmas day is a holiday
     QCOMPARE(res.first, SUNDAY_INDEX);
 }
+
+void OpeningHoursAlgorithms_TestCondenseOpeningHours::test()
+{
+    // SETUP
+
+    const QVariantList uncondensedOpeningHours
+    {
+        QVariantMap {{ "day", "Monday" },    { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", "Tuesday" },   { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", "Wednesday" }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", "Thursday" },  { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", "Friday" },    { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", "Saturday" },  { "hours", "closed" }},
+        QVariantMap {{ "day", "Sunday" },    { "hours", "closed" }}
+    };
+
+    // EXECUTE
+
+    auto const res = condenseOpeningHours(uncondensedOpeningHours);
+
+    // VERIFY
+
+    const QVariantList condensedOpeningHours
+    {
+        QVariantMap {{ "day", "Monday - Friday" },    { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", "Saturday - Sunday" },  { "hours", "closed" }},
+    };
+
+    QCOMPARE(res, condensedOpeningHours);
+}
