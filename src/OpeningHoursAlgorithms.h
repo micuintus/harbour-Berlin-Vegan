@@ -53,7 +53,7 @@ QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours)
 {
     QVariantList condensedOpeningHours;
 
-    unsigned curr = 1;
+    unsigned curr = 0;
     const unsigned numElements = uncondensedOpeningHours.size();
 
     while (curr < numElements)
