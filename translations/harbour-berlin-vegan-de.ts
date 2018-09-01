@@ -278,6 +278,9 @@
     <message id="id-filter-venue-open-now">
         <source>Open now</source>
         <translation>Jetzt geöffnet</translation>
+    <message id="id-venue-please-tell-waiter">
+        <source>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</source>
+        <translation>Teile dem Kellner/Eigentümer doch bitte mit, dass du sein Lokal über die Berlin-Vegan-App gefunden hast.</translation>
     </message>
 </context>
 </TS>
