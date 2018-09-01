@@ -46,6 +46,8 @@ BVApp.Page {
         id: flicka
         anchors.fill: parent
         contentHeight: descriptionText.y + descriptionText.height + BVApp.Theme.paddingLarge
+                                         + tellWaiter.height + BVApp.Theme.paddingLarge
+
         readonly property real nonDescriptionHeaderHeight: locationHeader.height
                                                           + underHeaderBar.height
                                                           + iconToolBar.height
@@ -231,6 +233,36 @@ BVApp.Page {
                 rightMargin:  BVApp.Theme.horizontalPageMargin
             }
         }
+
+        Label {
+            id: tellWaiter
+
+            visible: isFoodVenue
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: descriptionText.bottom
+
+                topMargin:    BVApp.Theme.paddingLarge
+                bottomMargin: BVApp.Theme.paddingLarge
+                leftMargin:   BVApp.Theme.horizontalPageMargin
+                rightMargin:  BVApp.Theme.horizontalPageMargin
+            }
+
+            font {
+                pixelSize: BVApp.Theme.fontSizeSmall
+                italic: true
+            }
+
+            wrapMode: Text.WordWrap
+            color: BVApp.Theme.primaryColor
+
+            //% "Please tell the waiter/owner that you found their venue via the Berlin-Vegan app."
+            text: qsTrId("id-venue-please-tell-waiter")
+        }
+
+
     }
 }
 

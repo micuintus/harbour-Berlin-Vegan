@@ -4,42 +4,34 @@
 <context>
     <name></name>
     <message id="id-monday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="99"/>
         <source>Monday</source>
         <translation>Maandag</translation>
     </message>
     <message id="id-tuesday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="101"/>
         <source>Tuesday</source>
         <translation>Dinsdag</translation>
     </message>
     <message id="id-wednesday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="103"/>
         <source>Wednesday</source>
         <translation>Woensdag</translation>
     </message>
     <message id="id-thursday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="105"/>
         <source>Thursday</source>
         <translation>Donderdag</translation>
     </message>
     <message id="id-friday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="107"/>
         <source>Friday</source>
         <translation>Vrijdag</translation>
     </message>
     <message id="id-saturday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="109"/>
         <source>Saturday</source>
         <translation>Zaterdag</translation>
     </message>
     <message id="id-sunday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="111"/>
         <source>Sunday</source>
         <translation>Zondag</translation>
     </message>
     <message id="id-closed">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="86"/>
         <source>closed</source>
         <translation>gesloten</translation>
     </message>
@@ -367,6 +359,11 @@
         <location filename="../qml/components-generic/VenueListItem.qml" line="90"/>
         <source>closes soon</source>
         <translation>sluit snel</translation>
+    </message>
+    <message id="id-venue-please-tell-waiter">
+        <location filename="../qml/pages/VenueDescription.qml" line="262"/>
+        <source>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</source>
+        <translation>Vertel de ober / eigenaar dat je zijn locatie gevonden hebt via de app Berlijn-Vegan.</translation>
     </message>
 </context>
 </TS>
