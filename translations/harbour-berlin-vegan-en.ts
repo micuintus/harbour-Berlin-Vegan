@@ -64,7 +64,7 @@
     </message>
     <message id="id-omnivore">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="49"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="176"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="198"/>
         <source>omnivore</source>
         <translation>omnivore</translation>
     </message>
@@ -76,7 +76,7 @@
     </message>
     <message id="id-vegetarian">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="57"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="167"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="189"/>
         <source>vegetarian</source>
         <translation>vegetarian</translation>
     </message>
@@ -88,12 +88,13 @@
     </message>
     <message id="id-vegan">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="65"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="157"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="179"/>
         <source>vegan</source>
         <translation>vegan</translation>
     </message>
     <message id="id-opening-hours">
         <location filename="../qml/components-generic/VenueDetails.qml" line="56"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="103"/>
         <source>Opening hours</source>
         <translation>Opening hours</translation>
     </message>
@@ -109,13 +110,13 @@
     </message>
     <message id="id-organic">
         <location filename="../qml/components-generic/VenueDetails.qml" line="88"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="195"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="217"/>
         <source>Organic products</source>
         <translation>Organic products</translation>
     </message>
     <message id="id-gluten-free">
         <location filename="../qml/components-generic/VenueDetails.qml" line="95"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="204"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="226"/>
         <source>Gluten-free options</source>
         <translation>Gluten-free options</translation>
     </message>
@@ -126,37 +127,37 @@
     </message>
     <message id="id-wheelchair">
         <location filename="../qml/components-generic/VenueDetails.qml" line="114"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="213"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="235"/>
         <source>Wheelchair-friendly</source>
         <translation>Wheelchair-friendly</translation>
     </message>
     <message id="id-wheelchair-wc">
         <location filename="../qml/components-generic/VenueDetails.qml" line="120"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="222"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="244"/>
         <source>Wheelchair-accessible WC</source>
         <translation>Wheelchair-accessible WC</translation>
     </message>
     <message id="id-high-chair">
         <location filename="../qml/components-generic/VenueDetails.qml" line="126"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="231"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="253"/>
         <source>High chair</source>
         <translation>High chair</translation>
     </message>
     <message id="id-dogs-allowed">
         <location filename="../qml/components-generic/VenueDetails.qml" line="132"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="240"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="262"/>
         <source>Dogs allowed</source>
         <translation>Dogs allowed</translation>
     </message>
     <message id="id-venue-features">
         <location filename="../qml/components-generic/VenueDetails.qml" line="138"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="190"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="212"/>
         <source>Venue features</source>
         <translation>Venue features</translation>
     </message>
     <message id="id-wifi">
         <location filename="../qml/components-generic/VenueDetails.qml" line="144"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="249"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="271"/>
         <source>WiFi</source>
         <translation>WiFi</translation>
     </message>
@@ -172,21 +173,21 @@
     </message>
     <message id="id-catering">
         <location filename="../qml/components-generic/VenueDetails.qml" line="162"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="258"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="280"/>
         <source>Catering</source>
         <translation>Catering</translation>
     </message>
     <message id="id-delivery">
         <location filename="../qml/components-generic/VenueDetails.qml" line="168"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="267"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="289"/>
         <source>Delivery service</source>
         <translation>Delivery service</translation>
     </message>
     <message id="id-berlin-vegan">
         <location filename="../qml/components-v-play/Page.qml" line="10"/>
         <location filename="../qml/cover/CoverPage.qml" line="72"/>
-        <location filename="../qml/pages/VenueList.qml" line="40"/>
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="93"/>
+        <location filename="../qml/pages/VenueList.qml" line="40"/>
         <source>Berlin-Vegan</source>
         <translation>Berlin-Vegan</translation>
     </message>
@@ -241,33 +242,38 @@
         <source>Shopping</source>
         <translation>Shopping</translation>
     </message>
+    <message id="id-filter-venue-open-now">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="109"/>
+        <source>Open now</source>
+        <translation>Open now</translation>
+    </message>
     <message id="id-filter-vegan-category">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="152"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="174"/>
         <source>Veg*an category</source>
         <translation>Veg*an category</translation>
     </message>
     <message id="id-filter-venue-sub-type">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="104"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="126"/>
         <source>Venue sub type</source>
         <translation>Venue sub type</translation>
     </message>
     <message id="id-venue-subtype-restaurant">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="110"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="132"/>
         <source>Restaurant</source>
         <translation>Restaurant</translation>
     </message>
     <message id="id-venue-subtype-fastfood">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="120"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="142"/>
         <source>Snack bar</source>
         <translation>Snack bar</translation>
     </message>
     <message id="id-venue-subtype-cafe">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="130"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="152"/>
         <source>Café</source>
         <translation>Café</translation>
     </message>
     <message id="id-venue-subtype-icecream">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="140"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="162"/>
         <source>Ice cream parlor</source>
         <translation>Ice cream parlor</translation>
     </message>

@@ -275,5 +275,9 @@
         <source>closes soon</source>
         <translation>schließt bald</translation>
     </message>
+    <message id="id-filter-venue-open-now">
+        <source>Open now</source>
+        <translation>Jetzt geöffnet</translation>
+    </message>
 </context>
 </TS>
