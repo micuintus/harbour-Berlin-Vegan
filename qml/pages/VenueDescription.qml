@@ -258,7 +258,7 @@ BVApp.Page {
             wrapMode: Text.WordWrap
             color: BVApp.Theme.primaryColor
 
-            //% "Please tell the waiter/owner that you found their venue via the Berlin-Vegan app."
+            //% "Please tell the waiter/owner that you found their venue via the Berlin-Vegan app. The significance of being listed in a database like this is often underestimated. Thanks for the help!"
             text: qsTrId("id-venue-please-tell-waiter")
         }
 

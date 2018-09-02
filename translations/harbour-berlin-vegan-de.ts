@@ -278,9 +278,11 @@
     <message id="id-filter-venue-open-now">
         <source>Open now</source>
         <translation>Jetzt geöffnet</translation>
+    </message>
     <message id="id-venue-please-tell-waiter">
-        <source>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</source>
-        <translation>Teile dem Kellner/Eigentümer doch bitte mit, dass du sein Lokal über die Berlin-Vegan-App gefunden hast.</translation>
+        <source>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app. The significance of being listed in a database like this is often underestimated. Thanks for the help!</source>
+        <oldsource>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</oldsource>
+        <translation>Bitte teile der/dem Kellner(in)/Inhaber(in) mit, dass du ihr Lokal über die Berlin-Vegan-App gefunden hast. Die Wichtigkeit, in Datenbanken wie dieser gelistet zu sein, wird von vielen unterschätzt. Danke für die Hilfe!</translation>
     </message>
 </context>
 </TS>
