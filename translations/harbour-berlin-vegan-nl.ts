@@ -4,34 +4,42 @@
 <context>
     <name></name>
     <message id="id-monday">
+        <location filename="../src/OpeningHoursAlgorithms.h" line="99"/>
         <source>Monday</source>
         <translation>Maandag</translation>
     </message>
     <message id="id-tuesday">
+        <location filename="../src/OpeningHoursAlgorithms.h" line="101"/>
         <source>Tuesday</source>
         <translation>Dinsdag</translation>
     </message>
     <message id="id-wednesday">
+        <location filename="../src/OpeningHoursAlgorithms.h" line="103"/>
         <source>Wednesday</source>
         <translation>Woensdag</translation>
     </message>
     <message id="id-thursday">
+        <location filename="../src/OpeningHoursAlgorithms.h" line="105"/>
         <source>Thursday</source>
         <translation>Donderdag</translation>
     </message>
     <message id="id-friday">
+        <location filename="../src/OpeningHoursAlgorithms.h" line="107"/>
         <source>Friday</source>
         <translation>Vrijdag</translation>
     </message>
     <message id="id-saturday">
+        <location filename="../src/OpeningHoursAlgorithms.h" line="109"/>
         <source>Saturday</source>
         <translation>Zaterdag</translation>
     </message>
     <message id="id-sunday">
+        <location filename="../src/OpeningHoursAlgorithms.h" line="111"/>
         <source>Sunday</source>
         <translation>Zondag</translation>
     </message>
     <message id="id-closed">
+        <location filename="../src/OpeningHoursAlgorithms.h" line="86"/>
         <source>closed</source>
         <translation>gesloten</translation>
     </message>
@@ -178,8 +186,8 @@
     <message id="id-berlin-vegan">
         <location filename="../qml/components-v-play/Page.qml" line="10"/>
         <location filename="../qml/cover/CoverPage.qml" line="72"/>
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="93"/>
         <location filename="../qml/pages/VenueList.qml" line="40"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="93"/>
         <source>Berlin-Vegan</source>
         <translation>Berlijn-Vegan</translation>
     </message>
@@ -194,22 +202,22 @@
         <translation>Licentie tonen</translation>
     </message>
     <message id="id-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="130"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="136"/>
         <source>Venues</source>
         <translation>Gelegenheid</translation>
     </message>
     <message id="id-favorites-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="149"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="155"/>
         <source>Favorites</source>
         <translation>Favorieten</translation>
     </message>
     <message id="id-filter">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="167"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="173"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="176"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="182"/>
         <source>About</source>
         <translation>Over</translation>
     </message>
@@ -362,8 +370,9 @@
     </message>
     <message id="id-venue-please-tell-waiter">
         <location filename="../qml/pages/VenueDescription.qml" line="262"/>
-        <source>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</source>
-        <translation>Vertel de ober / eigenaar dat je zijn locatie gevonden hebt via de app Berlijn-Vegan.</translation>
+        <source>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app. The significance of being listed in a database like this is often underestimated. Thanks for the help!</source>
+        <oldsource>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</oldsource>
+        <translation>Vertel de ober / eigenaar dat je zijn locatie gevonden hebt via de app Berlijn-Vegan. Het belang om in zo&apos;n database te worden vermeld, wordt vaak onderschat. Bedankt voor de hulp!</translation>
     </message>
 </context>
 </TS>
