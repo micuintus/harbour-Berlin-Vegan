@@ -57,6 +57,9 @@ QtObject {
             icon       = IconType.coffee;
             fontFamily = "FontAwesome";
             break;
+        case "heart":
+            icon = "favorite";
+            break;
         case "map":
             icon = "map";
             break;

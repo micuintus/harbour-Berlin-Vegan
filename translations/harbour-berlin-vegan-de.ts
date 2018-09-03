@@ -275,5 +275,9 @@
         <source>closes soon</source>
         <translation>schließt bald</translation>
     </message>
+    <message id="id-rate-app">
+        <source>Rate app</source>
+        <translation>App bewerten</translation>
+    </message>
 </context>
 </TS>

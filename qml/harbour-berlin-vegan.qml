@@ -170,6 +170,39 @@ ApplicationWindow
             }
         }
 
+        BVApp.ActionMenuItem {
+            menuIcon: BVApp.Theme.iconFor("heart")
+            //% "Rate app"
+            text: qsTrId("id-rate-app")
+
+            onClicked: {
+                var rateLink = "https://github.com/micuintus/harbour-Berlin-Vegan";
+                if (BVApp.Platform.isIos)
+                {
+                    rateLink = "itms-apps://itunes.apple.com/de/app/berlin-vegan-guide/id435371382?mt=8&action=write-review";
+                }
+                if (BVApp.Platform.isAndroid)
+                {
+                    rateLink = "market://details?id=\"org.berlin_vegan.bvapp\"";
+                }
+                if (BVApp.Platform.isSailfish)
+                {
+                    rateLink = "https://openrepos.net/content/micuintus/berlin-vegan";
+                }
+
+                if (BVApp.Platform.isVPlay)
+                {
+                    nativeUtils.openUrl(rateLink);
+                }
+                else
+                {
+                    Qt.openUrlExternally(rateLink);
+                }
+            }
+
+            pageComponent: app.initialPage
+        }
+
         BVApp.MenuItem {
             menuIcon: BVApp.Theme.iconFor("about")
             //% "About"
