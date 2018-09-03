@@ -9,4 +9,6 @@ QtObject {
 
     readonly property bool isIos:   false
     readonly property bool isMacOS: false
+
+    readonly property bool isAndroid: false
 }
