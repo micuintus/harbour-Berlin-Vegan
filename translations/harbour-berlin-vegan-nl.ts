@@ -185,8 +185,8 @@
     <message id="id-berlin-vegan">
         <location filename="../qml/components-v-play/Page.qml" line="10"/>
         <location filename="../qml/cover/CoverPage.qml" line="72"/>
-        <location filename="../qml/pages/VenueList.qml" line="40"/>
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="93"/>
+        <location filename="../qml/pages/VenueList.qml" line="40"/>
         <source>Berlin-Vegan</source>
         <translation>Berlijn-Vegan</translation>
     </message>
@@ -215,8 +215,13 @@
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
-    <message id="id-about-venue-list">
+    <message id="id-rate-app">
         <location filename="../qml/harbour-berlin-vegan.qml" line="176"/>
+        <source>Rate app</source>
+        <translation>Beoordeel app</translation>
+    </message>
+    <message id="id-about-venue-list">
+        <location filename="../qml/harbour-berlin-vegan.qml" line="209"/>
         <source>About</source>
         <translation>Over</translation>
     </message>

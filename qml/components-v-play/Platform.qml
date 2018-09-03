@@ -10,4 +10,6 @@ QtObject {
 
     readonly property bool isIos:   Theme.isIos
     readonly property bool isMacOS: Theme.isOSX
+
+    readonly property bool isAndroid: Theme.isAndroid
 }
