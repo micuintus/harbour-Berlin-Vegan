@@ -123,6 +123,12 @@ ApplicationWindow
     } }
 
     BVApp.NavigationMenu {
+        // Used for Android only (AppDrawer)
+        headerView: Image {
+            fillMode: Image.PreserveAspectFit
+            width: parent.width
+            source: "qrc:/images/Platzhalter_v2_mitSchriftzug_header.jpg"
+        }
 
         BVApp.ActionMenuItem {
             menuIcon: BVApp.Theme.iconFor("list")
