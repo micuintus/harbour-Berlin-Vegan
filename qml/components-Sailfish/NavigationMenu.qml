@@ -7,6 +7,9 @@ Silica.PullDownMenu {
     property Page menuPage
     flickable: menuPage.flickable
 
+    // Dummy, used for Android only
+    property Component headerView
+
     // Always keep the menu on the current root page
     data: [
     Connections {
