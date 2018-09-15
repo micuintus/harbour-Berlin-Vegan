@@ -137,6 +137,18 @@ void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
     emit filterFavoritesChanged();
 }
 
+void VenueSortFilterProxyModel::setFilterOpenNow(bool filterOpenNow)
+{
+    if (m_filterOpenNow == filterOpenNow)
+    {
+        return;
+    }
+
+    m_filterOpenNow = filterOpenNow;
+    invalidateFilter();
+    emit filterOpenNowChanged();
+}
+
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 {
     if (m_currentPosition == position)
@@ -164,7 +176,9 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
 
     if (m_filterFavorites)
     {
-        return favoriteStatusMatches(index) && searchStringMatches(index);
+        return favoriteStatusMatches(index)
+           && (!m_filterOpenNow || openNow(index))
+           && searchStringMatches(index);
     }
     else
     {
@@ -180,6 +194,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
             && vegCategoryMatches(index)
             // Only Food venues are filtered for sub type and properties
             && (venueType == VenueModel::Shopping || (venueSubTypeMatches(index) && venuePropertiesMatch(index)))
+            && (!m_filterOpenNow || openNow(index))
             // Filter search string last => slowest
             && searchStringMatches(index);
     }
@@ -282,6 +297,20 @@ bool VenueSortFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) 
         return false;
     }
 }
+
+bool VenueSortFilterProxyModel::openNow(const QModelIndex &index) const
+{
+    const auto valueRole = index.data( VenueModel::VenueModelRoles::Open);
+    if (valueRole.isValid() && valueRole.canConvert<bool>())
+    {
+        return valueRole.toBool();
+    }
+    else
+    {
+        return false;
+    }
+}
+
 
 bool VenueSortFilterProxyModel::venueTypeMatches(const VenueModel::VenueType& venueType) const
 {
