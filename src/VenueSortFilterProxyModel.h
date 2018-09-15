@@ -11,12 +11,14 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_OBJECT
 
     Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
-    Q_PROPERTY(QString searchString MEMBER m_simplifiedSearchString WRITE setSearchString NOTIFY searchStringChanged)
     Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
+
+    Q_PROPERTY(QString searchString MEMBER m_simplifiedSearchString WRITE setSearchString NOTIFY searchStringChanged)
     Q_PROPERTY(VenueModel::VenueTypeFlags filterVenueType MEMBER m_filterVenueType WRITE setFilterVenueType NOTIFY filterVenueTypeChanged)
     Q_PROPERTY(VenueModel::VenueSubTypeFlags filterVenueSubType READ filterVenueSubType NOTIFY filterVenueSubTypeChanged)
     Q_PROPERTY(VenueVegCategoryFlags filterVegCategory READ filterVegCategory NOTIFY filterVegCategoryChanged)
     Q_PROPERTY(VenuePropertyFlags filterVenueProperty READ filterVenueProperty NOTIFY filterVenuePropertyChanged)
+    Q_PROPERTY(bool filterOpenNow MEMBER m_filterOpenNow WRITE setFilterOpenNow NOTIFY filterOpenNowChanged)
     Q_PROPERTY(bool filterFavorites MEMBER m_filterFavorites WRITE setFilterFavorites NOTIFY filterFavoritesChanged)
 
 public:
@@ -66,9 +68,11 @@ public:
 public slots:
     void setModel(VenueModel* model);
     void setSearchString(QString searchString);
-    void setFilterFavorites(bool);
     void setFilterVenueType(VenueModel::VenueTypeFlags);
     void setCurrentPosition(QGeoCoordinate position);
+    void setFilterFavorites(bool);
+    void setFilterOpenNow(bool);
+
 signals:
     void modelChanged();
     void searchStringChanged();
@@ -76,6 +80,7 @@ signals:
     void filterVenueSubTypeChanged();
     void filterVegCategoryChanged();
     void filterVenuePropertyChanged();
+    void filterOpenNowChanged();
     void filterFavoritesChanged();
 
 protected:
@@ -86,11 +91,12 @@ private:
     void reSort();
 
     bool searchStringMatches(const QModelIndex& index) const;
-    bool favoriteStatusMatches(const QModelIndex& index) const;
     bool venueSubTypeMatches(const QModelIndex& index) const;
     bool venueTypeMatches(const VenueModel::VenueType& venueType) const;
     bool vegCategoryMatches(const QModelIndex& index) const;
     bool venuePropertiesMatch(const QModelIndex& index) const;
+    bool favoriteStatusMatches(const QModelIndex& index) const;
+    bool openNow(const QModelIndex& index) const;
 
     template <typename FilterFlags, typename SignalType>
     void setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType changedSignal);
@@ -109,6 +115,7 @@ private:
     // Negative filter / AND filter: Only filter in if all categories match
     VenuePropertyFlags m_filterVenueProperty = { };
 
+    bool m_filterOpenNow = false;
     bool m_filterFavorites = false;
 };
 

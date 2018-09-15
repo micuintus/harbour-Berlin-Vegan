@@ -1,6 +1,6 @@
 import VPlayApps 1.0
 
-ListPage {
+Page {
     id: page
     property alias pageStack: page.navigationStack
 

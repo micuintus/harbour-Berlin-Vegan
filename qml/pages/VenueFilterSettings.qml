@@ -96,6 +96,28 @@ BVApp.Page {
 
             Column {
 
+                width: parent.width
+
+                BVApp.SectionHeader {
+                    //%          "Opening hours"
+                    text: qsTrId("id-opening-hours")
+                    icon: BVApp.Theme.iconFor("schedule")
+                }
+
+                TextSwitch {
+                    //% "Open now"
+                    text: qsTrId("id-filter-venue-open-now")
+                    onCheckedChanged: {
+                        jsonModelCollection.filterOpenNow = checked;
+                    }
+
+                    Component.onCompleted: checked = jsonModelCollection.filterOpenNow;
+
+                }
+            }
+
+            Column {
+
                 visible: jsonModelCollection.filterVenueType & VenueModel.FoodFlag
                 width: parent.width
 
