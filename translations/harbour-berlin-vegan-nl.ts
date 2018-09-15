@@ -372,7 +372,7 @@
         <location filename="../qml/pages/VenueDescription.qml" line="262"/>
         <source>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app. The significance of being listed in a database like this is often underestimated. Thanks for the help!</source>
         <oldsource>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</oldsource>
-        <translation>Vertel de ober / eigenaar dat je zijn locatie gevonden hebt via de app Berlijn-Vegan. Het belang om in zo&apos;n database te worden vermeld, wordt vaak onderschat. Bedankt voor de hulp!</translation>
+        <translation>Vertel de ober/eigenaar dat je zijn locatie gevonden hebt via de app Berlijn-Vegan. Het belang om in zo&apos;n databank te worden vermeld wordt vaak onderschat. Bedankt voor de hulp!</translation>
     </message>
 </context>
 </TS>
