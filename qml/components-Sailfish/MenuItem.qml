@@ -5,6 +5,9 @@ Silica.MenuItem {
     property Page page
     property Component pageComponent
 
+    // dummies
+    property Component splitViewExtraPageComponent
+    property bool split
     property var menuIcon
 
     onClicked: page = pageStack.push(pageComponent)
