@@ -9,7 +9,7 @@ App {
     id: app
 
     property var cover
-    property var initialPage
+    property Page initialPage
 
     onInitTheme: {
         Theme.navigationBar.backgroundColor = BVApp.Theme.highlightColor

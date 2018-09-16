@@ -135,6 +135,7 @@ ApplicationWindow
             //% "Venues"
             text: qsTrId("id-venue-list")
 
+            split: true
             onPageChanged: page.searchString = gJsonCollection.searchString;
 
             onClicked: {
@@ -154,10 +155,12 @@ ApplicationWindow
             //% "Favorites"
             text: qsTrId("id-favorites-venue-list")
 
+            split: true
             onPageChanged: page.searchString = gJsonCollection.searchString;
 
             onClicked: {
                 gJsonCollection.filterFavorites = true;
+
                 if (page)
                 {
                     page.searchString = gJsonCollection.searchString;
@@ -171,6 +174,8 @@ ApplicationWindow
             menuIcon: BVApp.Theme.iconFor("filter")
             //% "Filter"
             text: qsTrId("id-filter")
+            split: true
+            splitViewExtraPageComponent: app.initialPage
             pageComponent: VenueFilterSettings {
                 jsonModelCollection: gJsonCollection
             }
