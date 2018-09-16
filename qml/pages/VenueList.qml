@@ -48,7 +48,7 @@ BVApp.Page {
 
     BVApp.SearchField {
        id: searchField
-       width: page.width
+       width: parent.width
 
        flickableForSailfish: listView
     }
@@ -97,8 +97,7 @@ BVApp.Page {
         }
 
         delegate: BVApp.VenueListItem {
-            width: page.width
-
+            width: parent.width
 
             distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                       BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
