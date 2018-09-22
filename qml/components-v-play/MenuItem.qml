@@ -18,8 +18,28 @@ NavigationItem {
 
     BVApp.NavigationStackWithPushAttached
     {
+        Timer {
+            id: pushExtraContentLater
+            interval: 5;
+            repeat: false
+            onTriggered: push(splitViewExtraPageComponent)
+        }
+
         splitView: tablet && split
         leftColumnWidth: screenWidth/2.2
+        onSplitViewActiveChanged: {
+            if (!splitViewActive && depth === 2)
+            {
+                popAllExceptFirst();
+            }
+            else if (splitViewExtraPageComponent && depth == 1)
+            {
+                // HACK to fix V-Play problem with "stuck" page that appears
+                // with the iOS animations otherwise
+                pushExtraContentLater.start();
+
+            }
+        }
     }
 
     function tryLoadPage() {
@@ -27,12 +47,6 @@ NavigationItem {
         {
             navigationStack.clearAndPush(pageComponent);
             page = navigationStack.getPage(0);
-
-            if (splitViewExtraPageComponent && navigationStack.splitViewActive)
-            {
-                navigationStack.push(splitViewExtraPageComponent);
-            }
-
         }
     }
 
