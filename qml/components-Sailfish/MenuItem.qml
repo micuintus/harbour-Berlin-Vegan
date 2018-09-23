@@ -5,7 +5,7 @@ Silica.MenuItem {
     property Page page
     property Component pageComponent
 
-    // dummies
+    // Dummies
     property Component splitViewExtraPageComponent
     property bool split
     property var menuIcon
