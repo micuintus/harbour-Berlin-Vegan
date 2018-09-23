@@ -118,7 +118,7 @@ ApplicationWindow
             jsonModelCollection: gJsonCollection
             currentCategoryLoaded: gJsonVenueModel.loadedVenueType & gJsonCollection.filterVenueType;
             onSearchStringChanged: {
-                gJsonCollection.searchString = searchString
+                gJsonCollection.searchString = searchString;
             }
     } }
 
@@ -178,6 +178,10 @@ ApplicationWindow
             splitViewExtraPageComponent: app.initialPage
             pageComponent: VenueFilterSettings {
                 jsonModelCollection: gJsonCollection
+            }
+
+            onClicked: {
+                gJsonCollection.filterFavorites = false;
             }
         }
 

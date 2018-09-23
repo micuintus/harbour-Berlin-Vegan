@@ -10,6 +10,7 @@ NavigationItem {
     property Component splitViewExtraPageComponent
 
     property bool split: false
+    signal clicked
 
     // Outside should only read it
     property Page page
@@ -58,6 +59,9 @@ NavigationItem {
     onLoaded: tryLoadPage()
     onNavigationStackChanged: tryLoadPage()
     onPageComponentChanged: tryLoadPage()
-    onSelected: tryLoadPage()
+    onSelected: {
+        tryLoadPage();
+        clicked();
+    }
 
 }
