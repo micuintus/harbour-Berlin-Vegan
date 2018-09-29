@@ -284,5 +284,9 @@
         <oldsource>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</oldsource>
         <translation>Bitte teile der/dem Kellner(in)/Inhaber(in) mit, dass du ihr Lokal über die Berlin-Vegan-App gefunden hast. Die Wichtigkeit, in Datenbanken wie dieser gelistet zu sein, wird von vielen unterschätzt. Danke für die Hilfe!</translation>
     </message>
+    <message id="id-dutch-translation">
+        <source>Dutch translation:</source>
+        <translation>Niederländische Übersetzung:</translation>
+    </message>
 </context>
 </TS>
