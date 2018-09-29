@@ -74,7 +74,8 @@ public:
         RestaurantFlag = 0x1,
         FastFoodFlag   = 0x2,
         CafeFlag       = 0x4,
-        IceCreamFlag   = 0x8
+        IceCreamFlag   = 0x8,
+        BarFlag        = 0x10
     };
     Q_DECLARE_FLAGS(VenueSubTypeFlags, VenueSubTypeFlag)
     Q_FLAG(VenueSubTypeFlags)

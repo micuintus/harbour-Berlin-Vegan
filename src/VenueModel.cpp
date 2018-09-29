@@ -28,7 +28,8 @@ VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
         { "Restaurant" , VenueModel::RestaurantFlag },
         { "Imbiss"     , VenueModel::FastFoodFlag   },
         { "Cafe"       , VenueModel::CafeFlag       },
-        { "Eiscafe"    , VenueModel::IceCreamFlag   }
+        { "Eiscafe"    , VenueModel::IceCreamFlag   },
+        { "Bar"        , VenueModel::BarFlag        }
     };
 
     auto const it = subTypeStringLookup.find(name);
