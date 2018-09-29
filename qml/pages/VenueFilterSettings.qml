@@ -166,6 +166,16 @@ BVApp.Page {
 
                     Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.IceCreamFlag;
                 }
+
+                TextSwitch {
+                    //% "Bar"
+                    text: qsTrId("id-venue-subtype-bar")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.BarFlag, checked);
+                    }
+
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.BarFlag;
+                }
             }
 
 

@@ -109,6 +109,7 @@ private:
     VenueModel::VenueSubTypeFlags m_filterVenueSubType = { VenueModel::RestaurantFlag
                                                          | VenueModel::FastFoodFlag
                                                          | VenueModel::CafeFlag
+                                                         | VenueModel::BarFlag
                                                          | VenueModel::IceCreamFlag };
 
     VenueVegCategoryFlags m_filterVegCategory = { VeganFlag | VegetarianFlag | OmnivoreFlag };
