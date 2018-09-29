@@ -228,6 +228,31 @@ BVApp.Page {
 
             Item {
                 width: parent.width
+                height: BVApp.Theme.paddingLarge
+            }
+
+            Label {
+                         //% "Dutch translation:"
+                text: qsTrId("id-dutch-translation")
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+
+            Label {
+                text: "Heimen <vistausss@outlook.com>"
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.highlightColor
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Item {
+                width: parent.width
                 height: BVApp.Theme.paddingLarge * 2
             }
 
