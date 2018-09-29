@@ -188,9 +188,13 @@ BVApp.Page {
             }
 
             Label {
-                text: "Julian <julian@veggi.es>"
+                text: "Julian <a href='ref'>&lt;www.veggi.es&gt;</a>"
                 font.pixelSize: BVApp.Theme.fontSizeSmall
                 color: BVApp.Theme.highlightColor
+                textFormat: Text.StyledText
+                linkColor: BVApp.Theme.linkColor
+                onLinkActivated: Qt.openUrlExternally("http://www.veggi.es")
+
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                 }
