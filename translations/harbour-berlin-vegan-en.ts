@@ -64,7 +64,7 @@
     </message>
     <message id="id-omnivore">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="49"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="198"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="208"/>
         <source>omnivore</source>
         <translation>omnivore</translation>
     </message>
@@ -76,7 +76,7 @@
     </message>
     <message id="id-vegetarian">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="57"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="189"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="199"/>
         <source>vegetarian</source>
         <translation>vegetarian</translation>
     </message>
@@ -88,7 +88,7 @@
     </message>
     <message id="id-vegan">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="65"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="179"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="189"/>
         <source>vegan</source>
         <translation>vegan</translation>
     </message>
@@ -110,13 +110,13 @@
     </message>
     <message id="id-organic">
         <location filename="../qml/components-generic/VenueDetails.qml" line="88"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="217"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="227"/>
         <source>Organic products</source>
         <translation>Organic products</translation>
     </message>
     <message id="id-gluten-free">
         <location filename="../qml/components-generic/VenueDetails.qml" line="95"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="226"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="236"/>
         <source>Gluten-free options</source>
         <translation>Gluten-free options</translation>
     </message>
@@ -127,37 +127,37 @@
     </message>
     <message id="id-wheelchair">
         <location filename="../qml/components-generic/VenueDetails.qml" line="114"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="235"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="245"/>
         <source>Wheelchair-friendly</source>
         <translation>Wheelchair-friendly</translation>
     </message>
     <message id="id-wheelchair-wc">
         <location filename="../qml/components-generic/VenueDetails.qml" line="120"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="244"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="254"/>
         <source>Wheelchair-accessible WC</source>
         <translation>Wheelchair-accessible WC</translation>
     </message>
     <message id="id-high-chair">
         <location filename="../qml/components-generic/VenueDetails.qml" line="126"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="253"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="263"/>
         <source>High chair</source>
         <translation>High chair</translation>
     </message>
     <message id="id-dogs-allowed">
         <location filename="../qml/components-generic/VenueDetails.qml" line="132"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="262"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="272"/>
         <source>Dogs allowed</source>
         <translation>Dogs allowed</translation>
     </message>
     <message id="id-venue-features">
         <location filename="../qml/components-generic/VenueDetails.qml" line="138"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="212"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="222"/>
         <source>Venue features</source>
         <translation>Venue features</translation>
     </message>
     <message id="id-wifi">
         <location filename="../qml/components-generic/VenueDetails.qml" line="144"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="271"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="281"/>
         <source>WiFi</source>
         <translation>WiFi</translation>
     </message>
@@ -173,13 +173,13 @@
     </message>
     <message id="id-catering">
         <location filename="../qml/components-generic/VenueDetails.qml" line="162"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="280"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="290"/>
         <source>Catering</source>
         <translation>Catering</translation>
     </message>
     <message id="id-delivery">
         <location filename="../qml/components-generic/VenueDetails.qml" line="168"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="289"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="299"/>
         <source>Delivery service</source>
         <translation>Delivery service</translation>
     </message>
@@ -247,10 +247,27 @@
         <source>Open now</source>
         <translation>Open now</translation>
     </message>
+    <message id="id-venue-subtype-bar">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="172"/>
+        <source>Bar</source>
+        <translation>Bar</translation>
+    </message>
     <message id="id-filter-vegan-category">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="174"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="184"/>
         <source>Veg*an category</source>
         <translation>Veg*an category</translation>
+    </message>
+    <message id="id-breakfast">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="308"/>
+        <source></source>
+        <oldsource>Breakfast</oldsource>
+        <translation>Breakfast</translation>
+    </message>
+    <message id="id-brunch">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="317"/>
+        <source></source>
+        <oldsource>Brunch</oldsource>
+        <translation>Brunch</translation>
     </message>
     <message id="id-filter-venue-sub-type">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="126"/>

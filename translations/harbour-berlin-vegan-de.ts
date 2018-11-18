@@ -288,5 +288,19 @@
         <source>Dutch translation:</source>
         <translation>Niederländische Übersetzung:</translation>
     </message>
+    <message id="id-venue-subtype-bar">
+        <source>Bar</source>
+        <translation>Bar</translation>
+    </message>
+    <message id="id-brunch">
+        <source></source>
+        <oldsource>Brunch</oldsource>
+        <translation>Brunch</translation>
+    </message>
+    <message id="id-breakfast">
+        <source></source>
+        <oldsource>Breakfast</oldsource>
+        <translation>Frühstück</translation>
+    </message>
 </context>
 </TS>
