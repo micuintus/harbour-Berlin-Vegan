@@ -41,6 +41,8 @@ public:
         Organic                 = enumValueToFlag(VenueModel::Organic,                 VenueModel::FirstPropertyRole),
         GlutenFree              = enumValueToFlag(VenueModel::GlutenFree,              VenueModel::FirstPropertyRole),
         Delivery                = enumValueToFlag(VenueModel::Delivery,                VenueModel::FirstPropertyRole),
+        Breakfast               = enumValueToFlag(VenueModel::Breakfast,               VenueModel::FirstPropertyRole),
+        Brunch                  = enumValueToFlag(VenueModel::Brunch,                  VenueModel::FirstPropertyRole),
         Dog                     = enumValueToFlag(VenueModel::Dog,                     VenueModel::FirstPropertyRole),
         ChildChair              = enumValueToFlag(VenueModel::ChildChair,              VenueModel::FirstPropertyRole),
     };

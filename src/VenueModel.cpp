@@ -215,6 +215,8 @@ QHash<int, QByteArray> VenueModel::roleNames() const
         { VenueModelRoles::Organic,       "organic"      },
         { VenueModelRoles::GlutenFree,    "glutenFree"   },
         { VenueModelRoles::Delivery,      "delivery"     },
+        { VenueModelRoles::Breakfast,     "breakfast"    },
+        { VenueModelRoles::Brunch,        "brunch"       },
         { VenueModelRoles::SeatsOutdoor,  "seatsOutdoor" },
         { VenueModelRoles::SeatsIndoor,   "seatsIndoor"  },
         { VenueModelRoles::Dog,           "dog"          },
