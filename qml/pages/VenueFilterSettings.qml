@@ -303,6 +303,24 @@ BVApp.Page {
 
                     Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Delivery;
                 }
+
+                TextSwitch {
+                    text: qsTrId("id-breakfast")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Breakfast, checked);
+                    }
+
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Breakfast;
+                }
+
+                TextSwitch {
+                    text: qsTrId("id-brunch")
+                    onCheckedChanged: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Brunch, checked);
+                    }
+
+                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Brunch;
+                }
             }
         }
     }

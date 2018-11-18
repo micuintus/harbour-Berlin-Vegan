@@ -117,6 +117,8 @@ public:
         Organic,
         GlutenFree,
         Delivery,
+        Breakfast,
+        Brunch,
         SeatsOutdoor,
         SeatsIndoor,
         Dog,
