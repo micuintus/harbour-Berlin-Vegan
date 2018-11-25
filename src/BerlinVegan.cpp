@@ -26,7 +26,8 @@
 #include <QtQuick>
 
 #include "FileIO.h"
-#include "VenueSortFilterProxyModel.h"
+#include "VenueFilterProxyModel.h"
+#include "VenueSortProxyModel.h"
 #include "VenueModel.h"
 
 #ifdef Q_OS_SAILFISH
@@ -45,7 +46,8 @@
 int main(int argc, char *argv[])
 {
     qmlRegisterType<VenueModel>("harbour.berlin.vegan", 1, 0, "VenueModel");
-    qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan", 1, 0, "VenueSortFilterProxyModel");
+    qmlRegisterType<VenueFilterProxyModel>("harbour.berlin.vegan", 1, 0, "VenueFilterProxyModel");
+    qmlRegisterType<VenueSortProxyModel>("harbour.berlin.vegan", 1, 0, "VenueSortProxyModel");
     auto const mainQMLFile = QString("qrc:/qml/harbour-berlin-vegan.qml");
 
 #ifdef Q_OS_SAILFISH

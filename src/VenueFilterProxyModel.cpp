@@ -1,56 +1,28 @@
-#include "VenueSortFilterProxyModel.h"
+#include "VenueFilterProxyModel.h"
 
-VenueSortFilterProxyModel::VenueSortFilterProxyModel(QObject *parent) : QSortFilterProxyModel(parent)
+VenueFilterProxyModel::VenueFilterProxyModel(QObject *parent) : QSortFilterProxyModel(parent)
 {
-    sort(0);
 }
 
-VenueModel* VenueSortFilterProxyModel::model() const
-{
-    return qobject_cast<VenueModel*>(sourceModel());
-}
 
-QVariantMap VenueSortFilterProxyModel::item(int row) const
-{
-    QVariantMap ret;
 
-    const auto model = this->model();
-    if (model)
-    {
-        QModelIndex m = index(row, 0);
-        QModelIndex source = mapToSource(m);
-        QStandardItem* item = model->itemFromIndex(source);
-
-        if (item)
-        {
-            const QHash<int, QByteArray>& roleNames = model->roleNames();
-            for (auto roleKey = roleNames.keyBegin(); roleKey != roleNames.keyEnd(); roleKey++)
-            {
-                ret.insert(roleNames[*roleKey], item->data(*roleKey));
-            }
-        }
-    }
-
-    return ret;
-}
-
-VenueSortFilterProxyModel::VenueVegCategoryFlags VenueSortFilterProxyModel::filterVegCategory() const
+VenueFilterProxyModel::VenueVegCategoryFlags VenueFilterProxyModel::filterVegCategory() const
 {
     return m_filterVegCategory;
 }
 
-VenueModel::VenueSubTypeFlags VenueSortFilterProxyModel::filterVenueSubType() const
+VenueModel::VenueSubTypeFlags VenueFilterProxyModel::filterVenueSubType() const
 {
     return m_filterVenueSubType;
 }
 
-VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterVenueProperty() const
+VenueFilterProxyModel::VenuePropertyFlags VenueFilterProxyModel::filterVenueProperty() const
 {
     return m_filterVenueProperty;
 }
 
 template <typename FilterFlags, typename SignalType>
-void VenueSortFilterProxyModel::setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType filterChangedSignal)
+void VenueFilterProxyModel::setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType filterChangedSignal)
 {
     if (filterFlagMask.testFlag(flag) == on)
     {
@@ -70,37 +42,23 @@ void VenueSortFilterProxyModel::setFilterFlag(FilterFlags& filterFlagMask, const
     emit (this->*filterChangedSignal)();
 }
 
-void VenueSortFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on)
+void VenueFilterProxyModel::setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on)
 {
-    setFilterFlag(m_filterVegCategory, flag, on, &VenueSortFilterProxyModel::filterVegCategoryChanged);
+    setFilterFlag(m_filterVegCategory, flag, on, &VenueFilterProxyModel::filterVegCategoryChanged);
 }
 
-void VenueSortFilterProxyModel::setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on)
+void VenueFilterProxyModel::setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on)
 {
-    setFilterFlag(m_filterVenueProperty, flag, on, &VenueSortFilterProxyModel::filterVenuePropertyChanged);
+    setFilterFlag(m_filterVenueProperty, flag, on, &VenueFilterProxyModel::filterVenuePropertyChanged);
 }
 
-void VenueSortFilterProxyModel::setVenueSubTypeFilterFlag(int flag, bool on)
+void VenueFilterProxyModel::setVenueSubTypeFilterFlag(int flag, bool on)
 {
-    setFilterFlag(m_filterVenueSubType, static_cast<VenueModel::VenueSubTypeFlag>(flag), on, &VenueSortFilterProxyModel::filterVenueSubTypeChanged);
+    setFilterFlag(m_filterVenueSubType, static_cast<VenueModel::VenueSubTypeFlag>(flag), on, &VenueFilterProxyModel::filterVenueSubTypeChanged);
 }
 
-void VenueSortFilterProxyModel::setModel(VenueModel *model)
-{
-    VenueModel *oldModel = qobject_cast<VenueModel*>(sourceModel());
-    if (oldModel == model)
-        return;
 
-    if (oldModel) {
-        disconnect(oldModel, SIGNAL(rolesChanged()),
-                   this, SLOT(rolesChanged()));
-    }
-
-    setSourceModel(model);
-    emit modelChanged();
-}
-
-void VenueSortFilterProxyModel::setSearchString(QString searchString)
+void VenueFilterProxyModel::setSearchString(QString searchString)
 {
     QString simplifiedSearchString = simplifySearchString(searchString);
     if (m_simplifiedSearchString == simplifiedSearchString)
@@ -113,7 +71,7 @@ void VenueSortFilterProxyModel::setSearchString(QString searchString)
     emit searchStringChanged();
 }
 
-void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags filterVenueTypeFlags)
+void VenueFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags filterVenueTypeFlags)
 {
     if (m_filterVenueType == filterVenueTypeFlags)
     {
@@ -125,7 +83,7 @@ void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags fi
     emit filterVenueTypeChanged();
 }
 
-void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
+void VenueFilterProxyModel::setFilterFavorites(bool filterFavorites)
 {
     if (m_filterFavorites == filterFavorites)
     {
@@ -137,7 +95,7 @@ void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
     emit filterFavoritesChanged();
 }
 
-void VenueSortFilterProxyModel::setFilterOpenNow(bool filterOpenNow)
+void VenueFilterProxyModel::setFilterOpenNow(bool filterOpenNow)
 {
     if (m_filterOpenNow == filterOpenNow)
     {
@@ -149,19 +107,9 @@ void VenueSortFilterProxyModel::setFilterOpenNow(bool filterOpenNow)
     emit filterOpenNowChanged();
 }
 
-void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
-{
-    if (m_currentPosition == position)
-    {
-        return;
-    }
-
-    m_currentPosition = position;
-    reSort();
-}
 
 
-bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
+bool VenueFilterProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
     if (sourceModel() == nullptr)
     {
@@ -200,42 +148,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
     }
 }
 
-bool VenueSortFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
-{
-    QVariant leftLat, leftLong, rightLat, rightLong;
-
-    if (   !m_currentPosition.isValid()
-        || !source_left.isValid() || !source_right.isValid())
-        goto err;
-
-    leftLat   = source_left.data(VenueModel::VenueModelRoles::LatCoord);
-    leftLong  = source_left.data(VenueModel::VenueModelRoles::LongCoord);
-    rightLat  = source_right.data(VenueModel::VenueModelRoles::LatCoord);
-    rightLong = source_right.data(VenueModel::VenueModelRoles::LongCoord);
-
-    if (!leftLat.canConvert<double>() || !leftLong.canConvert<double>() ||
-        !rightLat.canConvert<double>() || !rightLong.canConvert<double>())
-        goto err;
-
-    return   m_currentPosition.distanceTo(QGeoCoordinate(leftLat.toDouble(), leftLong.toDouble()))
-           < m_currentPosition.distanceTo(QGeoCoordinate(rightLat.toDouble(), rightLong.toDouble()));
-
-err:
-    return QSortFilterProxyModel::lessThan(source_left, source_right);
-}
-
-void VenueSortFilterProxyModel::reSort()
-{
-    if (dynamicSortFilter()) {
-        // Workaround: If dynamic_sortfilter == true, sort(0) will not (always)
-        // result in d->sort() being called, but setDynamicSortFilter(true) will.
-        setDynamicSortFilter(true);
-    } else {
-        sort(0);
-    }
-}
-
-bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) const
+bool VenueFilterProxyModel::searchStringMatches(const QModelIndex &index) const
 {
     if (m_simplifiedSearchString.isEmpty())
     {
@@ -285,7 +198,7 @@ bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) co
     return false;
 }
 
-bool VenueSortFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) const
+bool VenueFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) const
 {
     const auto valueRole = index.data( VenueModel::VenueModelRoles::Favorite);
     if (valueRole.isValid() && valueRole.canConvert<bool>())
@@ -298,7 +211,7 @@ bool VenueSortFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) 
     }
 }
 
-bool VenueSortFilterProxyModel::openNow(const QModelIndex &index) const
+bool VenueFilterProxyModel::openNow(const QModelIndex &index) const
 {
     const auto valueRole = index.data( VenueModel::VenueModelRoles::Open);
     if (valueRole.isValid() && valueRole.canConvert<bool>())
@@ -312,13 +225,13 @@ bool VenueSortFilterProxyModel::openNow(const QModelIndex &index) const
 }
 
 
-bool VenueSortFilterProxyModel::venueTypeMatches(const VenueModel::VenueType& venueType) const
+bool VenueFilterProxyModel::venueTypeMatches(const VenueModel::VenueType& venueType) const
 {
     return m_filterVenueType.testFlag(static_cast<VenueModel::VenueTypeFlag>(enumValueToFlag(venueType)));
 }
 
 
-bool VenueSortFilterProxyModel::venueSubTypeMatches(const QModelIndex &index) const
+bool VenueFilterProxyModel::venueSubTypeMatches(const QModelIndex &index) const
 {
 
     const auto venueSubTypeRole = index.data(VenueModel::VenueModelRoles::VenueSubTypeRole);
@@ -345,12 +258,12 @@ bool testCategoryFilter(const QModelIndex &index, VenueModel::VenueModelRoles ro
 }
 
 
-bool VenueSortFilterProxyModel::vegCategoryMatches(const QModelIndex &index) const
+bool VenueFilterProxyModel::vegCategoryMatches(const QModelIndex &index) const
 {
     return testCategoryFilter(index, VenueModel::VenueModelRoles::VegCategory, m_filterVegCategory);
 }
 
-bool VenueSortFilterProxyModel::venuePropertiesMatch(const QModelIndex &index) const
+bool VenueFilterProxyModel::venuePropertiesMatch(const QModelIndex &index) const
 {
     for (int roleKey = VenueModel::FirstPropertyRole; roleKey <= VenueModel::LastPropertyRole; roleKey++)
     {

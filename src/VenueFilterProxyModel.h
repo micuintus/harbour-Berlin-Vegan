@@ -6,12 +6,9 @@
 #include <QString>
 #include <QGeoCoordinate>
 
-class VenueSortFilterProxyModel : public QSortFilterProxyModel
+class VenueFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
-
-    Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
-    Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
 
     Q_PROPERTY(QString searchString MEMBER m_simplifiedSearchString WRITE setSearchString NOTIFY searchStringChanged)
     Q_PROPERTY(VenueModel::VenueTypeFlags filterVenueType MEMBER m_filterVenueType WRITE setFilterVenueType NOTIFY filterVenueTypeChanged)
@@ -50,14 +47,12 @@ public:
 
     Q_ENUMS(VenueModel::VenueSubTypeFlag)
 
-    VenueSortFilterProxyModel(QObject *parent = 0);
+    VenueFilterProxyModel(QObject *parent = 0);
 
-    Q_INVOKABLE VenueModel* model() const;
     Q_INVOKABLE VenueVegCategoryFlags filterVegCategory() const;
     Q_INVOKABLE VenueModel::VenueSubTypeFlags filterVenueSubType() const;
     Q_INVOKABLE VenuePropertyFlags filterVenueProperty() const;
 
-    Q_INVOKABLE QVariantMap item(int row) const;
     Q_INVOKABLE void setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on);
     Q_INVOKABLE void setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on);
     // Note: Int because of QTBUG-58454:
@@ -66,10 +61,8 @@ public:
 
 
 public slots:
-    void setModel(VenueModel* model);
     void setSearchString(QString searchString);
     void setFilterVenueType(VenueModel::VenueTypeFlags);
-    void setCurrentPosition(QGeoCoordinate position);
     void setFilterFavorites(bool);
     void setFilterOpenNow(bool);
 
@@ -85,11 +78,8 @@ signals:
 
 protected:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
-    bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
 
 private:
-    void reSort();
-
     bool searchStringMatches(const QModelIndex& index) const;
     bool venueSubTypeMatches(const QModelIndex& index) const;
     bool venueTypeMatches(const VenueModel::VenueType& venueType) const;
@@ -102,7 +92,6 @@ private:
     void setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType changedSignal);
 
     QString m_simplifiedSearchString;
-    QGeoCoordinate m_currentPosition;
 
     // Positive filter / OR filter: Filter in if any category matches
     VenueModel::VenueTypeFlags m_filterVenueType = VenueModel::FoodFlag;

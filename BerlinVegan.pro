@@ -12,10 +12,12 @@ CONFIG += c++11
 SOURCES += src/BerlinVegan.cpp \
            src/FileIO.cpp \
            src/VenueModel.cpp \
-           src/VenueSortFilterProxyModel.cpp
+           src/VenueFilterProxyModel.cpp \
+           src/VenueSortProxyModel.cpp
 
 HEADERS += src/VenueModel.h \
-           src/VenueSortFilterProxyModel.h \
+           src/VenueFilterProxyModel.h \
+           src/VenueSortProxyModel.h \
            src/FileIO.h \
            src/OpeningHoursAlgorithms.h \
            src/TruncationMode.h

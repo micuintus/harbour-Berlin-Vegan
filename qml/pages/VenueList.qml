@@ -121,8 +121,7 @@ BVApp.Page {
 
     onPushed: pageStack.pushAttached("qrc:/qml/pages/VenueMapOverviewPage.qml",
                             {
-                                "positionSource": globalPositionSource,
-                                "model": gJsonCollection
+                               "model": gFilterProxyModel
                             }, BVApp.Theme.iconFor("map")
                         );
 }

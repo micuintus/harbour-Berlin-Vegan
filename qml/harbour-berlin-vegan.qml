@@ -48,11 +48,17 @@ ApplicationWindow
         property var oldPosition: QtPositioning.coordinate(0, 0)
      }
 
-    VenueSortFilterProxyModel {
-        id: gJsonCollection
-        model: gJsonVenueModel
+    VenueFilterProxyModel {
+        id: gFilterProxyModel
+        sourceModel: gJsonVenueModel
+    }
+
+    VenueSortProxyModel {
+        id: gSortFilterProxyModel
+        sourceModel: gFilterProxyModel
         currentPosition: globalPositionSource.position.coordinate
     }
+
 
     property int jsonFilesToLoad: 2
     function favoritesHook()
@@ -109,16 +115,16 @@ ApplicationWindow
     cover: Component { CoverPage {
             id: cover
             positionSource: globalPositionSource
-            jsonModelCollection: gJsonCollection
+            jsonModelCollection: gSortFilterProxyModel
     } }
 
     initialPage: Component { VenueList {
             id: venueList
             positionSource: globalPositionSource
-            jsonModelCollection: gJsonCollection
-            currentCategoryLoaded: gJsonVenueModel.loadedVenueType & gJsonCollection.filterVenueType;
+            jsonModelCollection: gSortFilterProxyModel
+            currentCategoryLoaded: gJsonVenueModel.loadedVenueType & gFilterProxyModel.filterVenueType;
             onSearchStringChanged: {
-                gJsonCollection.searchString = searchString;
+                gFilterProxyModel.searchString = searchString;
             }
     } }
 
@@ -136,14 +142,14 @@ ApplicationWindow
             text: qsTrId("id-venue-list")
 
             split: true
-            onPageChanged: page.searchString = gJsonCollection.searchString;
+            onPageChanged: page.searchString = gFilterProxyModel.searchString;
 
             onClicked: {
-                gJsonCollection.filterFavorites = false;
+                gFilterProxyModel.filterFavorites = false;
 
                 if (page)
                 {
-                    page.searchString = gJsonCollection.searchString;
+                    page.searchString = gFilterProxyModel.searchString;
                 }
             }
 
@@ -156,14 +162,14 @@ ApplicationWindow
             text: qsTrId("id-favorites-venue-list")
 
             split: true
-            onPageChanged: page.searchString = gJsonCollection.searchString;
+            onPageChanged: page.searchString = gFilterProxyModel.searchString;
 
             onClicked: {
-                gJsonCollection.filterFavorites = true;
+                gFilterProxyModel.filterFavorites = true;
 
                 if (page)
                 {
-                    page.searchString = gJsonCollection.searchString;
+                    page.searchString = gFilterProxyModel.searchString;
                 }
             }
 
@@ -177,11 +183,11 @@ ApplicationWindow
             split: true
             splitViewExtraPageComponent: app.initialPage
             pageComponent: VenueFilterSettings {
-                jsonModelCollection: gJsonCollection
+                jsonModelCollection: gFilterProxyModel
             }
 
             onClicked: {
-                gJsonCollection.filterFavorites = false;
+                gFilterProxyModel.filterFavorites = false;
             }
         }
 
