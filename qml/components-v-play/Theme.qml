@@ -113,7 +113,7 @@ QtObject {
     readonly property int fontSizeMedium: dp(17)
     readonly property int fontSizeSmall: dp(16) // Theme.listItem.fontSizeText
     readonly property int fontSizeExtraSmall: dp(15) // Theme.listItem.fontSizeDetailText
-    readonly property int fontSizeTiny: dp(13)
+    readonly property int fontSizeTiny: dp(10)
     readonly property int fontSizeLarge: dp(18)
     readonly property int fontSizeExtraLarge: dp(23)
 

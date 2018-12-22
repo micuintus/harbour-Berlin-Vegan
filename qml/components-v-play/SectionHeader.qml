@@ -47,8 +47,8 @@ Item {
         id: txt
         text: header.text
         color: BVApp.Theme.highlightColor
-        font.pixelSize:  BVApp.Theme.fontSizeSmall
-
+        font.pixelSize:   BVApp.Theme.fontSizeSmall
+        // font.bold:  true
         anchors {
             left: iconItem.right
             top: header.top

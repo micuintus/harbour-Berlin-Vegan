@@ -29,29 +29,12 @@ import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
 import harbour.berlin.vegan 1.0
 
-Column
+BVApp.IconButton
 {
-    property alias type: button.type
-    property alias color: button.color
-    property alias iconScale: button.scale
+
     property alias text: subtitle.text
-    signal clicked
 
 
-    BVApp.IconButton
-    {
-        id: button
-        onClicked: parent.clicked()
-        anchors.horizontalCenter: parent.horizontalCenter
-    }
 
-    Text {
-        id: subtitle
-        font.pixelSize: BVApp.Theme.fontSizeTiny
-        font.letterSpacing: 1.1
-        color: BVApp.Theme.secondaryColor
-        anchors.horizontalCenter: parent.horizontalCenter
-
-    }
 }
 

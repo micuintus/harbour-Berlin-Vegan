@@ -19,7 +19,7 @@ Rectangle {
         id: keyText
         color: BVApp.Theme.primaryColor
 
-        font.pixelSize: BVApp.Theme.fontSizeSmall
+        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
 
         anchors.left: parent.left
         anchors.right: valueText.left
@@ -39,7 +39,7 @@ Rectangle {
         id: valueText
         color: BVApp.Theme.secondaryColor
 
-        font.pixelSize: BVApp.Theme.fontSizeSmall
+        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
 
         anchors {
             right: parent.right

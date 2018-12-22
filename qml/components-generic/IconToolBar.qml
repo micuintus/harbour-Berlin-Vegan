@@ -35,6 +35,8 @@ Column {
 
     id: column
 
+    spacing: 8
+
     Separator {
         width: column.width
         horizontalAlignment: Qt.AlignCenter
@@ -51,7 +53,7 @@ Column {
 
         width: column.width
 
-        BVApp.IconButtonWithText {
+        BVApp.IconButton {
             type: "answer"
             text: "CALL"
 
@@ -63,7 +65,7 @@ Column {
 
         }
 
-        BVApp.IconButtonWithText {
+        BVApp.IconButton {
             type: restaurant.favorite ? "favorite" : "favorite-o"
             text: "FAVORITE"
 
@@ -87,7 +89,7 @@ Column {
         }
 
 
-        BVApp.IconButtonWithText {
+        BVApp.IconButton {
             type: "home"
             text: "WEBSITE"
 
