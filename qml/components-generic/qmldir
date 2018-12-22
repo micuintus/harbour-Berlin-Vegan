@@ -1,6 +1,7 @@
 module BerlinVegan.components.generic
 CollapsibleItem 1.0 CollapsibleItem.qml
 IconToolBar 1.0 IconToolBar.qml
+IconButtonWithText 1.0 IconButtonWithText.qml
 JsonDownloadHelper 1.0 JsonDownloadHelper.qml
 VenueDescriptionHeader 1.0 VenueDescriptionHeader.qml
 VenueDetails 1.0 VenueDetails.qml

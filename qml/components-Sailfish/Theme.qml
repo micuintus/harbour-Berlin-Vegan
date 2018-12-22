@@ -74,6 +74,7 @@ QtObject {
 
     readonly property int fontSizeMedium: Silica.Theme.fontSizeMedium
     readonly property int fontSizeExtraSmall: Silica.Theme.fontSizeExtraSmall
+    readonly property int fontSizeExtraSmall:  Silica.Theme.fontSizeExtraSmall
     readonly property int fontSizeSmall: Silica.Theme.fontSizeSmall
     readonly property int fontSizeLarge: Silica.Theme.fontSizeLarge
     readonly property int fontSizeExtraLarge: Silica.Theme.fontSizeExtraLarge

@@ -14,5 +14,6 @@
         <file>PageIndicator.qml</file>
         <file>VeganMarker.qml</file>
         <file>VenueListItem.qml</file>
+        <file>IconButtonWithText.qml</file>
     </qresource>
 </RCC>

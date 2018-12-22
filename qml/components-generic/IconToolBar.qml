@@ -51,17 +51,22 @@ Column {
 
         width: column.width
 
-        BVApp.IconButton {
+        BVApp.IconButtonWithText {
             type: "answer"
-            scale: BVApp.Theme.iconSizeMedium / BVApp.Theme.iconSizeLarge
+            text: "CALL"
+
+            iconScale: BVApp.Theme.iconSizeMedium / BVApp.Theme.iconSizeLarge
 
             onClicked: Qt.openUrlExternally("tel:/" + restaurant.telephone)
             Layout.fillWidth: true
             enabled: typeof restaurant["telephone"] !== "undefined"
+
         }
 
-        BVApp.IconButton {
+        BVApp.IconButtonWithText {
             type: restaurant.favorite ? "favorite" : "favorite-o"
+            text: "FAVORITE"
+
             onClicked: {
                 switch (type) {
                 case "favorite-o":
@@ -82,8 +87,9 @@ Column {
         }
 
 
-        BVApp.IconButton {
+        BVApp.IconButtonWithText {
             type: "home"
+            text: "WEBSITE"
 
             onClicked: Qt.openUrlExternally(restaurant.website.slice(0,4) === "http"
                                             ?             restaurant.website
