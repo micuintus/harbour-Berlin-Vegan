@@ -35,7 +35,7 @@ Column {
 
     id: column
 
-    spacing: 8
+    spacing: 5
 
     Separator {
         width: column.width

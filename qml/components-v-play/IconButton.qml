@@ -16,7 +16,7 @@ IconButton {
     Column {
         anchors.fill: parent
 
-        spacing: 5
+        spacing: 4
 
         AppText {
             id: icn
