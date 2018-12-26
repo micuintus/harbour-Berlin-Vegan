@@ -16,7 +16,7 @@ IconButton {
     Column {
         anchors.fill: parent
 
-        spacing: 4
+        spacing: text ? 3.5 : 0
 
         AppText {
             id: icn
@@ -40,13 +40,15 @@ IconButton {
 
             width: parent.width
 
+            visible: text
+
             font.pixelSize: BVApp.Theme.fontSizeTiny
             font.bold: true
             font.letterSpacing: 1.2
             color: icn.color
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment:  Text.AlignBottom
+            verticalAlignment:  Text.AlignVCenter
         }
     }
 }

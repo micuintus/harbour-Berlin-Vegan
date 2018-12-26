@@ -111,11 +111,11 @@ QtObject {
     readonly property int smallLinkFontSize: dp(12)
 
     readonly property int fontSizeMedium: dp(17)
-    readonly property int fontSizeSmall: dp(14) // Theme.listItem.fontSizeText
-    readonly property int fontSizeExtraSmall: dp(13) // Theme.listItem.fontSizeDetailText
+    readonly property int fontSizeSmall: dp(15.4) // Theme.listItem.fontSizeText
+    readonly property int fontSizeExtraSmall: dp(13.6) // Theme.listItem.fontSizeDetailText
     readonly property int fontSizeTiny: dp(9)
     readonly property int fontSizeLarge: dp(18)
-    readonly property int fontSizeExtraLarge: dp(23)
+    readonly property int fontSizeExtraLarge: dp(20)
 
     readonly property int pageIndicatorSmall: dp(6)
     readonly property int pageIndicatorPadding: dp(6)
@@ -127,7 +127,7 @@ QtObject {
     readonly property int iconSizeExtraLarge: dp(28)
 
     readonly property int paddingSmall: dp(6)
-    readonly property int paddingMedium: dp(11)
+    readonly property int paddingMedium: dp(10)
     readonly property int paddingLarge: fontSizeSmall
     readonly property int horizontalPageMargin: paddingLarge
 

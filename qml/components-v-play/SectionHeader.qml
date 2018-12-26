@@ -22,23 +22,22 @@ Item {
     // we add BVApp.Theme.paddingSmall the height, as well -->
     height: txt.height * 2 + BVApp.Theme.paddingSmall
 
-    Icon {
+    AppText {
         id: iconItem
-        icon: header.icon.iconString
+
         color: BVApp.Theme.highlightColor
 
-        Component.onCompleted: {
-            iconItem.textItem.font.family = header.icon.fontFamily
-        }
+        text: header.icon.iconString
+        font.family: header.icon.fontFamily
+        font.pixelSize:   BVApp.Theme.fontSizeSmall * 0.96
 
-        size:   BVApp.Theme.fontSizeSmall
-        height: BVApp.Theme.fontSizeSmall
-        width:  BVApp.Theme.fontSizeSmall
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
 
+        height: txt.height
         anchors {
             left: header.left
-            verticalCenter: txt.verticalCenter
-
+            top: txt.top
             leftMargin: BVApp.Theme.horizontalPageMargin
         }
     }
@@ -53,7 +52,7 @@ Item {
             left: iconItem.right
             top: header.top
 
-            leftMargin:  BVApp.Theme.paddingMedium
+            leftMargin:  BVApp.Theme.horizontalPageMargin
             topMargin:   txt.height
         }
     }

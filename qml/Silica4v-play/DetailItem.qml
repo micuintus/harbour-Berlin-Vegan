@@ -29,7 +29,7 @@ Rectangle {
                          // + SectionHeader icon
                             + BVApp.Theme.fontSizeSmall
                          // + Distance between icon and text
-                            + BVApp.Theme.paddingMedium
+                            + BVApp.Theme.horizontalPageMargin
         anchors.rightMargin: BVApp.Theme.paddingSmall
 
         truncationMode: TruncationMode.Fade
