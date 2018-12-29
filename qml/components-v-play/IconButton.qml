@@ -3,7 +3,7 @@ import QtQuick.Layouts 1.1
 import VPlayApps 1.0
 import "." as BVApp
 
-IconButton {
+MouseArea {
 
     id: iconButton
 
@@ -13,14 +13,17 @@ IconButton {
     property alias verticalAlignment: icn.verticalAlignment
     property alias text: subtitle.text
 
-    Column {
-        anchors.fill: parent
+    height: text ? icn.height + subtitle.height + 7 : icn.height
+    width: Math.max(icn.implicitWidth)
 
-        spacing: text ? 3.5 : 0
+    Column {
+
+        width: parent.width
+
+        spacing: text ? 7 : 0
 
         AppText {
             id: icn
-
             width: parent.width
 
             text: BVApp.Theme.iconFor(type).iconString
@@ -37,10 +40,7 @@ IconButton {
 
         AppText {
             id: subtitle
-
             width: parent.width
-
-            visible: text
 
             font.pixelSize: BVApp.Theme.fontSizeTiny
             font.bold: true
