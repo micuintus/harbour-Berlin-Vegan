@@ -9,7 +9,7 @@ MouseArea {
 
     property string type
     property string color
-    property real iconScale
+    property real iconScale: 1
     property alias verticalAlignment: icn.verticalAlignment
     property alias text: subtitle.text
 
@@ -32,7 +32,7 @@ MouseArea {
                                       : BVApp.Theme.secondaryColor;
             font.family: BVApp.Theme.iconFor(type).fontFamily
 
-            font.pixelSize: iconButton.iconScale ? BVApp.Theme.iconSizeLarge * iconButton.iconScale : BVApp.Theme.iconSizeLarge
+            font.pixelSize: BVApp.Theme.iconSizeLarge * iconButton.iconScale
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:  Text.AlignVCenter
         }
