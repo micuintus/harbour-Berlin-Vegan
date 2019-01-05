@@ -131,6 +131,8 @@ QtObject {
     readonly property int paddingLarge: fontSizeSmall
     readonly property int horizontalPageMargin: paddingLarge
 
+    readonly property int sectionHeaderIconLeftPadding: dp(2)
+    readonly property int sectionHeaderIconTextPadding: dp(10.7)
     readonly property int busyIndicatorSizeLarge: 0
 
     // From OpacityRampEffectBase.qml:

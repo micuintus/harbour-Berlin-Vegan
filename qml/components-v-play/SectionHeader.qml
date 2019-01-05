@@ -38,7 +38,7 @@ Item {
         anchors {
             left: header.left
             top: txt.top
-            leftMargin: BVApp.Theme.horizontalPageMargin
+            leftMargin: BVApp.Theme.horizontalPageMargin + BVApp.Theme.sectionHeaderIconLeftPadding
         }
     }
 
@@ -52,8 +52,8 @@ Item {
             left: iconItem.right
             top: header.top
 
-            leftMargin:  BVApp.Theme.horizontalPageMargin
-            topMargin:   txt.height
+            leftMargin: BVApp.Theme.sectionHeaderIconTextPadding
+            topMargin:  txt.height
         }
     }
 }

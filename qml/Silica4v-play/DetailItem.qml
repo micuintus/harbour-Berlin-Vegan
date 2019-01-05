@@ -25,11 +25,11 @@ Rectangle {
         anchors.right: valueText.left
 
                           // padding to the left edge
-        anchors.leftMargin: BVApp.Theme.horizontalPageMargin
+        anchors.leftMargin: BVApp.Theme.horizontalPageMargin + BVApp.Theme.sectionHeaderIconLeftPadding
                          // + SectionHeader icon
                             + BVApp.Theme.fontSizeSmall
                          // + Distance between icon and text
-                            + BVApp.Theme.horizontalPageMargin
+                            + BVApp.Theme.sectionHeaderIconTextPadding
         anchors.rightMargin: BVApp.Theme.paddingSmall
 
         truncationMode: TruncationMode.Fade
