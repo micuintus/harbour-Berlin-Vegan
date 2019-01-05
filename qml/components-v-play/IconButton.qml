@@ -13,14 +13,15 @@ MouseArea {
     property alias verticalAlignment: icn.verticalAlignment
     property alias text: subtitle.text
 
-    height: text ? icn.height + subtitle.height + 7 : icn.height
-    width: Math.max(icn.implicitWidth)
+    height: column.height
+    width: icn.implicitWidth
 
     Column {
 
+        id: column
         width: parent.width
 
-        spacing: text ? 7 : 0
+        spacing: text ? BVApp.Theme.iconToolBarPadding : 0
 
         AppText {
             id: icn

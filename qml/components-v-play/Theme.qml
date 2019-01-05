@@ -108,32 +108,35 @@ QtObject {
     readonly property color warningColor: "red"
 
     readonly property color linkColor: highlightColor
-    readonly property int smallLinkFontSize: dp(12)
+    readonly property real smallLinkFontSize: dp(12)
 
-    readonly property int fontSizeMedium: dp(17)
-    readonly property int fontSizeSmall: dp(15.4) // Theme.listItem.fontSizeText
-    readonly property int fontSizeExtraSmall: dp(13.6) // Theme.listItem.fontSizeDetailText
-    readonly property int fontSizeTiny: dp(8.5)
-    readonly property int fontSizeLarge: dp(18)
-    readonly property int fontSizeExtraLarge: dp(17)
+    readonly property real fontSizeMedium: dp(17)
+    readonly property real fontSizeSmall: dp(15.4) // Theme.listItem.fontSizeText
+    readonly property real fontSizeExtraSmall: dp(13.6) // Theme.listItem.fontSizeDetailText
+    readonly property real fontSizeTiny: dp(8.5)
+    readonly property real fontSizeLarge: dp(18)
+    readonly property real fontSizeExtraLarge: dp(17)
 
-    readonly property int pageIndicatorSmall: dp(6)
-    readonly property int pageIndicatorPadding: dp(6)
+    readonly property real pageIndicatorSmall: dp(6)
+    readonly property real pageIndicatorPadding: dp(6)
     readonly property color pageIndicatorColor: "white"
 
     // HACK: only used in IconToolBar so far, we want to keep scale at 1 ATM
-    readonly property int iconSizeMedium: dp(22)
-    readonly property int iconSizeLarge: dp(22)
-    readonly property int iconSizeExtraLarge: dp(28)
+    readonly property real iconSizeMedium: dp(22)
+    readonly property real iconSizeLarge: dp(22)
+    readonly property real iconSizeExtraLarge: dp(28)
 
-    readonly property int paddingSmall: dp(6)
-    readonly property int paddingMedium: dp(10)
-    readonly property int paddingLarge: fontSizeSmall
-    readonly property int horizontalPageMargin: paddingLarge
+    readonly property real paddingSmall: dp(6)
+    readonly property real paddingMedium: dp(10)
+    readonly property real paddingLarge: fontSizeSmall
+    readonly property real horizontalPageMargin: paddingLarge
 
-    readonly property int sectionHeaderIconLeftPadding: dp(2)
-    readonly property int sectionHeaderIconTextPadding: dp(10.7)
-    readonly property int busyIndicatorSizeLarge: 0
+    readonly property real sectionHeaderIconLeftPadding: dp(2)
+    readonly property real sectionHeaderIconTextPadding: dp(10.7)
+    readonly property real busyIndicatorSizeLarge: 0
+
+    readonly property real iconToolBarPadding: dp(3)
+
 
     // From OpacityRampEffectBase.qml:
     //     LtR = 0, RtL = 1, TtB = 2, BtT = 3
@@ -143,7 +146,7 @@ QtObject {
     readonly property int opacityRampTopToBottom: 2
     readonly property int opacityRampBottomToTop: 3
 
-    readonly property int dividerHeight: dp(1)
+    readonly property real dividerHeight: dp(1)
 
-    readonly property int mapHeight: dp(200)
+    readonly property real mapHeight: dp(200)
 }

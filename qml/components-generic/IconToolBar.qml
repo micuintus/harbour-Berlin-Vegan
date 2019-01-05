@@ -35,7 +35,7 @@ Column {
 
     id: column
 
-    spacing: 3
+    spacing: BVApp.Theme.iconToolBarPadding
 
     Separator {
         width: column.width
