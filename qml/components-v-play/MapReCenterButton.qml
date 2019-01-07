@@ -6,8 +6,8 @@ Item {
     id: centerButton
     signal clicked
 
-    width: myLocation.width
-    height: myLocation.height
+    width: myLocation.width * 1.3
+    height: myLocation.height * 1.3
 
     Rectangle {
         id: circle

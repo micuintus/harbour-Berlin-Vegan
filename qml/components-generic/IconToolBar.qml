@@ -55,7 +55,8 @@ Column {
 
         BVApp.IconButton {
             type: "answer"
-            text: "CALL"
+                     //% "CALL"
+            text: qsTrId("id-icon-toolbar-call")
 
             iconScale: BVApp.Theme.iconSizeMedium / BVApp.Theme.iconSizeLarge
 
@@ -67,7 +68,8 @@ Column {
 
         BVApp.IconButton {
             type: restaurant.favorite ? "favorite" : "favorite-o"
-            text: "FAVORITE"
+                     //% "FAVORITE"
+            text: qsTrId("id-icon-toolbar-favorite")
 
             onClicked: {
                 switch (type) {
@@ -91,7 +93,8 @@ Column {
 
         BVApp.IconButton {
             type: "home"
-            text: "WEBSITE"
+                     //% "WEBSITE"
+            text: qsTrId("id-icon-toolbar-website")
 
             onClicked: Qt.openUrlExternally(restaurant.website.slice(0,4) === "http"
                                             ?             restaurant.website

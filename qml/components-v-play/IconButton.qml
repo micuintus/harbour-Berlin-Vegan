@@ -42,6 +42,7 @@ MouseArea {
         AppText {
             id: subtitle
             width: parent.width
+            height: text ? implicitHeight : 0
 
             font.pixelSize: BVApp.Theme.fontSizeTiny
             font.bold: true

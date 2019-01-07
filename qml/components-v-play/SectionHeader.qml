@@ -20,7 +20,7 @@ Item {
     // V-Play's icon class seems to be broken).
     // As we want to have a small padding at the bottom,
     // we add BVApp.Theme.paddingSmall the height, as well -->
-    height: txt.height * 2 + BVApp.Theme.paddingSmall
+    height: txt.height * 1.8 + BVApp.Theme.paddingSmall
 
     AppText {
         id: iconItem
@@ -29,7 +29,8 @@ Item {
 
         text: header.icon.iconString
         font.family: header.icon.fontFamily
-        font.pixelSize:   BVApp.Theme.fontSizeSmall * 0.96
+        font.pixelSize: BVApp.Theme.fontSizeSmall * 0.97
+        font.bold:  true
 
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -42,18 +43,17 @@ Item {
         }
     }
 
-    Label {
+    AppText {
         id: txt
         text: header.text
         color: BVApp.Theme.highlightColor
-        font.pixelSize:   BVApp.Theme.fontSizeSmall
-        // font.bold:  true
+        font.pixelSize: BVApp.Theme.fontSizeSmall
         anchors {
             left: iconItem.right
             top: header.top
 
-            leftMargin: BVApp.Theme.sectionHeaderIconTextPadding
-            topMargin:  txt.height
+            leftMargin: BVApp.Theme.sectionHeaderIconTextPadding * 0.98
+            topMargin:  txt.height * 0.8
         }
     }
 }
