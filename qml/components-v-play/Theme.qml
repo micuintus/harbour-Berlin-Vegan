@@ -114,8 +114,8 @@ QtObject {
     readonly property real fontSizeSmall: dp(15.3) // Theme.listItem.fontSizeText
     readonly property real fontSizeExtraSmall: dp(13.5) // Theme.listItem.fontSizeDetailText
     readonly property real fontSizeTiny: dp(8.6)
-    readonly property real fontSizeLarge: dp(19)
-    readonly property real fontSizeExtraLarge: dp(20)
+    readonly property real fontSizeLarge: dp(17.4)
+    readonly property real fontSizeExtraLarge: dp(23)
 
     readonly property real pageIndicatorSmall: dp(6)
     readonly property real pageIndicatorPadding: dp(6)
