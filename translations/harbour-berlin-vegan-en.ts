@@ -396,5 +396,20 @@
         <oldsource>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</oldsource>
         <translation>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app. The significance of being listed in a database like this is often underestimated. Thanks for the help!</translation>
     </message>
+    <message id="id-icon-toolbar-call">
+        <location filename="../qml/components-generic/IconToolBar.qml" line="59"/>
+        <source>CALL</source>
+        <translation>CALL</translation>
+    </message>
+    <message id="id-icon-toolbar-favorite">
+        <location filename="../qml/components-generic/IconToolBar.qml" line="72"/>
+        <source>FAVORITE</source>
+        <translation>FAVORITE</translation>
+    </message>
+    <message id="id-icon-toolbar-website">
+        <location filename="../qml/components-generic/IconToolBar.qml" line="97"/>
+        <source>WEBSITE</source>
+        <translation>WEBSITE</translation>
+    </message>
 </context>
 </TS>

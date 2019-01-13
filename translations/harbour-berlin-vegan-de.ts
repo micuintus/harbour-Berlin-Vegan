@@ -302,5 +302,17 @@
         <oldsource>Breakfast</oldsource>
         <translation>Frühstück</translation>
     </message>
+    <message id="id-icon-toolbar-call">
+        <source>CALL</source>
+        <translation>ANRUFEN</translation>
+    </message>
+    <message id="id-icon-toolbar-favorite">
+        <source>FAVORITE</source>
+        <translation>FAVORIT</translation>
+    </message>
+    <message id="id-icon-toolbar-website">
+        <source>WEBSITE</source>
+        <translation>WEBSITE</translation>
+    </message>
 </context>
 </TS>
