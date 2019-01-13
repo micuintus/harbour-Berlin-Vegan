@@ -20,41 +20,39 @@ Item {
     // V-Play's icon class seems to be broken).
     // As we want to have a small padding at the bottom,
     // we add BVApp.Theme.paddingSmall the height, as well -->
-    height: txt.height * 2 + BVApp.Theme.paddingSmall
+    height: txt.height * 1.8 + BVApp.Theme.paddingSmall
 
-    Icon {
+    AppText {
         id: iconItem
-        icon: header.icon.iconString
+
         color: BVApp.Theme.highlightColor
 
-        Component.onCompleted: {
-            iconItem.textItem.font.family = header.icon.fontFamily
-        }
+        text: header.icon.iconString
+        font.family: header.icon.fontFamily
+        font.pixelSize: BVApp.Theme.fontSizeSmall * 0.944
 
-        size:   BVApp.Theme.fontSizeSmall
-        height: BVApp.Theme.fontSizeSmall
-        width:  BVApp.Theme.fontSizeSmall
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
 
+        height: txt.height
         anchors {
             left: header.left
             verticalCenter: txt.verticalCenter
-
-            leftMargin: BVApp.Theme.horizontalPageMargin
+            leftMargin: BVApp.Theme.horizontalPageMargin + BVApp.Theme.sectionHeaderIconLeftPadding
         }
     }
 
-    Label {
+    AppText {
         id: txt
         text: header.text
         color: BVApp.Theme.highlightColor
-        font.pixelSize:  BVApp.Theme.fontSizeSmall
-
+        font.pixelSize: BVApp.Theme.fontSizeSmall
         anchors {
             left: iconItem.right
             top: header.top
 
-            leftMargin:  BVApp.Theme.paddingMedium
-            topMargin:   txt.height
+            leftMargin: BVApp.Theme.sectionHeaderIconTextPadding * 0.98
+            topMargin:  txt.height * 0.8
         }
     }
 }

@@ -396,5 +396,20 @@
         <oldsource>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</oldsource>
         <translation>Vertel de ober/eigenaar dat je zijn locatie gevonden hebt via de app Berlijn-Vegan. Het belang om in zo&apos;n databank te worden vermeld wordt vaak onderschat. Bedankt voor de hulp!</translation>
     </message>
+    <message id="id-icon-toolbar-call">
+        <location filename="../qml/components-generic/IconToolBar.qml" line="59"/>
+        <source>CALL</source>
+        <translation>BEL</translation>
+    </message>
+    <message id="id-icon-toolbar-favorite">
+        <location filename="../qml/components-generic/IconToolBar.qml" line="72"/>
+        <source>FAVORITE</source>
+        <translation>FAVORIET</translation>
+    </message>
+    <message id="id-icon-toolbar-website">
+        <location filename="../qml/components-generic/IconToolBar.qml" line="97"/>
+        <source>WEBSITE</source>
+        <translation>WEBSITE</translation>
+    </message>
 </context>
 </TS>

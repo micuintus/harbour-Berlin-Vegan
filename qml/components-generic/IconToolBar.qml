@@ -35,6 +35,8 @@ Column {
 
     id: column
 
+    spacing: BVApp.Theme.iconToolBarPadding
+
     Separator {
         width: column.width
         horizontalAlignment: Qt.AlignCenter
@@ -53,15 +55,22 @@ Column {
 
         BVApp.IconButton {
             type: "answer"
-            scale: BVApp.Theme.iconSizeMedium / BVApp.Theme.iconSizeLarge
+                     //% "CALL"
+            text: qsTrId("id-icon-toolbar-call")
+
+            iconScale: BVApp.Theme.iconSizeMedium / BVApp.Theme.iconSizeLarge
 
             onClicked: Qt.openUrlExternally("tel:/" + restaurant.telephone)
             Layout.fillWidth: true
             enabled: typeof restaurant["telephone"] !== "undefined"
+
         }
 
         BVApp.IconButton {
             type: restaurant.favorite ? "favorite" : "favorite-o"
+                     //% "FAVORITE"
+            text: qsTrId("id-icon-toolbar-favorite")
+
             onClicked: {
                 switch (type) {
                 case "favorite-o":
@@ -84,6 +93,8 @@ Column {
 
         BVApp.IconButton {
             type: "home"
+                     //% "WEBSITE"
+            text: qsTrId("id-icon-toolbar-website")
 
             onClicked: Qt.openUrlExternally(restaurant.website.slice(0,4) === "http"
                                             ?             restaurant.website
