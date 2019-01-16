@@ -21,16 +21,17 @@ Quick2.RadioButton {
         text: parent.text
         anchors.left: parent.left
         anchors.leftMargin: parent.indicator.width + parent.indicator.x + parent.spacing
+        font.pixelSize:  BVApp.Theme.fontSizeExtraSmall
     }
 
     indicator: Item {
         implicitWidth: dp(20)
-        implicitHeight: dp(32)
+        implicitHeight: dp(28)
         x: parent.leftPadding
         y: parent.height / 2 - height / 2
         Rectangle {
             anchors.centerIn: parent
-            implicitWidth: dp(20)
+            implicitWidth: BVApp.Theme.fontSizeSmall * 1.2
             implicitHeight: implicitWidth
             radius: width * 0.5
             border.color: radioButton.checked ? Theme.tintColor : Theme.secondaryTextColor
