@@ -30,7 +30,7 @@ MouseArea {
             text: BVApp.Theme.iconFor(type).iconString
 
             color: iconButton.enabled ? (iconButton.color ? iconButton.color : BVApp.Theme.highlightColor)
-                                      : BVApp.Theme.secondaryColor;
+                                      : BVApp.Theme.disabledColor;
             font.family: BVApp.Theme.iconFor(type).fontFamily
 
             font.pixelSize: BVApp.Theme.iconSizeLarge * iconButton.iconScale
