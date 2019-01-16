@@ -10,4 +10,6 @@ AppCheckBox {
     spacing: BVApp.Theme.paddingLarge
 
     labelColorOff: BVApp.Theme.primaryColor
+    labelFontSize: BVApp.Theme.fontSizeExtraSmall
+    checkBoxSize: labelFontSize * 1.3
 }
