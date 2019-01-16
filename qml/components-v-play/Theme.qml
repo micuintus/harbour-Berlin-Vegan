@@ -104,7 +104,7 @@ QtObject {
     readonly property color highlightColor: "#97BF0F"
     readonly property color secondaryHighlightColor: "#E4E4E4"
     readonly property color dividerColor: "#B6B6B6"
-    readonly property color disabledColor: "#B6B6B6"
+    readonly property color disabledColor: Theme.disabledColor
     readonly property color warningColor: "red"
 
     readonly property color linkColor: highlightColor
