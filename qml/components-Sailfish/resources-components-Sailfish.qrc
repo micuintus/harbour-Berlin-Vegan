@@ -13,5 +13,6 @@
         <file>ActionMenuItem.qml</file>
         <file>RadioButton.qml</file>
         <file>MapReCenterButton.qml</file>
+        <file>Image.qml</file>
     </qresource>
 </RCC>

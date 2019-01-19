@@ -57,14 +57,14 @@ Item {
         // '1' so we see the placeholder image
         model: pictureAvailable ? pictures.length : 1
 
-        delegate: Image {
+        delegate: BVApp.Image {
 
             source: pictureAvailable
                     ? pictures[index].url
                     : "qrc:/images/Platzhalter_v2_mitSchriftzug" + (BVApp.Platform.isSailfish ?
                                                                         "_alpha.png"
                                                                       : ".jpg")
-            fillMode: Image.PreserveAspectCrop
+            fillMode: BVApp.Image.PreserveAspectCrop
 
             height: Math.max(root.height - shrinkHeightBy,0)
             width: root.width
