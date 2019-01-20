@@ -27,7 +27,7 @@ Rectangle {
                           // padding to the left edge
         anchors.leftMargin: BVApp.Theme.horizontalPageMargin + BVApp.Theme.sectionHeaderIconLeftPadding
                          // + SectionHeader icon
-                            + BVApp.Theme.fontSizeSmall
+                            + BVApp.Theme.fontSizeSmall * 1.05
                          // + Distance between icon and text
                             + BVApp.Theme.sectionHeaderIconTextPadding
         anchors.rightMargin: BVApp.Theme.paddingSmall
