@@ -20,7 +20,15 @@ Item {
     // V-Play's icon class seems to be broken).
     // As we want to have a small padding at the bottom,
     // we add BVApp.Theme.paddingSmall the height, as well -->
-    height: txt.height * 1.8 + BVApp.Theme.paddingSmall
+    height: txt.height * 2 + BVApp.Theme.paddingSmall
+
+    AppText {
+        id: iconHeightMeasure
+        text: header.icon.iconString
+        font.family: header.icon.fontFamily
+        font.pixelSize: BVApp.Theme.fontSizeSmall
+        visible: false
+    }
 
     AppText {
         id: iconItem
@@ -29,16 +37,17 @@ Item {
 
         text: header.icon.iconString
         font.family: header.icon.fontFamily
-        font.pixelSize: BVApp.Theme.fontSizeSmall * 0.944
+        font.pixelSize: BVApp.Theme.fontSizeSmall
 
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
+        scale:  0.78 * (txt.height / iconHeightMeasure.height)
+        transformOrigin: Item.Top
 
-        height: txt.height
         anchors {
             left: header.left
-            verticalCenter: txt.verticalCenter
+            top: header.top
+
             leftMargin: BVApp.Theme.horizontalPageMargin + BVApp.Theme.sectionHeaderIconLeftPadding
+            topMargin:  txt.height
         }
     }
 
@@ -47,12 +56,12 @@ Item {
         text: header.text
         color: BVApp.Theme.highlightColor
         font.pixelSize: BVApp.Theme.fontSizeSmall
-        anchors {
-            left: iconItem.right
-            top: header.top
 
-            leftMargin: BVApp.Theme.sectionHeaderIconTextPadding * 0.98
-            topMargin:  txt.height * 0.8
+        anchors {
+            left: iconItem.right                                // account for height/width difference
+                                                                // to fit the alignment with DetailItem
+            leftMargin: BVApp.Theme.sectionHeaderIconTextPadding + iconItem.height - iconItem.width
+            verticalCenter: iconItem.verticalCenter
         }
     }
 }
