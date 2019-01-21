@@ -45,8 +45,9 @@ BVApp.Page {
     SilicaFlickable {
         id: flicka
         anchors.fill: parent
-        contentHeight: descriptionText.y + descriptionText.height + BVApp.Theme.paddingLarge
-                                         + tellWaiter.height + BVApp.Theme.paddingLarge
+        contentHeight: shortComment.y + shortComment.height + BVApp.Theme.paddingLarge
+                                         + (review.visible ? (review.height + review.anchors.topMargin) : 0)
+                                         + tellWaiter.height + tellWaiter.anchors.topMargin
 
         readonly property real nonDescriptionHeaderHeight: locationHeader.height
                                                           + underHeaderBar.height
@@ -181,8 +182,8 @@ BVApp.Page {
             height: BVApp.Theme.dividerHeight
 
             anchors {
-                left: descriptionText.left
-                right: descriptionText.right
+                left: shortComment.left
+                right: shortComment.right
                 top: detailsCollapsible.bottom
             }
         }
@@ -197,8 +198,8 @@ BVApp.Page {
             height: BVApp.Theme.mapHeight
 
             anchors {
-                left: descriptionText.left
-                right: descriptionText.right
+                left: shortComment.left
+                right: shortComment.right
                 top: BVApp.Platform.isVPlay ?
                        separator.bottom
                      : detailsCollapsible.bottom
@@ -210,7 +211,7 @@ BVApp.Page {
         }
 
         Label {
-            id: descriptionText
+            id: shortComment
 
             visible: isFoodVenue
 
@@ -235,6 +236,28 @@ BVApp.Page {
         }
 
         Label {
+            id: review
+
+            visible: isFoodVenue && typeof restaurant.review !== "undefined"
+
+            font.pixelSize: BVApp.Theme.fontSizeSmall
+            text: restaurant.review
+            wrapMode: Text.WordWrap
+            color: BVApp.Theme.primaryColor
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: shortComment.bottom
+
+                topMargin:    BVApp.Theme.paddingLarge * 2
+                bottomMargin: BVApp.Theme.paddingLarge
+                leftMargin:   BVApp.Theme.horizontalPageMargin
+                rightMargin:  BVApp.Theme.horizontalPageMargin
+            }
+        }
+
+        Label {
             id: tellWaiter
 
             visible: isFoodVenue
@@ -242,7 +265,7 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: descriptionText.bottom
+                top: review.visible ? review.bottom : shortComment.bottom
 
                 topMargin:    BVApp.Theme.paddingLarge
                 bottomMargin: BVApp.Theme.paddingLarge
@@ -261,8 +284,6 @@ BVApp.Page {
             //% "Please tell the waiter/owner that you found their venue via the Berlin-Vegan app. The significance of being listed in a database like this is often underestimated. Thanks for the help!"
             text: qsTrId("id-venue-please-tell-waiter")
         }
-
-
     }
 }
 
