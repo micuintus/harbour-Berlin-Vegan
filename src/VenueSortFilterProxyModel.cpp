@@ -282,6 +282,16 @@ bool VenueSortFilterProxyModel::searchStringMatches(const QModelIndex &index) co
         }
     }
 
+    valueRole = index.data( VenueModel::VenueModelRoles::SimplifiedSearchReview);
+    if (valueRole.isValid() && valueRole.canConvert<QString>())
+    {
+        auto const value = valueRole.toString();
+        if (value.contains(m_simplifiedSearchString))
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 

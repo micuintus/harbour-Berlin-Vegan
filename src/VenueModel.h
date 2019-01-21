@@ -99,6 +99,8 @@ public:
         SimplifiedSearchDescription,
         DescriptionEn,
         SimplifiedSearchDescriptionEn,
+        Review,
+        SimplifiedSearchReview,
         Website,
         Telephone,
         Pictures,

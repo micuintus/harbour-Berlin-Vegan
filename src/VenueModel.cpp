@@ -132,6 +132,12 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
                 auto const simplifiedSearchName = extractSimplifiedSearchName(value);
                 item->setData(simplifiedSearchName, VenueModelRoles::SimplifiedSearchDescriptionEn);
             }
+
+            if (roleKey == VenueModelRoles::Review)
+            {
+                auto const simplifiedSearchName = extractSimplifiedSearchName(value);
+                item->setData(simplifiedSearchName, VenueModelRoles::SimplifiedSearchReview);
+            }
             item->setData(value.toVariant(), roleKey);
         }
     }
@@ -196,6 +202,7 @@ QHash<int, QByteArray> VenueModel::roleNames() const
         { VenueModelRoles::Street,        "street"      },
         { VenueModelRoles::Description,   "comment"     },
         { VenueModelRoles::DescriptionEn, "commentEnglish" },
+        { VenueModelRoles::Review,        "review"      },
         { VenueModelRoles::Website,       "website"     },
         { VenueModelRoles::Telephone,     "telephone"   },
         { VenueModelRoles::Pictures,      "pictures"    },
