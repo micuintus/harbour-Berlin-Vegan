@@ -1,8 +1,8 @@
-# Berlin-Vegan for SailfishOS and iOS
+# Berlin-Vegan for SailfishOS, iOS and Android
 
-Berlin-Vegan is a Qt-based cross-platform app for [SailfishOS](https://en.wikipedia.org/wiki/Sailfish_OS) and iOS.
+Berlin-Vegan is a Qt-based cross-platform app for [SailfishOS](https://en.wikipedia.org/wiki/Sailfish_OS), iOS and Android.
 
-There is also a [FOSS Android version](https://github.com/Berlin-Vegan/berlin-vegan-guide).
+There is also a [former version for Android](https://github.com/Berlin-Vegan/berlin-vegan-guide).
 
 With the Berlin-Vegan guide, you have got quick access to an overview of the vegan
 food and shopping possibilities in Berlin, Germany --- even while you are out and about.
@@ -15,7 +15,7 @@ trying to live their life in a greener and more animal friendly way.
 
 ----
 
-Berlin-Vegan guide is [Free Software](http://www.micuintus.de/2010/10/27/die-gesellschaftliche-bedeutung-freier-software-und-offener-standards/):
+Berlin-Vegan is [Free Software](http://www.micuintus.de/2010/10/27/die-gesellschaftliche-bedeutung-freier-software-und-offener-standards/):
 
 You can redistribute it and/or modify it under the terms of the
 [GNU General Public License](https://github.com/micuintus/harbour-Berlin-Vegan/blob/master/qml/pages/about/LICENSE)
@@ -30,7 +30,8 @@ This content is released under the terms of the [Attribution-NonCommercial 4.0 I
 
 ----
 
-Berlin-Vegan for iOS and SailfishOS is being developed with the free and open source cross-platform framework [Qt](https://www.qt.io/). While the app uses jolla's native Qt-based SDK on SailfishOS, on iOS it is realized with the cross-platform [V-Play Engine](https://v-play.net/).
+Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework [Qt](https://www.qt.io/).
+While the app uses jolla's native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform [V-Play Engine](https://v-play.net/).
 
 Moreover, this application greatfully makes use of [third party Free Software projects](https://github.com/micuintus/harbour-Berlin-Vegan/blob/master/qml/pages/about/AboutBerlinVegan.qml#L299).
 
