@@ -125,7 +125,7 @@ BVApp.Page {
                     }
 
                     Label {
-                                //% "for SailfishOS and iOS"
+                                //% "for SailfishOS, iOS and Android"
                         text: qsTrId("id-about-for-sailfish-and-ios")
                         font.pixelSize: BVApp.Platform.isVPlay ?
                                           BVApp.Theme.fontSizeExtraSmall
@@ -258,7 +258,7 @@ BVApp.Page {
 
             Label {
                 id: freeSoftwareBla
-                //% "Berlin-Vegan for SailfishOS and iOS is <a href='ref'>Free Software</a>: "
+                //% "Berlin-Vegan for SailfishOS, iOS and Android is <a href='ref'>Free Software</a>: "
                 //% "you can redistribute it and/or modify it under the terms of the "
                 //% "GNU General Public License as published by the "
                 //% "Free Software Foundation, either version 2 of the license, or "
@@ -422,10 +422,10 @@ BVApp.Page {
 
 
             Label {
-                //% "Berlin-Vegan for iOS and SailfishOS is being developed "
+                //% "Berlin-Vegan for SailfishOS, iOS and Android is being developed "
                 //% "with the free and open source cross-platform framework <a href='ref'>Qt</a>. "
                 //% "While the app uses jolla's native Qt-based SDK on SailfishOS, "
-                //% "on iOS it is realized with the cross-platform V-Play Engine."
+                //% "on Android and iOS it is realized with the cross-platform V-Play Engine."
                 text: qsTrId("id-thanks-to-qt")
                 wrapMode: Text.WordWrap
                 font.pixelSize: BVApp.Theme.fontSizeSmall

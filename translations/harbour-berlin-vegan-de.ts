@@ -182,8 +182,9 @@
         <translation>Cross-Plattform-App</translation>
     </message>
     <message id="id-about-for-sailfish-and-ios">
-        <source>for SailfishOS and iOS</source>
-        <translation>für SailfishOS und iOS</translation>
+        <source>for SailfishOS, iOS and Android</source>
+        <oldsource>for SailfishOS and iOS</oldsource>
+        <translation>für SailfishOS, iOS und Android</translation>
     </message>
     <message id="id-version">
         <source>Version</source>
@@ -198,8 +199,9 @@
         <translation>UI-Design:</translation>
     </message>
     <message id="id-bvapp-is-free-software">
-        <source>Berlin-Vegan for SailfishOS and iOS is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
-        <translation>Berlin-Vegan für SailfishOS und iOS ist &lt;a href=&apos;ref&apos;&gt;Freie Software&lt;/a&gt;: Sie können die App unter den Bedingungen von Version 2 der GNU General Public License (oder optional jeder nachfolgenden, von der Free Software Foundation veröffentlichten Version dieser Lizenz) verwenden, verstehen, verändern und verbreiten.</translation>
+        <source>Berlin-Vegan for SailfishOS, iOS and Android is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
+        <oldsource>Berlin-Vegan for SailfishOS and iOS is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</oldsource>
+        <translation>Berlin-Vegan für SailfishOS, iOS und Android ist &lt;a href=&apos;ref&apos;&gt;Freie Software&lt;/a&gt;: Sie können die App unter den Bedingungen von Version 2 der GNU General Public License (oder optional jeder nachfolgenden, von der Free Software Foundation veröffentlichten Version dieser Lizenz) verwenden, verstehen, verändern und verbreiten.</translation>
     </message>
     <message id="id-view-gplv2">
         <source>View GPLv2</source>
@@ -218,8 +220,9 @@
         <translation>CC-BY-NC anzeigen</translation>
     </message>
     <message id="id-thanks-to-qt">
-        <source>Berlin-Vegan for iOS and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS it is realized with the cross-platform V-Play Engine.</source>
-        <translation>Berlin-Vegan für SailfishOS und iOS wird mit dem freien Open-Source-Framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt; entwickelt. Während die App jollas natives Qt-basiertes SDK für SailfishOS verwendet, ist die iOS-Variante mit der Cross-Plattform-V-Play-Engine realisiert.</translation>
+        <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform V-Play Engine.</source>
+        <oldsource>Berlin-Vegan for iOS, Android and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS and Android it is realized with the cross-platform V-Play Engine.</oldsource>
+        <translation>Berlin-Vegan für SailfishOS, iOS und Android wird mit dem freien Open-Source-Framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt; entwickelt. Während die App jollas natives Qt-basiertes SDK für SailfishOS verwendet, sind die Android- und iOS-Varianten mit der Cross-Plattform-V-Play-Engine realisiert.</translation>
     </message>
     <message id="id-thanks-to-mapbox">
         <source>We would like to thank Mapbox for donating &lt;a href=&apos;ref&apos;&gt;their astonishing Mapbox GL Plugin&lt;/a&gt; to the Qt project, which makes hardware accelerated vector maps possible for this app.</source>
