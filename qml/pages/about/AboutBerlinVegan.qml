@@ -511,7 +511,7 @@ BVApp.Page {
                model: ListModel {
 
                    ListElement {
-                       name: "Berlin-Vegan (Android app)"
+                       name: "Berlin-Vegan 2.*"
                        url: "https://github.com/Berlin-Vegan/berlin-vegan-guide"
                        licenseName: "GPLv2"
                        licenseFile: "LICENSE"
