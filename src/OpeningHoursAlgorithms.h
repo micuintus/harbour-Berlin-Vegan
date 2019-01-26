@@ -230,6 +230,7 @@ bool isPublicHoliday(const QDate &date)
     auto const es = easterSunday(year);
 
     const QDate newYearsDay(year, 1, 1);
+    const QDate internationalWomensDay(year, 3, 8);
     const QDate goodFriday(es.addDays(-2));
     const QDate easterMonday(es.addDays(1));
     const QDate labourDay{year, 05, 01};
@@ -241,6 +242,8 @@ bool isPublicHoliday(const QDate &date)
 
     // C++ doesn't allow for non-integral types in switch statements
     if (date == newYearsDay)
+        return true;
+    else if (date == internationalWomensDay)
         return true;
     else if (date == goodFriday)
         return true;
