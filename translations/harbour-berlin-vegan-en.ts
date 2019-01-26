@@ -311,8 +311,9 @@
     </message>
     <message id="id-about-for-sailfish-and-ios">
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="129"/>
-        <source>for SailfishOS and iOS</source>
-        <translation>for SailfishOS and iOS</translation>
+        <source>for SailfishOS, iOS and Android</source>
+        <oldsource>for SailfishOS and iOS</oldsource>
+        <translation>for SailfishOS, iOS and Android</translation>
     </message>
     <message id="id-version">
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="151"/>
@@ -336,8 +337,9 @@
     </message>
     <message id="id-bvapp-is-free-software">
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="266"/>
-        <source>Berlin-Vegan for SailfishOS and iOS is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
-        <translation>Berlin-Vegan for SailfishOS and iOS is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</translation>
+        <source>Berlin-Vegan for SailfishOS, iOS and Android is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</source>
+        <oldsource>Berlin-Vegan for SailfishOS and iOS is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</oldsource>
+        <translation>Berlin-Vegan for SailfishOS, iOS and Android is &lt;a href=&apos;ref&apos;&gt;Free Software&lt;/a&gt;: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the license, or (at your option) any later version.</translation>
     </message>
     <message id="id-view-gplv2">
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="289"/>
@@ -361,8 +363,9 @@
     </message>
     <message id="id-thanks-to-qt">
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="429"/>
-        <source>Berlin-Vegan for iOS and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS it is realized with the cross-platform V-Play Engine.</source>
-        <translation>Berlin-Vegan for iOS and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS it is realized with the cross-platform V-Play Engine.</translation>
+        <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform V-Play Engine.</source>
+        <oldsource>Berlin-Vegan for iOS, Android and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS and Android it is realized with the cross-platform V-Play Engine.</oldsource>
+        <translation>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform V-Play Engine.</translation>
     </message>
     <message id="id-thanks-to-mapbox">
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="455"/>
@@ -391,7 +394,7 @@
         <translation>closes soon</translation>
     </message>
     <message id="id-venue-please-tell-waiter">
-        <location filename="../qml/pages/VenueDescription.qml" line="262"/>
+        <location filename="../qml/pages/VenueDescription.qml" line="285"/>
         <source>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app. The significance of being listed in a database like this is often underestimated. Thanks for the help!</source>
         <oldsource>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app.</oldsource>
         <translation>Please tell the waiter/owner that you found their venue via the Berlin-Vegan app. The significance of being listed in a database like this is often underestimated. Thanks for the help!</translation>
