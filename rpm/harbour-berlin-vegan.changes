@@ -12,7 +12,7 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
-* Mon Jan 10 2018 micu <post@micuintus.de> 3.4-1
+* Mon Jan 10 2019 micu <post@micuintus.de> 3.4-1
 - First release for SailfishOS, iOS and Android together --- from the same source code
 - Improve the tablet experience on iOS and Android (split view)
 - Allow the user filtering for currently open venues
