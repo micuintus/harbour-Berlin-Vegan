@@ -76,6 +76,8 @@ Rectangle {
                 nativeUtils.displayAlertSheet("", ["Apple Maps", "Google Maps"], true);
             } else if (BVApp.Platform.isMacOS) {
                 Qt.openUrlExternally("https://maps.apple.com/?q=" + query)
+            } else if (BVApp.Platform.isAndroid) {
+                Qt.openUrlExternally("https://maps.google.com/?q=" + query);
             } else {
                 Qt.openUrlExternally("geo:" + query)
             }
