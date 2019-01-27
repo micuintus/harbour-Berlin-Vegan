@@ -45,6 +45,8 @@ private slots:
     void rightDayIndexReturnedIfShortAfterMidnightAndCurrentDayIsHoliday();
     void rightDayIndexReturnedIfShortAfterMidnightAndDayBeforeIsHoliday();
     void rightDayIndexReturnedIfShortAfterMidnightAndTodayAndDayBeforeAreHolidays();
+    void sundayIndexReturnedIfShortAfterMidnightAndCurrentDayIsMonday();
+
 };
 
 class OpeningHoursAlgorithms_TestCondenseOpeningHours : public QObject

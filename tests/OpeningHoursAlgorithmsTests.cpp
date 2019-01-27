@@ -351,6 +351,25 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::rightDayIndexReturnedI
     QCOMPARE(res.first, SUNDAY_INDEX);
 }
 
+void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::sundayIndexReturnedIfShortAfterMidnightAndCurrentDayIsMonday()
+{
+    // SETUP
+
+    const QDateTime j2019_01_21__1_27{QDate{2019, 01, 21}, QTime{01, 27, 00}};
+
+    QTEST_ASSERT(isShortAfterMidnight(j2019_01_21__1_27));
+
+
+    // EXECUTE
+
+    auto const res = extractDayIndexAndMinute(j2019_01_21__1_27);
+
+
+    // VERIFY
+
+    QCOMPARE(res.first, SUNDAY_INDEX);
+}
+
 void OpeningHoursAlgorithms_TestCondenseOpeningHours::test()
 {
     // SETUP
