@@ -241,7 +241,7 @@ BVApp.Page {
             visible: isFoodVenue && typeof restaurant.review !== "undefined"
 
             font.pixelSize: BVApp.Theme.fontSizeSmall
-            text: restaurant.review
+            text: visible ? restaurant.review : ""
             wrapMode: Text.WordWrap
             color: BVApp.Theme.primaryColor
 
