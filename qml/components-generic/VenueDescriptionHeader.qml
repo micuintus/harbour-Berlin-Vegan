@@ -64,7 +64,7 @@ Item {
                     : "qrc:/images/Platzhalter_v2_mitSchriftzug" + (BVApp.Platform.isSailfish ?
                                                                         "_alpha.png"
                                                                       : ".jpg")
-            fillMode: BVApp.Image.PreserveAspectCrop
+            fillMode: Image.PreserveAspectCrop
 
             height: Math.max(root.height - shrinkHeightBy,0)
             width: root.width
