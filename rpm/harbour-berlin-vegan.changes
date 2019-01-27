@@ -12,6 +12,20 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Mon Jan 10 2018 micu <post@micuintus.de> 3.4-1
+- First release for SailfishOS, iOS and Android together --- from the same source code
+- Improve the tablet experience on iOS and Android (split view)
+- Allow the user filtering for currently open venues
+- Warn if venues are closing soon
+- Provide a Dutch translation (thanks to Heimen Stoffels)
+- Add the new venue sub type "bar" and the two new venue features "breakfast" and "brunch"
+- Allow users viewing venue pictures in full screen mode
+- Show both the short comment and the full review in the venue description
+- Add description texts under the icons in the icon bar (call, website and favorite) as it used to be in 2.* versions of the Android app
+- Allow the user to choose the map application on iOS
+- Add International Women's Day as holiday
+- Bug fixes
+
 * Thu May 10 2018 micu <post@micuintus.de> 3.3-1
 - Mark opening state in the venue list, i.e. indicate that a venue is closed if that is currently the case
 - Add a button to the map overview that allows re-centering the map to the current position of the user
