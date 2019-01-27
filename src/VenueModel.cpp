@@ -256,7 +256,7 @@ QVariant VenueModel::data(const QModelIndex &index, int role) const
     if (role == VenueModelRoles::Open || role == VenueModelRoles::ClosesSoon)
     {
         const auto openingMinutesVar = QStandardItemModel::data(index, VenueModel::OpeningMinutes);
-        if (!openingMinutesVar.isValid())
+        if (m_currendDayIndex < 0 || !openingMinutesVar.isValid())
         {
             return QVariant::fromValue(false);
         }
