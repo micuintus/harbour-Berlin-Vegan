@@ -271,7 +271,7 @@ std::pair<unsigned char, unsigned> extractDayIndexAndMinute(QDateTime dateTime)
     if (isShortAfterMidnight(dateTime))            // If that is the case, we treat this time as if from the day before:
     {
         currentMinute += MINUTES_PER_DAY;          // We count the minutes starting from the day before
-        dayIndex = (dayIndex - 1) % DAYS_PER_WEEK; // and we use the opening hour from the day before.
+        dayIndex = (dayIndex + 6) % DAYS_PER_WEEK; // and we use the opening hour from the day before.
         dateTime = dateTime.addDays(-1);
     }
 
