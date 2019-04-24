@@ -49,10 +49,6 @@ Rectangle {
         id: map
         anchors.fill: parent
 
-        // user shall not move the map, but click to open the coordinates in the dedicated map app.
-        gesture {
-            enabled: false
-        }
 
         Component.onCompleted: {
             addMapItem(venueMarker)

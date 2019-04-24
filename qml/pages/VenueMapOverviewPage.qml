@@ -69,9 +69,6 @@ BVApp.Page {
         // remove once SFOS is on QtLocation > 5.6
         property bool dirty: false
 
-        gesture {
-            enabled: true
-        }
 
         // Work around QTBUG-47366;
         // remove once SFOS is on QtLocation > 5.6
@@ -98,7 +95,7 @@ BVApp.Page {
                 anchorPoint.x: venueMarkerImage.width / 2
                 anchorPoint.y: venueMarkerImage.height
 
-                coordinate: QtPositioning.coordinate(model.latCoord, model.longCoord)
+                coordinate: QtPositioning.coordinate(model.latCoord ? model.latCoord : 0, model.longCoord)
 
                 sourceItem: BVApp.IconButton {
                     id: venueMarkerImage
@@ -119,7 +116,7 @@ BVApp.Page {
         }
 
         Component.onCompleted: {
-            addMapItem(currentPosition);
+            // addMapItem(currentPosition);
             centerAndZoom();
         }
 
