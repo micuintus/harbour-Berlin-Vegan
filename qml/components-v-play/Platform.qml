@@ -5,8 +5,8 @@ import Felgo 3.0
 
 QtObject {
 
-    readonly property bool isSailfish: false
-    readonly property bool isVPlay: true
+    readonly property bool isSailfish:  false
+    readonly property bool isFelgo:     true
 
     readonly property bool isAndroid:   Theme.isAndroid
     readonly property bool isIos:       Theme.isIos

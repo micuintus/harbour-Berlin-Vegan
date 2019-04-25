@@ -83,7 +83,7 @@ BVApp.Page {
             height: streetLabel.height
 
             anchors {
-                top:    BVApp.Platform.isVPlay ?
+                top:    BVApp.Platform.isFelgo ?
                           locationHeader.bottom
                         : undefined
                 bottom: BVApp.Platform.isSailfish ?
@@ -174,7 +174,7 @@ BVApp.Page {
         Separator {
             id: separator
 
-            visible: BVApp.Platform.isVPlay
+            visible: BVApp.Platform.isFelgo
 
             width: parent.width
             horizontalAlignment: Qt.AlignCenter
@@ -200,7 +200,7 @@ BVApp.Page {
             anchors {
                 left: shortComment.left
                 right: shortComment.right
-                top: BVApp.Platform.isVPlay ?
+                top: BVApp.Platform.isFelgo ?
                        separator.bottom
                      : detailsCollapsible.bottom
                 topMargin:    BVApp.Platform.isSailfish ?
