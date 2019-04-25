@@ -29,7 +29,7 @@ DEFINES += Q_OS_SAILFISH
 CONFIG += sailfishapp
 CONFIG += sailfishapp_no_deploy_qml
 
-RESOURCES += qml/components-Sailfish/resources-components-Sailfish.qrc
+RESOURCES += qml/components-sailfish/resources-components-sailfish.qrc
 
 # to disable building translations every time, comment out the
 # following CONFIG line
