@@ -425,7 +425,7 @@ BVApp.Page {
                 //% "Berlin-Vegan for SailfishOS, iOS and Android is being developed "
                 //% "with the free and open source cross-platform framework <a href='ref'>Qt</a>. "
                 //% "While the app uses jolla's native Qt-based SDK on SailfishOS, "
-                //% "on Android and iOS it is realized with the cross-platform V-Play Engine."
+                //% "on Android and iOS it is realized with the cross-platform toolkit Felgo."
                 text: qsTrId("id-thanks-to-qt")
                 wrapMode: Text.WordWrap
                 font.pixelSize: BVApp.Theme.fontSizeSmall
