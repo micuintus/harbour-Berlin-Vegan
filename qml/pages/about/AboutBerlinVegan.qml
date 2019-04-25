@@ -64,11 +64,11 @@ BVApp.Page {
             Item {
                 width: page.width
                 height: BVApp.Platform.isFelgo ?
-                            vPlayHeaderPicture.height * 0.95
+                            felgoHeaderPicture.height * 0.95
                           : titleColumn.height
 
                 Image  {
-                    id: vPlayHeaderPicture
+                    id: felgoHeaderPicture
                     visible: BVApp.Platform.isFelgo
 
                     fillMode: Image.PreserveAspectCrop
@@ -84,7 +84,7 @@ BVApp.Page {
                     Item {
                         width: parent.width
                         height: BVApp.Platform.isFelgo ?
-                                    vPlayHeaderPicture.width * 0.04
+                                    felgoHeaderPicture.width * 0.04
                                   : BVApp.Theme.paddingMedium
                     }
 
@@ -106,7 +106,7 @@ BVApp.Page {
                     Item {
                         width: parent.width
                         height: BVApp.Platform.isFelgo ?
-                                    vPlayHeaderPicture.width * 0.02
+                                    felgoHeaderPicture.width * 0.02
                                   : BVApp.Theme.paddingMedium
                     }
 
