@@ -4,42 +4,34 @@
 <context>
     <name></name>
     <message id="id-monday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="99"/>
         <source>Monday</source>
         <translation>Monday</translation>
     </message>
     <message id="id-tuesday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="101"/>
         <source>Tuesday</source>
         <translation>Tuesday</translation>
     </message>
     <message id="id-wednesday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="103"/>
         <source>Wednesday</source>
         <translation>Wednesday</translation>
     </message>
     <message id="id-thursday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="105"/>
         <source>Thursday</source>
         <translation>Thursday</translation>
     </message>
     <message id="id-friday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="107"/>
         <source>Friday</source>
         <translation>Friday</translation>
     </message>
     <message id="id-saturday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="109"/>
         <source>Saturday</source>
         <translation>Saturday</translation>
     </message>
     <message id="id-sunday">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="111"/>
         <source>Sunday</source>
         <translation>Sunday</translation>
     </message>
     <message id="id-closed">
-        <location filename="../src/OpeningHoursAlgorithms.h" line="86"/>
         <source>closed</source>
         <translation>closed</translation>
     </message>
@@ -184,10 +176,10 @@
         <translation>Delivery service</translation>
     </message>
     <message id="id-berlin-vegan">
-        <location filename="../qml/components-v-play/Page.qml" line="10"/>
+        <location filename="../qml/components-felgo/Page.qml" line="10"/>
         <location filename="../qml/cover/CoverPage.qml" line="72"/>
-        <location filename="../qml/pages/VenueList.qml" line="40"/>
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="93"/>
+        <location filename="../qml/pages/VenueList.qml" line="40"/>
         <source>Berlin-Vegan</source>
         <translation>Berlin-Vegan</translation>
     </message>
@@ -295,7 +287,7 @@
         <translation>Ice cream parlor</translation>
     </message>
     <message id="id-search">
-        <location filename="../qml/components-v-play/SearchField.qml" line="15"/>
+        <location filename="../qml/components-felgo/SearchField.qml" line="15"/>
         <source>Search...</source>
         <translation>Search...</translation>
     </message>
@@ -363,9 +355,9 @@
     </message>
     <message id="id-thanks-to-qt">
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="429"/>
-        <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform V-Play Engine.</source>
-        <oldsource>Berlin-Vegan for iOS, Android and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS and Android it is realized with the cross-platform V-Play Engine.</oldsource>
-        <translation>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform V-Play Engine.</translation>
+        <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform Felgo Engine.</source>
+        <oldsource>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform toolkit Felgo.</oldsource>
+        <translation type="unfinished">Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform toolkit Felgo.</translation>
     </message>
     <message id="id-thanks-to-mapbox">
         <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="455"/>

@@ -220,9 +220,9 @@
         <translation>CC-BY-NC anzeigen</translation>
     </message>
     <message id="id-thanks-to-qt">
-        <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform V-Play Engine.</source>
-        <oldsource>Berlin-Vegan for iOS, Android and SailfishOS is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on iOS and Android it is realized with the cross-platform V-Play Engine.</oldsource>
-        <translation>Berlin-Vegan für SailfishOS, iOS und Android wird mit dem freien Open-Source-Framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt; entwickelt. Während die App jollas natives Qt-basiertes SDK für SailfishOS verwendet, sind die Android- und iOS-Varianten mit der Cross-Plattform-V-Play-Engine realisiert.</translation>
+        <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform Felgo Engine.</source>
+        <oldsource>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform toolkit Felgo.</oldsource>
+        <translation type="unfinished">Berlin-Vegan für SailfishOS, iOS und Android wird mit dem freien Open-Source-Framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt; entwickelt. Während die App jollas natives Qt-basiertes SDK für SailfishOS verwendet, sind die Android- und iOS-Varianten mit dem Cross-Plattform-Toolkit Felgo realisiert.</translation>
     </message>
     <message id="id-thanks-to-mapbox">
         <source>We would like to thank Mapbox for donating &lt;a href=&apos;ref&apos;&gt;their astonishing Mapbox GL Plugin&lt;/a&gt; to the Qt project, which makes hardware accelerated vector maps possible for this app.</source>
