@@ -1,4 +1,4 @@
-import VPlayApps 1.0
+import Felgo 3.0
 import QtQuick 2.5
 import QtQuick.Controls 2.0 as Quick2
 import BerlinVegan.components.platform 1.0 as BVApp
