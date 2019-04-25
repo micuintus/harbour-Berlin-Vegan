@@ -36,7 +36,7 @@ RESOURCES += qml/components-Sailfish/resources-components-Sailfish.qrc
 CONFIG += sailfishapp_i18n sailfishapp_i18n_idbased
 
 } else {
-CONFIG    += v-play
+CONFIG    += felgo
 RESOURCES += qml/Silica4v-play/resources-Silica4v-play.qrc \
              qml/components-v-play/resources-components-v-play.qrc
 }

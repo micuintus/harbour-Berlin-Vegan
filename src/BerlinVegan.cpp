@@ -38,7 +38,7 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QApplication>
-#include <VPApplication>
+#include <FelgoApplication>
 #include <QQmlApplicationEngine>
 #endif
 
@@ -68,10 +68,10 @@ int main(int argc, char *argv[])
         qInfo() << "Could not load translation";
     }
 
-    VPApplication vplay;
+    FelgoApplication felgoApp;
 
-    // Use platform-specific fonts instead of V-Play's default font
-    vplay.setPreservePlatformFonts(true);
+    // Use platform-specific fonts instead of Felgo's default font
+    felgoApp.setPreservePlatformFonts(true);
 
     QQmlApplicationEngine qmlEngine;
 #endif
@@ -85,9 +85,9 @@ int main(int argc, char *argv[])
     view->show();
     view->rootContext()->setContextProperty("FileIO", &fileIO);
 #else
-    vplay.initialize(&qmlEngine);
-    vplay.setMainQmlFileName(mainQMLFile);
-    qmlEngine.load(QUrl(vplay.mainQmlFileName()));
+    felgoApp.initialize(&qmlEngine);
+    felgoApp.setMainQmlFileName(mainQMLFile);
+    qmlEngine.load(QUrl(felgoApp.mainQmlFileName()));
     qmlEngine.rootContext()->setContextProperty("FileIO", &fileIO);
 #endif
     return app->exec();
