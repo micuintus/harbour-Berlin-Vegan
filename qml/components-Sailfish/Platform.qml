@@ -4,8 +4,8 @@ import QtQuick 2.2
 
 QtObject {
 
-    readonly property bool isSailfish: true
-    readonly property bool isVPlay: false
+    readonly property bool isSailfish:  true
+    readonly property bool isFelgo:     false
 
     readonly property bool isAndroid:   false
     readonly property bool isIos:       false

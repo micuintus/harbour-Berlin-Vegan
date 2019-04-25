@@ -63,13 +63,13 @@ BVApp.Page {
             // Semi-hack to make different Layouts on Sailfish and V-Play possible
             Item {
                 width: page.width
-                height: BVApp.Platform.isVPlay ?
+                height: BVApp.Platform.isFelgo ?
                             vPlayHeaderPicture.height * 0.95
                           : titleColumn.height
 
                 Image  {
                     id: vPlayHeaderPicture
-                    visible: BVApp.Platform.isVPlay
+                    visible: BVApp.Platform.isFelgo
 
                     fillMode: Image.PreserveAspectCrop
                     source: "qrc:/images/Platzhalter_v2_mitSchriftzug.jpg"
@@ -83,7 +83,7 @@ BVApp.Page {
 
                     Item {
                         width: parent.width
-                        height: BVApp.Platform.isVPlay ?
+                        height: BVApp.Platform.isFelgo ?
                                     vPlayHeaderPicture.width * 0.04
                                   : BVApp.Theme.paddingMedium
                     }
@@ -91,11 +91,11 @@ BVApp.Page {
                     Label {
                                     //% "Berlin-Vegan"
                         text: qsTrId("id-berlin-vegan")
-                        font.pixelSize: BVApp.Platform.isVPlay ?
+                        font.pixelSize: BVApp.Platform.isFelgo ?
                                           BVApp.Theme.fontSizeExtraLarge
                                         : BVApp.Theme.fontSizeLarge
 
-                        color: BVApp.Platform.isVPlay ?
+                        color: BVApp.Platform.isFelgo ?
                                  BVApp.Theme.highlightDimmerColor
                                : BVApp.Theme.highlightColor
                         anchors {
@@ -105,7 +105,7 @@ BVApp.Page {
 
                     Item {
                         width: parent.width
-                        height: BVApp.Platform.isVPlay ?
+                        height: BVApp.Platform.isFelgo ?
                                     vPlayHeaderPicture.width * 0.02
                                   : BVApp.Theme.paddingMedium
                     }
@@ -113,10 +113,10 @@ BVApp.Page {
                     Label {
                                   //% "Cross-platform app"
                         text: qsTrId("id-about-cross-platform-app")
-                        font.pixelSize: BVApp.Platform.isVPlay ?
+                        font.pixelSize: BVApp.Platform.isFelgo ?
                                           BVApp.Theme.fontSizeExtraSmall
                                         : BVApp.Theme.fontSizeSmall
-                        color: BVApp.Platform.isVPlay ?
+                        color: BVApp.Platform.isFelgo ?
                                  BVApp.Theme.highlightDimmerColor
                                : BVApp.Theme.highlightColor
                         anchors {
@@ -127,10 +127,10 @@ BVApp.Page {
                     Label {
                                 //% "for SailfishOS, iOS and Android"
                         text: qsTrId("id-about-for-sailfish-and-ios")
-                        font.pixelSize: BVApp.Platform.isVPlay ?
+                        font.pixelSize: BVApp.Platform.isFelgo ?
                                           BVApp.Theme.fontSizeExtraSmall
                                         : BVApp.Theme.fontSizeSmall
-                        color: BVApp.Platform.isVPlay ?
+                        color: BVApp.Platform.isFelgo ?
                                  BVApp.Theme.highlightDimmerColor
                                : BVApp.Theme.highlightColor
                         anchors {
@@ -445,7 +445,7 @@ BVApp.Page {
             Item {
                 width: parent.width
                 height: BVApp.Theme.paddingMedium
-                visible: BVApp.Platform.isVPlay
+                visible: BVApp.Platform.isFelgo
             }
 
             Label {
@@ -454,7 +454,7 @@ BVApp.Page {
                 //% "possible for this app."
                 text: qsTrId("id-thanks-to-mapbox")
 
-                visible: BVApp.Platform.isVPlay
+                visible: BVApp.Platform.isFelgo
 
                 wrapMode: Text.WordWrap
                 font.pixelSize: BVApp.Theme.fontSizeSmall
@@ -549,7 +549,7 @@ BVApp.Page {
                    {
                        // HACK B/C ListElement doesn't support 'real' properties
                        // and we only want to include this ...
-                       if (BVApp.Platform.isVPlay)
+                       if (BVApp.Platform.isFelgo)
                        {
                            insert(0,
                            {
