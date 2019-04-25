@@ -60,7 +60,7 @@ BVApp.Page {
                 }
             }
 
-            // Semi-hack to make different Layouts on Sailfish and V-Play possible
+            // Semi-hack to make different Layouts on Sailfish and Felgo possible
             Item {
                 width: page.width
                 height: BVApp.Platform.isFelgo ?

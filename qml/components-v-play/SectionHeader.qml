@@ -17,7 +17,7 @@ Item {
     // The text item is anchored to the headers top with a
     // padding of the txt.height. Then we anchor the vertical center of the icon
     // to the text item's vertical center (top/bottom alignment of
-    // V-Play's icon class seems to be broken).
+    // Felgo's icon class seems to be broken).
     // As we want to have a small padding at the bottom,
     // we add BVApp.Theme.paddingSmall the height, as well -->
     height: txt.height * 2 + BVApp.Theme.paddingSmall

@@ -35,7 +35,7 @@ NavigationItem {
             }
             else if (splitViewExtraPageComponent && depth == 1)
             {
-                // HACK to fix V-Play problem with "stuck" page that appears
+                // HACK to fix Felgo problem with "stuck" page that appears
                 // with the iOS animations otherwise
                 pushExtraContentLater.start();
 

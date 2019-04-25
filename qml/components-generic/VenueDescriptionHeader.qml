@@ -109,11 +109,11 @@ Item {
     Rectangle {
         property int xMargin: 10
         property int yMargin: 7
-        // v-play: TypeError: Cannot read property 'x' of undefined
+        // Felgo: TypeError: Cannot read property 'x' of undefined
         x: nameLabel.extraContent.x + nameLabel.extraContent.width - xMargin
         y: nameLabel.y + nameLabel.childrenRect.y - yMargin - shrinkHeightBy * 0.1
         height: nameLabel.childrenRect.height + yMargin*2
-        // v-play: TypeError: Cannot read property 'width' of undefined
+        // Felgo: TypeError: Cannot read property 'width' of undefined
         width: (nameLabel.childrenRect.width - nameLabel.extraContent.width) + xMargin*2
         radius: 5
         color: BVApp.Theme.highlightDimmerColor
