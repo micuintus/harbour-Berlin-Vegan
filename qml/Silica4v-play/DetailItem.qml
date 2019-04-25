@@ -1,5 +1,5 @@
 import QtQuick 2.7
-import VPlayApps 1.0
+import Felgo 3.0
 
 import Sailfish.Silica 1.0
 

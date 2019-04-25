@@ -2,7 +2,7 @@ pragma Singleton
 
 import harbour.berlin.vegan 1.0
 import QtQuick 2.7
-import VPlayApps 1.0
+import Felgo 3.0
 
 QtObject {
 
