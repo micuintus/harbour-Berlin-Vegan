@@ -2,14 +2,15 @@ sudo: required
 
 language: cpp
 
+dist: xenial
+
 install:
-  - sudo add-apt-repository --yes ppa:beineri/opt-qt591-trusty
   - sudo apt-get update
-  - sudo apt-get install -y qt59-meta-full
+  - sudo apt-get install qtdeclarative5-dev qtbase5-dev-tools qt5-qmake
+  
 
 script:
-  - export QT_ENV_SCRIPT=$(find /opt -name 'qt*-env.sh')
-  - source $QT_ENV_SCRIPT
+  - export QT_SELECT=qt5
   - qmake BerlinVeganTests.pro
   - make
   - ./BerlinVeganTests
