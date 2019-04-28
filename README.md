@@ -31,7 +31,7 @@ This content is released under the terms of the [Attribution-NonCommercial 4.0 I
 ----
 
 Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework [Qt](https://www.qt.io/).
-While the app uses jolla's native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform [V-Play Engine](https://v-play.net/).
+While the app uses jolla's native Qt-based SDK on SailfishOS, on Android and iOS it is realized with [Felgo](https://felgo.com/).
 
 Moreover, this application greatfully makes use of [third party Free Software projects](https://github.com/micuintus/harbour-Berlin-Vegan/blob/master/qml/pages/about/AboutBerlinVegan.qml#L299).
 
