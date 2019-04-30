@@ -45,9 +45,7 @@ BVApp.Page {
     SilicaFlickable {
         id: flicka
         anchors.fill: parent
-        contentHeight: shortComment.y + shortComment.height + BVApp.Theme.paddingLarge
-                                         + (review.visible ? (review.height + review.anchors.topMargin) : 0)
-                                         + tellWaiter.height + tellWaiter.anchors.topMargin
+        contentHeight: tellWaiter.y + tellWaiter.height + tellWaiter.anchors.topMargin
 
         readonly property real nonDescriptionHeaderHeight: locationHeader.height
                                                           + underHeaderBar.height
@@ -70,8 +68,6 @@ BVApp.Page {
                 left: parent.left
                 right: parent.right
                 top: parent.top
-
-                bottomMargin: BVApp.Theme.paddingMedium
             }
         }
 
@@ -91,7 +87,6 @@ BVApp.Page {
                         : undefined
 
                 topMargin: BVApp.Theme.paddingMedium
-                bottomMargin: BVApp.Theme.paddingMedium
             }
 
             Label {
@@ -188,28 +183,6 @@ BVApp.Page {
             }
         }
 
-        VenueMapPage {
-            id: map
-
-            venueCoordinate: QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord)
-            vegan: restaurant.vegan
-            positionSource: page.positionSource
-
-            height: BVApp.Theme.mapHeight
-
-            anchors {
-                left: shortComment.left
-                right: shortComment.right
-                top: BVApp.Platform.isFelgo ?
-                       separator.bottom
-                     : detailsCollapsible.bottom
-                topMargin:    BVApp.Platform.isSailfish ?
-                                BVApp.Theme.paddingSmall
-                              : BVApp.Theme.paddingLarge
-                bottomMargin: BVApp.Theme.paddingLarge
-            }
-        }
-
         Label {
             id: shortComment
 
@@ -226,12 +199,33 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: map.bottom
+                top: BVApp.Platform.isFelgo ?
+                       separator.bottom
+                     : detailsCollapsible.bottom
 
-                topMargin:    BVApp.Theme.paddingLarge
-                bottomMargin: BVApp.Theme.paddingLarge
+                topMargin:    BVApp.Platform.isSailfish ?
+                                BVApp.Theme.paddingSmall
+                              : BVApp.Theme.paddingMedium
                 leftMargin:   BVApp.Theme.horizontalPageMargin
                 rightMargin:  BVApp.Theme.horizontalPageMargin
+            }
+        }
+
+        VenueMapPage {
+            id: map
+
+            venueCoordinate: QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord)
+            vegan: restaurant.vegan
+            positionSource: page.positionSource
+
+            height: BVApp.Theme.mapHeight
+
+            anchors {
+                left: shortComment.left
+                right: shortComment.right
+                top: shortComment.bottom
+
+                topMargin:    BVApp.Theme.paddingMedium
             }
         }
 
@@ -248,10 +242,9 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: shortComment.bottom
+                top: map.bottom
 
-                topMargin:    BVApp.Theme.paddingLarge * 2
-                bottomMargin: BVApp.Theme.paddingLarge
+                topMargin:    BVApp.Theme.paddingLarge
                 leftMargin:   BVApp.Theme.horizontalPageMargin
                 rightMargin:  BVApp.Theme.horizontalPageMargin
             }
@@ -265,10 +258,9 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: review.visible ? review.bottom : shortComment.bottom
+                top: review.visible ? review.bottom : map.bottom
 
                 topMargin:    BVApp.Theme.paddingLarge
-                bottomMargin: BVApp.Theme.paddingLarge
                 leftMargin:   BVApp.Theme.horizontalPageMargin
                 rightMargin:  BVApp.Theme.horizontalPageMargin
             }
