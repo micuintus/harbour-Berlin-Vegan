@@ -54,6 +54,16 @@ ios {
 
     app_launch_images.files = $$PWD/ios/Launch.xib $$files($$PWD/ios/Splashscreen_1242x2208_mit-Schriftzug.jpg)
     QMAKE_BUNDLE_DATA += app_launch_images
+
+    # Set ID - fix for Qt = 5.11.1 - https://bugreports.qt.io/browse/QTBUG-70072
+    equals(QT_MAJOR_VERSION, 5):equals(QT_MINOR_VERSION, 11):equals(QT_PATCH_VERSION, 1) {
+      load(default_post.prf)
+    }
+    xcode_product_bundle_identifier_setting.value = "org.berlin-vegan.bvapp"
+
+    # Set ID - Qt >= 5.12
+    QMAKE_TARGET_BUNDLE_PREFIX = "org.berlin-vegan"
+    QMAKE_BUNDLE = "bvapp"
 }
 
 TRANSLATIONS += translations/harbour-berlin-vegan.ts \
