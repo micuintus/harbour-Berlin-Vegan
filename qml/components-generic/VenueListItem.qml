@@ -67,7 +67,7 @@ ListItem {
         id: veganMark
 
         markerSize: namelabel.font.pixelSize * 0.92
-        color: BVApp.Theme.colorFor(model.vegan)
+        color: BVApp.Theme.vegTypeColor(model.vegan)
 
         visible: model.vegan >= VenueModel.Vegetarian
 

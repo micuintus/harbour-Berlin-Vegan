@@ -25,7 +25,7 @@ Rectangle {
             type: "location"
 
             scale: 1.6
-            color: BVApp.Theme.colorFor(vegan)
+            color: BVApp.Theme.vegTypeColor(vegan)
             verticalAlignment: Text.AlignBottom
         }
     }

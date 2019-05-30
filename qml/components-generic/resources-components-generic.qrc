@@ -14,5 +14,7 @@
         <file>PageIndicator.qml</file>
         <file>VeganMarker.qml</file>
         <file>VenueListItem.qml</file>
+        <file>VenueSubTypeTag.qml</file>
+        <file>VenueSubTypeTagCloud.qml</file>
     </qresource>
 </RCC>

@@ -104,7 +104,7 @@ BVApp.Page {
                     id: venueMarkerImage
                     type: "location"
 
-                    color: BVApp.Theme.colorFor(model.vegan)
+                    color: BVApp.Theme.vegTypeColor(model.vegan)
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {

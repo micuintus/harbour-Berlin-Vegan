@@ -195,17 +195,18 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     static const auto roles =
     QHash<int, QByteArray>
     {
-        { VenueModelRoles::ID,            "id"          },
-        { VenueModelRoles::Name,          "name"        },
-        { VenueModelRoles::VenueTypeRole, "venueType"   },
-        { VenueModelRoles::Favorite,      "favorite"    },
-        { VenueModelRoles::Street,        "street"      },
-        { VenueModelRoles::Description,   "comment"     },
-        { VenueModelRoles::DescriptionEn, "commentEnglish" },
-        { VenueModelRoles::Review,        "review"      },
-        { VenueModelRoles::Website,       "website"     },
-        { VenueModelRoles::Telephone,     "telephone"   },
-        { VenueModelRoles::Pictures,      "pictures"    },
+        { VenueModelRoles::ID,               "id"          },
+        { VenueModelRoles::Name,             "name"        },
+        { VenueModelRoles::VenueTypeRole,    "venueType"   },
+        { VenueModelRoles::VenueSubTypeRole, "venueSubType"   },
+        { VenueModelRoles::Favorite,         "favorite"    },
+        { VenueModelRoles::Street,           "street"      },
+        { VenueModelRoles::Description,      "comment"     },
+        { VenueModelRoles::DescriptionEn,    "commentEnglish" },
+        { VenueModelRoles::Review,           "review"      },
+        { VenueModelRoles::Website,          "website"     },
+        { VenueModelRoles::Telephone,        "telephone"   },
+        { VenueModelRoles::Pictures,         "pictures"    },
 
         // Coordinates
         { VenueModelRoles::LatCoord,      "latCoord"    },

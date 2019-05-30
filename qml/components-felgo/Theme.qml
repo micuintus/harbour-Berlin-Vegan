@@ -6,7 +6,26 @@ import Felgo 3.0
 
 QtObject {
 
-    function colorFor(type) {
+    function venueSubTypeTagColor(type) {
+        switch (type) {
+        case VenueModel.RestaurantFlag:
+            return "#ae2e2e";
+        case VenueModel.FastFoodFlag:
+            return "#801877";
+        case VenueModel.CafeFlag:
+            return "#b88b11";
+        case VenueModel.IceCreamFlag:
+            return "#bd007d";
+        case VenueModel.BarFlag:
+            return "#6e207c";
+
+        case VenueModel.NoneFlag:
+        default:
+            return "#000000";
+        }
+    }
+
+    function vegTypeColor(type) {
         switch (type) {
         case VenueModel.Vegetarian:
         case VenueModel.VegetarianVeganDeclared:

@@ -42,6 +42,7 @@ ApplicationWindow
         id: gJsonVenueModel
     }
 
+
     PositionSource {
         id: globalPositionSource
         updateInterval: 5000

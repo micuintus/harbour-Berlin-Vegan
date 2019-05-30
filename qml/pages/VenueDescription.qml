@@ -183,18 +183,10 @@ BVApp.Page {
             }
         }
 
-        Label {
-            id: shortComment
 
-            visible: isFoodVenue
-
-            font.pixelSize: BVApp.Theme.fontSizeSmall
-            text: isFoodVenue ?
-                      (Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
-                           restaurant.comment :
-                           restaurant.commentEnglish) : ""
-            wrapMode: Text.WordWrap
-            color: BVApp.Theme.primaryColor
+        BVApp.VenueSubTypeTagCloud {
+            id: venueSubTypeTagCloud
+            restaurant: page.restaurant
 
             anchors {
                 left: parent.left
@@ -211,6 +203,47 @@ BVApp.Page {
             }
         }
 
+
+        Label {
+            id: shortComment
+
+            visible: isFoodVenue
+
+            font.pixelSize: BVApp.Theme.fontSizeSmall
+            text: isFoodVenue ?
+                      (Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
+                           restaurant.comment :
+                           restaurant.commentEnglish) : ""
+            wrapMode: Text.WordWrap
+            color: BVApp.Theme.primaryColor
+
+            onLineLaidOut: {
+                if (line.y <= venueSubTypeTagCloud.height + BVApp.Theme.paddingSmall) {
+                    var remainingWidth = line.width - venueSubTypeTagCloud.implicitWidth - 2 * BVApp.Theme.horizontalPageMargin;
+                    if (remainingWidth < 0.3 * line.width)
+                    {
+                        line.height = line.height + venueSubTypeTagCloud.height + BVApp.Theme.paddingSmall
+                    }
+                    else
+                    {
+                        line.width = remainingWidth
+                    }
+                }
+            }
+
+
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: venueSubTypeTagCloud.top
+
+                leftMargin:   BVApp.Theme.horizontalPageMargin
+                rightMargin:  BVApp.Theme.horizontalPageMargin
+            }
+
+        }
+
+
         VenueMapPage {
             id: map
 
@@ -223,11 +256,15 @@ BVApp.Page {
             anchors {
                 left: shortComment.left
                 right: shortComment.right
-                top: shortComment.bottom
+                top: venueSubTypeTagCloud.height > shortComment.height ?
+                         venueSubTypeTagCloud.bottom
+                       : shortComment.bottom
 
                 topMargin:    BVApp.Theme.paddingMedium
             }
         }
+
+
 
         Label {
             id: review
