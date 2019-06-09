@@ -23,7 +23,7 @@
  *
 **/
 
-import QtQuick 2.2
+import QtQuick 2.5
 import Sailfish.Silica 1.0
 import QtPositioning 5.2
 
@@ -203,46 +203,44 @@ BVApp.Page {
             }
         }
 
-
         Label {
             id: shortComment
+
+            TextMetrics {
+                id: shortCommentTextMetrics
+                font.family: shortComment.font.family
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+
+                elide: Text.ElideNone
+                text: isFoodVenue ?
+                          (Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
+                               restaurant.comment :
+                               restaurant.commentEnglish) : ""
+            }
+
+            property bool showShortCommentLeftOfTags:
+                shortCommentTextMetrics.width + venueSubTypeTagCloud.implicitWidth + BVApp.Theme.horizontalPageMargin
+                <= parent.width -  2 * BVApp.Theme.horizontalPageMargin
 
             visible: isFoodVenue
 
             font.pixelSize: BVApp.Theme.fontSizeSmall
-            text: isFoodVenue ?
-                      (Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
-                           restaurant.comment :
-                           restaurant.commentEnglish) : ""
+            text: shortCommentTextMetrics.text
             wrapMode: Text.WordWrap
             color: BVApp.Theme.primaryColor
-
-            onLineLaidOut: {
-                if (line.y <= venueSubTypeTagCloud.height + BVApp.Theme.paddingSmall) {
-                    var remainingWidth = line.width - venueSubTypeTagCloud.implicitWidth - 2 * BVApp.Theme.horizontalPageMargin;
-                    if (remainingWidth < 0.3 * line.width)
-                    {
-                        line.height = line.height + venueSubTypeTagCloud.height + BVApp.Theme.paddingSmall
-                    }
-                    else
-                    {
-                        line.width = remainingWidth
-                    }
-                }
-            }
-
 
             anchors {
                 left: parent.left
                 right: parent.right
-                top: venueSubTypeTagCloud.top
+                top:  showShortCommentLeftOfTags ?
+                         venueSubTypeTagCloud.top
+                       : venueSubTypeTagCloud.bottom
 
+                topMargin: showShortCommentLeftOfTags ? 0 : BVApp.Theme.paddingMedium
                 leftMargin:   BVApp.Theme.horizontalPageMargin
                 rightMargin:  BVApp.Theme.horizontalPageMargin
             }
-
         }
-
 
         VenueMapPage {
             id: map
@@ -256,11 +254,13 @@ BVApp.Page {
             anchors {
                 left: shortComment.left
                 right: shortComment.right
-                top: venueSubTypeTagCloud.height > shortComment.height ?
+                top: shortComment.showShortCommentLeftOfTags ?
                          venueSubTypeTagCloud.bottom
                        : shortComment.bottom
 
-                topMargin:    BVApp.Theme.paddingMedium
+                topMargin:  BVApp.Platform.isSailfish ?
+                                BVApp.Theme.paddingLarge
+                              : BVApp.Theme.paddingMedium
             }
         }
 
