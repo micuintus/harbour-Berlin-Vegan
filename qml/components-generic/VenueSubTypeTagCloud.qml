@@ -11,39 +11,13 @@ Flow {
     spacing: BVApp.Theme.paddingMedium
     layoutDirection: Qt.RightToLeft
 
-    BVApp.VenueSubTypeTag {
-        color: BVApp.Theme.venueSubTypeTagColor(VenueSortFilterProxyModel.RestaurantFlag)
-                 //% "Restaurant"
-        text: qsTrId("id-venue-subtype-restaurant")
-        visible: restaurant.venueSubType & VenueModel.RestaurantFlag
-    }
+    Repeater {
+        model: BVApp.VenueSubTypeDefinitions.foodVenueSubTypes
 
-    BVApp.VenueSubTypeTag {
-        color: BVApp.Theme.venueSubTypeTagColor(VenueSortFilterProxyModel.FastFoodFlag)
-                 //% "Snack bar"
-        text: qsTrId("id-venue-subtype-fastfood")
-        visible: restaurant.venueSubType & VenueModel.FastFoodFlag
+        BVApp.VenueSubTypeTag {
+            color: BVApp.Theme.venueSubTypeTagColor(model.flag)
+            text: model.text
+            visible: restaurant.venueSubType & model.flag
+        }
     }
-
-    BVApp.VenueSubTypeTag {
-        color: BVApp.Theme.venueSubTypeTagColor(VenueSortFilterProxyModel.CafeFlag)
-                 //% "Café"
-        text: qsTrId("id-venue-subtype-cafe")
-        visible: restaurant.venueSubType & VenueModel.CafeFlag
-    }
-
-    BVApp.VenueSubTypeTag {
-        color: BVApp.Theme.venueSubTypeTagColor(VenueSortFilterProxyModel.IceCreamFlag)
-                 //% "Ice cream parlor"
-        text: qsTrId("id-venue-subtype-icecream")
-        visible: restaurant.venueSubType & VenueModel.IceCreamFlag
-    }
-
-    BVApp.VenueSubTypeTag {
-        color: BVApp.Theme.venueSubTypeTagColor(VenueSortFilterProxyModel.BarFlag)
-                 //% "Bar"
-        text: qsTrId("id-venue-subtype-bar")
-        visible: restaurant.venueSubType & VenueModel.BarFlag
-    }
-
 }

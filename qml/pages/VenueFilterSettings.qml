@@ -127,57 +127,18 @@ BVApp.Page {
                     icon: BVApp.Theme.iconFor("coffee")
                 }
 
-                TextSwitch {
-                    //% "Restaurant"
-                    text: qsTrId("id-venue-subtype-restaurant")
-                    onCheckedChanged: {
-                        jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.RestaurantFlag, checked);
+                Repeater {
+                    model: BVApp.VenueSubTypeDefinitions.foodVenueSubTypes
+                    TextSwitch {
+                        text: model.text
+                        onCheckedChanged: {
+                            jsonModelCollection.setVenueSubTypeFilterFlag(model.flag, checked);
+                        }
+
+                        Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & model.flag;
                     }
-
-                    Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.RestaurantFlag;
-                }
-
-                TextSwitch {
-                    //% "Snack bar"
-                    text: qsTrId("id-venue-subtype-fastfood")
-                    onCheckedChanged: {
-                        jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.FastFoodFlag, checked);
-                    }
-
-                    Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.FastFoodFlag;
-                }
-
-                TextSwitch {
-                    //% "Café"
-                    text: qsTrId("id-venue-subtype-cafe")
-                    onCheckedChanged: {
-                        jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.CafeFlag, checked);
-                    }
-
-                    Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.CafeFlag;
-                }
-
-                TextSwitch {
-                    //% "Ice cream parlor"
-                    text: qsTrId("id-venue-subtype-icecream")
-                    onCheckedChanged: {
-                        jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.IceCreamFlag, checked);
-                    }
-
-                    Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.IceCreamFlag;
-                }
-
-                TextSwitch {
-                    //% "Bar"
-                    text: qsTrId("id-venue-subtype-bar")
-                    onCheckedChanged: {
-                        jsonModelCollection.setVenueSubTypeFilterFlag(VenueSortFilterProxyModel.BarFlag, checked);
-                    }
-
-                    Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & VenueSortFilterProxyModel.BarFlag;
                 }
             }
-
 
             BVApp.SectionHeader {
                 //% "Veg*an category"

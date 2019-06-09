@@ -16,5 +16,7 @@
         <file>VenueListItem.qml</file>
         <file>VenueSubTypeTag.qml</file>
         <file>VenueSubTypeTagCloud.qml</file>
+        <file>VenueSubTypeDefinition.qml</file>
+        <file>VenueSubTypeDefinitions.qml</file>
     </qresource>
 </RCC>
