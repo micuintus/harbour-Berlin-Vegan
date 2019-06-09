@@ -104,6 +104,7 @@ Item {
 
 
             BVApp.SectionHeader {
+
                             //% "Accessibility"
                 text: qsTrId("id-accessibility")
                 icon: BVApp.Theme.iconFor("accessible")
@@ -133,10 +134,23 @@ Item {
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
             }
 
+
             BVApp.SectionHeader {
                             //% "Venue features"
                 text: qsTrId("id-venue-features")
                 icon: BVApp.Theme.iconFor("more_vert")
+            }
+
+            DetailItem {
+                             //% "Delivery service"
+                label: qsTrId("id-delivery")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
+            }
+
+            DetailItem {
+                             //% "Catering"
+                label: qsTrId("id-catering")
+                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
             }
 
             DetailItem {
@@ -157,17 +171,6 @@ Item {
                 value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
             }
 
-            DetailItem {
-                             //% "Catering"
-                label: qsTrId("id-catering")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
-            }
-
-            DetailItem {
-                             //% "Delivery service"
-                label: qsTrId("id-delivery")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
-            }
         }
     }
 }
