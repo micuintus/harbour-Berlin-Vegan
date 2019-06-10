@@ -110,8 +110,9 @@
         <translation>Hunde erlaubt</translation>
     </message>
     <message id="id-venue-features">
-        <source>Venue features</source>
-        <translation>Eigenschaften des Lokals</translation>
+        <source>Features</source>
+        <oldsource>Venue features</oldsource>
+        <translation>Eigenschaften</translation>
     </message>
     <message id="id-wifi">
         <source>WiFi</source>
@@ -359,6 +360,10 @@
     <message id="id-shop">
         <source>Shop</source>
         <translation>Geschäft</translation>
+    </message>
+    <message id="id-venue-more-features">
+        <source>Further features</source>
+        <translation>Weitere Eigenschaften</translation>
     </message>
 </context>
 </TS>
