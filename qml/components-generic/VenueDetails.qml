@@ -71,15 +71,27 @@ Item {
         }
 
         BVApp.SectionHeader {
+                     //% "Features"
+            text: qsTrId("id-venue-features")
+            icon: BVApp.Theme.iconFor("more_vert")
+            // Summerize venue features for shops under one single header
+            visible: !isGastroVenue
+        }
+
+        BVApp.SectionHeader {
                      //% "Food details"
             text: qsTrId("id-food-details")
             icon: BVApp.Theme.iconFor("details")
             id: foodDetailsHeader
+            // Summerize venue features for shops under one single header
+            visible: isGastroVenue
         }
 
         DetailItem {
                       //% "Category"
-            label: qsTrId("id-vegan-venue-category")
+            label: isGastroVenue ?
+                       qsTrId("id-vegan-venue-category")
+                     : qsTrId("id-filter-vegan-category")
             value: BVApp.VenueDescriptionAlgorithms.restaurantCategory(restaurant.vegan)
         }
 
@@ -87,7 +99,6 @@ Item {
                       //% "Organic products"
             label: qsTrId("id-organic")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
-            visible: isGastroVenue
         }
 
         DetailItem {
@@ -114,13 +125,13 @@ Item {
         Column {
 
             width: parent.width
-            visible: isGastroVenue
-
 
             BVApp.SectionHeader {
                          //% "Accessibility"
                 text: qsTrId("id-accessibility")
                 icon: BVApp.Theme.iconFor("accessible")
+                // Summerize venue features for shops under one single header
+                visible: isGastroVenue
             }
 
             DetailItem {
@@ -133,25 +144,30 @@ Item {
                           //% "Wheelchair-accessible WC"
                 label: qsTrId("id-wheelchair-wc")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
+                visible: isGastroVenue
             }
 
             DetailItem {
                           //% "High chair"
                 label: qsTrId("id-high-chair")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
+                visible: isGastroVenue
             }
 
             DetailItem {
                           //% "Dogs allowed"
                 label: qsTrId("id-dogs-allowed")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
+                visible: isGastroVenue
             }
 
 
             BVApp.SectionHeader {
-                         //% "Venue features"
-                text: qsTrId("id-venue-features")
+                         //% "Further features"
+                text: qsTrId("id-venue-more-features")
                 icon: BVApp.Theme.iconFor("more_vert")
+                // Summerize venue features for shops under one single header
+                visible: isGastroVenue
             }
 
             DetailItem {
@@ -164,24 +180,28 @@ Item {
                           //% "Catering"
                 label: qsTrId("id-catering")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
+                visible: isGastroVenue
             }
 
             DetailItem {
                           //% "WiFi"
                 label: qsTrId("id-wifi")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
+                visible: isGastroVenue
             }
 
             DetailItem {
                           //% "Seats outdoor"
                 label: qsTrId("id-outdoor-seats")
                 value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
+                visible: isGastroVenue
             }
 
             DetailItem {
                           //% "Seats indoor"
                 label: qsTrId("id-indoor-seats")
                 value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
+                visible: isGastroVenue
             }
         }
     }
