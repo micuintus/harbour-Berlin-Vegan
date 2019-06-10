@@ -216,17 +216,14 @@ BVApp.Page {
                 font.pixelSize: BVApp.Theme.fontSizeSmall
 
                 elide: Text.ElideNone
-                text: isGastroVenue ?
-                          (Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
-                               restaurant.comment :
-                               restaurant.commentEnglish) : ""
+                text: Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
+                          restaurant.comment :
+                          restaurant.commentEnglish
             }
 
             property bool showShortCommentLeftOfTags:
                 shortCommentTextMetrics.width + venueSubTypeTagCloud.implicitWidth + BVApp.Theme.horizontalPageMargin
                 <= parent.width -  2 * BVApp.Theme.horizontalPageMargin
-
-            visible: isGastroVenue
 
             font.pixelSize: BVApp.Theme.fontSizeSmall
             text: shortCommentTextMetrics.text
@@ -269,11 +266,10 @@ BVApp.Page {
         }
 
 
-
         Label {
             id: review
 
-            visible: isGastroVenue && typeof restaurant.review !== "undefined"
+            visible: typeof restaurant.review !== "undefined"
 
             font.pixelSize: BVApp.Theme.fontSizeSmall
             text: visible ? restaurant.review : ""
