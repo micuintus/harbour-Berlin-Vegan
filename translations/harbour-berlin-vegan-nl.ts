@@ -152,7 +152,7 @@
         <location filename="../qml/components-generic/VenueDetails.qml" line="167"/>
         <source>Further features</source>
         <oldsource>Andere functies</oldsource>
-        <translation>Andere functies</translation>
+        <translation>Overige kenmerken</translation>
     </message>
     <message id="id-wifi">
         <location filename="../qml/components-generic/VenueDetails.qml" line="188"/>
@@ -240,7 +240,7 @@
     <message id="id-shops">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="82"/>
         <source>Shops</source>
-        <translation>Shops</translation>
+        <translation>Winkels</translation>
     </message>
     <message id="id-filter-with-review">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="294"/>
@@ -307,7 +307,7 @@
     <message id="id-venue-subtype-icecream">
         <location filename="../qml/components-generic/VenueSubTypeDefinitions.qml" line="26"/>
         <source>Ice cream parlor</source>
-        <translation>Ijssalon</translation>
+        <translation>IJssalon</translation>
     </message>
     <message id="id-venue-subtype-foods">
         <location filename="../qml/components-generic/VenueSubTypeDefinitions.qml" line="40"/>
@@ -327,7 +327,7 @@
     <message id="id-venue-subtype-supermarket">
         <location filename="../qml/components-generic/VenueSubTypeDefinitions.qml" line="55"/>
         <source>Supermarket</source>
-        <translation>Supermarket</translation>
+        <translation>Supermarkt</translation>
     </message>
     <message id="id-venue-subtype-hairdressers">
         <location filename="../qml/components-generic/VenueSubTypeDefinitions.qml" line="60"/>
@@ -342,7 +342,7 @@
     <message id="id-venue-subtype-tattoostudio">
         <location filename="../qml/components-generic/VenueSubTypeDefinitions.qml" line="70"/>
         <source>Tattoo studio</source>
-        <translation>Tattoo studio</translation>
+        <translation>Tattoostudio</translation>
     </message>
     <message id="id-venue-subtype-accommodation">
         <location filename="../qml/components-generic/VenueSubTypeDefinitions.qml" line="75"/>
@@ -446,7 +446,7 @@
     <message id="id-venue-closes-soon">
         <location filename="../qml/components-generic/VenueListItem.qml" line="90"/>
         <source>closes soon</source>
-        <translation>sluit snel</translation>
+        <translation>sluit bijna</translation>
     </message>
     <message id="id-venue-please-tell-waiter">
         <location filename="../qml/pages/VenueDescription.qml" line="314"/>
@@ -457,7 +457,7 @@
     <message id="id-icon-toolbar-call">
         <location filename="../qml/components-generic/IconToolBar.qml" line="59"/>
         <source>CALL</source>
-        <translation>BEL</translation>
+        <translation>BELLEN</translation>
     </message>
     <message id="id-icon-toolbar-favorite">
         <location filename="../qml/components-generic/IconToolBar.qml" line="72"/>
