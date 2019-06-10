@@ -33,6 +33,7 @@ BVApp.Page {
     id: page
 
     property var jsonModelCollection
+    property bool showGastroVenues: jsonModelCollection.filterVenueType & VenueModel.GastroFlag
 
     SilicaFlickable {
         anchors.fill: parent
@@ -126,7 +127,7 @@ BVApp.Page {
                 }
 
                 Repeater {
-                    model: jsonModelCollection.filterVenueType & VenueModel.GastroFlag ?
+                    model: showGastroVenues ?
                                BVApp.VenueSubTypeDefinitions.gastroVenueSubTypes
                              : BVApp.VenueSubTypeDefinitions.shopVenueSubTypes
                     TextSwitch {
@@ -175,7 +176,6 @@ BVApp.Page {
 
             Column {
 
-                visible: jsonModelCollection.filterVenueType & VenueModel.GastroFlag
                 width: parent.width
 
                 BVApp.SectionHeader {
@@ -193,6 +193,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                     text: qsTrId("id-gluten-free")
                     onCheckedChanged: {
                         jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.GlutenFree, checked);
@@ -202,6 +203,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                     text: qsTrId("id-breakfast")
                     onCheckedChanged: {
                         jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Breakfast, checked);
@@ -211,6 +213,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                     text: qsTrId("id-brunch")
                     onCheckedChanged: {
                         jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Brunch, checked);
@@ -229,6 +232,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                     text: qsTrId("id-wheelchair-wc")
                     onCheckedChanged: {
                         jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessibleWc , checked);
@@ -238,6 +242,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                     text: qsTrId("id-high-chair")
                     onCheckedChanged: {
                         jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.ChildChair, checked);
@@ -247,6 +252,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                     text: qsTrId("id-dogs-allowed")
                     onCheckedChanged: {
                         jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Dog, checked);
@@ -265,6 +271,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                     text: qsTrId("id-catering")
                     onCheckedChanged: {
                         jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Catering, checked);
@@ -274,6 +281,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                     text: qsTrId("id-wifi")
                     onCheckedChanged: {
                         jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Wlan, checked);

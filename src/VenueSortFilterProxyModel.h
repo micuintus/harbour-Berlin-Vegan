@@ -94,7 +94,7 @@ private:
 
     bool searchStringMatches(const QModelIndex& index) const;
     bool venueSubTypeMatches(const QModelIndex& index) const;
-    bool venueTypeMatches(const VenueModel::VenueType& venueType) const;
+    bool venueTypeMatches(const QModelIndex& indexe) const;
     bool vegCategoryMatches(const QModelIndex& index) const;
     bool venuePropertiesMatch(const QModelIndex& index) const;
     bool favoriteStatusMatches(const QModelIndex& index) const;
