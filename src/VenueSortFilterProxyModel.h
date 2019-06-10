@@ -107,7 +107,7 @@ private:
     QGeoCoordinate m_currentPosition;
 
     // Positive filter / OR filter: Filter in if any category matches
-    VenueModel::VenueTypeFlags m_filterVenueType = VenueModel::FoodFlag;
+    VenueModel::VenueTypeFlags m_filterVenueType = VenueModel::GastroFlag;
                                                          // Gastro flags
     VenueModel::VenueSubTypeFlags m_filterVenueSubType = { VenueModel::RestaurantFlag
                                                          | VenueModel::FastFoodFlag

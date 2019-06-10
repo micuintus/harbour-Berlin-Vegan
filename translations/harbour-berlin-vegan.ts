@@ -221,16 +221,25 @@
     </message>
     <message id="id-venue-category">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="55"/>
-        <source>Venue type</source>
-        <translation>Venue type</translation>
+        <source>Venue category</source>
+        <oldsource>Venue type</oldsource>
+        <translation>Venue category</translation>
+    </message>
+    <message id="id-gastro">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="62"/>
+        <source>Eating out</source>
+        <translation>Eating out</translation>
+    </message>
+    <message id="id-shops">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="81"/>
+        <source>Shops</source>
+        <translation>Shops</translation>
     </message>
     <message id="id-food">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="62"/>
         <source>Food</source>
         <translation>Food</translation>
     </message>
     <message id="id-shopping">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="81"/>
         <source>Shopping</source>
         <translation>Shopping</translation>
     </message>
@@ -262,9 +271,10 @@
         <translation>Brunch</translation>
     </message>
     <message id="id-filter-venue-sub-type">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="126"/>
-        <source>Venue sub type</source>
-        <translation>Venue sub type</translation>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="124"/>
+        <source>Sub category</source>
+        <oldsource>Venue sub type</oldsource>
+        <translation>Sub category</translation>
     </message>
     <message id="id-venue-subtype-restaurant">
         <location filename="../qml/components-generic/VenueSubTypeDefinitions.qml" line="11"/>

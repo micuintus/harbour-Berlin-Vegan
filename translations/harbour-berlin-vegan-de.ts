@@ -237,7 +237,8 @@
         <translation>Keine Filter- oder Suchergebnisse</translation>
     </message>
     <message id="id-filter-venue-sub-type">
-        <source>Venue sub type</source>
+        <source>Sub category</source>
+        <oldsource>Venue sub type</oldsource>
         <translation>Unterkategorie</translation>
     </message>
     <message id="id-venue-subtype-restaurant">
@@ -265,8 +266,8 @@
         <translation>Einkaufen</translation>
     </message>
     <message id="id-venue-category">
-        <source>Venue type</source>
-        <oldsource>Venue category</oldsource>
+        <source>Venue category</source>
+        <oldsource>Venue type</oldsource>
         <translation>Laden-Kategorie</translation>
     </message>
     <message id="id-venue-closed">
@@ -346,6 +347,18 @@
     <message id="id-venue-subtype-accommodation">
         <source>Accommodation</source>
         <translation>Unterkunft</translation>
+    </message>
+    <message id="id-gastro">
+        <source>Eating out</source>
+        <translation>Gastronomie</translation>
+    </message>
+    <message id="id-shops">
+        <source>Shops</source>
+        <translation>Geschäfte</translation>
+    </message>
+    <message id="id-shop">
+        <source>Shop</source>
+        <translation>Geschäft</translation>
     </message>
 </context>
 </TS>

@@ -39,7 +39,7 @@ BVApp.Page {
 
     property var restaurant
     property var positionSource
-    readonly property bool isFoodVenue: restaurant.venueType === VenueModel.Food
+    readonly property bool isGastroVenue: restaurant.venueType === VenueModel.Gastro
 
 
     SilicaFlickable {
@@ -147,7 +147,7 @@ BVApp.Page {
         BVApp.CollapsibleItem {
             id: detailsCollapsible
 
-            collapsed: isFoodVenue
+            collapsed: isGastroVenue
             collapsedHeight: venueDetails.collapsedHeight
             expandedHeight: venueDetails.expandedHeight + BVApp.Theme.paddingLarge
 
@@ -161,7 +161,7 @@ BVApp.Page {
             contentItem: BVApp.VenueDetails {
                 id: venueDetails
                 restaurant: page.restaurant
-                isFoodVenue: page.isFoodVenue
+                isGastroVenue: page.isGastroVenue
                 anchors.fill: parent
             }
         }
@@ -188,9 +188,9 @@ BVApp.Page {
             id: venueSubTypeTagCloud
             restaurant: page.restaurant
             venueSubTypeDefinitions:
-                isFoodVenue ?
-                    BVApp.VenueSubTypeDefinitions.foodVenueSubTypes
-                  : BVApp.VenueSubTypeDefinitions.shopsVenueSubTypes
+                isGastroVenue ?
+                    BVApp.VenueSubTypeDefinitions.gastroVenueSubTypes
+                  : BVApp.VenueSubTypeDefinitions.shopVenueSubTypes
 
             anchors {
                 left: parent.left
@@ -216,7 +216,7 @@ BVApp.Page {
                 font.pixelSize: BVApp.Theme.fontSizeSmall
 
                 elide: Text.ElideNone
-                text: isFoodVenue ?
+                text: isGastroVenue ?
                           (Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
                                restaurant.comment :
                                restaurant.commentEnglish) : ""
@@ -226,7 +226,7 @@ BVApp.Page {
                 shortCommentTextMetrics.width + venueSubTypeTagCloud.implicitWidth + BVApp.Theme.horizontalPageMargin
                 <= parent.width -  2 * BVApp.Theme.horizontalPageMargin
 
-            visible: isFoodVenue
+            visible: isGastroVenue
 
             font.pixelSize: BVApp.Theme.fontSizeSmall
             text: shortCommentTextMetrics.text
@@ -273,7 +273,7 @@ BVApp.Page {
         Label {
             id: review
 
-            visible: isFoodVenue && typeof restaurant.review !== "undefined"
+            visible: isGastroVenue && typeof restaurant.review !== "undefined"
 
             font.pixelSize: BVApp.Theme.fontSizeSmall
             text: visible ? restaurant.review : ""
@@ -294,7 +294,7 @@ BVApp.Page {
         Label {
             id: tellWaiter
 
-            visible: isFoodVenue
+            visible: isGastroVenue
 
             anchors {
                 left: parent.left

@@ -32,7 +32,7 @@ VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
         { "Eiscafe"     , VenueModel::IceCreamFlag      },
         { "Bar"         , VenueModel::BarFlag           },
 
-        // Shops tags
+        // Shop tags
         { "foods"       , VenueModel::FoodsFlag         },
         { "clothing"    , VenueModel::ClothingFlag      },
         { "toiletries"  , VenueModel::ToiletriesFlag    },
