@@ -149,6 +149,18 @@ void VenueSortFilterProxyModel::setFilterOpenNow(bool filterOpenNow)
     emit filterOpenNowChanged();
 }
 
+void VenueSortFilterProxyModel::setFilterWithReview(bool filterWithReview)
+{
+    if (m_filterWithReview == filterWithReview)
+    {
+        return;
+    }
+
+    m_filterWithReview = filterWithReview;
+    invalidateFilter();
+    emit filterWithReviewChanged();
+}
+
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 {
     if (m_currentPosition == position)
@@ -183,6 +195,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
     else
     {
         return venueTypeMatches(index)
+            && (!m_filterWithReview || hasReview(index))
             && vegCategoryMatches(index)
             && venueSubTypeMatches(index)
             && venuePropertiesMatch(index)
@@ -311,6 +324,12 @@ bool VenueSortFilterProxyModel::openNow(const QModelIndex &index) const
     {
         return false;
     }
+}
+
+bool VenueSortFilterProxyModel::hasReview(const QModelIndex &index) const
+{
+    const auto valueRole = index.data( VenueModel::VenueModelRoles::Review);
+    return valueRole.isValid() && valueRole.canConvert<QString>();
 }
 
 
