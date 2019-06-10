@@ -1,6 +1,6 @@
 pragma Singleton
 
-import QtQuick 2.2
+import QtQuick 2.5
 
 QtObject {
 

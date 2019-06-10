@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 2.5
 
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.generic 1.0 as BVApp
