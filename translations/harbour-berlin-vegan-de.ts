@@ -220,9 +220,9 @@
         <translation>CC-BY-NC anzeigen</translation>
     </message>
     <message id="id-thanks-to-qt">
-        <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform Felgo Engine.</source>
-        <oldsource>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform toolkit Felgo.</oldsource>
-        <translation type="unfinished">Berlin-Vegan für SailfishOS, iOS und Android wird mit dem freien Open-Source-Framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt; entwickelt. Während die App jollas natives Qt-basiertes SDK für SailfishOS verwendet, sind die Android- und iOS-Varianten mit dem Cross-Plattform-Toolkit Felgo realisiert.</translation>
+        <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform toolkit Felgo.</source>
+        <oldsource>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform Felgo Engine.</oldsource>
+        <translation>Berlin-Vegan für SailfishOS, iOS und Android wird mit dem freien Open-Source-Framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt; entwickelt. Während die App jollas natives Qt-basiertes SDK für SailfishOS verwendet, sind die Android- und iOS-Varianten mit dem Cross-Plattform-Toolkit Felgo realisiert.</translation>
     </message>
     <message id="id-thanks-to-mapbox">
         <source>We would like to thank Mapbox for donating &lt;a href=&apos;ref&apos;&gt;their astonishing Mapbox GL Plugin&lt;/a&gt; to the Qt project, which makes hardware accelerated vector maps possible for this app.</source>
@@ -296,13 +296,11 @@
         <translation>Bar</translation>
     </message>
     <message id="id-brunch">
-        <source></source>
-        <oldsource>Brunch</oldsource>
+        <source>Brunch</source>
         <translation>Brunch</translation>
     </message>
     <message id="id-breakfast">
-        <source></source>
-        <oldsource>Breakfast</oldsource>
+        <source>Breakfast</source>
         <translation>Frühstück</translation>
     </message>
     <message id="id-icon-toolbar-call">
@@ -316,6 +314,38 @@
     <message id="id-icon-toolbar-website">
         <source>WEBSITE</source>
         <translation>WEBSITE</translation>
+    </message>
+    <message id="id-venue-subtype-foods">
+        <source>Food</source>
+        <translation>Lebensmittel</translation>
+    </message>
+    <message id="id-venue-subtype-clothing">
+        <source>Fashion</source>
+        <translation>Kleidung</translation>
+    </message>
+    <message id="id-venue-subtype-toiletries">
+        <source>Toiletries</source>
+        <translation>Kosmetik</translation>
+    </message>
+    <message id="id-venue-subtype-supermarket">
+        <source>Supermarket</source>
+        <translation>Supermarkt</translation>
+    </message>
+    <message id="id-venue-subtype-hairdressers">
+        <source>Hairdresser&apos;s</source>
+        <translation>Friseursalon</translation>
+    </message>
+    <message id="id-venue-subtype-sports">
+        <source>Sports</source>
+        <translation>Sport</translation>
+    </message>
+    <message id="id-venue-subtype-tattoostudio">
+        <source>Tattoo studio</source>
+        <translation>Tattoostudio</translation>
+    </message>
+    <message id="id-venue-subtype-accommodation">
+        <source>Accommodation</source>
+        <translation>Unterkunft</translation>
     </message>
 </context>
 </TS>
