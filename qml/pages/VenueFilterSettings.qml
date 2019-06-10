@@ -117,8 +117,6 @@ BVApp.Page {
             }
 
             Column {
-
-                visible: jsonModelCollection.filterVenueType & VenueModel.FoodFlag
                 width: parent.width
 
                 BVApp.SectionHeader {
@@ -128,7 +126,9 @@ BVApp.Page {
                 }
 
                 Repeater {
-                    model: BVApp.VenueSubTypeDefinitions.foodVenueSubTypes
+                    model: jsonModelCollection.filterVenueType & VenueModel.FoodFlag ?
+                               BVApp.VenueSubTypeDefinitions.foodVenueSubTypes
+                             : BVApp.VenueSubTypeDefinitions.shopsVenueSubTypes
                     TextSwitch {
                         text: model.text
                         onCheckedChanged: {

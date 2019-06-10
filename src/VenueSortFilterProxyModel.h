@@ -108,11 +108,21 @@ private:
 
     // Positive filter / OR filter: Filter in if any category matches
     VenueModel::VenueTypeFlags m_filterVenueType = VenueModel::FoodFlag;
+                                                         // Gastro flags
     VenueModel::VenueSubTypeFlags m_filterVenueSubType = { VenueModel::RestaurantFlag
                                                          | VenueModel::FastFoodFlag
                                                          | VenueModel::CafeFlag
                                                          | VenueModel::BarFlag
-                                                         | VenueModel::IceCreamFlag };
+                                                         | VenueModel::IceCreamFlag
+                                                         // Shopping flags
+                                                         | VenueModel::FoodsFlag
+                                                         | VenueModel::ClothingFlag
+                                                         | VenueModel::ToiletriesFlag
+                                                         | VenueModel::SupermarketFlag
+                                                         | VenueModel::HairdressersFlag
+                                                         | VenueModel::SportsFlag
+                                                         | VenueModel::TattoostudioFlag
+                                                         | VenueModel::AccommodationFlag};
 
     VenueVegCategoryFlags m_filterVegCategory = { VeganFlag | VegetarianFlag | OmnivoreFlag };
     // Negative filter / AND filter: Only filter in if all categories match
