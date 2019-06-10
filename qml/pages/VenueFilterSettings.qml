@@ -289,6 +289,16 @@ BVApp.Page {
 
                     Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Wlan;
                 }
+
+                TextSwitch {
+                             //% "With review (German)"
+                    text: qsTrId("id-filter-with-review")
+                    onCheckedChanged: {
+                        jsonModelCollection.setFilterWithReview(checked);
+                    }
+
+                    Component.onCompleted: checked = jsonModelCollection.filterWithReview;
+                }
             }
         }
     }

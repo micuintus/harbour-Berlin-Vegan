@@ -365,5 +365,9 @@
         <source>Further features</source>
         <translation>Weitere Eigenschaften</translation>
     </message>
+    <message id="id-filter-with-review">
+        <source>With review (German)</source>
+        <translation>Mit Rezension</translation>
+    </message>
 </context>
 </TS>

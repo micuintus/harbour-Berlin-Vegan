@@ -19,6 +19,7 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(VenueVegCategoryFlags filterVegCategory READ filterVegCategory NOTIFY filterVegCategoryChanged)
     Q_PROPERTY(VenuePropertyFlags filterVenueProperty READ filterVenueProperty NOTIFY filterVenuePropertyChanged)
     Q_PROPERTY(bool filterOpenNow MEMBER m_filterOpenNow WRITE setFilterOpenNow NOTIFY filterOpenNowChanged)
+    Q_PROPERTY(bool filterWithReview MEMBER m_filterWithReview WRITE setFilterWithReview NOTIFY filterWithReviewChanged)
     Q_PROPERTY(bool filterFavorites MEMBER m_filterFavorites WRITE setFilterFavorites NOTIFY filterFavoritesChanged)
 
 public:
@@ -72,8 +73,9 @@ public slots:
     void setSearchString(QString searchString);
     void setFilterVenueType(VenueModel::VenueTypeFlags);
     void setCurrentPosition(QGeoCoordinate position);
-    void setFilterFavorites(bool);
     void setFilterOpenNow(bool);
+    void setFilterWithReview(bool);
+    void setFilterFavorites(bool);
 
 signals:
     void modelChanged();
@@ -83,6 +85,7 @@ signals:
     void filterVegCategoryChanged();
     void filterVenuePropertyChanged();
     void filterOpenNowChanged();
+    void filterWithReviewChanged();
     void filterFavoritesChanged();
 
 protected:
@@ -99,6 +102,7 @@ private:
     bool venuePropertiesMatch(const QModelIndex& index) const;
     bool favoriteStatusMatches(const QModelIndex& index) const;
     bool openNow(const QModelIndex& index) const;
+    bool hasReview(const QModelIndex& index) const;
 
     template <typename FilterFlags, typename SignalType>
     void setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType changedSignal);
@@ -128,7 +132,8 @@ private:
     // Negative filter / AND filter: Only filter in if all categories match
     VenuePropertyFlags m_filterVenueProperty = { };
 
-    bool m_filterOpenNow = false;
-    bool m_filterFavorites = false;
+    bool m_filterOpenNow    = false;
+    bool m_filterWithReview = false;
+    bool m_filterFavorites  = false;
 };
 
