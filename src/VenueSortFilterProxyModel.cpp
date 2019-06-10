@@ -182,19 +182,10 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
     }
     else
     {
-        const auto venueTypeRole = index.data(VenueModel::VenueModelRoles::VenueTypeRole);
-        if (!(venueTypeRole.isValid() && venueTypeRole.canConvert<int>()))
-        {
-            return false;
-        }
-
-        const auto venueType = static_cast<VenueModel::VenueType>(venueTypeRole.toInt());
-
-        return venueTypeMatches(venueType)
+        return venueTypeMatches(index)
             && vegCategoryMatches(index)
             && venueSubTypeMatches(index)
-            // Only Food venues are filtered for venue properties (as of now)
-            && (venueType == VenueModel::Shop || venuePropertiesMatch(index))
+            && venuePropertiesMatch(index)
             && (!m_filterOpenNow || openNow(index))
             // Filter search string last => slowest
             && searchStringMatches(index);
@@ -323,8 +314,15 @@ bool VenueSortFilterProxyModel::openNow(const QModelIndex &index) const
 }
 
 
-bool VenueSortFilterProxyModel::venueTypeMatches(const VenueModel::VenueType& venueType) const
+bool VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
 {
+    const auto venueTypeRole = index.data(VenueModel::VenueModelRoles::VenueTypeRole);
+    if (!(venueTypeRole.isValid() && venueTypeRole.canConvert<int>()))
+    {
+        return false;
+    }
+
+    const auto venueType = static_cast<VenueModel::VenueType>(venueTypeRole.toInt());
     return m_filterVenueType.testFlag(static_cast<VenueModel::VenueTypeFlag>(enumValueToFlag(venueType)));
 }
 
