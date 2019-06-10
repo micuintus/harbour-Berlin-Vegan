@@ -23,7 +23,7 @@
  *
 **/
 
-import QtQuick 2.2
+import QtQuick 2.5
 
 // We cannot use upstream implementation, because SailfishOS does not support
 // Qt Quick Controls 2 at the moment (see PageIndicator.qml)

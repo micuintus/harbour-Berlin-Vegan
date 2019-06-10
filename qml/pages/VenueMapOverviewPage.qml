@@ -1,7 +1,7 @@
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
 
-import QtQuick 2.2
+import QtQuick 2.5
 import Sailfish.Silica 1.0
 import QtLocation 5.0
 import QtPositioning 5.0
