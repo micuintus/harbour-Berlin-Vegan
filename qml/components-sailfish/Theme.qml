@@ -8,6 +8,7 @@ QtObject {
 
     function venueSubTypeTagColor(type) {
         switch (type) {
+        // Gastro
         case VenueModel.RestaurantFlag:
             return "#ae2e2e";
         case VenueModel.FastFoodFlag:
@@ -18,6 +19,24 @@ QtObject {
             return "#bd007d";
         case VenueModel.BarFlag:
             return "#6e207c";
+
+        // Shops
+        case VenueModel.FoodsFlag:
+            return "#51bc36";
+        case VenueModel.ClothingFlag:
+            return "#5d66a3";
+        case VenueModel.ToiletriesFlag:
+            return "#9243a8";
+        case VenueModel.SupermarketFlag:
+            return "#d6bf13";
+        case VenueModel.HairdressersFlag:
+            return "#23858e";
+        case VenueModel.SportsFlag:
+            return "#2c59d3";
+        case VenueModel.TattoostudioFlag:
+            return "#505259";
+        case VenueModel.AccommodationFlag:
+            return "#b26c3e";
 
         case VenueModel.NoneFlag:
         default:

@@ -187,6 +187,10 @@ BVApp.Page {
         BVApp.VenueSubTypeTagCloud {
             id: venueSubTypeTagCloud
             restaurant: page.restaurant
+            venueSubTypeDefinitions:
+                isFoodVenue ?
+                    BVApp.VenueSubTypeDefinitions.foodVenueSubTypes
+                  : BVApp.VenueSubTypeDefinitions.shopsVenueSubTypes
 
             anchors {
                 left: parent.left

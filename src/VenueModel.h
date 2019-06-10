@@ -70,12 +70,24 @@ public:
 
     enum VenueSubTypeFlag
     {
-        NoneFlag       = 0x0,
-        RestaurantFlag = 0x1,
-        FastFoodFlag   = 0x2,
-        CafeFlag       = 0x4,
-        IceCreamFlag   = 0x8,
-        BarFlag        = 0x10
+        NoneFlag          = enumValueToFlag(0),
+
+        // Gastro flags
+        RestaurantFlag    = enumValueToFlag(1),
+        FastFoodFlag      = enumValueToFlag(2),
+        CafeFlag          = enumValueToFlag(3),
+        IceCreamFlag      = enumValueToFlag(4),
+        BarFlag           = enumValueToFlag(5),
+
+        // Shops flags
+        FoodsFlag         = enumValueToFlag(6),
+        ClothingFlag      = enumValueToFlag(7),
+        ToiletriesFlag    = enumValueToFlag(8),
+        SupermarketFlag   = enumValueToFlag(9),
+        HairdressersFlag  = enumValueToFlag(10),
+        SportsFlag        = enumValueToFlag(11),
+        TattoostudioFlag  = enumValueToFlag(12),
+        AccommodationFlag = enumValueToFlag(13),
     };
     Q_DECLARE_FLAGS(VenueSubTypeFlags, VenueSubTypeFlag)
     Q_FLAG(VenueSubTypeFlags)
