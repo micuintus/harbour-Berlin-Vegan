@@ -269,7 +269,7 @@
     <message id="id-venue-category">
         <source>Venue category</source>
         <oldsource>Venue type</oldsource>
-        <translation>Laden-Kategorie</translation>
+        <translation>Kategorie</translation>
     </message>
     <message id="id-venue-closed">
         <source>closed now</source>
