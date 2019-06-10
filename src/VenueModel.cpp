@@ -25,11 +25,22 @@ VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
     static const auto subTypeStringLookup
     = QHash<QString, VenueModel::VenueSubTypeFlag>
     {
-        { "Restaurant" , VenueModel::RestaurantFlag },
-        { "Imbiss"     , VenueModel::FastFoodFlag   },
-        { "Cafe"       , VenueModel::CafeFlag       },
-        { "Eiscafe"    , VenueModel::IceCreamFlag   },
-        { "Bar"        , VenueModel::BarFlag        }
+        // Gastro tags
+        { "Restaurant"  , VenueModel::RestaurantFlag    },
+        { "Imbiss"      , VenueModel::FastFoodFlag      },
+        { "Cafe"        , VenueModel::CafeFlag          },
+        { "Eiscafe"     , VenueModel::IceCreamFlag      },
+        { "Bar"         , VenueModel::BarFlag           },
+
+        // Shops tags
+        { "foods"       , VenueModel::FoodsFlag         },
+        { "clothing"    , VenueModel::ClothingFlag      },
+        { "toiletries"  , VenueModel::ToiletriesFlag    },
+        { "supermarket" , VenueModel::SupermarketFlag   },
+        { "hairdressers", VenueModel::HairdressersFlag  },
+        { "sports"      , VenueModel::SportsFlag        },
+        { "tatoostudio" , VenueModel::TattoostudioFlag  },
+        { "accomodation", VenueModel::AccommodationFlag }
     };
 
     auto const it = subTypeStringLookup.find(name);

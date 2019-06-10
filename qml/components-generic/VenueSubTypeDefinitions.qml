@@ -32,4 +32,48 @@ QtObject {
             flag: VenueSortFilterProxyModel.BarFlag
         }
     ]
+
+    property list<VenueSubTypeDefinition> shopsVenueSubTypes:
+    [
+        VenueSubTypeDefinition {
+                     //% "Food"
+            text: qsTrId("id-venue-subtype-foods")
+            flag: VenueSortFilterProxyModel.FoodsFlag
+        },
+        VenueSubTypeDefinition {
+                     //% "Fashion"
+            text: qsTrId("id-venue-subtype-clothing")
+            flag: VenueSortFilterProxyModel.ClothingFlag
+        },
+        VenueSubTypeDefinition {
+                     //% "Toiletries"
+            text: qsTrId("id-venue-subtype-toiletries")
+            flag: VenueSortFilterProxyModel.ToiletriesFlag
+        },
+        VenueSubTypeDefinition {
+                     //% "Supermarket"
+            text: qsTrId("id-venue-subtype-supermarket")
+            flag: VenueSortFilterProxyModel.SupermarketFlag
+        },
+        VenueSubTypeDefinition {
+                     //% "Hairdresser's"
+            text: qsTrId("id-venue-subtype-hairdressers")
+            flag: VenueSortFilterProxyModel.HairdressersFlag
+        },
+        VenueSubTypeDefinition {
+                     //% "Sports"
+            text: qsTrId("id-venue-subtype-sports")
+            flag: VenueSortFilterProxyModel.SportsFlag
+        },
+        VenueSubTypeDefinition {
+                     //% "Tattoo studio"
+            text: qsTrId("id-venue-subtype-tattoostudio")
+            flag: VenueSortFilterProxyModel.TattoostudioFlag
+        },
+        VenueSubTypeDefinition {
+                     //% "Accommodation"
+            text: qsTrId("id-venue-subtype-accommodation")
+            flag: VenueSortFilterProxyModel.AccommodationFlag
+        }
+    ]
 }

@@ -8,11 +8,12 @@ import BerlinVegan.components.platform 1.0 as BVApp
 Flow {
     id: flow
     property var restaurant
+    property list<VenueSubTypeDefinition> venueSubTypeDefinitions
     spacing: BVApp.Theme.paddingMedium
     layoutDirection: Qt.RightToLeft
 
     Repeater {
-        model: BVApp.VenueSubTypeDefinitions.foodVenueSubTypes
+        model: venueSubTypeDefinitions
 
         BVApp.VenueSubTypeTag {
             color: BVApp.Theme.venueSubTypeTagColor(model.flag)
