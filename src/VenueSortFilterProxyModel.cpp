@@ -192,8 +192,9 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
 
         return venueTypeMatches(venueType)
             && vegCategoryMatches(index)
-            // Only Food venues are filtered for sub type and properties
-            && (venueType == VenueModel::Shopping || (venueSubTypeMatches(index) && venuePropertiesMatch(index)))
+            && venueSubTypeMatches(index)
+            // Only Food venues are filtered for venue properties (as of now)
+            && (venueType == VenueModel::Shopping || venuePropertiesMatch(index))
             && (!m_filterOpenNow || openNow(index))
             // Filter search string last => slowest
             && searchStringMatches(index);
