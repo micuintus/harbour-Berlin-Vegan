@@ -35,7 +35,7 @@ Item {
 
     id: venueDetails
     property var restaurant
-    property bool isFoodVenue
+    property bool isGastroVenue
 
     // internal
     readonly property real collapsedHeight : openingHourListView.height + foodDetailsHeader.height
@@ -87,34 +87,34 @@ Item {
                       //% "Organic products"
             label: qsTrId("id-organic")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
-            visible: isFoodVenue
+            visible: isGastroVenue
         }
 
         DetailItem {
                       //% "Breakfast"
             label: qsTrId("id-breakfast")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.breakfast)
-            visible: isFoodVenue
+            visible: isGastroVenue
         }
 
         DetailItem {
                       //% "Brunch"
             label: qsTrId("id-brunch")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.brunch)
-            visible: isFoodVenue
+            visible: isGastroVenue
         }
 
         DetailItem {
                       //% "Gluten-free options"
             label: qsTrId("id-gluten-free")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.glutenFree)
-            visible: isFoodVenue
+            visible: isGastroVenue
         }
 
         Column {
 
             width: parent.width
-            visible: isFoodVenue
+            visible: isGastroVenue
 
 
             BVApp.SectionHeader {

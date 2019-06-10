@@ -73,7 +73,7 @@ ApplicationWindow
         onFileLoaded:
         function(json)
         {
-            gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Food);
+            gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Gastro);
             favoritesHook();
         }
     }
@@ -83,7 +83,7 @@ ApplicationWindow
         onFileLoaded:
         function(json)
         {
-            gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shopping);
+            gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shop);
             favoritesHook();
         }
     }

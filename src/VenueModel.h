@@ -54,15 +54,15 @@ public:
 
     enum VenueType
     {
-        Food,
-        Shopping,
+        Gastro,
+        Shop,
     };
     Q_ENUM(VenueType)
 
     enum VenueTypeFlag
     {
-        FoodFlag     = enumValueToFlag(VenueType::Food),
-        ShoppingFlag = enumValueToFlag(VenueType::Shopping)
+        GastroFlag = enumValueToFlag(VenueType::Gastro),
+        ShopFlag  = enumValueToFlag(VenueType::Shop)
     };
     Q_DECLARE_FLAGS(VenueTypeFlags, VenueTypeFlag)
     Q_FLAG(VenueTypeFlags)
@@ -79,7 +79,7 @@ public:
         IceCreamFlag      = enumValueToFlag(4),
         BarFlag           = enumValueToFlag(5),
 
-        // Shops flags
+        // Shop flags
         FoodsFlag         = enumValueToFlag(6),
         ClothingFlag      = enumValueToFlag(7),
         ToiletriesFlag    = enumValueToFlag(8),

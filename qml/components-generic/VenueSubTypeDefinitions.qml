@@ -4,7 +4,7 @@ import QtQuick 2.5
 import harbour.berlin.vegan 1.0
 
 QtObject {
-    property list<VenueSubTypeDefinition> foodVenueSubTypes:
+    property list<VenueSubTypeDefinition> gastroVenueSubTypes:
     [
         VenueSubTypeDefinition {
                      //% "Restaurant"
@@ -33,7 +33,7 @@ QtObject {
         }
     ]
 
-    property list<VenueSubTypeDefinition> shopsVenueSubTypes:
+    property list<VenueSubTypeDefinition> shopVenueSubTypes:
     [
         VenueSubTypeDefinition {
                      //% "Food"

@@ -51,47 +51,47 @@ BVApp.Page {
             }
 
             BVApp.SectionHeader {
-                //% "Venue type"
+                         //% "Venue category"
                 text: qsTrId("id-venue-category")
                 icon: BVApp.Theme.iconFor("list")
             }
 
             BVApp.RadioButton {
                 id: foodButton
-                      //% "Food"
-                text: qsTrId("id-food")
+                         //% "Eating out"
+                text: qsTrId("id-gastro")
 
                 onClicked: {
                     // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
                     if (checked) {
                         shoppingButton.checked = false;
-                        jsonModelCollection.filterVenueType = VenueModel.FoodFlag;
+                        jsonModelCollection.filterVenueType = VenueModel.GastroFlag;
                     }
                     else {
                         foodButton.checked = true;
                     }
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.FoodFlag;
+                Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.GastroFlag;
             }
 
             BVApp.RadioButton {
                 id: shoppingButton
-                      //% "Shopping"
-                text: qsTrId("id-shopping")
+                         //% "Shops"
+                text: qsTrId("id-shops")
 
                 onClicked: {
                     // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
                     if (checked) {
                         foodButton.checked = false;
-                        jsonModelCollection.filterVenueType = VenueModel.ShoppingFlag;
+                        jsonModelCollection.filterVenueType = VenueModel.ShopFlag;
                     }
                     else {
                         shoppingButton.checked = true;
                     }
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.ShoppingFlag;
+                Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.ShopFlag;
             }
 
             Column {
@@ -120,15 +120,15 @@ BVApp.Page {
                 width: parent.width
 
                 BVApp.SectionHeader {
-                    //% "Venue sub type"
+                             //% "Sub category"
                     text: qsTrId("id-filter-venue-sub-type")
                     icon: BVApp.Theme.iconFor("coffee")
                 }
 
                 Repeater {
-                    model: jsonModelCollection.filterVenueType & VenueModel.FoodFlag ?
-                               BVApp.VenueSubTypeDefinitions.foodVenueSubTypes
-                             : BVApp.VenueSubTypeDefinitions.shopsVenueSubTypes
+                    model: jsonModelCollection.filterVenueType & VenueModel.GastroFlag ?
+                               BVApp.VenueSubTypeDefinitions.gastroVenueSubTypes
+                             : BVApp.VenueSubTypeDefinitions.shopVenueSubTypes
                     TextSwitch {
                         text: model.text
                         onCheckedChanged: {
@@ -175,7 +175,7 @@ BVApp.Page {
 
             Column {
 
-                visible: jsonModelCollection.filterVenueType & VenueModel.FoodFlag
+                visible: jsonModelCollection.filterVenueType & VenueModel.GastroFlag
                 width: parent.width
 
                 BVApp.SectionHeader {
