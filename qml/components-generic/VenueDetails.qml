@@ -70,6 +70,24 @@ Item {
             }
         }
 
+        Label {
+            id: openComment
+
+            anchors {
+                left: organic.left
+                right: organic.right
+                leftMargin: BVApp.Theme.horizontalPageMargin
+                rightMargin: BVApp.Theme.horizontalPageMargin
+            }
+
+            text: Qt.locale().name.toLowerCase().indexOf("de") === 0 || typeof restaurant.openCommentEnglish === "undefined" ?
+                      restaurant.openComment :
+                      restaurant.openCommentEnglish
+            font.family: shortComment.font.family
+            font.pixelSize: BVApp.Theme.fontSizeSmall
+            color: BVApp.Theme.primaryColor
+        }
+
         BVApp.SectionHeader {
                      //% "Features"
             text: qsTrId("id-venue-features")
@@ -96,6 +114,7 @@ Item {
         }
 
         DetailItem {
+            id: organic
                       //% "Organic products"
             label: qsTrId("id-organic")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)

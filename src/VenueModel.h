@@ -150,7 +150,9 @@ public:
         OtThu,
         OtFri,
         OtSat,
-        OtSun
+        OtSun,
+        OpenComment,
+        OpenCommentEn
     };
 
     VenueModel(QObject *parent = 0);

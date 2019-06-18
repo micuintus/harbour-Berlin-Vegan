@@ -242,16 +242,19 @@ QHash<int, QByteArray> VenueModel::roleNames() const
         { VenueModelRoles::ChildChair,    "childChair"   },
 
         // OpeningHours
-        { VenueModelRoles::CondensedOpeningHours,         "condensedOpeningHours"  },
-        { VenueModelRoles::ClosesSoon,    "closesSoon"  },
-        { VenueModelRoles::Open,          "open"   },
-        { VenueModelRoles::OtMon,         "otMon"  },
-        { VenueModelRoles::OtTue,         "otTue"  },
-        { VenueModelRoles::OtWed,         "otWed"  },
-        { VenueModelRoles::OtThu,         "otThu"  },
-        { VenueModelRoles::OtFri,         "otFri"  },
-        { VenueModelRoles::OtSat,         "otSat"  },
-        { VenueModelRoles::OtSun,         "otSun"  }
+        { VenueModelRoles::CondensedOpeningHours, "condensedOpeningHours"  },
+        { VenueModelRoles::ClosesSoon,            "closesSoon"  },
+        { VenueModelRoles::Open,                  "open"   },
+        { VenueModelRoles::OtMon,                 "otMon"  },
+        { VenueModelRoles::OtTue,                 "otTue"  },
+        { VenueModelRoles::OtWed,                 "otWed"  },
+        { VenueModelRoles::OtThu,                 "otThu"  },
+        { VenueModelRoles::OtFri,                 "otFri"  },
+        { VenueModelRoles::OtSat,                 "otSat"  },
+        { VenueModelRoles::OtSun,                 "otSun"  },
+        { VenueModelRoles::OpenComment,           "openComment"  },
+        { VenueModelRoles::OpenCommentEn,         "openCommentEnglish"  }
+
 
     };
 
