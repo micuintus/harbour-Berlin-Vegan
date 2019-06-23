@@ -465,3 +465,33 @@ void OpeningHoursAlgorithms_TestCondenseOpeningHours::differentOpeningHoursInThe
 
     QCOMPARE(res, condensedOpeningHours);
 }
+
+void OpeningHoursAlgorithms_TestCondenseOpeningHours::sundayDoesNotGetCollapsed()
+{
+    // SETUP
+
+    const QVariantList uncondensedOpeningHours
+    {
+        QVariantMap {{ "day", qtTrId("id-monday")    }, { "hours", "08:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-tuesday")   }, { "hours", "08:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-wednesday") }, { "hours", "08:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-thursday")  }, { "hours", "08:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-friday")    }, { "hours", "08:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-saturday")  }, { "hours", "08:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-sunday")    }, { "hours", "08:00 - 13:00" }}
+    };
+
+    // EXECUTE
+
+    auto const res = condenseOpeningHours(uncondensedOpeningHours);
+
+    // VERIFY
+
+    const QVariantList condensedOpeningHours
+    {
+        QVariantMap {{ "day", qtTrId("id-monday")   + " - " + qtTrId("id-saturday") }, { "hours", "08:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-sunday")                                   }, { "hours", "08:00 - 13:00" }}
+    };
+
+    QCOMPARE(res, condensedOpeningHours);
+}
