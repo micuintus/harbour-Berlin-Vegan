@@ -370,19 +370,19 @@ void OpeningHoursAlgorithms_TestExtractDayIndexAndMinute::sundayIndexReturnedIfS
     QCOMPARE(res.first, SUNDAY_INDEX);
 }
 
-void OpeningHoursAlgorithms_TestCondenseOpeningHours::test()
+void OpeningHoursAlgorithms_TestCondenseOpeningHours::mondayToFridayTheSameCollapsesThem()
 {
     // SETUP
 
     const QVariantList uncondensedOpeningHours
     {
-        QVariantMap {{ "day", "Monday" },    { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", "Tuesday" },   { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", "Wednesday" }, { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", "Thursday" },  { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", "Friday" },    { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", "Saturday" },  { "hours", "closed" }},
-        QVariantMap {{ "day", "Sunday" },    { "hours", "closed" }}
+        QVariantMap {{ "day", qtTrId("id-monday")    }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-tuesday")   }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-wednesday") }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-thursday")  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-friday")    }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-saturday")  }, { "hours", qtTrId("id-closed") }},
+        QVariantMap {{ "day", qtTrId("id-sunday")    }, { "hours", qtTrId("id-closed") }}
     };
 
     // EXECUTE
@@ -393,8 +393,74 @@ void OpeningHoursAlgorithms_TestCondenseOpeningHours::test()
 
     const QVariantList condensedOpeningHours
     {
-        QVariantMap {{ "day", "Monday - Friday" },    { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", "Saturday - Sunday" },  { "hours", "closed" }},
+        QVariantMap {{ "day", qtTrId("id-monday")   + " - " + qtTrId("id-friday") }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-saturday")                               }, { "hours", qtTrId("id-closed") }},
+        QVariantMap {{ "day", qtTrId("id-sunday")                                 }, { "hours", qtTrId("id-closed") }}
+    };
+
+    QCOMPARE(res, condensedOpeningHours);
+}
+
+void OpeningHoursAlgorithms_TestCondenseOpeningHours::differentOpeningHoursInTheMiddleDontGetCondensed1()
+{
+    // SETUP
+
+    const QVariantList uncondensedOpeningHours
+    {
+        QVariantMap {{ "day", qtTrId("id-monday")    }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-tuesday")   }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-wednesday") }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-thursday")  }, { "hours", "09:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-friday")    }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-saturday")  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-sunday")    }, { "hours", "09:00 - 17:00" }}
+    };
+
+    // EXECUTE
+
+    auto const res = condenseOpeningHours(uncondensedOpeningHours);
+
+    // VERIFY
+
+    const QVariantList condensedOpeningHours
+    {
+        QVariantMap {{ "day", qtTrId("id-monday")   + " - " + qtTrId("id-wednesday") }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-thursday")                                  }, { "hours", "09:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-friday")   + " - " + qtTrId("id-saturday")  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-sunday")                                    }, { "hours", "09:00 - 17:00" }},
+    };
+
+    QCOMPARE(res, condensedOpeningHours);
+}
+
+void OpeningHoursAlgorithms_TestCondenseOpeningHours::differentOpeningHoursInTheMiddleDontGetCondensed2()
+{
+    // SETUP
+
+    const QVariantList uncondensedOpeningHours
+    {
+        QVariantMap {{ "day", qtTrId("id-monday")    }, { "hours", "10:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-tuesday")   }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-wednesday") }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-thursday")  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-friday")    }, { "hours", "12:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-saturday")  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-sunday")    }, { "hours", "09:00 - 17:00" }}
+    };
+
+    // EXECUTE
+
+    auto const res = condenseOpeningHours(uncondensedOpeningHours);
+
+    // VERIFY
+
+    const QVariantList condensedOpeningHours
+    {
+        QVariantMap {{ "day", qtTrId("id-monday")                                    }, { "hours", "10:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-tuesday")  + " - " + qtTrId("id-thursday")  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-friday")                                    }, { "hours", "12:00 - 13:00" }},
+        QVariantMap {{ "day", qtTrId("id-saturday")                                  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "day", qtTrId("id-sunday")                                    }, { "hours", "09:00 - 17:00" }}
     };
 
     QCOMPARE(res, condensedOpeningHours);
