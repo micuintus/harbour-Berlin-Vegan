@@ -44,21 +44,21 @@ function restaurantCategory(key)
 {
     switch(key)
     {
-        case BVApp.VenueModel.Omnivore:
-                      //% "omnivore"
-            return qsTrId("id-omnivore");
+        case BVApp.VenueModel.Omnivorous:
+                      //% "omnivorous"
+            return qsTrId("id-omnivorous");
 
-        case BVApp.VenueModel.OmnivoreVeganDeclared:
-                      //% "omnivore \n(vegan declared)"
-            return qsTrId("id-omnivore-declared");
+        case BVApp.VenueModel.OmnivorousVeganLabeled:
+                      //% "omnivorous \n(vegan dishes labeled)"
+            return qsTrId("id-omnivorous-labeled");
 
         case BVApp.VenueModel.Vegetarian:
                       //% "vegetarian"
             return qsTrId("id-vegetarian");
 
-        case BVApp.VenueModel.VegetarianVeganDeclared:
-                      //% "vegetarian \n(vegan declared)"
-            return qsTrId("id-vegetarian-declared");
+        case BVApp.VenueModel.VegetarianVeganLabeled:
+                      //% "vegetarian \n(vegan dishes labeled)"
+            return qsTrId("id-vegetarian-labeled");
 
         case BVApp.VenueModel.Vegan:
                       //% "vegan"

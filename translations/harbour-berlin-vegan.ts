@@ -54,17 +54,17 @@
         <source>unknown</source>
         <translation>unknown</translation>
     </message>
-    <message id="id-omnivore">
+    <message id="id-omnivorous">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="49"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="169"/>
-        <source>omnivore</source>
-        <translation>omnivore</translation>
+        <source>omnivorous</source>
+        <translation>omnivorous</translation>
     </message>
-    <message id="id-omnivore-declared">
+    <message id="id-omnivorous-labeled">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="53"/>
-        <source>omnivore \n(vegan declared)</source>
-        <translation>omnivore
-(vegan declared)</translation>
+        <source>omnivorous \n(vegan dishes labeled)</source>
+        <translation>omnivorous
+(vegan dishes labeled)</translation>
     </message>
     <message id="id-vegetarian">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="57"/>
@@ -72,11 +72,11 @@
         <source>vegetarian</source>
         <translation>vegetarian</translation>
     </message>
-    <message id="id-vegetarian-declared">
+    <message id="id-vegetarian-labeled">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="61"/>
-        <source>vegetarian \n(vegan declared)</source>
+        <source>vegetarian \n(vegan dishes labeled)</source>
         <translation>vegetarian
-(vegan declared)</translation>
+(vegan dishes labeled)</translation>
     </message>
     <message id="id-vegan">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="65"/>
