@@ -28,8 +28,8 @@
         <translation>Zaterdag</translation>
     </message>
     <message id="id-sunday">
-        <source>Sunday</source>
-        <translation>Zondag</translation>
+        <source>Sunday / Holiday</source>
+        <translation>Zondag / Feestdag</translation>
     </message>
     <message id="id-closed">
         <source>closed</source>
