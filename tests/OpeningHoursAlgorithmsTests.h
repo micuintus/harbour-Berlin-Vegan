@@ -58,4 +58,6 @@ private slots:
     void mondayToFridayTheSameCollapsesThem();
     void differentOpeningHoursInTheMiddleDontGetCondensed1();
     void differentOpeningHoursInTheMiddleDontGetCondensed2();
+    void sundayDoesNotGetCollapsed();
+
 };
