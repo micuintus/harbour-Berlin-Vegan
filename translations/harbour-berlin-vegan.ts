@@ -28,8 +28,8 @@
         <translation>Saturday</translation>
     </message>
     <message id="id-sunday">
-        <source>Sunday</source>
-        <translation>Sunday</translation>
+        <source>Sunday / Holiday</source>
+        <translation>Sunday / Holiday</translation>
     </message>
     <message id="id-closed">
         <source>closed</source>
