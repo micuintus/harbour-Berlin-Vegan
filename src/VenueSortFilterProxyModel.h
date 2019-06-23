@@ -25,8 +25,8 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
 public:
 
     enum VenueVegCategoryFlag {
-        OmnivoreFlag   = enumValueToFlag(VenueModel::Omnivore)   | enumValueToFlag(VenueModel::OmnivoreVeganDeclared),
-        VegetarianFlag = enumValueToFlag(VenueModel::Vegetarian) | enumValueToFlag(VenueModel::VegetarianVeganDeclared),
+        OmnivorousFlag = enumValueToFlag(VenueModel::Omnivorous) | enumValueToFlag(VenueModel::OmnivorousVeganLabeled),
+        VegetarianFlag = enumValueToFlag(VenueModel::Vegetarian) | enumValueToFlag(VenueModel::VegetarianVeganLabeled),
         VeganFlag      = enumValueToFlag(VenueModel::Vegan)
     };
     Q_DECLARE_FLAGS(VenueVegCategoryFlags, VenueVegCategoryFlag)
@@ -128,7 +128,7 @@ private:
                                                          | VenueModel::TattoostudioFlag
                                                          | VenueModel::AccommodationFlag};
 
-    VenueVegCategoryFlags m_filterVegCategory = { VeganFlag | VegetarianFlag | OmnivoreFlag };
+    VenueVegCategoryFlags m_filterVegCategory = { VeganFlag | VegetarianFlag | OmnivorousFlag };
     // Negative filter / AND filter: Only filter in if all categories match
     VenuePropertyFlags m_filterVenueProperty = { };
 

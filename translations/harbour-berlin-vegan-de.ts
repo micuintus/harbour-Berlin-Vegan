@@ -47,12 +47,12 @@
         <source>unknown</source>
         <translation>unbekannt</translation>
     </message>
-    <message id="id-omnivore">
-        <source>omnivore</source>
+    <message id="id-omnivorous">
+        <source>omnivorous</source>
         <translation>omnivor</translation>
     </message>
-    <message id="id-omnivore-declared">
-        <source>omnivore \n(vegan declared)</source>
+    <message id="id-omnivorous-labeled">
+        <source>omnivorous \n(vegan dishes labeled)</source>
         <translation>omnivor
 (vegan deklariert)</translation>
     </message>
@@ -60,8 +60,8 @@
         <source>vegetarian</source>
         <translation>vegetarisch</translation>
     </message>
-    <message id="id-vegetarian-declared">
-        <source>vegetarian \n(vegan declared)</source>
+    <message id="id-vegetarian-labeled">
+        <source>vegetarian \n(vegan dishes labeled)</source>
         <translation>vegetarisch
 (vegan deklariert)</translation>
     </message>

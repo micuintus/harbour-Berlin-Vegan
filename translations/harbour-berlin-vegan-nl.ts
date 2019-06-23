@@ -54,15 +54,15 @@
         <source>unknown</source>
         <translation>onbekend</translation>
     </message>
-    <message id="id-omnivore">
+    <message id="id-omnivorous">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="49"/>
         <location filename="../qml/pages/VenueFilterSettings.qml" line="169"/>
-        <source>omnivore</source>
+        <source>omnivorous</source>
         <translation>omnivoor</translation>
     </message>
-    <message id="id-omnivore-declared">
+    <message id="id-omnivorous-labeled">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="53"/>
-        <source>omnivore \n(vegan declared)</source>
+        <source>omnivorous \n(vegan dishes labeled)</source>
         <translation>omnivoor
 (veganistisch verklaard)</translation>
     </message>
@@ -72,9 +72,9 @@
         <source>vegetarian</source>
         <translation>vegetarisch</translation>
     </message>
-    <message id="id-vegetarian-declared">
+    <message id="id-vegetarian-labeled">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="61"/>
-        <source>vegetarian \n(vegan declared)</source>
+        <source>vegetarian \n(vegan dishes labeled)</source>
         <translation>vegetarisch
 (veganistisch verklaard)</translation>
     </message>

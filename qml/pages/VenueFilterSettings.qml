@@ -166,12 +166,12 @@ BVApp.Page {
             }
 
             TextSwitch {
-                text: qsTrId("id-omnivore")
+                text: qsTrId("id-omnivorous")
                 onCheckedChanged: {
-                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.OmnivoreFlag, checked);
+                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.OmnivorousFlag, checked);
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivoreFlag;
+                Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivorousFlag;
             }
 
             Column {
