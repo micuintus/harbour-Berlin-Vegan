@@ -55,5 +55,7 @@ class OpeningHoursAlgorithms_TestCondenseOpeningHours : public QObject
 
 private slots:
 
-    void test();
+    void mondayToFridayTheSameCollapsesThem();
+    void differentOpeningHoursInTheMiddleDontGetCondensed1();
+    void differentOpeningHoursInTheMiddleDontGetCondensed2();
 };
