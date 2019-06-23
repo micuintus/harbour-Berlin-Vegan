@@ -63,7 +63,9 @@ QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours)
 
         while (next < numElements
                &&    uncondensedOpeningHours[curr].toMap()["hours"]
-                  == uncondensedOpeningHours[next].toMap()["hours"])
+                  == uncondensedOpeningHours[next].toMap()["hours"]
+               && uncondensedOpeningHours[next].toMap()["day"]
+                  != qtTrId("id-sunday")) // Do not merge sundays
         {
             next++;
         }
@@ -107,7 +109,7 @@ QVariantList extractOpenHoursData(const QJSValue& from)
         QVariantMap {{ "day", qtTrId("id-friday")},    { "hours", hoursString(from, "otFri") }},
                                  //% "Saturday"
         QVariantMap {{ "day", qtTrId("id-saturday")},  { "hours", hoursString(from, "otSat") }},
-                                 //% "Sunday"
+                                 //% "Sunday / Holiday"
         QVariantMap {{ "day", qtTrId("id-sunday")},    { "hours", hoursString(from, "otSun") }}
     };
 
