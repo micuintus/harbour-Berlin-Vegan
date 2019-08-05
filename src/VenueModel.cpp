@@ -267,7 +267,7 @@ void VenueModel::updateOpenState()
 {
     const auto currentDateTime = QDateTime::currentDateTime();
     std::tie(m_currendDayIndex, m_currentMinute) = extractDayIndexAndMinute(currentDateTime);
-    emit dataChanged(index(0, 0), index(rowCount() - 1, 0), { VenueModelRoles::Open });
+    emit dataChanged(index(0, 0), index(rowCount() - 1, 0), { VenueModelRoles::Open, VenueModelRoles::ClosesSoon });
 }
 
 QVariant VenueModel::data(const QModelIndex &index, int role) const
