@@ -47,7 +47,7 @@ QtObject {
     function vegTypeColor(type) {
         switch (type) {
         case VenueModel.Vegetarian:
-        case VenueModel.VegetarianVeganDeclared:
+        case VenueModel.VegetarianVeganLabeled:
             return "#fd9827";
         case VenueModel.Vegan:
             return "#97bf0f";
