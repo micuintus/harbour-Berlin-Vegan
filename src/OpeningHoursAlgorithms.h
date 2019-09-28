@@ -300,9 +300,7 @@ bool isInRange(const QVariantMap& openingMinutes, const unsigned currentMinute)
 void extractAndProcessOpenHoursData(QStandardItem& to, const QJSValue& from)
 {
     auto const openingHours = extractOpenHoursData(from);
-    auto const condensedOpeningHours = condenseOpeningHours(openingHours);
-
-    to.setData(condensedOpeningHours, VenueModel::CondensedOpeningHours);
+    to.setData(openingHours, VenueModel::OpeningHours);
 
     auto const openingMinutes = extractOpeningMinutes(openingHours);
     to.setData(openingMinutes, VenueModel::OpeningMinutes);

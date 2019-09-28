@@ -155,6 +155,7 @@ public:
         SimplifiedSearchDescriptionEn,
         SimplifiedSearchReview,
 
+        OpeningHours,
         OpeningMinutes,
 
         // Property ranges
