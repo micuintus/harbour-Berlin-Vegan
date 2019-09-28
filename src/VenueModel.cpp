@@ -229,7 +229,10 @@ void VenueModel::updateOpenState()
 
 QVariant VenueModel::data(const QModelIndex &index, int role) const
 {
-    if (role == VenueModelRoles::Open || role == VenueModelRoles::ClosesSoon)
+    switch(role)
+    {
+    case VenueModelRoles::Open:
+    case VenueModelRoles::ClosesSoon:
     {
         const auto openingMinutesVar = QStandardItemModel::data(index, VenueModel::OpeningMinutes);
         if (m_currendDayIndex < 0 || !openingMinutesVar.isValid())
@@ -239,7 +242,8 @@ QVariant VenueModel::data(const QModelIndex &index, int role) const
 
         auto const openingMinutes = openingMinutesVar.toList();
 
-        switch(role) {
+        switch(role)
+        {
         case VenueModelRoles::Open:
             return isInRange(openingMinutes[m_currendDayIndex].toMap(), m_currentMinute);
         case VenueModelRoles::ClosesSoon:
@@ -247,7 +251,19 @@ QVariant VenueModel::data(const QModelIndex &index, int role) const
             return !isInRange(openingMinutes[m_currendDayIndex].toMap(), m_currentMinute + MINUTES_CLOSES_SOON);
         }
     }
+    break;
+    case VenueModelRoles::CondensedOpeningHours:
+    {
+        const auto openingHoursVar = QStandardItemModel::data(index, VenueModel::OpeningHours);
+        if (!openingHoursVar.isValid())
+        {
+            return QVariant::Invalid;
+        }
 
-    return QStandardItemModel::data(index, role);
+        return condenseOpeningHours(openingHoursVar.toList());
+    }
+    default:
+        return QStandardItemModel::data(index, role);
+    }
 }
 
