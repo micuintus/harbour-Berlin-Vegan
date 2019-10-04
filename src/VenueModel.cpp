@@ -206,53 +206,10 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     static const auto roles =
     QHash<int, QByteArray>
     {
-        { VenueModelRoles::ID,               "id"          },
-        { VenueModelRoles::Name,             "name"        },
-        { VenueModelRoles::VenueTypeRole,    "venueType"   },
-        { VenueModelRoles::VenueSubTypeRole, "venueSubType"   },
-        { VenueModelRoles::Favorite,         "favorite"    },
-        { VenueModelRoles::Street,           "street"      },
-        { VenueModelRoles::Description,      "comment"     },
-        { VenueModelRoles::DescriptionEn,    "commentEnglish" },
-        { VenueModelRoles::Review,           "review"      },
-        { VenueModelRoles::Website,          "website"     },
-        { VenueModelRoles::Telephone,        "telephone"   },
-        { VenueModelRoles::Pictures,         "pictures"    },
-
-        // Coordinates
-        { VenueModelRoles::LatCoord,      "latCoord"    },
-        { VenueModelRoles::LongCoord,     "longCoord"   },
-
-        // Properties
-        { VenueModelRoles::Wlan,          "wlan" },
-        { VenueModelRoles::VegCategory,   "vegan" },
-        { VenueModelRoles::HandicappedAccessible,
-                                          "handicappedAccessible" },
-        { VenueModelRoles::HandicappedAccessibleWc,
-                                          "handicappedAccessibleWc" },
-        { VenueModelRoles::Catering,      "catering"     },
-        { VenueModelRoles::Organic,       "organic"      },
-        { VenueModelRoles::GlutenFree,    "glutenFree"   },
-        { VenueModelRoles::Delivery,      "delivery"     },
-        { VenueModelRoles::Breakfast,     "breakfast"    },
-        { VenueModelRoles::Brunch,        "brunch"       },
-        { VenueModelRoles::SeatsOutdoor,  "seatsOutdoor" },
-        { VenueModelRoles::SeatsIndoor,   "seatsIndoor"  },
-        { VenueModelRoles::Dog,           "dog"          },
-        { VenueModelRoles::ChildChair,    "childChair"   },
-
-        // OpeningHours
-        { VenueModelRoles::CondensedOpeningHours,         "condensedOpeningHours"  },
-        { VenueModelRoles::ClosesSoon,    "closesSoon"  },
-        { VenueModelRoles::Open,          "open"   },
-        { VenueModelRoles::OtMon,         "otMon"  },
-        { VenueModelRoles::OtTue,         "otTue"  },
-        { VenueModelRoles::OtWed,         "otWed"  },
-        { VenueModelRoles::OtThu,         "otThu"  },
-        { VenueModelRoles::OtFri,         "otFri"  },
-        { VenueModelRoles::OtSat,         "otSat"  },
-        { VenueModelRoles::OtSun,         "otSun"  }
-
+#define ROLE_NAME_ID_PAIR(NAME, ID) \
+        { VenueModelRoles::ID, #NAME},
+        ROLE_NAME_ID_PAIRS
+#undef ROLE_NAME_ID_PAIR
     };
 
     return roles;
