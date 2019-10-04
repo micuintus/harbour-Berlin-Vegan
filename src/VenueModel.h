@@ -32,6 +32,53 @@ inline QString simplifySearchString(const QString searchString)
                            .replace(L'ß', QLatin1String("ss"), Qt::CaseInsensitive);
 }
 
+#define ROLE_NAME_ID_PAIRS                                                \
+    ROLE_NAME_ID_PAIR( id,                      ID                      ) \
+    ROLE_NAME_ID_PAIR( name,                    Name                    ) \
+    ROLE_NAME_ID_PAIR( venueType,               VenueTypeRole           ) \
+    ROLE_NAME_ID_PAIR( venueSubType,            VenueSubTypeRole        ) \
+    ROLE_NAME_ID_PAIR( favorite,                Favorite                ) \
+    ROLE_NAME_ID_PAIR( street,                  Street                  ) \
+    ROLE_NAME_ID_PAIR( comment,                 Description             ) \
+    ROLE_NAME_ID_PAIR( commentEnglish,          DescriptionEn           ) \
+    ROLE_NAME_ID_PAIR( review,                  Review                  ) \
+    ROLE_NAME_ID_PAIR( website,                 Website                 ) \
+    ROLE_NAME_ID_PAIR( telephone,               Telephone               ) \
+    ROLE_NAME_ID_PAIR( pictures,                Pictures                ) \
+                                                                          \
+    /* Coordinates */                                                     \
+    ROLE_NAME_ID_PAIR( latCoord,                LatCoord                ) \
+    ROLE_NAME_ID_PAIR( longCoord,               LongCoord               ) \
+                                                                          \
+    /* Properties */                                                      \
+    ROLE_NAME_ID_PAIR( wlan,                    Wlan                    ) \
+    ROLE_NAME_ID_PAIR( vegan,                   VegCategory             ) \
+    ROLE_NAME_ID_PAIR( handicappedAccessible,   HandicappedAccessible   ) \
+    ROLE_NAME_ID_PAIR( handicappedAccessibleWc, HandicappedAccessibleWc ) \
+    ROLE_NAME_ID_PAIR( catering,                Catering                ) \
+    ROLE_NAME_ID_PAIR( organic,                 Organic                 ) \
+    ROLE_NAME_ID_PAIR( glutenFree,              GlutenFree              ) \
+    ROLE_NAME_ID_PAIR( delivery,                Delivery                ) \
+    ROLE_NAME_ID_PAIR( breakfast,               Breakfast               ) \
+    ROLE_NAME_ID_PAIR( brunch,                  Brunch                  ) \
+    ROLE_NAME_ID_PAIR( seatsOutdoor,            SeatsOutdoor            ) \
+    ROLE_NAME_ID_PAIR( seatsIndoor,             SeatsIndoor             ) \
+    ROLE_NAME_ID_PAIR( dog,                     Dog                     ) \
+    ROLE_NAME_ID_PAIR( childChair,              ChildChair              ) \
+                                                                          \
+    /* OpeningHours */                                                    \
+    ROLE_NAME_ID_PAIR( condensedOpeningHours,   CondensedOpeningHours   ) \
+    ROLE_NAME_ID_PAIR( closesSoon,              ClosesSoon              ) \
+    ROLE_NAME_ID_PAIR( open,                    Open                    ) \
+    ROLE_NAME_ID_PAIR( otMon,                   OtMon                   ) \
+    ROLE_NAME_ID_PAIR( otTue,                   OtTue                   ) \
+    ROLE_NAME_ID_PAIR( otWed,                   OtWed                   ) \
+    ROLE_NAME_ID_PAIR( otThu,                   OtThu                   ) \
+    ROLE_NAME_ID_PAIR( otFri,                   OtFri                   ) \
+    ROLE_NAME_ID_PAIR( otSat,                   OtSat                   ) \
+    ROLE_NAME_ID_PAIR( otSun,                   OtSun                   ) \
+
+
 class VenueModel : public QStandardItemModel
 {
     Q_OBJECT
@@ -95,62 +142,24 @@ public:
 
     enum VenueModelRoles
     {
-        ID = Qt::UserRole + 1,
-        Name,
+        UserRole = Qt::UserRole,
+#define ROLE_NAME_ID_PAIR(NAME, ID) ID,
+        ROLE_NAME_ID_PAIRS
+#undef ROLE_NAME_ID_PAIR
+
+        // Nameless roles
+
         SimplifiedSearchName,
-
-        // Model Category
-        VenueTypeRole,
-        // Restaurant, Imbiss, Cafe, Eiscafe
-        VenueSubTypeRole,
-        Favorite,
-
-        Street,
         SimplifiedSearchStreet,
-        Description,
         SimplifiedSearchDescription,
-        DescriptionEn,
         SimplifiedSearchDescriptionEn,
-        Review,
         SimplifiedSearchReview,
-        Website,
-        Telephone,
-        Pictures,
 
-        // Coordinates
-        LatCoord,
-        LongCoord,
-
-        // Properties
-        FirstPropertyRole,
-        Wlan = FirstPropertyRole,
-        VegCategory,
-        HandicappedAccessible,
-        HandicappedAccessibleWc,
-        Catering,
-        Organic,
-        GlutenFree,
-        Delivery,
-        Breakfast,
-        Brunch,
-        SeatsOutdoor,
-        SeatsIndoor,
-        Dog,
-        ChildChair,
-        LastPropertyRole = ChildChair,
-
-        // OpeningHours
-        Open,
-        ClosesSoon,
-        CondensedOpeningHours,
         OpeningMinutes,
-        OtMon,
-        OtTue,
-        OtWed,
-        OtThu,
-        OtFri,
-        OtSat,
-        OtSun
+
+        // Property ranges
+        FirstPropertyRole = Wlan,
+        LastPropertyRole = ChildChair
     };
 
     VenueModel(QObject *parent = 0);
