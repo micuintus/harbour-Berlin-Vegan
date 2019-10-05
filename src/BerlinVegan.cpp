@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
 {
     qmlRegisterType<VenueModel>("harbour.berlin.vegan", 1, 0, "VenueModel");
     qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan", 1, 0, "VenueSortFilterProxyModel");
+    qmlRegisterUncreatableType<VenueHandle>("harbour.berlin.vegan", 1, 0, "VenueHandle", "VenueHandle is not createable from QML");
     auto const mainQMLFile = QString("qrc:/qml/harbour-berlin-vegan.qml");
 
 #ifdef Q_OS_SAILFISH

@@ -10,28 +10,17 @@ VenueModel* VenueSortFilterProxyModel::model() const
     return qobject_cast<VenueModel*>(sourceModel());
 }
 
-QVariantMap VenueSortFilterProxyModel::item(int row) const
+VenueHandle* VenueSortFilterProxyModel::item(int row) const
 {
-    QVariantMap ret;
-
+    QModelIndex sourceIndex;
     const auto model = this->model();
     if (model)
     {
         QModelIndex m = index(row, 0);
-        QModelIndex source = mapToSource(m);
-        QStandardItem* item = model->itemFromIndex(source);
-
-        if (item)
-        {
-            const QHash<int, QByteArray>& roleNames = model->roleNames();
-            for (auto roleKey = roleNames.keyBegin(); roleKey != roleNames.keyEnd(); roleKey++)
-            {
-                ret.insert(roleNames[*roleKey], item->data(*roleKey));
-            }
-        }
+        sourceIndex = mapToSource(m);
     }
 
-    return ret;
+    return new VenueHandle(QPersistentModelIndex(sourceIndex));
 }
 
 VenueSortFilterProxyModel::VenueVegCategoryFlags VenueSortFilterProxyModel::filterVegCategory() const
