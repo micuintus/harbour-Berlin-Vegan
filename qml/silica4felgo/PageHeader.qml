@@ -1,7 +1,8 @@
 import QtQuick 2.7
 
 Item {
-
-    property var title
-
+    visible: false
+    enabled: false
+    property string title
+    property Item extraContent: Item { }
 }
