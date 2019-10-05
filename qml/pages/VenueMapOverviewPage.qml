@@ -110,7 +110,7 @@ BVApp.Page {
                     onClicked: {
                         pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                        {
-                                           restaurant     : model,
+                                           restaurant     : mapItemView.model.item(index),
                                            positionSource : page.positionSource
                                        });
                     }
