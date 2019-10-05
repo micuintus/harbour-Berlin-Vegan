@@ -28,6 +28,7 @@
 #include "FileIO.h"
 #include "VenueSortFilterProxyModel.h"
 #include "VenueModel.h"
+#include "VenueHandle.h"
 
 #ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>

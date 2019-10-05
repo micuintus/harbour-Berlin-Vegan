@@ -1,5 +1,6 @@
 #pragma once
 #include "VenueModel.h"
+#include "VenueHandle.h"
 
 #include <QtCore/QSortFilterProxyModel>
 #include <QtQml/QJSValue>
