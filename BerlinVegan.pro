@@ -15,6 +15,7 @@ SOURCES += src/BerlinVegan.cpp \
            src/VenueSortFilterProxyModel.cpp
 
 HEADERS += src/VenueModel.h \
+           src/VenueHandle.h \
            src/VenueSortFilterProxyModel.h \
            src/FileIO.h \
            src/OpeningHoursAlgorithms.h \
