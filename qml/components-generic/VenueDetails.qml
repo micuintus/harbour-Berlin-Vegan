@@ -65,8 +65,9 @@ Item {
             model: restaurant.condensedOpeningHours.length
 
             delegate: DetailItem {
-                label: restaurant.condensedOpeningHours[index]["day"]
-                value: restaurant.condensedOpeningHours[index]["hours"]
+                property bool current: restaurant.condensedOpeningHours[index]["current"]
+                label: (current ? "<b>" : "") + restaurant.condensedOpeningHours[index]["day"]   + (current ? "</b>" : "")
+                value: (current ? "<b>" : "") + restaurant.condensedOpeningHours[index]["hours"] + (current ? "</b>" : "")
             }
         }
 
