@@ -30,27 +30,30 @@
 
 QVariantMap mergeElements(const QVariantList& openingHours,
                           const unsigned from,
-                          const unsigned until)
+                          const unsigned until,
+                          const int todayIndex)
 {
+    QVariantMap result;
+
     if (from == until)
     {
-        return openingHours[from].toMap();
+        result = openingHours[from].toMap();
     }
     else
     {
-        QVariantMap result;
-
         const auto& fromDay  = openingHours[from]. toMap()["day"].toString();
         const auto& untilDay = openingHours[until].toMap()["day"].toString();
 
-        result["day"]   = fromDay + " - " + untilDay;
-        result["hours"] = openingHours[from].toMap()["hours"];
-
-        return result;
+        result["day"]      = fromDay + " - " + untilDay;
+        result["hours"]    = openingHours[from].toMap()["hours"];
     }
+
+    result["current"]  = from <= todayIndex && todayIndex <= until;
+
+    return result;
 }
 
-QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours)
+QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours, const int todayIndex = -1)
 {
     QVariantList condensedOpeningHours;
 
@@ -70,7 +73,7 @@ QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours)
             next++;
         }
 
-        condensedOpeningHours.append(mergeElements(uncondensedOpeningHours, curr, next - 1));
+        condensedOpeningHours.append(mergeElements(uncondensedOpeningHours, curr, next - 1, todayIndex));
 
         curr = next;
     }
