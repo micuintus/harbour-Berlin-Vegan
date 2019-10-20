@@ -65,9 +65,16 @@ Item {
             model: restaurant.condensedOpeningHours
 
             delegate: DetailItem {
-                property bool current: modelData["current"]
-                label: (current ? "<b>" : "") + modelData["day"]   + (current ? "</b>" : "")
-                value: (current ? "<b>" : "") + modelData["hours"] + (current ? "</b>" : "")
+                label: modelData["day"]
+                value: modelData["hours"]
+
+                Component.onCompleted: {
+                    if (modelData["current"])
+                    {
+                        children[0].font.weight = Font.Bold
+                        children[1].font.weight = Font.Bold
+                    }
+                }
             }
         }
 
