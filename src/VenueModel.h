@@ -50,21 +50,25 @@ inline QString simplifySearchString(const QString searchString)
     ROLE_NAME_ID_PAIR( latCoord,                LatCoord                ) \
     ROLE_NAME_ID_PAIR( longCoord,               LongCoord               ) \
                                                                           \
-    /* Properties */                                                      \
-    ROLE_NAME_ID_PAIR( wlan,                    Wlan                    ) \
+    /* Veg*an Category */                                                 \
     ROLE_NAME_ID_PAIR( vegan,                   VegCategory             ) \
-    ROLE_NAME_ID_PAIR( handicappedAccessible,   HandicappedAccessible   ) \
-    ROLE_NAME_ID_PAIR( handicappedAccessibleWc, HandicappedAccessibleWc ) \
-    ROLE_NAME_ID_PAIR( catering,                Catering                ) \
+                                                                          \
+    /* Venue Properties */                                                \
     ROLE_NAME_ID_PAIR( organic,                 Organic                 ) \
-    ROLE_NAME_ID_PAIR( glutenFree,              GlutenFree              ) \
+    ROLE_NAME_ID_PAIR( handicappedAccessible,   HandicappedAccessible   ) \
     ROLE_NAME_ID_PAIR( delivery,                Delivery                ) \
+                                                                          \
+    /* Gastro Properties */                                               \
+    ROLE_NAME_ID_PAIR( glutenFree,              GlutenFree              ) \
     ROLE_NAME_ID_PAIR( breakfast,               Breakfast               ) \
     ROLE_NAME_ID_PAIR( brunch,                  Brunch                  ) \
+    ROLE_NAME_ID_PAIR( handicappedAccessibleWc, HandicappedAccessibleWc ) \
+    ROLE_NAME_ID_PAIR( childChair,              ChildChair              ) \
+    ROLE_NAME_ID_PAIR( dog,                     Dog                     ) \
+    ROLE_NAME_ID_PAIR( catering,                Catering                ) \
+    ROLE_NAME_ID_PAIR( wlan,                    Wlan                    ) \
     ROLE_NAME_ID_PAIR( seatsOutdoor,            SeatsOutdoor            ) \
     ROLE_NAME_ID_PAIR( seatsIndoor,             SeatsIndoor             ) \
-    ROLE_NAME_ID_PAIR( dog,                     Dog                     ) \
-    ROLE_NAME_ID_PAIR( childChair,              ChildChair              ) \
                                                                           \
     /* OpeningHours */                                                    \
     ROLE_NAME_ID_PAIR( condensedOpeningHours,   CondensedOpeningHours   ) \
@@ -159,8 +163,10 @@ public:
         OpeningMinutes,
 
         // Property ranges
-        FirstPropertyRole = Wlan,
-        LastPropertyRole = ChildChair
+        FirstVenuePropertyRole  = Organic,
+        LastVenuePropertyRole   = Delivery,
+        FirstGastroPropertyRole = GlutenFree,
+        LastGastroPropertyRole  = Wlan
     };
 
     VenueModel(QObject *parent = 0);

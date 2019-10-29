@@ -19,6 +19,7 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(VenueModel::VenueSubTypeFlags filterVenueSubType READ filterVenueSubType NOTIFY filterVenueSubTypeChanged)
     Q_PROPERTY(VenueVegCategoryFlags filterVegCategory READ filterVegCategory NOTIFY filterVegCategoryChanged)
     Q_PROPERTY(VenuePropertyFlags filterVenueProperty READ filterVenueProperty NOTIFY filterVenuePropertyChanged)
+    Q_PROPERTY(GastroPropertyFlags filterGastroProperty READ filterGastroProperty NOTIFY filterGastroPropertyChanged)
     Q_PROPERTY(bool filterOpenNow MEMBER m_filterOpenNow WRITE setFilterOpenNow NOTIFY filterOpenNowChanged)
     Q_PROPERTY(bool filterWithReview MEMBER m_filterWithReview WRITE setFilterWithReview NOTIFY filterWithReviewChanged)
     Q_PROPERTY(bool filterFavorites MEMBER m_filterFavorites WRITE setFilterFavorites NOTIFY filterFavoritesChanged)
@@ -34,36 +35,46 @@ public:
     Q_FLAG(VenueVegCategoryFlags)
     Q_ENUM(VenueVegCategoryFlag)
 
+    // Property flags that apply to both shops and gastro venues
     enum VenuePropertyFlag {
-                                  // Make sure we start with bit 0 and not with bit VenueModel::FirstPropertyRole
-        Wlan                    = enumValueToFlag(VenueModel::Wlan,                    VenueModel::FirstPropertyRole),
-        HandicappedAccessible   = enumValueToFlag(VenueModel::HandicappedAccessible,   VenueModel::FirstPropertyRole),
-        HandicappedAccessibleWc = enumValueToFlag(VenueModel::HandicappedAccessibleWc, VenueModel::FirstPropertyRole),
-        Catering                = enumValueToFlag(VenueModel::Catering,                VenueModel::FirstPropertyRole),
-        Organic                 = enumValueToFlag(VenueModel::Organic,                 VenueModel::FirstPropertyRole),
-        GlutenFree              = enumValueToFlag(VenueModel::GlutenFree,              VenueModel::FirstPropertyRole),
-        Delivery                = enumValueToFlag(VenueModel::Delivery,                VenueModel::FirstPropertyRole),
-        Breakfast               = enumValueToFlag(VenueModel::Breakfast,               VenueModel::FirstPropertyRole),
-        Brunch                  = enumValueToFlag(VenueModel::Brunch,                  VenueModel::FirstPropertyRole),
-        Dog                     = enumValueToFlag(VenueModel::Dog,                     VenueModel::FirstPropertyRole),
-        ChildChair              = enumValueToFlag(VenueModel::ChildChair,              VenueModel::FirstPropertyRole),
+        Organic                 = enumValueToFlag(VenueModel::Organic,                 VenueModel::FirstVenuePropertyRole),
+        HandicappedAccessible   = enumValueToFlag(VenueModel::HandicappedAccessible,   VenueModel::FirstVenuePropertyRole),
+        Delivery                = enumValueToFlag(VenueModel::Delivery,                VenueModel::FirstVenuePropertyRole),
     };
     Q_DECLARE_FLAGS(VenuePropertyFlags, VenuePropertyFlag)
     Q_FLAG(VenuePropertyFlags)
     Q_ENUM(VenuePropertyFlag)
+
+    // Gastro only flags
+    enum GastroPropertyFlag {
+        GlutenFree              = enumValueToFlag(VenueModel::GlutenFree,              VenueModel::FirstGastroPropertyRole),
+        Breakfast               = enumValueToFlag(VenueModel::Breakfast,               VenueModel::FirstGastroPropertyRole),
+        Brunch                  = enumValueToFlag(VenueModel::Brunch,                  VenueModel::FirstGastroPropertyRole),
+        HandicappedAccessibleWc = enumValueToFlag(VenueModel::HandicappedAccessibleWc, VenueModel::FirstGastroPropertyRole),
+        ChildChair              = enumValueToFlag(VenueModel::ChildChair,              VenueModel::FirstGastroPropertyRole),
+        Dog                     = enumValueToFlag(VenueModel::Dog,                     VenueModel::FirstGastroPropertyRole),
+        Catering                = enumValueToFlag(VenueModel::Catering,                VenueModel::FirstGastroPropertyRole),
+        Wlan                    = enumValueToFlag(VenueModel::Wlan,                    VenueModel::FirstGastroPropertyRole),
+    };
+    Q_DECLARE_FLAGS(GastroPropertyFlags, GastroPropertyFlag)
+    Q_FLAG(GastroPropertyFlags)
+    Q_ENUM(GastroPropertyFlag)
 
     Q_ENUMS(VenueModel::VenueSubTypeFlag)
 
     VenueSortFilterProxyModel(QObject *parent = 0);
 
     Q_INVOKABLE VenueModel* model() const;
-    Q_INVOKABLE VenueVegCategoryFlags filterVegCategory() const;
-    Q_INVOKABLE VenueModel::VenueSubTypeFlags filterVenueSubType() const;
-    Q_INVOKABLE VenuePropertyFlags filterVenueProperty() const;
+    VenueVegCategoryFlags filterVegCategory() const;
+    VenueModel::VenueSubTypeFlags filterVenueSubType() const;
+    VenuePropertyFlags  filterVenueProperty() const;
+    GastroPropertyFlags filterGastroProperty() const;
 
     Q_INVOKABLE VenueHandle* item(int row) const;
     Q_INVOKABLE void setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on);
     Q_INVOKABLE void setVenuePropertyFilterFlag(VenuePropertyFlag flag, bool on);
+    Q_INVOKABLE void setGastroPropertyFilterFlag(GastroPropertyFlag flag, bool on);
+
     // Note: Int because of QTBUG-58454:
     // Q_ENUMs from one class cannot be used as a Q_INVOKABLE function parameter of another class
     Q_INVOKABLE void setVenueSubTypeFilterFlag(int flag, bool on);
@@ -85,6 +96,7 @@ signals:
     void filterVenueSubTypeChanged();
     void filterVegCategoryChanged();
     void filterVenuePropertyChanged();
+    void filterGastroPropertyChanged();
     void filterOpenNowChanged();
     void filterWithReviewChanged();
     void filterFavoritesChanged();
@@ -98,9 +110,11 @@ private:
 
     bool searchStringMatches(const QModelIndex& index) const;
     bool venueSubTypeMatches(const QModelIndex& index) const;
-    bool venueTypeMatches(const QModelIndex& indexe) const;
+    std::pair<bool, VenueModel::VenueType>
+    venueTypeMatches(const QModelIndex& indexe) const;
     bool vegCategoryMatches(const QModelIndex& index) const;
     bool venuePropertiesMatch(const QModelIndex& index) const;
+    bool gastroPropertiesMatch(const QModelIndex& index) const;
     bool favoriteStatusMatches(const QModelIndex& index) const;
     bool openNow(const QModelIndex& index) const;
     bool hasReview(const QModelIndex& index) const;
@@ -132,6 +146,8 @@ private:
     VenueVegCategoryFlags m_filterVegCategory = { VeganFlag | VegetarianFlag | OmnivorousFlag };
     // Negative filter / AND filter: Only filter in if all categories match
     VenuePropertyFlags m_filterVenueProperty = { };
+    GastroPropertyFlags m_filterGastroProperty = { };
+
 
     bool m_filterOpenNow    = false;
     bool m_filterWithReview = false;
