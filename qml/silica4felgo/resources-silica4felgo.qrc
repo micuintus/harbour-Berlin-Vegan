@@ -8,7 +8,6 @@
         <file>CoverAction.qml</file>
         <file>CoverActionList.qml</file>
         <file>CoverBackground.qml</file>
-        <file>DetailItem.qml</file>
         <file>Label.qml</file>
         <file>ListItem.qml</file>
         <file>OpacityRampEffect.qml</file>

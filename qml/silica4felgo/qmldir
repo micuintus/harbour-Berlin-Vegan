@@ -5,7 +5,6 @@ Button 1.0 Button.qml
 CoverAction 1.0 CoverAction.qml
 CoverActionList 1.0 CoverActionList.qml
 CoverBackground 1.0 CoverBackground.qml
-DetailItem 1.0 DetailItem.qml
 Label 1.0 Label.qml
 ListItem 1.0 ListItem.qml
 OpacityRampEffect 1.0 OpacityRampEffect.qml

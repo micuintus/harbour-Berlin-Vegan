@@ -64,17 +64,12 @@ Item {
 
             model: restaurant.condensedOpeningHours
 
-            delegate: DetailItem {
+            delegate: BVApp.DetailItem {
                 label: modelData["day"]
                 value: modelData["hours"]
-
-                Component.onCompleted: {
-                    if (modelData["current"])
-                    {
-                        children[0].font.weight = Font.Bold
-                        children[1].font.weight = Font.Bold
-                    }
-                }
+                fontWeight: modelData["current"] ?
+                                Font.Bold
+                              : Font.Normal
             }
         }
 
@@ -95,7 +90,7 @@ Item {
             visible: isGastroVenue
         }
 
-        DetailItem {
+        BVApp.DetailItem {
                       //% "Category"
             label: isGastroVenue ?
                        qsTrId("id-vegan-venue-category")
@@ -103,27 +98,27 @@ Item {
             value: BVApp.VenueDescriptionAlgorithms.restaurantCategory(restaurant.vegan)
         }
 
-        DetailItem {
+        BVApp.DetailItem {
                       //% "Organic products"
             label: qsTrId("id-organic")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
         }
 
-        DetailItem {
+        BVApp.DetailItem {
                       //% "Breakfast"
             label: qsTrId("id-breakfast")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.breakfast)
             visible: isGastroVenue
         }
 
-        DetailItem {
+        BVApp.DetailItem {
                       //% "Brunch"
             label: qsTrId("id-brunch")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.brunch)
             visible: isGastroVenue
         }
 
-        DetailItem {
+        BVApp.DetailItem {
                       //% "Gluten-free options"
             label: qsTrId("id-gluten-free")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.glutenFree)
@@ -142,27 +137,27 @@ Item {
                 visible: isGastroVenue
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "Wheelchair-friendly"
                 label: qsTrId("id-wheelchair")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "Wheelchair-accessible WC"
                 label: qsTrId("id-wheelchair-wc")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
                 visible: isGastroVenue
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "High chair"
                 label: qsTrId("id-high-chair")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
                 visible: isGastroVenue
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "Dogs allowed"
                 label: qsTrId("id-dogs-allowed")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
@@ -178,34 +173,34 @@ Item {
                 visible: isGastroVenue
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "Delivery service"
                 label: qsTrId("id-delivery")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "Catering"
                 label: qsTrId("id-catering")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
                 visible: isGastroVenue
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "WiFi"
                 label: qsTrId("id-wifi")
                 value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
                 visible: isGastroVenue
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "Seats outdoor"
                 label: qsTrId("id-outdoor-seats")
                 value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
                 visible: isGastroVenue
             }
 
-            DetailItem {
+            BVApp.DetailItem {
                           //% "Seats indoor"
                 label: qsTrId("id-indoor-seats")
                 value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
