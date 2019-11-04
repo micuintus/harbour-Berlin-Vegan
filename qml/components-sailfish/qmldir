@@ -7,6 +7,7 @@ NavigationMenu 1.0 NavigationMenu.qml
 Map 1.0 Map.qml
 MapReCenterButton 1.0 MapReCenterButton.qml
 MenuItem 1.0 MenuItem.qml
+DetailItem 1.0 DetailItem.qml
 SectionHeader 1.0 SectionHeader.qml
 SearchField 1.0 SearchField.qml
 ActionMenuItem 1.0 ActionMenuItem.qml

@@ -2,23 +2,26 @@ import QtQuick 2.7
 import Felgo 3.0
 
 import Sailfish.Silica 1.0
-
 import BerlinVegan.components.platform 1.0 as BVApp
 
-Rectangle {
-
-    property alias label: keyText.text
-    property int leftMargin
-    property int rightMargin
+Item {
+    id: me
+    property alias label: labelText.text
     property alias value: valueText.text
+    property alias fontWeight: labelText.font.weight
+    property alias fontSize: labelText.font.pixelSize
+    readonly property real leftMargin: labelText.anchors.leftMargin
+    readonly property real rightMargin: valueText.anchors.rightMargin
+    property alias labelColor: labelText.color
+    property alias valueColor: valueText.color
 
     width: parent.width
     height: valueText.height
 
     Label {
-        id: keyText
-        color: BVApp.Theme.primaryColor
+        id: labelText
 
+        color: BVApp.Theme.primaryColor
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
 
         anchors.left: parent.left
@@ -39,7 +42,10 @@ Rectangle {
         id: valueText
         color: BVApp.Theme.secondaryColor
 
-        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+        font {
+            pixelSize: BVApp.Theme.fontSizeExtraSmall
+            weight: labelText.font.weight
+        }
 
         anchors {
             right: parent.right
