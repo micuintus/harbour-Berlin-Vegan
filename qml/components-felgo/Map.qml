@@ -3,6 +3,10 @@ import QtLocation 5.9
 
 AppMap {
 
+
+    // fix map scaling on android
+    scale: Theme.isAndroid ? dp(1) : 1
+
     // the copyright notice is usually displayed in the bottom left corner
     copyrightsVisible: false
 

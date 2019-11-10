@@ -17,6 +17,8 @@ Rectangle {
 
         coordinate: venueCoordinate
 
+        scale: 1 / map.scale
+
         anchorPoint.x: venueMarkerImage.width / 2
         anchorPoint.y: venueMarkerImage.height
 
@@ -32,6 +34,8 @@ Rectangle {
 
     property var currentPosition: MapQuickItem {
         id: currentPosition
+
+        scale: 1 / map.scale
 
         coordinate: positionSource.position.coordinate
 

@@ -36,6 +36,8 @@ BVApp.Page {
     property var currentPosition: MapQuickItem {
         id: currentPosition
 
+        scale: 1 / map.scale
+
         coordinate: positionSource.position.coordinate
 
         anchorPoint.x: currentPosImage.width / 2
@@ -95,6 +97,8 @@ BVApp.Page {
 
             delegate: MapQuickItem {
 
+                scale: 1 / map.scale
+
                 anchorPoint.x: venueMarkerImage.width / 2
                 anchorPoint.y: venueMarkerImage.height
 
@@ -130,6 +134,8 @@ BVApp.Page {
         }
 
         BVApp.MapReCenterButton {
+            scale: 1 / map.scale
+
             // SFOS map has no 'userPositionAvailable'
             enabled: positionSource.position.coordinate.isValid
 
