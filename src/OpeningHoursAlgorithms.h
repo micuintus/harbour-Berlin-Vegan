@@ -29,8 +29,8 @@
 // Condense opening hours part --->
 
 QVariantMap mergeElements(const QVariantList& openingHours,
-                          const unsigned from,
-                          const unsigned until,
+                          const int from,
+                          const int until,
                           const int todayIndex)
 {
     QVariantMap result;
@@ -57,12 +57,12 @@ QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours, c
 {
     QVariantList condensedOpeningHours;
 
-    unsigned curr = 0;
-    const unsigned numElements = uncondensedOpeningHours.size();
+    int curr = 0;
+    const int numElements = uncondensedOpeningHours.size();
 
     while (curr < numElements)
     {
-        unsigned next = curr + 1;
+        int next = curr + 1;
 
         while (next < numElements
                &&    uncondensedOpeningHours[curr].toMap()["hours"]
@@ -123,21 +123,21 @@ QVariantList extractOpenHoursData(const QJSValue& from)
 
 // Extract machine readable hours part --->
 
-unsigned minute(const QString& time)
+int minute(const QString& time)
 {
     if (time == nullptr || time.isEmpty())
     {
         return 0;
     }
 
-    unsigned hour   = 0;
-    unsigned minute = 0;
+    int hour   = 0;
+    int minute = 0;
 
     if (time.contains(":"))
     {
         const QStringList parts = time.split(":");
-        hour   = parts[0].trimmed().toUInt();
-        minute = parts[1].trimmed().toUInt();
+        hour   = parts[0].trimmed().toInt();
+        minute = parts[1].trimmed().toInt();
     }
     else
     {
@@ -149,8 +149,8 @@ unsigned minute(const QString& time)
 
 QVariantMap parseOpeningMinutes(const QString& openingString)
 {
-    unsigned startMinute = 0;
-    unsigned endMinute   = 0;
+    int startMinute = 0;
+    int endMinute   = 0;
 
     if (openingString.contains("-"))
     {
@@ -271,8 +271,8 @@ bool isPublicHoliday(const QDate &date)
 
 std::pair<unsigned char, unsigned> extractDayIndexAndMinute(QDateTime dateTime)
 {
-    const unsigned currentHour = dateTime.time().hour();
-    unsigned currentMinute = currentHour * MINUTES_PER_HOUR + dateTime.time().minute();
+    const int currentHour = dateTime.time().hour();
+    int currentMinute = currentHour * MINUTES_PER_HOUR + dateTime.time().minute();
 
     unsigned char dayIndex = static_cast<unsigned char>(dateTime.date().dayOfWeek() - 1);
 
