@@ -73,6 +73,46 @@ Item {
             }
         }
 
+        Item {
+            visible: openComment.visible
+            height: BVApp.Theme.paddingSmall
+            width: parent.width
+        }
+
+        Label {
+            id: openComment
+
+            visible: text != ""
+
+            anchors {
+                // As we cannot get hold of the last opening hours item easily,
+                // we just go with the next detail item
+                left: organic.left
+                right: organic.right
+                leftMargin: organic.leftMargin
+                rightMargin: organic.rightMargin
+            }
+
+            text: Qt.locale().name.toLowerCase().indexOf("de") === 0 || typeof restaurant.openCommentEnglish === "undefined" ?
+                      restaurant.openComment :
+                      restaurant.openCommentEnglish
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignRight
+
+            font {
+                pixelSize: organic.fontSize
+                italic: true
+            }
+
+            color: organic.valueColor
+        }
+
+        Item {
+            visible: BVApp.Platform.isSailfish && openComment.visible
+            height: BVApp.Theme.paddingLarge
+            width: parent.width
+        }
+
         BVApp.SectionHeader {
                      //% "Features"
             text: qsTrId("id-venue-features")
@@ -105,6 +145,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: organic
                       //% "Breakfast"
             label: qsTrId("id-breakfast")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.breakfast)

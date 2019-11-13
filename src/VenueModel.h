@@ -81,7 +81,8 @@ inline QString simplifySearchString(const QString searchString)
     ROLE_NAME_ID_PAIR( otFri,                   OtFri                   ) \
     ROLE_NAME_ID_PAIR( otSat,                   OtSat                   ) \
     ROLE_NAME_ID_PAIR( otSun,                   OtSun                   ) \
-
+    ROLE_NAME_ID_PAIR( openComment,             OpenComment             ) \
+    ROLE_NAME_ID_PAIR( openCommentEnglish,      OpenCommentEn           ) \
 
 class VenueModel : public QStandardItemModel
 {
