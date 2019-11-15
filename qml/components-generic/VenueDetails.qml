@@ -166,87 +166,81 @@ Item {
             visible: isGastroVenue
         }
 
-        Column {
+        BVApp.SectionHeader {
+                     //% "Accessibility"
+            text: qsTrId("id-accessibility")
+            icon: BVApp.Theme.iconFor("accessible")
+            // Summerize venue features for shops under one single header
+            visible: isGastroVenue
+        }
 
-            width: parent.width
+        BVApp.DetailItem {
+                      //% "Wheelchair-friendly"
+            label: qsTrId("id-wheelchair")
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
+        }
 
-            BVApp.SectionHeader {
-                         //% "Accessibility"
-                text: qsTrId("id-accessibility")
-                icon: BVApp.Theme.iconFor("accessible")
-                // Summerize venue features for shops under one single header
-                visible: isGastroVenue
-            }
+        BVApp.DetailItem {
+                      //% "Wheelchair-accessible WC"
+            label: qsTrId("id-wheelchair-wc")
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
+            visible: isGastroVenue
+        }
 
-            BVApp.DetailItem {
-                          //% "Wheelchair-friendly"
-                label: qsTrId("id-wheelchair")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
-            }
+        BVApp.DetailItem {
+                      //% "High chair"
+            label: qsTrId("id-high-chair")
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
+            visible: isGastroVenue
+        }
 
-            BVApp.DetailItem {
-                          //% "Wheelchair-accessible WC"
-                label: qsTrId("id-wheelchair-wc")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
-                visible: isGastroVenue
-            }
+        BVApp.DetailItem {
+                      //% "Dogs allowed"
+            label: qsTrId("id-dogs-allowed")
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
+            visible: isGastroVenue
+        }
 
-            BVApp.DetailItem {
-                          //% "High chair"
-                label: qsTrId("id-high-chair")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
-                visible: isGastroVenue
-            }
+        BVApp.SectionHeader {
+                     //% "Further features"
+            text: qsTrId("id-venue-more-features")
+            icon: BVApp.Theme.iconFor("more_vert")
+            // Summerize venue features for shops under one single header
+            visible: isGastroVenue
+        }
 
-            BVApp.DetailItem {
-                          //% "Dogs allowed"
-                label: qsTrId("id-dogs-allowed")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
-                visible: isGastroVenue
-            }
+        BVApp.DetailItem {
+                      //% "Delivery service"
+            label: qsTrId("id-delivery")
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
+        }
 
+        BVApp.DetailItem {
+                      //% "Catering"
+            label: qsTrId("id-catering")
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
+            visible: isGastroVenue
+        }
 
-            BVApp.SectionHeader {
-                         //% "Further features"
-                text: qsTrId("id-venue-more-features")
-                icon: BVApp.Theme.iconFor("more_vert")
-                // Summerize venue features for shops under one single header
-                visible: isGastroVenue
-            }
+        BVApp.DetailItem {
+                      //% "WiFi"
+            label: qsTrId("id-wifi")
+            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
+            visible: isGastroVenue
+        }
 
-            BVApp.DetailItem {
-                          //% "Delivery service"
-                label: qsTrId("id-delivery")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
-            }
+        BVApp.DetailItem {
+                      //% "Seats outdoor"
+            label: qsTrId("id-outdoor-seats")
+            value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
+            visible: isGastroVenue
+        }
 
-            BVApp.DetailItem {
-                          //% "Catering"
-                label: qsTrId("id-catering")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
-                visible: isGastroVenue
-            }
-
-            BVApp.DetailItem {
-                          //% "WiFi"
-                label: qsTrId("id-wifi")
-                value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
-                visible: isGastroVenue
-            }
-
-            BVApp.DetailItem {
-                          //% "Seats outdoor"
-                label: qsTrId("id-outdoor-seats")
-                value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
-                visible: isGastroVenue
-            }
-
-            BVApp.DetailItem {
-                          //% "Seats indoor"
-                label: qsTrId("id-indoor-seats")
-                value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
-                visible: isGastroVenue
-            }
+        BVApp.DetailItem {
+                      //% "Seats indoor"
+            label: qsTrId("id-indoor-seats")
+            value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
+            visible: isGastroVenue
         }
     }
 }
