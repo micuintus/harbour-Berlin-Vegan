@@ -93,9 +93,17 @@ Item {
                 rightMargin: organic.rightMargin
             }
 
-            text: Qt.locale().name.toLowerCase().indexOf("de") === 0 || typeof restaurant.openCommentEnglish === "undefined" ?
-                      restaurant.openComment :
-                      restaurant.openCommentEnglish
+            text: if ((Qt.locale().name.toLowerCase().indexOf("de") === 0 || typeof restaurant.openCommentEnglish === "undefined")
+                          && typeof restaurant.openComment !== "undefined")
+                  {
+                      return restaurant.openComment;
+                  }
+                  else if (typeof restaurant.openCommentEnglish !== "undefined")
+                  {
+                      return restaurant.openCommentEnglish;
+                  }
+                  else return "";
+
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignRight
 
