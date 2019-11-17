@@ -26,6 +26,10 @@
 .pragma library
 .import harbour.berlin.vegan 1.0 as BVApp
 
+function valueUnknown(key)
+{
+    return (typeof key === "undefined") || (key === -1);
+}
 
 function defaultBooleanProperty(key)
 {
