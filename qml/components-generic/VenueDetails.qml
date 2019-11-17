@@ -118,7 +118,7 @@ Item {
             text: qsTrId("id-venue-features")
             icon: BVApp.Theme.iconFor("more_vert")
             // Summerize venue features for shops under one single header
-            visible: !isGastroVenue
+            visible: !isGastroVenue // Section header always visible for shop venues, as venueCategory should be never unknown
         }
 
         BVApp.SectionHeader {
@@ -127,10 +127,11 @@ Item {
             icon: BVApp.Theme.iconFor("details")
             id: foodDetailsHeader
             // Summerize venue features for shops under one single header
-            visible: isGastroVenue
+            visible: isGastroVenue // Section header always visible for gastro venues, as venueCategory should be never unknown
         }
 
         BVApp.DetailItem {
+            id: venueCategory
                       //% "Category"
             label: isGastroVenue ?
                        qsTrId("id-vegan-venue-category")
@@ -140,6 +141,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: organic
                       //% "Organic products"
             label: qsTrId("id-organic")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
@@ -147,7 +149,7 @@ Item {
         }
 
         BVApp.DetailItem {
-            id: organic
+            id: breakfast
                       //% "Breakfast"
             label: qsTrId("id-breakfast")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.breakfast)
@@ -155,6 +157,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: brunch
                       //% "Brunch"
             label: qsTrId("id-brunch")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.brunch)
@@ -162,6 +165,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: glutenFree
                       //% "Gluten-free options"
             label: qsTrId("id-gluten-free")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.glutenFree)
@@ -173,10 +177,11 @@ Item {
             text: qsTrId("id-accessibility")
             icon: BVApp.Theme.iconFor("accessible")
             // Summerize venue features for shops under one single header
-            visible: isGastroVenue
+            visible: isGastroVenue && (wheelchairFriendly.visible || wheelchairAccessibleWc.visible || highChair.visible || dogsAllowed.visible)
         }
 
         BVApp.DetailItem {
+            id: wheelchairFriendly
                       //% "Wheelchair-friendly"
             label: qsTrId("id-wheelchair")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
@@ -184,6 +189,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: wheelchairAccessibleWc
                       //% "Wheelchair-accessible WC"
             label: qsTrId("id-wheelchair-wc")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
@@ -191,6 +197,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: highChair
                       //% "High chair"
             label: qsTrId("id-high-chair")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
@@ -198,6 +205,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: dogsAllowed
                       //% "Dogs allowed"
             label: qsTrId("id-dogs-allowed")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
@@ -209,10 +217,11 @@ Item {
             text: qsTrId("id-venue-more-features")
             icon: BVApp.Theme.iconFor("more_vert")
             // Summerize venue features for shops under one single header
-            visible: isGastroVenue
+            visible: isGastroVenue && (deliveryService.visible || catering.visible || wifi.visible || seatsOutdoor.visible || seatsIndoor.visible)
         }
 
         BVApp.DetailItem {
+            id: deliveryService
                       //% "Delivery service"
             label: qsTrId("id-delivery")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
@@ -220,6 +229,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: catering
                       //% "Catering"
             label: qsTrId("id-catering")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
@@ -227,6 +237,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: wifi
                       //% "WiFi"
             label: qsTrId("id-wifi")
             value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
@@ -234,6 +245,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: seatsOutdoor
                       //% "Seats outdoor"
             label: qsTrId("id-outdoor-seats")
             value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
@@ -241,6 +253,7 @@ Item {
         }
 
         BVApp.DetailItem {
+            id: seatsIndoor
                       //% "Seats indoor"
             label: qsTrId("id-indoor-seats")
             value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
