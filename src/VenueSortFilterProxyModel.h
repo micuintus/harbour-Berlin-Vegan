@@ -13,7 +13,7 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
 
     Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
-
+    Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QString searchString MEMBER m_simplifiedSearchString WRITE setSearchString NOTIFY searchStringChanged)
     Q_PROPERTY(VenueModel::VenueTypeFlags filterVenueType MEMBER m_filterVenueType WRITE setFilterVenueType NOTIFY filterVenueTypeChanged)
     Q_PROPERTY(VenueModel::VenueSubTypeFlags filterVenueSubType READ filterVenueSubType NOTIFY filterVenueSubTypeChanged)
@@ -65,6 +65,7 @@ public:
     VenueSortFilterProxyModel(QObject *parent = 0);
 
     Q_INVOKABLE VenueModel* model() const;
+    int count() const;
     VenueVegCategoryFlags filterVegCategory() const;
     VenueModel::VenueSubTypeFlags filterVenueSubType() const;
     VenuePropertyFlags  filterVenueProperty() const;
@@ -91,6 +92,7 @@ public slots:
 
 signals:
     void modelChanged();
+    void countChanged();
     void searchStringChanged();
     void filterVenueTypeChanged();
     void filterVenueSubTypeChanged();
