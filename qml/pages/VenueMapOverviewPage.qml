@@ -126,7 +126,7 @@ BVApp.Page {
         function centerAndZoom()
         {
             center = currentPosition.coordinate;
-            zoomLevel = maximumZoomLevel - (BVApp.Platform.isSailfish ? 3 : 9);
+            zoomLevel = maximumZoomLevel - (BVApp.Platform.isIos ? 9 : 3);
         }
 
         BVApp.MapReCenterButton {
