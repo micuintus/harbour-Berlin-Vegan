@@ -258,14 +258,6 @@
         <source>Ice cream parlor</source>
         <translation>Eisdiele</translation>
     </message>
-    <message id="id-food">
-        <source>Food</source>
-        <translation>Gastronomie</translation>
-    </message>
-    <message id="id-shopping">
-        <source>Shopping</source>
-        <translation>Einkaufen</translation>
-    </message>
     <message id="id-venue-category">
         <source>Venue category</source>
         <oldsource>Venue type</oldsource>
@@ -357,10 +349,6 @@
         <source>Shops</source>
         <translation>Geschäfte</translation>
     </message>
-    <message id="id-shop">
-        <source>Shop</source>
-        <translation>Geschäft</translation>
-    </message>
     <message id="id-venue-more-features">
         <source>Further features</source>
         <translation>Weitere Eigenschaften</translation>
@@ -368,6 +356,10 @@
     <message id="id-filter-with-review">
         <source>With review (German)</source>
         <translation>Mit Rezension</translation>
+    </message>
+    <message id="id-selected">
+        <source>venues selected</source>
+        <translation>Läden ausgewählt</translation>
     </message>
 </context>
 </TS>
