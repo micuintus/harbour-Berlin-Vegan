@@ -3,11 +3,20 @@
 VenueSortFilterProxyModel::VenueSortFilterProxyModel(QObject *parent) : QSortFilterProxyModel(parent)
 {
     sort(0);
+
+    connect(this, &QAbstractItemModel::rowsRemoved, this, &VenueSortFilterProxyModel::countChanged);
+    connect(this, &QAbstractItemModel::rowsInserted, this, &VenueSortFilterProxyModel::countChanged);
+    connect(this, &QAbstractItemModel::modelReset, this, &VenueSortFilterProxyModel::countChanged);
 }
 
 VenueModel* VenueSortFilterProxyModel::model() const
 {
     return qobject_cast<VenueModel*>(sourceModel());
+}
+
+int VenueSortFilterProxyModel::count() const
+{
+    return rowCount();
 }
 
 VenueHandle* VenueSortFilterProxyModel::item(int row) const

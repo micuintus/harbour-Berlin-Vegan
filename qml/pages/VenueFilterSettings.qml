@@ -43,12 +43,31 @@ BVApp.Page {
             id: column
             width: page.width
 
-
             PageHeader {
                 id: pageHeader
                              //% "Filter settings"
                 title: qsTrId("id-filter-page-title")
 
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Platform.isSailfish ? 0 : 2 * BVApp.Theme.paddingLarge
+            }
+
+            Label {
+                width: parent.width
+                                                           //% "venues selected"
+                text: jsonModelCollection.count + " " + qsTrId("id-selected")
+                horizontalAlignment: Text.AlignHCenter
+                color: BVApp.Theme.highlightColor
+                font.pixelSize: BVApp.Theme.fontSizeExtraSmall
+                font.italic: true
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Platform.isSailfish ? BVApp.Theme.paddingLarge : 0
             }
 
             BVApp.SectionHeader {
