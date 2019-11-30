@@ -12,6 +12,21 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Sun Dec 01 2019 micu <post@micuintus.de> 3.5-1
+- Show venue sub type as colored tags (Restaurant, Bar, etc.) in venue description
+- Adapt the application to the new "Shops" data layout
+- Show number of matching venues on filter page
+- Show opening hours comment (if available)
+- Mark currently applicable line of the opening hours bold
+- Hide unknown venue property entries
+- Show "Breakfast" and "Brunch" property in the venue description (not just as a flter option)
+- Add option to to filter out venues that do not have a review
+- Improve English translation: "omnivor" -> "omnivorous", "vegan declared" -> "vegan dishes labled"
+- Align filter sorting with web version
+- Increase zoom level in Android version (on recenter)
+- "Sunday" was renamed to "Sunday/Holiday"
+- Fix "Closes soon" tag not being updated correctly
+
 * Mon Jan 10 2019 micu <post@micuintus.de> 3.4-1
 - First release for SailfishOS, iOS and Android together --- from the same source code
 - Improve the tablet experience on iOS and Android (split view)
