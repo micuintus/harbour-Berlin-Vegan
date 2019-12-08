@@ -29,6 +29,11 @@ App {
         source: "qrc:/icons/MaterialIcons-Regular.ttf"
     }
 
+    onTabletChanged: {
+        nativeUtils.preferredScreenOrientation = tablet ? NativeUtils.ScreenOrientationUnspecified :
+                                                          NativeUtils.ScreenOrientationPortrait
+    }
+
     Component.onCompleted: {
         // We need to access the dp() function from the Theme component
         BVApp.Theme.myApp = app
