@@ -46,7 +46,8 @@ ApplicationWindow
     PositionSource {
         id: globalPositionSource
         updateInterval: 5000
-        property var oldPosition: QtPositioning.coordinate(0, 0)
+        property Position oldPosition: QtPositioning.coordinate(0, 0)
+        preferredPositioningMethods: PositionSource.AllPositioningMethods
      }
 
     VenueSortFilterProxyModel {
