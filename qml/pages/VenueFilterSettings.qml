@@ -41,7 +41,7 @@ BVApp.Page {
 
         Column {
             id: column
-            width: page.width
+            width: parent.width
 
             PageHeader {
                 id: pageHeader
@@ -76,38 +76,38 @@ BVApp.Page {
                 icon: BVApp.Theme.iconFor("list")
             }
 
-            BVApp.RadioButton {
+            TextSwitch  {
                 id: foodButton
                          //% "Eating out"
                 text: qsTrId("id-gastro")
 
-                onClicked: {
+                onCheckedChanged: {
                     // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
                     if (checked) {
                         shoppingButton.checked = false;
                         jsonModelCollection.filterVenueType = VenueModel.GastroFlag;
                     }
                     else {
-                        foodButton.checked = true;
+                        shoppingButton.checked = true;
                     }
                 }
 
                 Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.GastroFlag;
             }
 
-            BVApp.RadioButton {
+            TextSwitch {
                 id: shoppingButton
                          //% "Shops"
                 text: qsTrId("id-shops")
 
-                onClicked: {
+                onCheckedChanged: {
                     // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
                     if (checked) {
                         foodButton.checked = false;
                         jsonModelCollection.filterVenueType = VenueModel.ShopFlag;
                     }
                     else {
-                        shoppingButton.checked = true;
+                        foodButton.checked = true;
                     }
                 }
 
