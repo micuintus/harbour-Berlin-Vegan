@@ -20,7 +20,7 @@ BVApp.Page {
         id: header
         y: 0
         title: name
-        width: page.width
+        width: parent.width
         z: 5
     }
 
