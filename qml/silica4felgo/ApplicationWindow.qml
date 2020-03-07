@@ -1,6 +1,7 @@
 import Felgo 3.0
 
 import QtQuick 2.7
+import QtQuick.Window 2.7
 
 import BerlinVegan.components.platform 1.0 as BVApp
 
@@ -12,6 +13,8 @@ App {
     property Component initialPage
 
     onInitTheme: {
+        // this hotfixes a faulty navbar bar height size after enabling the default Qt high dpi support in main.cpp
+        Theme.navigationBar.height = Theme.navigationBar.height/Screen.devicePixelRatio
         Theme.navigationBar.backgroundColor = BVApp.Theme.highlightColor
         Theme.navigationBar.titleColor = "white"
         // otherwise tintColor is used (see below) and you might have a hard time seeing navigation
