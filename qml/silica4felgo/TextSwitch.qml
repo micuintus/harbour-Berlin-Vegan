@@ -2,14 +2,37 @@ import QtQuick 2.7
 import Felgo 3.0
 import BerlinVegan.components.platform 1.0 as BVApp
 
-AppCheckBox {
-    id: checkbox
-    x: parent.width/6
+MouseArea {
+    id: mouseArea
 
-    height: BVApp.Theme.iconSizeLarge
-    spacing: BVApp.Theme.paddingLarge
+    property alias text: appText.text
+    property alias checked: swico.checked
+    height: appText.height + anchors.topMargin + anchors.bottomMargin
 
-    labelColorOff: BVApp.Theme.primaryColor
-    labelFontSize: BVApp.Theme.fontSizeExtraSmall
-    checkBoxSize: labelFontSize * 1.3
+    onClicked: swico.toggle()
+
+    anchors.topMargin: BVApp.Theme.paddingSmall
+    anchors.bottomMargin: BVApp.Theme.paddingSmall
+    anchors.left: parent.left
+    anchors.right: parent.right
+
+    AppText {
+        id: appText
+        font.pixelSize: BVApp.Theme.fontSizeSmall
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
+        anchors.right: swico.left
+
+        anchors.leftMargin: BVApp.Theme.horizontalPageMargin + BVApp.Theme.sectionHeaderIconLeftPadding  + BVApp.Theme.fontSizeSmall * 1.05 + BVApp.Theme.sectionHeaderIconTextPadding
+
+    }
+
+    AppSwitch {
+      id: swico
+      height: appText.height
+      dropShadow: true
+      anchors.right: parent.right
+
+      anchors.rightMargin: BVApp.Theme.horizontalPageMargin
+  }
 }
