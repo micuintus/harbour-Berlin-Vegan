@@ -19,7 +19,7 @@ MouseArea {
     AppText {
         id: appText
         font.pixelSize: BVApp.Theme.fontSizeSmall
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: swico.left
 
@@ -32,6 +32,7 @@ MouseArea {
       height: appText.height
       dropShadow: true
       anchors.right: parent.right
+      anchors.bottom: parent.bottom
 
       anchors.rightMargin: BVApp.Theme.horizontalPageMargin
   }
