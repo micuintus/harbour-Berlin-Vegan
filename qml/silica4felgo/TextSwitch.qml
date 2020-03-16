@@ -19,21 +19,21 @@ MouseArea {
     AppText {
         id: appText
         font.pixelSize: BVApp.Theme.fontSizeSmall
-        anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: swico.left
+        anchors.bottom: parent.bottom
 
         anchors.leftMargin: BVApp.Theme.horizontalPageMargin + BVApp.Theme.sectionHeaderIconLeftPadding  + BVApp.Theme.fontSizeSmall * 1.05 + BVApp.Theme.sectionHeaderIconTextPadding
-
     }
 
     AppSwitch {
-      id: swico
-      height: appText.height
-      dropShadow: true
-      anchors.right: parent.right
-      anchors.bottom: parent.bottom
+        id: swico
+        height: appText.height
+        dropShadow: true
 
-      anchors.rightMargin: BVApp.Theme.horizontalPageMargin
-  }
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        anchors.rightMargin: BVApp.Theme.horizontalPageMargin
+    }
 }
