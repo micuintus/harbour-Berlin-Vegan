@@ -28,7 +28,7 @@
 
 // Condense opening hours part --->
 
-QVariantMap mergeElements(const QVariantList& openingHours,
+inline QVariantMap mergeElements(const QVariantList& openingHours,
                           const int from,
                           const int until,
                           const int todayIndex)
@@ -53,7 +53,7 @@ QVariantMap mergeElements(const QVariantList& openingHours,
     return result;
 }
 
-QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours, const int todayIndex = -1)
+inline QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours, const int todayIndex = -1)
 {
     QVariantList condensedOpeningHours;
 
@@ -81,7 +81,7 @@ QVariantList condenseOpeningHours(const QVariantList& uncondensedOpeningHours, c
     return condensedOpeningHours;
 }
 
-QString hoursString(const QJSValue& from, const QString& property)
+inline QString hoursString(const QJSValue& from, const QString& property)
 {
     const QString& hoursString = from.property(property).toVariant().toString();
 
@@ -96,7 +96,7 @@ QString hoursString(const QJSValue& from, const QString& property)
     }
 }
 
-QVariantList extractOpenHoursData(const QJSValue& from)
+inline QVariantList extractOpenHoursData(const QJSValue& from)
 {
     QVariantList uncondensedOpeningHours
     {
@@ -123,7 +123,7 @@ QVariantList extractOpenHoursData(const QJSValue& from)
 
 // Extract machine readable hours part --->
 
-int minute(const QString& time)
+inline int minute(const QString& time)
 {
     if (time == nullptr || time.isEmpty())
     {
@@ -147,7 +147,7 @@ int minute(const QString& time)
     return hour * MINUTES_PER_HOUR + minute;
 }
 
-QVariantMap parseOpeningMinutes(const QString& openingString)
+inline QVariantMap parseOpeningMinutes(const QString& openingString)
 {
     int startMinute = 0;
     int endMinute   = 0;
@@ -187,7 +187,7 @@ QVariantMap parseOpeningMinutes(const QString& openingString)
     };
 }
 
-QVariantList extractOpeningMinutes(const QVariantList& openingHours)
+inline QVariantList extractOpeningMinutes(const QVariantList& openingHours)
 {
     QVariantList openingMinutes;
     std::transform(openingHours.begin(), openingHours.end(), std::back_inserter(openingMinutes),
@@ -204,12 +204,12 @@ QVariantList extractOpeningMinutes(const QVariantList& openingHours)
 
 // Opening state calculations --->
 
-bool isShortAfterMidnight(const QDateTime& dateTime)
+inline bool isShortAfterMidnight(const QDateTime& dateTime)
 {
     return dateTime.time() < QTime(6, 0, 0);
 }
 
-QDate easterSunday(int year)
+inline QDate easterSunday(int year)
 {
     // calulate easter date
     // https://stackoverflow.com/a/1284335
@@ -229,7 +229,7 @@ QDate easterSunday(int year)
     return QDate{year, month, day};
 }
 
-bool isPublicHoliday(const QDate &date)
+inline bool isPublicHoliday(const QDate &date)
 {
     const auto year = date.year();
     auto const es = easterSunday(year);
@@ -269,7 +269,7 @@ bool isPublicHoliday(const QDate &date)
     return false;
 }
 
-std::pair<unsigned char, unsigned> extractDayIndexAndMinute(QDateTime dateTime)
+inline std::pair<unsigned char, unsigned> extractDayIndexAndMinute(QDateTime dateTime)
 {
     const int currentHour = dateTime.time().hour();
     int currentMinute = currentHour * MINUTES_PER_HOUR + dateTime.time().minute();
@@ -291,16 +291,17 @@ std::pair<unsigned char, unsigned> extractDayIndexAndMinute(QDateTime dateTime)
     return { dayIndex, currentMinute };
 }
 
-bool isInRange(const QVariantMap& openingMinutes, const unsigned currentMinute)
+inline bool isInRange(const QVariantMap& openingMinutes, const unsigned currentMinute)
 {
     return currentMinute >= openingMinutes["startMinute"].toUInt()
         && currentMinute <= openingMinutes["endMinute"].toUInt();
 }
 
+
 // <--- Opening state calculations
 
 
-void extractAndProcessOpenHoursData(QStandardItem& to, const QJSValue& from)
+inline void extractAndProcessOpenHoursData(QStandardItem& to, const QJSValue& from)
 {
     auto const openingHours = extractOpenHoursData(from);
     to.setData(openingHours, VenueModel::OpeningHours);
