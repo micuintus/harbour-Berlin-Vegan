@@ -11,13 +11,9 @@
 #include <QStandardItem>
 
 VenueModel::VenueModel(QObject *parent) :
-    QStandardItemModel(parent) ,
-    m_openStateUpdateTimer(this)
+    QStandardItemModel(parent)
 {
-    updateOpenState();
 
-    connect(&m_openStateUpdateTimer, &QTimer::timeout, this, &VenueModel::updateOpenState);
-    m_openStateUpdateTimer.start(MICROSECONDS_PER_SECOND * SECONDS_PER_MINUTE/2);
 }
 
 VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
@@ -220,51 +216,3 @@ VenueModel::VenueTypeFlags VenueModel::loadedVenueType() const
     return m_loadedVenueType;
 }
 
-void VenueModel::updateOpenState()
-{
-    const auto currentDateTime = QDateTime::currentDateTime();
-    std::tie(m_currendDayIndex, m_currentMinute) = extractDayIndexAndMinute(currentDateTime);
-    emit dataChanged(index(0, 0), index(rowCount() - 1, 0), { VenueModelRoles::Open,
-                                                              VenueModelRoles::ClosesSoon,
-                                                              VenueModelRoles::CondensedOpeningHours });
-}
-
-QVariant VenueModel::data(const QModelIndex &index, int role) const
-{
-    switch(role)
-    {
-        case VenueModelRoles::Open:
-        case VenueModelRoles::ClosesSoon:
-        {
-            const auto openingMinutesVar = QStandardItemModel::data(index, VenueModel::OpeningMinutes);
-            if (m_currendDayIndex < 0 || !openingMinutesVar.isValid())
-            {
-                return QVariant::fromValue(false);
-            }
-
-            auto const openingMinutes = openingMinutesVar.toList();
-
-            switch(role)
-            {
-            case VenueModelRoles::Open:
-                return isInRange(openingMinutes[m_currendDayIndex].toMap(), m_currentMinute);
-            case VenueModelRoles::ClosesSoon:
-                // ClosesSoon holds true if venue is NOT open in half an hour from now
-                return !isInRange(openingMinutes[m_currendDayIndex].toMap(), m_currentMinute + MINUTES_CLOSES_SOON);
-            }
-        }
-        break;
-        case VenueModelRoles::CondensedOpeningHours:
-        {
-            const auto openingHoursVar = QStandardItemModel::data(index, VenueModel::OpeningHours);
-            if (!openingHoursVar.isValid())
-            {
-                return QVariant::Invalid;
-            }
-
-            return condenseOpeningHours(openingHoursVar.toList(), m_currendDayIndex);
-        }
-    }
-
-    return QStandardItemModel::data(index, role);
-}

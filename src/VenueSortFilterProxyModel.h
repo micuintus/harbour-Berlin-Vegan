@@ -90,6 +90,9 @@ public slots:
     void setFilterWithReview(bool);
     void setFilterFavorites(bool);
 
+private slots:
+    void updateOpenState();
+
 signals:
     void modelChanged();
     void countChanged();
@@ -108,6 +111,10 @@ protected:
     bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
 
 private:
+    // Need to override for opening hours
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    QVariant sourceData(const QModelIndex &index, int role = Qt::DisplayRole) const;
+
     void reSort();
 
     bool searchStringMatches(const QModelIndex& index) const;
@@ -118,7 +125,6 @@ private:
     bool venuePropertiesMatch(const QModelIndex& index) const;
     bool gastroPropertiesMatch(const QModelIndex& index) const;
     bool favoriteStatusMatches(const QModelIndex& index) const;
-    bool openNow(const QModelIndex& index) const;
     bool hasReview(const QModelIndex& index) const;
 
     template <typename FilterFlags, typename SignalType>
@@ -150,9 +156,13 @@ private:
     VenuePropertyFlags m_filterVenueProperty = { };
     GastroPropertyFlags m_filterGastroProperty = { };
 
-
     bool m_filterOpenNow    = false;
     bool m_filterWithReview = false;
     bool m_filterFavorites  = false;
+
+    QTimer m_openStateUpdateTimer{this};
+
+    char m_currendDayIndex = -1;
+    unsigned m_currentMinute = 0;
 };
 

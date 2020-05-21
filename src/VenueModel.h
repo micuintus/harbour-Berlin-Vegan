@@ -181,22 +181,11 @@ public:
 signals:
     void loadedVenueTypeChanged();
 
-private slots:
-    void updateOpenState();
-
 private:
-    // Need to override for opening hours
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
-
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
 
-    QTimer m_openStateUpdateTimer;
-
     VenueTypeFlags m_loadedVenueType;
-    char m_currendDayIndex = -1;
-    unsigned m_currentMinute = 0;
-
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(VenueModel::VenueTypeFlags)
