@@ -125,7 +125,6 @@ private:
     bool venuePropertiesMatch(const QModelIndex& index) const;
     bool gastroPropertiesMatch(const QModelIndex& index) const;
     bool favoriteStatusMatches(const QModelIndex& index) const;
-    bool hasReview(const QModelIndex& index) const;
 
     template <typename FilterFlags, typename SignalType>
     void setFilterFlag(FilterFlags& filterFlagMask, const typename FilterFlags::enum_type flag, const bool on, SignalType changedSignal);
