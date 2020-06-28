@@ -43,6 +43,12 @@ bool closesSoon(const QModelIndex& index, int currentDayIndex, int currentMinute
     return !isInRange(openingMinutes.toMap(), currentMinute + MINUTES_CLOSES_SOON);
 }
 
+bool hasReview(const QModelIndex& index)
+{
+    const auto valueRole = index.data(VenueModel::VenueModelRoles::Review);
+    return valueRole.isValid() && valueRole.canConvert<QString>();
+}
+
 }
 
 VenueSortFilterProxyModel::VenueSortFilterProxyModel(QObject *parent) : QSortFilterProxyModel(parent)
@@ -257,7 +263,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
         VenueModel::VenueType venueType;
         std::tie(venueTypeIsMatching, venueType) = venueTypeMatches(index);
         return venueTypeIsMatching
-            && (!m_filterWithReview || hasReview(index))
+            && (!m_filterWithReview || detail::hasReview(index))
             && vegCategoryMatches(index)
             && venueSubTypeMatches(index)
             && venuePropertiesMatch(index)
@@ -418,14 +424,6 @@ bool VenueSortFilterProxyModel::favoriteStatusMatches(const QModelIndex &index) 
         return false;
     }
 }
-
-
-bool VenueSortFilterProxyModel::hasReview(const QModelIndex &index) const
-{
-    const auto valueRole = index.data( VenueModel::VenueModelRoles::Review);
-    return valueRole.isValid() && valueRole.canConvert<QString>();
-}
-
 
 std::pair<bool, VenueModel::VenueType>
 VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
