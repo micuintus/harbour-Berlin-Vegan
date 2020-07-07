@@ -145,6 +145,12 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
                 auto const simplifiedSearchName = extractSimplifiedSearchName(value);
                 item->setData(simplifiedSearchName, VenueModelRoles::SimplifiedSearchReview);
             }
+
+            if (roleKey == VenueModelRoles::Created)
+            {
+                item->setData(value.toVariant(), VenueModelRoles::DateCreated);
+            }
+
             item->setData(value.toVariant(), roleKey);
         }
     }

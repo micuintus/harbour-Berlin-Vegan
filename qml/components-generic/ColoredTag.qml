@@ -12,8 +12,8 @@ Rectangle {
     height: label.height + BVApp.Theme.paddingSmall
 
     Label {
-        anchors.centerIn: tag
         id: label
+        anchors.centerIn: tag
         color: "white"
         font.pixelSize: BVApp.Theme.fontSizeExtraSmall
     }

@@ -15,7 +15,7 @@ Flow {
     Repeater {
         model: venueSubTypeDefinitions
 
-        BVApp.VenueSubTypeTag {
+        BVApp.ColoredTag {
             color: BVApp.Theme.venueSubTypeTagColor(model.flag)
             text: model.text
             visible: restaurant.venueSubType & model.flag

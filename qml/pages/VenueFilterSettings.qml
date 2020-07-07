@@ -134,6 +134,7 @@ BVApp.Page {
                     Component.onCompleted: checked = jsonModelCollection.filterOpenNow;
 
                 }
+
             }
 
             Column {
@@ -319,6 +320,55 @@ BVApp.Page {
 
                     Component.onCompleted: checked = jsonModelCollection.filterWithReview;
                 }
+            }
+
+            Column {
+
+                width: parent.width
+
+                BVApp.SectionHeader {
+                    //%          "New in database"
+                    text: qsTrId("id-new-in-database")
+                    icon: BVApp.Theme.iconFor("date_range")
+                }
+
+                TextSwitch {
+                    visible: showGastroVenues
+                             //% "New"
+                    text: qsTrId("id-new")
+                    onCheckedChanged: {
+                        jsonModelCollection.setFilterNew(checked);
+                    }
+
+                    Component.onCompleted: checked = jsonModelCollection.filterNew;
+                }
+
+                BVApp.ValueSelector
+                {
+                    visible: showGastroVenues
+                    id: vs
+                              //% "A venue is new for:"
+                    label: qsTrId("id-meaning-new")
+                                          //% "month"
+                    labelUnitSingular: qsTrId("id-month")
+                                        //% "months"
+                    labelUnitPlural: qsTrId("id-months")
+
+                    from: 1
+                    to: 50
+                    stepSize: 1
+
+                    onValueModified: {
+                        jsonModelCollection.setMonthNew(value);
+                    }
+
+                    Component.onCompleted: value = jsonModelCollection.monthNew;
+                }
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge * 1.3
             }
         }
     }

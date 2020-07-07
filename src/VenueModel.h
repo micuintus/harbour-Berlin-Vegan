@@ -83,6 +83,12 @@ inline QString simplifySearchString(const QString searchString)
     ROLE_NAME_ID_PAIR( otSun,                   OtSun                   ) \
     ROLE_NAME_ID_PAIR( openComment,             OpenComment             ) \
     ROLE_NAME_ID_PAIR( openCommentEnglish,      OpenCommentEn           ) \
+                                                                          \
+    /* "dateCreated" W/ fallback "created" */                             \
+    ROLE_NAME_ID_PAIR( dateCreated,             DateCreated             ) \
+    ROLE_NAME_ID_PAIR( created,                 Created                 ) \
+    ROLE_NAME_ID_PAIR( isNew,                   IsNew                   ) \
+
 
 class VenueModel : public QStandardItemModel
 {

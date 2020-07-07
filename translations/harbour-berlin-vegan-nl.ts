@@ -65,31 +65,35 @@
     </message>
     <message id="id-omnivorous">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="53"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="188"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="189"/>
         <source>omnivorous</source>
         <translation>omnivoor</translation>
     </message>
     <message id="id-omnivorous-labeled">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="57"/>
         <source>omnivorous \n(vegan dishes labeled)</source>
+        <oldsource>omnivorous 
+(vegan dishes labeled)</oldsource>
         <translation>omnivoor
 (veganistisch verklaard)</translation>
     </message>
     <message id="id-vegetarian">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="61"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="179"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="180"/>
         <source>vegetarian</source>
         <translation>vegetarisch</translation>
     </message>
     <message id="id-vegetarian-labeled">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="65"/>
         <source>vegetarian \n(vegan dishes labeled)</source>
+        <oldsource>vegetarian 
+(vegan dishes labeled)</oldsource>
         <translation>vegetarisch
 (veganistisch verklaard)</translation>
     </message>
     <message id="id-vegan">
         <location filename="../qml/components-generic/VenueDescriptionAlgorithms.js" line="69"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="170"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="171"/>
         <source>vegan</source>
         <translation>veganistisch</translation>
     </message>
@@ -111,13 +115,13 @@
     </message>
     <message id="id-organic">
         <location filename="../qml/components-generic/VenueDetails.qml" line="154"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="206"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="207"/>
         <source>Organic products</source>
         <translation>Biologische producten</translation>
     </message>
     <message id="id-gluten-free">
         <location filename="../qml/components-generic/VenueDetails.qml" line="178"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="216"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="217"/>
         <source>Gluten-free options</source>
         <translation>Glutenvrije opties</translation>
     </message>
@@ -128,31 +132,31 @@
     </message>
     <message id="id-wheelchair">
         <location filename="../qml/components-generic/VenueDetails.qml" line="194"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="245"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="246"/>
         <source>Wheelchair-friendly</source>
         <translation>Rolstoeltoegankelijk</translation>
     </message>
     <message id="id-wheelchair-wc">
         <location filename="../qml/components-generic/VenueDetails.qml" line="202"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="255"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="256"/>
         <source>Wheelchair-accessible WC</source>
         <translation>Rolstoeltoegankelijk toilet</translation>
     </message>
     <message id="id-high-chair">
         <location filename="../qml/components-generic/VenueDetails.qml" line="210"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="265"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="266"/>
         <source>High chair</source>
         <translation>Kinderstoel</translation>
     </message>
     <message id="id-dogs-allowed">
         <location filename="../qml/components-generic/VenueDetails.qml" line="218"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="275"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="276"/>
         <source>Dogs allowed</source>
         <translation>Honden toegestaan</translation>
     </message>
     <message id="id-venue-features">
         <location filename="../qml/components-generic/VenueDetails.qml" line="126"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="201"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="202"/>
         <source>Features</source>
         <oldsource>Venue features</oldsource>
         <translation>Kenmerken</translation>
@@ -165,7 +169,7 @@
     </message>
     <message id="id-wifi">
         <location filename="../qml/components-generic/VenueDetails.qml" line="250"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="304"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="305"/>
         <source>WiFi</source>
         <translation>Wi-Fi</translation>
     </message>
@@ -181,13 +185,13 @@
     </message>
     <message id="id-catering">
         <location filename="../qml/components-generic/VenueDetails.qml" line="242"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="294"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="295"/>
         <source>Catering</source>
         <translation>Catering</translation>
     </message>
     <message id="id-delivery">
         <location filename="../qml/components-generic/VenueDetails.qml" line="234"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="284"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="285"/>
         <source>Delivery service</source>
         <translation>Bezorgdienst</translation>
     </message>
@@ -210,22 +214,22 @@
         <translation>Licentie tonen</translation>
     </message>
     <message id="id-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="137"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="138"/>
         <source>Venues</source>
         <translation>Gelegenheid</translation>
     </message>
     <message id="id-favorites-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="157"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="158"/>
         <source>Favorites</source>
         <translation>Favorieten</translation>
     </message>
     <message id="id-filter">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="177"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="178"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message id="id-about-venue-list">
-        <location filename="../qml/harbour-berlin-vegan.qml" line="192"/>
+        <location filename="../qml/harbour-berlin-vegan.qml" line="193"/>
         <source>About</source>
         <translation>Over</translation>
     </message>
@@ -256,10 +260,36 @@
         <source>Shops</source>
         <translation>Winkels</translation>
     </message>
+    <message id="id-new-in-database">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="331"/>
+        <source>New in database</source>
+        <translation>Nieuw in database</translation>
+    </message>
     <message id="id-filter-with-review">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="314"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="316"/>
         <source>With review (German)</source>
         <translation>Met beoordeling (Duits)</translation>
+    </message>
+    <message id="id-new">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="338"/>
+        <source>New</source>
+        <translation>Nieuw</translation>
+    </message>
+    <message id="id-meaning-new">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="351"/>
+        <source>A venue is new for:</source>
+        <oldsource>&lt;source&gt;A venue is new for:&lt;/source&gt;</oldsource>
+        <translation>Een locatie is nieuw voor:</translation>
+    </message>
+    <message id="id-month">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="353"/>
+        <source>month</source>
+        <translation>Maand</translation>
+    </message>
+    <message id="id-months">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="355"/>
+        <source>months</source>
+        <translation>Maanden</translation>
     </message>
     <message id="id-filter-venue-open-now">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="129"/>
@@ -273,24 +303,24 @@
     </message>
     <message id="id-filter-vegan-category">
         <location filename="../qml/components-generic/VenueDetails.qml" line="146"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="165"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="166"/>
         <source>Veg*an category</source>
         <translation>Veg*ancategorie</translation>
     </message>
     <message id="id-breakfast">
         <location filename="../qml/components-generic/VenueDetails.qml" line="162"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="226"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="227"/>
         <source>Breakfast</source>
         <translation>Ontbijt</translation>
     </message>
     <message id="id-brunch">
         <location filename="../qml/components-generic/VenueDetails.qml" line="170"/>
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="236"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="237"/>
         <source>Brunch</source>
         <translation>Brunch</translation>
     </message>
     <message id="id-filter-venue-sub-type">
-        <location filename="../qml/pages/VenueFilterSettings.qml" line="144"/>
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="145"/>
         <source>Sub category</source>
         <oldsource>Venue sub type</oldsource>
         <translation>Subsoort</translation>
@@ -443,14 +473,19 @@
         <source>No filter or search results</source>
         <translation>Geen filter- of zoekresultaten</translation>
     </message>
+    <message id="id-tag-new">
+        <location filename="../qml/components-generic/VenueListItem.qml" line="72"/>
+        <source>new</source>
+        <translation>nieuw</translation>
+    </message>
     <message id="id-venue-closed">
-        <location filename="../qml/components-generic/VenueListItem.qml" line="88"/>
+        <location filename="../qml/components-generic/VenueListItem.qml" line="107"/>
         <source>closed now</source>
         <oldsource>closed\nnow</oldsource>
         <translation>gesloten</translation>
     </message>
     <message id="id-venue-closes-soon">
-        <location filename="../qml/components-generic/VenueListItem.qml" line="90"/>
+        <location filename="../qml/components-generic/VenueListItem.qml" line="109"/>
         <source>closes soon</source>
         <translation>sluit bijna</translation>
     </message>
