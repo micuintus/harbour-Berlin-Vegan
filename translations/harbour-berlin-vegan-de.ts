@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="de">
 <context>
     <name></name>
     <message id="id-monday">
@@ -53,6 +53,8 @@
     </message>
     <message id="id-omnivorous-labeled">
         <source>omnivorous \n(vegan dishes labeled)</source>
+        <oldsource>omnivorous 
+(vegan dishes labeled)</oldsource>
         <translation>omnivor
 (vegan deklariert)</translation>
     </message>
@@ -62,6 +64,8 @@
     </message>
     <message id="id-vegetarian-labeled">
         <source>vegetarian \n(vegan dishes labeled)</source>
+        <oldsource>vegetarian 
+(vegan dishes labeled)</oldsource>
         <translation>vegetarisch
 (vegan deklariert)</translation>
     </message>
@@ -360,6 +364,31 @@
     <message id="id-selected">
         <source>venues selected</source>
         <translation>Läden ausgewählt</translation>
+    </message>
+    <message id="id-new">
+        <source>New</source>
+        <translation>Neu</translation>
+    </message>
+    <message id="id-meaning-new">
+        <source>A venue is new for:</source>
+        <oldsource>&lt;source&gt;A venue is new for:&lt;/source&gt;</oldsource>
+        <translation>Ein Laden ist neu für:</translation>
+    </message>
+    <message id="id-tag-new">
+        <source>new</source>
+        <translation>neu</translation>
+    </message>
+    <message id="id-month">
+        <source>month</source>
+        <translation>Monat</translation>
+    </message>
+    <message id="id-months">
+        <source>months</source>
+        <translation>Monate</translation>
+    </message>
+    <message id="id-new-in-database">
+        <source>New in database</source>
+        <translation>Neu in der Datenbank</translation>
     </message>
 </context>
 </TS>

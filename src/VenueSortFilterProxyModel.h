@@ -23,6 +23,8 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(bool filterOpenNow MEMBER m_filterOpenNow WRITE setFilterOpenNow NOTIFY filterOpenNowChanged)
     Q_PROPERTY(bool filterWithReview MEMBER m_filterWithReview WRITE setFilterWithReview NOTIFY filterWithReviewChanged)
     Q_PROPERTY(bool filterFavorites MEMBER m_filterFavorites WRITE setFilterFavorites NOTIFY filterFavoritesChanged)
+    Q_PROPERTY(bool filterNew MEMBER m_filterNew WRITE setFilterNew NOTIFY filterNewChanged)
+    Q_PROPERTY(int monthNew MEMBER m_monthNew WRITE setMonthNew NOTIFY monthNewChanged)
 
 public:
 
@@ -89,6 +91,8 @@ public slots:
     void setFilterOpenNow(bool);
     void setFilterWithReview(bool);
     void setFilterFavorites(bool);
+    void setFilterNew(bool);
+    void setMonthNew(int);
 
 private slots:
     void updateOpenState();
@@ -105,6 +109,8 @@ signals:
     void filterOpenNowChanged();
     void filterWithReviewChanged();
     void filterFavoritesChanged();
+    void filterNewChanged();
+    void monthNewChanged();
 
 protected:
     bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
@@ -158,6 +164,8 @@ private:
     bool m_filterOpenNow    = false;
     bool m_filterWithReview = false;
     bool m_filterFavorites  = false;
+    bool m_filterNew        {false};
+    int m_monthNew{3};
 
     QTimer m_openStateUpdateTimer{this};
 

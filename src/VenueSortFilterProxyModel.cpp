@@ -1,6 +1,8 @@
 #include "VenueSortFilterProxyModel.h"
 #include "OpeningHoursAlgorithms.h"
 
+#include <QDate>
+
 namespace detail {
 
 QVariant openingMinutesForDay(const QModelIndex& index, int currentDayIndex)
@@ -47,6 +49,26 @@ bool hasReview(const QModelIndex& index)
 {
     const auto valueRole = index.data(VenueModel::VenueModelRoles::Review);
     return valueRole.isValid() && valueRole.canConvert<QString>();
+}
+
+bool dateTodayInNewWindow(QDate dateCreated, QDate dateToday, int monthNew)
+{
+    //  dateCreated          dateCreatedPlusMonthNew       dateToday
+    //  |                    |                             |
+    //  *  --- monthNew ---  *                             *
+    const QDate createdPlusMonthNew = dateCreated.addMonths(monthNew);
+    return dateToday <= createdPlusMonthNew;
+}
+
+bool isNew(const QModelIndex& index, QDate dateToday, int monthNew)
+{
+    const auto dateCreatedVar = index.data(VenueModel::DateCreated);
+    if (!dateCreatedVar.isValid() || !dateCreatedVar.canConvert(QMetaType::QDate))
+    {
+        return false;
+    }
+
+    return dateTodayInNewWindow(dateCreatedVar.toDate(), dateToday, monthNew);
 }
 
 }
@@ -225,6 +247,31 @@ void VenueSortFilterProxyModel::setFilterWithReview(bool filterWithReview)
     emit filterWithReviewChanged();
 }
 
+void VenueSortFilterProxyModel::setFilterNew(bool filterNew)
+{
+    if (m_filterNew == filterNew)
+    {
+        return;
+    }
+
+    m_filterNew = filterNew;
+    invalidateFilter();
+    emit filterNewChanged();
+}
+
+void VenueSortFilterProxyModel::setMonthNew(int monthNew)
+{
+    if (m_monthNew == monthNew)
+    {
+        return;
+    }
+
+    m_monthNew = monthNew;
+    invalidateFilter();
+    emit dataChanged(index(0, 0), index(rowCount() - 1, 0), { VenueModel::VenueModelRoles::IsNew});
+    emit monthNewChanged();
+}
+
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 {
     if (m_currentPosition == position)
@@ -259,12 +306,14 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
         bool venueTypeIsMatching;
         VenueModel::VenueType venueType;
         std::tie(venueTypeIsMatching, venueType) = venueTypeMatches(index);
+        const bool venueIsShop = venueType == VenueModel::VenueType::Shop;
         return venueTypeIsMatching
             && (venueIsShop || !m_filterWithReview || detail::hasReview(index))
+            && (venueIsShop || !m_filterNew        || detail::isNew(index, QDate::currentDate(), m_monthNew))
             && vegCategoryMatches(index)
             && venueSubTypeMatches(index)
             && venuePropertiesMatch(index)
-            && (venueType == VenueModel::VenueType::Shop || gastroPropertiesMatch(index))
+            && (venueIsShop || gastroPropertiesMatch(index))
             && (!m_filterOpenNow || detail::isOpenNow(index, m_currendDayIndex, m_currentMinute))
             // Filter search string last => slowest
             && searchStringMatches(index);
@@ -316,6 +365,10 @@ QVariant VenueSortFilterProxyModel::data(const QModelIndex &index, int role) con
     case VenueModel::VenueModelRoles::ClosesSoon:
     {
         return detail::closesSoon(mapToSource(index), m_currendDayIndex, m_currentMinute);
+    }
+    case VenueModel::VenueModelRoles::IsNew:
+    {
+        return detail::isNew(mapToSource(index), QDate::currentDate(), m_monthNew);
     }
     case VenueModel::VenueModelRoles::CondensedOpeningHours:
     {

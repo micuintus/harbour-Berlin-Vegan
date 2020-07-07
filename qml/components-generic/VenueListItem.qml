@@ -49,6 +49,8 @@ ListItem {
                         - (namelabel.anchors.leftMargin
                            + (veganMark.visible ? veganMark.anchors.leftMargin + veganMark.width  : 0)
                            + (veganMark.visible && closing.visible ? veganMark.anchors.rightMargin : 0)
+                           + (newTag.visible ? newTag.anchors.leftMargin + newTag.width  : 0)
+                           + (newTag.visible && closing.visible ? newTag.anchors.rightMargin : 0)
                            + (closing.visible ? closing.width + closing.anchors.leftMargin : 0)
                            + distance.anchors.rightMargin))
 
@@ -63,13 +65,29 @@ ListItem {
         }
     }
 
+    BVApp.ColoredTag {
+        id: newTag
+        color: BVApp.Theme.vegTypeColor(model.vegan)
+                 //% "new"
+        text: qsTrId("id-tag-new")
+        visible: model.isNew
+        height: veganMark.height
+        anchors {
+            left: namelabel.right
+            top: namelabel.top
+
+            leftMargin: BVApp.Theme.paddingSmall
+            rightMargin: BVApp.Theme.horizontalPageMargin
+        }
+    }
+
     BVApp.VeganMarker {
         id: veganMark
 
         markerSize: namelabel.font.pixelSize * 0.92
         color: BVApp.Theme.vegTypeColor(model.vegan)
 
-        visible: model.vegan >= VenueModel.Vegetarian
+        visible: !newTag.visible && (model.vegan >= VenueModel.Vegetarian)
 
         anchors {
             left: namelabel.right
@@ -79,6 +97,7 @@ ListItem {
             rightMargin: BVApp.Theme.horizontalPageMargin
         }
     }
+
 
     Label {
         id: closing

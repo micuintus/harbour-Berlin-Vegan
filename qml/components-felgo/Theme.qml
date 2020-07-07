@@ -120,6 +120,9 @@ QtObject {
         case "more_vert":
             icon = "more_vert";
             break;
+        case "date_range":
+            icon = "date_range";
+            break;
         }
 
         return {

@@ -15,5 +15,6 @@
         <file>ActionMenuItem.qml</file>
         <file>MapReCenterButton.qml</file>
         <file>Image.qml</file>
+        <file>ValueSelector.qml</file>
     </qresource>
 </RCC>
