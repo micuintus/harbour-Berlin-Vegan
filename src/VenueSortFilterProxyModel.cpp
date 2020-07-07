@@ -63,7 +63,6 @@ VenueSortFilterProxyModel::VenueSortFilterProxyModel(QObject *parent) : QSortFil
     connect(&m_openStateUpdateTimer, &QTimer::timeout, this, &VenueSortFilterProxyModel::updateOpenState);
     m_openStateUpdateTimer.start(MICROSECONDS_PER_SECOND * SECONDS_PER_MINUTE/2);
     updateOpenState();
-
 }
 
 VenueModel* VenueSortFilterProxyModel::model() const
@@ -327,7 +326,6 @@ QVariant VenueSortFilterProxyModel::data(const QModelIndex &index, int role) con
         {
             return QVariant::Invalid;
         }
-
         return condenseOpeningHours(openingHoursVar.toList(), m_currendDayIndex);
     }
     }
@@ -435,14 +433,13 @@ VenueSortFilterProxyModel::venueTypeMatches(const QModelIndex &index) const
     }
 
     const auto venueType = static_cast<VenueModel::VenueType>(venueTypeRole.toInt());
-    const bool match =     m_filterVenueType.testFlag(static_cast<VenueModel::VenueTypeFlag>(enumValueToFlag(venueType)));
-    return {match, venueType };
+    const bool match     = m_filterVenueType.testFlag(static_cast<VenueModel::VenueTypeFlag>(enumValueToFlag(venueType)));
+    return { match, venueType };
 }
 
 
 bool VenueSortFilterProxyModel::venueSubTypeMatches(const QModelIndex &index) const
 {
-
     const auto venueSubTypeRole = index.data(VenueModel::VenueModelRoles::VenueSubTypeRole);
     if (venueSubTypeRole.isValid() && venueSubTypeRole.canConvert<int>())
     {
