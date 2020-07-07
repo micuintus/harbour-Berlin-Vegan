@@ -21,7 +21,7 @@ MouseArea {
         font.pixelSize: BVApp.Theme.fontSizeSmall
         anchors.left: parent.left
         anchors.right: swico.left
-        anchors.bottom: parent.bottom
+        anchors.verticalCenter: parent.verticalCenter
 
         anchors.leftMargin: BVApp.Theme.horizontalPageMargin + BVApp.Theme.sectionHeaderIconLeftPadding  + BVApp.Theme.fontSizeSmall * 1.05 + BVApp.Theme.sectionHeaderIconTextPadding
     }
@@ -32,7 +32,7 @@ MouseArea {
         dropShadow: true
 
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        anchors.verticalCenter: parent.verticalCenter
 
         anchors.rightMargin: BVApp.Theme.horizontalPageMargin
     }
