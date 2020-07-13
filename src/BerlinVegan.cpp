@@ -45,7 +45,6 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     qmlRegisterType<VenueModel>("harbour.berlin.vegan", 1, 0, "VenueModel");
     qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan", 1, 0, "VenueSortFilterProxyModel");
     qmlRegisterUncreatableType<VenueHandle>("harbour.berlin.vegan", 1, 0, "VenueHandle", "VenueHandle is not createable from QML");
@@ -56,6 +55,7 @@ int main(int argc, char *argv[])
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     auto& qmlEngine = *(view->engine());
 #else
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     qRegisterMetaType<TruncationMode::Modes>("TruncationMode::Modes");
     qmlRegisterType<TruncationMode>("Sailfish.Silica", 1, 0, "TruncationMode");
 
