@@ -32,5 +32,6 @@
         <file>translations/harbour-berlin-vegan-nl.ts</file>
         <file>translations/harbour-berlin-vegan.qm</file>
         <file>images/Platzhalter_v2_mitSchriftzug_header.jpg</file>
+        <file>qml/pages/about/LICENSE.FelgoComponentShowcase</file>
     </qresource>
 </RCC>
