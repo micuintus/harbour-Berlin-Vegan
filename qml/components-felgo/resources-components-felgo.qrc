@@ -17,5 +17,7 @@
         <file>Image.qml</file>
         <file>ValueSelector.qml</file>
         <file>TextSwitch.qml</file>
+        <file>TimePicker.qml</file>
+        <file>TimePickerDialog.qml</file>
     </qresource>
 </RCC>

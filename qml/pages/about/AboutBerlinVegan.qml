@@ -558,6 +558,14 @@ BVApp.Page {
                                "licenseName": "MIT",
                                "licenseFile": "qrc:/imports/Sailfish/Silica/OpacityRampEffectBase.qml",
                             });
+
+                           insert(2,
+                           {
+                               "name": "Felgo Component Showcase",
+                               "url": "https://felgo.com/doc/felgo-appdemos-showcase-example",
+                               "licenseName": "MIT",
+                               "licenseFile": "LICENSE.FelgoComponentShowcase",
+                            });
                         }
                     }
                 }
