@@ -252,9 +252,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
 
     if (m_filterFavorites)
     {
-        return favoriteStatusMatches(index)
-           && (!m_filterOpenNow || detail::isOpenNow(index, m_currendDayIndex, m_currentMinute))
-           && searchStringMatches(index);
+        return favoriteStatusMatches(index) && searchStringMatches(index);
     }
     else
     {
