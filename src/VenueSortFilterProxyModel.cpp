@@ -260,7 +260,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
         VenueModel::VenueType venueType;
         std::tie(venueTypeIsMatching, venueType) = venueTypeMatches(index);
         return venueTypeIsMatching
-            && (!m_filterWithReview || detail::hasReview(index))
+            && (venueIsShop || !m_filterWithReview || detail::hasReview(index))
             && vegCategoryMatches(index)
             && venueSubTypeMatches(index)
             && venuePropertiesMatch(index)

@@ -310,6 +310,7 @@ BVApp.Page {
                 }
 
                 TextSwitch {
+                    visible: showGastroVenues
                              //% "With review (German)"
                     text: qsTrId("id-filter-with-review")
                     onCheckedChanged: {
