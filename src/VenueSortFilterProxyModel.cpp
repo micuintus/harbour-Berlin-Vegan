@@ -314,7 +314,7 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
             && venueSubTypeMatches(index)
             && venuePropertiesMatch(index)
             && (venueIsShop || gastroPropertiesMatch(index))
-            && (!m_filterOpenNow || detail::isOpenNow(index, m_currendDayIndex, m_currentMinute))
+            && (!m_filterOpenNow || detail::isOpenNow(index, m_currentDayIndex, m_currentMinute))
             // Filter search string last => slowest
             && searchStringMatches(index);
     }
@@ -347,7 +347,7 @@ err:
 void VenueSortFilterProxyModel::updateOpenState()
 {
     const auto currentDateTime = QDateTime::currentDateTime();
-    std::tie(m_currendDayIndex, m_currentMinute) = extractDayIndexAndMinute(currentDateTime);
+    std::tie(m_currentDayIndex, m_currentMinute) = extractDayIndexAndMinute(currentDateTime);
     emit dataChanged(index(0, 0), index(rowCount() - 1, 0), { VenueModel::VenueModelRoles::Open,
                                                               VenueModel::VenueModelRoles::ClosesSoon,
                                                               VenueModel::VenueModelRoles::CondensedOpeningHours });
@@ -360,11 +360,11 @@ QVariant VenueSortFilterProxyModel::data(const QModelIndex &index, int role) con
     {
     case VenueModel::VenueModelRoles::Open:
     {
-        return detail::isOpenNow(mapToSource(index), m_currendDayIndex, m_currentMinute);
+        return detail::isOpenNow(mapToSource(index), m_currentDayIndex, m_currentMinute);
     }
     case VenueModel::VenueModelRoles::ClosesSoon:
     {
-        return detail::closesSoon(mapToSource(index), m_currendDayIndex, m_currentMinute);
+        return detail::closesSoon(mapToSource(index), m_currentDayIndex, m_currentMinute);
     }
     case VenueModel::VenueModelRoles::IsNew:
     {
@@ -377,7 +377,7 @@ QVariant VenueSortFilterProxyModel::data(const QModelIndex &index, int role) con
         {
             return QVariant::Invalid;
         }
-        return condenseOpeningHours(openingHoursVar.toList(), m_currendDayIndex);
+        return condenseOpeningHours(openingHoursVar.toList(), m_currentDayIndex);
     }
     }
 
