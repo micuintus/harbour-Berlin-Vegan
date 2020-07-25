@@ -169,7 +169,7 @@ private:
 
     QTimer m_openStateUpdateTimer{this};
 
-    char m_currendDayIndex = -1;
+    char m_currentDayIndex = -1;
     unsigned m_currentMinute = 0;
 };
 
