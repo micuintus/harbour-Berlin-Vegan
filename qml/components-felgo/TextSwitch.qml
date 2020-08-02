@@ -7,9 +7,11 @@ MouseArea {
 
     property alias text: appText.text
     property alias checked: swico.checked
-    height: appText.height + anchors.topMargin + anchors.bottomMargin
+    property alias automaticCheck: swico.updateChecked
+    signal userToggled()
+    onClicked: userToggled()
 
-    onClicked: swico.toggle()
+    height: appText.height + anchors.topMargin + anchors.bottomMargin
 
     anchors.topMargin: BVApp.Theme.paddingSmall
     anchors.bottomMargin: BVApp.Theme.paddingSmall
@@ -35,5 +37,7 @@ MouseArea {
         anchors.verticalCenter: parent.verticalCenter
 
         anchors.rightMargin: BVApp.Theme.horizontalPageMargin
+
+        onToggled: userToggled()
     }
 }

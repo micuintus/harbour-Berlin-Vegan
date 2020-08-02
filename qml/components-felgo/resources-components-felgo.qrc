@@ -16,5 +16,6 @@
         <file>MapReCenterButton.qml</file>
         <file>Image.qml</file>
         <file>ValueSelector.qml</file>
+        <file>TextSwitch.qml</file>
     </qresource>
 </RCC>
