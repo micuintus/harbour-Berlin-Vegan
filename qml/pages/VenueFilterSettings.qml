@@ -76,42 +76,40 @@ BVApp.Page {
                 icon: BVApp.Theme.iconFor("list")
             }
 
-            TextSwitch  {
+            BVApp.TextSwitch  {
                 id: foodButton
                          //% "Eating out"
                 text: qsTrId("id-gastro")
 
-                onCheckedChanged: {
-                    // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
+                onUserToggled: {
                     if (checked) {
-                        shoppingButton.checked = false;
-                        jsonModelCollection.filterVenueType = VenueModel.GastroFlag;
+                        jsonModelCollection.filterVenueType = VenueModel.ShopFlag;
                     }
                     else {
-                        shoppingButton.checked = true;
+                        jsonModelCollection.filterVenueType = VenueModel.GastroFlag;
                     }
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.GastroFlag;
+                automaticCheck: false
+                checked: jsonModelCollection.filterVenueType === VenueModel.GastroFlag
             }
 
-            TextSwitch {
+            BVApp.TextSwitch {
                 id: shoppingButton
                          //% "Shops"
                 text: qsTrId("id-shops")
 
-                onCheckedChanged: {
-                    // for SFOS: we need to implement "mutual exclusive", since we currently only have a TextSwitch
+                onUserToggled: {
                     if (checked) {
-                        foodButton.checked = false;
-                        jsonModelCollection.filterVenueType = VenueModel.ShopFlag;
+                        jsonModelCollection.filterVenueType = VenueModel.GastroFlag;
                     }
                     else {
-                        foodButton.checked = true;
+                        jsonModelCollection.filterVenueType = VenueModel.ShopFlag;
                     }
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVenueType & VenueModel.ShopFlag;
+                automaticCheck: false
+                checked: jsonModelCollection.filterVenueType === VenueModel.ShopFlag
             }
 
             Column {
@@ -124,15 +122,15 @@ BVApp.Page {
                     icon: BVApp.Theme.iconFor("schedule")
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     //% "Open now"
                     text: qsTrId("id-filter-venue-open-now")
-                    onCheckedChanged: {
-                        jsonModelCollection.filterOpenNow = checked;
+                    onUserToggled: {
+                        jsonModelCollection.filterOpenNow = !checked;
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterOpenNow;
-
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterOpenNow
                 }
 
             }
@@ -150,13 +148,14 @@ BVApp.Page {
                     model: showGastroVenues ?
                                BVApp.VenueSubTypeDefinitions.gastroVenueSubTypes
                              : BVApp.VenueSubTypeDefinitions.shopVenueSubTypes
-                    TextSwitch {
+                    BVApp.TextSwitch {
                         text: model.text
-                        onCheckedChanged: {
-                            jsonModelCollection.setVenueSubTypeFilterFlag(model.flag, checked);
+                        onUserToggled: {
+                            jsonModelCollection.setVenueSubTypeFilterFlag(model.flag, !checked);
                         }
 
-                        Component.onCompleted: checked = jsonModelCollection.filterVenueSubType & model.flag;
+                        automaticCheck: false
+                        checked: jsonModelCollection.filterVenueSubType & model.flag;
                     }
                 }
             }
@@ -167,35 +166,37 @@ BVApp.Page {
                 icon: BVApp.Theme.iconFor("vegan")
             }
 
-            TextSwitch {
+            BVApp.TextSwitch {
                 text: qsTrId("id-vegan")
-                onCheckedChanged: {
-                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VeganFlag, checked);
+                onUserToggled: {
+                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VeganFlag, !checked);
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VeganFlag;
+                automaticCheck: false
+                checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VeganFlag
             }
 
-            TextSwitch {
+            BVApp.TextSwitch {
                 text: qsTrId("id-vegetarian")
-                onCheckedChanged: {
-                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VegetarianFlag, checked);
+                onUserToggled: {
+                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VegetarianFlag, !checked);
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VegetarianFlag;
+                automaticCheck: false
+                checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VegetarianFlag
             }
 
-            TextSwitch {
+            BVApp.TextSwitch {
                 text: qsTrId("id-omnivorous")
-                onCheckedChanged: {
-                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.OmnivorousFlag, checked);
+                onUserToggled: {
+                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.OmnivorousFlag, !checked);
                 }
 
-                Component.onCompleted: checked = jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivorousFlag;
+                automaticCheck: false
+                checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivorousFlag
             }
 
             Column {
-
                 width: parent.width
 
                 BVApp.SectionHeader {
@@ -203,122 +204,134 @@ BVApp.Page {
                     icon: BVApp.Theme.iconFor("more_vert")
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     text: qsTrId("id-organic")
-                    onCheckedChanged: {
-                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Organic, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Organic, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Organic;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Organic
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                     text: qsTrId("id-gluten-free")
-                    onCheckedChanged: {
-                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.GlutenFree, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.GlutenFree, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.GlutenFree;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.GlutenFree
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                     text: qsTrId("id-breakfast")
-                    onCheckedChanged: {
-                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Breakfast, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Breakfast, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Breakfast;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Breakfast
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                     text: qsTrId("id-brunch")
-                    onCheckedChanged: {
-                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Brunch, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Brunch, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Brunch;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Brunch
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     text: qsTrId("id-wheelchair")
-                    onCheckedChanged: {
-                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessible, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessible, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.HandicappedAccessible;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.HandicappedAccessible
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                     text: qsTrId("id-wheelchair-wc")
-                    onCheckedChanged: {
-                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessibleWc , checked);
+                    onUserToggled: {
+                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.HandicappedAccessibleWc, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.HandicappedAccessibleWc;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.HandicappedAccessibleWc
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                     text: qsTrId("id-high-chair")
-                    onCheckedChanged: {
-                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.ChildChair, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.ChildChair, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.ChildChair;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.ChildChair
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                     text: qsTrId("id-dogs-allowed")
-                    onCheckedChanged: {
-                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Dog, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Dog, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Dog;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Dog
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     text: qsTrId("id-delivery")
-                    onCheckedChanged: {
-                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Delivery, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setVenuePropertyFilterFlag(VenueSortFilterProxyModel.Delivery, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Delivery;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterVenueProperty & VenueSortFilterProxyModel.Delivery
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                     text: qsTrId("id-catering")
-                    onCheckedChanged: {
-                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Catering, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Catering, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Catering
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Catering
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                     text: qsTrId("id-wifi")
-                    onCheckedChanged: {
-                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Wlan, checked);
+                    onUserToggled: {
+                        jsonModelCollection.setGastroPropertyFilterFlag(VenueSortFilterProxyModel.Wlan, !checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Wlan;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterGastroProperty & VenueSortFilterProxyModel.Wlan
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                              //% "With review (German)"
                     text: qsTrId("id-filter-with-review")
-                    onCheckedChanged: {
-                        jsonModelCollection.setFilterWithReview(checked);
+                    onUserToggled: {
+                        jsonModelCollection.setFilterWithReview(!checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterWithReview;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterWithReview
                 }
             }
 
@@ -332,15 +345,16 @@ BVApp.Page {
                     icon: BVApp.Theme.iconFor("date_range")
                 }
 
-                TextSwitch {
+                BVApp.TextSwitch {
                     visible: showGastroVenues
                              //% "New"
                     text: qsTrId("id-new")
-                    onCheckedChanged: {
-                        jsonModelCollection.setFilterNew(checked);
+                    onUserToggled: {
+                        jsonModelCollection.setFilterNew(!checked);
                     }
 
-                    Component.onCompleted: checked = jsonModelCollection.filterNew;
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterNew
                 }
 
                 BVApp.ValueSelector
@@ -362,7 +376,7 @@ BVApp.Page {
                         jsonModelCollection.setMonthNew(value);
                     }
 
-                    Component.onCompleted: value = jsonModelCollection.monthNew;
+                    value: jsonModelCollection.monthNew
                 }
             }
 
