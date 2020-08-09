@@ -393,9 +393,9 @@ void OpeningHoursAlgorithms_TestCondenseOpeningHours::mondayToFridayTheSameColla
 
     const QVariantList condensedOpeningHours
     {
-        QVariantMap {{ "day", qtTrId("id-monday")   + " - " + qtTrId("id-friday") }, { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", qtTrId("id-saturday")                               }, { "hours", qtTrId("id-closed") }},
-        QVariantMap {{ "day", qtTrId("id-sunday")                                 }, { "hours", qtTrId("id-closed") }}
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-monday")   + " - " + qtTrId("id-friday") }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-saturday")                               }, { "hours", qtTrId("id-closed") }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-sunday")                                 }, { "hours", qtTrId("id-closed") }}
     };
 
     QCOMPARE(res, condensedOpeningHours);
@@ -424,10 +424,10 @@ void OpeningHoursAlgorithms_TestCondenseOpeningHours::differentOpeningHoursInThe
 
     const QVariantList condensedOpeningHours
     {
-        QVariantMap {{ "day", qtTrId("id-monday")   + " - " + qtTrId("id-wednesday") }, { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", qtTrId("id-thursday")                                  }, { "hours", "09:00 - 13:00" }},
-        QVariantMap {{ "day", qtTrId("id-friday")   + " - " + qtTrId("id-saturday")  }, { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", qtTrId("id-sunday")                                    }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-monday")   + " - " + qtTrId("id-wednesday") }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-thursday")                                  }, { "hours", "09:00 - 13:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-friday")   + " - " + qtTrId("id-saturday")  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-sunday")                                    }, { "hours", "09:00 - 17:00" }},
     };
 
     QCOMPARE(res, condensedOpeningHours);
@@ -456,11 +456,11 @@ void OpeningHoursAlgorithms_TestCondenseOpeningHours::differentOpeningHoursInThe
 
     const QVariantList condensedOpeningHours
     {
-        QVariantMap {{ "day", qtTrId("id-monday")                                    }, { "hours", "10:00 - 17:00" }},
-        QVariantMap {{ "day", qtTrId("id-tuesday")  + " - " + qtTrId("id-thursday")  }, { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", qtTrId("id-friday")                                    }, { "hours", "12:00 - 13:00" }},
-        QVariantMap {{ "day", qtTrId("id-saturday")                                  }, { "hours", "09:00 - 17:00" }},
-        QVariantMap {{ "day", qtTrId("id-sunday")                                    }, { "hours", "09:00 - 17:00" }}
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-monday")                                    }, { "hours", "10:00 - 17:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-tuesday")  + " - " + qtTrId("id-thursday")  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-friday")                                    }, { "hours", "12:00 - 13:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-saturday")                                  }, { "hours", "09:00 - 17:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-sunday")                                    }, { "hours", "09:00 - 17:00" }}
     };
 
     QCOMPARE(res, condensedOpeningHours);
@@ -489,8 +489,8 @@ void OpeningHoursAlgorithms_TestCondenseOpeningHours::sundayDoesNotGetCollapsed(
 
     const QVariantList condensedOpeningHours
     {
-        QVariantMap {{ "day", qtTrId("id-monday")   + " - " + qtTrId("id-saturday") }, { "hours", "08:00 - 13:00" }},
-        QVariantMap {{ "day", qtTrId("id-sunday")                                   }, { "hours", "08:00 - 13:00" }}
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-monday")   + " - " + qtTrId("id-saturday") }, { "hours", "08:00 - 13:00" }},
+        QVariantMap {{ "current", false }, { "day", qtTrId("id-sunday")                                   }, { "hours", "08:00 - 13:00" }}
     };
 
     QCOMPARE(res, condensedOpeningHours);
