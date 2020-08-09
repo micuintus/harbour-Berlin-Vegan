@@ -178,6 +178,10 @@ QtObject {
 
     readonly property real iconToolBarPadding: dp(4.1)
 
+    readonly property real customOpenButtonVerticalMargin: dp(1)
+    readonly property real customOpenButtonHorizontalMargin: dp(4.2)
+    readonly property real customOpenButtonVerticalPadding: dp(2.1)
+
 
     // From OpacityRampEffectBase.qml:
     //     LtR = 0, RtL = 1, TtB = 2, BtT = 3

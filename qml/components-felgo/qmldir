@@ -14,6 +14,7 @@ SearchField 1.0 SearchField.qml
 ActionMenuItem 1.0 ActionMenuItem.qml
 ValueSelector 1.0 ValueSelector.qml
 TextSwitch 1.0 TextSwitch.qml
-TimePicker 1.0 TickerPicker.qml
-TimePickerDialog 1.0 TickerPickerDialog.qml
+TimePicker 1.0 TimePicker.qml
+CustomOpenTextSwitch 1.0 CustomOpenTextSwitch.qml
+TimePickerDialog 1.0 TimePickerDialog.qml
 Image 1.0 Image.qml

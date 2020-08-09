@@ -19,5 +19,6 @@
         <file>TextSwitch.qml</file>
         <file>TimePicker.qml</file>
         <file>TimePickerDialog.qml</file>
+        <file>CustomOpenTextSwitch.qml</file>
     </qresource>
 </RCC>

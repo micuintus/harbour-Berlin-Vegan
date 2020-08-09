@@ -28,6 +28,7 @@ import Sailfish.Silica 1.0
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
+import QtQuick.Layouts 1.1
 
 BVApp.Page {
     id: page
@@ -113,6 +114,7 @@ BVApp.Page {
             }
 
             Column {
+                z: 1
 
                 width: parent.width
 
@@ -123,7 +125,7 @@ BVApp.Page {
                 }
 
                 BVApp.TextSwitch {
-                    //% "Open now"
+                             //% "Open now"
                     text: qsTrId("id-filter-venue-open-now")
                     onUserToggled: {
                         jsonModelCollection.filterOpenNow = !checked;
@@ -131,6 +133,27 @@ BVApp.Page {
 
                     automaticCheck: false
                     checked: jsonModelCollection.filterOpenNow
+                }
+
+
+                BVApp.CustomOpenTextSwitch {
+                                 //% "Open"
+                    openText: qsTrId("id-filter-venue-custom-open")
+                                   //% "at"
+                    timePrefix: qsTrId("id-filter-venue-open-at")
+                                   //% "on"
+                    datePrefix: qsTrId("id-filter-venue-open-on")
+
+                    time: jsonModelCollection.customOpenTime
+                    onTimeSelected: jsonModelCollection.customOpenTime = time
+                    date: jsonModelCollection.customOpenDate
+                    onDateSelected: jsonModelCollection.customOpenDate = date
+
+                    automaticCheck: false
+                    onUserToggled: {
+                        jsonModelCollection.filterCustomOpen = !checked;
+                    }
+                    checked: jsonModelCollection.filterCustomOpen
                 }
 
             }
@@ -336,7 +359,6 @@ BVApp.Page {
             }
 
             Column {
-
                 width: parent.width
 
                 BVApp.SectionHeader {

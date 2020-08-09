@@ -6,6 +6,7 @@
 #include <QtQml/QJSValue>
 #include <QString>
 #include <QGeoCoordinate>
+#include <QDateTime>
 
 class VenueSortFilterProxyModel : public QSortFilterProxyModel
 {
@@ -20,7 +21,10 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(VenueVegCategoryFlags filterVegCategory READ filterVegCategory NOTIFY filterVegCategoryChanged)
     Q_PROPERTY(VenuePropertyFlags filterVenueProperty READ filterVenueProperty NOTIFY filterVenuePropertyChanged)
     Q_PROPERTY(GastroPropertyFlags filterGastroProperty READ filterGastroProperty NOTIFY filterGastroPropertyChanged)
-    Q_PROPERTY(bool filterOpenNow MEMBER m_filterOpenNow WRITE setFilterOpenNow NOTIFY filterOpenNowChanged)
+    Q_PROPERTY(bool filterOpenNow MEMBER m_filterOpenNow WRITE setFilterOpenNow NOTIFY filterOpenChanged)
+    Q_PROPERTY(bool filterCustomOpen MEMBER m_filterCustomOpen WRITE setfilterCustomOpen NOTIFY filterOpenChanged)
+    Q_PROPERTY(QDate customOpenDate READ customOpenDate WRITE setCustomOpenDate NOTIFY customOpenDateChanged)
+    Q_PROPERTY(QTime customOpenTime READ customOpenTime WRITE setCustomOpenTime NOTIFY customOpenTimeChanged)
     Q_PROPERTY(bool filterWithReview MEMBER m_filterWithReview WRITE setFilterWithReview NOTIFY filterWithReviewChanged)
     Q_PROPERTY(bool filterFavorites MEMBER m_filterFavorites WRITE setFilterFavorites NOTIFY filterFavoritesChanged)
     Q_PROPERTY(bool filterNew MEMBER m_filterNew WRITE setFilterNew NOTIFY filterNewChanged)
@@ -72,6 +76,8 @@ public:
     VenueModel::VenueSubTypeFlags filterVenueSubType() const;
     VenuePropertyFlags  filterVenueProperty() const;
     GastroPropertyFlags filterGastroProperty() const;
+    QDate customOpenDate() const;
+    QTime customOpenTime() const;
 
     Q_INVOKABLE VenueHandle* item(int row) const;
     Q_INVOKABLE void setVegCategoryFilterFlag(VenueVegCategoryFlag flag, bool on);
@@ -89,6 +95,9 @@ public slots:
     void setFilterVenueType(VenueModel::VenueTypeFlags);
     void setCurrentPosition(QGeoCoordinate position);
     void setFilterOpenNow(bool);
+    void setfilterCustomOpen(bool);
+    void setCustomOpenDate(QDate);
+    void setCustomOpenTime(QTime);
     void setFilterWithReview(bool);
     void setFilterFavorites(bool);
     void setFilterNew(bool);
@@ -106,7 +115,9 @@ signals:
     void filterVegCategoryChanged();
     void filterVenuePropertyChanged();
     void filterGastroPropertyChanged();
-    void filterOpenNowChanged();
+    void filterOpenChanged();
+    void customOpenDateChanged();
+    void customOpenTimeChanged();
     void filterWithReviewChanged();
     void filterFavoritesChanged();
     void filterNewChanged();
@@ -162,6 +173,7 @@ private:
     GastroPropertyFlags m_filterGastroProperty = { };
 
     bool m_filterOpenNow    = false;
+    bool m_filterCustomOpen = false;
     bool m_filterWithReview = false;
     bool m_filterFavorites  = false;
     bool m_filterNew        {false};
@@ -171,5 +183,7 @@ private:
 
     char m_currentDayIndex = -1;
     unsigned m_currentMinute = 0;
+
+    QDateTime m_customOpenDateTime = QDateTime::currentDateTime();
 };
 
