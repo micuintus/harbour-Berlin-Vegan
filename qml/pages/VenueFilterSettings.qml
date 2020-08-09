@@ -160,6 +160,7 @@ BVApp.Page {
 
             Column {
                 width: parent.width
+                visible: showGastroVenues
 
                 BVApp.SectionHeader {
                     //%          "New in database"
@@ -168,7 +169,6 @@ BVApp.Page {
                 }
 
                 BVApp.TextSwitch {
-                    visible: showGastroVenues
                              //% "New"
                     text: qsTrId("id-new")
                     onUserToggled: {
@@ -181,7 +181,6 @@ BVApp.Page {
 
                 BVApp.ValueSelector
                 {
-                    visible: showGastroVenues
                     id: vs
                               //% "A venue is new for:"
                     label: qsTrId("id-meaning-new")
