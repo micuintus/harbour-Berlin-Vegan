@@ -162,6 +162,90 @@ BVApp.Page {
                 width: parent.width
 
                 BVApp.SectionHeader {
+                    //%          "New in database"
+                    text: qsTrId("id-new-in-database")
+                    icon: BVApp.Theme.iconFor("date_range")
+                }
+
+                BVApp.TextSwitch {
+                    visible: showGastroVenues
+                             //% "New"
+                    text: qsTrId("id-new")
+                    onUserToggled: {
+                        jsonModelCollection.setFilterNew(!checked);
+                    }
+
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterNew
+                }
+
+                BVApp.ValueSelector
+                {
+                    visible: showGastroVenues
+                    id: vs
+                              //% "A venue is new for:"
+                    label: qsTrId("id-meaning-new")
+                                          //% "month"
+                    labelUnitSingular: qsTrId("id-month")
+                                        //% "months"
+                    labelUnitPlural: qsTrId("id-months")
+
+                    from: 1
+                    to: 50
+                    stepSize: 1
+
+                    onValueModified: {
+                        jsonModelCollection.setMonthNew(value);
+                    }
+
+                    value: jsonModelCollection.monthNew
+                }
+            }
+
+            Column {
+                width: parent.width
+
+                BVApp.SectionHeader {
+                    //% "Veg*an category"
+                    text: qsTrId("id-filter-vegan-category")
+                    icon: BVApp.Theme.iconFor("vegan")
+                }
+
+                BVApp.TextSwitch {
+                    text: qsTrId("id-vegan")
+                    onUserToggled: {
+                        jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VeganFlag, !checked);
+                    }
+
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VeganFlag
+                }
+
+                BVApp.TextSwitch {
+                    text: qsTrId("id-vegetarian")
+                    onUserToggled: {
+                        jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VegetarianFlag, !checked);
+                    }
+
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VegetarianFlag
+                }
+
+                BVApp.TextSwitch {
+                    text: qsTrId("id-omnivorous")
+                    onUserToggled: {
+                        jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.OmnivorousFlag, !checked);
+                    }
+
+                    automaticCheck: false
+                    checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivorousFlag
+                }
+            }
+
+            Column {
+                width: parent.width
+
+                BVApp.SectionHeader {
                              //% "Sub category"
                     text: qsTrId("id-filter-venue-sub-type")
                     icon: BVApp.Theme.iconFor("coffee")
@@ -181,42 +265,6 @@ BVApp.Page {
                         checked: jsonModelCollection.filterVenueSubType & model.flag;
                     }
                 }
-            }
-
-            BVApp.SectionHeader {
-                //% "Veg*an category"
-                text: qsTrId("id-filter-vegan-category")
-                icon: BVApp.Theme.iconFor("vegan")
-            }
-
-            BVApp.TextSwitch {
-                text: qsTrId("id-vegan")
-                onUserToggled: {
-                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VeganFlag, !checked);
-                }
-
-                automaticCheck: false
-                checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VeganFlag
-            }
-
-            BVApp.TextSwitch {
-                text: qsTrId("id-vegetarian")
-                onUserToggled: {
-                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VegetarianFlag, !checked);
-                }
-
-                automaticCheck: false
-                checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VegetarianFlag
-            }
-
-            BVApp.TextSwitch {
-                text: qsTrId("id-omnivorous")
-                onUserToggled: {
-                    jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.OmnivorousFlag, !checked);
-                }
-
-                automaticCheck: false
-                checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivorousFlag
             }
 
             Column {
@@ -355,50 +403,6 @@ BVApp.Page {
 
                     automaticCheck: false
                     checked: jsonModelCollection.filterWithReview
-                }
-            }
-
-            Column {
-                width: parent.width
-
-                BVApp.SectionHeader {
-                    //%          "New in database"
-                    text: qsTrId("id-new-in-database")
-                    icon: BVApp.Theme.iconFor("date_range")
-                }
-
-                BVApp.TextSwitch {
-                    visible: showGastroVenues
-                             //% "New"
-                    text: qsTrId("id-new")
-                    onUserToggled: {
-                        jsonModelCollection.setFilterNew(!checked);
-                    }
-
-                    automaticCheck: false
-                    checked: jsonModelCollection.filterNew
-                }
-
-                BVApp.ValueSelector
-                {
-                    visible: showGastroVenues
-                    id: vs
-                              //% "A venue is new for:"
-                    label: qsTrId("id-meaning-new")
-                                          //% "month"
-                    labelUnitSingular: qsTrId("id-month")
-                                        //% "months"
-                    labelUnitPlural: qsTrId("id-months")
-
-                    from: 1
-                    to: 50
-                    stepSize: 1
-
-                    onValueModified: {
-                        jsonModelCollection.setMonthNew(value);
-                    }
-
-                    value: jsonModelCollection.monthNew
                 }
             }
 
