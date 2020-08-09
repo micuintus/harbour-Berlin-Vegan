@@ -12,6 +12,5 @@ PageHeader 1.0 PageHeader.qml
 Separator 1.0 Separator.qml
 SilicaFlickable 1.0 SilicaFlickable.qml
 SilicaListView 1.0 SilicaListView.qml
-Text 1.0 Text.qml
 TextSwitch 1.0 TextSwitch.qml
 VerticalScrollDecorator 1.0 VerticalScrollDecorator.qml
