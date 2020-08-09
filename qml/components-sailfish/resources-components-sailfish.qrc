@@ -16,5 +16,6 @@
         <file>Image.qml</file>
         <file>TextSwitch.qml</file>
         <file>ValueSelector.qml</file>
+        <file>CustomOpenTextSwitch.qml</file>
     </qresource>
 </RCC>

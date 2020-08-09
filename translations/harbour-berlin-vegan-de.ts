@@ -52,9 +52,9 @@
         <translation>omnivor</translation>
     </message>
     <message id="id-omnivorous-labeled">
-        <source>omnivorous \n(vegan dishes labeled)</source>
-        <oldsource>omnivorous 
-(vegan dishes labeled)</oldsource>
+        <source>omnivorous 
+(vegan dishes labeled)</source>
+        <oldsource>omnivorous \n(vegan dishes labeled)</oldsource>
         <translation>omnivor
 (vegan deklariert)</translation>
     </message>
@@ -63,9 +63,9 @@
         <translation>vegetarisch</translation>
     </message>
     <message id="id-vegetarian-labeled">
-        <source>vegetarian \n(vegan dishes labeled)</source>
-        <oldsource>vegetarian 
-(vegan dishes labeled)</oldsource>
+        <source>vegetarian 
+(vegan dishes labeled)</source>
+        <oldsource>vegetarian \n(vegan dishes labeled)</oldsource>
         <translation>vegetarisch
 (vegan deklariert)</translation>
     </message>
@@ -389,6 +389,30 @@
     <message id="id-new-in-database">
         <source>New in database</source>
         <translation>Neu in der Datenbank</translation>
+    </message>
+    <message id="id-timepicker-cancel">
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message id="id-timepicker-set-time">
+        <source>Set Time</source>
+        <translation>Zeit einstellen</translation>
+    </message>
+    <message id="id-timepicker-ok">
+        <source>OK</source>
+        <translation>OK</translation>
+    </message>
+    <message id="id-filter-venue-custom-open">
+        <source>Open</source>
+        <translation>Geöffnet</translation>
+    </message>
+    <message id="id-filter-venue-open-at">
+        <source>at</source>
+        <translation>um</translation>
+    </message>
+    <message id="id-filter-venue-open-on">
+        <source>on</source>
+        <translation>am</translation>
     </message>
 </context>
 </TS>

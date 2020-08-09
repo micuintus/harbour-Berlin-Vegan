@@ -22,15 +22,22 @@ QVariant openingMinutesForDay(const QModelIndex& index, int currentDayIndex)
     return openingMinutes[currentDayIndex];
 }
 
-bool isOpenNow(const QModelIndex& index, int currentDayIndex, int currentMinute)
+bool isOpenAt(const QModelIndex& index, int dayIndex, int minute)
 {
-    const auto openingMinutes = openingMinutesForDay(index, currentDayIndex);
+    const auto openingMinutes = openingMinutesForDay(index, dayIndex);
     if (!openingMinutes.isValid() || !openingMinutes.canConvert(QMetaType::QVariantMap))
     {
         return false;
     }
 
-    return isInRange(openingMinutes.toMap(), currentMinute);
+    return isInRange(openingMinutes.toMap(), minute);
+}
+
+bool isOpenAt(const QModelIndex& index, QDateTime dateTime)
+{
+    int dayIndex, minute;
+    std::tie(dayIndex, minute) = extractDayIndexAndMinute(dateTime);
+    return isOpenAt(index, dayIndex, minute);
 }
 
 bool closesSoon(const QModelIndex& index, int currentDayIndex, int currentMinute)
@@ -128,6 +135,16 @@ VenueSortFilterProxyModel::VenuePropertyFlags VenueSortFilterProxyModel::filterV
 VenueSortFilterProxyModel::GastroPropertyFlags VenueSortFilterProxyModel::filterGastroProperty() const
 {
     return m_filterGastroProperty;
+}
+
+QDate VenueSortFilterProxyModel::customOpenDate() const
+{
+    return m_customOpenDateTime.date();
+}
+
+QTime VenueSortFilterProxyModel::customOpenTime() const
+{
+    return m_customOpenDateTime.time();
 }
 
 template <typename FilterFlags, typename SignalType>
@@ -231,8 +248,56 @@ void VenueSortFilterProxyModel::setFilterOpenNow(bool filterOpenNow)
     }
 
     m_filterOpenNow = filterOpenNow;
+
+    if (m_filterOpenNow && m_filterCustomOpen)
+    {
+        m_filterCustomOpen = false;
+    }
+
     invalidateFilter();
-    emit filterOpenNowChanged();
+    emit filterOpenChanged();
+}
+
+void VenueSortFilterProxyModel::setfilterCustomOpen(bool filterCustomOpen)
+{
+    if (m_filterCustomOpen == filterCustomOpen)
+    {
+        return;
+    }
+
+    m_filterCustomOpen = filterCustomOpen;
+
+    if (m_filterCustomOpen && m_filterOpenNow)
+    {
+        m_filterOpenNow = false;
+    }
+
+    invalidateFilter();
+    emit filterOpenChanged();
+}
+
+void VenueSortFilterProxyModel::setCustomOpenDate(QDate customOpenDate)
+{
+    if (m_customOpenDateTime.date() == customOpenDate)
+    {
+        return;
+    }
+
+    m_customOpenDateTime.setDate(customOpenDate);
+    invalidateFilter();
+    emit customOpenDateChanged();
+}
+
+void VenueSortFilterProxyModel::setCustomOpenTime(QTime customOpenTime)
+{
+    if (m_customOpenDateTime.time() == customOpenTime)
+    {
+        return;
+    }
+
+    m_customOpenDateTime.setTime(customOpenTime);
+    invalidateFilter();
+    emit customOpenTimeChanged();
 }
 
 void VenueSortFilterProxyModel::setFilterWithReview(bool filterWithReview)
@@ -314,7 +379,8 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
             && venueSubTypeMatches(index)
             && venuePropertiesMatch(index)
             && (venueIsShop || gastroPropertiesMatch(index))
-            && (!m_filterOpenNow || detail::isOpenNow(index, m_currentDayIndex, m_currentMinute))
+            && (!m_filterOpenNow    || detail::isOpenAt(index, m_currentDayIndex, m_currentMinute))
+            && (!m_filterCustomOpen || detail::isOpenAt(index, m_customOpenDateTime))
             // Filter search string last => slowest
             && searchStringMatches(index);
     }
@@ -360,7 +426,7 @@ QVariant VenueSortFilterProxyModel::data(const QModelIndex &index, int role) con
     {
     case VenueModel::VenueModelRoles::Open:
     {
-        return detail::isOpenNow(mapToSource(index), m_currentDayIndex, m_currentMinute);
+        return detail::isOpenAt(mapToSource(index), m_currentDayIndex, m_currentMinute);
     }
     case VenueModel::VenueModelRoles::ClosesSoon:
     {
