@@ -52,9 +52,9 @@
         <translation>omnivor</translation>
     </message>
     <message id="id-omnivorous-labeled">
-        <source>omnivorous 
-(vegan dishes labeled)</source>
-        <oldsource>omnivorous \n(vegan dishes labeled)</oldsource>
+        <source>omnivorous \n(vegan dishes labeled)</source>
+        <oldsource>omnivorous 
+(vegan dishes labeled)</oldsource>
         <translation>omnivor
 (vegan deklariert)</translation>
     </message>
@@ -63,9 +63,9 @@
         <translation>vegetarisch</translation>
     </message>
     <message id="id-vegetarian-labeled">
-        <source>vegetarian 
-(vegan dishes labeled)</source>
-        <oldsource>vegetarian \n(vegan dishes labeled)</oldsource>
+        <source>vegetarian \n(vegan dishes labeled)</source>
+        <oldsource>vegetarian 
+(vegan dishes labeled)</oldsource>
         <translation>vegetarisch
 (vegan deklariert)</translation>
     </message>
