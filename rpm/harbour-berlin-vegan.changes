@@ -12,6 +12,13 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Sun Aug 16 2020 micu <post@micuintus.de> 3.6-1
+- Mark recently added venues in list with a "new" tag
+- Allow filtering for recently added venues
+- Completely overhaul the filter section for FELGO (iOS/Android) variants (switches instead of check boxes)
+- Offer filtering for venues open on a date and at a time specified by the user
+- Fix bug for variant on Android: Map resolution was broken, font sizes were way too small
+
 * Sun Dec 01 2019 micu <post@micuintus.de> 3.5-1
 - Show venue sub type as colored tags (Restaurant, Bar, etc.) in venue description
 - Adapt the application to the new "Shops" data layout
