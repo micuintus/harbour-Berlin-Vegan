@@ -16,7 +16,7 @@
         <file>qml/pages/ShoppingLocations.json</file>
         <file>qml/pages/VenueDescription.qml</file>
         <file>qml/pages/VenueList.qml</file>
-        <file>qml/pages/VenueMapPage.qml</file>
+        <file>qml/pages/VenueMapWidget.qml</file>
         <file>qml/pages/VenueMapOverviewPage.qml</file>
         <file>qml/harbour-berlin-vegan.qml</file>
         <file>translations/harbour-berlin-vegan-de.qm</file>
