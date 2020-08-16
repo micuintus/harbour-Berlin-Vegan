@@ -243,7 +243,7 @@ BVApp.Page {
             }
         }
 
-        VenueMapPage {
+        VenueMapWidget {
             id: map
 
             venueCoordinate: QtPositioning.coordinate(restaurant.latCoord, restaurant.longCoord)
