@@ -2,7 +2,8 @@
 
 Berlin-Vegan is a Qt-based cross-platform app for [SailfishOS](https://en.wikipedia.org/wiki/Sailfish_OS), iOS and Android.
 
-There is also a [former version for Android](https://github.com/Berlin-Vegan/berlin-vegan-guide).
+There is a [blog article about the development of this app](http://www.micuintus.de/2017/10/01/cross-platform-mobile-app-development-for-ios-sailfishos-and-android-with-qtqml/).
+Furthermore, the source code of a former version of this app for Android (2.x series) can be found [here](https://github.com/Berlin-Vegan/berlin-vegan-guide).
 
 With the Berlin-Vegan guide, you have got quick access to an overview of the vegan
 food and shopping possibilities in Berlin, Germany --- even while you are out and about.
