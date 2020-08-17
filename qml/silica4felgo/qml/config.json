@@ -3,6 +3,6 @@
   "identifier": "org.berlin-vegan.bvapp",
   "orientation": "auto",
   "versioncode": 1,
-  "versionname": "3.6",
-  "stage": "publish"
+  "versionname": "3.6.1alpha",
+  "stage": "test"
 }
