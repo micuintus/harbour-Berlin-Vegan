@@ -1,6 +1,18 @@
 # Berlin-Vegan for SailfishOS, iOS and Android
 
+![](https://openrepos.net/sites/default/files/styles/thumbnail/public/packages/8751/icon-berlinvegan.png)
+
 Berlin-Vegan is a Qt-based cross-platform app for [SailfishOS](https://en.wikipedia.org/wiki/Sailfish_OS), iOS and Android.
+
+<table style="width:200px">
+<tr>
+<td><a href="https://apt.izzysoft.de/fdroid/index/apk/org.berlin_vegan.bvapp"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get Berlin-Vegan on IzzyOnDroid" height="50"></a></td>
+<td><a href="https://play.google.com/store/apps/details?id=org.berlin_vegan.bvapp"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get Berlin-Vegan on Google Play" height="50"></a>
+<td><a href="https://apps.apple.com/de/app/berlin-vegan-guide/id435371382"><img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download Berlin-Vegan on the Apple App Store" height="34"></a></td>
+<td><a href="https://openrepos.net/content/micuintus/berlin-vegan"><img src="https://openrepos.net/sites/default/files/styles/thumbnail/public/packages/12655/icon-harbour-storeman.png?itok=6CH9wbYQ" alt="Download Berlin-Vegan on OpenRepos" height="33"></a></td>
+  <td><a href="https://github.com/micuintus/harbour-Berlin-Vegan/releases"><p style="font-size:50px">:octocat:</p></a></td>
+</tr>
+</table>
 
 There is a [blog article about the development of this app](http://www.micuintus.de/2017/10/01/cross-platform-mobile-app-development-for-ios-sailfishos-and-android-with-qtqml/).
 Furthermore, the source code of a former version of this app for Android (2.x series) can be found [here](https://github.com/Berlin-Vegan/berlin-vegan-guide).
