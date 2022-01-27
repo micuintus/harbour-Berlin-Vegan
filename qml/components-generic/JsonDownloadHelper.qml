@@ -83,7 +83,7 @@ Timer {
     {
         restart()
         isVenue = false
-        _fileRequest("https://www.berlin-vegan.de/app/data/ShoppingLocations.json", true)
+        _fileRequest("https://data.berlin-vegan.de/api/ShoppingLocations.json", true)
     }
 
     onTriggered: {
