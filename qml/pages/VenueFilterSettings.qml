@@ -205,46 +205,6 @@ BVApp.Page {
                 width: parent.width
 
                 BVApp.SectionHeader {
-                    //% "Veg*an category"
-                    text: qsTrId("id-filter-vegan-category")
-                    icon: BVApp.Theme.iconFor("vegan")
-                }
-
-                BVApp.TextSwitch {
-                    text: qsTrId("id-vegan")
-                    onUserToggled: {
-                        jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VeganFlag, !checked);
-                    }
-
-                    automaticCheck: false
-                    checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VeganFlag
-                }
-
-                BVApp.TextSwitch {
-                    text: qsTrId("id-vegetarian")
-                    onUserToggled: {
-                        jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.VegetarianFlag, !checked);
-                    }
-
-                    automaticCheck: false
-                    checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.VegetarianFlag
-                }
-
-                BVApp.TextSwitch {
-                    text: qsTrId("id-omnivorous")
-                    onUserToggled: {
-                        jsonModelCollection.setVegCategoryFilterFlag(VenueSortFilterProxyModel.OmnivorousFlag, !checked);
-                    }
-
-                    automaticCheck: false
-                    checked: jsonModelCollection.filterVegCategory & VenueSortFilterProxyModel.OmnivorousFlag
-                }
-            }
-
-            Column {
-                width: parent.width
-
-                BVApp.SectionHeader {
                              //% "Sub category"
                     text: qsTrId("id-filter-venue-sub-type")
                     icon: BVApp.Theme.iconFor("coffee")
