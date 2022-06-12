@@ -12,6 +12,10 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Sun Jun 12 2022 Julian Vega <julian@veggies.de> 3.6.1-1
+- Update URLs of location json files
+- Remove UI filter option for veg*an categories
+
 * Sun Aug 16 2020 micu <post@micuintus.de> 3.6-1
 - Mark recently added venues in list with a "new" tag
 - Allow filtering for recently added venues
