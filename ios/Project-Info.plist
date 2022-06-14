@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)$(BUNDLE_SUFFIX)</string>
+	<string>org.berlin-vegan.bvapp</string>
 	<key>CFBundleName</key>
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
@@ -22,6 +22,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Our app does not request this permission or utilize this functionality but it is included in our info.plist since our app utilizes the Felgo library, which references this permission in its code.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Our app does not request this permission or utilize this functionality but it is included in our info.plist since our app utilizes the Felgo library, which references this permission in its code.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) camera use.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
