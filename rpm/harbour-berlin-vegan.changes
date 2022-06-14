@@ -12,6 +12,9 @@
 # - Scrubbed the deck
 # - Hoisted the sails
 
+* Tue Jun 14 2022 Julian Vega <julian@veggies.de> 3.6.2-1
+- Fix GastroLocations.json
+
 * Sun Jun 12 2022 Julian Vega <julian@veggies.de> 3.6.1-1
 - Update URLs of location json files
 - Remove UI filter option for veg*an categories
