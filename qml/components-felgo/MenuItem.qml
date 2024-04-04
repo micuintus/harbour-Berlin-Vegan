@@ -5,7 +5,6 @@ import BerlinVegan.components.platform 1.0 as BVApp
 NavigationItem {
     id: item
     property var menuIcon
-    property alias text: item.title
     property Component pageComponent
     property Component splitViewExtraPageComponent
 
@@ -15,7 +14,7 @@ NavigationItem {
     // Outside should only read it
     property Page page
 
-    icon: menuIcon.iconString
+    iconType: menuIcon.iconString
 
     BVApp.NavigationStackWithPushAttached
     {
@@ -56,7 +55,6 @@ NavigationItem {
         tryLoadPage();
     }
 
-    onLoaded: tryLoadPage()
     onNavigationStackChanged: tryLoadPage()
     onPageComponentChanged: tryLoadPage()
     onSelected: {

@@ -1,6 +1,6 @@
 import Felgo
 
-Page {
+AppPage {
     id: page
     property alias pageStack: page.navigationStack
 

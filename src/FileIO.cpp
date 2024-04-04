@@ -51,5 +51,5 @@ bool FileIO::write(const QString& filename, const QString& data)
 
 QString FileIO::getWritableLocation()
 {
-    return QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator();
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QDir::separator();
 }

@@ -97,7 +97,6 @@ BVApp.Page {
         }
 
         delegate: BVApp.VenueListItem {
-            width: parent.width
 
             distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                       BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,

@@ -21,15 +21,17 @@ constexpr inline int enumValueToFlag(const int enumValue, const int enumOffset =
 
 inline QString simplifySearchString(const QString searchString)
 {
+    using namespace Qt::Literals::StringLiterals;
+
     auto simplifiedString = searchString.toLower();
-    return simplifiedString.replace(L'é', QLatin1Char('e'), Qt::CaseInsensitive)
-                           .replace(L'è', QLatin1Char('e'), Qt::CaseInsensitive)
-                           .replace(L'ê', QLatin1Char('e'), Qt::CaseInsensitive)
-                           .replace(L'ü', QLatin1Char('u'), Qt::CaseInsensitive)
-                           .replace(L'ö', QLatin1Char('o'), Qt::CaseInsensitive)
-                           .replace(L'ä', QLatin1Char('a'), Qt::CaseInsensitive)
+    return simplifiedString.replace(u'é', QLatin1Char('e'), Qt::CaseInsensitive)
+                           .replace(u'è', QLatin1Char('e'), Qt::CaseInsensitive)
+                           .replace(u'ê', QLatin1Char('e'), Qt::CaseInsensitive)
+                           .replace(u'ü', QLatin1Char('u'), Qt::CaseInsensitive)
+                           .replace(u'ö', QLatin1Char('o'), Qt::CaseInsensitive)
+                           .replace(u'ä', QLatin1Char('a'), Qt::CaseInsensitive)
                            .replace(QLatin1Char('c'), QLatin1Char('k'), Qt::CaseInsensitive)
-                           .replace(L'ß', QLatin1String("ss"), Qt::CaseInsensitive);
+                           .replace(u'ß', QLatin1String("ss"), Qt::CaseInsensitive);
 }
 
 #define ROLE_NAME_ID_PAIRS                                                \
