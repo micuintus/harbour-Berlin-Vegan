@@ -32,8 +32,8 @@
 **
 ****************************************************************************************/
 
-import QtQuick 2.7
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Window
 
 import Sailfish.Silica 1.0
 import BerlinVegan.components.platform 1.0 as BVApp

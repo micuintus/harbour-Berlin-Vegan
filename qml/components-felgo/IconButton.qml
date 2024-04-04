@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Layouts 1.1
-import Felgo 3.0
+import Felgo
 import "." as BVApp
 
 MouseArea {

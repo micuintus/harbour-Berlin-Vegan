@@ -1,4 +1,4 @@
-import Felgo 3.0
+import Felgo
 import QtLocation 5.9
 
 AppMap {
