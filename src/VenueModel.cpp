@@ -22,11 +22,11 @@ VenueModel::VenueSubTypeFlag subTypeStringToFlag(const QString name)
     = QHash<QString, VenueModel::VenueSubTypeFlag>
     {
         // Gastro tags
-        { "Restaurant"  , VenueModel::RestaurantFlag    },
-        { "Imbiss"      , VenueModel::FastFoodFlag      },
-        { "Cafe"        , VenueModel::CafeFlag          },
-        { "Eiscafe"     , VenueModel::IceCreamFlag      },
-        { "Bar"         , VenueModel::BarFlag           },
+        { QStringLiteral("Restaurant")  , VenueModel::RestaurantFlag    },
+        { QStringLiteral("Imbiss")      , VenueModel::FastFoodFlag      },
+        { QStringLiteral("Cafe")        , VenueModel::CafeFlag          },
+        { QStringLiteral("Eiscafe")     , VenueModel::IceCreamFlag      },
+        { QStringLiteral("Bar")         , VenueModel::BarFlag           },
 
         // Shop tags
         { "foods"       , VenueModel::FoodsFlag         },
