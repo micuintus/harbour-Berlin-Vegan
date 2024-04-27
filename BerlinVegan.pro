@@ -72,5 +72,8 @@ TRANSLATIONS += translations/harbour-berlin-vegan.ts \
                 translations/harbour-berlin-vegan-en.ts \
                 translations/harbour-berlin-vegan-nl.ts
 
+DISTFILES += \
+    CMakeLists.txt
+
 
 
