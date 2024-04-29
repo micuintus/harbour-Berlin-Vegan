@@ -43,6 +43,9 @@
 #include <QQmlApplicationEngine>
 #endif
 
+#include <QtQml/qqmlextensionplugin.h>
+Q_IMPORT_QML_PLUGIN(Sailfish_SilicaPlugin);
+
 int main(int argc, char *argv[])
 {
     qmlRegisterType<VenueModel>("harbour.berlin.vegan", 1, 0, "VenueModel");
@@ -56,8 +59,8 @@ int main(int argc, char *argv[])
     auto& qmlEngine = *(view->engine());
 #else
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    qRegisterMetaType<TruncationMode::Modes>("TruncationMode::Modes");
-    qmlRegisterType<TruncationMode>("Sailfish.Silica", 1, 0, "TruncationMode");
+    //qRegisterMetaType<TruncationMode::Modes>("TruncationMode::Modes");
+    //qmlRegisterType<TruncationMode>("Sailfish.Silica", 1, 0, "TruncationMode");
 
     QScopedPointer<QApplication> app(new QApplication(argc, argv));
 
