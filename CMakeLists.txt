@@ -29,7 +29,6 @@ file(GLOB_RECURSE AssetsFiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} qml/pages/* i
 
 file(GLOB_RECURSE PlatformQml RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} qml/components-felgo/*.js qml/components-felgo/*.qml)
 file(GLOB_RECURSE GenericQml RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} qml/components-generic/*.js qml/components-generic/*.qml)
-file(GLOB_RECURSE Silica4FelgoQml RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} qml/silica4felgo/*.js qml/silica4felgo/*.qml)
 
 list(REMOVE_ITEM PlatformRes ${PlatformQml})
 list(REMOVE_ITEM GenericRes ${GenericQml})
@@ -58,7 +57,7 @@ qt_add_executable(harbour-berlin-vegan ${SOURCES} ${HEADERS} ${QmlFiles}) #$ ${A
 
  felgo_configure_executable(harbour-berlin-vegan)
 
-
+ add_subdirectory(src/Sailfish/Silica)
 
  # Deploy resources to build folder/package directly - comment for publishing
  deploy_resources("${QmlFiles};${AssetsFiles}; ${GenericQml}; ${GenericRes}; ${PlatformQml}; ${PlatformRes}")
@@ -80,7 +79,7 @@ qt_add_qml_module(berlin-vegan-generic
     QML_FILES ${GenericQml}
     PLUGIN_TARGET berlin-vegan-generic-plugin
     OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/BerlinVegan/components/generic
-    RESOURCE_PREFIX /imports/
+   # RESOURCE_PREFIX /qml/components-generic/
 )
 
 qt_add_qml_module(berlin-vegan-platform
@@ -89,18 +88,17 @@ qt_add_qml_module(berlin-vegan-platform
     QML_FILES ${PlatformQml}
     PLUGIN_TARGET berlin-vegan-platform-plugin
     OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/BerlinVegan/components/platform
-    RESOURCE_PREFIX /imports/
+   # RESOURCE_PREFIX /qml/components-platform
 )
 
-qt_add_qml_module(silica4felgo
-    URI Sailfish.Silica
-    VERSION 1.0
-    QML_FILES ${Silica4FelgoQml}
-    PLUGIN_TARGET silica4felgo-plugin
-    OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/Sailfish/Silica
-    RESOURCE_PREFIX /
-)
 
+
+qt_import_plugins(harbour-berlin-vegan
+    INCLUDE berlin-vegan-qml
+    INCLUDE silica4felgo
+    INCLUDE berlin-vegan-platform
+    INCLUDE berlin-vegan-generic
+)
 
  target_compile_definitions(harbour-berlin-vegan PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
- target_link_libraries(harbour-berlin-vegan PRIVATE Felgo Qt6::Positioning Qt6::Location berlin-vegan-qml silica4felgo berlin-vegan-platform berlin-vegan-generic )
+ target_link_libraries(harbour-berlin-vegan PUBLIC  Qt6::Positioning Qt6::Location berlin-vegan-qml Silica4FelgoPlugin berlin-vegan-platform berlin-vegan-generic Felgo)
