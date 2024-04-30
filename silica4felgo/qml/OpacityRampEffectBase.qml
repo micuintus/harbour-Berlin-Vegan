@@ -56,54 +56,6 @@ ShaderEffect {
     // impl. ---------------------
     property var source
 
-//    vertexShader: "
-//        attribute highp vec4 qt_Vertex;
-//        attribute highp vec2 qt_MultiTexCoord0;
-
-//        uniform highp mat4 qt_Matrix;
-
-//        uniform lowp float slope;
-//        uniform lowp float offset;
-//        uniform int direction;
-
-//        varying highp vec2 vTC;
-//        varying lowp float vLevel;
-
-//        void main() {
-//            gl_Position = qt_Matrix * qt_Vertex;
-//            vTC = qt_MultiTexCoord0;
-
-//            // Right-to-left
-//            if (direction == 1)
-//                vLevel = 1.0 + slope * (qt_MultiTexCoord0.x - 1.0 + offset);
-
-//            // Top-to-bottom
-//            else if (direction == 2)
-//                vLevel = 1.0 - slope * (qt_MultiTexCoord0.y - offset);
-
-//            // Bottom-to-top
-//            else if (direction == 3)
-//                vLevel = 1.0 + slope * (qt_MultiTexCoord0.y - 1.0 + offset);
-
-//            // Left-to-right (and any bogus value)
-//            else
-//                vLevel = 1.0 - slope * (qt_MultiTexCoord0.x - offset);
-//        }
-//        "
-
-//    fragmentShader: "
-//        uniform sampler2D source;
-
-//        uniform lowp float qt_Opacity;
-//        uniform lowp float clampFactor;
-//        uniform lowp float clampMin;
-//        uniform lowp float clampMax;
-
-//        varying highp vec2 vTC;
-//        varying lowp float vLevel;
-
-//        void main(void) {
-//            gl_FragColor = qt_Opacity * texture2D(source, vTC) * (clamp(clampFactor + vLevel, clampMin, clampMax));
-//        }
-//        "
+    vertexShader: "qrc:/OpacityRampShaders/shaders/opacity_ramp.vert.qsb"
+    fragmentShader: "qrc:/OpacityRampShaders/shaders/opacity_ramp.frag.qsb"
 }
