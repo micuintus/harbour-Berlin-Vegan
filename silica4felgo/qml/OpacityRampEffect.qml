@@ -44,12 +44,12 @@ OpacityRampEffectBase {
 
     anchors.fill: sourceItem
     visible: enabled && sourceItem && sourceItem.visible
-    source: effectsource
+    // source: effectsource
 
-    ShaderEffectSource {
-        id: effectsource
-        hideSource: root.enabled
-        smooth: true
-        sourceItem: root.enabled ? root.sourceItem : null
-    }
+//    ShaderEffectSource {
+//        id: effectsource
+//        hideSource: root.enabled
+//        smooth: true
+//        sourceItem: root.enabled ? root.sourceItem : null
+//    }
 }
