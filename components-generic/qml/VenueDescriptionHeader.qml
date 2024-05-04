@@ -108,6 +108,7 @@ Item {
 
     Rectangle {
         enabled: BVApp.Platform.isSailfish
+        visible: BVApp.Platform.isSailfish
         property int xMargin: 10
         property int yMargin: 7
         x: nameLabel.extraContent.x + nameLabel.extraContent.width - xMargin
