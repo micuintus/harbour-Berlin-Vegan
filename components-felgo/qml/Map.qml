@@ -1,5 +1,5 @@
 import Felgo
-import QtLocation 5.9
+import QtLocation
 
 AppMap {
 
@@ -9,5 +9,10 @@ AppMap {
     // V-Play 2.15.1: Fix user position and location circle for AppMap with MapBoxGL plugin
     showUserPosition: true
 
-    plugin: Plugin { name: "mapboxgl" }
-}
+    plugin:
+        Plugin {
+                name: "maplibregl"
+                PluginParameter { name: "maplibregl.settings_template"; value: "mapbox" }
+        }
+    }
+
