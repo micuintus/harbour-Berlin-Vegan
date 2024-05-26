@@ -88,6 +88,20 @@ QVariant extractSimplifiedSearchName(const QJSValue& stringJS)
     return simplifySearchString(stringJS.toString());
 }
 
+QJSValue removeSoftHyphon(const QJSValue& stringJS)
+{
+    if (!stringJS.isString())
+    {
+        // We don't perform any proper type checking
+        // for any of the values anyhow. It's JSON, after all...
+        return stringJS;
+    }
+
+    QString reviewString = stringJS.toString();
+    QString removeSoft = reviewString.remove("&shy;");
+    return removeSoft;
+}
+
 QJSValue stripWhiteSpaces(const QJSValue& stringJS)
 {
     if (!stringJS.isString())
@@ -142,6 +156,7 @@ QStandardItem* VenueModel::jsonItem2QStandardItem(const QJSValue& from)
 
             if (roleKey == VenueModelRoles::Review)
             {
+                value = removeSoftHyphon(value);
                 auto const simplifiedSearchName = extractSimplifiedSearchName(value);
                 item->setData(simplifiedSearchName, VenueModelRoles::SimplifiedSearchReview);
             }
