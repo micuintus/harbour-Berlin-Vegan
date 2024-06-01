@@ -25,7 +25,7 @@ NavigationItem {
             onTriggered: push(splitViewExtraPageComponent)
         }
 
-        splitView: tablet && split
+        splitView: tablet && landscape && split
         leftColumnWidth: screenWidth/2.2
         onSplitViewActiveChanged: {
             if (!splitViewActive && depth === 2)
