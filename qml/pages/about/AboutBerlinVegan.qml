@@ -467,7 +467,7 @@ BVApp.Page {
                     margins: BVApp.Theme.paddingLarge
                 }
 
-                onLinkActivated: Qt.openUrlExternally("http://blog.qt.io/blog/2016/10/04/customizable-vector-maps-with-the-mapbox-qt-sdk")
+                onLinkActivated: Qt.openUrlExternally("https://github.com/maplibre/maplibre-native/blob/main/FORK.md")
             }
 
             Item {
