@@ -14,7 +14,7 @@ find_package(Qt6 COMPONENTS Positioning Location REQUIRED)
 # Define version macro
 add_compile_definitions(APP_VERSION="${PROJECT_VERSION}")
 
-set(PRODUCT_IDENTIFIER "harbour.berlin.vegan")
+set(PRODUCT_IDENTIFIER "org.berlin_vegan.bvapp")
 set(PRODUCT_VERSION_NAME APP_VERSION)
 set(PRODUCT_VERSION_CODE 3)
 set(PRODUCT_LICENSE_KEY "")
