@@ -15,3 +15,14 @@ ValueSelector 1.0 ValueSelector.qml
 TextSwitch 1.0 TextSwitch.qml
 CustomOpenTextSwitch 1.0 CustomOpenTextSwitch.qml
 Image 1.0 Image.qml
+ListView 1.0 ListView.qml
+Flickable 1.0 Flickable.qml
+Label 1.0 Label.qml
+Button 1.0 Button.qml
+BusyIndicator 1.0 BusyIndicator.qml
+Separator 1.0 Separator.qml
+ScrollDecorator 1.0 ScrollDecorator.qml
+PageHeader 1.0 PageHeader.qml
+CoverBackground 1.0 CoverBackground.qml
+CoverAction 1.0 CoverAction.qml
+CoverActionList 1.0 CoverActionList.qml
