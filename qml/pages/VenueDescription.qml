@@ -76,7 +76,8 @@ BVApp.Page {
             height: streetLabel.height
 
             anchors {
-                bottom: locationHeader.bottom
+                top: BVApp.Theme.headerBarOverlapsImage ? undefined : locationHeader.bottom
+                bottom: BVApp.Theme.headerBarOverlapsImage ? locationHeader.bottom : undefined
                 topMargin: BVApp.Theme.paddingMedium
             }
 

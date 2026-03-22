@@ -95,7 +95,7 @@ MouseArea {
 
         Connections {
             target: nativeUtils
-            onDatePickerFinished: {
+            function onDatePickerFinished(accepted, date) {
                    if (accepted)
                    {
                        item.date = date

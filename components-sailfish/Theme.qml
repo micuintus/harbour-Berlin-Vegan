@@ -156,4 +156,5 @@ QtObject {
     readonly property int filterPageTopSpacing: 0
     readonly property int filterPagePostCategorySpacing: paddingLarge
     readonly property string headerImageSuffix: ".svg"
+    readonly property bool headerBarOverlapsImage: true
 }

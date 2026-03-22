@@ -206,4 +206,5 @@ QtObject {
     readonly property real filterPageTopSpacing: 2 * paddingLarge
     readonly property real filterPagePostCategorySpacing: 0
     readonly property string headerImageSuffix: ".jpg"
+    readonly property bool headerBarOverlapsImage: false
 }

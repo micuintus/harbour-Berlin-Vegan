@@ -9,4 +9,8 @@ AppMap {
 
     // Abstraction for gesture control.
     property bool gestureEnabled: true
+
+    plugin: Plugin {
+        name: "maplibre"
+    }
 }
