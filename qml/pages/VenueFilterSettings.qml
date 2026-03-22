@@ -23,12 +23,11 @@
  *
 **/
 
-import QtQuick 2.5
-import Sailfish.Silica 1.0
+import QtQuick
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
-import QtQuick.Layouts 1.1
+import BerlinVegan.components.ui 1.0 as BVApp
+import QtQuick.Layouts
 
 BVApp.Page {
     id: page
@@ -36,7 +35,7 @@ BVApp.Page {
     property var jsonModelCollection
     property bool showGastroVenues: jsonModelCollection.filterVenueType & VenueModel.GastroFlag
 
-    SilicaFlickable {
+    BVApp.Flickable {
         anchors.fill: parent
         contentHeight: column.height
 
@@ -44,7 +43,7 @@ BVApp.Page {
             id: column
             width: parent.width
 
-            PageHeader {
+            BVApp.PageHeader {
                 id: pageHeader
                              //% "Filter settings"
                 title: qsTrId("id-filter-page-title")
@@ -53,10 +52,10 @@ BVApp.Page {
 
             Item {
                 width: parent.width
-                height: BVApp.Platform.isSailfish ? 0 : 2 * BVApp.Theme.paddingLarge
+                height: BVApp.Theme.filterPageTopSpacing
             }
 
-            Label {
+            BVApp.Label {
                 width: parent.width
                                                            //% "venues selected"
                 text: jsonModelCollection.count + " " + qsTrId("id-selected")
@@ -68,7 +67,7 @@ BVApp.Page {
 
             Item {
                 width: parent.width
-                height: BVApp.Platform.isSailfish ? BVApp.Theme.paddingLarge : 0
+                height: BVApp.Theme.filterPagePostCategorySpacing
             }
 
             BVApp.SectionHeader {
@@ -253,8 +252,8 @@ BVApp.Page {
 
                 Repeater {
                     model: showGastroVenues ?
-                               BVApp.VenueSubTypeDefinitions.gastroVenueSubTypes
-                             : BVApp.VenueSubTypeDefinitions.shopVenueSubTypes
+                               VenueSubTypeDefinitions.gastroVenueSubTypes
+                             : VenueSubTypeDefinitions.shopVenueSubTypes
                     BVApp.TextSwitch {
                         text: model.text
                         onUserToggled: {

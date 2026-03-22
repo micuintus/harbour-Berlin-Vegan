@@ -1,3 +1,5 @@
 *.user
 *.user.*
 rpm/harbour-berlin-vegan.spec
+build/
+.DS_Store

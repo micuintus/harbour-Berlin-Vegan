@@ -1,7 +1,6 @@
-import QtQuick 2.5
-import Sailfish.Silica 1.0
-import QtLocation 5.0
-import QtPositioning 5.2
+import QtQuick
+import QtLocation
+import QtPositioning
 import BerlinVegan.components.platform 1.0 as BVApp
 
 Rectangle {
@@ -50,9 +49,7 @@ Rectangle {
         anchors.fill: parent
 
         // user shall not move the map, but click to open the coordinates in the dedicated map app.
-        gesture {
-            enabled: false
-        }
+        gestureEnabled: false
 
         Component.onCompleted: {
             addMapItem(venueMarker)
@@ -88,7 +85,7 @@ Rectangle {
     Connections {
         // supress warning "ReferenceError: nativeUtils is not defined" on SailfishOS by setting target to "null"
         target: BVApp.Platform.isIos ? nativeUtils : null
-        onAlertSheetFinished: {
+        function onAlertSheetFinished(index) {
             // cancel was clicked
             if (index === -1) {
                 return;

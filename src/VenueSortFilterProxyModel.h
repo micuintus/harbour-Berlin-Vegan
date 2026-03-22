@@ -4,6 +4,7 @@
 
 #include <QtCore/QSortFilterProxyModel>
 #include <QtQml/QJSValue>
+#include <QtQml/qqmlregistration.h>
 #include <QString>
 #include <QGeoCoordinate>
 #include <QDateTime>
@@ -11,6 +12,7 @@
 class VenueSortFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)
@@ -129,10 +131,11 @@ protected:
 
 private:
     // Need to override for opening hours
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QVariant sourceData(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     void reSort();
+    void deferInvalidateFilter();
 
     bool searchStringMatches(const QModelIndex& index) const;
     bool venueSubTypeMatches(const QModelIndex& index) const;
@@ -180,6 +183,7 @@ private:
     int m_monthNew{3};
 
     QTimer m_openStateUpdateTimer{this};
+    bool m_filterInvalidationPending = false;
 
     char m_currentDayIndex = -1;
     unsigned m_currentMinute = 0;

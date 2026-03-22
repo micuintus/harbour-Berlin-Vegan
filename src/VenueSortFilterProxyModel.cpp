@@ -2,6 +2,7 @@
 #include "OpeningHoursAlgorithms.h"
 
 #include <QDate>
+#include <QQmlEngine>
 
 namespace detail {
 
@@ -9,13 +10,13 @@ QVariant openingMinutesForDay(const QModelIndex& index, int currentDayIndex)
 {
     if (currentDayIndex < MONDAY_INDEX || currentDayIndex > SUNDAY_INDEX)
     {
-        return QVariant::Invalid;
+        return {};
     }
 
     const auto openingMinutesVar = index.data(VenueModel::OpeningMinutes);
-    if (!openingMinutesVar.isValid() || !openingMinutesVar.canConvert(QMetaType::QVariantList))
+    if (!openingMinutesVar.isValid() || !openingMinutesVar.canConvert<QVariantList>())
     {
-        return QVariant::Invalid;
+        return {};
     }
 
     auto const openingMinutes = openingMinutesVar.toList();
@@ -25,7 +26,7 @@ QVariant openingMinutesForDay(const QModelIndex& index, int currentDayIndex)
 bool isOpenAt(const QModelIndex& index, int dayIndex, int minute)
 {
     const auto openingMinutes = openingMinutesForDay(index, dayIndex);
-    if (!openingMinutes.isValid() || !openingMinutes.canConvert(QMetaType::QVariantMap))
+    if (!openingMinutes.isValid() || !openingMinutes.canConvert<QVariantMap>())
     {
         return false;
     }
@@ -43,7 +44,7 @@ bool isOpenAt(const QModelIndex& index, QDateTime dateTime)
 bool closesSoon(const QModelIndex& index, int currentDayIndex, int currentMinute)
 {
     const auto openingMinutes = openingMinutesForDay(index, currentDayIndex);
-    if (!openingMinutes.isValid() || !openingMinutes.canConvert(QMetaType::QVariantMap))
+    if (!openingMinutes.isValid() || !openingMinutes.canConvert<QVariantMap>())
     {
         return false;
     }
@@ -70,7 +71,7 @@ bool dateTodayInNewWindow(QDate dateCreated, QDate dateToday, int monthNew)
 bool isNew(const QModelIndex& index, QDate dateToday, int monthNew)
 {
     const auto dateCreatedVar = index.data(VenueModel::DateCreated);
-    if (!dateCreatedVar.isValid() || !dateCreatedVar.canConvert(QMetaType::QDate))
+    if (!dateCreatedVar.isValid() || !dateCreatedVar.canConvert<QDate>())
     {
         return false;
     }
@@ -90,7 +91,7 @@ VenueSortFilterProxyModel::VenueSortFilterProxyModel(QObject *parent) : QSortFil
 
 
     connect(&m_openStateUpdateTimer, &QTimer::timeout, this, &VenueSortFilterProxyModel::updateOpenState);
-    m_openStateUpdateTimer.start(MICROSECONDS_PER_SECOND * SECONDS_PER_MINUTE/2);
+    m_openStateUpdateTimer.start(MILLISECONDS_PER_SECOND * SECONDS_PER_MINUTE/2);
     updateOpenState();
 }
 
@@ -114,7 +115,9 @@ VenueHandle* VenueSortFilterProxyModel::item(int row) const
 
     QModelIndex m = index(row, 0);
 
-    return new VenueHandle(QPersistentModelIndex(m));
+    auto* handle = new VenueHandle(QPersistentModelIndex(m));
+    QQmlEngine::setObjectOwnership(handle, QQmlEngine::JavaScriptOwnership);
+    return handle;
 }
 
 VenueSortFilterProxyModel::VenueVegCategoryFlags VenueSortFilterProxyModel::filterVegCategory() const
@@ -164,7 +167,7 @@ void VenueSortFilterProxyModel::setFilterFlag(FilterFlags& filterFlagMask, const
         filterFlagMask &= ~flag;
     }
 
-    invalidateFilter();
+    deferInvalidateFilter();
     emit (this->*filterChangedSignal)();
 }
 
@@ -190,14 +193,8 @@ void VenueSortFilterProxyModel::setVenueSubTypeFilterFlag(int flag, bool on)
 
 void VenueSortFilterProxyModel::setModel(VenueModel *model)
 {
-    VenueModel *oldModel = qobject_cast<VenueModel*>(sourceModel());
-    if (oldModel == model)
+    if (sourceModel() == model)
         return;
-
-    if (oldModel) {
-        disconnect(oldModel, SIGNAL(rolesChanged()),
-                   this, SLOT(rolesChanged()));
-    }
 
     setSourceModel(model);
     emit modelChanged();
@@ -212,7 +209,7 @@ void VenueSortFilterProxyModel::setSearchString(QString searchString)
     }
 
     m_simplifiedSearchString.swap(simplifiedSearchString);
-    invalidateFilter();
+    deferInvalidateFilter();
     emit searchStringChanged();
 }
 
@@ -224,7 +221,7 @@ void VenueSortFilterProxyModel::setFilterVenueType(VenueModel::VenueTypeFlags fi
     }
 
     m_filterVenueType = filterVenueTypeFlags;
-    invalidateFilter();
+    deferInvalidateFilter();
     emit filterVenueTypeChanged();
 }
 
@@ -236,7 +233,7 @@ void VenueSortFilterProxyModel::setFilterFavorites(bool filterFavorites)
     }
 
     m_filterFavorites = filterFavorites;
-    invalidateFilter();
+    deferInvalidateFilter();
     emit filterFavoritesChanged();
 }
 
@@ -254,7 +251,7 @@ void VenueSortFilterProxyModel::setFilterOpenNow(bool filterOpenNow)
         m_filterCustomOpen = false;
     }
 
-    invalidateFilter();
+    deferInvalidateFilter();
     emit filterOpenChanged();
 }
 
@@ -272,7 +269,7 @@ void VenueSortFilterProxyModel::setfilterCustomOpen(bool filterCustomOpen)
         m_filterOpenNow = false;
     }
 
-    invalidateFilter();
+    deferInvalidateFilter();
     emit filterOpenChanged();
 }
 
@@ -284,7 +281,7 @@ void VenueSortFilterProxyModel::setCustomOpenDate(QDate customOpenDate)
     }
 
     m_customOpenDateTime.setDate(customOpenDate);
-    invalidateFilter();
+    deferInvalidateFilter();
     emit customOpenDateChanged();
 }
 
@@ -296,7 +293,7 @@ void VenueSortFilterProxyModel::setCustomOpenTime(QTime customOpenTime)
     }
 
     m_customOpenDateTime.setTime(customOpenTime);
-    invalidateFilter();
+    deferInvalidateFilter();
     emit customOpenTimeChanged();
 }
 
@@ -308,7 +305,7 @@ void VenueSortFilterProxyModel::setFilterWithReview(bool filterWithReview)
     }
 
     m_filterWithReview = filterWithReview;
-    invalidateFilter();
+    deferInvalidateFilter();
     emit filterWithReviewChanged();
 }
 
@@ -320,7 +317,7 @@ void VenueSortFilterProxyModel::setFilterNew(bool filterNew)
     }
 
     m_filterNew = filterNew;
-    invalidateFilter();
+    deferInvalidateFilter();
     emit filterNewChanged();
 }
 
@@ -332,8 +329,7 @@ void VenueSortFilterProxyModel::setMonthNew(int monthNew)
     }
 
     m_monthNew = monthNew;
-    invalidateFilter();
-    emit dataChanged(index(0, 0), index(rowCount() - 1, 0), { VenueModel::VenueModelRoles::IsNew});
+    deferInvalidateFilter();
     emit monthNewChanged();
 }
 
@@ -388,26 +384,20 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
 
 bool VenueSortFilterProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
 {
-    QVariant leftLat, leftLong, rightLat, rightLong;
+    if (!m_currentPosition.isValid() || !source_left.isValid() || !source_right.isValid())
+        return QSortFilterProxyModel::lessThan(source_left, source_right);
 
-    if (   !m_currentPosition.isValid()
-        || !source_left.isValid() || !source_right.isValid())
-        goto err;
-
-    leftLat   = source_left.data(VenueModel::VenueModelRoles::LatCoord);
-    leftLong  = source_left.data(VenueModel::VenueModelRoles::LongCoord);
-    rightLat  = source_right.data(VenueModel::VenueModelRoles::LatCoord);
-    rightLong = source_right.data(VenueModel::VenueModelRoles::LongCoord);
+    const auto leftLat   = source_left.data(VenueModel::VenueModelRoles::LatCoord);
+    const auto leftLong  = source_left.data(VenueModel::VenueModelRoles::LongCoord);
+    const auto rightLat  = source_right.data(VenueModel::VenueModelRoles::LatCoord);
+    const auto rightLong = source_right.data(VenueModel::VenueModelRoles::LongCoord);
 
     if (!leftLat.canConvert<double>() || !leftLong.canConvert<double>() ||
         !rightLat.canConvert<double>() || !rightLong.canConvert<double>())
-        goto err;
+        return QSortFilterProxyModel::lessThan(source_left, source_right);
 
-    return   m_currentPosition.distanceTo(QGeoCoordinate(leftLat.toDouble(), leftLong.toDouble()))
-           < m_currentPosition.distanceTo(QGeoCoordinate(rightLat.toDouble(), rightLong.toDouble()));
-
-err:
-    return QSortFilterProxyModel::lessThan(source_left, source_right);
+    return m_currentPosition.distanceTo(QGeoCoordinate(leftLat.toDouble(), leftLong.toDouble()))
+         < m_currentPosition.distanceTo(QGeoCoordinate(rightLat.toDouble(), rightLong.toDouble()));
 }
 
 void VenueSortFilterProxyModel::updateOpenState()
@@ -441,7 +431,7 @@ QVariant VenueSortFilterProxyModel::data(const QModelIndex &index, int role) con
         const auto openingHoursVar = sourceData(index, VenueModel::OpeningHours);
         if (!openingHoursVar.isValid())
         {
-            return QVariant::Invalid;
+            return {};
         }
         return condenseOpeningHours(openingHoursVar.toList(), m_currentDayIndex);
     }
@@ -454,6 +444,18 @@ QVariant VenueSortFilterProxyModel::sourceData(const QModelIndex &index, int rol
 {
     const auto sourceIndex = mapToSource(index);
     return model()->data(sourceIndex, role);
+}
+
+void VenueSortFilterProxyModel::deferInvalidateFilter()
+{
+    if (!m_filterInvalidationPending)
+    {
+        m_filterInvalidationPending = true;
+        QTimer::singleShot(0, this, [this]() {
+            m_filterInvalidationPending = false;
+            invalidateFilter();
+        });
+    }
 }
 
 void VenueSortFilterProxyModel::reSort()

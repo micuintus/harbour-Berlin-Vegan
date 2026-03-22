@@ -24,26 +24,26 @@
 **/
 
 
-import Sailfish.Silica 1.0
-import QtPositioning 5.2
-import QtQuick 2.5
+import QtPositioning
+import QtQuick
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
+import harbour.berlin.vegan 1.0
 
 
-CoverBackground {
+BVApp.CoverBackground {
 
     property var jsonModelCollection
     property var positionSource
     readonly property double listStretch: 1.15
 
 
-    CoverActionList {
+    BVApp.CoverActionList {
         id: actionlist
 
         iconBackground: true
 
-        CoverAction {
+        BVApp.CoverAction {
             iconSource: "image://theme/icon-cover-refresh"
             onTriggered: {
                 positionSource.update();
@@ -52,7 +52,7 @@ CoverBackground {
         }
     }
 
-    SilicaListView {
+    BVApp.ListView {
         id: listView
         model: jsonModelCollection
 
@@ -67,20 +67,20 @@ CoverBackground {
             margins: BVApp.Theme.paddingLarge
         }
 
-        header: Label {
+        header: BVApp.Label {
                               //% "Berlin-Vegan"
             text: qsTrId("id-berlin-vegan")
             color: BVApp.Theme.highlightColor
             height: contentHeight * listStretch
         }
 
-        delegate: ListItem {
+        delegate: BVApp.ListItem {
             id: delegate
 
             contentHeight: namelabel.height * listStretch
             contentWidth: parent.width
 
-            Label {
+            BVApp.Label {
                 id: namelabel
                 text: model.name
 
@@ -95,7 +95,7 @@ CoverBackground {
                 truncationMode: TruncationMode.Fade
             }
 
-            Label {
+            BVApp.Label {
                 id: distance
                 text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                 BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,

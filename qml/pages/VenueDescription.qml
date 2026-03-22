@@ -23,13 +23,12 @@
  *
 **/
 
-import QtQuick 2.5
-import Sailfish.Silica 1.0
-import QtPositioning 5.2
+import QtQuick
+import QtPositioning
 
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 
 BVApp.Page {
@@ -42,7 +41,7 @@ BVApp.Page {
     readonly property bool isGastroVenue: restaurant.venueType === VenueModel.Gastro
 
 
-    SilicaFlickable {
+    BVApp.Flickable {
         id: flicka
         anchors.fill: parent
         contentHeight: tellWaiter.y + tellWaiter.height + tellWaiter.anchors.topMargin
@@ -52,16 +51,14 @@ BVApp.Page {
                                                           + iconToolBar.height
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
 
-        BVApp.VenueDescriptionHeader {
+        VenueDescriptionHeader {
             id: locationHeader
             name: restaurant.name
             pictures: restaurant.pictures
             positionSource: page.positionSource
 
             opacity: flicka.scrolledUpRatio
-            height: BVApp.Platform.isSailfish ?
-                      page.height / 2.6
-                    : page.height / 3
+            height: page.height * BVApp.Theme.descriptionHeaderHeightRatio
             shrinkHeightBy: flicka.contentY
 
             anchors {
@@ -79,23 +76,16 @@ BVApp.Page {
             height: streetLabel.height
 
             anchors {
-                top:    BVApp.Platform.isFelgo ?
-                          locationHeader.bottom
-                        : undefined
-                bottom: BVApp.Platform.isSailfish ?
-                          locationHeader.bottom
-                        : undefined
-
+                top: BVApp.Theme.headerBarOverlapsImage ? undefined : locationHeader.bottom
+                bottom: BVApp.Theme.headerBarOverlapsImage ? locationHeader.bottom : undefined
                 topMargin: BVApp.Theme.paddingMedium
             }
 
-            Label {
+            BVApp.Label {
                 id: streetLabel
                 text: restaurant.street
                 font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-                color: BVApp.Platform.isSailfish ?
-                         BVApp.Theme.highlightColor
-                       : BVApp.Theme.secondaryColor
+                color: BVApp.Theme.streetLabelColor
                 truncationMode: TruncationMode.Fade
 
                 anchors {
@@ -108,7 +98,7 @@ BVApp.Page {
                 }
             }
 
-            Label {
+            BVApp.Label {
                 id: distanceLabel
                 text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
                       ? BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
@@ -127,7 +117,7 @@ BVApp.Page {
             }
         }
 
-        BVApp.IconToolBar {
+        IconToolBar {
             id: iconToolBar
             restaurant: page.restaurant
 
@@ -158,7 +148,7 @@ BVApp.Page {
 
             }
 
-            contentItem: BVApp.VenueDetails {
+            contentItem: VenueDetails {
                 id: venueDetails
                 restaurant: page.restaurant
                 isGastroVenue: page.isGastroVenue
@@ -166,10 +156,10 @@ BVApp.Page {
             }
         }
 
-        Separator {
+        BVApp.Separator {
             id: separator
 
-            visible: BVApp.Platform.isFelgo
+            visible: BVApp.Theme.showSeparatorBeforeTags
 
             width: parent.width
             horizontalAlignment: Qt.AlignCenter
@@ -184,30 +174,28 @@ BVApp.Page {
         }
 
 
-        BVApp.VenueSubTypeTagCloud {
+        VenueSubTypeTagCloud {
             id: venueSubTypeTagCloud
             restaurant: page.restaurant
             venueSubTypeDefinitions:
                 isGastroVenue ?
-                    BVApp.VenueSubTypeDefinitions.gastroVenueSubTypes
-                  : BVApp.VenueSubTypeDefinitions.shopVenueSubTypes
+                    VenueSubTypeDefinitions.gastroVenueSubTypes
+                  : VenueSubTypeDefinitions.shopVenueSubTypes
 
             anchors {
                 left: parent.left
                 right: parent.right
-                top: BVApp.Platform.isFelgo ?
+                top: BVApp.Theme.showSeparatorBeforeTags ?
                        separator.bottom
                      : detailsCollapsible.bottom
 
-                topMargin:    BVApp.Platform.isSailfish ?
-                                BVApp.Theme.paddingSmall
-                              : BVApp.Theme.paddingMedium
+                topMargin: BVApp.Theme.tagCloudTopMargin
                 leftMargin:   BVApp.Theme.horizontalPageMargin
                 rightMargin:  BVApp.Theme.horizontalPageMargin
             }
         }
 
-        Label {
+        BVApp.Label {
             id: shortComment
 
             TextMetrics {
@@ -259,14 +247,12 @@ BVApp.Page {
                          venueSubTypeTagCloud.bottom
                        : shortComment.bottom
 
-                topMargin:  BVApp.Platform.isSailfish ?
-                                BVApp.Theme.paddingLarge
-                              : BVApp.Theme.paddingMedium
+                topMargin: BVApp.Theme.mapTopMargin
             }
         }
 
 
-        Label {
+        BVApp.Label {
             id: review
 
             visible: typeof restaurant.review !== "undefined"
@@ -287,7 +273,7 @@ BVApp.Page {
             }
         }
 
-        Label {
+        BVApp.Label {
             id: tellWaiter
 
             visible: isGastroVenue

@@ -23,16 +23,15 @@
  *
 **/
 
-import QtQuick 2.5
-import Sailfish.Silica 1.0
+import QtQuick
 import BerlinVegan.components.platform 1.0 as BVApp
 
-SilicaListView {
+BVApp.ListView {
 
     width: parent.width
     height: contentItem.childrenRect.height
 
-    delegate: ListItem {
+    delegate: BVApp.ListItem {
 
         width: parent.width
         contentHeight: column.height
@@ -46,7 +45,7 @@ SilicaListView {
                 height: BVApp.Theme.paddingLarge
             }
 
-            Label {
+            BVApp.Label {
                 anchors.horizontalCenter: parent.horizontalCenter
                 font.pixelSize: BVApp.Theme.fontSizeMedium
                 color: BVApp.Theme.secondaryColor
@@ -58,7 +57,7 @@ SilicaListView {
                 height: BVApp.Theme.paddingMedium
             }
 
-            Label {
+            BVApp.Label {
                anchors {
                    horizontalCenter: parent.horizontalCenter
                }
@@ -77,7 +76,7 @@ SilicaListView {
                 height: BVApp.Theme.paddingLarge
             }
 
-            Button {
+            BVApp.Button {
                 id: gplButton
                             //% "View license"
                 text: qsTrId("id-view-license")
@@ -97,7 +96,7 @@ SilicaListView {
                 height: BVApp.Theme.paddingLarge
             }
 
-            Separator {
+            BVApp.Separator {
                 id: lastSeperator
                 width: parent.width
                 horizontalAlignment: Qt.AlignCenter

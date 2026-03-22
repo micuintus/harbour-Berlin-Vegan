@@ -3,6 +3,7 @@
 #include <QtCore/QHash>
 #include <QtCore/QSet>
 #include <QtQml/QJSValue>
+#include <QtQml/qqmlregistration.h>
 
 #include <QStandardItemModel>
 #include <QPersistentModelIndex>
@@ -95,6 +96,7 @@ inline QString simplifySearchString(const QString searchString)
 class VenueModel : public QStandardItemModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(VenueTypeFlags loadedVenueType READ loadedVenueType NOTIFY loadedVenueTypeChanged)
 

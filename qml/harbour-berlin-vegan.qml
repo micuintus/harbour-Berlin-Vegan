@@ -24,17 +24,16 @@
 **/
 
 import QtQuick
-import Sailfish.Silica 1.0
 import QtPositioning
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 import "pages"
 import "pages/about"
 import "cover"
 
-ApplicationWindow
+BVApp.ApplicationWindow
 {
     id: app
 
@@ -46,8 +45,7 @@ ApplicationWindow
     PositionSource {
         id: globalPositionSource
         updateInterval: 5000
-        property Position oldPosition: QtPositioning.coordinate(0, 0)
-        preferredPositioningMethods: PositionSource.AllPositioningMethods
+        active: Qt.application.state === Qt.ApplicationActive
      }
 
     VenueSortFilterProxyModel {
@@ -62,51 +60,29 @@ ApplicationWindow
         jsonFilesToLoad--;
         if (jsonFilesToLoad === 0)
         {
-            var favorite_ids = BVApp.Database.dbGetFavoriteIds();
-            for (var i = 0; i < favorite_ids.rows.length; i++) {
-                gJsonVenueModel.setFavorite(favorite_ids.rows.item(i).favorite_id, true);
+            var favorite_ids = FavoritesManager.getFavoriteIds();
+            for (var i = 0; i < favorite_ids.length; i++) {
+                gJsonVenueModel.setFavorite(favorite_ids[i], true);
             }
         }
     }
 
-    BVApp.JsonDownloadHelper {
-        id: venueDownloadHelper
-        onFileLoaded:
-        function(json)
-        {
+    Connections {
+        target: VenueDataLoader
+        function onGastroDataReady(json) {
             gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Gastro);
             favoritesHook();
         }
-    }
-
-    BVApp.JsonDownloadHelper {
-        id: shoppingDownloadHelper
-        onFileLoaded:
-        function(json)
-        {
+        function onShoppingDataReady(json) {
             gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shop);
             favoritesHook();
         }
     }
 
     Component.onCompleted: {
-        BVApp.Database.dbInit();
-        venueDownloadHelper.loadVenueJson();
-        shoppingDownloadHelper.loadShoppingJson();
+        VenueDataLoader.loadGastroVenues();
+        VenueDataLoader.loadShoppingVenues();
     }
-
-    Connections {
-        target: Qt.application
-        onStateChanged: {
-            if (Qt.application.state === Qt.ApplicationActive) {
-                globalPositionSource.start();
-            }
-            else {
-                globalPositionSource.stop();
-            }
-        }
-    }
-
 
     cover: Component { CoverPage {
             id: cover
@@ -140,7 +116,7 @@ ApplicationWindow
             split: true
             onPageChanged: page.searchString = gJsonCollection.searchString;
 
-            onClicked: {
+            onMenuActivated: {
                 gJsonCollection.filterFavorites = false;
 
                 if (page)
@@ -160,7 +136,7 @@ ApplicationWindow
             split: true
             onPageChanged: page.searchString = gJsonCollection.searchString;
 
-            onClicked: {
+            onMenuActivated: {
                 gJsonCollection.filterFavorites = true;
 
                 if (page)
@@ -182,7 +158,7 @@ ApplicationWindow
                 jsonModelCollection: gJsonCollection
             }
 
-            onClicked: {
+            onMenuActivated: {
                 gJsonCollection.filterFavorites = false;
             }
         }

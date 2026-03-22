@@ -23,13 +23,11 @@
  *
 **/
 
-import QtQuick 2.5
-import Sailfish.Silica 1.0
-import QtPositioning 5.2
-import QtLocation 5.0
+import QtQuick
+import QtPositioning
 
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 import harbour.berlin.vegan 1.0
 
@@ -53,7 +51,7 @@ BVApp.Page {
        flickableForSailfish: listView
     }
 
-    SilicaListView {
+    BVApp.ListView {
         id: listView
         anchors {
             top: searchField.bottom
@@ -62,7 +60,7 @@ BVApp.Page {
             bottom: parent.bottom
         }
 
-        Label {
+        BVApp.Label {
             id: emptyText
             anchors.fill: parent
                         //% "No filter or search results"
@@ -78,7 +76,7 @@ BVApp.Page {
             verticalAlignment: Text.AlignVCenter
         }
 
-        BusyIndicator {
+        BVApp.BusyIndicator {
             id: busyGuy
             anchors.centerIn: parent
             running: !currentCategoryLoaded
@@ -96,17 +94,17 @@ BVApp.Page {
             Qt.inputMethod.hide();
         }
 
-        delegate: BVApp.VenueListItem {
+        delegate: VenueListItem {
 
             distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                       BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
                                                                  QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
-            onClicked:
+            onClicked: function(clickedIndex)
             {
                 // ios: keyboard stays visible, if user used search field before clicking and did not press Return key
                 Qt.inputMethod.hide();
 
-                var currRestaurant = jsonModelCollection.item(index);
+                var currRestaurant = jsonModelCollection.item(clickedIndex);
                 pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                {
                                    restaurant     : currRestaurant,
@@ -115,7 +113,7 @@ BVApp.Page {
             }
         }
 
-        VerticalScrollDecorator {}
+        BVApp.ScrollDecorator {}
     }
 
     onPushed: pageStack.pushAttached("qrc:/qml/pages/VenueMapOverviewPage.qml",

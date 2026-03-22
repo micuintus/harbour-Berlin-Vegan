@@ -1,8 +1,7 @@
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 import QtQuick
-import Sailfish.Silica 1.0
 import QtLocation
 import QtPositioning
 import Qt5Compat.GraphicalEffects
@@ -16,7 +15,7 @@ BVApp.Page {
     property alias name : page.title
     property alias map : map
 
-    PageHeader {
+    BVApp.PageHeader {
         id: header
         y: 0
         title: name
@@ -69,9 +68,7 @@ BVApp.Page {
         // remove once SFOS is on QtLocation > 5.6
         property bool dirty: false
 
-        gesture {
-            enabled: true
-        }
+        gestureEnabled: true
 
         // Work around QTBUG-47366;
         // remove once SFOS is on QtLocation > 5.6
@@ -86,7 +83,7 @@ BVApp.Page {
         // remove once SFOS is on QtLocation > 5.6
         Connections {
             target: mapItemView.model
-            onRowsRemoved: map.dirty = true
+            function onRowsRemoved() { map.dirty = true }
         }
 
         MapItemView {
