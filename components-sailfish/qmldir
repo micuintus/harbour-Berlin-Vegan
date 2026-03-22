@@ -26,3 +26,4 @@ PageHeader 1.0 PageHeader.qml
 CoverBackground 1.0 CoverBackground.qml
 CoverAction 1.0 CoverAction.qml
 CoverActionList 1.0 CoverActionList.qml
+ListItem 1.0 ListItem.qml

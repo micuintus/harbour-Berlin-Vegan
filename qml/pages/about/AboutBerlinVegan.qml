@@ -24,7 +24,6 @@
 **/
 
 import QtQuick 2.5
-import Sailfish.Silica 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 
 BVApp.Page {
@@ -33,7 +32,7 @@ BVApp.Page {
                 //% "About"
     title: qsTrId("id-about-page-title")
 
-    SilicaFlickable {
+    BVApp.Flickable {
 
         anchors.fill: parent
         contentHeight: column.height
@@ -42,7 +41,7 @@ BVApp.Page {
             id: column
             width: page.width
 
-            PageHeader {
+            BVApp.PageHeader {
                 id: pageHeader
                 visible: BVApp.Platform.isSailfish
                 title: page.title
@@ -88,7 +87,7 @@ BVApp.Page {
                                   : BVApp.Theme.paddingMedium
                     }
 
-                    Label {
+                    BVApp.Label {
                                     //% "Berlin-Vegan"
                         text: qsTrId("id-berlin-vegan")
                         font.pixelSize: BVApp.Platform.isFelgo ?
@@ -110,7 +109,7 @@ BVApp.Page {
                                   : BVApp.Theme.paddingMedium
                     }
 
-                    Label {
+                    BVApp.Label {
                                   //% "Cross-platform app"
                         text: qsTrId("id-about-cross-platform-app")
                         font.pixelSize: BVApp.Platform.isFelgo ?
@@ -124,7 +123,7 @@ BVApp.Page {
                         }
                     }
 
-                    Label {
+                    BVApp.Label {
                                 //% "for SailfishOS, iOS and Android"
                         text: qsTrId("id-about-for-sailfish-and-ios")
                         font.pixelSize: BVApp.Platform.isFelgo ?
@@ -146,7 +145,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingMedium * 1.3
             }
 
-            Label {
+            BVApp.Label {
                             //% "Version"
                 text: qsTrId("id-version") + ": " + Qt.application.version
                 font.pixelSize: BVApp.Theme.fontSizeSmall
@@ -164,7 +163,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge*2
             }
 
-            Label {
+            BVApp.Label {
                     //% "Development:"
                 text: qsTrId("id-development")
                 font.pixelSize: BVApp.Theme.fontSizeSmall
@@ -174,7 +173,7 @@ BVApp.Page {
                 }
             }
 
-            Label {
+            BVApp.Label {
                 text: "micu <a href='ref'>&lt;www.micuintus.de&gt;</a>"
                 font.pixelSize: BVApp.Theme.fontSizeSmall
                 color: BVApp.Theme.highlightColor
@@ -187,7 +186,7 @@ BVApp.Page {
                 }
             }
 
-            Label {
+            BVApp.Label {
                 text: "Julian <a href='ref'>&lt;www.veggi.es&gt;</a>"
                 font.pixelSize: BVApp.Theme.fontSizeSmall
                 color: BVApp.Theme.highlightColor
@@ -206,7 +205,7 @@ BVApp.Page {
 
             }
 
-            Label {
+            BVApp.Label {
                          //% "UI design:"
                 text: qsTrId("id-ui-design")
                 font.pixelSize: BVApp.Theme.fontSizeSmall
@@ -217,7 +216,7 @@ BVApp.Page {
             }
 
 
-            Label {
+            BVApp.Label {
                 text: "Robin <robin@siebzehn3.de>"
                 font.pixelSize: BVApp.Theme.fontSizeSmall
                 color: BVApp.Theme.highlightColor
@@ -231,7 +230,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge
             }
 
-            Label {
+            BVApp.Label {
                          //% "Dutch translation:"
                 text: qsTrId("id-dutch-translation")
                 font.pixelSize: BVApp.Theme.fontSizeSmall
@@ -242,7 +241,7 @@ BVApp.Page {
             }
 
 
-            Label {
+            BVApp.Label {
                 text: "Heimen <vistausss@outlook.com>"
                 font.pixelSize: BVApp.Theme.fontSizeSmall
                 color: BVApp.Theme.highlightColor
@@ -256,7 +255,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge * 2
             }
 
-            Label {
+            BVApp.Label {
                 id: freeSoftwareBla
                 //% "Berlin-Vegan for SailfishOS, iOS and Android is <a href='ref'>Free Software</a>: "
                 //% "you can redistribute it and/or modify it under the terms of the "
@@ -283,7 +282,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge
             }
 
-            Button {
+            BVApp.Button {
                 id: gplButton
                 //% "View GPLv2"
                 text: qsTrId("id-view-gplv2")
@@ -303,7 +302,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge
             }
 
-            Label {
+            BVApp.Label {
                 id: sourceCodeInfo
                             //% "You can view the source code here:"
                 text: qsTrId("id-you-can-view-source-code-here")
@@ -321,7 +320,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingSmall
             }
 
-            Label {
+            BVApp.Label {
                 id: gitHubURL
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -341,7 +340,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge * 1.3
             }
 
-            Separator {
+            BVApp.Separator {
                 width: parent.width
                 horizontalAlignment: Qt.AlignCenter
                 color: BVApp.Theme.secondaryHighlightColor
@@ -357,7 +356,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge * 1.3
             }
 
-            Label {
+            BVApp.Label {
                 //% "Many thanks goes to the <a href='ref'>editorial "
                 //% "team of berlin-vegan.de</a> for creating and maintaining the "
                 //% "Berlin-Vegan project with its marvelous restaurant database, "
@@ -385,7 +384,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge
             }
 
-            Button {
+            BVApp.Button {
                             //% "View CC BY-NC"
                 text: qsTrId("id-view-cc-by-nc")
                 anchors {
@@ -404,7 +403,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge * 1.3
             }
 
-            Separator {
+            BVApp.Separator {
                 width: parent.width
                 horizontalAlignment: Qt.AlignCenter
                 color: BVApp.Theme.secondaryHighlightColor
@@ -421,7 +420,7 @@ BVApp.Page {
             }
 
 
-            Label {
+            BVApp.Label {
                 //% "Berlin-Vegan for SailfishOS, iOS and Android is being developed "
                 //% "with the free and open source cross-platform framework <a href='ref'>Qt</a>. "
                 //% "While the app uses jolla's native Qt-based SDK on SailfishOS, "
@@ -448,7 +447,7 @@ BVApp.Page {
                 visible: BVApp.Platform.isFelgo
             }
 
-            Label {
+            BVApp.Label {
                 //% "We would like to thank Mapbox for donating <a href='ref'>their astonishing "
                 //% "Mapbox GL Plugin</a> to the Qt project, which makes hardware accelerated vector maps "
                 //% "possible for this app."
@@ -475,7 +474,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge * 1.3
             }
 
-            Separator {
+            BVApp.Separator {
                 width: parent.width
                 horizontalAlignment: Qt.AlignCenter
                 color: BVApp.Theme.secondaryHighlightColor
@@ -491,7 +490,7 @@ BVApp.Page {
                 height: BVApp.Theme.paddingLarge * 1.3
             }
 
-            Label {
+            BVApp.Label {
                 //% "Moreover, this application greatfully makes use of the "
                 //% "following third party Free Software projects:"
                 text: qsTrId("id-thanks-to-other-3rd-party-sw")
@@ -572,6 +571,6 @@ BVApp.Page {
             }
         }
 
-        VerticalScrollDecorator {}
+        BVApp.ScrollDecorator {}
     }
 }

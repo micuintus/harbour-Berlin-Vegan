@@ -2,7 +2,6 @@ import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
 
 import QtQuick
-import Sailfish.Silica 1.0
 import QtLocation
 import QtPositioning
 import Qt5Compat.GraphicalEffects
@@ -16,7 +15,7 @@ BVApp.Page {
     property alias name : page.title
     property alias map : map
 
-    PageHeader {
+    BVApp.PageHeader {
         id: header
         y: 0
         title: name

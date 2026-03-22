@@ -28,7 +28,6 @@
  */
 
 import QtQuick 2.5
-import Sailfish.Silica 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 
 BVApp.Page {
@@ -54,7 +53,7 @@ BVApp.Page {
         xhr.send();
     }
 
-    SilicaFlickable {
+    BVApp.Flickable {
         anchors.fill: parent
         anchors.leftMargin: BVApp.Theme.paddingMedium
         anchors.rightMargin: BVApp.Theme.paddingMedium
@@ -64,7 +63,7 @@ BVApp.Page {
             id: column
             width: parent.width
 
-            PageHeader {
+            BVApp.PageHeader {
                 //% "License:"
                 title: qsTrId("id-license") + " " + licenseName
             }
@@ -78,6 +77,6 @@ BVApp.Page {
             }
         }
 
-        VerticalScrollDecorator {}
+        BVApp.ScrollDecorator {}
     }
 }
