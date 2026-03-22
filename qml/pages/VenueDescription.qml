@@ -42,7 +42,7 @@ BVApp.Page {
     readonly property bool isGastroVenue: restaurant.venueType === VenueModel.Gastro
 
 
-    SilicaFlickable {
+    BVApp.Flickable {
         id: flicka
         anchors.fill: parent
         contentHeight: tellWaiter.y + tellWaiter.height + tellWaiter.anchors.topMargin
@@ -89,7 +89,7 @@ BVApp.Page {
                 topMargin: BVApp.Theme.paddingMedium
             }
 
-            Label {
+            BVApp.Label {
                 id: streetLabel
                 text: restaurant.street
                 font.pixelSize: BVApp.Theme.fontSizeExtraSmall
@@ -108,7 +108,7 @@ BVApp.Page {
                 }
             }
 
-            Label {
+            BVApp.Label {
                 id: distanceLabel
                 text: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
                       ? BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
@@ -166,7 +166,7 @@ BVApp.Page {
             }
         }
 
-        Separator {
+        BVApp.Separator {
             id: separator
 
             visible: BVApp.Platform.isFelgo
@@ -207,7 +207,7 @@ BVApp.Page {
             }
         }
 
-        Label {
+        BVApp.Label {
             id: shortComment
 
             TextMetrics {
@@ -266,7 +266,7 @@ BVApp.Page {
         }
 
 
-        Label {
+        BVApp.Label {
             id: review
 
             visible: typeof restaurant.review !== "undefined"
@@ -287,7 +287,7 @@ BVApp.Page {
             }
         }
 
-        Label {
+        BVApp.Label {
             id: tellWaiter
 
             visible: isGastroVenue

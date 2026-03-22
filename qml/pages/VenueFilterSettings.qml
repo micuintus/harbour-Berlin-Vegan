@@ -24,7 +24,6 @@
 **/
 
 import QtQuick 2.5
-import Sailfish.Silica 1.0
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
@@ -36,7 +35,7 @@ BVApp.Page {
     property var jsonModelCollection
     property bool showGastroVenues: jsonModelCollection.filterVenueType & VenueModel.GastroFlag
 
-    SilicaFlickable {
+    BVApp.Flickable {
         anchors.fill: parent
         contentHeight: column.height
 
@@ -44,7 +43,7 @@ BVApp.Page {
             id: column
             width: parent.width
 
-            PageHeader {
+            BVApp.PageHeader {
                 id: pageHeader
                              //% "Filter settings"
                 title: qsTrId("id-filter-page-title")
@@ -56,7 +55,7 @@ BVApp.Page {
                 height: BVApp.Platform.isSailfish ? 0 : 2 * BVApp.Theme.paddingLarge
             }
 
-            Label {
+            BVApp.Label {
                 width: parent.width
                                                            //% "venues selected"
                 text: jsonModelCollection.count + " " + qsTrId("id-selected")

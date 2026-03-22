@@ -24,9 +24,7 @@
 **/
 
 import QtQuick 2.5
-import Sailfish.Silica 1.0
 import QtPositioning 5.2
-import QtLocation 5.0
 
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.generic 1.0 as BVApp
@@ -53,7 +51,7 @@ BVApp.Page {
        flickableForSailfish: listView
     }
 
-    SilicaListView {
+    BVApp.ListView {
         id: listView
         anchors {
             top: searchField.bottom
@@ -62,7 +60,7 @@ BVApp.Page {
             bottom: parent.bottom
         }
 
-        Label {
+        BVApp.Label {
             id: emptyText
             anchors.fill: parent
                         //% "No filter or search results"
@@ -78,7 +76,7 @@ BVApp.Page {
             verticalAlignment: Text.AlignVCenter
         }
 
-        BusyIndicator {
+        BVApp.BusyIndicator {
             id: busyGuy
             anchors.centerIn: parent
             running: !currentCategoryLoaded
@@ -115,7 +113,7 @@ BVApp.Page {
             }
         }
 
-        VerticalScrollDecorator {}
+        BVApp.ScrollDecorator {}
     }
 
     onPushed: pageStack.pushAttached("qrc:/qml/pages/VenueMapOverviewPage.qml",
