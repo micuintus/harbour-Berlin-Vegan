@@ -50,6 +50,12 @@ set(HEADERS
 
 qt_add_executable(harbour-berlin-vegan ${SOURCES} ${HEADERS} ${QmlFiles} resources.qrc) #$ ${AssetsFiles} ${GenericQml} ${GenericRes} ${PlatformQml} ${PlatformRes})
 
+if(APPLE AND NOT IOS)
+    set_target_properties(harbour-berlin-vegan PROPERTIES
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/macos/Info.plist"
+    )
+endif()
+
 felgo_configure_executable(harbour-berlin-vegan)
 
 add_subdirectory(components-felgo)

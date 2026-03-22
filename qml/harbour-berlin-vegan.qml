@@ -137,7 +137,7 @@ BVApp.ApplicationWindow
             split: true
             onPageChanged: page.searchString = gJsonCollection.searchString;
 
-            onClicked: {
+            onMenuActivated: {
                 gJsonCollection.filterFavorites = false;
 
                 if (page)
@@ -157,7 +157,7 @@ BVApp.ApplicationWindow
             split: true
             onPageChanged: page.searchString = gJsonCollection.searchString;
 
-            onClicked: {
+            onMenuActivated: {
                 gJsonCollection.filterFavorites = true;
 
                 if (page)
@@ -179,7 +179,7 @@ BVApp.ApplicationWindow
                 jsonModelCollection: gJsonCollection
             }
 
-            onClicked: {
+            onMenuActivated: {
                 gJsonCollection.filterFavorites = false;
             }
         }

@@ -10,5 +10,10 @@ Silica.MenuItem {
     property bool split
     property var menuIcon
 
-    onClicked: page = pageStack.push(pageComponent)
+    signal menuActivated
+
+    onClicked: {
+        page = pageStack.push(pageComponent)
+        menuActivated()
+    }
 }

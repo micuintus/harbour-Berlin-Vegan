@@ -83,7 +83,7 @@ BVApp.Page {
         // remove once SFOS is on QtLocation > 5.6
         Connections {
             target: mapItemView.model
-            onRowsRemoved: map.dirty = true
+            function onRowsRemoved() { map.dirty = true }
         }
 
         MapItemView {
