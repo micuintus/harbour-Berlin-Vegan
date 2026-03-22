@@ -49,7 +49,6 @@ qt_add_executable(harbour-berlin-vegan ${SOURCES} ${HEADERS} ${QmlFiles} resourc
 
 felgo_configure_executable(harbour-berlin-vegan)
 
-add_subdirectory(silica4felgo)
 add_subdirectory(components-felgo)
 add_subdirectory(components-generic)
 
@@ -66,4 +65,4 @@ qt_add_qml_module(berlin-vegan-qml
 )
 
 target_compile_definitions(harbour-berlin-vegan PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(harbour-berlin-vegan PRIVATE  Qt6::Positioning Qt6::Location berlin-vegan-qml Silica4Felgo Silica4FelgoPlugin BerlinVeganPlatformPlugin BerlinVeganGenericPlugin Felgo)
+target_link_libraries(harbour-berlin-vegan PRIVATE  Qt6::Positioning Qt6::Location berlin-vegan-qml BerlinVeganPlatformPlugin BerlinVeganGenericPlugin Felgo)

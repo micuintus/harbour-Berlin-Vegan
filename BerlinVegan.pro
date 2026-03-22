@@ -38,8 +38,7 @@ CONFIG += sailfishapp_i18n sailfishapp_i18n_idbased
 
 } else {
 CONFIG    += felgo
-RESOURCES += qml/silica4felgo/resources-silica4felgo.qrc \
-             qml/components-felgo/resources-components-felgo.qrc
+RESOURCES += qml/components-felgo/resources-components-felgo.qrc
 }
 
 android {

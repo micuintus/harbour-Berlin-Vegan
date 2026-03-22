@@ -1,5 +1,0 @@
-import Felgo
-
-AppFlickable {
-
-}

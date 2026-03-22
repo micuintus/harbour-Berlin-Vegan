@@ -43,7 +43,6 @@
 #endif
 
 #include <QtQml/qqmlextensionplugin.h>
-Q_IMPORT_QML_PLUGIN(Sailfish_SilicaPlugin);
 Q_IMPORT_QML_PLUGIN(BerlinVegan_components_platformPlugin);
 Q_IMPORT_QML_PLUGIN(BerlinVegan_components_genericPlugin);
 
