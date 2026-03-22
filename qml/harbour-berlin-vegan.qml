@@ -45,7 +45,6 @@ BVApp.ApplicationWindow
     PositionSource {
         id: globalPositionSource
         updateInterval: 5000
-        property Position oldPosition: QtPositioning.coordinate(0, 0)
         preferredPositioningMethods: PositionSource.AllPositioningMethods
      }
 
@@ -95,7 +94,7 @@ BVApp.ApplicationWindow
 
     Connections {
         target: Qt.application
-        onStateChanged: {
+        function onStateChanged() {
             if (Qt.application.state === Qt.ApplicationActive) {
                 globalPositionSource.start();
             }

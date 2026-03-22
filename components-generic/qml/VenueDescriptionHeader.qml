@@ -85,7 +85,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
     }
 
-    OpacityRampEffect {
+    BVApp.OpacityRampEffect {
         id: ramp
         enabled: BVApp.Platform.isSailfish
         anchors.fill: images
@@ -119,7 +119,7 @@ Item {
         opacity: 0.6
     }
 
-    PageHeader {
+    BVApp.PageHeader {
         id: nameLabel
         readonly property int initalY: 100
 

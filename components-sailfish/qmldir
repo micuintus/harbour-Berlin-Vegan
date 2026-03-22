@@ -28,3 +28,4 @@ CoverAction 1.0 CoverAction.qml
 CoverActionList 1.0 CoverActionList.qml
 ListItem 1.0 ListItem.qml
 ApplicationWindow 1.0 ApplicationWindow.qml
+OpacityRampEffect 1.0 OpacityRampEffect.qml

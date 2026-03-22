@@ -1,13 +1,17 @@
 import Felgo
 import QtLocation
+import QtQuick
 
 AppMap {
 
-    // the copyright notice is usually displayed in the bottom left corner
     copyrightsVisible: false
-
-    // V-Play 2.15.1: Fix user position and location circle for AppMap with MapBoxGL plugin
     showUserPosition: true
+
+    // Compatibility shim: Qt Location Map has a 'gesture' group property.
+    // AppMap doesn't expose it, so we provide a dummy object.
+    property QtObject gesture: QtObject {
+        property bool enabled: true
+    }
 
     plugin:
         Plugin {
@@ -15,4 +19,3 @@ AppMap {
                 PluginParameter { name: "maplibregl.settings_template"; value: "mapbox" }
         }
     }
-

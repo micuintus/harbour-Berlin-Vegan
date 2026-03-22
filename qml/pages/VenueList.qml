@@ -99,12 +99,12 @@ BVApp.Page {
             distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                       BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
                                                                  QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
-            onClicked:
+            onClicked: function(clickedIndex)
             {
                 // ios: keyboard stays visible, if user used search field before clicking and did not press Return key
                 Qt.inputMethod.hide();
 
-                var currRestaurant = jsonModelCollection.item(index);
+                var currRestaurant = jsonModelCollection.item(clickedIndex);
                 pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
                                {
                                    restaurant     : currRestaurant,
