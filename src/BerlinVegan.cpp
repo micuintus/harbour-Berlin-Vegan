@@ -27,6 +27,7 @@
 
 #include "FileIO.h"
 #include "FavoritesManager.h"
+#include "TruncationMode.h"
 #include "VenueSortFilterProxyModel.h"
 #include "VenueModel.h"
 #include "VenueHandle.h"
@@ -52,6 +53,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<VenueModel>("harbour.berlin.vegan", 1, 0, "VenueModel");
     qmlRegisterType<VenueSortFilterProxyModel>("harbour.berlin.vegan", 1, 0, "VenueSortFilterProxyModel");
     qmlRegisterUncreatableType<VenueHandle>("harbour.berlin.vegan", 1, 0, "VenueHandle", "VenueHandle is not createable from QML");
+    qmlRegisterUncreatableType<TruncationMode>("harbour.berlin.vegan", 1, 0, "TruncationMode", "TruncationMode provides enum values only");
     auto const mainQMLFile = QString("qml/harbour-berlin-vegan.qml");
 
 #ifdef Q_OS_SAILFISH
