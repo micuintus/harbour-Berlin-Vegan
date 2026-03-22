@@ -61,9 +61,9 @@ BVApp.ApplicationWindow
         jsonFilesToLoad--;
         if (jsonFilesToLoad === 0)
         {
-            var favorite_ids = BVApp.Database.dbGetFavoriteIds();
-            for (var i = 0; i < favorite_ids.rows.length; i++) {
-                gJsonVenueModel.setFavorite(favorite_ids.rows.item(i).favorite_id, true);
+            var favorite_ids = FavoritesManager.getFavoriteIds();
+            for (var i = 0; i < favorite_ids.length; i++) {
+                gJsonVenueModel.setFavorite(favorite_ids[i], true);
             }
         }
     }
@@ -89,7 +89,6 @@ BVApp.ApplicationWindow
     }
 
     Component.onCompleted: {
-        BVApp.Database.dbInit();
         venueDownloadHelper.loadVenueJson();
         shoppingDownloadHelper.loadShoppingJson();
     }

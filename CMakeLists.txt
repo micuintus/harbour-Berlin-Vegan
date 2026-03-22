@@ -30,6 +30,7 @@ list(REMOVE_ITEM AssetsFiles ${QmlFiles})
 
 set(SOURCES
     src/BerlinVegan.cpp
+    src/FavoritesManager.cpp
     src/FileIO.cpp
     src/OpeningHoursAlgorithms.cpp
     src/VenueModel.cpp
@@ -37,6 +38,7 @@ set(SOURCES
 )
 
 set(HEADERS
+    src/FavoritesManager.h
     src/VenueModel.h
     src/VenueHandle.h
     src/VenueSortFilterProxyModel.h

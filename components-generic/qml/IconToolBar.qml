@@ -74,13 +74,13 @@ Column {
                 switch (type) {
                 case "favorite-o":
                     type = "favorite"
-                    BVApp.Database.dbInsertFavoriteId(restaurant.id);
+                    FavoritesManager.addFavorite(restaurant.id);
                     // we cannot do restaurant.favorite = true here, because we are working on copied data
                     gJsonVenueModel.setFavorite(restaurant.id, true);
                     break
                 case "favorite":
                     type = "favorite-o"
-                    BVApp.Database.dbDeleteFavoriteId(restaurant.id);
+                    FavoritesManager.removeFavorite(restaurant.id);
                     // we cannot do restaurant.favorite = false here, because we are working on copied data
                     gJsonVenueModel.setFavorite(restaurant.id, false);
                     break
