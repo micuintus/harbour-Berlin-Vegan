@@ -61,10 +61,6 @@ harbour-Berlin-Vegan/
 │   ├── qml/                     # VenueListItem, VenueDetails, Database.js, etc.
 │   └── CMakeLists.txt           # Registers as BerlinVegan.components.generic
 │
-├── silica4felgo/                # Sailfish.Silica compatibility shim for Felgo
-│   ├── qml/                     # 15 stub/wrapper Silica types
-│   └── CMakeLists.txt           # Registers as Sailfish.Silica 1.0
-│
 ├── tests/                       # Qt Test unit tests
 ├── translations/                # i18n (.ts/.qm): de, en, nl
 ├── android/                     # AndroidManifest.xml
@@ -90,27 +86,24 @@ JSON (berlin-vegan.de) → JsonDownloadHelper.qml → JSON.parse() in QML
 - **VenueHandle**: Auto-generated Q_PROPERTY per role via same macro system
 - **OpeningHoursAlgorithms**: Parsing, condensation, Berlin public holidays
 
-### Platform Abstraction (6 Layers)
+### Platform Abstraction (4 Layers)
 
 1. **Build-time selection**: `#ifdef Q_OS_SAILFISH` in C++, `packagesExist(sailfishapp)` in QMake
 2. **QML module system**: Both platforms register `BerlinVegan.components.platform 1.0`
-3. **Wrapper components**: Page, MenuItem, SearchField, Map, etc. delegate to platform primitives
-4. **Silica4Felgo shim**: Fakes `Sailfish.Silica 1.0` for Felgo builds (15 stub files)
-5. **Theme abstraction**: `BVApp.Theme` singleton with platform-specific values
-6. **Runtime checks**: `BVApp.Platform.isSailfish/isFelgo` scattered in ~15+ locations
+3. **Wrapper components**: Page, MenuItem, ListView, Label, Map, etc. delegate to platform primitives
+4. **Theme abstraction**: `BVApp.Theme` singleton with platform-specific style properties
 
 ### Known Issues
 
 - **UI blocks on filter changes**: Synchronous `invalidateFilter()` does ~6,000 data lookups on UI thread
-- **Felgo UX limited**: Pages use Silica types directly via shim, bypassing Felgo features
-  (no pull-to-refresh, no dark mode, no swipe actions, broken loading indicator)
+- **Felgo UX limited**: Felgo wrappers are minimal (now unblocked for improvement)
 - **C++11 declared** but Qt6 requires C++17 minimum
 - **Memory leak**: `new VenueHandle()` without QML ownership management
 - **God object**: Root QML creates all models, manages state, handles favorites
 
 ## Revamp Goals (Priority Order)
 
-1. **C: Unified Abstraction** - Absorb Silica types into BVApp, delete silica4felgo
+1. ~~**C: Unified Abstraction**~~ DONE - silica4felgo deleted, 4-layer architecture
 2. **B: Better Architecture** - Fix UI blocking, C++ service layer, DataRepository
 3. **A: Idiomatic Code** - C++17, QAbstractListModel, constexpr, QML_ELEMENT
 4. **D: Multi-Source Data** - OSM (Overpass API), Geoapify, abstract provider interface
