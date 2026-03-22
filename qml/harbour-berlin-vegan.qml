@@ -24,7 +24,6 @@
 **/
 
 import QtQuick
-import Sailfish.Silica 1.0
 import QtPositioning
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
@@ -34,7 +33,7 @@ import "pages"
 import "pages/about"
 import "cover"
 
-ApplicationWindow
+BVApp.ApplicationWindow
 {
     id: app
 

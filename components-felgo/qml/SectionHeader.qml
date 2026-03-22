@@ -2,7 +2,6 @@ import QtQuick 2.7
 import Felgo
 
 import BerlinVegan.components.platform 1.0 as BVApp
-import Sailfish.Silica 1.0
 
 Item {
 

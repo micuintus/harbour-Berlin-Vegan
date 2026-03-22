@@ -1,8 +1,8 @@
 import QtQuick 2.7
 import Felgo
 
-import Sailfish.Silica 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
+import harbour.berlin.vegan 1.0
 
 Item {
     id: me
@@ -18,7 +18,7 @@ Item {
     width: parent.width
     height: valueText.height
 
-    Label {
+    BVApp.Label {
         id: labelText
 
         color: BVApp.Theme.primaryColor
@@ -38,7 +38,7 @@ Item {
         truncationMode: TruncationMode.Fade
     }
 
-    Label {
+    BVApp.Label {
         id: valueText
         color: BVApp.Theme.secondaryColor
 

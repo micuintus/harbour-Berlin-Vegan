@@ -41,6 +41,7 @@ set(HEADERS
     src/VenueSortFilterProxyModel.h
     src/FileIO.h
     src/OpeningHoursAlgorithms.h
+    src/TruncationMode.h
 )
 
 

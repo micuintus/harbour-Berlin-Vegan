@@ -24,7 +24,6 @@
 **/
 
 import QtQuick 2.5
-import Sailfish.Silica 1.0
 import QtPositioning 5.2
 
 import harbour.berlin.vegan 1.0
