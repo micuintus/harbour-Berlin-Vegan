@@ -2,6 +2,7 @@
 #include "OpeningHoursAlgorithms.h"
 
 #include <QDate>
+#include <QQmlEngine>
 
 namespace detail {
 
@@ -114,7 +115,9 @@ VenueHandle* VenueSortFilterProxyModel::item(int row) const
 
     QModelIndex m = index(row, 0);
 
-    return new VenueHandle(QPersistentModelIndex(m));
+    auto* handle = new VenueHandle(QPersistentModelIndex(m));
+    QQmlEngine::setObjectOwnership(handle, QQmlEngine::JavaScriptOwnership);
+    return handle;
 }
 
 VenueSortFilterProxyModel::VenueVegCategoryFlags VenueSortFilterProxyModel::filterVegCategory() const

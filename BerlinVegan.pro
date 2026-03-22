@@ -11,6 +11,7 @@ CONFIG += c++11
 
 SOURCES += src/BerlinVegan.cpp \
            src/FileIO.cpp \
+           src/OpeningHoursAlgorithms.cpp \
            src/VenueModel.cpp \
            src/VenueSortFilterProxyModel.cpp
 

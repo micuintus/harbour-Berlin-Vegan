@@ -31,6 +31,7 @@ list(REMOVE_ITEM AssetsFiles ${QmlFiles})
 set(SOURCES
     src/BerlinVegan.cpp
     src/FileIO.cpp
+    src/OpeningHoursAlgorithms.cpp
     src/VenueModel.cpp
     src/VenueSortFilterProxyModel.cpp
 )
