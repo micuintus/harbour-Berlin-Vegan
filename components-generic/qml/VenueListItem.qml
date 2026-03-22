@@ -31,13 +31,13 @@ import BerlinVegan.components.generic 1.0 as BVApp
 
 import harbour.berlin.vegan 1.0
 
-ListItem {
+BVApp.ListItem {
     id: delegate
     property alias distanceText: distance.text
 
     contentHeight: streetLabel.y + streetLabel.height + streetLabel.anchors.bottomMargin
 
-    Label {
+    BVApp.Label {
         id: namelabel
         text: model.name
         color: delegate.highlighted ? BVApp.Theme.highlightColor :
@@ -99,7 +99,7 @@ ListItem {
     }
 
 
-    Label {
+    BVApp.Label {
         id: closing
 
         visible: !(model.open) || model.closesSoon
@@ -122,7 +122,7 @@ ListItem {
         }
     }
 
-    Label {
+    BVApp.Label {
         id: streetLabel
         text: model.street
 
@@ -147,7 +147,7 @@ ListItem {
     }
 
 
-    Label {
+    BVApp.Label {
         id: distance
 
         color: (model.open) ? BVApp.Theme.highlightColor : BVApp.Theme.disabledColor

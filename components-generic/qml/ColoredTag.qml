@@ -1,6 +1,4 @@
 import QtQuick 2.5
-
-import Sailfish.Silica 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 
 Rectangle {
@@ -11,7 +9,7 @@ Rectangle {
     width: label.width + BVApp.Theme.paddingLarge
     height: label.height + BVApp.Theme.paddingSmall
 
-    Label {
+    BVApp.Label {
         id: label
         anchors.centerIn: tag
         color: "white"

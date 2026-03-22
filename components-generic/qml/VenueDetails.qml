@@ -24,7 +24,6 @@
 **/
 
 import QtQuick 2.5
-import Sailfish.Silica 1.0
 
 import BerlinVegan.components.generic 1.0 as BVApp
 import BerlinVegan.components.platform 1.0 as BVApp
@@ -79,7 +78,7 @@ Item {
             width: parent.width
         }
 
-        Label {
+        BVApp.Label {
             id: openComment
 
             visible: text != ""
