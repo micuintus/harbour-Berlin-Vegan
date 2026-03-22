@@ -7,11 +7,9 @@ AppMap {
     copyrightsVisible: false
     showUserPosition: true
 
-    // Compatibility shim: Qt Location Map has a 'gesture' group property.
-    // AppMap doesn't expose it, so we provide a dummy object.
-    property QtObject gesture: QtObject {
-        property bool enabled: true
-    }
+    // Abstraction for gesture control.
+    // Pages should use: gestureEnabled: true/false
+    property bool gestureEnabled: true
 
     plugin:
         Plugin {

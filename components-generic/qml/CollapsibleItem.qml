@@ -51,7 +51,7 @@ Item {
 
     children : [mousearea, contentItem, ramp]
 
-    OpacityRampEffect {
+    BVApp.OpacityRampEffect {
         anchors.fill: parent
         id: ramp
         sourceItem: contentItem

@@ -68,9 +68,7 @@ BVApp.Page {
         // remove once SFOS is on QtLocation > 5.6
         property bool dirty: false
 
-        gesture {
-            enabled: true
-        }
+        gestureEnabled: true
 
         // Work around QTBUG-47366;
         // remove once SFOS is on QtLocation > 5.6

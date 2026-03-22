@@ -49,9 +49,7 @@ Rectangle {
         anchors.fill: parent
 
         // user shall not move the map, but click to open the coordinates in the dedicated map app.
-        gesture {
-            enabled: false
-        }
+        gestureEnabled: false
 
         Component.onCompleted: {
             addMapItem(venueMarker)
@@ -87,7 +85,7 @@ Rectangle {
     Connections {
         // supress warning "ReferenceError: nativeUtils is not defined" on SailfishOS by setting target to "null"
         target: BVApp.Platform.isIos ? nativeUtils : null
-        onAlertSheetFinished: {
+        function onAlertSheetFinished(index) {
             // cancel was clicked
             if (index === -1) {
                 return;
