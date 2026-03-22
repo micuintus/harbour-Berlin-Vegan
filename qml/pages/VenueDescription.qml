@@ -59,9 +59,7 @@ BVApp.Page {
             positionSource: page.positionSource
 
             opacity: flicka.scrolledUpRatio
-            height: BVApp.Platform.isSailfish ?
-                      page.height / 2.6
-                    : page.height / 3
+            height: page.height * BVApp.Theme.descriptionHeaderHeightRatio
             shrinkHeightBy: flicka.contentY
 
             anchors {
@@ -79,13 +77,7 @@ BVApp.Page {
             height: streetLabel.height
 
             anchors {
-                top:    BVApp.Platform.isFelgo ?
-                          locationHeader.bottom
-                        : undefined
-                bottom: BVApp.Platform.isSailfish ?
-                          locationHeader.bottom
-                        : undefined
-
+                bottom: locationHeader.bottom
                 topMargin: BVApp.Theme.paddingMedium
             }
 
@@ -93,9 +85,7 @@ BVApp.Page {
                 id: streetLabel
                 text: restaurant.street
                 font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-                color: BVApp.Platform.isSailfish ?
-                         BVApp.Theme.highlightColor
-                       : BVApp.Theme.secondaryColor
+                color: BVApp.Theme.streetLabelColor
                 truncationMode: TruncationMode.Fade
 
                 anchors {
@@ -169,7 +159,7 @@ BVApp.Page {
         BVApp.Separator {
             id: separator
 
-            visible: BVApp.Platform.isFelgo
+            visible: BVApp.Theme.showSeparatorBeforeTags
 
             width: parent.width
             horizontalAlignment: Qt.AlignCenter
@@ -195,13 +185,11 @@ BVApp.Page {
             anchors {
                 left: parent.left
                 right: parent.right
-                top: BVApp.Platform.isFelgo ?
+                top: BVApp.Theme.showSeparatorBeforeTags ?
                        separator.bottom
                      : detailsCollapsible.bottom
 
-                topMargin:    BVApp.Platform.isSailfish ?
-                                BVApp.Theme.paddingSmall
-                              : BVApp.Theme.paddingMedium
+                topMargin: BVApp.Theme.tagCloudTopMargin
                 leftMargin:   BVApp.Theme.horizontalPageMargin
                 rightMargin:  BVApp.Theme.horizontalPageMargin
             }
@@ -259,9 +247,7 @@ BVApp.Page {
                          venueSubTypeTagCloud.bottom
                        : shortComment.bottom
 
-                topMargin:  BVApp.Platform.isSailfish ?
-                                BVApp.Theme.paddingLarge
-                              : BVApp.Theme.paddingMedium
+                topMargin: BVApp.Theme.mapTopMargin
             }
         }
 

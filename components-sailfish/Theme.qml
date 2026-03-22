@@ -144,4 +144,16 @@ QtObject {
 
     // Silica.Theme.paddingLarge = 32 on emulator
     readonly property int mapHeight: 12.5*Silica.Theme.paddingLarge
+
+    // Platform-specific style properties (absorbed from BVApp.Platform checks)
+    readonly property color venueListNameColor: primaryColor
+    readonly property int venueListNameFontSize: fontSizeMedium
+    readonly property real descriptionHeaderHeightRatio: 1.0 / 2.6
+    readonly property color streetLabelColor: highlightColor
+    readonly property bool showSeparatorBeforeTags: false
+    readonly property int tagCloudTopMargin: paddingSmall
+    readonly property int mapTopMargin: paddingLarge
+    readonly property int filterPageTopSpacing: 0
+    readonly property int filterPagePostCategorySpacing: paddingLarge
+    readonly property string headerImageSuffix: ".svg"
 }

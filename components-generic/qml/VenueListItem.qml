@@ -40,8 +40,7 @@ BVApp.ListItem {
     BVApp.Label {
         id: namelabel
         text: model.name
-        color: delegate.highlighted ? BVApp.Theme.highlightColor :
-                                      BVApp.Platform.isSailfish ? BVApp.Theme.primaryColor : BVApp.Theme.secondaryColor
+        color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.venueListNameColor
 
         width: Math.min(namelabel.contentWidth,
                         // space that is left after substracting all the other elements from the available width
@@ -54,7 +53,7 @@ BVApp.ListItem {
                            + (closing.visible ? closing.width + closing.anchors.leftMargin : 0)
                            + distance.anchors.rightMargin))
 
-        font.pixelSize: BVApp.Platform.isSailfish ? BVApp.Theme.fontSizeMedium : BVApp.Theme.fontSizeLarge
+        font.pixelSize: BVApp.Theme.venueListNameFontSize
         truncationMode: TruncationMode.Fade
         anchors {
             top: parent.top

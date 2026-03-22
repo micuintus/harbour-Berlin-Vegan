@@ -52,7 +52,7 @@ BVApp.Page {
 
             Item {
                 width: parent.width
-                height: BVApp.Platform.isSailfish ? 0 : 2 * BVApp.Theme.paddingLarge
+                height: BVApp.Theme.filterPageTopSpacing
             }
 
             BVApp.Label {
@@ -67,7 +67,7 @@ BVApp.Page {
 
             Item {
                 width: parent.width
-                height: BVApp.Platform.isSailfish ? BVApp.Theme.paddingLarge : 0
+                height: BVApp.Theme.filterPagePostCategorySpacing
             }
 
             BVApp.SectionHeader {

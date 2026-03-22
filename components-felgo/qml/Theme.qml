@@ -194,4 +194,16 @@ QtObject {
     readonly property real dividerHeight: dp(1)
 
     readonly property real mapHeight: dp(200)
+
+    // Platform-specific style properties (absorbed from BVApp.Platform checks)
+    readonly property color venueListNameColor: secondaryColor
+    readonly property real venueListNameFontSize: fontSizeLarge
+    readonly property real descriptionHeaderHeightRatio: 1.0 / 3.0
+    readonly property color streetLabelColor: secondaryColor
+    readonly property bool showSeparatorBeforeTags: true
+    readonly property real tagCloudTopMargin: paddingMedium
+    readonly property real mapTopMargin: paddingMedium
+    readonly property real filterPageTopSpacing: 2 * paddingLarge
+    readonly property real filterPagePostCategorySpacing: 0
+    readonly property string headerImageSuffix: ".jpg"
 }
