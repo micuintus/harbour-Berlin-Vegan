@@ -133,6 +133,7 @@ private:
     QVariant sourceData(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     void reSort();
+    void deferInvalidateFilter();
 
     bool searchStringMatches(const QModelIndex& index) const;
     bool venueSubTypeMatches(const QModelIndex& index) const;
@@ -180,6 +181,7 @@ private:
     int m_monthNew{3};
 
     QTimer m_openStateUpdateTimer{this};
+    bool m_filterInvalidationPending = false;
 
     char m_currentDayIndex = -1;
     unsigned m_currentMinute = 0;

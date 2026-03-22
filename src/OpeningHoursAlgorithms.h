@@ -9,21 +9,21 @@
 #include <QDateTime>
 #include <QtMath>
 
-#define DAYS_PER_WEEK 7
-#define HOURS_PER_DAY 24
-#define MICROSECONDS_PER_SECOND 1000
-#define SECONDS_PER_MINUTE 60
-#define MINUTES_PER_HOUR 60
-#define MINUTES_PER_DAY (HOURS_PER_DAY * MINUTES_PER_HOUR)
-#define MINUTES_CLOSES_SOON 30
+constexpr int DAYS_PER_WEEK = 7;
+constexpr int HOURS_PER_DAY = 24;
+constexpr int MILLISECONDS_PER_SECOND = 1000;
+constexpr int SECONDS_PER_MINUTE = 60;
+constexpr int MINUTES_PER_HOUR = 60;
+constexpr int MINUTES_PER_DAY = HOURS_PER_DAY * MINUTES_PER_HOUR;
+constexpr int MINUTES_CLOSES_SOON = 30;
 
-#define MONDAY_INDEX    static_cast<unsigned char>(0)
-#define TUESDAY_INDEX   static_cast<unsigned char>(1)
-#define WEDNESDAY_INDEX static_cast<unsigned char>(2)
-#define THURSDAY_INDEX  static_cast<unsigned char>(3)
-#define FRIDAY_INDEX    static_cast<unsigned char>(4)
-#define SATURDAY_INDEX  static_cast<unsigned char>(5)
-#define SUNDAY_INDEX    static_cast<unsigned char>(6)
+constexpr unsigned char MONDAY_INDEX    = 0;
+constexpr unsigned char TUESDAY_INDEX   = 1;
+constexpr unsigned char WEDNESDAY_INDEX = 2;
+constexpr unsigned char THURSDAY_INDEX  = 3;
+constexpr unsigned char FRIDAY_INDEX    = 4;
+constexpr unsigned char SATURDAY_INDEX  = 5;
+constexpr unsigned char SUNDAY_INDEX    = 6;
 
 
 // Condense opening hours part --->

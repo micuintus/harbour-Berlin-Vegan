@@ -59,7 +59,6 @@ int main(int argc, char *argv[])
     auto& qmlEngine = *(view->engine());
 #else
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QScopedPointer<QApplication> app(new QApplication(argc, argv));
 
