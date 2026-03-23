@@ -7,10 +7,15 @@ AppMap {
     copyrightsVisible: false
     showUserPosition: true
 
-    // Abstraction for gesture control.
     property bool gestureEnabled: true
 
     plugin: Plugin {
         name: "maplibre"
+        parameters: [
+            PluginParameter {
+                name: "maplibre.map.styles"
+                value: "https://tiles.openfreemap.org/styles/liberty"
+            }
+        ]
     }
 }
