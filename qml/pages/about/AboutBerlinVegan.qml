@@ -408,10 +408,55 @@ BVApp.Page {
                 horizontalAlignment: Qt.AlignCenter
                 color: BVApp.Theme.secondaryHighlightColor
                 height: 2
+                anchors { horizontalCenter: parent.horizontalCenter }
+            }
 
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge * 1.3
+            }
+
+            BVApp.Label {
+                //% "This app also uses venue data from <a href='ref'>OpenStreetMap</a>, "
+                //% "a collaborative project to create a free editable geographic database. "
+                //% "OSM data is released under the Open Data Commons Open Database License (ODbL)."
+                text: qsTrId("id-thanks-to-osm")
+                wrapMode: Text.WordWrap
+                font.pixelSize: BVApp.Theme.fontSizeSmall
+                color: BVApp.Theme.secondaryColor
+                linkColor: BVApp.Theme.linkColor
+                textFormat: Text.StyledText
                 anchors {
-                    horizontalCenter: parent.horizontalCenter
+                    left: parent.left
+                    right: parent.right
+                    margins: BVApp.Theme.paddingLarge
                 }
+                onLinkActivated: Qt.openUrlExternally("https://www.openstreetmap.org/copyright")
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge
+            }
+
+            BVApp.Button {
+                //% "View ODbL"
+                text: qsTrId("id-view-odbl")
+                anchors { horizontalCenter: parent.horizontalCenter }
+                onClicked: Qt.openUrlExternally("https://opendatacommons.org/licenses/odbl/1-0/")
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.paddingLarge * 1.3
+            }
+
+            BVApp.Separator {
+                width: parent.width
+                horizontalAlignment: Qt.AlignCenter
+                color: BVApp.Theme.secondaryHighlightColor
+                height: 2
+                anchors { horizontalCenter: parent.horizontalCenter }
             }
 
             Item {

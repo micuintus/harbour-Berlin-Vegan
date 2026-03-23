@@ -24,7 +24,7 @@ class VenueSortFilterProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(VenuePropertyFlags filterVenueProperty READ filterVenueProperty NOTIFY filterVenuePropertyChanged)
     Q_PROPERTY(GastroPropertyFlags filterGastroProperty READ filterGastroProperty NOTIFY filterGastroPropertyChanged)
     Q_PROPERTY(bool filterOpenNow MEMBER m_filterOpenNow WRITE setFilterOpenNow NOTIFY filterOpenChanged)
-    Q_PROPERTY(bool filterCustomOpen MEMBER m_filterCustomOpen WRITE setfilterCustomOpen NOTIFY filterOpenChanged)
+    Q_PROPERTY(bool filterCustomOpen MEMBER m_filterCustomOpen WRITE setFilterCustomOpen NOTIFY filterOpenChanged)
     Q_PROPERTY(QDate customOpenDate READ customOpenDate WRITE setCustomOpenDate NOTIFY customOpenDateChanged)
     Q_PROPERTY(QTime customOpenTime READ customOpenTime WRITE setCustomOpenTime NOTIFY customOpenTimeChanged)
     Q_PROPERTY(bool filterWithReview MEMBER m_filterWithReview WRITE setFilterWithReview NOTIFY filterWithReviewChanged)
@@ -98,7 +98,7 @@ public slots:
     void setFilterVenueType(VenueModel::VenueTypeFlags);
     void setCurrentPosition(QGeoCoordinate position);
     void setFilterOpenNow(bool);
-    void setfilterCustomOpen(bool);
+    void setFilterCustomOpen(bool);
     void setCustomOpenDate(QDate);
     void setCustomOpenTime(QTime);
     void setFilterWithReview(bool);

@@ -33,7 +33,8 @@ BVApp.Page {
 
 
     property var currentPosition: MapQuickItem {
-        id: currentPosition
+        id: currentPositionMarker
+        parent: map.mapTarget
 
         coordinate: positionSource.position.coordinate
 
@@ -102,6 +103,7 @@ BVApp.Page {
                     type: "location"
 
                     color: BVApp.Theme.vegTypeColor(model.vegan)
+                    opacity: (typeof model.dataSource !== "undefined" && model.dataSource === "osm") ? 0.5 : 1.0
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {
@@ -116,24 +118,60 @@ BVApp.Page {
         }
 
         Component.onCompleted: {
-            addMapItem(currentPosition);
             centerAndZoom();
         }
 
         function centerAndZoom()
         {
-            center = currentPosition.coordinate;
-            zoomLevel = maximumZoomLevel - (BVApp.Platform.isIos ? 9 : 3);
+            // Only animate to current position when we have a valid GPS fix;
+            // otherwise the map would jump to (0,0) and show the Atlantic Ocean.
+            const coord = positionSource.position.coordinate;
+            if (coord.isValid)
+                animateToLocation(coord, 15);
+        }
+
+        function animateToLocation(coord, targetZoom) {
+            flyAnimation.stop();
+            flyAnimation.fromCenter = map.center;
+            flyAnimation.toCenter = coord;
+            flyAnimation.fromZoom = map.zoomLevel;
+            flyAnimation.toZoom = targetZoom;
+            flyAnimation.start();
+        }
+
+        ParallelAnimation {
+            id: flyAnimation
+            property var fromCenter: QtPositioning.coordinate(0, 0)
+            property var toCenter: QtPositioning.coordinate(0, 0)
+            property real fromZoom: 10
+            property real toZoom: 15
+
+            CoordinateAnimation {
+                target: map
+                property: "center"
+                from: flyAnimation.fromCenter
+                to: flyAnimation.toCenter
+                duration: 600
+                easing.type: Easing.InOutQuad
+            }
+            NumberAnimation {
+                target: map
+                property: "zoomLevel"
+                from: flyAnimation.fromZoom
+                to: flyAnimation.toZoom
+                duration: 600
+                easing.type: Easing.InOutQuad
+            }
         }
 
         BVApp.MapReCenterButton {
-            // SFOS map has no 'userPositionAvailable'
             enabled: positionSource.position.coordinate.isValid
 
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.rightMargin: BVApp.Theme.paddingLarge
             anchors.bottomMargin: BVApp.Theme.paddingLarge
+                                  + (typeof nativeUtils !== "undefined" ? nativeUtils.safeAreaInsets.bottom : 0)
 
             onClicked: map.centerAndZoom()
 

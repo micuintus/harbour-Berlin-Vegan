@@ -64,6 +64,9 @@ BVApp.ApplicationWindow
             for (var i = 0; i < favorite_ids.length; i++) {
                 gJsonVenueModel.setFavorite(favorite_ids[i], true);
             }
+
+            // Load OSM data AFTER BV data so deduplication works
+            OSMProvider.loadMetroArea();
         }
     }
 
@@ -83,13 +86,15 @@ BVApp.ApplicationWindow
         target: OSMProvider
         function onVenuesReady(venues) {
             gJsonVenueModel.importOSMVenues(venues);
+            // Fill missing street addresses in background
+            ReverseGeocoder.enrichModel(gJsonVenueModel);
         }
     }
 
     Component.onCompleted: {
         VenueDataLoader.loadGastroVenues();
         VenueDataLoader.loadShoppingVenues();
-        OSMProvider.loadMetroArea();
+        // OSM data loads after BV data (in favoritesHook) for deduplication
     }
 
     cover: Component { CoverPage {

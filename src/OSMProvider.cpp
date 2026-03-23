@@ -4,8 +4,13 @@
 #include <QJsonDocument>
 #include <QUrlQuery>
 #include <QFile>
+#include <QFileInfo>
 #include <QDir>
 #include <QStandardPaths>
+
+#ifndef APP_VERSION
+#  define APP_VERSION "0.0.0"
+#endif
 
 // Multiple Overpass endpoints for resilience
 static const QStringList OVERPASS_ENDPOINTS = {
@@ -23,6 +28,7 @@ static const QString CACHE_FILENAME = QStringLiteral("osm_metro_cache.json");
 static constexpr int VegCategory_Omnivorous = 1;
 static constexpr int VegCategory_OmnivorousVeganLabeled = 2;
 static constexpr int VegCategory_Vegetarian = 3;
+static constexpr int VegCategory_VegetarianVeganLabeled = 4;
 static constexpr int VegCategory_Vegan = 5;
 
 OSMProvider::OSMProvider(QObject *parent)
@@ -101,7 +107,7 @@ void OSMProvider::tryNextEndpoint(const QString& query, int endpointIndex)
 
     QNetworkRequest request(endpoint);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-    request.setRawHeader("User-Agent", "BerlinVegan-App/3.7.0");
+    request.setRawHeader("User-Agent", "BerlinVegan-App/" APP_VERSION);
     request.setTransferTimeout(30000);
 
     QUrlQuery postData;
@@ -133,9 +139,17 @@ void OSMProvider::tryNextEndpoint(const QString& query, int endpointIndex)
 
 void OSMProvider::parseResponse(const QByteArray& data)
 {
-    const auto doc = QJsonDocument::fromJson(data);
-    if (!doc.isObject()) {
-        emit error(QStringLiteral("Invalid Overpass response"));
+    if (data.isEmpty()) return;
+
+    QJsonParseError parseError;
+    const auto doc = QJsonDocument::fromJson(data, &parseError);
+    if (parseError.error != QJsonParseError::NoError) {
+        emit error(QStringLiteral("JSON parse error: ") + parseError.errorString());
+        return;
+    }
+
+    if (!doc.isObject() || !doc.object().contains("elements")) {
+        emit error(QStringLiteral("Invalid Overpass response: missing 'elements'"));
         return;
     }
 
@@ -149,7 +163,8 @@ void OSMProvider::parseResponse(const QByteArray& data)
             venues.append(venue);
     }
 
-    qInfo() << "OSM: parsed" << venues.size() << "vegan/vegetarian venues";
+    qInfo() << "OSM: parsed" << venues.size() << "venues from" << elements.size() << "elements"
+            << "(" << (elements.size() - venues.size()) << "filtered out)";
     emit venuesReady(venues);
 }
 
@@ -191,15 +206,28 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
 
     if (name.isEmpty()) return {};
 
+    // --- Quality filter: minimum data quality ---
+    const bool hasAddress = tags.contains("addr:street");
+    const bool hasHours = tags.contains("opening_hours");
+    if (!hasAddress && !hasHours)
+        return {};
+
+    // --- Mapping ---
+
     // Get coordinates (nodes have lat/lon directly, ways/relations have center)
     double lat, lon;
     if (element.contains("center")) {
-        lat = element["center"].toObject()["lat"].toDouble();
-        lon = element["center"].toObject()["lon"].toDouble();
+        const auto center = element["center"].toObject();
+        lat = center["lat"].toDouble();
+        lon = center["lon"].toDouble();
     } else {
         lat = element["lat"].toDouble();
         lon = element["lon"].toDouble();
     }
+
+    // Reject venues with invalid/missing coordinates
+    if (qFuzzyIsNull(lat) && qFuzzyIsNull(lon))
+        return {};
 
     QJsonObject venue;
     venue["id"] = QStringLiteral("osm_") + QString::number(element["id"].toInteger());
@@ -210,7 +238,9 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
     // Street address
     const auto street = tags["addr:street"].toString();
     const auto houseNumber = tags["addr:housenumber"].toString();
-    venue["street"] = street.isEmpty() ? QString() : street + " " + houseNumber;
+    venue["street"] = street.isEmpty() ? QString()
+                    : houseNumber.isEmpty() ? street
+                    : street + QStringLiteral(" ") + houseNumber;
 
     // Contact
     venue["telephone"] = tags["phone"].toString();
@@ -251,7 +281,7 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
         if (amenity == "restaurant") gastroTags.append("Restaurant");
         else if (amenity == "cafe") gastroTags.append("Cafe");
         else if (amenity == "fast_food") gastroTags.append("Imbiss");
-        else if (amenity == "bar") gastroTags.append("Bar");
+        else if (amenity == "bar" || amenity == "pub" || amenity == "biergarten") gastroTags.append("Bar");
         else if (amenity == "ice_cream") gastroTags.append("Eiscafe");
         else gastroTags.append("Restaurant");
         venue["tags"] = gastroTags;
@@ -262,9 +292,22 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
 
 int OSMProvider::mapDietTagToVegCategory(const QString& dietVegan, const QString& dietVegetarian) const
 {
-    if (dietVegan == "only") return VegCategory_Vegan;
-    if (dietVegan == "yes") return VegCategory_OmnivorousVeganLabeled;
-    if (dietVegetarian == "only") return VegCategory_Vegetarian;
-    if (dietVegetarian == "yes") return VegCategory_OmnivorousVeganLabeled;
+    // diet:vegan=only → fully vegan venue
+    if (dietVegan == "only")
+        return VegCategory_Vegan;
+
+    // diet:vegetarian=only + diet:vegan=yes → vegetarian with vegan options labeled
+    // diet:vegetarian=only (no vegan tag) → just vegetarian
+    if (dietVegetarian == "only")
+        return dietVegan == "yes" ? VegCategory_VegetarianVeganLabeled : VegCategory_Vegetarian;
+
+    // diet:vegan=yes → omnivore but offers/labels vegan options
+    if (dietVegan == "yes")
+        return VegCategory_OmnivorousVeganLabeled;
+
+    // diet:vegetarian=yes → omnivore but offers vegetarian
+    if (dietVegetarian == "yes")
+        return VegCategory_OmnivorousVeganLabeled;
+
     return VegCategory_Omnivorous;
 }

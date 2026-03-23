@@ -55,8 +55,10 @@ qt_add_qml_module(harbour-berlin-vegan
         src/VenueDataLoader.h src/VenueDataLoader.cpp
         src/TruncationMode.h
         src/OSMProvider.h src/OSMProvider.cpp
+        src/ReverseGeocoder.h src/ReverseGeocoder.cpp
         src/OsmOpeningHoursParser.h src/OsmOpeningHoursParser.cpp
         src/OpeningHoursAlgorithms.h src/OpeningHoursAlgorithms.cpp
+        src/MapBearingLock.h
     QML_FILES
         qml/harbour-berlin-vegan.qml
         qml/pages/VenueList.qml
@@ -64,7 +66,6 @@ qt_add_qml_module(harbour-berlin-vegan
         qml/pages/VenueFilterSettings.qml
         qml/pages/VenueMapOverviewPage.qml
         qml/pages/VenueMapWidget.qml
-        qml/pages/OSMVenueList.qml
         qml/pages/about/AboutBerlinVegan.qml
         qml/pages/about/LicenseViewer.qml
         qml/pages/about/ThirdPartySoftware.qml
@@ -124,6 +125,10 @@ qt_add_translations(harbour-berlin-vegan
     RESOURCE_PREFIX "/translations"
     LRELEASE_OPTIONS -idbased
 )
+
+# --- Tests ---
+
+add_subdirectory(tests)
 
 # --- Link ---
 

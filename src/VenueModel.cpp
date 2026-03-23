@@ -201,6 +201,18 @@ void VenueModel::importFromJson(const QJSValue &item, VenueType venueType)
     emit loadedVenueTypeChanged();
 }
 
+bool VenueModel::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+    const bool ok = QStandardItemModel::setData(index, value, role);
+    // When the Street role is written (e.g. by ReverseGeocoder), keep the
+    // SimplifiedSearchStreet role in sync so that text search can find the venue.
+    if (ok && role == VenueModelRoles::Street) {
+        const auto simplified = simplifySearchString(value.toString());
+        QStandardItemModel::setData(index, simplified, VenueModelRoles::SimplifiedSearchStreet);
+    }
+    return ok;
+}
+
 void VenueModel::setFavorite(const QString &id, bool favorite)
 {
     auto const index = indexFromID(id);
@@ -238,20 +250,30 @@ void VenueModel::importOSMVenues(const QJsonArray& venues)
 {
     auto root = this->invisibleRootItem();
     int addedCount = 0;
+    int dupCount = 0;
+    int noNameCount = 0;
 
     for (const auto& venueValue : venues)
     {
         const auto venue = venueValue.toObject();
-        if (venue["name"].toString().isEmpty())
+        if (venue["name"].toString().isEmpty()) {
+            noNameCount++;
             continue;
+        }
 
-        if (isDuplicate(venue))
+        if (isDuplicate(venue)) {
+            dupCount++;
             continue;
+        }
 
         auto item = osmVenueToItem(venue);
         root->appendRow(item);
         addedCount++;
     }
+
+    qInfo() << "OSM import:" << addedCount << "added,"
+            << dupCount << "duplicates removed,"
+            << noNameCount << "unnamed skipped";
 
     if (addedCount > 0)
     {
@@ -330,6 +352,15 @@ QStandardItem* VenueModel::osmVenueToItem(const QJsonObject& venue)
     return item;
 }
 
+// Dedup thresholds at Berlin's latitude (~52.5°N):
+// 1° lat ≈ 111km, 1° lon ≈ 65km
+static constexpr double DEDUP_SAME_LOCATION_LAT = 0.0003;  // ~33m
+static constexpr double DEDUP_SAME_LOCATION_LON = 0.0004;  // ~26m
+static constexpr double DEDUP_NAME_CHECK_LAT    = 0.002;   // ~222m
+static constexpr double DEDUP_NAME_CHECK_LON    = 0.003;   // ~195m
+static constexpr int    DEDUP_MIN_PREFIX_LEN     = 4;
+static constexpr int    DEDUP_MIN_WORD_LEN       = 3;
+
 bool VenueModel::isDuplicate(const QJsonObject& osmVenue) const
 {
     const double osmLat = osmVenue["latCoord"].toDouble();
@@ -339,24 +370,33 @@ bool VenueModel::isDuplicate(const QJsonObject& osmVenue) const
     for (int row = 0; row < rowCount(); ++row)
     {
         const auto idx = index(row, 0);
-        const auto existingSource = idx.data(VenueModelRoles::DataSource).toString();
-
-        // Only deduplicate against berlin-vegan.de venues
-        if (existingSource == "osm")
-            continue;
-
         const double lat = idx.data(VenueModelRoles::LatCoord).toDouble();
         const double lon = idx.data(VenueModelRoles::LongCoord).toDouble();
 
-        // Quick geographic check (~50m threshold at Berlin's latitude)
         const double dlat = qAbs(osmLat - lat);
         const double dlon = qAbs(osmLon - lon);
-        if (dlat > 0.0005 || dlon > 0.0007)
+
+        // Very close: same venue regardless of name differences
+        if (dlat < DEDUP_SAME_LOCATION_LAT && dlon < DEDUP_SAME_LOCATION_LON)
+            return true;
+
+        // Too far: skip name check entirely
+        if (dlat > DEDUP_NAME_CHECK_LAT || dlon > DEDUP_NAME_CHECK_LON)
             continue;
 
-        // Name similarity check
+        // Within name-check range: compare names
         const auto existingName = idx.data(VenueModelRoles::SimplifiedSearchName).toString();
+
         if (osmName.contains(existingName) || existingName.contains(osmName))
+            return true;
+
+        if (osmName.length() >= DEDUP_MIN_PREFIX_LEN && existingName.length() >= DEDUP_MIN_PREFIX_LEN
+            && osmName.left(DEDUP_MIN_PREFIX_LEN) == existingName.left(DEDUP_MIN_PREFIX_LEN))
+            return true;
+
+        const auto osmFirst = osmName.split(' ').first();
+        const auto bvFirst = existingName.split(' ').first();
+        if (osmFirst.length() >= DEDUP_MIN_WORD_LEN && osmFirst == bvFirst)
             return true;
     }
 
