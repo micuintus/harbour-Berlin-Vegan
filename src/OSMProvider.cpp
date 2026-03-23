@@ -200,16 +200,7 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
 
     if (name.isEmpty()) return {};
 
-    // --- Quality filter ---
-
-    const auto dietVegan = tags["diet:vegan"].toString();
-    const auto dietVegetarian = tags["diet:vegetarian"].toString();
-
-    // Must have some vegan indication (not just vegetarian=yes with no vegan info)
-    if (dietVegan.isEmpty() && dietVegetarian != "only")
-        return {};
-
-    // Minimum data quality: must have at least opening_hours or address
+    // --- Quality filter: minimum data quality ---
     const bool hasAddress = tags.contains("addr:street");
     const bool hasHours = tags.contains("opening_hours");
     if (!hasAddress && !hasHours)
