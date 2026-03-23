@@ -102,6 +102,8 @@ BVApp.Page {
                     type: "location"
 
                     color: BVApp.Theme.vegTypeColor(model.vegan)
+                    opacity: (typeof model.dataSource !== "undefined" && model.dataSource === "osm") ? 0.6 : 1.0
+                    scale: (typeof model.dataSource !== "undefined" && model.dataSource === "osm") ? 0.7 : 1.0
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {
@@ -122,12 +124,45 @@ BVApp.Page {
 
         function centerAndZoom()
         {
-            center = currentPosition.coordinate;
-            zoomLevel = maximumZoomLevel - (BVApp.Platform.isIos ? 9 : 3);
+            animateToLocation(currentPosition.coordinate,
+                              maximumZoomLevel - (BVApp.Platform.isIos ? 9 : 3));
+        }
+
+        function animateToLocation(coord, targetZoom) {
+            flyAnimation.stop();
+            flyAnimation.fromCenter = map.center;
+            flyAnimation.toCenter = coord;
+            flyAnimation.fromZoom = map.zoomLevel;
+            flyAnimation.toZoom = targetZoom;
+            flyAnimation.start();
+        }
+
+        ParallelAnimation {
+            id: flyAnimation
+            property var fromCenter: QtPositioning.coordinate(0, 0)
+            property var toCenter: QtPositioning.coordinate(0, 0)
+            property real fromZoom: 10
+            property real toZoom: 15
+
+            CoordinateAnimation {
+                target: map
+                property: "center"
+                from: flyAnimation.fromCenter
+                to: flyAnimation.toCenter
+                duration: 600
+                easing.type: Easing.InOutQuad
+            }
+            NumberAnimation {
+                target: map
+                property: "zoomLevel"
+                from: flyAnimation.fromZoom
+                to: flyAnimation.toZoom
+                duration: 600
+                easing.type: Easing.InOutQuad
+            }
         }
 
         BVApp.MapReCenterButton {
-            // SFOS map has no 'userPositionAvailable'
             enabled: positionSource.position.coordinate.isValid
 
             anchors.right: parent.right
