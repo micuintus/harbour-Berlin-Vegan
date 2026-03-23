@@ -201,19 +201,6 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
     if (dietVegan.isEmpty() && dietVegetarian != "only")
         return {};
 
-    // Exclude known fast-food chains (not what Berlin-Vegan users are looking for)
-    const auto brand = tags["brand"].toString().toLower();
-    const auto nameLower = name.toLower();
-    static const QStringList excludedBrands = {
-        "mcdonald's", "burger king", "subway", "kfc",
-        "domino's", "starbucks", "pizza hut", "nordsee"
-    };
-    for (const auto& chain : excludedBrands)
-    {
-        if (nameLower.contains(chain) || brand.contains(chain))
-            return {};
-    }
-
     // Minimum data quality: must have at least opening_hours or address
     const bool hasAddress = tags.contains("addr:street");
     const bool hasHours = tags.contains("opening_hours");
