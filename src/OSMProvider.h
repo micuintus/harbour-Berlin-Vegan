@@ -30,6 +30,8 @@ signals:
     void error(const QString& message);
 
 private:
+    friend class TestOSMProvider;
+
     void fetchFromOverpass(const QString& query);
     void tryNextEndpoint(const QString& query, int endpointIndex);
     void parseResponse(const QByteArray& data);
