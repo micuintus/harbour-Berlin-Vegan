@@ -149,7 +149,8 @@ void OSMProvider::parseResponse(const QByteArray& data)
             venues.append(venue);
     }
 
-    qInfo() << "OSM: parsed" << venues.size() << "vegan/vegetarian venues";
+    qInfo() << "OSM: parsed" << venues.size() << "venues from" << elements.size() << "elements"
+            << "(" << (elements.size() - venues.size()) << "filtered out)";
     emit venuesReady(venues);
 }
 
@@ -190,6 +191,36 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
     const auto name = tags["name"].toString();
 
     if (name.isEmpty()) return {};
+
+    // --- Quality filter ---
+
+    const auto dietVegan = tags["diet:vegan"].toString();
+    const auto dietVegetarian = tags["diet:vegetarian"].toString();
+
+    // Must have some vegan indication (not just vegetarian=yes with no vegan info)
+    if (dietVegan.isEmpty() && dietVegetarian != "only")
+        return {};
+
+    // Exclude known fast-food chains (not what Berlin-Vegan users are looking for)
+    const auto brand = tags["brand"].toString().toLower();
+    const auto nameLower = name.toLower();
+    static const QStringList excludedBrands = {
+        "mcdonald's", "burger king", "subway", "kfc",
+        "domino's", "starbucks", "pizza hut", "nordsee"
+    };
+    for (const auto& chain : excludedBrands)
+    {
+        if (nameLower.contains(chain) || brand.contains(chain))
+            return {};
+    }
+
+    // Minimum data quality: must have at least opening_hours or address
+    const bool hasAddress = tags.contains("addr:street");
+    const bool hasHours = tags.contains("opening_hours");
+    if (!hasAddress && !hasHours)
+        return {};
+
+    // --- Mapping ---
 
     // Get coordinates (nodes have lat/lon directly, ways/relations have center)
     double lat, lon;
