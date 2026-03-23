@@ -12,12 +12,26 @@ App {
     property Component initialPage
 
     onInitTheme: {
+        // Navigation bar (green Berlin-Vegan branding)
         Theme.navigationBar.backgroundColor = BVApp.Theme.highlightColor
         Theme.navigationBar.titleColor = "white"
-        Theme.navigationBar.itemColor = Theme.navigationBar.titleColor
+        Theme.navigationBar.itemColor = "white"
+
+        // App-wide colors
         Theme.colors.tintColor = BVApp.Theme.highlightColor
-        Theme.colors.secondaryBackgroundColor = "white"
+        Theme.colors.backgroundColor = "white"
+        Theme.colors.secondaryBackgroundColor = "#F5F5F5"
+        Theme.colors.textColor = BVApp.Theme.primaryColor
+
+        // Status bar
         Theme.colors.statusBarStyle = Theme.colors.statusBarStyleWhite
+
+        // Navigation drawer (white background, clean Material look)
+        if (Theme.navigationDrawer) {
+            Theme.navigationDrawer.backgroundColor = "white"
+            Theme.navigationDrawer.textColor = BVApp.Theme.primaryColor
+            Theme.navigationDrawer.activeTextColor = BVApp.Theme.highlightColor
+        }
     }
 
     FontLoader {
