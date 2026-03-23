@@ -4,7 +4,6 @@
 #include <QFile>
 #include <QStandardPaths>
 #include <QDir>
-#include <QTimer>
 
 static const QUrl GASTRO_URL{QStringLiteral("https://www.berlin-vegan.de/app/data/GastroLocations.json")};
 static const QUrl SHOPPING_URL{QStringLiteral("https://data.berlin-vegan.de/api/ShoppingLocations.json")};
@@ -32,22 +31,13 @@ void VenueDataLoader::fetchFromNetwork(const QUrl& url, bool isGastro)
     m_pendingRequests++;
     emit loadingChanged();
 
-    auto* reply = m_networkManager.get(QNetworkRequest(url));
+    QNetworkRequest request(url);
+    request.setTransferTimeout(NETWORK_TIMEOUT_MS);
+
+    auto* reply = m_networkManager.get(request);
     const QString filename = isGastro ? GASTRO_FILENAME : SHOPPING_FILENAME;
 
-    // Timeout: fall back to cache after NETWORK_TIMEOUT_MS
-    auto* timer = new QTimer(reply);
-    timer->setSingleShot(true);
-    timer->start(NETWORK_TIMEOUT_MS);
-
-    QObject::connect(timer, &QTimer::timeout, reply, [this, reply, filename, isGastro]() {
-        reply->abort();
-        qInfo() << "Network timeout for" << filename << "- trying cache";
-        loadFromCache(filename, isGastro);
-    });
-
-    QObject::connect(reply, &QNetworkReply::finished, this, [this, reply, filename, isGastro, timer]() {
-        timer->stop();
+    QObject::connect(reply, &QNetworkReply::finished, this, [this, reply, filename, isGastro]() {
         reply->deleteLater();
 
         if (reply->error() == QNetworkReply::NoError)
@@ -61,13 +51,12 @@ void VenueDataLoader::fetchFromNetwork(const QUrl& url, bool isGastro)
             else
                 emit shoppingDataReady(json);
         }
-        else if (reply->error() != QNetworkReply::OperationCanceledError)
+        else
         {
-            // Not a timeout cancel - actual error, try cache
-            qWarning() << "Network error for" << filename << ":" << reply->errorString();
+            qWarning() << "Network error for" << filename << ":" << reply->errorString()
+                       << "- trying cache";
             loadFromCache(filename, isGastro);
         }
-        // OperationCanceledError is handled by the timeout handler
 
         m_pendingRequests--;
         emit loadingChanged();

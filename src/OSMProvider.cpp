@@ -23,6 +23,7 @@ static const QString CACHE_FILENAME = QStringLiteral("osm_metro_cache.json");
 static constexpr int VegCategory_Omnivorous = 1;
 static constexpr int VegCategory_OmnivorousVeganLabeled = 2;
 static constexpr int VegCategory_Vegetarian = 3;
+static constexpr int VegCategory_VegetarianVeganLabeled = 4;
 static constexpr int VegCategory_Vegan = 5;
 
 OSMProvider::OSMProvider(QObject *parent)
@@ -211,12 +212,17 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
     // Get coordinates (nodes have lat/lon directly, ways/relations have center)
     double lat, lon;
     if (element.contains("center")) {
-        lat = element["center"].toObject()["lat"].toDouble();
-        lon = element["center"].toObject()["lon"].toDouble();
+        const auto center = element["center"].toObject();
+        lat = center["lat"].toDouble();
+        lon = center["lon"].toDouble();
     } else {
         lat = element["lat"].toDouble();
         lon = element["lon"].toDouble();
     }
+
+    // Reject venues with invalid/missing coordinates
+    if (qFuzzyIsNull(lat) && qFuzzyIsNull(lon))
+        return {};
 
     QJsonObject venue;
     venue["id"] = QStringLiteral("osm_") + QString::number(element["id"].toInteger());
@@ -268,7 +274,7 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
         if (amenity == "restaurant") gastroTags.append("Restaurant");
         else if (amenity == "cafe") gastroTags.append("Cafe");
         else if (amenity == "fast_food") gastroTags.append("Imbiss");
-        else if (amenity == "bar") gastroTags.append("Bar");
+        else if (amenity == "bar" || amenity == "pub" || amenity == "biergarten") gastroTags.append("Bar");
         else if (amenity == "ice_cream") gastroTags.append("Eiscafe");
         else gastroTags.append("Restaurant");
         venue["tags"] = gastroTags;
@@ -279,9 +285,22 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
 
 int OSMProvider::mapDietTagToVegCategory(const QString& dietVegan, const QString& dietVegetarian) const
 {
-    if (dietVegan == "only") return VegCategory_Vegan;
-    if (dietVegan == "yes") return VegCategory_OmnivorousVeganLabeled;
-    if (dietVegetarian == "only") return VegCategory_Vegetarian;
-    if (dietVegetarian == "yes") return VegCategory_OmnivorousVeganLabeled;
+    // diet:vegan=only → fully vegan venue
+    if (dietVegan == "only")
+        return VegCategory_Vegan;
+
+    // diet:vegetarian=only + diet:vegan=yes → vegetarian with vegan options labeled
+    // diet:vegetarian=only (no vegan tag) → just vegetarian
+    if (dietVegetarian == "only")
+        return dietVegan == "yes" ? VegCategory_VegetarianVeganLabeled : VegCategory_Vegetarian;
+
+    // diet:vegan=yes → omnivore but offers/labels vegan options
+    if (dietVegan == "yes")
+        return VegCategory_OmnivorousVeganLabeled;
+
+    // diet:vegetarian=yes → omnivore but offers vegetarian
+    if (dietVegetarian == "yes")
+        return VegCategory_OmnivorousVeganLabeled;
+
     return VegCategory_Omnivorous;
 }
