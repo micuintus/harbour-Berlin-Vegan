@@ -1,6 +1,7 @@
 #include "ReverseGeocoder.h"
 #include "VenueModel.h"
 
+#include <QCoreApplication>
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -16,6 +17,11 @@ ReverseGeocoder::ReverseGeocoder(QObject *parent)
     m_rateTimer.setSingleShot(true);
     m_rateTimer.setInterval(RATE_LIMIT_MS);
     connect(&m_rateTimer, &QTimer::timeout, this, &ReverseGeocoder::processNext);
+
+    // Save partial progress if app exits during geocoding
+    connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit, this, [this]() {
+        if (!m_cache.isEmpty()) saveCache();
+    });
 }
 
 void ReverseGeocoder::enrichModel(VenueModel *model)

@@ -32,16 +32,11 @@ App {
         source: "qrc:/icons/MaterialIcons-Regular.ttf"
     }
 
-    onTabletChanged: {
-        if (!BVApp.Platform.isMacOS) {
-            nativeUtils.preferredScreenOrientation = tablet ? NativeUtils.ScreenOrientationUnspecified :
-                                                              NativeUtils.ScreenOrientationPortrait
-        }
-    }
-
-    screenOrientation: Qt.PortraitOrientation
-
     Component.onCompleted: {
+        // Lock to portrait on mobile
+        if (!BVApp.Platform.isMacOS && typeof nativeUtils !== "undefined") {
+            nativeUtils.preferredScreenOrientation = NativeUtils.ScreenOrientationPortrait;
+        }
         BVApp.Theme.myApp = app
         if (material.status == FontLoader.Ready) {
             console.log("Loaded font: '" + material.name + "'")
