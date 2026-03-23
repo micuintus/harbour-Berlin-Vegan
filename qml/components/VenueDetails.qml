@@ -92,16 +92,22 @@ Item {
                 rightMargin: organic.rightMargin
             }
 
-            text: if ((Qt.locale().name.toLowerCase().indexOf("de") === 0 || typeof restaurant.openCommentEnglish === "undefined")
+            text: {
+                      // Don't show raw OSM opening_hours string if we have parsed hours
+                      var hasCondensedHours = typeof restaurant.condensedOpeningHours !== "undefined"
+                                              && restaurant.condensedOpeningHours.length > 0;
+                      var source = typeof restaurant.dataSource !== "undefined" ? restaurant.dataSource : "bv";
+                      if (source === "osm" && hasCondensedHours)
+                          return "";
+
+                      if ((Qt.locale().name.toLowerCase().indexOf("de") === 0
+                           || typeof restaurant.openCommentEnglish === "undefined")
                           && typeof restaurant.openComment !== "undefined")
-                  {
-                      return restaurant.openComment;
+                          return restaurant.openComment;
+                      else if (typeof restaurant.openCommentEnglish !== "undefined")
+                          return restaurant.openCommentEnglish;
+                      else return "";
                   }
-                  else if (typeof restaurant.openCommentEnglish !== "undefined")
-                  {
-                      return restaurant.openCommentEnglish;
-                  }
-                  else return "";
 
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignRight

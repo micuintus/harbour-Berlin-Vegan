@@ -238,20 +238,30 @@ void VenueModel::importOSMVenues(const QJsonArray& venues)
 {
     auto root = this->invisibleRootItem();
     int addedCount = 0;
+    int dupCount = 0;
+    int noNameCount = 0;
 
     for (const auto& venueValue : venues)
     {
         const auto venue = venueValue.toObject();
-        if (venue["name"].toString().isEmpty())
+        if (venue["name"].toString().isEmpty()) {
+            noNameCount++;
             continue;
+        }
 
-        if (isDuplicate(venue))
+        if (isDuplicate(venue)) {
+            dupCount++;
             continue;
+        }
 
         auto item = osmVenueToItem(venue);
         root->appendRow(item);
         addedCount++;
     }
+
+    qInfo() << "OSM import:" << addedCount << "added,"
+            << dupCount << "duplicates removed,"
+            << noNameCount << "unnamed skipped";
 
     if (addedCount > 0)
     {
@@ -348,20 +358,32 @@ bool VenueModel::isDuplicate(const QJsonObject& osmVenue) const
         const double lat = idx.data(VenueModelRoles::LatCoord).toDouble();
         const double lon = idx.data(VenueModelRoles::LongCoord).toDouble();
 
-        // Geographic check (~100m threshold at Berlin's latitude)
         const double dlat = qAbs(osmLat - lat);
         const double dlon = qAbs(osmLon - lon);
-        if (dlat > 0.001 || dlon > 0.0014)
+
+        // Very close (~30m): same venue regardless of name differences
+        if (dlat < 0.0003 && dlon < 0.0004)
+            return true;
+
+        // Within ~200m: check name similarity
+        if (dlat > 0.002 || dlon > 0.003)
             continue;
 
-        // Name similarity: substring match or first 5 chars match
         const auto existingName = idx.data(VenueModelRoles::SimplifiedSearchName).toString();
+
+        // Substring match
         if (osmName.contains(existingName) || existingName.contains(osmName))
             return true;
 
-        // Short names might not substring-match, so also check prefix
-        const int minLen = qMin(osmName.length(), existingName.length());
-        if (minLen >= 4 && osmName.left(4) == existingName.left(4))
+        // Prefix match (first 4 chars after normalization)
+        if (osmName.length() >= 4 && existingName.length() >= 4
+            && osmName.left(4) == existingName.left(4))
+            return true;
+
+        // Word-by-word: if first word matches
+        const auto osmFirst = osmName.split(' ').first();
+        const auto bvFirst = existingName.split(' ').first();
+        if (osmFirst.length() >= 3 && osmFirst == bvFirst)
             return true;
     }
 
