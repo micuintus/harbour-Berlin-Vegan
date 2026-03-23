@@ -48,6 +48,7 @@ BVApp.ListItem {
                            + (veganMark.visible ? veganMark.anchors.leftMargin + veganMark.width  : 0)
                            + (veganMark.visible && closing.visible ? veganMark.anchors.rightMargin : 0)
                            + (newTag.visible ? newTag.anchors.leftMargin + newTag.width  : 0)
+                           + (curatedBadge.visible ? curatedBadge.anchors.leftMargin + curatedBadge.width : 0)
                            + (newTag.visible && closing.visible ? newTag.anchors.rightMargin : 0)
                            + (closing.visible ? closing.width + closing.anchors.leftMargin : 0)
                            + distance.anchors.rightMargin))
@@ -85,13 +86,30 @@ BVApp.ListItem {
         markerSize: namelabel.font.pixelSize * 0.92
         color: BVApp.Theme.vegTypeColor(model.vegan)
 
-        visible: venueType === VenueModel.Shop && !newTag.visible && (model.vegan >= VenueModel.Vegetarian)
+        visible: !newTag.visible && (model.vegan >= VenueModel.Vegetarian)
 
         anchors {
             left: namelabel.right
             top: namelabel.top
 
             leftMargin: height * 0.16
+            rightMargin: BVApp.Theme.horizontalPageMargin
+        }
+    }
+
+    BVApp.ColoredTag {
+        id: curatedBadge
+        color: BVApp.Theme.highlightColor
+                 //% "BV"
+        text: qsTrId("id-tag-curated")
+        visible: typeof model.dataSource !== "undefined" && model.dataSource === "bv" && !newTag.visible
+        height: veganMark.height
+
+        anchors {
+            left: veganMark.visible ? veganMark.right : namelabel.right
+            top: namelabel.top
+
+            leftMargin: BVApp.Theme.paddingSmall
             rightMargin: BVApp.Theme.horizontalPageMargin
         }
     }

@@ -71,6 +71,23 @@ BVApp.Page {
             }
 
             BVApp.SectionHeader {
+                         //% "Data source"
+                text: qsTrId("id-data-source")
+                icon: BVApp.Theme.iconFor("details")
+            }
+
+            BVApp.TextSwitch {
+                         //% "OpenStreetMap (community)"
+                text: qsTrId("id-osm-data-source")
+                onUserToggled: {
+                    jsonModelCollection.showOSMVenues = !checked;
+                }
+
+                automaticCheck: false
+                checked: jsonModelCollection.showOSMVenues
+            }
+
+            BVApp.SectionHeader {
                          //% "Venue category"
                 text: qsTrId("id-venue-category")
                 icon: BVApp.Theme.iconFor("list")
@@ -202,7 +219,6 @@ BVApp.Page {
 
             Column {
                 width: parent.width
-                visible: !showGastroVenues
 
                 BVApp.SectionHeader {
                     //% "Veg*an category"

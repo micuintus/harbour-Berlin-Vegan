@@ -54,6 +54,8 @@ qt_add_qml_module(harbour-berlin-vegan
         src/FavoritesManager.h src/FavoritesManager.cpp
         src/VenueDataLoader.h src/VenueDataLoader.cpp
         src/TruncationMode.h
+        src/OSMProvider.h src/OSMProvider.cpp
+        src/OsmOpeningHoursParser.h src/OsmOpeningHoursParser.cpp
         src/OpeningHoursAlgorithms.h src/OpeningHoursAlgorithms.cpp
     QML_FILES
         qml/harbour-berlin-vegan.qml

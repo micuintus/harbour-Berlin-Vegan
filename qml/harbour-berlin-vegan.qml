@@ -79,9 +79,17 @@ BVApp.ApplicationWindow
         }
     }
 
+    Connections {
+        target: OSMProvider
+        function onVenuesReady(venues) {
+            gJsonVenueModel.importOSMVenues(venues);
+        }
+    }
+
     Component.onCompleted: {
         VenueDataLoader.loadGastroVenues();
         VenueDataLoader.loadShoppingVenues();
+        OSMProvider.loadMetroArea();
     }
 
     cover: Component { CoverPage {

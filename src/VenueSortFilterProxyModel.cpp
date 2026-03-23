@@ -333,6 +333,16 @@ void VenueSortFilterProxyModel::setMonthNew(int monthNew)
     emit monthNewChanged();
 }
 
+void VenueSortFilterProxyModel::setShowOSMVenues(bool show)
+{
+    if (m_showOSMVenues == show)
+        return;
+
+    m_showOSMVenues = show;
+    deferInvalidateFilter();
+    emit showOSMVenuesChanged();
+}
+
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 {
     if (m_currentPosition == position)
@@ -368,6 +378,11 @@ bool VenueSortFilterProxyModel::filterAcceptsRow(int source_row, const QModelInd
         VenueModel::VenueType venueType;
         std::tie(venueTypeIsMatching, venueType) = venueTypeMatches(index);
         const bool venueIsShop = venueType == VenueModel::VenueType::Shop;
+        // Data source filter: hide OSM venues when disabled
+        const auto dataSource = index.data(VenueModel::VenueModelRoles::DataSource).toString();
+        if (!m_showOSMVenues && dataSource == "osm")
+            return false;
+
         return venueTypeIsMatching
             && (venueIsShop || !m_filterWithReview || detail::hasReview(index))
             && (venueIsShop || !m_filterNew        || detail::isNew(index, QDate::currentDate(), m_monthNew))
