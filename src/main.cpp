@@ -55,9 +55,6 @@ int main(int argc, char *argv[])
     if (translator.load(QLocale(), QLatin1String("harbour-berlin-vegan"),
                         QLatin1String("-"), QLatin1String(":/translations"))) {
         app->installTranslator(&translator);
-        qInfo() << "Translations loaded";
-    } else {
-        qInfo() << "Could not load translation";
     }
 
     FelgoApplication felgoApp;

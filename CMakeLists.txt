@@ -7,9 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 
 find_package(Felgo REQUIRED)
-find_package(Qt6 COMPONENTS Core Qml Quick Network Positioning Location REQUIRED)
+find_package(Qt6 COMPONENTS Core Qml Quick Network Positioning Location LinguistTools REQUIRED)
 
-qt_standard_project_setup()
+qt_standard_project_setup(
+    I18N_TRANSLATED_LANGUAGES de en nl
+    I18N_SOURCE_LANGUAGE en
+)
 
 add_compile_definitions(APP_VERSION="${PROJECT_VERSION}")
 
@@ -110,13 +113,13 @@ qt_add_resources(harbour-berlin-vegan "licenses"
         qml/pages/about/LICENSE.FelgoComponentShowcase
 )
 
-qt_add_resources(harbour-berlin-vegan "translations"
-    PREFIX "/"
-    FILES
-        translations/harbour-berlin-vegan-de.qm
-        translations/harbour-berlin-vegan-en.qm
-        translations/harbour-berlin-vegan-nl.qm
-        translations/harbour-berlin-vegan.qm
+qt_add_translations(harbour-berlin-vegan
+    TS_FILES
+        translations/harbour-berlin-vegan-de.ts
+        translations/harbour-berlin-vegan-en.ts
+        translations/harbour-berlin-vegan-nl.ts
+    RESOURCE_PREFIX "/translations"
+    LRELEASE_OPTIONS -idbased
 )
 
 # --- Link ---
