@@ -204,9 +204,11 @@ BVApp.Page {
                 font.pixelSize: BVApp.Theme.fontSizeSmall
 
                 elide: Text.ElideNone
-                text: Qt.locale().name.toLowerCase().indexOf("de") === 0 ? // startsWith() was introduced in Qt 5.8 and Sailfish is currently running 5.6
-                          restaurant.comment :
-                          restaurant.commentEnglish
+                text: {
+                          var de = typeof restaurant.comment !== "undefined" ? restaurant.comment : "";
+                          var en = typeof restaurant.commentEnglish !== "undefined" ? restaurant.commentEnglish : "";
+                          return Qt.locale().name.toLowerCase().indexOf("de") === 0 ? de : (en || de);
+                      }
             }
 
             property bool showShortCommentLeftOfTags:
