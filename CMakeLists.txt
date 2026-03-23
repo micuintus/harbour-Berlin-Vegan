@@ -125,6 +125,10 @@ qt_add_translations(harbour-berlin-vegan
     LRELEASE_OPTIONS -idbased
 )
 
+# --- Tests ---
+
+add_subdirectory(tests)
+
 # --- Link ---
 
 target_compile_definitions(harbour-berlin-vegan

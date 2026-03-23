@@ -85,11 +85,15 @@ OsmOpeningHoursParser::Result OsmOpeningHoursParser::parse(const QString& input)
         return result;
     }
 
-    // Split on semicolons and commas-before-day-names
-    // "Tu-Fr 12:00-22:00, Sa,Su 10:00-22:00" → ["Tu-Fr 12:00-22:00", "Sa,Su 10:00-22:00"]
-    // But preserve commas within time ranges: "09:00-12:00,14:00-18:00"
-    static const QRegularExpression ruleSplitRe(R"(\s*;\s*|\s*,\s*(?=(?:Mo|Tu|We|Th|Fr|Sa|Su)[\s,\-]))");
-    const auto rules = input.split(ruleSplitRe);
+    // Normalize: replace commas between rules with semicolons.
+    // A comma separates rules when preceded by a time and followed by a day name.
+    // "Tu-Fr 12:00-22:00, Sa,Su 10:00-22:00" → "Tu-Fr 12:00-22:00; Sa,Su 10:00-22:00"
+    // Commas within day lists (Mo,We,Fr) or time lists (09:00-12:00,14:00-18:00) are preserved.
+    auto normalized = input;
+    static const QRegularExpression commaRule(R"((\d{2}:\d{2})\s*,\s*((?:Mo|Tu|We|Th|Fr|Sa|Su)))");
+    normalized.replace(commaRule, R"(\1; \2)");
+
+    const auto rules = normalized.split(';');
 
     // Regex: optional day-spec, then time range(s)
     static const QRegularExpression ruleRe(
