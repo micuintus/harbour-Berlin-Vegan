@@ -358,12 +358,6 @@ bool VenueModel::isDuplicate(const QJsonObject& osmVenue) const
     for (int row = 0; row < rowCount(); ++row)
     {
         const auto idx = index(row, 0);
-        const auto existingSource = idx.data(VenueModelRoles::DataSource).toString();
-
-        // Only deduplicate against berlin-vegan.de venues
-        if (existingSource == "osm")
-            continue;
-
         const double lat = idx.data(VenueModelRoles::LatCoord).toDouble();
         const double lon = idx.data(VenueModelRoles::LongCoord).toDouble();
 

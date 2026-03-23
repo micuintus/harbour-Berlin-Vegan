@@ -86,7 +86,7 @@ private slots:
         QVERIFY(!m_model.isDuplicate(makeOSMVenue("Anything", 52.53000, 13.40000)));
     }
 
-    void osmVenueNotCheckedAgainstOtherOSM()
+    void osmVenueDeduplicatedAgainstOtherOSM()
     {
         // Add an OSM-sourced venue
         auto item = new QStandardItem;
@@ -98,8 +98,8 @@ private slots:
         item->setData(QStringLiteral("osm"), VenueModel::VenueModelRoles::DataSource);
         m_model.invisibleRootItem()->appendRow(item);
 
-        // Another OSM venue at same spot - should NOT be detected as duplicate
-        QVERIFY(!m_model.isDuplicate(makeOSMVenue("Test Place", 52.53000, 13.40000)));
+        // Same OSM venue (node+way duplicate) - SHOULD be detected
+        QVERIFY(m_model.isDuplicate(makeOSMVenue("Test Place", 52.53000, 13.40000)));
     }
 };
 
