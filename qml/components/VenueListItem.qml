@@ -85,7 +85,7 @@ BVApp.ListItem {
         markerSize: namelabel.font.pixelSize * 0.92
         color: BVApp.Theme.vegTypeColor(model.vegan)
 
-        visible: venueType === VenueModel.Shop && !newTag.visible && (model.vegan >= VenueModel.Vegetarian)
+        visible: !newTag.visible && (model.vegan >= VenueModel.Vegetarian)
 
         anchors {
             left: namelabel.right

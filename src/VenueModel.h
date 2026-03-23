@@ -4,6 +4,8 @@
 #include <QtCore/QSet>
 #include <QtQml/QJSValue>
 #include <QtQml/qqmlregistration.h>
+#include <QJsonArray>
+#include <QJsonObject>
 
 #include <QStandardItemModel>
 #include <QPersistentModelIndex>
@@ -91,6 +93,9 @@ inline QString simplifySearchString(const QString searchString)
     ROLE_NAME_ID_PAIR( dateCreated,             DateCreated             ) \
     ROLE_NAME_ID_PAIR( created,                 Created                 ) \
     ROLE_NAME_ID_PAIR( isNew,                   IsNew                   ) \
+                                                                          \
+    /* Data source: "bv" for berlin-vegan.de, "osm" for OpenStreetMap */ \
+    ROLE_NAME_ID_PAIR( dataSource,              DataSource              ) \
 
 
 class VenueModel : public QStandardItemModel
@@ -183,6 +188,7 @@ public:
     VenueModel(QObject *parent = 0);
 
     Q_INVOKABLE void importFromJson(const QJSValue&, VenueType venueType);
+    Q_INVOKABLE void importOSMVenues(const QJsonArray& venues);
     Q_INVOKABLE void setFavorite(const QString& id, bool favorite = true);
     QHash<int, QByteArray> roleNames() const override;
 
@@ -190,10 +196,13 @@ public:
 
 signals:
     void loadedVenueTypeChanged();
+    void osmVenuesLoaded(int count);
 
 private:
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
+    QStandardItem* osmVenueToItem(const QJsonObject& venue);
+    bool isDuplicate(const QJsonObject& osmVenue) const;
 
     VenueTypeFlags m_loadedVenueType;
 };

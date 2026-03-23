@@ -191,6 +191,7 @@ void VenueModel::importFromJson(const QJSValue &item, VenueType venueType)
 
             auto venueItem = jsonItem2QStandardItem(array.value());
             venueItem->setData(venueType, VenueModelRoles::VenueTypeRole);
+            venueItem->setData(QStringLiteral("bv"), VenueModelRoles::DataSource);
             root->appendRow(venueItem);
         }
     }
@@ -230,6 +231,109 @@ QHash<int, QByteArray> VenueModel::roleNames() const
     };
 
     return roles;
+}
+
+void VenueModel::importOSMVenues(const QJsonArray& venues)
+{
+    auto root = this->invisibleRootItem();
+    int addedCount = 0;
+
+    for (const auto& venueValue : venues)
+    {
+        const auto venue = venueValue.toObject();
+        if (venue["name"].toString().isEmpty())
+            continue;
+
+        if (isDuplicate(venue))
+            continue;
+
+        auto item = osmVenueToItem(venue);
+        root->appendRow(item);
+        addedCount++;
+    }
+
+    if (addedCount > 0)
+    {
+        m_loadedVenueType |= GastroFlag | ShopFlag;
+        emit loadedVenueTypeChanged();
+    }
+
+    emit osmVenuesLoaded(addedCount);
+}
+
+QStandardItem* VenueModel::osmVenueToItem(const QJsonObject& venue)
+{
+    auto item = new QStandardItem;
+
+    item->setData(venue["id"].toString(), VenueModelRoles::ID);
+    item->setData(venue["name"].toString().simplified(), VenueModelRoles::Name);
+    item->setData(simplifySearchString(venue["name"].toString()), VenueModelRoles::SimplifiedSearchName);
+    item->setData(venue["street"].toString(), VenueModelRoles::Street);
+    item->setData(simplifySearchString(venue["street"].toString()), VenueModelRoles::SimplifiedSearchStreet);
+    item->setData(venue["latCoord"].toDouble(), VenueModelRoles::LatCoord);
+    item->setData(venue["longCoord"].toDouble(), VenueModelRoles::LongCoord);
+    item->setData(venue["vegan"].toInt(), VenueModelRoles::VegCategory);
+    item->setData(venue["telephone"].toString(), VenueModelRoles::Telephone);
+    item->setData(venue["website"].toString(), VenueModelRoles::Website);
+    item->setData(venue["openComment"].toString(), VenueModelRoles::OpenComment);
+    item->setData(QStringLiteral("osm"), VenueModelRoles::DataSource);
+
+    // Properties (-1 = unknown, 0 = no, 1 = yes)
+    item->setData(venue["organic"].toInt(-1), VenueModelRoles::Organic);
+    item->setData(venue["handicappedAccessible"].toInt(-1), VenueModelRoles::HandicappedAccessible);
+    item->setData(venue["delivery"].toInt(-1), VenueModelRoles::Delivery);
+    item->setData(venue["wlan"].toInt(-1), VenueModelRoles::Wlan);
+    item->setData(venue["dog"].toInt(-1), VenueModelRoles::Dog);
+    item->setData(venue["childChair"].toInt(-1), VenueModelRoles::ChildChair);
+
+    // Venue type
+    const int venueType = venue["venueType"].toInt(0);
+    item->setData(venueType, VenueModelRoles::VenueTypeRole);
+
+    // Sub-type from tags array
+    const auto tags = venue["tags"].toArray();
+    VenueSubTypeFlags subTypeFlags;
+    for (const auto& tag : tags)
+    {
+        const auto flag = subTypeStringToFlag(tag.toString());
+        subTypeFlags |= flag;
+    }
+    item->setData(QVariant::fromValue(static_cast<int>(subTypeFlags)), VenueModelRoles::VenueSubTypeRole);
+
+    return item;
+}
+
+bool VenueModel::isDuplicate(const QJsonObject& osmVenue) const
+{
+    const double osmLat = osmVenue["latCoord"].toDouble();
+    const double osmLon = osmVenue["longCoord"].toDouble();
+    const auto osmName = simplifySearchString(osmVenue["name"].toString());
+
+    for (int row = 0; row < rowCount(); ++row)
+    {
+        const auto idx = index(row, 0);
+        const auto existingSource = idx.data(VenueModelRoles::DataSource).toString();
+
+        // Only deduplicate against berlin-vegan.de venues
+        if (existingSource == "osm")
+            continue;
+
+        const double lat = idx.data(VenueModelRoles::LatCoord).toDouble();
+        const double lon = idx.data(VenueModelRoles::LongCoord).toDouble();
+
+        // Quick geographic check (~50m threshold at Berlin's latitude)
+        const double dlat = qAbs(osmLat - lat);
+        const double dlon = qAbs(osmLon - lon);
+        if (dlat > 0.0005 || dlon > 0.0007)
+            continue;
+
+        // Name similarity check
+        const auto existingName = idx.data(VenueModelRoles::SimplifiedSearchName).toString();
+        if (osmName.contains(existingName) || existingName.contains(osmName))
+            return true;
+    }
+
+    return false;
 }
 
 VenueModel::VenueTypeFlags VenueModel::loadedVenueType() const
