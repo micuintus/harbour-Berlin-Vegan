@@ -76,6 +76,7 @@ qt_add_qml_module(harbour-berlin-vegan
         qml/components/VenueSubTypeDefinition.qml
         qml/components/VenueSubTypeDefinitions.qml
         qml/components/VenueDescriptionAlgorithms.js
+        qml/components/tinycolor.js
     IMPORTS
         BerlinVegan.components.platform
         BerlinVegan.components.ui

@@ -10,7 +10,7 @@ static const QUrl GASTRO_URL{QStringLiteral("https://www.berlin-vegan.de/app/dat
 static const QUrl SHOPPING_URL{QStringLiteral("https://data.berlin-vegan.de/api/ShoppingLocations.json")};
 static const QString GASTRO_FILENAME = QStringLiteral("GastroLocations.json");
 static const QString SHOPPING_FILENAME = QStringLiteral("ShoppingLocations.json");
-static constexpr int NETWORK_TIMEOUT_MS = 5000;
+static constexpr int NETWORK_TIMEOUT_MS = 15000;
 
 VenueDataLoader::VenueDataLoader(QObject *parent)
     : QObject(parent)
