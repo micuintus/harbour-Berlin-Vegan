@@ -55,6 +55,7 @@ qt_add_qml_module(harbour-berlin-vegan
         src/VenueDataLoader.h src/VenueDataLoader.cpp
         src/TruncationMode.h
         src/OSMProvider.h src/OSMProvider.cpp
+        src/ReverseGeocoder.h src/ReverseGeocoder.cpp
         src/OsmOpeningHoursParser.h src/OsmOpeningHoursParser.cpp
         src/OpeningHoursAlgorithms.h src/OpeningHoursAlgorithms.cpp
     QML_FILES

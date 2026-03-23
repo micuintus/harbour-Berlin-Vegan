@@ -39,6 +39,8 @@ App {
         }
     }
 
+    screenOrientation: Qt.PortraitOrientation
+
     Component.onCompleted: {
         BVApp.Theme.myApp = app
         if (material.status == FontLoader.Ready) {

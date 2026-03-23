@@ -123,8 +123,7 @@ BVApp.Page {
 
         function centerAndZoom()
         {
-            animateToLocation(currentPosition.coordinate,
-                              maximumZoomLevel - (BVApp.Platform.isIos ? 9 : 3));
+            animateToLocation(currentPosition.coordinate, 15);
         }
 
         function animateToLocation(coord, targetZoom) {

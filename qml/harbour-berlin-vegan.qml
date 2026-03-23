@@ -86,6 +86,8 @@ BVApp.ApplicationWindow
         target: OSMProvider
         function onVenuesReady(venues) {
             gJsonVenueModel.importOSMVenues(venues);
+            // Fill missing street addresses in background
+            ReverseGeocoder.enrichModel(gJsonVenueModel);
         }
     }
 
