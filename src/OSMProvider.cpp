@@ -133,9 +133,17 @@ void OSMProvider::tryNextEndpoint(const QString& query, int endpointIndex)
 
 void OSMProvider::parseResponse(const QByteArray& data)
 {
-    const auto doc = QJsonDocument::fromJson(data);
-    if (!doc.isObject()) {
-        emit error(QStringLiteral("Invalid Overpass response"));
+    if (data.isEmpty()) return;
+
+    QJsonParseError parseError;
+    const auto doc = QJsonDocument::fromJson(data, &parseError);
+    if (parseError.error != QJsonParseError::NoError) {
+        emit error(QStringLiteral("JSON parse error: ") + parseError.errorString());
+        return;
+    }
+
+    if (!doc.isObject() || !doc.object().contains("elements")) {
+        emit error(QStringLiteral("Invalid Overpass response: missing 'elements'"));
         return;
     }
 

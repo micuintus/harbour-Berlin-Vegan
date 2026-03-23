@@ -1,13 +1,11 @@
 #pragma once
 
-#include "VenueModel.h"
-
-#include <QStandardItem>
 #include <QVariant>
 #include <QtQml/QJSValue>
-
 #include <QDateTime>
 #include <QtMath>
+
+class QStandardItem;
 
 constexpr int DAYS_PER_WEEK = 7;
 constexpr int HOURS_PER_DAY = 24;

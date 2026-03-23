@@ -255,7 +255,7 @@ void VenueSortFilterProxyModel::setFilterOpenNow(bool filterOpenNow)
     emit filterOpenChanged();
 }
 
-void VenueSortFilterProxyModel::setfilterCustomOpen(bool filterCustomOpen)
+void VenueSortFilterProxyModel::setFilterCustomOpen(bool filterCustomOpen)
 {
     if (m_filterCustomOpen == filterCustomOpen)
     {

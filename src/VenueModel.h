@@ -199,6 +199,8 @@ signals:
     void osmVenuesLoaded(int count);
 
 private:
+    friend class TestDeduplication;
+
     QModelIndex indexFromID(const QString& id) const;
     QStandardItem* jsonItem2QStandardItem(const QJSValue& from);
     QStandardItem* osmVenueToItem(const QJsonObject& venue);

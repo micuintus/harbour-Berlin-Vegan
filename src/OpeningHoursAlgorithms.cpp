@@ -1,5 +1,7 @@
 #include "OpeningHoursAlgorithms.h"
+#include "VenueModel.h"
 
+#include <QStandardItem>
 #include <QStringList>
 
 QVariantMap mergeElements(const QVariantList& openingHours,

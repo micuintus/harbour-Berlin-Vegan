@@ -90,8 +90,9 @@ OsmOpeningHoursParser::Result OsmOpeningHoursParser::parse(const QString& input)
     // "Tu-Fr 12:00-22:00, Sa,Su 10:00-22:00" → "Tu-Fr 12:00-22:00; Sa,Su 10:00-22:00"
     // Commas within day lists (Mo,We,Fr) or time lists (09:00-12:00,14:00-18:00) are preserved.
     auto normalized = input;
-    static const QRegularExpression commaRule(R"((\d{2}:\d{2})\s*,\s*((?:Mo|Tu|We|Th|Fr|Sa|Su)))");
-    normalized.replace(commaRule, R"(\1; \2)");
+    static const QRegularExpression commaRule(
+        QStringLiteral("(\\d{1,2}:\\d{2})\\s*,\\s*((?:Mo|Tu|We|Th|Fr|Sa|Su|PH|SH))"));
+    normalized.replace(commaRule, QStringLiteral("\\1; \\2"));
 
     const auto rules = normalized.split(';');
 

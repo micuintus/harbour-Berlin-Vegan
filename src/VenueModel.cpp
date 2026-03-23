@@ -340,6 +340,15 @@ QStandardItem* VenueModel::osmVenueToItem(const QJsonObject& venue)
     return item;
 }
 
+// Dedup thresholds at Berlin's latitude (~52.5°N):
+// 1° lat ≈ 111km, 1° lon ≈ 65km
+static constexpr double DEDUP_SAME_LOCATION_LAT = 0.0003;  // ~33m
+static constexpr double DEDUP_SAME_LOCATION_LON = 0.0004;  // ~26m
+static constexpr double DEDUP_NAME_CHECK_LAT    = 0.002;   // ~222m
+static constexpr double DEDUP_NAME_CHECK_LON    = 0.003;   // ~195m
+static constexpr int    DEDUP_MIN_PREFIX_LEN     = 4;
+static constexpr int    DEDUP_MIN_WORD_LEN       = 3;
+
 bool VenueModel::isDuplicate(const QJsonObject& osmVenue) const
 {
     const double osmLat = osmVenue["latCoord"].toDouble();
@@ -361,29 +370,27 @@ bool VenueModel::isDuplicate(const QJsonObject& osmVenue) const
         const double dlat = qAbs(osmLat - lat);
         const double dlon = qAbs(osmLon - lon);
 
-        // Very close (~30m): same venue regardless of name differences
-        if (dlat < 0.0003 && dlon < 0.0004)
+        // Very close: same venue regardless of name differences
+        if (dlat < DEDUP_SAME_LOCATION_LAT && dlon < DEDUP_SAME_LOCATION_LON)
             return true;
 
-        // Within ~200m: check name similarity
-        if (dlat > 0.002 || dlon > 0.003)
+        // Too far: skip name check entirely
+        if (dlat > DEDUP_NAME_CHECK_LAT || dlon > DEDUP_NAME_CHECK_LON)
             continue;
 
+        // Within name-check range: compare names
         const auto existingName = idx.data(VenueModelRoles::SimplifiedSearchName).toString();
 
-        // Substring match
         if (osmName.contains(existingName) || existingName.contains(osmName))
             return true;
 
-        // Prefix match (first 4 chars after normalization)
-        if (osmName.length() >= 4 && existingName.length() >= 4
-            && osmName.left(4) == existingName.left(4))
+        if (osmName.length() >= DEDUP_MIN_PREFIX_LEN && existingName.length() >= DEDUP_MIN_PREFIX_LEN
+            && osmName.left(DEDUP_MIN_PREFIX_LEN) == existingName.left(DEDUP_MIN_PREFIX_LEN))
             return true;
 
-        // Word-by-word: if first word matches
         const auto osmFirst = osmName.split(' ').first();
         const auto bvFirst = existingName.split(' ').first();
-        if (osmFirst.length() >= 3 && osmFirst == bvFirst)
+        if (osmFirst.length() >= DEDUP_MIN_WORD_LEN && osmFirst == bvFirst)
             return true;
     }
 

@@ -120,6 +120,56 @@ private slots:
         QCOMPARE(r.days[0], "10:00 - 20:00"); // Mo
         QVERIFY(r.days[6].isEmpty()); // Su = off
     }
+    // --- Edge cases ---
+
+    void afterMidnight()
+    {
+        auto r = OsmOpeningHoursParser::parse("Fr-Sa 18:00-02:00");
+        QVERIFY(r.parsed);
+        QCOMPARE(r.days[4], "18:00 - 02:00"); // Fr
+        QCOMPARE(r.days[5], "18:00 - 02:00"); // Sa
+    }
+
+    void singleDigitHours()
+    {
+        auto r = OsmOpeningHoursParser::parse("Mo-Fr 8:00-17:00");
+        QVERIFY(r.parsed);
+        QCOMPARE(r.days[0], "8:00 - 17:00");
+    }
+
+    void extraWhitespace()
+    {
+        auto r = OsmOpeningHoursParser::parse("  Mo-Fr  09:00 - 18:00 ;  Sa  10:00 - 14:00  ");
+        QVERIFY(r.parsed);
+        QCOMPARE(r.days[0], "09:00 - 18:00");
+        QCOMPARE(r.days[5], "10:00 - 14:00");
+    }
+
+    void phOnly_skipped()
+    {
+        auto r = OsmOpeningHoursParser::parse("PH 10:00-16:00");
+        QVERIFY(!r.parsed); // PH-only rules don't produce regular day entries
+    }
+
+    void multipleCommaRulesWithPH()
+    {
+        auto r = OsmOpeningHoursParser::parse("Mo-Fr 09:00-18:00, Sa 10:00-14:00, PH 10:00-16:00");
+        QVERIFY(r.parsed);
+        QCOMPARE(r.days[0], "09:00 - 18:00");
+        QCOMPARE(r.days[5], "10:00 - 14:00");
+    }
+
+    void wrapAroundWeek()
+    {
+        // Fr-Mo means Fr, Sa, Su, Mo
+        auto r = OsmOpeningHoursParser::parse("Fr-Mo 10:00-22:00");
+        QVERIFY(r.parsed);
+        QCOMPARE(r.days[4], "10:00 - 22:00"); // Fr
+        QCOMPARE(r.days[5], "10:00 - 22:00"); // Sa
+        QCOMPARE(r.days[6], "10:00 - 22:00"); // Su
+        QCOMPARE(r.days[0], "10:00 - 22:00"); // Mo
+        QVERIFY(r.days[1].isEmpty()); // Tu
+    }
 };
 
 QTEST_MAIN(TestOsmOpeningHours)
