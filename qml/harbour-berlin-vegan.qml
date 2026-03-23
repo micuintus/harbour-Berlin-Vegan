@@ -67,29 +67,21 @@ BVApp.ApplicationWindow
         }
     }
 
-    BVApp.JsonDownloadHelper {
-        id: venueDownloadHelper
-        onFileLoaded:
-        function(json)
-        {
+    Connections {
+        target: VenueDataLoader
+        function onGastroDataReady(json) {
             gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Gastro);
             favoritesHook();
         }
-    }
-
-    BVApp.JsonDownloadHelper {
-        id: shoppingDownloadHelper
-        onFileLoaded:
-        function(json)
-        {
+        function onShoppingDataReady(json) {
             gJsonVenueModel.importFromJson(JSON.parse(json), VenueModel.Shop);
             favoritesHook();
         }
     }
 
     Component.onCompleted: {
-        venueDownloadHelper.loadVenueJson();
-        shoppingDownloadHelper.loadShoppingJson();
+        VenueDataLoader.loadGastroVenues();
+        VenueDataLoader.loadShoppingVenues();
     }
 
     Connections {

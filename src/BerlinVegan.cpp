@@ -28,6 +28,7 @@
 #include "FileIO.h"
 #include "FavoritesManager.h"
 #include "TruncationMode.h"
+#include "VenueDataLoader.h"
 #include "VenueSortFilterProxyModel.h"
 #include "VenueModel.h"
 #include "VenueHandle.h"
@@ -87,6 +88,7 @@ int main(int argc, char *argv[])
     qmlEngine.addImportPath(QStringLiteral("qrc:/"));
     FileIO fileIO;
     FavoritesManager favoritesManager;
+    VenueDataLoader venueDataLoader;
 
 #ifdef Q_OS_SAILFISH
     app->setApplicationVersion(APP_VERSION);
@@ -94,12 +96,14 @@ int main(int argc, char *argv[])
     view->show();
     view->rootContext()->setContextProperty("FileIO", &fileIO);
     view->rootContext()->setContextProperty("FavoritesManager", &favoritesManager);
+    view->rootContext()->setContextProperty("VenueDataLoader", &venueDataLoader);
 #else
     felgoApp.initialize(&qmlEngine);
     felgoApp.setMainQmlFileName(mainQMLFile);
-    qmlEngine.load(QUrl(felgoApp.mainQmlFileName()));
     qmlEngine.rootContext()->setContextProperty("FileIO", &fileIO);
     qmlEngine.rootContext()->setContextProperty("FavoritesManager", &favoritesManager);
+    qmlEngine.rootContext()->setContextProperty("VenueDataLoader", &venueDataLoader);
+    qmlEngine.load(QUrl(felgoApp.mainQmlFileName()));
 #endif
     return app->exec();
 }

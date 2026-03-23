@@ -33,12 +33,14 @@ set(SOURCES
     src/FavoritesManager.cpp
     src/FileIO.cpp
     src/OpeningHoursAlgorithms.cpp
+    src/VenueDataLoader.cpp
     src/VenueModel.cpp
     src/VenueSortFilterProxyModel.cpp
 )
 
 set(HEADERS
     src/FavoritesManager.h
+    src/VenueDataLoader.h
     src/VenueModel.h
     src/VenueHandle.h
     src/VenueSortFilterProxyModel.h
