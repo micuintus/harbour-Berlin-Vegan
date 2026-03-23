@@ -4,44 +4,44 @@
 <context>
     <name></name>
     <message id="id-monday">
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="78"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="80"/>
         <source>Monday</source>
         <translation>Monday</translation>
     </message>
     <message id="id-tuesday">
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="80"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="82"/>
         <source>Tuesday</source>
         <translation>Tuesday</translation>
     </message>
     <message id="id-wednesday">
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="82"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="84"/>
         <source>Wednesday</source>
         <translation>Wednesday</translation>
     </message>
     <message id="id-thursday">
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="84"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="86"/>
         <source>Thursday</source>
         <translation>Thursday</translation>
     </message>
     <message id="id-friday">
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="86"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="88"/>
         <source>Friday</source>
         <translation>Friday</translation>
     </message>
     <message id="id-saturday">
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="88"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="90"/>
         <source>Saturday</source>
         <translation>Saturday</translation>
     </message>
     <message id="id-sunday">
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="45"/>
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="90"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="47"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="92"/>
         <source>Sunday / Holiday</source>
         <translation>Sunday / Holiday</translation>
     </message>
     <message id="id-closed">
-        <location filename="../src/OpeningHoursAlgorithms.cpp" line="65"/>
-        <location filename="../src/VenueModel.cpp" line="317"/>
+        <location filename="../src/VenueModel.cpp" line="327"/>
+        <location filename="../src/OpeningHoursAlgorithms.cpp" line="67"/>
         <source>closed</source>
         <translation>closed</translation>
     </message>
@@ -477,25 +477,34 @@
         <source>View CC BY-NC</source>
         <translation>View CC BY-NC</translation>
     </message>
+    <message id="id-thanks-to-osm">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="423"/>
+        <source>This app also uses venue data from &lt;a href=&apos;ref&apos;&gt;OpenStreetMap&lt;/a&gt;, a collaborative project to create a free editable geographic database. OSM data is released under the Open Data Commons Open Database License (ODbL).</source>
+        <translation>This app also uses venue data from &lt;a href='ref'&gt;OpenStreetMap&lt;/a&gt;, a collaborative project to create a free editable geographic database. OSM data is released under the Open Data Commons Open Database License (ODbL).</translation>
+    </message>
+    <message id="id-view-odbl">
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="444"/>
+        <source>View ODbL</source>
+        <translation>View ODbL</translation>
+    </message>
     <message id="id-thanks-to-qt">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="428"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="473"/>
         <source>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform toolkit Felgo.</source>
         <oldsource>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform Felgo Engine.</oldsource>
         <translation>Berlin-Vegan for SailfishOS, iOS and Android is being developed with the free and open source cross-platform framework &lt;a href=&apos;ref&apos;&gt;Qt&lt;/a&gt;. While the app uses jolla&apos;s native Qt-based SDK on SailfishOS, on Android and iOS it is realized with the cross-platform toolkit Felgo.</translation>
     </message>
     <message id="id-thanks-to-mapbox">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="454"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="499"/>
         <source>We would like to thank Mapbox for donating &lt;a href=&apos;ref&apos;&gt;their astonishing Mapbox GL Plugin&lt;/a&gt; to the Qt project, which makes hardware accelerated vector maps possible for this app.</source>
         <translation>We would like to thank Mapbox for donating &lt;a href=&apos;ref&apos;&gt;their astonishing Mapbox GL Plugin&lt;/a&gt; to the Qt project, which makes hardware accelerated vector maps possible for this app.</translation>
     </message>
     <message id="id-thanks-to-other-3rd-party-sw">
-        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="496"/>
+        <location filename="../qml/pages/about/AboutBerlinVegan.qml" line="541"/>
         <source>Moreover, this application greatfully makes use of the following third party Free Software projects:</source>
         <translation>Moreover, this application greatfully makes use of the following third party Free Software projects:</translation>
     </message>
     <message id="id-no-results">
         <location filename="../qml/pages/VenueList.qml" line="67"/>
-        <location filename="../qml/pages/OSMVenueList.qml" line="109"/>
         <source>No filter or search results</source>
         <translation>No filter or search results</translation>
     </message>

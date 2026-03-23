@@ -64,7 +64,6 @@ qt_add_qml_module(harbour-berlin-vegan
         qml/pages/VenueFilterSettings.qml
         qml/pages/VenueMapOverviewPage.qml
         qml/pages/VenueMapWidget.qml
-        qml/pages/OSMVenueList.qml
         qml/pages/about/AboutBerlinVegan.qml
         qml/pages/about/LicenseViewer.qml
         qml/pages/about/ThirdPartySoftware.qml

@@ -2,9 +2,9 @@
 
 ## Overview
 
-Cross-platform mobile guide for discovering vegan/vegetarian venues in Berlin.
-~300+ restaurants, cafes, bars, shops with GPS sorting, multi-dimensional filtering,
-opening hours intelligence, favorites, and map views.
+Cross-platform mobile guide for discovering vegan/vegetarian venues in Berlin metro area.
+~3000+ venues from OpenStreetMap + ~227 curated venues from berlin-vegan.de, with GPS sorting,
+multi-dimensional filtering, opening hours intelligence, favorites, and map views.
 
 ## Platforms & Build Systems
 
@@ -18,101 +18,89 @@ opening hours intelligence, favorites, and map views.
 ### Felgo (Desktop/iOS/Android)
 ```bash
 mkdir -p build && cd build
-cmake .. -DCMAKE_PREFIX_PATH=/path/to/felgo
-make -j$(nproc)
-```
-
-### SailfishOS
-```bash
-qmake BerlinVegan.pro && make
+cmake .. -DCMAKE_PREFIX_PATH=/path/to/felgo -GNinja
+ninja
 ```
 
 ### Tests
 ```bash
-cd tests && qmake ../BerlinVeganTests.pro && make && ./BerlinVeganTests
+ninja -C build tst_osm_opening_hours tst_opening_hours_algorithms tst_deduplication
+build/tests/tst_osm_opening_hours        # 21 tests
+build/tests/tst_opening_hours_algorithms  # 18 tests
+build/tests/tst_deduplication             # 11 tests
 ```
 
 ## Project Structure
 
 ```
 harbour-Berlin-Vegan/
-├── src/                         # C++ backend (platform-agnostic)
-│   ├── BerlinVegan.cpp          # Entry point (#ifdef Q_OS_SAILFISH)
-│   ├── VenueModel.h/cpp         # Data model (QStandardItemModel)
-│   ├── VenueSortFilterProxyModel.h/cpp  # Filter/sort engine (630 lines)
-│   ├── VenueHandle.h            # QML property proxy per venue
-│   ├── OpeningHoursAlgorithms.h # Opening hours parsing + holidays
-│   └── FileIO.h/cpp             # File I/O utility
+├── src/                           # C++ backend
+│   ├── main.cpp                   # Entry point (minimal, no type registration)
+│   ├── VenueModel.h/cpp           # Data model (QStandardItemModel, QML_ELEMENT)
+│   ├── VenueSortFilterProxyModel.h/cpp  # Filter/sort engine
+│   ├── VenueHandle.h              # QML property proxy per venue
+│   ├── OSMProvider.h/cpp          # Overpass API client (QML_SINGLETON)
+│   ├── OsmOpeningHoursParser.h/cpp # OSM opening_hours format parser
+│   ├── VenueDataLoader.h/cpp      # berlin-vegan.de JSON loader (QML_SINGLETON)
+│   ├── FavoritesManager.h/cpp     # Favorites persistence (QML_SINGLETON)
+│   ├── OpeningHoursAlgorithms.h/cpp # Opening hours parsing + Berlin holidays
+│   └── TruncationMode.h           # Text truncation enum (QML_UNCREATABLE)
 │
-├── qml/                         # Shared QML pages
-│   ├── harbour-berlin-vegan.qml # Root ApplicationWindow
-│   ├── pages/                   # VenueList, VenueDescription, Filter, Map, About
-│   └── cover/                   # Sailfish cover page
+├── qml/                           # QML pages and venue components
+│   ├── harbour-berlin-vegan.qml   # Root ApplicationWindow
+│   ├── pages/                     # VenueList, VenueDescription, Filter, Map, About
+│   ├── components/                # Venue business components (VenueListItem, etc.)
+│   └── cover/                     # Sailfish cover page
 │
-├── components-felgo/            # Felgo platform components (at root, NOT inside qml/)
-│   ├── qml/                     # Platform.qml, Theme.qml, Page.qml, etc.
-│   └── CMakeLists.txt           # Registers as BerlinVegan.components.platform
+├── components-platform/           # Platform abstraction
+│   ├── felgo/qml/                 # Felgo implementations (33 components)
+│   └── sailfish/                  # Sailfish implementations (qmldir)
 │
-├── components-sailfish/         # Sailfish platform components (at root)
-│   ├── *.qml                    # Platform.qml, Theme.qml, Page.qml, etc.
-│   └── qmldir                   # Registers as BerlinVegan.components.platform
-│
-├── components-generic/          # Shared business components (at root)
-│   ├── qml/                     # VenueListItem, VenueDetails, Database.js, etc.
-│   └── CMakeLists.txt           # Registers as BerlinVegan.components.generic
-│
-├── tests/                       # Qt Test unit tests
-├── translations/                # i18n (.ts/.qm): de, en, nl
-├── android/                     # AndroidManifest.xml
-├── ios/                         # Info.plist, assets
-└── rpm/                         # SailfishOS RPM packaging
+├── components-ui/qml/             # Reusable UI (SwipeView, CollapsibleItem, etc.)
+├── tests/                         # Qt Test unit tests (50 tests)
+├── translations/                  # i18n (.ts): de, en, nl
+├── macos/                         # macOS Info.plist (location permissions)
+├── android/                       # AndroidManifest.xml
+├── ios/                           # Info.plist, assets
+└── rpm/                           # SailfishOS RPM packaging
 ```
-
-**Important**: Component directories are at the **repository root**, not inside `qml/`.
 
 ## Architecture
 
 ### Data Flow
 ```
-JSON (berlin-vegan.de) → JsonDownloadHelper.qml → JSON.parse() in QML
-  → VenueModel.importFromJson() (C++) → VenueSortFilterProxyModel (C++)
-    → VenueHandle (C++) → QML Pages
+berlin-vegan.de JSON → VenueDataLoader (C++) → VenueModel.importFromJson()
+OSM Overpass API → OSMProvider (C++) → VenueModel.importOSMVenues() [with dedup]
+  → VenueSortFilterProxyModel (C++) → VenueHandle (C++) → QML Pages
 ```
 
-### C++ Core
-- **VenueModel**: QStandardItemModel with macro-generated roles (`ROLE_NAME_ID_PAIRS`)
-- **VenueSortFilterProxyModel**: OR filters (type/subtype/veg), AND filters (properties),
-  distance sort, opening hours, search with umlaut normalization
-- **VenueHandle**: Auto-generated Q_PROPERTY per role via same macro system
-- **OpeningHoursAlgorithms**: Parsing, condensation, Berlin public holidays
+### Data Sources
+- **berlin-vegan.de**: ~227 curated venues, rich data (photos, bilingual descriptions)
+- **OpenStreetMap**: ~3000+ venues via Overpass API, Berlin metro bbox preload with local cache
 
-### Platform Abstraction (4 Layers)
+### C++ Core (all use QML_ELEMENT)
+- **VenueModel**: QStandardItemModel with macro-generated roles, OSM deduplication
+- **VenueSortFilterProxyModel**: OR/AND filters, distance sort, deferred invalidation
+- **OSMProvider**: Multi-endpoint Overpass with cache-first loading (QML_SINGLETON)
+- **OsmOpeningHoursParser**: Parses "Mo-Fr 09:00-18:00" format (~90% coverage)
+- **FavoritesManager**: QSettings-based persistence (QML_SINGLETON)
+- **VenueDataLoader**: Network + cache + bundled resource fallback (QML_SINGLETON)
 
-1. **Build-time selection**: `#ifdef Q_OS_SAILFISH` in C++, `packagesExist(sailfishapp)` in QMake
-2. **QML module system**: Both platforms register `BerlinVegan.components.platform 1.0`
-3. **Wrapper components**: Page, MenuItem, ListView, Label, Map, etc. delegate to platform primitives
-4. **Theme abstraction**: `BVApp.Theme` singleton with platform-specific style properties
+### Platform Abstraction (3 modules)
+- `harbour.berlin.vegan` - App module (C++ types + pages + venue components)
+- `BerlinVegan.components.platform` - Platform wrappers (Felgo/Sailfish)
+- `BerlinVegan.components.ui` - Reusable UI components
 
-### Known Issues
-
-- **UI blocks on filter changes**: Synchronous `invalidateFilter()` does ~6,000 data lookups on UI thread
-- **Felgo UX limited**: Felgo wrappers are minimal (now unblocked for improvement)
-- **C++11 declared** but Qt6 requires C++17 minimum
-- **Memory leak**: `new VenueHandle()` without QML ownership management
-- **God object**: Root QML creates all models, manages state, handles favorites
-
-## Revamp Goals (Priority Order)
-
-1. ~~**C: Unified Abstraction**~~ DONE - silica4felgo deleted, 4-layer architecture
-2. **B: Better Architecture** - Fix UI blocking, C++ service layer, DataRepository
-3. **A: Idiomatic Code** - C++17, QAbstractListModel, constexpr, QML_ELEMENT
-4. **D: Multi-Source Data** - OSM (Overpass API), Geoapify, abstract provider interface
-5. **E: Sailfish Foundation** - Evaluate Chum Qt6 + Kremnium
+### Qt6 Patterns
+- `QML_ELEMENT` / `QML_SINGLETON` / `QML_UNCREATABLE` (no qmlRegisterType)
+- `qt_add_qml_module` with `NO_RESOURCE_TARGET_PATH` (Felgo requirement)
+- `qt_add_resources` (no resources.qrc)
+- `qt_add_translations` with `LRELEASE_OPTIONS -idbased`
+- `qt_standard_project_setup` with I18N configuration
 
 ## Code Style
 
 - **C++**: 4 spaces, `#pragma once`, PascalCase classes, camelCase methods, `m_` member prefix
-- **QML**: 4 spaces, imports grouped (Qt → Silica → BVApp → harbour.berlin.vegan)
+- **QML**: 4 spaces, bare imports (no version numbers), BVApp alias for platform/ui
 - **Translations**: `qsTrId("id-descriptive-name")` with `//%` source comments
-- **Logging**: `qInfo()`, `qWarning()`, `qDebug()`, `qCritical()`
-- **License**: GPL v2+ header required on new files
+- **Commit**: author `micu <micuintus@gmx.de>`, no Co-Authored-By
