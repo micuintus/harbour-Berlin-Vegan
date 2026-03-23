@@ -64,6 +64,9 @@ BVApp.ApplicationWindow
             for (var i = 0; i < favorite_ids.length; i++) {
                 gJsonVenueModel.setFavorite(favorite_ids[i], true);
             }
+
+            // Load OSM data AFTER BV data so deduplication works
+            OSMProvider.loadMetroArea();
         }
     }
 
@@ -89,7 +92,7 @@ BVApp.ApplicationWindow
     Component.onCompleted: {
         VenueDataLoader.loadGastroVenues();
         VenueDataLoader.loadShoppingVenues();
-        OSMProvider.loadMetroArea();
+        // OSM data loads after BV data (in favoritesHook) for deduplication
     }
 
     cover: Component { CoverPage {

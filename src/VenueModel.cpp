@@ -348,15 +348,20 @@ bool VenueModel::isDuplicate(const QJsonObject& osmVenue) const
         const double lat = idx.data(VenueModelRoles::LatCoord).toDouble();
         const double lon = idx.data(VenueModelRoles::LongCoord).toDouble();
 
-        // Quick geographic check (~50m threshold at Berlin's latitude)
+        // Geographic check (~100m threshold at Berlin's latitude)
         const double dlat = qAbs(osmLat - lat);
         const double dlon = qAbs(osmLon - lon);
-        if (dlat > 0.0005 || dlon > 0.0007)
+        if (dlat > 0.001 || dlon > 0.0014)
             continue;
 
-        // Name similarity check
+        // Name similarity: substring match or first 5 chars match
         const auto existingName = idx.data(VenueModelRoles::SimplifiedSearchName).toString();
         if (osmName.contains(existingName) || existingName.contains(osmName))
+            return true;
+
+        // Short names might not substring-match, so also check prefix
+        const int minLen = qMin(osmName.length(), existingName.length());
+        if (minLen >= 4 && osmName.left(4) == existingName.left(4))
             return true;
     }
 

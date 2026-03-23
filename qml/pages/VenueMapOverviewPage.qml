@@ -102,8 +102,7 @@ BVApp.Page {
                     type: "location"
 
                     color: BVApp.Theme.vegTypeColor(model.vegan)
-                    opacity: (typeof model.dataSource !== "undefined" && model.dataSource === "osm") ? 0.6 : 1.0
-                    scale: (typeof model.dataSource !== "undefined" && model.dataSource === "osm") ? 0.7 : 1.0
+                    opacity: (typeof model.dataSource !== "undefined" && model.dataSource === "osm") ? 0.5 : 1.0
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {
