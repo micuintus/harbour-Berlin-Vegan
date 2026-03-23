@@ -1,0 +1,8 @@
+{
+  "title": "Berlin-Vegan",
+  "identifier": "org.berlin_vegan.bvapp",
+  "orientation": "portrait",
+  "versioncode": 3,
+  "versionname": "APP_VERSION",
+  "stage": "test"
+}

@@ -45,7 +45,7 @@ BVApp.ApplicationWindow
     PositionSource {
         id: globalPositionSource
         updateInterval: 5000
-        preferredPositioningMethods: PositionSource.AllPositioningMethods
+        active: Qt.application.state === Qt.ApplicationActive
      }
 
     VenueSortFilterProxyModel {
@@ -83,19 +83,6 @@ BVApp.ApplicationWindow
         VenueDataLoader.loadGastroVenues();
         VenueDataLoader.loadShoppingVenues();
     }
-
-    Connections {
-        target: Qt.application
-        function onStateChanged() {
-            if (Qt.application.state === Qt.ApplicationActive) {
-                globalPositionSource.start();
-            }
-            else {
-                globalPositionSource.stop();
-            }
-        }
-    }
-
 
     cover: Component { CoverPage {
             id: cover

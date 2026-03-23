@@ -25,6 +25,7 @@
 
 #include <QQuickWindow>
 #include <QSGRendererInterface>
+#include <QPermissions>
 
 #ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>
@@ -50,6 +51,13 @@ int main(int argc, char *argv[])
 #else
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
     QScopedPointer<QApplication> app(new QApplication(argc, argv));
+
+    // Request location permission (required on macOS, iOS, Android)
+    QLocationPermission locationPermission;
+    locationPermission.setAccuracy(QLocationPermission::Precise);
+    if (app->checkPermission(locationPermission) == Qt::PermissionStatus::Undetermined) {
+        app->requestPermission(locationPermission, [](const QPermission &) {});
+    }
 
     QTranslator translator;
     if (translator.load(QLocale(), QLatin1String("harbour-berlin-vegan"),

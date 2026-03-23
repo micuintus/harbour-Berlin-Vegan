@@ -87,6 +87,7 @@ qt_add_qml_module(harbour-berlin-vegan
 qt_add_resources(harbour-berlin-vegan "assets"
     PREFIX "/"
     FILES
+        qml/config.json
         icons/MaterialIcons-Regular.ttf
         icons/icomoon.ttf
         images/Platzhalter_v2_mitSchriftzug.jpg
