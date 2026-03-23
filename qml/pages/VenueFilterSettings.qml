@@ -202,7 +202,6 @@ BVApp.Page {
 
             Column {
                 width: parent.width
-                visible: !showGastroVenues
 
                 BVApp.SectionHeader {
                     //% "Veg*an category"
