@@ -3,11 +3,21 @@
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QUrlQuery>
+#include <QFile>
+#include <QDir>
+#include <QStandardPaths>
 
-static const QString OVERPASS_URL = QStringLiteral("https://overpass-api.de/api/interpreter");
+// Multiple Overpass endpoints for resilience
+static const QStringList OVERPASS_ENDPOINTS = {
+    QStringLiteral("https://overpass-api.de/api/interpreter"),
+    QStringLiteral("https://overpass.kumi.systems/api/interpreter"),
+    QStringLiteral("https://maps.mail.ru/osm/tools/overpass/api/interpreter"),
+};
 
 // Berlin metro bounding box (includes Potsdam, Ludwigsfelde, Bernau)
 static const QString BERLIN_METRO_BBOX = QStringLiteral("52.25,12.85,52.75,13.85");
+
+static const QString CACHE_FILENAME = QStringLiteral("osm_metro_cache.json");
 
 // VenueModel::VenueVegCategory values
 static constexpr int VegCategory_Omnivorous = 1;
@@ -20,8 +30,18 @@ OSMProvider::OSMProvider(QObject *parent)
 {
 }
 
-void OSMProvider::fetchMetroArea()
+void OSMProvider::loadMetroArea()
 {
+    // Step 1: Load from cache immediately (instant, works offline)
+    const auto cached = loadCache();
+    if (!cached.isEmpty())
+    {
+        qInfo() << "OSM: loading venues from cache";
+        parseResponse(cached);
+        m_cacheLoaded = true;
+    }
+
+    // Step 2: Fetch fresh data in background
     const auto query = QStringLiteral(
         "[out:json][timeout:60];"
         "("
@@ -33,7 +53,7 @@ void OSMProvider::fetchMetroArea()
         "out center body;"
     ).arg(BERLIN_METRO_BBOX);
 
-    executeQuery(query);
+    fetchFromOverpass(query);
 }
 
 void OSMProvider::fetchNearby(const QGeoCoordinate& center, int radiusMeters)
@@ -49,40 +69,65 @@ void OSMProvider::fetchNearby(const QGeoCoordinate& center, int radiusMeters)
      .arg(center.latitude(), 0, 'f', 6)
      .arg(center.longitude(), 0, 'f', 6);
 
-    executeQuery(query);
+    fetchFromOverpass(query);
 }
 
-void OSMProvider::executeQuery(const QString& query)
+void OSMProvider::fetchFromOverpass(const QString& query)
 {
     if (m_loading) return;
 
     m_loading = true;
     emit loadingChanged();
 
-    QNetworkRequest request(OVERPASS_URL);
+    tryNextEndpoint(query, 0);
+}
+
+void OSMProvider::tryNextEndpoint(const QString& query, int endpointIndex)
+{
+    if (endpointIndex >= OVERPASS_ENDPOINTS.size())
+    {
+        qWarning() << "OSM: all Overpass endpoints failed";
+        if (!m_cacheLoaded)
+        {
+            emit error(QStringLiteral("All Overpass endpoints unavailable and no cache"));
+        }
+        m_loading = false;
+        emit loadingChanged();
+        return;
+    }
+
+    const auto& endpoint = OVERPASS_ENDPOINTS[endpointIndex];
+    qInfo() << "OSM: trying endpoint" << endpoint;
+
+    QNetworkRequest request(endpoint);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
     request.setRawHeader("User-Agent", "BerlinVegan-App/3.7.0");
+    request.setTransferTimeout(30000);
 
     QUrlQuery postData;
     postData.addQueryItem("data", query);
 
     auto* reply = m_networkManager.post(request, postData.toString(QUrl::FullyEncoded).toUtf8());
 
-    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+    connect(reply, &QNetworkReply::finished, this, [this, reply, query, endpointIndex]() {
         reply->deleteLater();
 
         if (reply->error() == QNetworkReply::NoError)
         {
-            parseResponse(reply->readAll());
+            const auto data = reply->readAll();
+            saveCache(data);
+            parseResponse(data);
+
+            m_loading = false;
+            emit loadingChanged();
         }
         else
         {
-            qWarning() << "Overpass query failed:" << reply->errorString();
-            emit error(QStringLiteral("OSM query failed: ") + reply->errorString());
+            qWarning() << "OSM: endpoint" << OVERPASS_ENDPOINTS[endpointIndex]
+                       << "failed:" << reply->errorString();
+            // Try next endpoint
+            tryNextEndpoint(query, endpointIndex + 1);
         }
-
-        m_loading = false;
-        emit loadingChanged();
     });
 }
 
@@ -104,9 +149,40 @@ void OSMProvider::parseResponse(const QByteArray& data)
             venues.append(venue);
     }
 
-    qInfo() << "OSM: found" << venues.size() << "vegan/vegetarian venues";
+    qInfo() << "OSM: parsed" << venues.size() << "vegan/vegetarian venues";
     emit venuesReady(venues);
 }
+
+// --- Cache ---
+
+QString OSMProvider::cachePath() const
+{
+    return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
+           + QStringLiteral("/") + CACHE_FILENAME;
+}
+
+void OSMProvider::saveCache(const QByteArray& data)
+{
+    const auto path = cachePath();
+    QDir().mkpath(QFileInfo(path).absolutePath());
+
+    QFile file(path);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        file.write(data);
+        qInfo() << "OSM: cached" << data.size() / 1024 << "KB to disk";
+    }
+}
+
+QByteArray OSMProvider::loadCache() const
+{
+    QFile file(cachePath());
+    if (file.open(QIODevice::ReadOnly))
+        return file.readAll();
+    return {};
+}
+
+// --- OSM data mapping ---
 
 QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
 {

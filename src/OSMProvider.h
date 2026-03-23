@@ -20,7 +20,8 @@ public:
 
     bool loading() const { return m_loading; }
 
-    Q_INVOKABLE void fetchMetroArea();
+    // Load cached data immediately, then fetch fresh in background
+    Q_INVOKABLE void loadMetroArea();
     Q_INVOKABLE void fetchNearby(const QGeoCoordinate& center, int radiusMeters = 5000);
 
 signals:
@@ -29,11 +30,18 @@ signals:
     void error(const QString& message);
 
 private:
-    void executeQuery(const QString& query);
+    void fetchFromOverpass(const QString& query);
+    void tryNextEndpoint(const QString& query, int endpointIndex);
     void parseResponse(const QByteArray& data);
     QJsonObject osmElementToVenue(const QJsonObject& element) const;
     int mapDietTagToVegCategory(const QString& dietVegan, const QString& dietVegetarian) const;
 
+    // Cache
+    void saveCache(const QByteArray& data);
+    QByteArray loadCache() const;
+    QString cachePath() const;
+
     QNetworkAccessManager m_networkManager;
     bool m_loading = false;
+    bool m_cacheLoaded = false;
 };

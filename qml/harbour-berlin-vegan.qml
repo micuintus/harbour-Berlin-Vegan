@@ -89,7 +89,7 @@ BVApp.ApplicationWindow
     Component.onCompleted: {
         VenueDataLoader.loadGastroVenues();
         VenueDataLoader.loadShoppingVenues();
-        OSMProvider.fetchMetroArea();
+        OSMProvider.loadMetroArea();
     }
 
     cover: Component { CoverPage {
