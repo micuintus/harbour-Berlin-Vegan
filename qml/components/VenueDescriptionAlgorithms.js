@@ -24,7 +24,13 @@
 **/
 
 .pragma library
-.import harbour.berlin.vegan 1.0 as BVApp
+
+// VenueModel.VenueVegCategory enum values
+var Omnivorous = 1;
+var OmnivorousVeganLabeled = 2;
+var Vegetarian = 3;
+var VegetarianVeganLabeled = 4;
+var Vegan = 5;
 
 function valueUnknown(key)
 {
@@ -48,23 +54,23 @@ function restaurantCategory(key)
 {
     switch(key)
     {
-        case BVApp.VenueModel.Omnivorous:
+        case Omnivorous:
                       //% "omnivorous"
             return qsTrId("id-omnivorous");
 
-        case BVApp.VenueModel.OmnivorousVeganLabeled:
+        case OmnivorousVeganLabeled:
                       //% "omnivorous \n(vegan dishes labeled)"
             return qsTrId("id-omnivorous-labeled");
 
-        case BVApp.VenueModel.Vegetarian:
+        case Vegetarian:
                       //% "vegetarian"
             return qsTrId("id-vegetarian");
 
-        case BVApp.VenueModel.VegetarianVeganLabeled:
+        case VegetarianVeganLabeled:
                       //% "vegetarian \n(vegan dishes labeled)"
             return qsTrId("id-vegetarian-labeled");
 
-        case BVApp.VenueModel.Vegan:
+        case Vegan:
                       //% "vegan"
             return qsTrId("id-vegan");
 

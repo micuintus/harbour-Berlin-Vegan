@@ -1,5 +1,5 @@
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 import QtQuick
 import QtLocation

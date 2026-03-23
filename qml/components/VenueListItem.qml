@@ -26,7 +26,7 @@
 import QtQuick 2.5
 
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 import harbour.berlin.vegan 1.0
 

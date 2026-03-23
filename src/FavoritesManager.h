@@ -1,12 +1,15 @@
 #pragma once
 
 #include <QObject>
+#include <QtQml/qqmlregistration.h>
 #include <QStringList>
 #include <QSettings>
 
 class FavoritesManager : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     explicit FavoritesManager(QObject *parent = nullptr);

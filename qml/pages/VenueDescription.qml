@@ -28,7 +28,7 @@ import QtPositioning 5.2
 
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 
 BVApp.Page {
@@ -51,7 +51,7 @@ BVApp.Page {
                                                           + iconToolBar.height
         property real scrolledUpRatio: 1 - (contentY / nonDescriptionHeaderHeight)
 
-        BVApp.VenueDescriptionHeader {
+        VenueDescriptionHeader {
             id: locationHeader
             name: restaurant.name
             pictures: restaurant.pictures
@@ -117,7 +117,7 @@ BVApp.Page {
             }
         }
 
-        BVApp.IconToolBar {
+        IconToolBar {
             id: iconToolBar
             restaurant: page.restaurant
 
@@ -148,7 +148,7 @@ BVApp.Page {
 
             }
 
-            contentItem: BVApp.VenueDetails {
+            contentItem: VenueDetails {
                 id: venueDetails
                 restaurant: page.restaurant
                 isGastroVenue: page.isGastroVenue
@@ -174,13 +174,13 @@ BVApp.Page {
         }
 
 
-        BVApp.VenueSubTypeTagCloud {
+        VenueSubTypeTagCloud {
             id: venueSubTypeTagCloud
             restaurant: page.restaurant
             venueSubTypeDefinitions:
                 isGastroVenue ?
-                    BVApp.VenueSubTypeDefinitions.gastroVenueSubTypes
-                  : BVApp.VenueSubTypeDefinitions.shopVenueSubTypes
+                    VenueSubTypeDefinitions.gastroVenueSubTypes
+                  : VenueSubTypeDefinitions.shopVenueSubTypes
 
             anchors {
                 left: parent.left

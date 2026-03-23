@@ -25,7 +25,7 @@
 
 import QtQuick 2.5
 
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 import BerlinVegan.components.platform 1.0 as BVApp
 
 import harbour.berlin.vegan 1.0
@@ -143,7 +143,7 @@ Item {
             label: isGastroVenue ?
                        qsTrId("id-vegan-venue-category")
                      : qsTrId("id-filter-vegan-category")
-            value: BVApp.VenueDescriptionAlgorithms.restaurantCategory(restaurant.vegan)
+            value: VenueDescriptionAlgorithms.restaurantCategory(restaurant.vegan)
             visible: true // venueCategory should be never unknown
         }
 
@@ -151,32 +151,32 @@ Item {
             id: organic
                       //% "Organic products"
             label: qsTrId("id-organic")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
-            visible: !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.organic)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.organic)
+            visible: !VenueDescriptionAlgorithms.valueUnknown(restaurant.organic)
         }
 
         BVApp.DetailItem {
             id: breakfast
                       //% "Breakfast"
             label: qsTrId("id-breakfast")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.breakfast)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.breakfast)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.breakfast)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.breakfast)
         }
 
         BVApp.DetailItem {
             id: brunch
                       //% "Brunch"
             label: qsTrId("id-brunch")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.brunch)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.brunch)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.brunch)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.brunch)
         }
 
         BVApp.DetailItem {
             id: glutenFree
                       //% "Gluten-free options"
             label: qsTrId("id-gluten-free")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.glutenFree)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.glutenFree)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.glutenFree)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.glutenFree)
         }
 
         BVApp.SectionHeader {
@@ -191,32 +191,32 @@ Item {
             id: wheelchairFriendly
                       //% "Wheelchair-friendly"
             label: qsTrId("id-wheelchair")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
-            visible: !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.handicappedAccessible)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessible)
+            visible: !VenueDescriptionAlgorithms.valueUnknown(restaurant.handicappedAccessible)
         }
 
         BVApp.DetailItem {
             id: wheelchairAccessibleWc
                       //% "Wheelchair-accessible WC"
             label: qsTrId("id-wheelchair-wc")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.handicappedAccessibleWc)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.handicappedAccessibleWc)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.handicappedAccessibleWc)
         }
 
         BVApp.DetailItem {
             id: highChair
                       //% "High chair"
             label: qsTrId("id-high-chair")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.childChair)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.childChair)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.childChair)
         }
 
         BVApp.DetailItem {
             id: dogsAllowed
                       //% "Dogs allowed"
             label: qsTrId("id-dogs-allowed")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.dog)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.dog)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.dog)
         }
 
         BVApp.SectionHeader {
@@ -231,40 +231,40 @@ Item {
             id: deliveryService
                       //% "Delivery service"
             label: qsTrId("id-delivery")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
-            visible: !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.delivery)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.delivery)
+            visible: !VenueDescriptionAlgorithms.valueUnknown(restaurant.delivery)
         }
 
         BVApp.DetailItem {
             id: catering
                       //% "Catering"
             label: qsTrId("id-catering")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.catering)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.catering)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.catering)
         }
 
         BVApp.DetailItem {
             id: wifi
                       //% "WiFi"
             label: qsTrId("id-wifi")
-            value: BVApp.VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.wlan)
+            value: VenueDescriptionAlgorithms.defaultBooleanProperty(restaurant.wlan)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.wlan)
         }
 
         BVApp.DetailItem {
             id: seatsOutdoor
                       //% "Seats outdoor"
             label: qsTrId("id-outdoor-seats")
-            value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.seatsOutdoor)
+            value: VenueDescriptionAlgorithms.seatProperty(restaurant.seatsOutdoor)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.seatsOutdoor)
         }
 
         BVApp.DetailItem {
             id: seatsIndoor
                       //% "Seats indoor"
             label: qsTrId("id-indoor-seats")
-            value: BVApp.VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
-            visible: isGastroVenue && !BVApp.VenueDescriptionAlgorithms.valueUnknown(restaurant.seatsIndoor)
+            value: VenueDescriptionAlgorithms.seatProperty(restaurant.seatsIndoor)
+            visible: isGastroVenue && !VenueDescriptionAlgorithms.valueUnknown(restaurant.seatsIndoor)
         }
     }
 }

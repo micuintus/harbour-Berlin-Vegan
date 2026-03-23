@@ -4,6 +4,7 @@
 
 #include <QtCore/QSortFilterProxyModel>
 #include <QtQml/QJSValue>
+#include <QtQml/qqmlregistration.h>
 #include <QString>
 #include <QGeoCoordinate>
 #include <QDateTime>
@@ -11,6 +12,7 @@
 class VenueSortFilterProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(VenueModel* model READ model WRITE setModel NOTIFY modelChanged)
     Q_PROPERTY(QGeoCoordinate currentPosition MEMBER m_currentPosition WRITE setCurrentPosition)

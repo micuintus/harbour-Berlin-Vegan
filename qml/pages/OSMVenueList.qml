@@ -27,7 +27,7 @@ import QtQuick 2.5
 import QtPositioning 5.2
 
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 import harbour.berlin.vegan 1.0
 
@@ -122,7 +122,7 @@ BVApp.Page {
             size: BVApp.Theme.busyIndicatorSizeLarge
         }
 
-        delegate: BVApp.VenueListItem {
+        delegate: VenueListItem {
             // The VenueListItem will use model.name and model.street from the model
             // We only need to set the distanceText property
             distanceText: positionSource && positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?

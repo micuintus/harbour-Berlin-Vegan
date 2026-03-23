@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QtQml/qqmlregistration.h>
 #include <QNetworkAccessManager>
 #include <QUrl>
 
@@ -9,6 +10,8 @@ class VenueModel;
 class VenueDataLoader : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
 

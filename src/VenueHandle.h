@@ -2,11 +2,14 @@
 
 #include "VenueModel.h"
 #include <QObject>
+#include <QtQml/qqmlregistration.h>
 #include <functional>
 
 class VenueHandle : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("Obtained from VenueSortFilterProxyModel.item()")
 
 #define ROLE_NAME_ID_PAIR(NAME, ID)                             \
     Q_PROPERTY(QVariant NAME READ NAME NOTIFY NAME##Changed)

@@ -27,7 +27,7 @@ import QtQuick 2.5
 import QtPositioning 5.2
 
 import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 
 import harbour.berlin.vegan 1.0
 
@@ -94,7 +94,7 @@ BVApp.Page {
             Qt.inputMethod.hide();
         }
 
-        delegate: BVApp.VenueListItem {
+        delegate: VenueListItem {
 
             distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
                       BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
