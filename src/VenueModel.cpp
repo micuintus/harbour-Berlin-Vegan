@@ -1,6 +1,7 @@
 #include "VenueModel.h"
 
 #include "OpeningHoursAlgorithms.h"
+#include "OsmOpeningHoursParser.h"
 
 #include <QtQml/qqml.h>
 #include <QtQml/QQmlEngine>
@@ -299,6 +300,32 @@ QStandardItem* VenueModel::osmVenueToItem(const QJsonObject& venue)
         subTypeFlags |= flag;
     }
     item->setData(QVariant::fromValue(static_cast<int>(subTypeFlags)), VenueModelRoles::VenueSubTypeRole);
+
+    // Parse OSM opening_hours into per-day format for "open now" filtering
+    const auto openingHoursRaw = venue["openComment"].toString();
+    const auto oh = OsmOpeningHoursParser::parse(openingHoursRaw);
+    if (oh.parsed)
+    {
+        static const char* dayTrIds[] = {
+            "id-monday", "id-tuesday", "id-wednesday", "id-thursday",
+            "id-friday", "id-saturday", "id-sunday"
+        };
+
+        QVariantList openingHours;
+        for (int i = 0; i < 7; ++i)
+        {
+            const auto hours = oh.days[i].isEmpty() ? qtTrId("id-closed") : oh.days[i];
+            openingHours.append(QVariantMap{
+                {"day", qtTrId(dayTrIds[i])},
+                {"hours", hours}
+            });
+        }
+
+        item->setData(openingHours, VenueModelRoles::OpeningHours);
+
+        auto const openingMinutes = extractOpeningMinutes(openingHours);
+        item->setData(openingMinutes, VenueModelRoles::OpeningMinutes);
+    }
 
     return item;
 }
