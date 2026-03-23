@@ -5,7 +5,6 @@
 
 // TruncationMode enum for text truncation in QML.
 // Values match Sailfish Silica's TruncationMode for compatibility.
-// Registered manually via qmlRegisterUncreatableType in BerlinVegan.cpp.
 class TruncationMode : public QObject
 {
     Q_OBJECT

@@ -131,7 +131,7 @@ protected:
 
 private:
     // Need to override for opening hours
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QVariant sourceData(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
     void reSort();

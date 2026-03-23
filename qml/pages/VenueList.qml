@@ -23,8 +23,8 @@
  *
 **/
 
-import QtQuick 2.5
-import QtPositioning 5.2
+import QtQuick
+import QtPositioning
 
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.ui 1.0 as BVApp

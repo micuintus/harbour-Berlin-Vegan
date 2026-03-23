@@ -23,11 +23,11 @@
  *
 **/
 
-import QtQuick 2.5
+import QtQuick
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.ui 1.0 as BVApp
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts
 
 BVApp.Page {
     id: page

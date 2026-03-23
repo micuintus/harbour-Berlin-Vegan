@@ -1,6 +1,6 @@
-import QtQuick 2.5
-import QtLocation 5.0
-import QtPositioning 5.2
+import QtQuick
+import QtLocation
+import QtPositioning
 import BerlinVegan.components.platform 1.0 as BVApp
 
 Rectangle {

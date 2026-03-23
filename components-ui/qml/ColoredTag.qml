@@ -1,4 +1,4 @@
-import QtQuick 2.5
+import QtQuick
 import BerlinVegan.components.platform 1.0 as BVApp
 
 Rectangle {

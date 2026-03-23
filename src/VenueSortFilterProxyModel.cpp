@@ -193,14 +193,8 @@ void VenueSortFilterProxyModel::setVenueSubTypeFilterFlag(int flag, bool on)
 
 void VenueSortFilterProxyModel::setModel(VenueModel *model)
 {
-    VenueModel *oldModel = qobject_cast<VenueModel*>(sourceModel());
-    if (oldModel == model)
+    if (sourceModel() == model)
         return;
-
-    if (oldModel) {
-        disconnect(oldModel, SIGNAL(rolesChanged()),
-                   this, SLOT(rolesChanged()));
-    }
 
     setSourceModel(model);
     emit modelChanged();

@@ -25,13 +25,6 @@ App {
 
         // Status bar
         Theme.colors.statusBarStyle = Theme.colors.statusBarStyleWhite
-
-        // Navigation drawer (white background, clean Material look)
-        if (Theme.navigationDrawer) {
-            Theme.navigationDrawer.backgroundColor = "white"
-            Theme.navigationDrawer.textColor = BVApp.Theme.primaryColor
-            Theme.navigationDrawer.activeTextColor = BVApp.Theme.highlightColor
-        }
     }
 
     FontLoader {
@@ -40,8 +33,10 @@ App {
     }
 
     onTabletChanged: {
-        nativeUtils.preferredScreenOrientation = tablet ? NativeUtils.ScreenOrientationUnspecified :
-                                                          NativeUtils.ScreenOrientationPortrait
+        if (!BVApp.Platform.isMacOS) {
+            nativeUtils.preferredScreenOrientation = tablet ? NativeUtils.ScreenOrientationUnspecified :
+                                                              NativeUtils.ScreenOrientationPortrait
+        }
     }
 
     Component.onCompleted: {

@@ -23,7 +23,7 @@ public:
         const auto* model = m_index.model();
         const auto& index = static_cast<QModelIndex>(m_index);
         connect(model, &QAbstractItemModel::dataChanged, this,
-        [&](const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles)
+        [this, index](const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles)
         {
             static QHash<VenueModel::VenueModelRoles, std::function<void(VenueHandle*)>> s_roleToChangedSignal =
             {
@@ -33,7 +33,7 @@ public:
             };
             #undef ROLE_NAME_ID_PAIR
 
-            if (index < topLeft || bottomRight < bottomRight)
+            if (index < topLeft || bottomRight < index)
                 return;
 
             for (const int role : roles)
@@ -61,5 +61,3 @@ signals:
 private:
     const QPersistentModelIndex m_index;
 };
-
-Q_DECLARE_INTERFACE(VenueHandle, "harbour.berlin.vegan.VenueHandle")
