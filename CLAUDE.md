@@ -24,10 +24,12 @@ ninja
 
 ### Tests
 ```bash
-ninja -C build tst_osm_opening_hours tst_opening_hours_algorithms tst_deduplication
+ninja -C build tst_osm_opening_hours tst_opening_hours_algorithms tst_deduplication tst_osm_provider tst_favorites
 build/tests/tst_osm_opening_hours        # 21 tests
 build/tests/tst_opening_hours_algorithms  # 18 tests
 build/tests/tst_deduplication             # 11 tests
+build/tests/tst_osm_provider             #  9 tests
+build/tests/tst_favorites                #  9 tests
 ```
 
 ## Project Structure
@@ -43,6 +45,7 @@ harbour-Berlin-Vegan/
 │   ├── OsmOpeningHoursParser.h/cpp # OSM opening_hours format parser
 │   ├── VenueDataLoader.h/cpp      # berlin-vegan.de JSON loader (QML_SINGLETON)
 │   ├── FavoritesManager.h/cpp     # Favorites persistence (QML_SINGLETON)
+│   ├── ReverseGeocoder.h/cpp      # Nominatim street lookup (QML_SINGLETON)
 │   ├── OpeningHoursAlgorithms.h/cpp # Opening hours parsing + Berlin holidays
 │   └── TruncationMode.h           # Text truncation enum (QML_UNCREATABLE)
 │
@@ -57,7 +60,7 @@ harbour-Berlin-Vegan/
 │   └── sailfish/                  # Sailfish implementations (qmldir)
 │
 ├── components-ui/qml/             # Reusable UI (SwipeView, CollapsibleItem, etc.)
-├── tests/                         # Qt Test unit tests (50 tests)
+├── tests/                         # Qt Test unit tests (68 tests)
 ├── translations/                  # i18n (.ts): de, en, nl
 ├── macos/                         # macOS Info.plist (location permissions)
 ├── android/                       # AndroidManifest.xml
@@ -71,6 +74,7 @@ harbour-Berlin-Vegan/
 ```
 berlin-vegan.de JSON → VenueDataLoader (C++) → VenueModel.importFromJson()
 OSM Overpass API → OSMProvider (C++) → VenueModel.importOSMVenues() [with dedup]
+Missing streets → ReverseGeocoder (C++) → Nominatim API [background, cached]
   → VenueSortFilterProxyModel (C++) → VenueHandle (C++) → QML Pages
 ```
 
@@ -85,6 +89,7 @@ OSM Overpass API → OSMProvider (C++) → VenueModel.importOSMVenues() [with de
 - **OsmOpeningHoursParser**: Parses "Mo-Fr 09:00-18:00" format (~90% coverage)
 - **FavoritesManager**: QSettings-based persistence (QML_SINGLETON)
 - **VenueDataLoader**: Network + cache + bundled resource fallback (QML_SINGLETON)
+- **ReverseGeocoder**: Nominatim background street lookup, persistent cache (QML_SINGLETON)
 
 ### Platform Abstraction (3 modules)
 - `harbour.berlin.vegan` - App module (C++ types + pages + venue components)

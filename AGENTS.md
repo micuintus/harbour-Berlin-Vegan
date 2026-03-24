@@ -2,219 +2,112 @@
 
 ## Project Overview
 
-Berlin-Vegan is a Qt/QML cross-platform mobile app for SailfishOS, iOS, and Android. It displays vegan food and shopping locations in Berlin.
+Berlin-Vegan is a Qt6/QML cross-platform mobile app for iOS, Android, and SailfishOS. It displays ~3000+ vegan/vegetarian venues in Berlin from OpenStreetMap + ~227 curated venues from berlin-vegan.de.
 
-- **Platforms**: SailfishOS (native), iOS/Android (via Felgo)
-- **Languages**: C++17, QML, JavaScript
-- **Build Systems**: QMake (.pro files) and CMake
+- **Platforms**: iOS/Android/Desktop (Felgo 4.3+), SailfishOS (Sailfish Silica)
+- **Languages**: C++17, QML (bare imports, no version numbers)
+- **Build System**: CMake (primary), QMake (Sailfish only)
 - **License**: GPL v2 or later
 
 ## Build Commands
 
-### Using QMake (SailfishOS SDK)
-
+### Felgo (Desktop/iOS/Android)
 ```bash
-# Build the main application
-qmake BerlinVegan.pro
-make
-
-# Build tests
-qmake BerlinVeganTests.pro
-make
-
-# Run tests
-./BerlinVeganTests
-
-# Run a single test class
-./BerlinVeganTests testFunctionName
+mkdir -p build && cd build
+cmake .. -DCMAKE_PREFIX_PATH=/path/to/felgo -GNinja
+ninja
 ```
 
-### Using CMake (Felgo/Desktop)
-
+### Tests (68 tests across 5 suites)
 ```bash
-# Configure and build
-mkdir build && cd build
-cmake .. -DCMAKE_PREFIX_PATH=/path/to/felgo
-make -j$(nproc)
-
-# Build with specific config
-cmake --build . --config Release
+ninja -C build tst_osm_opening_hours tst_opening_hours_algorithms tst_deduplication tst_osm_provider tst_favorites
 ```
 
-### Translation/L10n
-
-```bash
-# Update translation files (requires sailfishapp_i18n in .pro)
-lupdate BerlinVegan.pro
-
-# Release translations
-lrelease BerlinVegan.pro
-```
-
-## Test Commands
-
-Tests use Qt Test framework:
-
-```bash
-# Build and run all tests
-cd tests
-qmake ../BerlinVeganTests.pro
-make
-./BerlinVeganTests
-
-# Run specific test function
-./BerlinVeganTests testIsPublicHoliday
-
-# Run tests with verbose output
-./BerlinVeganTests -v2
-
-# List all test functions
-./BerlinVeganTests -functions
-```
-
-## Code Style Guidelines
+## Code Style
 
 ### C++ Style
-
 - **Standard**: C++17
 - **Indentation**: 4 spaces (no tabs)
-- **Headers**: Use `#pragma once` instead of include guards
-- **Line length**: ~120 characters max
-
-#### Naming Conventions
+- **Headers**: `#pragma once`
+- **Type registration**: `QML_ELEMENT` / `QML_SINGLETON` / `QML_UNCREATABLE` (no qmlRegisterType)
 
 | Type | Convention | Example |
 |------|------------|---------|
-| Classes | PascalCase | `VenueModel`, `VenueSortFilterProxyModel` |
-| Methods/Functions | camelCase | `importFromJson()`, `setFavorite()` |
-| Member Variables | m_ prefix + camelCase | `m_loadedVenueType` |
-| Constants | UPPER_CASE or PascalCase | `DAYS_PER_WEEK`, `VenueType::Gastro` |
-| Enums | PascalCase | `enum VenueVegCategory` |
-| Macros | UPPER_CASE | `ROLE_NAME_ID_PAIRS` |
-
-#### File Organization
-
-```cpp
-// 1. License header (mandatory for new files)
-/**
- * This file is part of the Berlin-Vegan guide
- * Copyright 20XX (c) by <author>
- * Licensed under GPL v2 or later
- */
-
-// 2. Includes - Qt first, then local
-#include <QtCore/QHash>
-#include <QStandardItemModel>
-#include "VenueModel.h"
-#include "FileIO.h"
-
-// 3. Forward declarations
-class QReadWriteLock;
-class QQmlEngine;
-
-// 4. Inline helpers before classes
-constexpr inline int enumValueToFlag(const int enumValue) { ... }
-```
+| Classes | PascalCase | `VenueModel`, `OSMProvider` |
+| Methods | camelCase | `importOSMVenues()`, `fetchMetroArea()` |
+| Members | m_ prefix | `m_loadedVenueType` |
+| Constants | constexpr + UPPER_CASE | `constexpr int DAYS_PER_WEEK = 7;` |
 
 ### QML Style
-
-- **Indentation**: 4 spaces
-- **Imports**: Group by source (Qt -> Sailfish -> local)
+- **Imports**: Bare (no version numbers): `import QtQuick`, `import QtPositioning`
+- **Module alias**: `import BerlinVegan.components.platform 1.0 as BVApp`
+- **Translations**: `qsTrId("id-descriptive-name")` with `//%` source comments
 
 ```qml
-import QtQuick 2.5
-import Sailfish.Silica 1.0
-import QtPositioning 5.2
-
-import BerlinVegan.components.platform 1.0 as BVApp
-import BerlinVegan.components.generic 1.0 as BVApp
-
+import QtQuick
+import QtPositioning
 import harbour.berlin.vegan 1.0
+import BerlinVegan.components.platform 1.0 as BVApp
+import BerlinVegan.components.ui 1.0 as BVApp
 ```
 
-#### Naming Conventions
-
-| Type | Convention | Example |
-|------|------------|---------|
-| IDs | camelCase | `id: page`, `id: listView` |
-| Properties | camelCase | `property var restaurant` |
-| Functions | camelCase | `function updatePosition() {}` |
-| Translation IDs | id-<name> | `qsTrId("id-filter-page-title")` |
-
-#### Translation
-
-Always use `qsTrId()` with id-based translations:
-
-```qml
-// Good
-Label {
-    //% "Filter settings"
-    text: qsTrId("id-filter-page-title")
-}
-
-// Context comments use //%
-```
-
-### Project Structure
-
-**Important**: Component directories are at the **repository root**, not inside `qml/`.
+## Project Structure
 
 ```
 harbour-Berlin-Vegan/
-├── src/                         # C++ source files
-├── qml/                         # Shared QML pages and cover
-│   ├── pages/                   # Page components
-│   └── cover/                   # Sailfish cover page
-├── components-felgo/            # Felgo platform components (ROOT level)
-│   └── qml/                     # Platform.qml, Theme.qml, Page.qml, etc.
-├── components-sailfish/         # Sailfish platform components (ROOT level)
-├── components-generic/          # Shared business components (ROOT level)
-│   └── qml/
-├── silica4felgo/                # Sailfish.Silica compatibility shim
-│   └── qml/
-├── tests/                       # Qt Test unit tests
-├── translations/                # .ts translation files (de, en, nl)
-├── android/                     # Android-specific files
-├── ios/                         # iOS-specific files
-└── rpm/                         # Sailfish RPM packaging
+├── src/                             # C++ backend (QML_ELEMENT types)
+├── qml/                             # Shared QML pages
+│   ├── pages/                       # VenueList, VenueDescription, Filter, Map, About
+│   ├── components/                  # Venue business components
+│   └── cover/                       # Sailfish cover page
+├── components-platform/
+│   ├── felgo/qml/                   # Felgo platform wrappers (33 components)
+│   └── sailfish/                    # Sailfish platform wrappers (qmldir)
+├── components-ui/qml/               # Reusable UI (SwipeView, CollapsibleItem, etc.)
+├── tests/                           # 68 Qt Test unit tests (5 suites)
+├── translations/                    # .ts files: de, en, nl (compiled at build time)
+├── macos/                           # macOS Info.plist
+├── android/                         # AndroidManifest.xml
+├── ios/                             # Info.plist, assets
+└── rpm/                             # SailfishOS RPM packaging
 ```
 
-## Error Handling
+## Architecture
 
-- Use Qt's logging: `qInfo()`, `qWarning()`, `qDebug()`, `qCritical()`
-- Return meaningful error states for model operations
-- Validate JSON inputs before processing
+### 3-Module Structure
+- `harbour.berlin.vegan` — App module (C++ types + pages + venue components)
+- `BerlinVegan.components.platform` — Platform wrappers (Felgo OR Sailfish)
+- `BerlinVegan.components.ui` — Reusable UI components
 
-## Platform Abstraction
+### Data Flow
+```
+berlin-vegan.de JSON → VenueDataLoader → VenueModel.importFromJson()
+OSM Overpass API → OSMProvider → VenueModel.importOSMVenues() [dedup]
+Missing streets → ReverseGeocoder → Nominatim API [background, cached]
+  → VenueSortFilterProxyModel → VenueHandle → QML Pages
+```
 
-The app uses platform-specific components:
+### C++ Singletons (QML_SINGLETON)
+- **OSMProvider**: Multi-endpoint Overpass with cache-first loading
+- **VenueDataLoader**: berlin-vegan.de JSON with timeout + cache
+- **FavoritesManager**: QSettings persistence
+- **ReverseGeocoder**: Nominatim background street lookup
 
-- **SailfishOS**: Native Silica components in `components-sailfish/`
-- **iOS/Android**: Felgo components in `components-felgo/`
-- **Shared**: Common components in `components-generic/`
-
-Use `#ifdef Q_OS_SAILFISH` for platform-specific C++ code.
-
-## Model/View Architecture
-
-- **VenueModel**: Core data model (QStandardItemModel subclass)
-- **VenueSortFilterProxyModel**: Sorting and filtering proxy
-- **VenueHandle**: Handle to venue data
-- Roles are defined via macros in VenueModel.h
+### CMake Patterns
+- `qt_add_qml_module` with `NO_RESOURCE_TARGET_PATH` (required for Felgo)
+- `qt_add_resources` for assets (no resources.qrc)
+- `qt_add_translations` with `LRELEASE_OPTIONS -idbased`
+- C++ SOURCES in qt_add_qml_module (not qt_add_executable)
 
 ## Git Conventions
 
-- Feature branches from master
+- Author: `micu <micuintus@gmx.de>`
+- No Co-Authored-By lines
 - Descriptive commit messages
-- Include license headers in new files
-- Test on both Sailfish and Felgo when possible
+- License headers in new files
 
-## Lint/Format
+## Before Committing
 
-No automated linter configured. Follow existing code style manually.
-
-Before committing:
-- Verify builds with both QMake and CMake
-- Run unit tests: `./BerlinVeganTests`
-- Check translations compile
-- Test on target platform if possible
+- Build with Ninja: `ninja -C build`
+- Run all 68 tests: all 5 test suites pass
+- Check runtime: clean console (only Felgo boilerplate)
