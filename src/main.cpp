@@ -70,6 +70,12 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine qmlEngine;
     felgoApp.initialize(&qmlEngine);
+    // On Android, static QML sub-modules (BerlinVegan.components.ui/platform) have
+    // their files compiled into the binary at qrc:/BerlinVegan/... but the
+    // android_rcc_bundle only carries their qmldir.  Adding qrc:/ as an import
+    // path lets the engine find both the qmldir and the actual QML/JS files
+    // directly from the compiled resources, bypassing the prefer-redirect path.
+    qmlEngine.addImportPath(QStringLiteral("qrc:/"));
     felgoApp.setMainQmlFileName(mainQMLFile);
     qmlEngine.load(QUrl(felgoApp.mainQmlFileName()));
 #endif
