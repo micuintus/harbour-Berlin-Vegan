@@ -394,10 +394,11 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 8. Network success — no road in Nominatim response: the result is cached
-    //    as an empty string and venueEnriched is NOT emitted.
+    // 8. Network success — no road in Nominatim response: the empty result is
+    //    cached as an empty string (suppresses future retries for this coord)
+    //    and venueEnriched is NOT emitted.
     // -----------------------------------------------------------------------
-    void networkSuccess_noRoad_notCachedPermanently()
+    void networkSuccess_noRoad_cachedAsEmpty_venueEnrichedNotEmitted()
     {
         FakeNAM fakeNam;
         // Response with empty address object (no "road" field)
@@ -582,9 +583,72 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 12. Calling enrichModel a second time while active: the timer must be
-    //     stopped, the old queue discarded, and a new run started WITHOUT
-    //     a spurious activeChanged(false) in between.
+    // 12. Calling enrichModel a second time while active, where the new model
+    //     has all addresses already in cache: the geocoder must transition to
+    //     inactive (active=false, activeChanged emitted) and NOT get stuck in
+    //     the active=true state forever.
+    //     Regression test for: enrichModel() early-returning on empty queue
+    //     without resetting m_active when called while a run was in progress.
+    // -----------------------------------------------------------------------
+    void reenrichModel_whileActive_allCached_transitionsToInactive()
+    {
+        // Pre-populate cache with the venue's coordinates
+        QJsonObject cache;
+        cache[QStringLiteral("52.11110,13.11110")] = QStringLiteral("Schönhauser Allee 10");
+        writeCacheFile(cache);
+
+        // First enrichModel call: venue NOT in cache → geocoder becomes active
+        // (we use a FakeNAM that never responds so the run stays in-flight)
+        FakeNAM fakeNam;
+        // Don't set a reply — FakeNAM will never deliver one, simulating an
+        // in-flight request.  We need the geocoder in m_active=true state.
+        fakeNam.setNextReply(QByteArray(), QNetworkReply::TimeoutError);
+
+        // Build a model with a venue NOT in cache (different coords)
+        auto* modelUncached = makeModelWithOSMVenue(QStringLiteral("osm_reenrich_a"), 52.0, 13.0);
+
+        TestableGeocoder geocoder(fakeNam);
+        geocoder.enrichModel(modelUncached); // → active=true, 1 request in flight
+
+        QVERIFY(geocoder.active());
+
+        // Now build a fresh model whose venue IS already in cache
+        // (same coords as the cache entry above)
+        auto* modelCached = makeModelWithOSMVenue(
+            QStringLiteral("osm_reenrich_b"), 52.1111, 13.1111);
+
+        // Track activeChanged signals
+        QList<bool> activeStates;
+        connect(&geocoder, &ReverseGeocoder::activeChanged, this, [&]() {
+            activeStates.append(geocoder.active());
+        });
+
+        // Call enrichModel again — the new queue will be empty because the
+        // venue's coordinates are in the cache.  The geocoder must emit
+        // activeChanged(false) and not remain stuck at active=true.
+        geocoder.enrichModel(modelCached);
+
+        // The geocoder must have transitioned to inactive
+        QVERIFY(!geocoder.active());
+        QCOMPARE(geocoder.pending(), 0);
+
+        // activeChanged(false) must have been emitted exactly once
+        QCOMPARE(activeStates.size(), 1);
+        QVERIFY(!activeStates.first());
+
+        // The cached street must have been written to the model
+        const auto idx = modelCached->index(0, 0);
+        QCOMPARE(idx.data(VenueModel::VenueModelRoles::Street).toString(),
+                 QStringLiteral("Schönhauser Allee 10"));
+
+        delete modelUncached;
+        delete modelCached;
+    }
+
+    // -----------------------------------------------------------------------
+    // 13. Calling enrichModel a second time while active (new queue non-empty):
+    //     the timer must be stopped, the old queue discarded, and a new run
+    //     started WITHOUT a spurious activeChanged(false) in between.
     // -----------------------------------------------------------------------
     void reenrichModel_resetsQueue_noSpuriousActiveChangedFalse()
     {
@@ -619,7 +683,7 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 13. Cache hit with empty string: a previous lookup that found no road
+    // 14. Cache hit with empty string: a previous lookup that found no road
     //     (empty string stored) must NOT set the street to empty (it stays
     //     whatever it was — empty in this case) and must NOT activate the
     //     geocoder.
@@ -650,7 +714,7 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 14. venueEnriched signal: when a cached (non-empty) street is applied,
+    // 15. venueEnriched signal: when a cached (non-empty) street is applied,
     //     no venueEnriched signal is emitted (signal is only for network path).
     // -----------------------------------------------------------------------
     void venueEnriched_notEmittedForCacheHits()
@@ -673,7 +737,7 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 15. Cache key format: verify that the cache key uses 5 decimal places
+    // 16. Cache key format: verify that the cache key uses 5 decimal places
     //     (matches the format used in loadCache/enrichModel).
     // -----------------------------------------------------------------------
     void cacheKey_fiveDecimalPlaces()
@@ -701,7 +765,7 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 16. User-Agent header: the Nominatim request must include a User-Agent
+    // 17. User-Agent header: the Nominatim request must include a User-Agent
     //     header to comply with OSM usage policy.
     // -----------------------------------------------------------------------
     void userAgent_presentInRequest()

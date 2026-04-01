@@ -110,6 +110,13 @@ void ReverseGeocoder::enrichModel(VenueModel *model)
 
     if (m_queue.isEmpty()) {
         qInfo() << "Geocoder: no venues need geocoding";
+        // If a previous run was active but the new queue is empty (e.g. all
+        // venues resolved from cache), we must transition back to inactive so
+        // that QML bindings on the `active` property reflect reality.
+        if (m_active) {
+            m_active = false;
+            emit activeChanged();
+        }
         return;
     }
 
