@@ -192,6 +192,11 @@ public:
     Q_INVOKABLE void setFavorite(const QString& id, bool favorite = true);
     QHash<int, QByteArray> roleNames() const override;
 
+    // Override setData so that writing the Street role also updates the
+    // SimplifiedSearchStreet role used by VenueSortFilterProxyModel.
+    // Without this, streets filled in by ReverseGeocoder are invisible to search.
+    bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
+
     VenueTypeFlags loadedVenueType() const;
 
 signals:

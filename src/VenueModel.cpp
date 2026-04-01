@@ -201,6 +201,18 @@ void VenueModel::importFromJson(const QJSValue &item, VenueType venueType)
     emit loadedVenueTypeChanged();
 }
 
+bool VenueModel::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+    const bool ok = QStandardItemModel::setData(index, value, role);
+    // When the Street role is written (e.g. by ReverseGeocoder), keep the
+    // SimplifiedSearchStreet role in sync so that text search can find the venue.
+    if (ok && role == VenueModelRoles::Street) {
+        const auto simplified = simplifySearchString(value.toString());
+        QStandardItemModel::setData(index, simplified, VenueModelRoles::SimplifiedSearchStreet);
+    }
+    return ok;
+}
+
 void VenueModel::setFavorite(const QString &id, bool favorite)
 {
     auto const index = indexFromID(id);

@@ -791,6 +791,43 @@ private slots:
 
         delete model;
     }
+
+    // -----------------------------------------------------------------------
+    // 18. SimplifiedSearchStreet must be updated when geocoder writes a street.
+    //     Without VenueModel::setData() override, search-by-street silently
+    //     fails for OSM venues that had their address filled in via geocoding.
+    // -----------------------------------------------------------------------
+    void networkSuccess_simplifiedSearchStreetUpdated()
+    {
+        FakeNAM fakeNam;
+        // Street contains an umlaut — simplification must apply (ü → u, ä → a, etc.)
+        fakeNam.setNextReply(nominatimResponse("Schönhauser Allee", "36a"));
+
+        const double lat = 52.54200;
+        const double lon = 13.41200;
+        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_search"), lat, lon);
+
+        TestableGeocoder geocoder(fakeNam);
+        geocoder.enrichModel(model);
+        QTest::qWait(100);
+
+        const auto idx = model->index(0, 0);
+
+        // Street role must contain the original (non-simplified) value
+        QCOMPARE(idx.data(VenueModel::VenueModelRoles::Street).toString(),
+                 QStringLiteral("Schönhauser Allee 36a"));
+
+        // SimplifiedSearchStreet must be updated too (ö→o, c→k, case-fold, etc.)
+        // Without the VenueModel::setData() override this would remain empty.
+        const auto simplified = idx.data(VenueModel::VenueModelRoles::SimplifiedSearchStreet).toString();
+        QVERIFY(!simplified.isEmpty());
+        // simplifySearchString: toLower + ö→o + c→k:
+        // "Schönhauser Allee 36a" → "schönhauser allee 36a" → "skhonhauser allee 36a"
+        QVERIFY(simplified.contains(QStringLiteral("skhonhauser")));
+        QVERIFY(simplified.contains(QStringLiteral("allee")));
+
+        delete model;
+    }
 };
 
 QTEST_MAIN(TestReverseGeocoder)
