@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QNetworkAccessManager>
+#include <QPointer>
 #include <QTimer>
 #include <QJsonObject>
 #include <QHash>
@@ -51,7 +52,8 @@ private:
     QTimer m_rateTimer;
     QList<GeoRequest> m_queue;
     QHash<QString, QString> m_cache; // "lat,lon" → "street housenumber"
-    VenueModel *m_model = nullptr;
+    QPointer<VenueModel> m_model;
     bool m_active = false;
     bool m_cacheLoaded = false;
+    int m_processedCount = 0; // processed requests in current run (for periodic save)
 };

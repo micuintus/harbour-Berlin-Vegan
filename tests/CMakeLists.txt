@@ -69,3 +69,15 @@ qt_add_executable(tst_favorites
 target_include_directories(tst_favorites PRIVATE ${CMAKE_SOURCE_DIR}/src)
 target_link_libraries(tst_favorites PRIVATE Qt6::Core Qt6::Test)
 add_test(NAME tst_favorites COMMAND tst_favorites)
+
+# --- ReverseGeocoder Tests ---
+
+qt_add_executable(tst_reverse_geocoder
+    tst_reverse_geocoder.cpp
+    ${CMAKE_SOURCE_DIR}/src/ReverseGeocoder.cpp
+    ${CMAKE_SOURCE_DIR}/src/ReverseGeocoder.h
+    ${VENUE_MODEL_SOURCES}
+)
+target_include_directories(tst_reverse_geocoder PRIVATE ${CMAKE_SOURCE_DIR}/src)
+target_link_libraries(tst_reverse_geocoder PRIVATE ${VENUE_MODEL_LIBS})
+add_test(NAME tst_reverse_geocoder COMMAND tst_reverse_geocoder)

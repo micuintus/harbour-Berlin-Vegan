@@ -9,7 +9,12 @@
 #include <QDir>
 #include <QStandardPaths>
 
+#ifndef APP_VERSION
+#  define APP_VERSION "0.0.0"
+#endif
+
 static constexpr int RATE_LIMIT_MS = 1100; // Nominatim: max 1 req/sec
+static constexpr int CACHE_SAVE_INTERVAL = 50; // Save after every N processed requests
 
 ReverseGeocoder::ReverseGeocoder(QObject *parent)
     : QObject(parent)
@@ -18,15 +23,26 @@ ReverseGeocoder::ReverseGeocoder(QObject *parent)
     m_rateTimer.setInterval(RATE_LIMIT_MS);
     connect(&m_rateTimer, &QTimer::timeout, this, &ReverseGeocoder::processNext);
 
-    // Save partial progress if app exits during geocoding
-    connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit, this, [this]() {
-        if (!m_cache.isEmpty()) saveCache();
-    });
+    // Save partial progress if the app exits during geocoding.
+    // Qt::UniqueConnection cannot deduplicate lambda slots, so we rely on the
+    // fact that each ReverseGeocoder instance is constructed at most once
+    // (enforced by QML_SINGLETON) to ensure this slot is connected exactly once.
+    connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit,
+            this, [this]() { if (!m_cache.isEmpty()) saveCache(); });
 }
 
 void ReverseGeocoder::enrichModel(VenueModel *model)
 {
-    if (!model || m_active) return;
+    if (!model) return;
+
+    // If a geocoding run is already in progress (e.g. OSM data refreshed in the
+    // background), stop the rate-limit timer so we don't fire processNext() with
+    // a stale queue, then rebuild the queue from the updated model.
+    if (m_active) {
+        m_rateTimer.stop();
+        m_active = false;
+        emit activeChanged();
+    }
 
     m_model = model;
 
@@ -37,6 +53,7 @@ void ReverseGeocoder::enrichModel(VenueModel *model)
 
     // Scan for venues missing street addresses
     m_queue.clear();
+    m_processedCount = 0;
     int cachedHits = 0;
 
     for (int row = 0; row < model->rowCount(); ++row)
@@ -107,7 +124,7 @@ void ReverseGeocoder::processNext()
         .arg(req.lat, 0, 'f', 6).arg(req.lon, 0, 'f', 6);
 
     QNetworkRequest netReq(url);
-    netReq.setRawHeader("User-Agent", "BerlinVegan-App/3.7.0");
+    netReq.setRawHeader("User-Agent", "BerlinVegan-App/" APP_VERSION);
     netReq.setTransferTimeout(10000);
 
     auto *reply = m_networkManager.get(netReq);
@@ -132,21 +149,34 @@ void ReverseGeocoder::processNext()
 
             if (!street.isEmpty() && m_model)
             {
+                // Validate that the row still contains the same venue we queued.
+                // If enrichModel() was called again mid-flight, row indices may
+                // have shifted and we must not write to the wrong venue.
                 const auto idx = m_model->index(req.modelRow, 0);
                 if (idx.isValid()) {
-                    m_model->setData(idx, street, VenueModel::VenueModelRoles::Street);
-                    emit venueEnriched(req.venueId, street);
+                    const auto idAtRow = idx.data(VenueModel::VenueModelRoles::ID).toString();
+                    if (idAtRow == req.venueId) {
+                        m_model->setData(idx, street, VenueModel::VenueModelRoles::Street);
+                        emit venueEnriched(req.venueId, street);
+                    }
                 }
             }
         }
         else
         {
-            // Cache empty string so we don't retry failed lookups
-            m_cache[cacheKey] = QString();
+            // Do NOT cache network errors: a transient failure (timeout, 429,
+            // connection refused) must not permanently suppress future retries.
+            // Only an explicit "no road found" result (road.isEmpty()) is cached
+            // as an empty string above in the success branch.
+            qWarning() << "Geocoder: network error for" << req.venueId
+                       << ":" << reply->errorString();
         }
 
-        // Save cache periodically so progress isn't lost if app is killed
-        if (m_cache.size() % 50 == 0)
+        // Save cache periodically so progress isn't lost if app is killed.
+        // Use a dedicated counter rather than total cache size (which may
+        // already be large from a previous run loaded from disk).
+        ++m_processedCount;
+        if (m_processedCount % CACHE_SAVE_INTERVAL == 0)
             saveCache();
 
         // Schedule next request after rate limit delay

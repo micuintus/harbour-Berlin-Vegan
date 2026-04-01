@@ -33,7 +33,8 @@ BVApp.Page {
 
 
     property var currentPosition: MapQuickItem {
-        id: currentPosition
+        id: currentPositionMarker
+        parent: map.mapTarget
 
         coordinate: positionSource.position.coordinate
 
@@ -117,13 +118,16 @@ BVApp.Page {
         }
 
         Component.onCompleted: {
-            addMapItem(currentPosition);
             centerAndZoom();
         }
 
         function centerAndZoom()
         {
-            animateToLocation(currentPosition.coordinate, 15);
+            // Only animate to current position when we have a valid GPS fix;
+            // otherwise the map would jump to (0,0) and show the Atlantic Ocean.
+            const coord = positionSource.position.coordinate;
+            if (coord.isValid)
+                animateToLocation(coord, 15);
         }
 
         function animateToLocation(coord, targetZoom) {
@@ -167,6 +171,7 @@ BVApp.Page {
             anchors.bottom: parent.bottom
             anchors.rightMargin: BVApp.Theme.paddingLarge
             anchors.bottomMargin: BVApp.Theme.paddingLarge
+                                  + (typeof nativeUtils !== "undefined" ? nativeUtils.safeAreaInsets.bottom : 0)
 
             onClicked: map.centerAndZoom()
 
