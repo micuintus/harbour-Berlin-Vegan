@@ -35,7 +35,14 @@ signals:
     void activeChanged();
     void venueEnriched(const QString& venueId, const QString& street);
 
+protected:
+    // Test-only constructor: accepts an externally-owned QNAM so unit tests
+    // can inject a fake manager without touching the production singleton path.
+    explicit ReverseGeocoder(QNetworkAccessManager& nam, QObject *parent = nullptr);
+
 private:
+    friend class TestReverseGeocoder;
+
     void processNext();
     void loadCache();
     void saveCache();
@@ -48,7 +55,9 @@ private:
         int modelRow;
     };
 
-    QNetworkAccessManager m_networkManager;
+    // In production: owns the manager. In tests: points to the injected one.
+    QNetworkAccessManager* m_namPtr = nullptr;
+    QNetworkAccessManager m_networkManagerOwned;
     QTimer m_rateTimer;
     QList<GeoRequest> m_queue;
     QHash<QString, QString> m_cache; // "lat,lon" → "street housenumber"
@@ -56,4 +65,10 @@ private:
     bool m_active = false;
     bool m_cacheLoaded = false;
     int m_processedCount = 0; // processed requests in current run (for periodic save)
+
+    // Incremented each time enrichModel() starts a new geocoding run.
+    // In-flight reply lambdas capture the generation at dispatch time and
+    // skip the rate-timer restart if the generation has advanced, preventing
+    // a stale reply from double-pumping the new run's queue.
+    int m_generation = 0;
 };

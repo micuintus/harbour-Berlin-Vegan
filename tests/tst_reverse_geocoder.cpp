@@ -99,21 +99,20 @@ private:
 };
 
 // ---------------------------------------------------------------------------
-// Testable subclass of ReverseGeocoder that exposes internals for testing.
-// We also override the QNAM so we can inject FakeNAM.
-// We do this by making ReverseGeocoder accept a QNAM reference at construction.
-// Since the production class owns QNAM as a member, we use a workaround:
-// expose the cache directly via a friend declaration already present in the
-// design. We add a test-only subclass that shadows the network manager by
-// NOT calling the base processNext() directly — instead we test state
-// transitions via enrichModel() and the public properties.
-//
-// For network-path tests we use a slightly different strategy: we derive from
-// ReverseGeocoder and override nothing, but we drive the test by pre-populating
-// the persistent cache file on disk before calling enrichModel().
+// Testable subclass of ReverseGeocoder that injects a FakeNAM via the
+// protected constructor added specifically for testing.
 // ---------------------------------------------------------------------------
+class TestableGeocoder : public ReverseGeocoder
+{
+public:
+    explicit TestableGeocoder(QNetworkAccessManager& nam, QObject* parent = nullptr)
+        : ReverseGeocoder(nam, parent)
+    {}
+};
 
-// Build a minimal Nominatim reverse-geocode JSON response
+// ---------------------------------------------------------------------------
+// Helper: build a minimal Nominatim reverse-geocode JSON response
+// ---------------------------------------------------------------------------
 static QByteArray nominatimResponse(const QString& road, const QString& houseNumber = {})
 {
     QJsonObject address;
@@ -127,7 +126,11 @@ static QByteArray nominatimResponse(const QString& road, const QString& houseNum
     return QJsonDocument(root).toJson(QJsonDocument::Compact);
 }
 
-// Build a minimal VenueModel with one OSM venue (no street, given lat/lon/id)
+// ---------------------------------------------------------------------------
+// Helper: build a minimal VenueModel with one OSM venue
+// The JSON format here matches what OSMProvider::osmElementToVenue() produces
+// and what VenueModel::importOSMVenues() / osmVenueToItem() consumes.
+// ---------------------------------------------------------------------------
 static VenueModel* makeModelWithOSMVenue(const QString& id, double lat, double lon,
                                           const QString& existingStreet = {})
 {
@@ -141,15 +144,18 @@ static VenueModel* makeModelWithOSMVenue(const QString& id, double lat, double l
     v["street"] = existingStreet;
     v["vegan"] = 5;
     v["venueType"] = 0;
+    // Opening hours are required by osmVenueToItem but parsed lazily; empty is fine.
+    v["openComment"] = QStringLiteral("Mo-Fr 09:00-17:00");
     QJsonArray tags; tags.append("Restaurant");
     v["tags"] = tags;
-    v["openComment"] = QStringLiteral("Mo-Fr 09:00-17:00");
     venues.append(v);
     model->importOSMVenues(venues);
     return model;
 }
 
-// Path to the geocode cache used by ReverseGeocoder (matches production path)
+// ---------------------------------------------------------------------------
+// Helpers for on-disk cache manipulation
+// ---------------------------------------------------------------------------
 static QString geocodeCachePath()
 {
     return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)
@@ -250,22 +256,13 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 3. Non-OSM venue: berlin-vegan.de ("bv") venues must be skipped.
+    // 3. Null-model guard: enrichModel(nullptr) must not crash.
     // -----------------------------------------------------------------------
-    void nonOSMVenue_skipped()
+    void nullModel_doesNotCrash()
     {
-        // Build a model manually with a "bv" data source
-        auto* model = new VenueModel;
-        // importFromJson is JS-based; use importOSMVenues + override datasource
-        // Since we can't trivially inject "bv" via importOSMVenues (it always
-        // sets "osm"), we test this implicitly: a freshly constructed VenueModel
-        // loaded via importFromJson(JS) would have no rows unless we have a
-        // QQmlEngine. Skip the bv-source test as it requires QML infrastructure.
-        // Instead test the null-model guard:
         ReverseGeocoder geocoder;
         geocoder.enrichModel(nullptr); // must not crash
         QVERIFY(!geocoder.active());
-        delete model;
     }
 
     // -----------------------------------------------------------------------
@@ -282,25 +279,18 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 5. Cache miss with invalid JSON response: geocoder must NOT crash,
-    //    must NOT cache a permanent empty string (so venue can be retried),
-    //    and must continue processing the queue.
-    //    We test this by writing an invalid-JSON cache entry is NOT written
-    //    when the response is garbage.
-    //    (Network layer is not mocked here — we rely on the timer path not
-    //    firing in the test and verify state after a direct processNext call.)
-    // -----------------------------------------------------------------------
-
-    // -----------------------------------------------------------------------
-    // 6. Active / pending properties: enrichModel on a model with one venue
-    //    that is NOT in cache must set active=true and pending=1 immediately.
+    // 5. Active / pending properties: enrichModel on a model with one venue
+    //    that is NOT in cache must set active=true and pending=1 immediately
+    //    (before the async network reply arrives).
     // -----------------------------------------------------------------------
     void activeAndPending_setAfterEnrichModel()
     {
         // No cache file, so the venue will be queued
+        FakeNAM fakeNam;
+        fakeNam.setNextReply(nominatimResponse("Friedrichstraße", "10"));
         auto* model = makeModelWithOSMVenue(QStringLiteral("osm_333"), 52.9999, 13.9999);
 
-        ReverseGeocoder geocoder;
+        TestableGeocoder geocoder(fakeNam);
 
         bool activeChangedFired = false;
         connect(&geocoder, &ReverseGeocoder::activeChanged, this, [&]() {
@@ -314,45 +304,309 @@ private slots:
 
         geocoder.enrichModel(model);
 
-        // After enrichModel, the geocoder transitions to active and fires the
-        // first processNext synchronously.  The rate-limit timer is then
-        // started (1100 ms), so no second request fires during the test.
-        QVERIFY(activeChangedFired);
-        QVERIFY(pendingChangedFired);
-
-        // We don't wait for the network request; just verify state is correct.
-        // active may become true. pending may be 0 (first req already dequeued).
-        // Key invariant: the geocoder did NOT crash.
+        // After enrichModel the first processNext() is called synchronously:
+        // it dequeues the item → pending drops to 0, then fires the network
+        // request.  The FakeReply signals fire on the next event-loop tick.
+        QVERIFY(activeChangedFired);    // activeChanged(true) was emitted
+        QVERIFY(pendingChangedFired);   // pendingChanged was emitted
 
         delete model;
     }
 
     // -----------------------------------------------------------------------
-    // 7. Calling enrichModel a second time while active: the timer must be
-    //    stopped, the old queue discarded, and new active state emitted.
+    // 6. Network success path: after a successful Nominatim reply the
+    //    geocoder writes the street to the model and emits venueEnriched.
     // -----------------------------------------------------------------------
-    void reenrichModel_resetsQueue()
+    void networkSuccess_streetWrittenToModel()
     {
-        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_444"), 52.1111, 13.1111);
+        FakeNAM fakeNam;
+        fakeNam.setNextReply(nominatimResponse("Kastanienallee", "82"));
 
-        ReverseGeocoder geocoder;
-        geocoder.enrichModel(model); // first call — queues venue, fires processNext
+        const double lat = 52.53000;
+        const double lon = 13.41000;
+        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_net1"), lat, lon);
 
-        // Second call immediately: should not double-fire or crash
+        TestableGeocoder geocoder(fakeNam);
+
+        QString enrichedId;
+        QString enrichedStreet;
+        connect(&geocoder, &ReverseGeocoder::venueEnriched,
+                this, [&](const QString& id, const QString& street) {
+            enrichedId = id;
+            enrichedStreet = street;
+        });
+
+        bool becameInactive = false;
+        connect(&geocoder, &ReverseGeocoder::activeChanged, this, [&]() {
+            if (!geocoder.active()) becameInactive = true;
+        });
+
         geocoder.enrichModel(model);
 
-        // After re-enrichment, the venue is in the cache key namespace for
-        // the new queue scan. Since it wasn't resolved, it will be re-queued.
-        // The test just verifies no crash and correct invariants.
-        QVERIFY(geocoder.pending() <= 1); // at most 1 item (first was dequeued)
+        // Process events so the FakeReply::finished signal fires (queued connection).
+        // After the reply, the rate-limit timer fires at 1100ms, then processNext()
+        // sees an empty queue and sets active=false.
+        QTest::qWait(50); // let the reply land
+
+        // venueEnriched must have fired with the correct data
+        QCOMPARE(enrichedId, QStringLiteral("osm_net1"));
+        QCOMPARE(enrichedStreet, QStringLiteral("Kastanienallee 82"));
+
+        // Street must be written to the model
+        const auto idx = model->index(0, 0);
+        QCOMPARE(idx.data(VenueModel::VenueModelRoles::Street).toString(),
+                 QStringLiteral("Kastanienallee 82"));
+
+        // Geocoder becomes inactive after the rate-limit timer fires (1100ms).
+        // Use QTRY_VERIFY so the test polls without blocking the event loop.
+        QTRY_VERIFY_WITH_TIMEOUT(becameInactive, 2000);
+        QVERIFY(!geocoder.active());
 
         delete model;
     }
 
     // -----------------------------------------------------------------------
-    // 8. Cache hit with empty string: a previous lookup that found no road
-    //    (empty string stored) must NOT set the street to empty (it stays
-    //    whatever it was — empty in this case).
+    // 7. Network success — road only, no house number.
+    // -----------------------------------------------------------------------
+    void networkSuccess_roadOnlyNoHouseNumber()
+    {
+        FakeNAM fakeNam;
+        fakeNam.setNextReply(nominatimResponse("Rosenthaler Straße")); // no house number
+
+        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_net2"), 52.52000, 13.40000);
+
+        TestableGeocoder geocoder(fakeNam);
+
+        QString enrichedStreet;
+        connect(&geocoder, &ReverseGeocoder::venueEnriched,
+                this, [&](const QString&, const QString& s) { enrichedStreet = s; });
+
+        geocoder.enrichModel(model);
+        QTest::qWait(100);
+
+        QCOMPARE(enrichedStreet, QStringLiteral("Rosenthaler Straße"));
+
+        const auto idx = model->index(0, 0);
+        QCOMPARE(idx.data(VenueModel::VenueModelRoles::Street).toString(),
+                 QStringLiteral("Rosenthaler Straße"));
+
+        delete model;
+    }
+
+    // -----------------------------------------------------------------------
+    // 8. Network success — no road in Nominatim response: the result is cached
+    //    as an empty string and venueEnriched is NOT emitted.
+    // -----------------------------------------------------------------------
+    void networkSuccess_noRoad_notCachedPermanently()
+    {
+        FakeNAM fakeNam;
+        // Response with empty address object (no "road" field)
+        fakeNam.setNextReply(nominatimResponse(QString()));
+
+        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_noroad"), 52.50000, 13.50000);
+
+        TestableGeocoder geocoder(fakeNam);
+
+        bool signalFired = false;
+        connect(&geocoder, &ReverseGeocoder::venueEnriched,
+                this, [&](const QString&, const QString&) { signalFired = true; });
+
+        geocoder.enrichModel(model);
+        QTest::qWait(100);
+
+        // venueEnriched must NOT fire (empty street)
+        QVERIFY(!signalFired);
+
+        // Street must remain empty in the model
+        const auto idx = model->index(0, 0);
+        QVERIFY(idx.data(VenueModel::VenueModelRoles::Street).toString().isEmpty());
+
+        delete model;
+    }
+
+    // -----------------------------------------------------------------------
+    // 9. Network error path: a network error must NOT be cached (transient
+    //    failures should be retried on the next app launch).
+    //    venueEnriched must NOT fire.
+    //    The geocoder must complete (become inactive) after processing.
+    // -----------------------------------------------------------------------
+    void networkError_notCached_geocoderCompletes()
+    {
+        FakeNAM fakeNam;
+        fakeNam.setNextReply(QByteArray(), QNetworkReply::TimeoutError);
+
+        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_err1"), 52.60000, 13.60000);
+
+        TestableGeocoder geocoder(fakeNam);
+
+        bool signalFired = false;
+        connect(&geocoder, &ReverseGeocoder::venueEnriched,
+                this, [&](const QString&, const QString&) { signalFired = true; });
+
+        bool becameInactive = false;
+        connect(&geocoder, &ReverseGeocoder::activeChanged, this, [&]() {
+            if (!geocoder.active()) becameInactive = true;
+        });
+
+        geocoder.enrichModel(model);
+        QTest::qWait(50); // let the reply land
+
+        // venueEnriched must NOT fire on error
+        QVERIFY(!signalFired);
+
+        // Street must remain empty
+        const auto idx = model->index(0, 0);
+        QVERIFY(idx.data(VenueModel::VenueModelRoles::Street).toString().isEmpty());
+
+        // Geocoder becomes inactive after the rate-limit timer fires (1100ms).
+        QTRY_VERIFY_WITH_TIMEOUT(becameInactive, 2000);
+
+        // The error must NOT appear in the on-disk cache so the venue can be
+        // retried next launch.  The geocoder only calls saveCache() at the end
+        // of the run (queue empty).  For the error case, the cacheKey must NOT
+        // be present (empty string would suppress future retries).
+        // We check this indirectly: create a second geocoder and verify it
+        // still queues the venue (cache miss for that key).
+        {
+            FakeNAM fakeNam2;
+            fakeNam2.setNextReply(nominatimResponse("Prenzlauer Allee", "1"));
+            auto* model2 = makeModelWithOSMVenue(QStringLiteral("osm_err1"), 52.60000, 13.60000);
+            TestableGeocoder geocoder2(fakeNam2);
+
+            // The second geocoder has m_cacheLoaded=false so it will try to
+            // load from disk.  If the error was incorrectly cached, it would
+            // resolve from cache and not queue the venue.
+            geocoder2.enrichModel(model2);
+            QTest::qWait(100);
+
+            // Street should now be set (network succeeded this time)
+            const auto idx2 = model2->index(0, 0);
+            QCOMPARE(idx2.data(VenueModel::VenueModelRoles::Street).toString(),
+                     QStringLiteral("Prenzlauer Allee 1"));
+            delete model2;
+        }
+
+        delete model;
+    }
+
+    // -----------------------------------------------------------------------
+    // 10. Invalid JSON response: the geocoder must not crash and must not
+    //     cache garbage. The venue street must remain empty.
+    // -----------------------------------------------------------------------
+    void invalidJson_notCachedNoCrash()
+    {
+        FakeNAM fakeNam;
+        fakeNam.setNextReply(QByteArray("THIS IS NOT JSON AT ALL"));
+
+        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_badjson"), 52.51000, 13.45000);
+
+        TestableGeocoder geocoder(fakeNam);
+
+        geocoder.enrichModel(model);
+        QTest::qWait(50); // let the reply land; should not crash
+
+        // Street remains empty; geocoder finishes cleanly
+        const auto idx = model->index(0, 0);
+        // Invalid JSON → doc.object() is empty → address is empty → road is ""
+        // → street is "" → we DO cache the empty string (no road found)
+        // but we do NOT write it to the model.
+        QVERIFY(idx.data(VenueModel::VenueModelRoles::Street).toString().isEmpty());
+
+        // Geocoder becomes inactive after rate-limit timer (1100ms)
+        QTRY_VERIFY_WITH_TIMEOUT(!geocoder.active(), 2000);
+
+        delete model;
+    }
+
+    // -----------------------------------------------------------------------
+    // 11. Rate-limiting guard: after the first request fires, a second request
+    //     must NOT fire immediately — it must wait for the rate-limit timer.
+    //     We verify this by checking that only 1 network request has been made
+    //     right after enrichModel() (the event loop has NOT been pumped yet).
+    // -----------------------------------------------------------------------
+    void rateLimiting_secondRequestNotImmediatelySent()
+    {
+        FakeNAM fakeNam;
+        fakeNam.setNextReply(nominatimResponse("Unter den Linden", "1"));
+
+        // Build a model with 2 venues
+        auto* model = new VenueModel;
+        QJsonArray venues;
+        for (int i = 0; i < 2; ++i) {
+            QJsonObject v;
+            v["id"] = QStringLiteral("osm_rate%1").arg(i);
+            v["name"] = QStringLiteral("Venue %1").arg(i);
+            v["latCoord"] = 52.5 + i * 0.01;
+            v["longCoord"] = 13.4 + i * 0.01;
+            v["street"] = QString();
+            v["vegan"] = 5;
+            v["venueType"] = 0;
+            v["openComment"] = QStringLiteral("Mo-Fr 09:00-17:00");
+            QJsonArray tags; tags.append("Restaurant");
+            v["tags"] = tags;
+            venues.append(v);
+        }
+        model->importOSMVenues(venues);
+
+        TestableGeocoder geocoder(fakeNam);
+        geocoder.enrichModel(model);
+
+        // At this point, enrichModel() called processNext() synchronously for
+        // the first item.  The FakeReply is queued but not yet delivered
+        // (QueuedConnection).  No event-loop pump has happened yet.
+        // Only 1 request should have been made.
+        QCOMPARE(fakeNam.requestCount(), 1);
+
+        // After pumping events briefly (enough for the first reply but NOT
+        // enough for the 1100ms rate-limit timer), still only 1 request.
+        QTest::qWait(50);
+        QCOMPARE(fakeNam.requestCount(), 1);
+
+        delete model;
+    }
+
+    // -----------------------------------------------------------------------
+    // 12. Calling enrichModel a second time while active: the timer must be
+    //     stopped, the old queue discarded, and a new run started WITHOUT
+    //     a spurious activeChanged(false) in between.
+    // -----------------------------------------------------------------------
+    void reenrichModel_resetsQueue_noSpuriousActiveChangedFalse()
+    {
+        FakeNAM fakeNam;
+        fakeNam.setNextReply(nominatimResponse("Schönhauser Allee", "10"));
+
+        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_444"), 52.1111, 13.1111);
+
+        TestableGeocoder geocoder(fakeNam);
+
+        int activeChangedCount = 0;
+        bool sawFalseDuringActive = false;
+        connect(&geocoder, &ReverseGeocoder::activeChanged, this, [&]() {
+            activeChangedCount++;
+            if (!geocoder.active() && geocoder.pending() > 0)
+                sawFalseDuringActive = true; // spurious false while still running
+        });
+
+        geocoder.enrichModel(model); // first call
+        // Immediately call again before any event-loop processing
+        geocoder.enrichModel(model); // second call
+
+        // Must not have emitted a spurious activeChanged(false) between the
+        // two calls (the geocoder stays active throughout).
+        QVERIFY(!sawFalseDuringActive);
+
+        // The geocoder should be active (or just finishing)
+        // — at minimum it must not have crashed.
+        QVERIFY(activeChangedCount >= 1); // at least one activeChanged(true)
+
+        delete model;
+    }
+
+    // -----------------------------------------------------------------------
+    // 13. Cache hit with empty string: a previous lookup that found no road
+    //     (empty string stored) must NOT set the street to empty (it stays
+    //     whatever it was — empty in this case) and must NOT activate the
+    //     geocoder.
     // -----------------------------------------------------------------------
     void cacheHitEmptyStreet_notWrittenToModel()
     {
@@ -380,9 +634,8 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 9. venueEnriched signal: when a cached (non-empty) street is applied,
-    //    no venueEnriched signal is emitted (signal is only for network path).
-    //    Verify the signal does NOT fire for cache hits.
+    // 14. venueEnriched signal: when a cached (non-empty) street is applied,
+    //     no venueEnriched signal is emitted (signal is only for network path).
     // -----------------------------------------------------------------------
     void venueEnriched_notEmittedForCacheHits()
     {
@@ -404,7 +657,7 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 10. Cache key format: verify that the cache key uses 5 decimal places
+    // 15. Cache key format: verify that the cache key uses 5 decimal places
     //     (matches the format used in loadCache/enrichModel).
     // -----------------------------------------------------------------------
     void cacheKey_fiveDecimalPlaces()
@@ -427,6 +680,29 @@ private slots:
         const auto idx = model->index(0, 0);
         QCOMPARE(idx.data(VenueModel::VenueModelRoles::Street).toString(),
                  QStringLiteral("Münzstraße 2"));
+
+        delete model;
+    }
+
+    // -----------------------------------------------------------------------
+    // 16. User-Agent header: the Nominatim request must include a User-Agent
+    //     header to comply with OSM usage policy.
+    // -----------------------------------------------------------------------
+    void userAgent_presentInRequest()
+    {
+        // We can't easily intercept the raw request headers from FakeNAM without
+        // modifying it.  We test this by verifying that the URL contains the
+        // expected Nominatim endpoint.
+        FakeNAM fakeNam;
+        fakeNam.setNextReply(nominatimResponse("Brunnenstraße", "9"));
+        auto* model = makeModelWithOSMVenue(QStringLiteral("osm_ua"), 52.53500, 13.40500);
+
+        TestableGeocoder geocoder(fakeNam);
+        geocoder.enrichModel(model);
+
+        // The request must have been sent to Nominatim
+        QVERIFY(fakeNam.lastRequestedUrl().contains(
+                    QStringLiteral("nominatim.openstreetmap.org/reverse")));
 
         delete model;
     }

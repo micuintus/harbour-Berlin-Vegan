@@ -18,6 +18,7 @@ static constexpr int CACHE_SAVE_INTERVAL = 50; // Save after every N processed r
 
 ReverseGeocoder::ReverseGeocoder(QObject *parent)
     : QObject(parent)
+    , m_namPtr(&m_networkManagerOwned)
 {
     m_rateTimer.setSingleShot(true);
     m_rateTimer.setInterval(RATE_LIMIT_MS);
@@ -31,17 +32,32 @@ ReverseGeocoder::ReverseGeocoder(QObject *parent)
             this, [this]() { if (!m_cache.isEmpty()) saveCache(); });
 }
 
+ReverseGeocoder::ReverseGeocoder(QNetworkAccessManager& nam, QObject *parent)
+    : QObject(parent)
+    , m_namPtr(&nam)
+{
+    m_rateTimer.setSingleShot(true);
+    m_rateTimer.setInterval(RATE_LIMIT_MS);
+    connect(&m_rateTimer, &QTimer::timeout, this, &ReverseGeocoder::processNext);
+
+    connect(QCoreApplication::instance(), &QCoreApplication::aboutToQuit,
+            this, [this]() { if (!m_cache.isEmpty()) saveCache(); });
+}
+
 void ReverseGeocoder::enrichModel(VenueModel *model)
 {
     if (!model) return;
 
     // If a geocoding run is already in progress (e.g. OSM data refreshed in the
-    // background), stop the rate-limit timer so we don't fire processNext() with
-    // a stale queue, then rebuild the queue from the updated model.
+    // background), stop the rate-limit timer and advance the generation counter
+    // so that any in-flight reply lambdas know they belong to the old run and
+    // must NOT restart the rate-limit timer (which would double-pump the new
+    // queue).  We intentionally do NOT emit activeChanged here: from the UI's
+    // perspective the geocoder stays active — it immediately starts a new run
+    // below, so there is no meaningful "went inactive" moment.
     if (m_active) {
         m_rateTimer.stop();
-        m_active = false;
-        emit activeChanged();
+        ++m_generation;
     }
 
     m_model = model;
@@ -127,9 +143,13 @@ void ReverseGeocoder::processNext()
     netReq.setRawHeader("User-Agent", "BerlinVegan-App/" APP_VERSION);
     netReq.setTransferTimeout(10000);
 
-    auto *reply = m_networkManager.get(netReq);
+    auto *reply = m_namPtr->get(netReq);
 
-    connect(reply, &QNetworkReply::finished, this, [this, reply, req]() {
+    // Capture the current generation so the lambda can detect if enrichModel()
+    // was called again while this request was in flight.
+    const int dispatchGeneration = m_generation;
+
+    connect(reply, &QNetworkReply::finished, this, [this, reply, req, dispatchGeneration]() {
         reply->deleteLater();
 
         const auto cacheKey = QStringLiteral("%1,%2")
@@ -179,8 +199,13 @@ void ReverseGeocoder::processNext()
         if (m_processedCount % CACHE_SAVE_INTERVAL == 0)
             saveCache();
 
-        // Schedule next request after rate limit delay
-        m_rateTimer.start();
+        // Only restart the rate-limit timer if this reply belongs to the
+        // current run.  If enrichModel() was called again while this request
+        // was in flight (m_generation was incremented), the new run has
+        // already called processNext() itself; restarting the timer here
+        // would cause a spurious second call that double-dequeues an item.
+        if (m_generation == dispatchGeneration)
+            m_rateTimer.start();
     });
 }
 
