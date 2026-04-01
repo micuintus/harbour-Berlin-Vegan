@@ -79,6 +79,7 @@ public:
     }
 
     QString lastRequestedUrl() const { return m_lastUrl; }
+    QByteArray lastUserAgent() const { return m_lastUserAgent; }
     int requestCount() const { return m_requestCount; }
 
 protected:
@@ -87,6 +88,7 @@ protected:
                                  QIODevice* /*outgoingData*/ = nullptr) override
     {
         m_lastUrl = req.url().toString();
+        m_lastUserAgent = req.rawHeader("User-Agent");
         ++m_requestCount;
         return new FakeReply(op, req, m_nextData, m_nextError, this);
     }
@@ -95,6 +97,7 @@ private:
     QByteArray m_nextData;
     QNetworkReply::NetworkError m_nextError = QNetworkReply::NoError;
     QString m_lastUrl;
+    QByteArray m_lastUserAgent;
     int m_requestCount = 0;
 };
 
@@ -765,14 +768,11 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 17. User-Agent header: the Nominatim request must include a User-Agent
-    //     header to comply with OSM usage policy.
+    // 17. User-Agent header: the Nominatim request must include a non-empty
+    //     User-Agent header to comply with OSM Nominatim usage policy.
     // -----------------------------------------------------------------------
     void userAgent_presentInRequest()
     {
-        // We can't easily intercept the raw request headers from FakeNAM without
-        // modifying it.  We test this by verifying that the URL contains the
-        // expected Nominatim endpoint.
         FakeNAM fakeNam;
         fakeNam.setNextReply(nominatimResponse("Brunnenstraße", "9"));
         auto* model = makeModelWithOSMVenue(QStringLiteral("osm_ua"), 52.53500, 13.40500);
@@ -780,9 +780,14 @@ private slots:
         TestableGeocoder geocoder(fakeNam);
         geocoder.enrichModel(model);
 
-        // The request must have been sent to Nominatim
+        // The request must have been sent to the correct Nominatim endpoint
         QVERIFY(fakeNam.lastRequestedUrl().contains(
                     QStringLiteral("nominatim.openstreetmap.org/reverse")));
+
+        // A non-empty User-Agent header is mandatory per OSM usage policy.
+        // FakeNAM now captures the raw header so we can verify it directly.
+        QVERIFY(!fakeNam.lastUserAgent().isEmpty());
+        QVERIFY(fakeNam.lastUserAgent().contains("BerlinVegan"));
 
         delete model;
     }

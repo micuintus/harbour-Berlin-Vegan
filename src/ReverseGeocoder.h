@@ -56,8 +56,11 @@ private:
     };
 
     // In production: owns the manager. In tests: points to the injected one.
-    QNetworkAccessManager* m_namPtr = nullptr;
+    // m_networkManagerOwned must be declared before m_namPtr so that the
+    // default-constructor initializer `m_namPtr(&m_networkManagerOwned)` is
+    // well-ordered (C++ initialises members in declaration order).
     QNetworkAccessManager m_networkManagerOwned;
+    QNetworkAccessManager* m_namPtr = nullptr;
     QTimer m_rateTimer;
     QList<GeoRequest> m_queue;
     QHash<QString, QString> m_cache; // "lat,lon" → "street housenumber"
