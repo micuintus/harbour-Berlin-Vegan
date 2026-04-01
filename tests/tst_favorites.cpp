@@ -1,4 +1,5 @@
 #include <QtTest>
+#include <QCoreApplication>
 #include "FavoritesManager.h"
 
 class TestFavorites : public QObject
@@ -6,6 +7,13 @@ class TestFavorites : public QObject
     Q_OBJECT
 
 private slots:
+    void initTestCase()
+    {
+        // Use a dedicated test namespace so QSettings never touches real app data
+        QCoreApplication::setOrganizationName(QStringLiteral("BerlinVeganTest"));
+        QCoreApplication::setApplicationName(QStringLiteral("tst_favorites"));
+    }
+
     void init()
     {
         // Clean state for each test

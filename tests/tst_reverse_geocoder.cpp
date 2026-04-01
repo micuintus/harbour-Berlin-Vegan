@@ -490,8 +490,9 @@ private slots:
     }
 
     // -----------------------------------------------------------------------
-    // 10. Invalid JSON response: the geocoder must not crash and must not
-    //     cache garbage. The venue street must remain empty.
+    // 10. Invalid JSON response: the geocoder must not crash and must NOT
+    //     cache the result (so the venue can be retried on the next launch).
+    //     The venue street must remain empty.
     // -----------------------------------------------------------------------
     void invalidJson_notCachedNoCrash()
     {
@@ -505,15 +506,30 @@ private slots:
         geocoder.enrichModel(model);
         QTest::qWait(50); // let the reply land; should not crash
 
-        // Street remains empty; geocoder finishes cleanly
+        // Street remains empty (bad JSON → no road extracted, nothing written)
         const auto idx = model->index(0, 0);
-        // Invalid JSON → doc.object() is empty → address is empty → road is ""
-        // → street is "" → we DO cache the empty string (no road found)
-        // but we do NOT write it to the model.
         QVERIFY(idx.data(VenueModel::VenueModelRoles::Street).toString().isEmpty());
 
         // Geocoder becomes inactive after rate-limit timer (1100ms)
         QTRY_VERIFY_WITH_TIMEOUT(!geocoder.active(), 2000);
+
+        // The invalid JSON must NOT be cached (unlike a genuine "no road found"
+        // response, a parse error is transient).  Verify by starting a second
+        // geocoder that reads the on-disk cache: if nothing was cached, it must
+        // still queue the venue for geocoding.
+        {
+            FakeNAM fakeNam2;
+            fakeNam2.setNextReply(nominatimResponse("Torstraße", "1"));
+            auto* model2 = makeModelWithOSMVenue(QStringLiteral("osm_badjson"), 52.51000, 13.45000);
+            TestableGeocoder geocoder2(fakeNam2);
+            geocoder2.enrichModel(model2);
+            QTest::qWait(100);
+            // Street should now be resolved (venue was NOT suppressed by a bad cache entry)
+            const auto idx2 = model2->index(0, 0);
+            QCOMPARE(idx2.data(VenueModel::VenueModelRoles::Street).toString(),
+                     QStringLiteral("Torstraße 1"));
+            delete model2;
+        }
 
         delete model;
     }

@@ -4,8 +4,13 @@
 #include <QJsonDocument>
 #include <QUrlQuery>
 #include <QFile>
+#include <QFileInfo>
 #include <QDir>
 #include <QStandardPaths>
+
+#ifndef APP_VERSION
+#  define APP_VERSION "0.0.0"
+#endif
 
 // Multiple Overpass endpoints for resilience
 static const QStringList OVERPASS_ENDPOINTS = {
@@ -102,7 +107,7 @@ void OSMProvider::tryNextEndpoint(const QString& query, int endpointIndex)
 
     QNetworkRequest request(endpoint);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
-    request.setRawHeader("User-Agent", "BerlinVegan-App/3.7.0");
+    request.setRawHeader("User-Agent", "BerlinVegan-App/" APP_VERSION);
     request.setTransferTimeout(30000);
 
     QUrlQuery postData;
@@ -233,7 +238,9 @@ QJsonObject OSMProvider::osmElementToVenue(const QJsonObject& element) const
     // Street address
     const auto street = tags["addr:street"].toString();
     const auto houseNumber = tags["addr:housenumber"].toString();
-    venue["street"] = street.isEmpty() ? QString() : street + " " + houseNumber;
+    venue["street"] = street.isEmpty() ? QString()
+                    : houseNumber.isEmpty() ? street
+                    : street + QStringLiteral(" ") + houseNumber;
 
     // Contact
     venue["telephone"] = tags["phone"].toString();

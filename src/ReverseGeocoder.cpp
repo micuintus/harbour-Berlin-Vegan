@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QFile>
+#include <QFileInfo>
 #include <QDir>
 #include <QStandardPaths>
 
@@ -157,27 +158,39 @@ void ReverseGeocoder::processNext()
 
         if (reply->error() == QNetworkReply::NoError)
         {
-            const auto doc = QJsonDocument::fromJson(reply->readAll());
-            const auto address = doc.object()["address"].toObject();
-            const auto road = address["road"].toString();
-            const auto houseNumber = address["house_number"].toString();
-
-            const auto street = road.isEmpty() ? QString()
-                : road + (houseNumber.isEmpty() ? QString() : " " + houseNumber);
-
-            m_cache[cacheKey] = street;
-
-            if (!street.isEmpty() && m_model)
+            QJsonParseError parseError;
+            const auto doc = QJsonDocument::fromJson(reply->readAll(), &parseError);
+            if (parseError.error != QJsonParseError::NoError || !doc.isObject())
             {
-                // Validate that the row still contains the same venue we queued.
-                // If enrichModel() was called again mid-flight, row indices may
-                // have shifted and we must not write to the wrong venue.
-                const auto idx = m_model->index(req.modelRow, 0);
-                if (idx.isValid()) {
-                    const auto idAtRow = idx.data(VenueModel::VenueModelRoles::ID).toString();
-                    if (idAtRow == req.venueId) {
-                        m_model->setData(idx, street, VenueModel::VenueModelRoles::Street);
-                        emit venueEnriched(req.venueId, street);
+                // Malformed/empty response (proxy error, server hiccup): treat as
+                // a transient failure.  Do NOT cache so the venue can be retried
+                // on the next app launch.
+                qWarning() << "Geocoder: invalid JSON for" << req.venueId
+                           << ":" << parseError.errorString();
+            }
+            else
+            {
+                const auto address = doc.object()["address"].toObject();
+                const auto road = address["road"].toString();
+                const auto houseNumber = address["house_number"].toString();
+
+                const auto street = road.isEmpty() ? QString()
+                    : road + (houseNumber.isEmpty() ? QString() : " " + houseNumber);
+
+                m_cache[cacheKey] = street;
+
+                if (!street.isEmpty() && m_model)
+                {
+                    // Validate that the row still contains the same venue we queued.
+                    // If enrichModel() was called again mid-flight, row indices may
+                    // have shifted and we must not write to the wrong venue.
+                    const auto idx = m_model->index(req.modelRow, 0);
+                    if (idx.isValid()) {
+                        const auto idAtRow = idx.data(VenueModel::VenueModelRoles::ID).toString();
+                        if (idAtRow == req.venueId) {
+                            m_model->setData(idx, street, VenueModel::VenueModelRoles::Street);
+                            emit venueEnriched(req.venueId, street);
+                        }
                     }
                 }
             }
@@ -186,8 +199,8 @@ void ReverseGeocoder::processNext()
         {
             // Do NOT cache network errors: a transient failure (timeout, 429,
             // connection refused) must not permanently suppress future retries.
-            // Only an explicit "no road found" result (road.isEmpty()) is cached
-            // as an empty string above in the success branch.
+            // An explicit "no road found" (empty road in a valid JSON response)
+            // is cached as an empty string in the success branch above.
             qWarning() << "Geocoder: network error for" << req.venueId
                        << ":" << reply->errorString();
         }
