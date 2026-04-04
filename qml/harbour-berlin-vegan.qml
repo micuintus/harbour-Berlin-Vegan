@@ -95,6 +95,19 @@ BVApp.ApplicationWindow
         VenueDataLoader.loadGastroVenues();
         VenueDataLoader.loadShoppingVenues();
         // OSM data loads after BV data (in favoritesHook) for deduplication
+
+        // ACCESS_FINE_LOCATION is in AndroidManifest.xml, but Android 6+
+        // requires a runtime grant as well.  PositionSource (and therefore the
+        // own-location marker) fail silently without it.
+        // The old AppMap { showUserPosition: true } handled this internally;
+        // we must do it explicitly now that we use a bare QL.Map.
+        if (typeof nativeUtils !== "undefined") {
+            nativeUtils.requestPermission(NativeUtils.PermissionLocation,
+                function(granted) {
+                    if (!granted)
+                        console.warn("Location permission denied — own-location marker disabled")
+                })
+        }
     }
 
     cover: Component { CoverPage {

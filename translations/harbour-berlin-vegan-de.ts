@@ -495,8 +495,8 @@
     </message>
     <message id="id-osm-data-source">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="81"/>
-        <source>OpenStreetMap (community)</source>
-        <translation>OpenStreetMap (Community)</translation>
+        <source>OpenStreetMap venues</source>
+        <translation>OpenStreetMap-Einträge</translation>
     </message>
     <message id="id-new">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="189"/>

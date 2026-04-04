@@ -252,8 +252,8 @@
     </message>
     <message id="id-osm-data-source">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="81"/>
-        <source>OpenStreetMap (community)</source>
-        <translation>OpenStreetMap (community)</translation>
+        <source>OpenStreetMap venues</source>
+        <translation>OpenStreetMap locaties</translation>
     </message>
     <message id="id-venue-category">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="92"/>

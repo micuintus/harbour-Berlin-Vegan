@@ -11,7 +11,7 @@ BVApp.Page {
     id: page
 
     property var model
-    property var positionSource
+    property var positionSource   // kept for VenueDescription distance calc
     property alias name : page.title
     property alias map : map
 
@@ -31,30 +31,12 @@ BVApp.Page {
         z: 4
     }
 
-
-    property var currentPosition: MapQuickItem {
-        id: currentPositionMarker
-        parent: map.mapTarget
-
-        coordinate: positionSource.position.coordinate
-
-        anchorPoint.x: currentPosImage.width / 2
-        anchorPoint.y: currentPosImage.height / 2
-
-        sourceItem: BVApp.IconButton {
-            id: currentPosImage
-            type: "cover-location"
-            color: BVApp.Theme.ownLocationColor
-        }
-    }
-
     FastBlur {
         anchors.fill: header
         source: ShaderEffectSource {
             sourceItem: map
             sourceRect: Qt.rect(0, 0, header.width, header.height)
         }
-
         radius: 40
         transparentBorder: true
         z: 3
@@ -74,7 +56,6 @@ BVApp.Page {
         // Work around QTBUG-47366;
         // remove once SFOS is on QtLocation > 5.6
         function repopulateMap() {
-            // triggers a map repopulation
             mapItemView.model = 'undefined';
             mapItemView.model = page.model;
             map.dirty = false;
@@ -87,6 +68,7 @@ BVApp.Page {
             function onRowsRemoved() { map.dirty = true }
         }
 
+        // Venue markers
         MapItemView {
             id: mapItemView
             model: page.model
@@ -107,27 +89,28 @@ BVApp.Page {
                     verticalAlignment: Text.AlignBottom
 
                     onClicked: {
-                        pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
-                                       {
-                                           restaurant     : mapItemView.model.item(index),
-                                           positionSource : page.positionSource
-                                       });
+                        if (!map.gestureActive) {
+                            pageStack.push(Qt.resolvedUrl("VenueDescription.qml"),
+                                           {
+                                               restaurant     : mapItemView.model.item(index),
+                                               positionSource : page.positionSource
+                                           });
+                        }
                     }
                 }
             }
         }
 
         Component.onCompleted: {
-            centerAndZoom();
+            centerAndZoom()
         }
 
-        function centerAndZoom()
-        {
-            // Only animate to current position when we have a valid GPS fix;
-            // otherwise the map would jump to (0,0) and show the Atlantic Ocean.
-            const coord = positionSource.position.coordinate;
-            if (coord.isValid)
-                animateToLocation(coord, 15);
+        // Fly to user position on page open.
+        // Use AppMap.userPosition (set by showUserPosition: true) rather than
+        // the external PositionSource so we don't depend on permission timing.
+        function centerAndZoom() {
+            if (map.userPositionAvailable)
+                animateToLocation(map.userPosition.coordinate, 15)
         }
 
         function animateToLocation(coord, targetZoom) {
@@ -165,7 +148,9 @@ BVApp.Page {
         }
 
         BVApp.MapReCenterButton {
-            enabled: positionSource.position.coordinate.isValid
+            // AppMap.userPositionAvailable tracks whether showUserPosition
+            // has acquired a fix — no separate PositionSource needed here.
+            enabled: map.userPositionAvailable
 
             anchors.right: parent.right
             anchors.bottom: parent.bottom

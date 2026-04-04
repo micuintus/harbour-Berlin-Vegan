@@ -493,10 +493,9 @@ BVApp.Page {
             }
 
             BVApp.Label {
-                //% "We would like to thank Mapbox for donating <a href='ref'>their astonishing "
-                //% "Mapbox GL Plugin</a> to the Qt project, which makes hardware accelerated vector maps "
-                //% "possible for this app."
-                text: qsTrId("id-thanks-to-mapbox")
+                //% "The map display is powered by <a href='ref'>MapLibre</a>, an open-source "
+                //% "fork of Mapbox GL Native, together with free map tiles provided by OpenFreeMap."
+                text: qsTrId("id-thanks-to-maplibre")
 
                 visible: BVApp.Platform.isFelgo
 
@@ -511,7 +510,7 @@ BVApp.Page {
                     margins: BVApp.Theme.paddingLarge
                 }
 
-                onLinkActivated: Qt.openUrlExternally("https://github.com/maplibre/maplibre-native/blob/main/FORK.md")
+                onLinkActivated: Qt.openUrlExternally("https://maplibre.org/")
             }
 
             Item {
