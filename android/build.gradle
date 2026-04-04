@@ -5,7 +5,10 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:${androidGradleToolsVersion}"
+        // AGP 8.0.2: last version before android.bundle.enableUncompressedNativeLibs
+        // was removed (removed in 8.1). Felgo's androiddeployqt injects that property
+        // unconditionally, so we pin to a version that still accepts it.
+        classpath "com.android.tools.build:gradle:8.0.2"
     }
 }
 
@@ -26,7 +29,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion    androidCompileSdkVersion.toInteger()
+    // namespace required by AGP 8.x; androidPackageName is set by androiddeployqt
+    namespace              androidPackageName
+    // Compile against SDK 34: AGP 8.0.2 was tested up to 33 but handles 34 fine.
+    // SDK 35's android.jar uses a new format that AGP 8.0.2's aapt2 cannot parse.
+    compileSdkVersion    34
     buildToolsVersion    androidBuildToolsVersion
 
     compileOptions {
@@ -36,12 +43,14 @@ android {
 
     defaultConfig {
       multiDexEnabled true
-      targetSdkVersion   androidCompileSdkVersion.toInteger()
-      applicationId    = productIdentifier
-      versionCode      = productVersionCode.toInteger()
-      versionName      = productVersionName
-      minSdkVersion    = project.hasProperty("qtMinSdkVersion") ? qtMinSdkVersion.toInteger() : 23
-
+      // Target the actual device SDK via the Qt-provided variable (plain integer)
+      targetSdkVersion   qtTargetSdkVersion.toInteger()
+      // productIdentifier only exists in the Felgo --gradle path; fall back to
+      // androidPackageName which is always set by androiddeployqt
+      applicationId    = project.hasProperty("productIdentifier") ? productIdentifier : androidPackageName
+      versionCode      = project.hasProperty("productVersionCode") ? productVersionCode.toInteger() : 37
+      versionName      = project.hasProperty("productVersionName") ? productVersionName : "3.7.0"
+      minSdkVersion    = project.hasProperty("qtMinSdkVersion") ? qtMinSdkVersion.toInteger() : 28
     }
 
     sourceSets {

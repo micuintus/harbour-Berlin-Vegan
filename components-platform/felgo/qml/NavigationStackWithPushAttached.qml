@@ -29,17 +29,22 @@ NavigationStack {
     }
 
     Component.onCompleted: {
-        // This hotfixes a faulty navigation bar height on Android after enabling the default Qt high dpi support in main.cpp:
+        // Hotfix: Felgo miscalculates NavigationBar height on Android with Qt high DPI.
+        // Setting topMargin briefly triggers a layout recalculation that corrects it.
         if (!BVApp.Platform.isAndroid) {
             return
         }
-        // Before the next line "navigationBar.height = 139.97597452201887" on my test device.
+        var heightBefore = navigationBar.height
         anchors.topMargin = 1
-        // The line above triggers something so that the "navigationBar.height = 55.97597452201887", but now it is partly hidden
-        // by the status bar on Android, so we add "Theme.statusBarHeight" but taking the high dpi scaling factor into account.
-        navigationBar.height += Theme.statusBarHeight / Screen.devicePixelRatio
-        // Afterwards the "navigationBar.height = 79.96567788859839". Next we reset the anchor again to its default value.
+        // On some devices with Qt high DPI, the topMargin trick corrects a
+        // doubled height.  When that happens the status bar inset is lost and
+        // must be re-added.  On devices where the height is already correct
+        // (includes the status bar), add a small visual padding.
+        if (navigationBar.height < heightBefore) {
+            navigationBar.height += nativeUtils.safeAreaInsets.top
+        } else {
+            navigationBar.height += nativeUtils.safeAreaInsets.top * 0.3
+        }
         anchors.topMargin = 0
-        // As comparison: without high dpi "navigationBar.height = 56" and "Theme.statusBarHeight = 24" on my test device.
     }
 }
