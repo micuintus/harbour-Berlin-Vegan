@@ -5,12 +5,16 @@ import BerlinVegan.components.platform 1.0 as BVApp
 Navigation {
     navigationMode: Theme.isAndroid ? navigationModeDrawer : navigationModeTabs
 
-    // On Android the drawer starts at y=0 of the NavigationStack, which means
-    // its first row renders behind the NavigationBar.  drawerLogoHeight creates
-    // a header-area spacer in the drawer that matches the (hotfix-adjusted)
-    // NavigationBar height, pushing the menu items below it.
-    // parent is the NavigationStack; parent.navigationBar is Felgo's bar.
-    drawerLogoHeight: (BVApp.Platform.isAndroid && parent && parent.navigationBar)
-                      ? parent.navigationBar.height
-                      : 0
+    // On Android the Felgo drawer starts at y=0 (behind the transparent
+    // status bar).  headerView content must be offset by the status bar /
+    // safe area height so the skyline image starts right at the boundary
+    // between the transparent system overlay and the opaque content area.
+    // The navigation bar (action bar) overlaps the top of the image.
+    readonly property real navigationBarOffset:
+        BVApp.Platform.isAndroid
+            ? (typeof nativeUtils !== "undefined"
+               && nativeUtils.safeAreaInsets.top > Theme.statusBarHeight
+                  ? nativeUtils.safeAreaInsets.top
+                  : Theme.statusBarHeight)
+            : 0
 }

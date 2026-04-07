@@ -127,11 +127,31 @@ BVApp.ApplicationWindow
     } }
 
     BVApp.NavigationMenu {
-        // Used for Android only (AppDrawer)
-        headerView: Image {
-            fillMode: Image.PreserveAspectFit
+        id: navMenu
+
+        // Used for Android only (AppDrawer).
+        // A green Rectangle fills the entire header area so the spacer above
+        // the skyline image matches the navigation bar colour.
+        // The skyline image is offset by navigationBarOffset (the action-bar
+        // height) so it appears fully below the overlaying nav bar.
+        headerView: Rectangle {
+            color: BVApp.Theme.highlightColor
             width: parent.width
-            source: "qrc:/images/Platzhalter_v2_mitSchriftzug_header.jpg"
+            height: navMenu.navigationBarOffset
+                    + (skylineImage.implicitWidth > 0
+                       ? skylineImage.implicitHeight * (width / skylineImage.implicitWidth)
+                       : 0)
+
+            Image {
+                id: skylineImage
+                y: navMenu.navigationBarOffset
+                width: parent.width
+                height: implicitWidth > 0
+                        ? implicitHeight * (width / implicitWidth)
+                        : 0
+                fillMode: Image.PreserveAspectFit
+                source: "qrc:/images/Platzhalter_v2_mitSchriftzug_header.jpg"
+            }
         }
 
         BVApp.ActionMenuItem {

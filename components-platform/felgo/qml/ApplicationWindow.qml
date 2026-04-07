@@ -44,4 +44,23 @@ App {
             console.error("Could not load font: '" + material.name + "'")
         }
     }
+
+    // ── Android blank-screen-on-resume fix ────────────────────────────────────
+    // On Android the EGL surface can be destroyed while the app is in the
+    // background.  When it is recreated Qt may not schedule a new frame
+    // automatically, leaving the screen blank.  We force a repaint:
+    //  • onStateChanged  – catches the common "screen-on / app-switch" case
+    //  • onSceneGraphInitialized – catches the surface-loss / re-init case
+    Connections {
+        target: Qt.application
+        function onStateChanged() {
+            if (Qt.application.state === Qt.ApplicationActive)
+                app.update()
+        }
+    }
+
+    Connections {
+        target: app
+        function onSceneGraphInitialized() { app.update() }
+    }
 }
