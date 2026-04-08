@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(harbour-berlin-vegan VERSION 3.7.0 LANGUAGES CXX)
+project(harbour-berlin-vegan VERSION 4.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,7 +18,7 @@ add_compile_definitions(APP_VERSION="${PROJECT_VERSION}")
 
 set(PRODUCT_IDENTIFIER "org.berlin_vegan.bvapp")
 set(PRODUCT_VERSION_NAME APP_VERSION)
-set(PRODUCT_VERSION_CODE 3)
+set(PRODUCT_VERSION_CODE 4)
 set(PRODUCT_LICENSE_KEY "")
 
 # --- Executable ---

@@ -1,7 +1,7 @@
 # SailfishOS build (QMake). For Felgo/Qt6 use CMakeLists.txt.
 TARGET = harbour-berlin-vegan
 
-VERSION="3.7.0"
+VERSION="4.0.0"
 
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
