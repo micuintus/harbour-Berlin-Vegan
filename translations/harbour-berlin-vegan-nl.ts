@@ -561,5 +561,25 @@
         <source>OK</source>
         <translation>OK</translation>
     </message>
+    <message id="id-sort-by-location">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="86"/>
+        <source>Sort by location</source>
+        <translation>Sorteren op locatie</translation>
+    </message>
+    <message id="id-sort-my-location">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="93"/>
+        <source>My location</source>
+        <translation>Mijn locatie</translation>
+    </message>
+    <message id="id-sort-by-address">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="114"/>
+        <source>Address</source>
+        <translation>Adres</translation>
+    </message>
+    <message id="id-address-search-placeholder">
+        <location filename="../qml/components/AddressSearchField.qml" line="52"/>
+        <source>Search address…</source>
+        <translation>Adres zoeken…</translation>
+    </message>
 </context>
 </TS>

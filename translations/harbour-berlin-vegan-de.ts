@@ -559,5 +559,25 @@
         <source>on</source>
         <translation>am</translation>
     </message>
+    <message id="id-sort-by-location">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="86"/>
+        <source>Sort by location</source>
+        <translation>Nach Standort sortieren</translation>
+    </message>
+    <message id="id-sort-my-location">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="93"/>
+        <source>My location</source>
+        <translation>Mein Standort</translation>
+    </message>
+    <message id="id-sort-by-address">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="114"/>
+        <source>Address</source>
+        <translation>Adresse</translation>
+    </message>
+    <message id="id-address-search-placeholder">
+        <location filename="../qml/components/AddressSearchField.qml" line="52"/>
+        <source>Search address…</source>
+        <translation>Adresse suchen …</translation>
+    </message>
 </context>
 </TS>

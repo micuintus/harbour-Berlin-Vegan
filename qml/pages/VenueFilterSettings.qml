@@ -24,6 +24,7 @@
 **/
 
 import QtQuick
+import QtPositioning
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.ui 1.0 as BVApp
@@ -34,6 +35,19 @@ BVApp.Page {
 
     property var jsonModelCollection
     property bool showGastroVenues: jsonModelCollection.filterVenueType & VenueModel.GastroFlag
+
+    // positionSource is the GPS PositionSource from the root app.
+    // When the user switches to address mode the filter page emits
+    // customPositionChanged so the root app can update the model's
+    // currentPosition accordingly.
+    property var positionSource
+
+    // True when the app is currently sorting by a custom address (not GPS).
+    // Passed in from root so the switch state survives page recreation.
+    property bool addressModeActive: false
+    property string addressDisplayText: ""
+
+    signal customPositionChanged(var coordinate, string displayText)
 
     BVApp.Flickable {
         anchors.fill: parent
@@ -69,6 +83,73 @@ BVApp.Page {
                 width: parent.width
                 height: BVApp.Theme.filterPagePostCategorySpacing
             }
+
+            // ---- Sort by location ----
+
+            BVApp.SectionHeader {
+                         //% "Sort by location"
+                text: qsTrId("id-sort-by-location")
+                icon: BVApp.Theme.iconFor("location_on")
+            }
+
+            BVApp.TextSwitch {
+                id: myLocationSwitch
+                         //% "My location"
+                text: qsTrId("id-sort-my-location")
+                automaticCheck: false
+                checked: !addressSwitch.checked
+
+                onUserToggled: {
+                    // Tapping "My location" always switches back to GPS mode
+                    addressSwitch.checked = false
+                    page.addressModeActive = false
+                    page.customPositionChanged(
+                        positionSource ? positionSource.position.coordinate
+                                       : QtPositioning.coordinate(),
+                        "")
+                }
+            }
+
+            BVApp.TextSwitch {
+                id: addressSwitch
+                         //% "Address"
+                text: qsTrId("id-sort-by-address")
+                automaticCheck: false
+                checked: page.addressModeActive
+
+                onUserToggled: {
+                    // Tapping "Address" always switches to address mode
+                    addressSwitch.checked = true
+                    page.addressModeActive = true
+                }
+            }
+
+            // Address search field — only visible in address mode
+            AddressSearchField {
+                id: addressSearchField
+                width: parent.width
+                visible: addressSwitch.checked
+                initialDisplayText: page.addressDisplayText
+
+                onAddressAccepted: function(coord, display) {
+                    page.customPositionChanged(coord, display)
+                }
+
+                onAddressCleared: {
+                    // Address cleared — fall back to GPS position
+                    page.customPositionChanged(
+                        positionSource ? positionSource.position.coordinate
+                                       : QtPositioning.coordinate(),
+                        "")
+                }
+            }
+
+            Item {
+                width: parent.width
+                height: BVApp.Theme.filterPagePostCategorySpacing
+            }
+
+            // ---- Data source ----
 
             BVApp.SectionHeader {
                          //% "Data source"

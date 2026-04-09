@@ -51,7 +51,30 @@ BVApp.ApplicationWindow
     VenueSortFilterProxyModel {
         id: gJsonCollection
         model: gJsonVenueModel
-        currentPosition: globalPositionSource.position.coordinate
+        currentPosition: app.effectiveSortPosition
+    }
+
+    // The coordinate actually used for distance sorting and display.
+    // Normally tracks GPS; overridden when the user picks an address in the filter.
+    property var customSortPosition: QtPositioning.coordinate()   // invalid = use GPS
+    property string customSortDisplayText: ""                      // human-readable label
+    readonly property var effectiveSortPosition:
+        customSortPosition.isValid ? customSortPosition
+                                   : globalPositionSource.position.coordinate
+
+    // Persistent filter settings page — kept alive so address/switch state survives navigation
+    Component {
+        id: filterSettingsComponent
+        VenueFilterSettings {
+            jsonModelCollection: gJsonCollection
+            positionSource: globalPositionSource
+            addressModeActive: app.customSortPosition.isValid
+            addressDisplayText: app.customSortDisplayText
+            onCustomPositionChanged: function(coordinate, displayText) {
+                app.customSortPosition = coordinate
+                app.customSortDisplayText = coordinate.isValid ? displayText : ""
+            }
+        }
     }
 
     property int jsonFilesToLoad: 2
@@ -99,10 +122,8 @@ BVApp.ApplicationWindow
         // ACCESS_FINE_LOCATION is in AndroidManifest.xml, but Android 6+
         // requires a runtime grant as well.  PositionSource (and therefore the
         // own-location marker) fail silently without it.
-        // The old AppMap { showUserPosition: true } handled this internally;
-        // we must do it explicitly now that we use a bare QL.Map.
-        if (typeof nativeUtils !== "undefined") {
-            nativeUtils.requestPermission(NativeUtils.PermissionLocation,
+        if (Qt.platform.os === "android") {
+            Qt.requestPermission("android.permission.ACCESS_FINE_LOCATION",
                 function(granted) {
                     if (!granted)
                         console.warn("Location permission denied — own-location marker disabled")
@@ -119,6 +140,7 @@ BVApp.ApplicationWindow
     initialPage: Component { VenueList {
             id: venueList
             positionSource: globalPositionSource
+            customSortCoordinate: app.customSortPosition
             jsonModelCollection: gJsonCollection
             currentCategoryLoaded: gJsonVenueModel.loadedVenueType & gJsonCollection.filterVenueType;
             onSearchStringChanged: {
@@ -200,9 +222,7 @@ BVApp.ApplicationWindow
             text: qsTrId("id-filter")
             split: true
             splitViewExtraPageComponent: app.initialPage
-            pageComponent: VenueFilterSettings {
-                jsonModelCollection: gJsonCollection
-            }
+            pageComponent: filterSettingsComponent
 
             onMenuActivated: {
                 gJsonCollection.filterFavorites = false;

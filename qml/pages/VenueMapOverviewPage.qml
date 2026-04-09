@@ -12,6 +12,7 @@ BVApp.Page {
 
     property var model
     property var positionSource   // kept for VenueDescription distance calc
+    property var customPosition   // custom address coordinate (invalid = use GPS)
     property alias name : page.title
     property alias map : map
 
@@ -101,13 +102,32 @@ BVApp.Page {
             }
         }
 
-        Component.onCompleted: {
-            centerAndZoom()
+        // Custom address marker — shown when sorting by a specific address
+        MapQuickItem {
+            visible: page.customPosition && page.customPosition.isValid
+            coordinate: (page.customPosition && page.customPosition.isValid)
+                        ? page.customPosition : QtPositioning.coordinate()
+            anchorPoint.x: addressMarkerIcon.width / 2
+            anchorPoint.y: addressMarkerIcon.height
+
+            sourceItem: BVApp.IconButton {
+                id: addressMarkerIcon
+                type: "my_location"
+                color: BVApp.Theme.primaryColor
+                scale: 1.5
+            }
         }
 
-        // Fly to user position on page open.
-        // Use AppMap.userPosition (set by showUserPosition: true) rather than
-        // the external PositionSource so we don't depend on permission timing.
+        Component.onCompleted: {
+            // On page open: fly to custom address if set, otherwise GPS
+            if (page.customPosition && page.customPosition.isValid)
+                animateToLocation(page.customPosition, 15)
+            else
+                centerAndZoom()
+        }
+
+        // Re-center = "where am I?" — always flies to GPS position.
+        // The custom address marker stays visible as a passive reference.
         function centerAndZoom() {
             if (map.userPositionAvailable)
                 animateToLocation(map.userPosition.coordinate, 15)

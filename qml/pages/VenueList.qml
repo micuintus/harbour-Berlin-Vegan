@@ -40,6 +40,10 @@ BVApp.Page {
     property alias jsonModelCollection: listView.model
     property bool currentCategoryLoaded: false
     property var positionSource
+    // The coordinate actually used for distance sorting/display.
+    // Normally invalid (falls back to GPS); set to a geocoded address coordinate
+    // when the user picks an address in the filter page.
+    property var customSortCoordinate
     property alias flickable: listView
     property alias searchString: searchField.text
 
@@ -95,10 +99,21 @@ BVApp.Page {
         }
 
         delegate: VenueListItem {
-
-            distanceText: positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods ?
-                      BVApp.DistanceAlgorithms.humanReadableDistanceString(positionSource.position.coordinate,
-                                                                 QtPositioning.coordinate(model.latCoord, model.longCoord)) : ""
+            // Use custom (address) coordinate when available, otherwise fall back to GPS.
+            // Show distance if either a custom coordinate is set or GPS is available.
+            distanceText: {
+                const customCoord = page.customSortCoordinate
+                if (customCoord && customCoord.isValid) {
+                    return BVApp.DistanceAlgorithms.humanReadableDistanceString(
+                               customCoord,
+                               QtPositioning.coordinate(model.latCoord, model.longCoord))
+                }
+                return positionSource.supportedPositioningMethods !== PositionSource.NoPositioningMethods
+                    ? BVApp.DistanceAlgorithms.humanReadableDistanceString(
+                          positionSource.position.coordinate,
+                          QtPositioning.coordinate(model.latCoord, model.longCoord))
+                    : ""
+            }
             onClicked: function(clickedIndex)
             {
                 // ios: keyboard stays visible, if user used search field before clicking and did not press Return key
@@ -119,7 +134,8 @@ BVApp.Page {
     onPushed: pageStack.pushAttached("qrc:/qml/pages/VenueMapOverviewPage.qml",
                             {
                                 "positionSource": globalPositionSource,
-                                "model": gJsonCollection
+                                "model": gJsonCollection,
+                                "customPosition": page.customSortCoordinate
                             }, BVApp.Theme.iconFor("map")
                         );
 }
