@@ -6,8 +6,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(Felgo REQUIRED)
-find_package(Qt6 COMPONENTS Core Qml Quick Network Positioning Location LinguistTools REQUIRED)
+# --- Platform selection ---
+
+set(BV_PLATFORM "felgo" CACHE STRING "Platform backend: felgo or kirigami")
+
+if(BV_PLATFORM STREQUAL "kirigami")
+    find_package(Qt6 COMPONENTS Core Qml Quick QuickControls2 Widgets Network Positioning Location Svg Concurrent LinguistTools REQUIRED)
+    find_package(KF6Kirigami REQUIRED)
+    find_package(ECM REQUIRED NO_MODULE)
+    list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+else()
+    find_package(Felgo REQUIRED)
+    find_package(Qt6 COMPONENTS Core Qml Quick Network Positioning Location LinguistTools REQUIRED)
+endif()
 
 qt_standard_project_setup(
     I18N_TRANSLATED_LANGUAGES de en nl
@@ -27,15 +38,42 @@ qt_add_executable(harbour-berlin-vegan src/main.cpp)
 
 if(APPLE AND NOT IOS)
     set_target_properties(harbour-berlin-vegan PROPERTIES
+        MACOSX_BUNDLE TRUE
         MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/macos/Info.plist"
     )
 endif()
 
-felgo_configure_executable(harbour-berlin-vegan)
+if(BV_PLATFORM STREQUAL "felgo")
+    felgo_configure_executable(harbour-berlin-vegan)
+elseif(BV_PLATFORM STREQUAL "kirigami")
+    target_compile_definitions(harbour-berlin-vegan PRIVATE BV_KIRIGAMI)
+endif()
+
+# --- Android configuration (Kirigami builds) ---
+
+if(ANDROID AND BV_PLATFORM STREQUAL "kirigami")
+    include(FetchContent)
+    FetchContent_Declare(android_openssl
+        DOWNLOAD_EXTRACT_TIMESTAMP true
+        URL https://github.com/KDAB/android_openssl/archive/refs/heads/master.zip)
+    FetchContent_MakeAvailable(android_openssl)
+    include(${android_openssl_SOURCE_DIR}/android_openssl.cmake)
+    add_android_openssl_libraries(harbour-berlin-vegan)
+
+    math(EXPR _version_code
+        "${PROJECT_VERSION_MAJOR} * 10000 + ${PROJECT_VERSION_MINOR} * 100 + ${PROJECT_VERSION_PATCH}")
+
+    set_target_properties(harbour-berlin-vegan PROPERTIES
+        QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android"
+        QT_ANDROID_PACKAGE_NAME "${PRODUCT_IDENTIFIER}"
+        QT_ANDROID_VERSION_CODE "${_version_code}"
+        QT_ANDROID_VERSION_NAME "${PROJECT_VERSION}"
+    )
+endif()
 
 # --- Sub-modules ---
 
-add_subdirectory(components-platform/felgo)
+add_subdirectory(components-platform/${BV_PLATFORM})
 add_subdirectory(components-ui)
 
 # --- Main QML module: C++ types + pages + venue components ---
@@ -147,5 +185,32 @@ target_link_libraries(harbour-berlin-vegan PRIVATE
     Qt6::Network
     Qt6::Positioning
     Qt6::Location
-    Felgo
 )
+
+if(BV_PLATFORM STREQUAL "kirigami")
+    target_link_libraries(harbour-berlin-vegan PRIVATE
+        Qt6::QuickControls2
+        Qt6::Widgets
+        Qt6::Svg
+        Qt6::Concurrent
+        KF6::Kirigami
+    )
+else()
+    target_link_libraries(harbour-berlin-vegan PRIVATE Felgo)
+endif()
+
+# --- Deployment (Kirigami desktop) ---
+
+if(NOT ANDROID AND BV_PLATFORM STREQUAL "kirigami")
+    install(TARGETS harbour-berlin-vegan
+        BUNDLE  DESTINATION .
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+    qt_generate_deploy_qml_app_script(
+        TARGET harbour-berlin-vegan
+        OUTPUT_SCRIPT deploy_script
+        NO_UNSUPPORTED_PLATFORM_ERROR
+        DEPLOY_USER_QML_MODULES_ON_UNSUPPORTED_PLATFORM
+    )
+    install(SCRIPT ${deploy_script})
+endif()

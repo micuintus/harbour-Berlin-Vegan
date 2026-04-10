@@ -154,6 +154,41 @@ QtObject {
     readonly property color linkColor: highlightColor
     readonly property real smallLinkFontSize: dp(12)
 
+    // --- New design tokens (Kirigami-aligned) ---
+
+    // Dark mode toggle
+    property bool darkMode: false
+
+    // Surface colors (depth/elevation)
+    readonly property color backgroundColor: darkMode ? "#121212" : "#FAFAFA"
+    readonly property color surfaceColor: darkMode ? "#1E1E1E" : "#FFFFFF"
+    readonly property color surfaceVariantColor: darkMode ? "#2C2C2C" : "#F5F5F5"
+
+    // Semantic text colors
+    readonly property color foregroundColor: darkMode ? "#E0E0E0" : primaryColor
+    readonly property color primaryForegroundColor: "#FFFFFF"
+
+    // Semantic status colors
+    readonly property color successColor: "#4CAF50"
+    readonly property color errorColor: "#E53935"
+
+    // Kirigami-aligned spacing (4px grid)
+    readonly property real smallSpacing: dp(4)
+    readonly property real mediumSpacing: dp(8)
+    readonly property real largeSpacing: dp(12)
+    readonly property real gridUnit: dp(16)
+
+    // Typography hierarchy aliases
+    readonly property real fontSizeHeadline: fontSizeExtraLarge
+    readonly property real fontSizeTitle: fontSizeLarge
+    readonly property real fontSizeBody: fontSizeMedium
+    readonly property real fontSizeCaption: fontSizeExtraSmall
+    readonly property real fontSizeOverline: fontSizeTiny
+
+    // Shape
+    readonly property real cardRadius: dp(12)
+    readonly property real buttonRadius: dp(8)
+
     readonly property real fontSizeMedium: dp(17)
     readonly property real fontSizeSmall: dp(15.4) // Theme.listItem.fontSizeText
     readonly property real fontSizeExtraSmall: dp(13.9) // Theme.listItem.fontSizeDetailText

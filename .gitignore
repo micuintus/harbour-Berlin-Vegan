@@ -4,3 +4,5 @@ rpm/harbour-berlin-vegan.spec
 build/
 build-android/
 .DS_Store
+build-kirigami/
+build-reset/

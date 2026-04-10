@@ -8,17 +8,31 @@ multi-dimensional filtering, opening hours intelligence, favorites, and map view
 
 ## Platforms & Build Systems
 
-| Platform | Build System | Qt Version | UI Toolkit | C++ Standard |
-|----------|-------------|------------|------------|-------------|
-| SailfishOS | QMake (`BerlinVegan.pro`) | Qt 5.6 | Sailfish Silica | C++17 (GCC 8.3) |
-| iOS/Android/Desktop | CMake (`CMakeLists.txt`) | Qt 6.8+ | Felgo 4.3+ | C++17 |
+| Platform | Toolkit | Distribution | Build System | Qt Version |
+|----------|---------|-------------|-------------|------------|
+| iOS | Felgo 4.3+ | App Store | CMake | Qt 6.8+ |
+| Android (Play Store) | Felgo 4.3+ | Google Play | CMake | Qt 6.8+ |
+| Android (FOSS) | Kirigami (KF6) | F-Droid | CMake | Qt 6.8+ |
+| SailfishOS (native) | Sailfish Silica | Jolla Store | QMake | Qt 5.6 |
+| SailfishOS (Kirigami) | Kirigami (KF6) | OpenRepos | CMake | Qt 6.8+ |
+| Desktop (dev) | Felgo 4.3+ | — | CMake | Qt 6.8+ |
+| Desktop (Linux) | Kirigami (KF6) | Flatpak/distro | CMake | Qt 6.8+ |
+
+Platform selection at configure time via `BV_PLATFORM` (default: `felgo`):
 
 ## Build Commands
 
 ### Felgo (Desktop/iOS/Android)
 ```bash
 mkdir -p build && cd build
-cmake .. -DCMAKE_PREFIX_PATH=/path/to/felgo -GNinja
+cmake .. -DCMAKE_PREFIX_PATH=/path/to/felgo -DBV_PLATFORM=felgo -GNinja
+ninja
+```
+
+### Kirigami (Desktop/Android — requires KF6 Kirigami)
+```bash
+mkdir -p build-kirigami && cd build-kirigami
+cmake .. -DBV_PLATFORM=kirigami -GNinja
 ninja
 ```
 
@@ -42,6 +56,7 @@ harbour-Berlin-Vegan/
 │   ├── OSMProvider.h/cpp          # Overpass API client (QML_SINGLETON)
 │   ├── OsmOpeningHoursParser.h/cpp # OSM opening_hours format parser
 │   ├── VenueDataLoader.h/cpp      # berlin-vegan.de JSON loader (QML_SINGLETON)
+│   ├── NominatimService.h/cpp      # Nominatim geocoding + address search (QML_SINGLETON)
 │   ├── FavoritesManager.h/cpp     # Favorites persistence (QML_SINGLETON)
 │   ├── OpeningHoursAlgorithms.h/cpp # Opening hours parsing + Berlin holidays
 │   └── TruncationMode.h           # Text truncation enum (QML_UNCREATABLE)
@@ -52,9 +67,10 @@ harbour-Berlin-Vegan/
 │   ├── components/                # Venue business components (VenueListItem, etc.)
 │   └── cover/                     # Sailfish cover page
 │
-├── components-platform/           # Platform abstraction
+├── components-platform/           # Platform abstraction (BV_PLATFORM selects one)
 │   ├── felgo/qml/                 # Felgo implementations (33 components)
-│   └── sailfish/                  # Sailfish implementations (qmldir)
+│   ├── kirigami/qml/              # Kirigami/KF6 implementations (33 components)
+│   └── sailfish/                  # Sailfish Silica implementations (qmldir)
 │
 ├── components-ui/qml/             # Reusable UI (SwipeView, CollapsibleItem, etc.)
 ├── tests/                         # Qt Test unit tests (50 tests)
@@ -83,12 +99,13 @@ OSM Overpass API → OSMProvider (C++) → VenueModel.importOSMVenues() [with de
 - **VenueSortFilterProxyModel**: OR/AND filters, distance sort, deferred invalidation
 - **OSMProvider**: Multi-endpoint Overpass with cache-first loading (QML_SINGLETON)
 - **OsmOpeningHoursParser**: Parses "Mo-Fr 09:00-18:00" format (~90% coverage)
+- **NominatimService**: Nominatim address search + geocoding, Berlin-scoped (QML_SINGLETON)
 - **FavoritesManager**: QSettings-based persistence (QML_SINGLETON)
 - **VenueDataLoader**: Network + cache + bundled resource fallback (QML_SINGLETON)
 
 ### Platform Abstraction (3 modules)
 - `harbour.berlin.vegan` - App module (C++ types + pages + venue components)
-- `BerlinVegan.components.platform` - Platform wrappers (Felgo/Sailfish)
+- `BerlinVegan.components.platform` - Platform wrappers (Felgo/Kirigami/Sailfish)
 - `BerlinVegan.components.ui` - Reusable UI components
 
 ### Qt6 Patterns

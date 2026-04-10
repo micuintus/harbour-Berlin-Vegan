@@ -30,6 +30,12 @@
 #ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>
 #include <QGuiApplication>
+#elif defined(BV_KIRIGAMI)
+#include <QTranslator>
+#include <QLocale>
+#include <QApplication>
+#include <QLibraryInfo>
+#include <QQmlApplicationEngine>
 #else
 #include <QTranslator>
 #include <QLocale>
@@ -48,6 +54,35 @@ int main(int argc, char *argv[])
     app->setApplicationVersion(APP_VERSION);
     view->setSource(mainQMLFile);
     view->show();
+#elif defined(BV_KIRIGAMI)
+    QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
+    QScopedPointer<QApplication> app(new QApplication(argc, argv));
+    app->setApplicationName(QStringLiteral("Berlin-Vegan"));
+    app->setOrganizationName(QStringLiteral("berlin-vegan.org"));
+    app->setApplicationVersion(QStringLiteral(APP_VERSION));
+
+    // Request location permission (required on macOS, iOS, Android)
+    QLocationPermission locationPermission;
+    locationPermission.setAccuracy(QLocationPermission::Precise);
+    if (app->checkPermission(locationPermission) == Qt::PermissionStatus::Undetermined) {
+        app->requestPermission(locationPermission, [](const QPermission &) {});
+    }
+
+    QTranslator translator;
+    if (translator.load(QLocale(), QLatin1String("harbour-berlin-vegan"),
+                        QLatin1String("-"), QLatin1String(":/translations"))) {
+        app->installTranslator(&translator);
+    }
+
+    QQmlApplicationEngine qmlEngine;
+    qmlEngine.addImportPath(QStringLiteral("qrc:/"));
+    // KF6 Kirigami QML modules — check standard locations and KF6_QML_IMPORT_PATH env
+    qmlEngine.addImportPath(QLibraryInfo::path(QLibraryInfo::QmlImportsPath));
+    qmlEngine.addImportPath(QCoreApplication::applicationDirPath() + QStringLiteral("/../lib/qml"));
+    const QString kf6Env = qEnvironmentVariable("KF6_QML_IMPORT_PATH");
+    if (!kf6Env.isEmpty())
+        qmlEngine.addImportPath(kf6Env);
+    qmlEngine.load(QUrl(QStringLiteral("qrc:/qml/harbour-berlin-vegan.qml")));
 #else
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
     QScopedPointer<QApplication> app(new QApplication(argc, argv));
@@ -70,11 +105,6 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine qmlEngine;
     felgoApp.initialize(&qmlEngine);
-    // On Android, static QML sub-modules (BerlinVegan.components.ui/platform) have
-    // their files compiled into the binary at qrc:/BerlinVegan/... but the
-    // android_rcc_bundle only carries their qmldir.  Adding qrc:/ as an import
-    // path lets the engine find both the qmldir and the actual QML/JS files
-    // directly from the compiled resources, bypassing the prefer-redirect path.
     qmlEngine.addImportPath(QStringLiteral("qrc:/"));
     felgoApp.setMainQmlFileName(mainQMLFile);
     qmlEngine.load(QUrl(felgoApp.mainQmlFileName()));
