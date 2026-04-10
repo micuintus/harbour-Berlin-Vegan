@@ -233,6 +233,11 @@
         <source>Filter settings</source>
         <translation>Filter</translation>
     </message>
+    <message id="id-reset-filters">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="68"/>
+        <source>Reset filters</source>
+        <translation>Filter zurücksetzen</translation>
+    </message>
     <message id="id-filter-vegan-category">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="225"/>
         <location filename="../qml/components/VenueDetails.qml" line="151"/>

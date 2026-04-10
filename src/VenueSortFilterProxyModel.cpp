@@ -343,6 +343,57 @@ void VenueSortFilterProxyModel::setShowOSMVenues(bool show)
     emit showOSMVenuesChanged();
 }
 
+void VenueSortFilterProxyModel::resetFilters()
+{
+    m_filterVenueType = VenueModel::GastroFlag;
+    emit filterVenueTypeChanged();
+
+    m_filterVenueSubType = { VenueModel::RestaurantFlag
+                           | VenueModel::FastFoodFlag
+                           | VenueModel::CafeFlag
+                           | VenueModel::BarFlag
+                           | VenueModel::IceCreamFlag
+                           | VenueModel::FoodsFlag
+                           | VenueModel::ClothingFlag
+                           | VenueModel::ToiletriesFlag
+                           | VenueModel::SupermarketFlag
+                           | VenueModel::HairdressersFlag
+                           | VenueModel::SportsFlag
+                           | VenueModel::TattoostudioFlag
+                           | VenueModel::AccommodationFlag };
+    emit filterVenueSubTypeChanged();
+
+    m_filterVegCategory = { VeganFlag | VegetarianFlag | OmnivorousFlag };
+    emit filterVegCategoryChanged();
+
+    m_filterVenueProperty = { };
+    emit filterVenuePropertyChanged();
+
+    m_filterGastroProperty = { };
+    emit filterGastroPropertyChanged();
+
+    m_filterOpenNow    = false;
+    m_filterCustomOpen = false;
+    emit filterOpenChanged();
+
+    m_filterWithReview = false;
+    emit filterWithReviewChanged();
+
+    m_filterFavorites  = false;
+    emit filterFavoritesChanged();
+
+    m_filterNew = false;
+    emit filterNewChanged();
+
+    m_monthNew = 3;
+    emit monthNewChanged();
+
+    m_showOSMVenues = true;
+    emit showOSMVenuesChanged();
+
+    deferInvalidateFilter();
+}
+
 void VenueSortFilterProxyModel::setCurrentPosition(QGeoCoordinate position)
 {
     if (m_currentPosition == position)

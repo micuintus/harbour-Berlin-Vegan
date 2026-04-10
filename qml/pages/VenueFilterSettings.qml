@@ -64,6 +64,23 @@ BVApp.Page {
 
             }
 
+            BVApp.Button {
+                         //% "Reset filters"
+                text: qsTrId("id-reset-filters")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    jsonModelCollection.resetFilters()
+                    addressSwitch.checked = false
+                    page.addressModeActive = false
+                    addressSearchField.clear()
+                    page.customPositionChanged(
+                        positionSource ? positionSource.position.coordinate
+                                       : QtPositioning.coordinate(),
+                        "")
+                    myLocationSwitch.checked = true
+                }
+            }
+
             Item {
                 width: parent.width
                 height: BVApp.Theme.filterPageTopSpacing

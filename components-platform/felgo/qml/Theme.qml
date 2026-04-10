@@ -123,6 +123,9 @@ QtObject {
         case "date_range":
             icon = "date_range";
             break;
+        case "reset":
+            icon = "refresh";
+            break;
         }
 
         return {

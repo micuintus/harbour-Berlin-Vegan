@@ -213,4 +213,12 @@ Item {
             }
         }
     }
+
+    function clear() {
+        searchField.text = ""
+        searchField.textField.text = ""
+        root.coordinate = QtPositioning.coordinate()
+        root.displayText = ""
+        suggestionModel.clear()
+    }
 }

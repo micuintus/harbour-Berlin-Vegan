@@ -90,6 +90,7 @@ public:
     // Note: Int because of QTBUG-58454:
     // Q_ENUMs from one class cannot be used as a Q_INVOKABLE function parameter of another class
     Q_INVOKABLE void setVenueSubTypeFilterFlag(int flag, bool on);
+    Q_INVOKABLE void resetFilters();
 
 
 public slots:

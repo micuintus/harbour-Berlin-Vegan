@@ -244,6 +244,11 @@
         <oldsource>Filter</oldsource>
         <translation>Filter</translation>
     </message>
+    <message id="id-reset-filters">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="68"/>
+        <source>Reset filters</source>
+        <translation>Reset filters</translation>
+    </message>
     <message id="id-data-source">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="75"/>
         <source>Data source</source>

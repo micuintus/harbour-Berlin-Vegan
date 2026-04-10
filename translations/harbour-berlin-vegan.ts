@@ -243,6 +243,11 @@
         <oldsource>Filter</oldsource>
         <translation>Filter</translation>
     </message>
+    <message id="id-reset-filters">
+        <location filename="../qml/pages/VenueFilterSettings.qml" line="68"/>
+        <source>Reset filters</source>
+        <translation>Reset filters</translation>
+    </message>
     <message id="id-venue-category">
         <location filename="../qml/pages/VenueFilterSettings.qml" line="76"/>
         <source>Venue category</source>
