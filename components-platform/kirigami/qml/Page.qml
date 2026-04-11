@@ -7,6 +7,6 @@ Kirigami.ScrollablePage {
     signal activated()
     signal pushed()
 
-    // Compat: Felgo/Sailfish use these for navigation
-    property var pageStack: Kirigami.ApplicationWindow.pageStack
+    // pageStack is provided natively by Kirigami when the page
+    // is in the stack — no need to declare it here.
 }

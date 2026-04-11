@@ -5,6 +5,7 @@ import org.kde.kirigami as Kirigami
 RowLayout {
     property string label
     property string value
+    property int fontWeight: Font.Normal
 
     spacing: Kirigami.Units.largeSpacing
 
@@ -13,6 +14,7 @@ RowLayout {
         text: label
         color: Kirigami.Theme.disabledTextColor
         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 0.9
+        font.weight: fontWeight
         horizontalAlignment: Text.AlignRight
         wrapMode: Text.Wrap
     }
@@ -22,6 +24,7 @@ RowLayout {
         text: value
         color: Kirigami.Theme.textColor
         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 0.9
+        font.weight: fontWeight
         wrapMode: Text.Wrap
     }
 }

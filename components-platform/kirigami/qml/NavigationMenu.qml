@@ -11,4 +11,11 @@ Kirigami.GlobalDrawer {
 
     // Compat: Felgo navigation bar offset
     property real navigationBarOffset: 0
+
+    // Self-register as the window's globalDrawer
+    Component.onCompleted: {
+        var win = applicationWindow()
+        if (win)
+            win.globalDrawer = drawer
+    }
 }

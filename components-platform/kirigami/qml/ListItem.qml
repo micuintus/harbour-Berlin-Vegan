@@ -2,30 +2,42 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 
 // Simple row wrapper — matches Felgo's SimpleRow API.
-// Uses MouseArea (not ItemDelegate) so children anchor directly
-// to the row without contentItem indirection.
-MouseArea {
+// Uses Item root so children anchor directly (no contentItem indirection).
+// Custom clicked(int) signal passes the ListView delegate index.
+Item {
     id: listItem
+
+    signal clicked(int index)
 
     property var contentWidth
     property var contentHeight
-    property bool highlighted: listItem.pressed
+    property bool highlighted: mouseArea.pressed
 
     height: contentHeight || implicitHeight
     width: parent ? parent.width : 0
+
+    // Press highlight
+    Rectangle {
+        anchors.fill: parent
+        color: mouseArea.pressed ? (Kirigami.Theme.highlightColor || "#97BF0F") : "transparent"
+        opacity: 0.1
+        z: -1
+    }
 
     // Divider at bottom
     Rectangle {
         anchors.bottom: parent.bottom
         width: parent.width
         height: 1
-        color: Kirigami.Theme.separatorColor || "#B6B6B6"
+        color: "#BDC3C7"
+        z: -1
     }
 
-    // Press highlight
-    Rectangle {
+    // Click handler — passes delegate index to signal
+    MouseArea {
+        id: mouseArea
         anchors.fill: parent
-        color: listItem.pressed ? (Kirigami.Theme.highlightColor || "#97BF0F") : "transparent"
-        opacity: 0.1
+        z: -2
+        onClicked: listItem.clicked(typeof model !== "undefined" ? model.index : -1)
     }
 }

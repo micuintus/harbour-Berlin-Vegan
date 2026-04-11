@@ -9,9 +9,14 @@ Kirigami.ApplicationWindow {
     property var globalPositionSource
 
     Component.onCompleted: {
+        // Find NavigationMenu (GlobalDrawer) child and assign it
+        for (var i = 0; i < app.data.length; i++) {
+            if (app.data[i] instanceof Kirigami.GlobalDrawer) {
+                app.globalDrawer = app.data[i]
+                break
+            }
+        }
         if (initialPage)
             pageStack.push(initialPage)
-        if (typeof app.onApplicationStarted === "function")
-            app.onApplicationStarted()
     }
 }
