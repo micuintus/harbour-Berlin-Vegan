@@ -78,8 +78,8 @@ QtObject {
     readonly property color secondaryColor: Kirigami.Theme.disabledTextColor
     readonly property color highlightDimmerColor: Kirigami.Theme.backgroundColor
     readonly property color highlightColor: "#97BF0F"  // Brand color — always green
-    readonly property color secondaryHighlightColor: Kirigami.Theme.hoverColor
-    readonly property color dividerColor: Kirigami.Theme.separatorColor
+    readonly property color secondaryHighlightColor: "#E4E4E4"
+    readonly property color dividerColor: "#BDC3C7"
     readonly property color disabledColor: Kirigami.Theme.disabledTextColor
     readonly property color warningColor: Kirigami.Theme.negativeTextColor
 
