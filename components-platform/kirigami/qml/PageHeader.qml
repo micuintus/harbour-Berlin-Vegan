@@ -1,12 +1,23 @@
 import QtQuick
-import org.kde.kirigami as Kirigami
 
 // On Kirigami, page titles are handled by Kirigami.Page.title.
-// This is a compat shim that renders as a heading when used standalone.
-Kirigami.Heading {
-    level: 2
-    property string title: text
+// This shim is invisible — it just propagates the title to the parent page.
+Item {
+    property string title
     property var extraContent: Item {}
-    text: title
-    padding: Kirigami.Units.largeSpacing
+    visible: false
+    height: 0
+    width: parent ? parent.width : 0
+
+    onTitleChanged: {
+        // Walk up to find the nearest Page and set its title
+        var p = parent
+        while (p) {
+            if (p.hasOwnProperty("title")) {
+                p.title = title
+                break
+            }
+            p = p.parent
+        }
+    }
 }
