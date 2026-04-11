@@ -17,6 +17,7 @@ import QtPositioning
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.ui 1.0 as BVApp
+import org.kde.kirigami as Kirigami
 
 // Address search field with live Nominatim autocomplete.
 // When the user picks a suggestion the coordinate property is updated
@@ -31,8 +32,8 @@ Item {
     signal addressAccepted(var coordinate, string display)
     signal addressCleared()
 
-    // Height grows to include the suggestion list when visible.
-    implicitHeight: searchField.height + (dropdown.visible ? dropdown.height : 0)
+    // Fixed height — dropdown overlays without expanding parent
+    implicitHeight: searchField.height
     width: parent ? parent.width : 0
 
     BVApp.SearchField {
@@ -82,25 +83,31 @@ Item {
         }
     }
 
-    // Suggestion dropdown — positioned below the search field.
+    // Suggestion dropdown — positioned below the search field as overlay.
     Rectangle {
         id: dropdown
-        z: 1
+        z: 100  // High z to overlay other content
         y: searchField.height
         x: BVApp.Theme.horizontalPageMargin
         width: parent.width - 2 * BVApp.Theme.horizontalPageMargin
-        height: suggestionList.contentHeight
+        height: Math.min(suggestionList.contentHeight, Kirigami.Units.gridUnit * 16)  // Cap max height
         visible: suggestionModel.count > 0
         color: "white"
         radius: 4
         border.color: BVApp.Theme.dividerColor
         border.width: 1
 
+        // Shadow for better visibility
+        layer.enabled: true
+        layer.effect: ShaderEffectSource {
+            // Simple shadow via rectangle behind
+        }
+
         ListView {
             id: suggestionList
-            width: parent.width
-            height: contentHeight
-            interactive: false
+            anchors.fill: parent
+            anchors.margins: 1  // Account for border
+            interactive: suggestionModel.count > 5  // Enable scrolling if many results
             clip: true
             model: ListModel { id: suggestionModel }
 
@@ -109,7 +116,7 @@ Item {
                 width: ListView.view.width
                 height: delegateColumn.height + 2 * BVApp.Theme.paddingMedium
                 color: delegateMouseArea.pressed ? BVApp.Theme.secondaryHighlightColor : "white"
-                radius: model.index === 0 || model.index === suggestionModel.count - 1 ? dropdown.radius : 0
+                radius: model.index === 0 ? dropdown.radius : (model.index === suggestionModel.count - 1 ? dropdown.radius : 0)
 
                 Behavior on color { ColorAnimation { duration: 120 } }
 

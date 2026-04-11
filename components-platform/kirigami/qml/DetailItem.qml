@@ -11,12 +11,14 @@ RowLayout {
 
     Text {
         Layout.preferredWidth: parent.width * 0.4
+        Layout.maximumWidth: parent.width * 0.4
         text: label
         color: Kirigami.Theme.disabledTextColor
         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 0.9
         font.weight: fontWeight
         horizontalAlignment: Text.AlignRight
-        wrapMode: Text.Wrap
+        wrapMode: Text.WordWrap
+        elide: Text.ElideRight
     }
 
     Text {
@@ -25,6 +27,6 @@ RowLayout {
         color: Kirigami.Theme.textColor
         font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 0.9
         font.weight: fontWeight
-        wrapMode: Text.Wrap
+        wrapMode: Text.WordWrap
     }
 }
