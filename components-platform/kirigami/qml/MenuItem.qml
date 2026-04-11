@@ -2,14 +2,14 @@ import QtQuick
 import org.kde.kirigami as Kirigami
 
 Kirigami.Action {
-    property string menuIcon
+    property var menuIcon
     property var pageComponent
     property bool split: false
     property var splitViewExtraPageComponent
 
     signal menuActivated()
 
-    icon.name: menuIcon
+    icon.name: menuIcon ? (menuIcon.iconString || menuIcon) : ""
     onTriggered: {
         menuActivated()
         if (pageComponent) {

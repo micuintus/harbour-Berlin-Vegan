@@ -8,9 +8,9 @@ Kirigami.ApplicationWindow {
     property var cover  // unused on Kirigami (Sailfish only)
     property var globalPositionSource
 
-    pageStack.initialPage: initialPage
-
     Component.onCompleted: {
+        if (initialPage)
+            pageStack.push(initialPage)
         if (typeof app.onApplicationStarted === "function")
             app.onApplicationStarted()
     }
