@@ -12,7 +12,6 @@ Kirigami.Action {
     property var page: null
 
     signal menuActivated()
-    signal pageChanged()
 
     icon.name: menuIcon ? (menuIcon.iconString || menuIcon) : ""
     onTriggered: {
@@ -22,15 +21,11 @@ Kirigami.Action {
             if (win && win.pageStack) {
                 win.pageStack.clear()
                 root.page = win.pageStack.push(pageComponent)
-                pageChanged()
             }
         }
     }
 
     // Navigation stack for this menu item (compatibility)
-    property var navigationStack: navStack
-
-    BVApp.NavigationStackWithPushAttached {
-        id: navStack
-    }
+    // Returns the application pageStack, not an internal one
+    property var navigationStack: applicationWindow() ? applicationWindow().pageStack : null
 }
