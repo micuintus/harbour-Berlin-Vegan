@@ -41,7 +41,7 @@ BVApp.ListItem {
         text: model.name
         color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.venueListNameColor
 
-        width: Math.min(namelabel.contentWidth,
+        width: Math.min(namelabel.implicitWidth,
                         // space that is left after substracting all the other elements from the available width
                         delegate.width
                         - (namelabel.anchors.leftMargin

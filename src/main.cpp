@@ -37,6 +37,8 @@
 #include <QLibraryInfo>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
+#include <QIcon>
+#include <QDir>
 #else
 #include <QTranslator>
 #include <QLocale>
@@ -66,6 +68,37 @@ int main(int argc, char *argv[])
     app->setApplicationName(QStringLiteral("Berlin-Vegan"));
     app->setOrganizationName(QStringLiteral("berlin-vegan.org"));
     app->setApplicationVersion(QStringLiteral(APP_VERSION));
+
+    // -------------------------------------------------------------------------
+    // Icon theme setup — Kirigami.Icon needs Breeze to resolve symbolic icon
+    // names such as starred-symbolic, non-starred-symbolic, go-home-symbolic.
+    // On Linux they are usually system-wide; on macOS they are installed by
+    // Homebrew into /opt/homebrew/share/icons (Apple Silicon) or
+    // /usr/local/share/icons (Intel).  We add all plausible paths so QIcon /
+    // KIconLoader finds Breeze regardless of how the system is configured.
+    // -------------------------------------------------------------------------
+    {
+        QStringList searchPaths = QIcon::themeSearchPaths();
+        for (const QString &candidate : {
+                 // macOS – Homebrew Apple Silicon / Intel
+                 QStringLiteral("/opt/homebrew/share/icons"),
+                 QStringLiteral("/usr/local/share/icons"),
+                 // Linux/BSD system-wide
+                 QStringLiteral("/usr/share/icons"),
+                 QStringLiteral("/usr/local/share/icons"),
+                 // Bundled inside the .app (populated by CMake post-build step)
+                 QCoreApplication::applicationDirPath() + QStringLiteral("/../Resources/icons"),
+             }) {
+            if (!searchPaths.contains(candidate) && QDir(candidate).exists())
+                searchPaths << candidate;
+        }
+        QIcon::setThemeSearchPaths(searchPaths);
+
+        // Prefer Breeze (KDE symbolic icons); hicolor is the Qt built-in fallback.
+        const QString currentTheme = QIcon::themeName();
+        if (currentTheme.isEmpty() || currentTheme == QStringLiteral("hicolor"))
+            QIcon::setThemeName(QStringLiteral("breeze"));
+    }
 
     // Request location permission (required on macOS, iOS, Android)
     QLocationPermission locationPermission;
