@@ -19,16 +19,22 @@ ColumnLayout {
     signal userToggled()
 
     spacing: Kirigami.Units.smallSpacing
+    width: parent ? parent.width : implicitWidth
 
     RowLayout {
         Layout.fillWidth: true
+        Layout.leftMargin: Kirigami.Units.largeSpacing
+        Layout.rightMargin: Kirigami.Units.mediumSpacing
 
         Controls.Label {
             id: openLabel
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignVCenter
+            wrapMode: Text.WordWrap
         }
 
         Controls.Switch {
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
             checked: root.checked
             onToggled: {
                 if (root.automaticCheck)
@@ -40,9 +46,16 @@ ColumnLayout {
 
     RowLayout {
         Layout.fillWidth: true
+        Layout.leftMargin: Kirigami.Units.largeSpacing
+        Layout.rightMargin: Kirigami.Units.largeSpacing
+        Layout.bottomMargin: Kirigami.Units.smallSpacing
         spacing: Kirigami.Units.smallSpacing
+        visible: root.checked
 
-        Controls.Label { text: root.timePrefix }
+        Controls.Label {
+            text: root.timePrefix
+            Layout.alignment: Qt.AlignVCenter
+        }
         Controls.Button {
             text: root.time.toLocaleTimeString(Qt.locale(), Locale.ShortFormat)
             onClicked: {
@@ -53,7 +66,10 @@ ColumnLayout {
             }
         }
 
-        Controls.Label { text: root.datePrefix }
+        Controls.Label {
+            text: root.datePrefix
+            Layout.alignment: Qt.AlignVCenter
+        }
         Controls.Button {
             text: root.date.toLocaleDateString(Qt.locale(), Locale.ShortFormat)
             onClicked: {
