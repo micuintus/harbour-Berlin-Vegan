@@ -166,7 +166,9 @@ QtObject {
 
     readonly property real mapHeight: Kirigami.Units.gridUnit * 12
 
-    readonly property color venueListNameColor: secondaryColor
+    // Venue name in list: use primary (dark) text so names are clearly readable.
+    // secondaryColor (disabledTextColor) was too faint on macOS/Fusion.
+    readonly property color venueListNameColor: primaryColor
     readonly property real venueListNameFontSize: fontSizeLarge
     readonly property real descriptionHeaderHeightRatio: 1.0 / 3.0
     readonly property color streetLabelColor: secondaryColor

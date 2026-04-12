@@ -57,7 +57,11 @@ Item {
             }
 
             width: parent.width
-            height: contentItem.height
+
+            // contentHeight includes the header item (the SectionHeader) plus all
+            // delegate rows.  contentItem.height only covers the delegates, so using
+            // it made the ListView too short and clipped the section header off-screen.
+            height: contentHeight
 
             interactive: false
 
@@ -274,4 +278,3 @@ Item {
         }
     }
 }
-
