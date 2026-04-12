@@ -1,0 +1,67 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+    "configurePresets": [
+        {
+            "name": "kirigami-macos",
+            "displayName": "Kirigami (macOS)",
+            "description": "Kirigami/KF6 + QMapLibre build for macOS desktop. Set BV_QT_DIR and BV_KF6_DIR.",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build-kirigami",
+            "cacheVariables": {
+                "BV_PLATFORM": "kirigami",
+                "CMAKE_PREFIX_PATH": "$env{BV_QT_DIR};$env{BV_KF6_DIR}",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "kirigami-macos-release",
+            "displayName": "Kirigami (macOS, Release)",
+            "description": "Kirigami/KF6 release build for distribution (runs macdeployqt on install).",
+            "inherits": "kirigami-macos",
+            "binaryDir": "${sourceDir}/build-kirigami-release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "felgo-macos",
+            "displayName": "Felgo (macOS)",
+            "description": "Felgo SDK build for macOS desktop. Set BV_FELGO_DIR.",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "BV_PLATFORM": "felgo",
+                "CMAKE_PREFIX_PATH": "$env{BV_FELGO_DIR}",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "kirigami-android-arm64",
+            "displayName": "Kirigami (Android arm64)",
+            "description": "Kirigami + KF6 + QMapLibre for Android arm64. Set BV_QT_DIR, BV_QT_ANDROID_DIR, BV_KF6_ANDROID_DIR, ANDROID_SDK_ROOT, ANDROID_NDK_ROOT.",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build-android",
+            "cacheVariables": {
+                "BV_PLATFORM": "kirigami",
+                "CMAKE_TOOLCHAIN_FILE": "$env{BV_QT_ANDROID_DIR}/lib/cmake/Qt6/qt.toolchain.cmake",
+                "CMAKE_PREFIX_PATH": "$env{BV_QT_ANDROID_DIR};$env{BV_KF6_ANDROID_DIR}",
+                "QT_HOST_PATH": "$env{BV_QT_DIR}",
+                "ANDROID_SDK_ROOT": "$env{ANDROID_SDK_ROOT}",
+                "ANDROID_NDK_ROOT": "$env{ANDROID_NDK_ROOT}",
+                "ANDROID_ABI": "arm64-v8a",
+                "KF6_ANDROID_PREFIX": "$env{BV_KF6_ANDROID_DIR}",
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        { "name": "kirigami-macos",         "configurePreset": "kirigami-macos" },
+        { "name": "kirigami-macos-release",  "configurePreset": "kirigami-macos-release" },
+        { "name": "felgo-macos",             "configurePreset": "felgo-macos" },
+        { "name": "kirigami-android-arm64",  "configurePreset": "kirigami-android-arm64" }
+    ],
+    "testPresets": [
+        { "name": "kirigami-macos", "configurePreset": "kirigami-macos" }
+    ]
+}

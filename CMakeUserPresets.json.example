@@ -1,0 +1,34 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "kirigami-macos",
+            "inherits": "kirigami-macos",
+            "displayName": "Kirigami (macOS, local)",
+            "environment": {
+                "BV_QT_DIR": "/opt/homebrew/opt/qt",
+                "BV_KF6_DIR": "/Users/yourname/KF6"
+            }
+        },
+        {
+            "name": "felgo-macos",
+            "inherits": "felgo-macos",
+            "displayName": "Felgo (macOS, local)",
+            "environment": {
+                "BV_FELGO_DIR": "/Users/yourname/Felgo/Felgo/macos"
+            }
+        },
+        {
+            "name": "kirigami-android-arm64",
+            "inherits": "kirigami-android-arm64",
+            "displayName": "Kirigami (Android arm64, local)",
+            "environment": {
+                "BV_QT_DIR": "/opt/homebrew/opt/qt",
+                "BV_QT_ANDROID_DIR": "/Users/yourname/Qt/6.8.3/android_arm64_v8a",
+                "BV_KF6_ANDROID_DIR": "/Users/yourname/KF6-android",
+                "ANDROID_SDK_ROOT": "/Users/yourname/Android",
+                "ANDROID_NDK_ROOT": "/Users/yourname/Android/ndk/27.x.x"
+            }
+        }
+    ]
+}
