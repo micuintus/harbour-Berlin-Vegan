@@ -36,6 +36,7 @@
 #include <QApplication>
 #include <QLibraryInfo>
 #include <QQmlApplicationEngine>
+#include <QQuickStyle>
 #else
 #include <QTranslator>
 #include <QLocale>
@@ -56,6 +57,11 @@ int main(int argc, char *argv[])
     view->show();
 #elif defined(BV_KIRIGAMI)
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
+
+    // Force Fusion style so QQC2 controls support custom background/contentItem.
+    // The macOS native style blocks customization; Fusion is always available in Qt.
+    QQuickStyle::setStyle(QStringLiteral("Fusion"));
+
     QScopedPointer<QApplication> app(new QApplication(argc, argv));
     app->setApplicationName(QStringLiteral("Berlin-Vegan"));
     app->setOrganizationName(QStringLiteral("berlin-vegan.org"));

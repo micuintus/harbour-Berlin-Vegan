@@ -50,6 +50,7 @@ QtObject {
         case "vegan":         iconName = "vegetarian-symbolic"; break
         case "my_location":   iconName = "mark-location"; break
         case "location":      iconName = "mark-location"; break
+        case "location_on":   iconName = "mark-location"; break
         case "cover-location": iconName = ""; break
         case "coffee":        iconName = "drink-symbolic"; break
         case "map":           iconName = "map-symbolic"; break

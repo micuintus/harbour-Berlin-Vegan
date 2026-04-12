@@ -55,13 +55,24 @@ if(ANDROID AND BV_PLATFORM STREQUAL "kirigami")
     include(FetchContent)
     FetchContent_Declare(android_openssl
         DOWNLOAD_EXTRACT_TIMESTAMP true
-        URL https://github.com/KDAB/android_openssl/archive/refs/heads/master.zip)
+        URL https://github.com/KDAB/android_openssl/archive/b71f1470962019bd89534a2919f5925f93bc5779.zip)
     FetchContent_MakeAvailable(android_openssl)
     include(${android_openssl_SOURCE_DIR}/android_openssl.cmake)
     add_android_openssl_libraries(harbour-berlin-vegan)
 
     math(EXPR _version_code
         "${PROJECT_VERSION_MAJOR} * 10000 + ${PROJECT_VERSION_MINOR} * 100 + ${PROJECT_VERSION_PATCH}")
+
+    # KF6_ANDROID_PREFIX must point to a KF6 installation cross-compiled for Android.
+    # Example: cmake -DKF6_ANDROID_PREFIX=/opt/kf6-android ...
+    if(DEFINED KF6_ANDROID_PREFIX)
+        set_target_properties(harbour-berlin-vegan PROPERTIES
+            # Let androiddeployqt find KF6 QML modules
+            QT_QML_IMPORT_PATH "${KF6_ANDROID_PREFIX}/lib/qml"
+            # Bundle the Kirigami shared library
+            QT_ANDROID_EXTRA_LIBS "${KF6_ANDROID_PREFIX}/lib/libKF6Kirigami.so"
+        )
+    endif()
 
     set_target_properties(harbour-berlin-vegan PROPERTIES
         QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android"
@@ -199,13 +210,18 @@ else()
     target_link_libraries(harbour-berlin-vegan PRIVATE Felgo)
 endif()
 
-# --- Deployment (Kirigami desktop) ---
+# --- Deployment (Kirigami non-Android) ---
 
 if(NOT ANDROID AND BV_PLATFORM STREQUAL "kirigami")
     install(TARGETS harbour-berlin-vegan
         BUNDLE  DESTINATION .
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
+
+    # Generates a deployment script that runs macdeployqt/windeployqt.
+    # Run `cmake --install <builddir>` to produce a fully self-contained bundle
+    # for distribution. During development, Qt is found via Homebrew and KF6
+    # QML modules are bundled by the post-build steps below.
     qt_generate_deploy_qml_app_script(
         TARGET harbour-berlin-vegan
         OUTPUT_SCRIPT deploy_script
@@ -213,4 +229,67 @@ if(NOT ANDROID AND BV_PLATFORM STREQUAL "kirigami")
         DEPLOY_USER_QML_MODULES_ON_UNSUPPORTED_PLATFORM
     )
     install(SCRIPT ${deploy_script})
+
+    # On macOS: bundle KF6 QML modules + dylibs so KF6_QML_IMPORT_PATH is not needed.
+    # main.cpp already probes <AppDir>/../lib/qml at runtime.
+    if(APPLE AND NOT IOS)
+        # Derive KF6 install prefix from the cmake package location.
+        # KF6Kirigami_DIR is typically <prefix>/lib/cmake/KF6Kirigami
+        get_filename_component(_kf6_cmake_kf "${KF6Kirigami_DIR}" DIRECTORY)   # .../lib/cmake
+        get_filename_component(_kf6_lib_dir  "${_kf6_cmake_kf}"   DIRECTORY)   # .../lib
+        get_filename_component(_kf6_prefix   "${_kf6_lib_dir}"    DIRECTORY)   # <prefix>
+
+        set(_bundle_dir "${CMAKE_CURRENT_BINARY_DIR}/harbour-berlin-vegan.app/Contents")
+
+        # 1a. Remove stale QML filesystem artifacts from previous macdeployqt runs.
+        #     Our QML is embedded as qrc:// resources; filesystem copies in
+        #     Resources/qml/ take precedence and break JS imports if incomplete.
+        add_custom_command(TARGET harbour-berlin-vegan POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E rm -rf
+                "${_bundle_dir}/Resources/qml/BerlinVegan"
+            COMMENT "Removing stale macdeployqt BerlinVegan QML artifacts"
+            VERBATIM
+        )
+
+        # 1b. Copy KF6 QML modules (org/kde/kirigami etc.) into the bundle.
+        #     main.cpp probes <AppDir>/../lib/qml at runtime, so no env var needed.
+        add_custom_command(TARGET harbour-berlin-vegan POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${_bundle_dir}/lib/qml"
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                "${_kf6_prefix}/lib/qml/org"
+                "${_bundle_dir}/lib/qml/org"
+            COMMENT "Bundling KF6 QML modules into .app"
+            VERBATIM
+        )
+
+        # 2. Copy KF6 dylibs into bundle Frameworks.
+        # KF6 libraries are named libKirigami*.dylib (no KF6 prefix).
+        # We collect only the unversioned symlinks (*.dylib, not *.6.dylib or *.6.x.y.dylib)
+        # so we don't duplicate files.
+        file(GLOB _kf6_dylibs LIST_DIRECTORIES false "${_kf6_prefix}/lib/libKirigami*.dylib")
+        if(_kf6_dylibs)
+            add_custom_command(TARGET harbour-berlin-vegan POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E make_directory "${_bundle_dir}/Frameworks"
+                VERBATIM
+            )
+            foreach(_dylib IN LISTS _kf6_dylibs)
+                add_custom_command(TARGET harbour-berlin-vegan POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                        "${_dylib}" "${_bundle_dir}/Frameworks/"
+                    VERBATIM
+                )
+            endforeach()
+        else()
+            message(WARNING "No libKirigami*.dylib found in ${_kf6_prefix}/lib — skipping dylib bundling")
+        endif()
+
+        # 3. Ensure the executable rpath includes the bundled Frameworks directory
+        add_custom_command(TARGET harbour-berlin-vegan POST_BUILD
+            COMMAND install_name_tool
+                -add_rpath "@executable_path/../Frameworks"
+                "$<TARGET_FILE:harbour-berlin-vegan>"
+            COMMENT "Adding @executable_path/../Frameworks rpath to binary"
+            VERBATIM
+        )
+    endif()
 endif()

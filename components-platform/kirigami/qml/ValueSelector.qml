@@ -17,17 +17,21 @@ ColumnLayout {
     signal valueModified()
 
     spacing: Kirigami.Units.smallSpacing
+    width: parent ? parent.width : implicitWidth
 
-    RowLayout {
+    Controls.Label {
         Layout.fillWidth: true
-        Controls.Label {
-            text: root.label + " " + Math.round(root.value) + " "
-                  + (Math.round(root.value) === 1 ? root.labelUnitSingular : root.labelUnitPlural)
-        }
+        Layout.leftMargin: Kirigami.Units.largeSpacing
+        Layout.rightMargin: Kirigami.Units.largeSpacing
+        text: root.label + " " + Math.round(root.value) + " "
+              + (Math.round(root.value) === 1 ? root.labelUnitSingular : root.labelUnitPlural)
+        wrapMode: Text.WordWrap
     }
 
     Controls.Slider {
         Layout.fillWidth: true
+        Layout.leftMargin: Kirigami.Units.largeSpacing
+        Layout.rightMargin: Kirigami.Units.largeSpacing
         from: root.from
         to: root.to
         stepSize: root.stepSize
