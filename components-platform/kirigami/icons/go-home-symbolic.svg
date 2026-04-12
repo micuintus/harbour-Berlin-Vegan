@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="22" height="22">
+  <!-- House with door cutout: roof peak (11,2), eaves at y=11, walls to y=20 -->
+  <path d="M11,2 L1,11 L4.5,11 L4.5,20 L9,20 L9,14.5 L13,14.5 L13,20 L17.5,20 L17.5,11 L21,11 Z"
+        fill="black"/>
+</svg>

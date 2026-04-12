@@ -10,3 +10,15 @@ qt_add_qml_module(BerlinVeganPlatform
     OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/BerlinVegan/components/platform
     QML_FILES ${PlatformQml}
 )
+
+# Bundle platform-specific SVG icons that are not available in hicolor
+# (the Qt built-in fallback theme). These are used by IconButton.qml via
+# qrc:/icons/bv/<name>.svg when Breeze or another full KDE icon theme is
+# not installed on the host system (e.g. macOS without breeze-icons).
+qt_add_resources(BerlinVeganPlatform "kirigami_bundled_icons"
+    PREFIX "/icons/bv"
+    FILES
+        icons/starred-symbolic.svg
+        icons/non-starred-symbolic.svg
+        icons/go-home-symbolic.svg
+)

@@ -23,8 +23,10 @@ MouseArea {
             property int verticalAlignment: Text.AlignVCenter
             source: BVApp.Theme.iconFor(type).iconString
             color: iconButton.enabled ? iconButton.color : BVApp.Theme.disabledColor
+            isMask: true
             width: BVApp.Theme.iconSizeLarge * iconButton.iconScale
             height: width
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         Text {

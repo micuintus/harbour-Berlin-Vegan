@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" width="22" height="22">
+  <!-- Outline 5-pointed star, center (11,11), outer r=8.5, inner r=3.5 -->
+  <polygon points="11,2.5 13.1,8.2 19.1,8.4 14.3,12.1 16,17.9 11,14.5 6,17.9 7.7,12.1 2.9,8.4 8.9,8.2"
+           fill="none" stroke="black" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>
