@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <manifest package="org.berlin_vegan.bvapp" xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="3.7.0" android:versionCode="37" android:installLocation="auto">
-    <application android:allowNativeHeapPointerTagging="false" android:extractNativeLibs="true" android:hardwareAccelerated="true" android:name="com.felgo.helper.FelgoApplication" android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+    <!-- Android 16 routes back through the predictive-back API and stops
+         dispatching onBackPressed/KEYCODE_BACK to apps that do not opt out.
+         Qt has no predictive-back support, so every pageStack pop would die. -->
+    <application android:enableOnBackInvokedCallback="false" android:allowNativeHeapPointerTagging="false" android:extractNativeLibs="true" android:hardwareAccelerated="true" android:name="com.felgo.helper.FelgoApplication" android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
         <activity android:exported="true" android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="com.felgo.helper.FelgoActivity" android:label="@string/app_name" android:screenOrientation="portrait" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
