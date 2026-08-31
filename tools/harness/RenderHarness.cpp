@@ -1,6 +1,7 @@
 #include "RenderHarness.h"
 
 #include <QDir>
+#include <QFile>
 #include <QGuiApplication>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -25,8 +26,6 @@ struct Message
 {
     QtMsgType type;
     QString text;
-    QString file;
-    int line;
 };
 
 std::vector<Message> g_messages;
@@ -34,7 +33,7 @@ QtMessageHandler g_previousHandler = nullptr;
 
 void recordingHandler(QtMsgType type, const QMessageLogContext& ctx, const QString& text)
 {
-    g_messages.push_back({type, text, QString::fromUtf8(ctx.file ? ctx.file : ""), ctx.line});
+    g_messages.push_back({type, text});
     if (g_previousHandler)
         g_previousHandler(type, ctx, text);
 }
@@ -42,7 +41,7 @@ void recordingHandler(QtMsgType type, const QMessageLogContext& ctx, const QStri
 QString typeName(const QObject* object)
 {
     QString name = QString::fromUtf8(object->metaObject()->className());
-    // QML-declared types get a _QMLTYPE_nn / _QML_nn suffix that changes between
+    // QML-declared types get a _QMLTYPE_nn suffix whose number changes between
     // runs; strip it so tree dumps are diffable.
     const int marker = name.indexOf(QStringLiteral("_QML"));
     return marker < 0 ? name : name.left(marker);
@@ -81,8 +80,6 @@ QJsonObject dumpItem(QQuickItem* item, int depth, QJsonArray& defects)
     node[QStringLiteral("visible")] = item->isVisible();
     node[QStringLiteral("opacity")] = item->opacity();
 
-    // --- Layout defects -----------------------------------------------------
-    // Only meaningful for items that are actually on screen.
     if (item->isVisible() && item->opacity() > 0.01) {
         const auto flag = [&](const char* kind) {
             QJsonObject defect;
@@ -90,8 +87,6 @@ QJsonObject dumpItem(QQuickItem* item, int depth, QJsonArray& defects)
             defect[QStringLiteral("type")] = typeName(item);
             if (!text.isEmpty())
                 defect[QStringLiteral("text")] = text.left(60);
-            defect[QStringLiteral("x")] = qRound(scenePos.x());
-            defect[QStringLiteral("y")] = qRound(scenePos.y());
             defects.append(defect);
         };
 
@@ -99,8 +94,8 @@ QJsonObject dumpItem(QQuickItem* item, int depth, QJsonArray& defects)
         const qreal implicitHeight = item->implicitHeight();
 
         if (!text.isEmpty() && implicitWidth > item->width() + 0.5) {
-            // Elide/wrap is legitimate; an unset elide mode on an overflowing
-            // label is not. elide==0 is Text.ElideNone.
+            // Elide or wrap is a deliberate answer to overflow; an unset elide
+            // mode on an overflowing label is not. elide == 0 is ElideNone.
             const QVariant elide = item->property("elide");
             const QVariant wrapMode = item->property("wrapMode");
             const bool handled = (elide.isValid() && elide.toInt() != 0)
@@ -118,11 +113,10 @@ QJsonObject dumpItem(QQuickItem* item, int depth, QJsonArray& defects)
     }
 
     QJsonArray children;
-    const auto childItems = item->childItems();
-    for (QQuickItem* child : childItems) {
-        if (depth >= 40)
-            break;
-        children.append(dumpItem(child, depth + 1, defects));
+    if (depth < 40) {
+        const auto childItems = item->childItems();
+        for (QQuickItem* child : childItems)
+            children.append(dumpItem(child, depth + 1, defects));
     }
     if (!children.isEmpty())
         node[QStringLiteral("children")] = children;
@@ -130,13 +124,35 @@ QJsonObject dumpItem(QQuickItem* item, int depth, QJsonArray& defects)
     return node;
 }
 
+int countNodes(const QJsonObject& node)
+{
+    int total = 1;
+    const QJsonArray children = node.value(QStringLiteral("children")).toArray();
+    for (const QJsonValue& child : children)
+        total += countNodes(child.toObject());
+    return total;
+}
+
+QJsonObject snapshot(QObject* root, int* nodeCount)
+{
+    QJsonArray defects;
+    QJsonObject tree;
+    if (auto* window = qobject_cast<QQuickWindow*>(root))
+        if (auto* content = window->contentItem())
+            tree = dumpItem(content, 0, defects);
+    if (nodeCount)
+        *nodeCount = countNodes(tree);
+
+    QJsonObject document;
+    document[QStringLiteral("tree")] = tree;
+    document[QStringLiteral("defects")] = defects;
+    return document;
+}
+
 QJsonArray dumpMessages()
 {
     QJsonArray array;
     for (const Message& message : g_messages) {
-        // Qt's own font-alias chatter is host noise, not an app defect.
-        if (message.text.contains(QStringLiteral("Populating font family aliases")))
-            continue;
         if (message.type != QtWarningMsg && message.type != QtCriticalMsg
             && message.type != QtFatalMsg)
             continue;
@@ -172,10 +188,6 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
 {
     const QString outDir = qEnvironmentVariable("BV_HARNESS_OUT",
                                                 QStringLiteral("harness-out"));
-    // Settle budget in ms before the first grab; data loading is async.
-    const int settleMs = qEnvironmentVariableIntValue("BV_HARNESS_SETTLE_MS") > 0
-                             ? qEnvironmentVariableIntValue("BV_HARNESS_SETTLE_MS")
-                             : 6000;
     QDir().mkpath(outDir);
 
     if (engine.rootObjects().isEmpty()) {
@@ -209,9 +221,9 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
 
     auto* state = new QObject(&app);
     auto step = std::make_shared<int>(0);
-
     auto shoot = std::make_shared<std::function<void()>>();
-    *shoot = [&engine, &app, window, root, outDir, pages, step, shoot, state]() {
+
+    *shoot = [&app, window, root, outDir, pages, step, shoot, state]() {
         if (*step >= pages.size()) {
             QJsonObject summary;
             summary[QStringLiteral("messages")] = dumpMessages();
@@ -225,7 +237,6 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
         const int pageIndex = pages.at(*step).toInt();
         const QString tag = QStringLiteral("page%1").arg(pageIndex);
 
-        // Activate the requested navigation entry, except for the initial page.
         if (pageIndex > 0) {
             const QVariant drawerVariant = QQmlProperty::read(root, QStringLiteral("globalDrawer"));
             QObject* drawer = drawerVariant.value<QObject*>();
@@ -237,45 +248,64 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
                     && actions.at(pageIndex)) {
                     QMetaObject::invokeMethod(actions.at(pageIndex), "trigger");
                 } else {
-                    qWarning("harness: no navigation action at index %d (count %d)",
-                             pageIndex, actions.isValid() ? actions.count() : -1);
+                    qCritical("harness: no navigation action at index %d (count %d)",
+                              pageIndex, actions.isValid() ? actions.count() : -1);
                 }
             } else {
-                qWarning("harness: globalDrawer not found; cannot navigate");
+                qCritical("harness: globalDrawer not found; cannot navigate");
             }
         }
 
-        // Let the new page lay out and render before grabbing.
-        QTimer::singleShot(1500, state, [window, root, outDir, tag, step, shoot]() {
+        // Sampling on a fixed delay makes the score a race: delegate creation
+        // and async load failures keep mutating the scene, so item counts and
+        // warning multiplicities differ run to run. Wait for the item count to
+        // stop changing instead, then sample once.
+        auto settle = std::make_shared<std::function<void(int, int, int)>>();
+        *settle = [window, root, outDir, tag, step, shoot, settle]
+                  (int previous, int stableRounds, int tries) {
+            int count = 0;
+            snapshot(root, &count);
+            const bool stable = (count == previous);
+            const int rounds = stable ? stableRounds + 1 : 0;
+
+            if (rounds < 2 && tries < 25) {
+                QTimer::singleShot(300, window, [settle, count, rounds, tries]() {
+                    (*settle)(count, rounds, tries + 1);
+                });
+                return;
+            }
+            if (tries >= 25)
+                qWarning("harness: %s never settled (last count %d)",
+                         qPrintable(tag), count);
+
             const QImage image = window->grabWindow();
             if (image.isNull())
-                qWarning("harness: grabWindow returned a null image for %s",
-                         qPrintable(tag));
+                qCritical("harness: grabWindow returned a null image for %s",
+                          qPrintable(tag));
             else
                 image.save(outDir + QLatin1Char('/') + tag + QStringLiteral(".png"));
 
-            QJsonArray defects;
-            QJsonObject tree;
-            if (auto* content = qobject_cast<QQuickWindow*>(root)->contentItem())
-                tree = dumpItem(content, 0, defects);
-
-            QJsonObject document;
+            QJsonObject document = snapshot(root, nullptr);
             document[QStringLiteral("page")] = tag;
-            document[QStringLiteral("tree")] = tree;
-            document[QStringLiteral("defects")] = defects;
             QFile file(outDir + QLatin1Char('/') + tag + QStringLiteral(".json"));
             if (file.open(QIODevice::WriteOnly))
                 file.write(QJsonDocument(document).toJson(QJsonDocument::Indented));
 
             ++*step;
             (*shoot)();
-        });
+        };
+        QTimer::singleShot(600, state, [settle]() { (*settle)(-1, 0, 0); });
     };
 
+    // One initial grace period for the first data load, then everything is
+    // driven by the settle poll above.
+    const int settleMs = qEnvironmentVariableIntValue("BV_HARNESS_SETTLE_MS") > 0
+                             ? qEnvironmentVariableIntValue("BV_HARNESS_SETTLE_MS")
+                             : 6000;
     QTimer::singleShot(settleMs, state, [shoot]() { (*shoot)(); });
 
     // Hard stop so a hung harness cannot wedge an evolve iteration.
-    QTimer::singleShot(settleMs + 8000 * (pages.size() + 1), &app, []() {
+    QTimer::singleShot(settleMs + 30000 * (pages.size() + 1), &app, []() {
         qCritical("harness: global timeout");
         QCoreApplication::exit(5);
     });

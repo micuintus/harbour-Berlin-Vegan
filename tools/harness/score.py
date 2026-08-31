@@ -99,6 +99,7 @@ def main():
 
     per_page, gates = {}, {"render": True, "pages": len(pages), "qml_errors": 0}
     total_items = total_defects = 0
+    distinct_defects = set()
     semantic_hits = semantic_total = 0
     brand_values = []
 
@@ -110,6 +111,9 @@ def main():
         defects = document.get("defects", [])
         total_items += len(items)
         total_defects += len(defects)
+        for defect in defects:
+            distinct_defects.add((tag, defect["kind"], defect["type"],
+                                  defect.get("text", "")))
 
         entry = {"items": len(items), "defects": len(defects)}
 
@@ -140,14 +144,20 @@ def main():
     if messages_file.exists():
         messages = json.loads(messages_file.read_text()).get("messages", [])
     real = [m for m in messages if not FIXTURE_NOISE.search(m["text"])]
-    errors = [m for m in real if m["type"] == "error"]
-    warnings = [m for m in real if m["type"] == "warning"]
+    errors = {m["text"].split("\n")[0] for m in real if m["type"] == "error"}
+    # Distinct texts, not occurrences. The same ReferenceError fires once per
+    # delegate, and how many delegates exist depends on scroll timing, so
+    # counting occurrences measures the harness rather than the code.
+    warnings = sorted({m["text"].split("\n")[0] for m in real if m["type"] == "warning"})
     gates["qml_errors"] = len(errors)
 
     # Components. Each is 0..1.
-    layout = 1.0 - (total_defects / total_items) if total_items else 0.0
+    # Distinct defect signatures, for the same reason: a clipped label in a
+    # recycled delegate must not score differently because more rows happened
+    # to be realised on this run.
+    layout = math.exp(-len(distinct_defects) / 4.0)
     # A handful of warnings should hurt a lot; the tail should not dominate.
-    console = math.exp(-len(warnings) / 8.0)
+    console = math.exp(-len(warnings) / 4.0)
     brand = sum(brand_values) / len(brand_values) if brand_values else 1.0
     semantic = (semantic_hits / semantic_total) if semantic_total else None
 
@@ -171,13 +181,14 @@ def main():
         "counts": {
             "items": total_items,
             "defects": total_defects,
+            "distinct_defects": len(distinct_defects),
             "warnings": len(warnings),
             "errors": len(errors),
         },
         "gates": gates,
         "gates_pass": bool(gates["render"] and gates["qml_errors"] == 0),
         "pages": per_page,
-        "top_warnings": [m["text"].split("\n")[0][:140] for m in warnings[:8]],
+        "top_warnings": [w[:140] for w in warnings[:8]],
     }
     print(json.dumps(verdict, indent=2))
     return 0
