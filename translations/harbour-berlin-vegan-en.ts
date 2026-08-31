@@ -521,7 +521,7 @@
     <message id="id-tag-vegetarian">
         <location filename="../qml/components/VenueListItem.qml" line="0"/>
         <source>veggie</source>
-        <translation>veggie</translation>
+        <translation>vegetarian</translation>
     </message>
     <message id="id-tag-new">
         <location filename="../qml/components/VenueListItem.qml" line="70"/>

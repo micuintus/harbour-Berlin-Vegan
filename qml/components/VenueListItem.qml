@@ -168,8 +168,33 @@ BVApp.ListItem {
                 }
 
                 BVApp.Label {
-                    id: stateLabel
+                    id: newLabel
                     anchors.left: parent.left
+                    anchors.baseline: streetLabel.baseline
+                    visible: model.isNew
+                                //% "new"
+                    text: qsTrId("id-tag-new")
+                    color: BVApp.BrandTokens.vegan
+                    font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                    font.capitalization: Font.AllUppercase
+                    font.letterSpacing: BVApp.BrandTokens.metaTracking
+                }
+
+                BVApp.Label {
+                    id: newDot
+                    anchors.left: newLabel.right
+                    anchors.leftMargin: unit * BVApp.BrandTokens.tightUnits
+                    anchors.baseline: streetLabel.baseline
+                    visible: newLabel.visible
+                    text: "\u00b7"
+                    color: BVApp.BrandTokens.inkFaint
+                    font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                }
+
+                BVApp.Label {
+                    id: stateLabel
+                    anchors.left: newLabel.visible ? newDot.right : parent.left
+                    anchors.leftMargin: newLabel.visible ? unit * BVApp.BrandTokens.tightUnits : 0
                     anchors.baseline: streetLabel.baseline
                     visible: !model.open || model.closesSoon
                                 //% "closed now"
@@ -195,9 +220,11 @@ BVApp.ListItem {
                 BVApp.Label {
                     id: streetLabel
                     anchors {
-                        left: stateLabel.visible ? separatorDot.right : parent.left
+                        left: stateLabel.visible ? separatorDot.right
+                                                 : (newLabel.visible ? newDot.right : parent.left)
                         right: distance.left
-                        leftMargin: stateLabel.visible ? unit * BVApp.BrandTokens.tightUnits : 0
+                        leftMargin: (stateLabel.visible || newLabel.visible)
+                                        ? unit * BVApp.BrandTokens.tightUnits : 0
                         rightMargin: unit * BVApp.BrandTokens.baseUnits
                         verticalCenter: parent.verticalCenter
                     }
