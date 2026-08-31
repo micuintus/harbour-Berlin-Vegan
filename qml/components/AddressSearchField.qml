@@ -17,7 +17,6 @@ import QtPositioning
 import harbour.berlin.vegan 1.0
 import BerlinVegan.components.platform 1.0 as BVApp
 import BerlinVegan.components.ui 1.0 as BVApp
-import org.kde.kirigami as Kirigami
 
 // Address search field with live Nominatim autocomplete.
 // When the user picks a suggestion the coordinate property is updated
@@ -90,7 +89,7 @@ Item {
         y: searchField.height
         x: BVApp.Theme.horizontalPageMargin
         width: parent.width - 2 * BVApp.Theme.horizontalPageMargin
-        height: Math.min(suggestionList.contentHeight, Kirigami.Units.gridUnit * 16)  // Cap max height
+        height: Math.min(suggestionList.contentHeight, BVApp.Theme.gridUnit * 16)
         visible: suggestionModel.count > 0
         color: "white"
         radius: 4
