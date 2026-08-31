@@ -93,15 +93,22 @@ QJsonObject dumpItem(QQuickItem* item, int depth, QJsonArray& defects)
         const qreal implicitWidth = item->implicitWidth();
         const qreal implicitHeight = item->implicitHeight();
 
-        if (!text.isEmpty() && implicitWidth > item->width() + 0.5) {
-            // Elide or wrap is a deliberate answer to overflow; an unset elide
-            // mode on an overflowing label is not. elide == 0 is ElideNone.
+        if (!text.isEmpty() && implicitWidth > item->width() + 0.5 && item->width() > 0) {
+            // Elide, wrap or a fade ramp are all deliberate answers to
+            // overflow; an unset elide mode on an overflowing label is not.
+            // elide == 0 is ElideNone.
             const QVariant elide = item->property("elide");
             const QVariant wrapMode = item->property("wrapMode");
             const bool handled = (elide.isValid() && elide.toInt() != 0)
-                                 || (wrapMode.isValid() && wrapMode.toInt() != 0);
+                                 || (wrapMode.isValid() && wrapMode.toInt() != 0)
+                                 || typeName(item).contains(QStringLiteral("FadingLabel"));
             if (!handled)
                 flag("text-overflow");
+            // Handling it does not make it readable. Past a third hidden the
+            // reader has lost the word, which is how a list of names elided to
+            // "Tig" and "BA" once scored clean.
+            else if (implicitWidth > item->width() * 1.35)
+                flag("severe-truncation");
         }
         // Only leaves can be clipped in a way we can attribute; a page or
         // flickable whose implicitHeight exceeds its height is just scrollable.

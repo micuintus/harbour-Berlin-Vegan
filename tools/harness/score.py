@@ -177,10 +177,14 @@ def main():
     gates["qml_errors"] = len(errors)
 
     # Components. Each is 0..1.
-    # Distinct defect signatures, for the same reason: a clipped label in a
-    # recycled delegate must not score differently because more rows happened
-    # to be realised on this run.
-    layout = math.exp(-len(distinct_defects) / 4.0)
+    # Two classes, graded differently. A zero-size or unhandled-overflow label
+    # is a bug and a handful should hurt badly. Severe truncation is a design
+    # tension with long real-world names: it has to cost something, but it is
+    # the tail of a distribution, not a broken screen.
+    hard = {d for d in distinct_defects if d[1] != "severe-truncation"}
+    soft = {d for d in distinct_defects if d[1] == "severe-truncation"}
+    rows = max(total_items, 1)
+    layout = math.exp(-len(hard) / 4.0) * math.exp(-len(soft) / (0.05 * rows + 8.0))
     # A handful of warnings should hurt a lot; the tail should not dominate.
     console = math.exp(-len(warnings) / 4.0)
     brand = sum(brand_values) / len(brand_values) if brand_values else 1.0
@@ -223,6 +227,8 @@ def main():
             "items": total_items,
             "defects": total_defects,
             "distinct_defects": len(distinct_defects),
+            "hard_defects": len(hard),
+            "truncations": len(soft),
             "warnings": len(warnings),
             "errors": len(errors),
         },

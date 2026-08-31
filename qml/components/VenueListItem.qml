@@ -140,7 +140,7 @@ BVApp.ListItem {
                     font.letterSpacing: BVApp.BrandTokens.metaTracking
                 }
 
-                BVApp.Label {
+                BVApp.FadingLabel {
                     id: nameLabel
                     anchors {
                         left: parent.left
@@ -148,10 +148,10 @@ BVApp.ListItem {
                         rightMargin: vegChip.visible ? unit * BVApp.BrandTokens.baseUnits : 0
                         verticalCenter: parent.verticalCenter
                     }
+                    height: implicitHeight
                     text: model.name
                     color: BVApp.BrandTokens.ink
                     font.pixelSize: BVApp.BrandTokens.title(bodySize)
-                    truncationMode: TruncationMode.Fade
                 }
             }
 
@@ -217,7 +217,7 @@ BVApp.ListItem {
                     font.pixelSize: BVApp.BrandTokens.caption(bodySize)
                 }
 
-                BVApp.Label {
+                BVApp.FadingLabel {
                     id: streetLabel
                     anchors {
                         left: stateLabel.visible ? separatorDot.right
@@ -228,10 +228,10 @@ BVApp.ListItem {
                         rightMargin: unit * BVApp.BrandTokens.baseUnits
                         verticalCenter: parent.verticalCenter
                     }
+                    height: implicitHeight
                     text: model.street
                     color: BVApp.BrandTokens.inkMuted
                     font.pixelSize: BVApp.BrandTokens.caption(bodySize)
-                    truncationMode: TruncationMode.Fade
                 }
             }
         }
