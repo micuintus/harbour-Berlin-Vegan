@@ -149,6 +149,38 @@ QJsonObject snapshot(QObject* root, int* nodeCount)
     return document;
 }
 
+// Felgo drives navigation through Navigation::currentIndex rather than a list
+// of triggerable actions, so the two platform layers need different hooks.
+QObject* findNavigation(QObject* root)
+{
+    const QString name = QString::fromUtf8(root->metaObject()->className());
+    if (name.contains(QStringLiteral("Navigation"))
+        && root->metaObject()->indexOfProperty("currentIndex") >= 0)
+        return root;
+    const auto children = root->children();
+    for (QObject* child : children)
+        if (QObject* found = findNavigation(child))
+            return found;
+    return nullptr;
+}
+
+// Returns false when no navigation mechanism could be driven at all.
+bool activatePage(QObject* root, int pageIndex)
+{
+    const QVariant drawerVariant = QQmlProperty::read(root, QStringLiteral("globalDrawer"));
+    if (QObject* drawer = drawerVariant.value<QObject*>()) {
+        // Kirigami: actions is a QQmlListProperty, so it needs a list reference.
+        QQmlListReference actions(drawer, "actions");
+        if (actions.isValid() && pageIndex < actions.count() && actions.at(pageIndex))
+            return QMetaObject::invokeMethod(actions.at(pageIndex), "trigger");
+    }
+    if (QObject* navigation = findNavigation(root)) {
+        navigation->setProperty("currentIndex", pageIndex);
+        return navigation->property("currentIndex").toInt() == pageIndex;
+    }
+    return false;
+}
+
 QJsonArray dumpMessages()
 {
     QJsonArray array;
@@ -241,24 +273,8 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
         // action, which clears the stack before pushing. Sampling whatever
         // startup happened to leave behind is not reproducible: on a cold run
         // an extra venue detail page rides along on top of the list.
-        {
-            const QVariant drawerVariant = QQmlProperty::read(root, QStringLiteral("globalDrawer"));
-            QObject* drawer = drawerVariant.value<QObject*>();
-            if (drawer) {
-                // actions is a QQmlListProperty, so it has to go through
-                // QQmlListReference rather than a QVariant cast.
-                QQmlListReference actions(drawer, "actions");
-                if (actions.isValid() && pageIndex < actions.count()
-                    && actions.at(pageIndex)) {
-                    QMetaObject::invokeMethod(actions.at(pageIndex), "trigger");
-                } else {
-                    qCritical("harness: no navigation action at index %d (count %d)",
-                              pageIndex, actions.isValid() ? actions.count() : -1);
-                }
-            } else {
-                qCritical("harness: globalDrawer not found; cannot navigate");
-            }
-        }
+        if (!activatePage(root, pageIndex))
+            qCritical("harness: could not navigate to page %d", pageIndex);
 
         // Sampling on a fixed delay makes the score a race: delegate creation
         // and async load failures keep mutating the scene, so item counts and
