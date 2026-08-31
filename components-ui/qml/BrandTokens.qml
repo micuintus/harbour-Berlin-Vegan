@@ -12,13 +12,13 @@ import QtQuick
 QtObject {
 
     // -- Identity -------------------------------------------------------------
-    readonly property color green:      "#7CA511"   // darkened for AA text contrast
+    readonly property color green:      "#5F7F0C"   // AA on white, calmer than the fill
     readonly property color greenBright: "#97BF0F"  // the historical brand fill
-    readonly property color greenSoft:  "#EEF5DA"   // tinted surface behind green
+    readonly property color greenSoft:  "#F1F5E6"   // tinted surface behind green
 
     // -- Veg categories, the primary filter axis ------------------------------
-    readonly property color vegan:      "#7CA511"
-    readonly property color vegetarian: "#E08600"
+    readonly property color vegan:      "#6B8F0E"
+    readonly property color vegetarian: "#B87500"
     readonly property color omnivore:   "#C2453B"
 
     // -- Neutrals -------------------------------------------------------------
@@ -46,10 +46,16 @@ QtObject {
     function headline(body) { return Math.round(body * typeRatio * typeRatio) }
 
     // -- Shape ----------------------------------------------------------------
-    // Multiples of the platform base unit, not pixels.
-    readonly property real radiusCardUnits:  0.75
-    readonly property real radiusChipUnits:  0.5
-    readonly property real thumbUnits:       3.0
+    // Multiples of the platform base unit, not pixels. Radii stay small and
+    // consistent: stacking several generous ones reads as toy-like rather than
+    // soft, and the effect compounds when a card, a thumbnail and a badge all
+    // curve at different rates.
+    readonly property real radiusCardUnits:  0.35
+    readonly property real radiusChipUnits:  0.2
+    readonly property real thumbUnits:       2.75
+
+    // Metadata set in small caps: wide tracking is what keeps it legible.
+    readonly property real metaTracking:     1.2
 
     // -- Rhythm ---------------------------------------------------------------
     // Spacing steps as multiples of the platform base unit.

@@ -36,7 +36,7 @@ BVApp.ListItem {
     property alias distanceText: distance.text
 
     // Cards carry the grouping, so the platform's row divider would double up.
-    dividerVisible: false
+    dividerVisible: true
 
     readonly property real unit: BVApp.Theme.gridUnit
     readonly property real bodySize: BVApp.Theme.fontSizeBody
@@ -59,11 +59,12 @@ BVApp.ListItem {
             topMargin: unit * BVApp.BrandTokens.tightUnits
         }
         height: unit * BVApp.BrandTokens.thumbUnits + unit * BVApp.BrandTokens.snugUnits
-        radius: unit * BVApp.BrandTokens.radiusCardUnits
+        radius: delegate.highlighted ? unit * BVApp.BrandTokens.radiusCardUnits : 0
         color: delegate.highlighted ? BVApp.BrandTokens.greenSoft
-                                    : BVApp.BrandTokens.surface
-        border.width: 1
-        border.color: BVApp.BrandTokens.hairline
+                                    : "transparent"
+        // Cards separate by sitting on the canvas; an outline as well makes
+        // every row read as a sticker.
+        border.width: 0
 
         // -- Thumbnail --------------------------------------------------------
         Rectangle {
@@ -85,8 +86,9 @@ BVApp.ListItem {
                 visible: photo.status !== Image.Ready
                 text: model.name.length > 0 ? model.name.charAt(0).toUpperCase() : "?"
                 color: BVApp.BrandTokens.green
-                font.pixelSize: BVApp.BrandTokens.title(bodySize)
-                font.weight: BVApp.BrandTokens.weightMedium
+                opacity: 0.55
+                font.pixelSize: bodySize
+                font.weight: BVApp.BrandTokens.weightNormal
             }
 
             Image {
@@ -99,30 +101,16 @@ BVApp.ListItem {
             }
         }
 
-        // -- Trailing: distance only -------------------------------------------
-        // Open/closed rides on the address line instead of its own column:
-        // reserving width for "closed now" on every card, when only some are
-        // closed, is what squeezed the venue name.
-        BVApp.Label {
-            id: distance
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-                rightMargin: unit * BVApp.BrandTokens.snugUnits
-            }
-            color: BVApp.BrandTokens.inkMuted
-            font.pixelSize: BVApp.BrandTokens.caption(bodySize)
-            horizontalAlignment: Text.AlignRight
-        }
-
-        // -- Name, veg chip, address ------------------------------------------
+        // -- Content: two lines, each carrying its own left and right cell ----
+        // Keeping both cells inside the line means the columns share a
+        // baseline grid; anchoring across the hierarchy silently does nothing.
         Column {
             anchors {
                 left: thumb.right
-                right: distance.left
+                right: parent.right
                 verticalCenter: parent.verticalCenter
-                leftMargin: unit * BVApp.BrandTokens.snugUnits
-                rightMargin: unit * BVApp.BrandTokens.snugUnits
+                leftMargin: unit * BVApp.BrandTokens.baseUnits
+                rightMargin: unit * BVApp.BrandTokens.baseUnits
             }
             spacing: unit * BVApp.BrandTokens.tightUnits
 
@@ -131,11 +119,32 @@ BVApp.ListItem {
                 height: nameLabel.implicitHeight
 
                 BVApp.Label {
+                    id: vegChip
+                    anchors.right: parent.right
+                    anchors.baseline: nameLabel.baseline
+                    visible: model.vegan >= VenueModel.Vegetarian
+                    text: model.vegan === VenueModel.Vegan
+                                //% "vegan"
+                                ? qsTrId("id-tag-vegan")
+                                //% "veggie"
+                                : qsTrId("id-tag-vegetarian")
+                    color: model.vegan === VenueModel.Vegan ? BVApp.BrandTokens.vegan
+                                                            : BVApp.BrandTokens.vegetarian
+                    // Uncurated OSM entries assert less about their veg status.
+                    opacity: (typeof model.dataSource !== "undefined"
+                              && model.dataSource === "bv") ? 1.0 : 0.6
+                    font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                    font.weight: BVApp.BrandTokens.weightMedium
+                    font.capitalization: Font.AllUppercase
+                    font.letterSpacing: BVApp.BrandTokens.metaTracking
+                }
+
+                BVApp.Label {
                     id: nameLabel
                     anchors {
                         left: parent.left
                         right: vegChip.visible ? vegChip.left : parent.right
-                        rightMargin: vegChip.visible ? unit * BVApp.BrandTokens.tightUnits : 0
+                        rightMargin: vegChip.visible ? unit * BVApp.BrandTokens.baseUnits : 0
                         verticalCenter: parent.verticalCenter
                     }
                     text: model.name
@@ -144,33 +153,6 @@ BVApp.ListItem {
                     font.weight: BVApp.BrandTokens.weightMedium
                     truncationMode: TruncationMode.Fade
                 }
-
-                Rectangle {
-                    id: vegChip
-                    anchors.right: parent.right
-                    anchors.verticalCenter: parent.verticalCenter
-                    visible: model.vegan >= VenueModel.Vegetarian
-                    width: vegLabel.implicitWidth + unit * BVApp.BrandTokens.snugUnits
-                    height: vegLabel.implicitHeight + unit * BVApp.BrandTokens.tightUnits
-                    radius: height / 2
-                    color: BVApp.Theme.vegTypeColor(model.vegan)
-                    // Uncurated OSM entries assert less about their veg status.
-                    opacity: (typeof model.dataSource !== "undefined"
-                              && model.dataSource === "bv") ? 1.0 : 0.55
-
-                    BVApp.Label {
-                        id: vegLabel
-                        anchors.centerIn: parent
-                        text: model.vegan === VenueModel.Vegan
-                                    //% "vegan"
-                                    ? qsTrId("id-tag-vegan")
-                                    //% "veggie"
-                                    : qsTrId("id-tag-vegetarian")
-                        color: "white"
-                        font.pixelSize: BVApp.BrandTokens.caption(bodySize)
-                        font.weight: BVApp.BrandTokens.weightMedium
-                    }
-                }
             }
 
             Item {
@@ -178,9 +160,17 @@ BVApp.ListItem {
                 height: streetLabel.implicitHeight
 
                 BVApp.Label {
+                    id: distance
+                    anchors.right: parent.right
+                    anchors.baseline: streetLabel.baseline
+                    color: BVApp.BrandTokens.inkMuted
+                    font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                }
+
+                BVApp.Label {
                     id: stateLabel
                     anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.baseline: streetLabel.baseline
                     visible: !model.open || model.closesSoon
                                 //% "closed now"
                     text: !model.open ? qsTrId("id-venue-closed")
@@ -189,16 +179,15 @@ BVApp.ListItem {
                     color: model.open ? BVApp.BrandTokens.warning
                                       : BVApp.BrandTokens.inkFaint
                     font.pixelSize: BVApp.BrandTokens.caption(bodySize)
-                    font.weight: BVApp.BrandTokens.weightMedium
                 }
 
                 BVApp.Label {
                     id: separatorDot
                     anchors.left: stateLabel.right
                     anchors.leftMargin: unit * BVApp.BrandTokens.tightUnits
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.baseline: streetLabel.baseline
                     visible: stateLabel.visible
-                    text: "·"
+                    text: "\u00b7"
                     color: BVApp.BrandTokens.inkFaint
                     font.pixelSize: BVApp.BrandTokens.caption(bodySize)
                 }
@@ -207,8 +196,9 @@ BVApp.ListItem {
                     id: streetLabel
                     anchors {
                         left: stateLabel.visible ? separatorDot.right : parent.left
-                        right: parent.right
+                        right: distance.left
                         leftMargin: stateLabel.visible ? unit * BVApp.BrandTokens.tightUnits : 0
+                        rightMargin: unit * BVApp.BrandTokens.baseUnits
                         verticalCenter: parent.verticalCenter
                     }
                     text: model.street
