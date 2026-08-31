@@ -26,6 +26,7 @@
 #include <QQuickWindow>
 #include <QSGRendererInterface>
 #include <QPermissions>
+#include <QFileInfo>
 
 #ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>
@@ -154,7 +155,16 @@ int main(int argc, char *argv[])
     felgoApp.initialize(&qmlEngine);
     qmlEngine.addImportPath(QStringLiteral("qrc:/"));
     felgoApp.setMainQmlFileName(mainQMLFile);
-    qmlEngine.load(QUrl(felgoApp.mainQmlFileName()));
+
+    // Felgo resolves the main QML against the bundle's Resources directory,
+    // which a qt_add_qml_module build never populates, so an installed .app
+    // cannot start. The module already embeds the file; prefer that.
+    QUrl mainQmlUrl(felgoApp.mainQmlFileName());
+    const bool resolvesOnDisk = mainQmlUrl.isLocalFile()
+                                && QFileInfo::exists(mainQmlUrl.toLocalFile());
+    if (!resolvesOnDisk)
+        mainQmlUrl = QUrl(QStringLiteral("qrc:/") + mainQMLFile);
+    qmlEngine.load(mainQmlUrl);
 #endif
 
 #if defined(BV_HARNESS) && !defined(Q_OS_SAILFISH)
