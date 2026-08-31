@@ -28,7 +28,7 @@ struct Message
     QString text;
 };
 
-std::vector<Message> g_messages;
+std::vector<Message> g_messages;  // read by the settle poll to detect diagnostic quiescence
 QtMessageHandler g_previousHandler = nullptr;
 
 void recordingHandler(QtMsgType type, const QMessageLogContext& ctx, const QString& text)
@@ -237,7 +237,11 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
         const int pageIndex = pages.at(*step).toInt();
         const QString tag = QStringLiteral("page%1").arg(pageIndex);
 
-        if (pageIndex > 0) {
+        // Every page, including the first, is entered through its navigation
+        // action, which clears the stack before pushing. Sampling whatever
+        // startup happened to leave behind is not reproducible: on a cold run
+        // an extra venue detail page rides along on top of the list.
+        {
             const QVariant drawerVariant = QQmlProperty::read(root, QStringLiteral("globalDrawer"));
             QObject* drawer = drawerVariant.value<QObject*>();
             if (drawer) {
@@ -258,23 +262,28 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
 
         // Sampling on a fixed delay makes the score a race: delegate creation
         // and async load failures keep mutating the scene, so item counts and
-        // warning multiplicities differ run to run. Wait for the item count to
-        // stop changing instead, then sample once.
-        auto settle = std::make_shared<std::function<void(int, int, int)>>();
+        // warning multiplicities differ run to run. Wait until both the item
+        // count and the diagnostic stream have stopped changing. Warnings must
+        // be part of the condition: some pages lazily instantiate others (the
+        // venue list preloads a detail page), and sampling before that happens
+        // silently drops that page's warnings from the score.
+        auto settle = std::make_shared<std::function<void(int, size_t, int, int)>>();
         *settle = [window, root, outDir, tag, step, shoot, settle]
-                  (int previous, int stableRounds, int tries) {
+                  (int previous, size_t previousMessages, int stableRounds, int tries) {
             int count = 0;
             snapshot(root, &count);
-            const bool stable = (count == previous);
+            const size_t messageCount = g_messages.size();
+            const bool stable = (count == previous && messageCount == previousMessages);
             const int rounds = stable ? stableRounds + 1 : 0;
 
-            if (rounds < 2 && tries < 25) {
-                QTimer::singleShot(300, window, [settle, count, rounds, tries]() {
-                    (*settle)(count, rounds, tries + 1);
+            if (rounds < 5 && tries < 60) {
+                QTimer::singleShot(400, window,
+                    [settle, count, messageCount, rounds, tries]() {
+                    (*settle)(count, messageCount, rounds, tries + 1);
                 });
                 return;
             }
-            if (tries >= 25)
+            if (tries >= 60)
                 qWarning("harness: %s never settled (last count %d)",
                          qPrintable(tag), count);
 
@@ -294,7 +303,7 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
             ++*step;
             (*shoot)();
         };
-        QTimer::singleShot(600, state, [settle]() { (*settle)(-1, 0, 0); });
+        QTimer::singleShot(600, state, [settle]() { (*settle)(-1, 0, 0, 0); });
     };
 
     // One initial grace period for the first data load, then everything is

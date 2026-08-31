@@ -16,12 +16,15 @@ import pathlib
 import re
 import sys
 
-# Weights sum to 1. Semantic coverage dominates because a port that silently
-# drops information is wrong in a way no amount of polish compensates for.
-W_SEMANTIC = 0.45
-W_LAYOUT = 0.25
-W_CONSOLE = 0.20
-W_BRAND = 0.10
+# Weights sum to 1. The goal is not a pixel copy of Felgo: it is the same
+# information and the same affordances, presented through native Kirigami
+# controls. Semantic coverage measures the first half, nativeness the second,
+# and neither alone is the target.
+W_SEMANTIC = 0.35
+W_NATIVE = 0.25
+W_LAYOUT = 0.20
+W_CONSOLE = 0.15
+W_BRAND = 0.05
 
 # Warnings the app cannot fix and that the fixture deliberately provokes:
 # every network request is refused by design so the bundled data is used.
@@ -82,16 +85,24 @@ def brand_score(png_path, palette):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("run", type=pathlib.Path)
+    parser.add_argument("run", type=pathlib.Path, nargs="+",
+                        help="one or more harness passes; results are unioned")
     parser.add_argument("--reference", type=pathlib.Path,
                         help="Felgo harness run to score semantic coverage against")
     parser.add_argument("--palette", default="97BF0F",
                         help="comma-separated brand hex colours")
+    parser.add_argument("--qml", type=pathlib.Path,
+                        default=pathlib.Path("components-platform/kirigami/qml"),
+                        help="platform layer to score for Kirigami nativeness")
     args = parser.parse_args()
 
-    pages = sorted(args.run.glob("page*.json"))
+    # The app's startup is not bit-reproducible: async loads and lazy attached
+    # pages mean a single pass samples a random subset of what can go wrong.
+    # Union the passes so the score describes the app rather than the sampling.
+    runs = args.run
+    pages = sorted(runs[0].glob("page*.json"))
     if not pages:
-        print(json.dumps({"error": "no page*.json in %s" % args.run}))
+        print(json.dumps({"error": "no page*.json in %s" % runs[0]}))
         return 2
 
     palette = [tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
@@ -104,20 +115,33 @@ def main():
     brand_values = []
 
     for page_json in pages:
-        document = json.loads(page_json.read_text())
-        tag = document["page"]
-        tree = document.get("tree", {})
-        items = list(walk(tree))
-        defects = document.get("defects", [])
-        total_items += len(items)
-        total_defects += len(defects)
-        for defect in defects:
-            distinct_defects.add((tag, defect["kind"], defect["type"],
-                                  defect.get("text", "")))
+        name = page_json.name
+        best_tree, best_items, best_defects, tag = {}, -1, [], None
+        for run in runs:
+            candidate = run / name
+            if not candidate.exists():
+                continue
+            document = json.loads(candidate.read_text())
+            tag = document["page"]
+            tree = document.get("tree", {})
+            items = list(walk(tree))
+            defects = document.get("defects", [])
+            for defect in defects:
+                distinct_defects.add((tag, defect["kind"], defect["type"],
+                                      defect.get("text", "")))
+            # Most-loaded pass wins: a pass that sampled before the page
+            # finished under-reports everything, including its defects.
+            if len(items) > best_items:
+                best_tree, best_items, best_defects = tree, len(items), defects
+        if tag is None:
+            continue
+        tree, items = best_tree, range(best_items)
+        total_items += best_items
+        total_defects += len(best_defects)
 
-        entry = {"items": len(items), "defects": len(defects)}
+        entry = {"items": best_items, "defects": len(best_defects)}
 
-        png = page_json.with_suffix(".png")
+        png = runs[0] / (page_json.stem + ".png")
         if not png.exists():
             gates["render"] = False
         else:
@@ -140,9 +164,10 @@ def main():
         per_page[tag] = entry
 
     messages = []
-    messages_file = args.run / "messages.json"
-    if messages_file.exists():
-        messages = json.loads(messages_file.read_text()).get("messages", [])
+    for run in runs:
+        messages_file = run / "messages.json"
+        if messages_file.exists():
+            messages += json.loads(messages_file.read_text()).get("messages", [])
     real = [m for m in messages if not FIXTURE_NOISE.search(m["text"])]
     errors = {m["text"].split("\n")[0] for m in real if m["type"] == "error"}
     # Distinct texts, not occurrences. The same ReferenceError fires once per
@@ -161,19 +186,35 @@ def main():
     brand = sum(brand_values) / len(brand_values) if brand_values else 1.0
     semantic = (semantic_hits / semantic_total) if semantic_total else None
 
-    if semantic is None:
-        # No reference run: renormalise over the components we can measure so
-        # the number stays comparable across iterations of the same setup.
-        weight = W_LAYOUT + W_CONSOLE + W_BRAND
-        score = (W_LAYOUT * layout + W_CONSOLE * console + W_BRAND * brand) / weight
-    else:
-        score = (W_SEMANTIC * semantic + W_LAYOUT * layout
-                 + W_CONSOLE * console + W_BRAND * brand)
+    native = None
+    if args.qml.is_dir():
+        import subprocess
+        tool = pathlib.Path(__file__).with_name("nativeness.py")
+        result = subprocess.run(
+            [sys.executable, str(tool), "--qml", str(args.qml), "--run", str(runs[0])],
+            capture_output=True, text=True)
+        if result.returncode == 0:
+            native = json.loads(result.stdout)["nativeness"]
+
+    measured = {
+        "semantic": (W_SEMANTIC, semantic),
+        "native": (W_NATIVE, native),
+        "layout": (W_LAYOUT, layout),
+        "console": (W_CONSOLE, console),
+        "brand": (W_BRAND, brand),
+    }
+    # Renormalise over whatever is available so the number stays comparable
+    # across iterations of the same setup. Without a Felgo reference run the
+    # semantic term is simply absent.
+    live = {k: (w, v) for k, (w, v) in measured.items() if v is not None}
+    total_weight = sum(w for w, _ in live.values())
+    score = sum(w * v for w, v in live.values()) / total_weight
 
     verdict = {
         "score": round(score, 4),
         "components": {
             "semantic": round(semantic, 4) if semantic is not None else None,
+            "native": round(native, 4) if native is not None else None,
             "layout": round(layout, 4),
             "console": round(console, 4),
             "brand": round(brand, 4),
@@ -186,6 +227,7 @@ def main():
             "errors": len(errors),
         },
         "gates": gates,
+        "passes": len(runs),
         "gates_pass": bool(gates["render"] and gates["qml_errors"] == 0),
         "pages": per_page,
         "top_warnings": [w[:140] for w in warnings[:8]],
