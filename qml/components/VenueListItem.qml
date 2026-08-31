@@ -140,7 +140,7 @@ BVApp.ListItem {
                     }
                     text: model.name
                     color: BVApp.BrandTokens.ink
-                    font.pixelSize: bodySize
+                    font.pixelSize: BVApp.BrandTokens.title(bodySize)
                     font.weight: BVApp.BrandTokens.weightMedium
                     truncationMode: TruncationMode.Fade
                 }

@@ -238,10 +238,15 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
 
     // A fixed window size makes geometry comparable across platform layers and
     // across runs; anything host-dependent would poison the diff.
+    //
+    // The default is a phone's *physical* pixel count, not its logical size.
+    // Felgo's dp() sizes for millimetres rather than layout units, so a 420pt
+    // window on a Retina host is a phone half a real one's physical width, and
+    // everything appears to overflow when nothing actually would on device.
     const int width = qEnvironmentVariableIntValue("BV_HARNESS_W") > 0
-                          ? qEnvironmentVariableIntValue("BV_HARNESS_W") : 420;
+                          ? qEnvironmentVariableIntValue("BV_HARNESS_W") : 840;
     const int height = qEnvironmentVariableIntValue("BV_HARNESS_H") > 0
-                           ? qEnvironmentVariableIntValue("BV_HARNESS_H") : 880;
+                           ? qEnvironmentVariableIntValue("BV_HARNESS_H") : 1760;
     window->resize(width, height);
     window->show();
 
