@@ -212,8 +212,12 @@ void installHarnessMessageHandler()
     // closed local port so every request fails immediately. Both loaders then
     // land on their bundled JSON, which is the only fixture that cannot drift.
     QStandardPaths::setTestModeEnabled(true);
-    QNetworkProxy::setApplicationProxy(
-        QNetworkProxy(QNetworkProxy::HttpProxy, QStringLiteral("127.0.0.1"), 9));
+    // BV_HARNESS_ONLINE renders what a device actually shows (venue photos,
+    // live data). It is for looking at, never for scoring: nothing about it
+    // is reproducible.
+    if (!qEnvironmentVariableIsSet("BV_HARNESS_ONLINE"))
+        QNetworkProxy::setApplicationProxy(
+            QNetworkProxy(QNetworkProxy::HttpProxy, QStringLiteral("127.0.0.1"), 9));
 }
 
 void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)

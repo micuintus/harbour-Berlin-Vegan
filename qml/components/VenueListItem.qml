@@ -134,7 +134,6 @@ BVApp.ListItem {
                     opacity: (typeof model.dataSource !== "undefined"
                               && model.dataSource === "bv") ? 1.0 : 0.6
                     font.pixelSize: BVApp.BrandTokens.caption(bodySize)
-                    font.weight: BVApp.BrandTokens.weightMedium
                     font.capitalization: Font.AllUppercase
                     font.letterSpacing: BVApp.BrandTokens.metaTracking
                 }
@@ -150,7 +149,6 @@ BVApp.ListItem {
                     text: model.name
                     color: BVApp.BrandTokens.ink
                     font.pixelSize: BVApp.BrandTokens.title(bodySize)
-                    font.weight: BVApp.BrandTokens.weightMedium
                     truncationMode: TruncationMode.Fade
                 }
             }
