@@ -13,3 +13,5 @@ CMakeUserPresets.json
 
 # QMapLibre source + build (cloned by setup-kirigami-macos.sh)
 extern/
+harness-out/
+harness-out.log

@@ -10,6 +10,10 @@ set(CMAKE_AUTOMOC ON)
 
 set(BV_PLATFORM "felgo" CACHE STRING "Platform backend: felgo or kirigami")
 
+# Off-screen render/introspection driver used to score platform-layer fidelity.
+# Never enable for a shipping build: it hijacks the event loop and exits.
+option(BV_HARNESS "Build the render-fidelity harness into the executable" OFF)
+
 if(BV_PLATFORM STREQUAL "kirigami")
     find_package(Qt6 COMPONENTS Core Qml Quick QuickControls2 Widgets Network Positioning Location Svg Concurrent LinguistTools REQUIRED)
     find_package(KF6Kirigami REQUIRED)
@@ -35,6 +39,14 @@ set(PRODUCT_LICENSE_KEY "")
 # --- Executable ---
 
 qt_add_executable(harbour-berlin-vegan src/main.cpp)
+
+if(BV_HARNESS)
+    target_sources(harbour-berlin-vegan PRIVATE
+        tools/harness/RenderHarness.cpp tools/harness/RenderHarness.h)
+    target_include_directories(harbour-berlin-vegan PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/tools/harness)
+    target_compile_definitions(harbour-berlin-vegan PRIVATE BV_HARNESS)
+endif()
 
 if(APPLE AND NOT IOS)
     set_target_properties(harbour-berlin-vegan PROPERTIES

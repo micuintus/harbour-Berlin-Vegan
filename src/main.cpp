@@ -47,9 +47,17 @@
 #include <QQmlApplicationEngine>
 #endif
 
+#ifdef BV_HARNESS
+#include "RenderHarness.h"
+#endif
+
 int main(int argc, char *argv[])
 {
     auto const mainQMLFile = QString("qml/harbour-berlin-vegan.qml");
+
+#ifdef BV_HARNESS
+    bv::installHarnessMessageHandler();
+#endif
 
 #ifdef Q_OS_SAILFISH
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
@@ -147,6 +155,10 @@ int main(int argc, char *argv[])
     qmlEngine.addImportPath(QStringLiteral("qrc:/"));
     felgoApp.setMainQmlFileName(mainQMLFile);
     qmlEngine.load(QUrl(felgoApp.mainQmlFileName()));
+#endif
+
+#if defined(BV_HARNESS) && !defined(Q_OS_SAILFISH)
+    bv::runRenderHarness(qmlEngine, *app);
 #endif
 
     return app->exec();
