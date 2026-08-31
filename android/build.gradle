@@ -1,3 +1,7 @@
+// Based on Felgo's own templates/build.gradle. Keep it close to that file so
+// SDK updates stay cheap; the deltas are the Felgo maven repo, the product
+// identity wiring, and the target SDK.
+
 buildscript {
     repositories {
         google()
@@ -5,75 +9,77 @@ buildscript {
     }
 
     dependencies {
-        // AGP 8.0.2: last version before android.bundle.enableUncompressedNativeLibs
-        // was removed (removed in 8.1). Felgo's androiddeployqt injects that property
-        // unconditionally, so we pin to a version that still accepts it.
-        classpath "com.android.tools.build:gradle:8.0.2"
+        //noinspection AndroidGradlePluginVersion
+        classpath 'com.android.tools.build:gradle:8.6.0'
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://install.felgo.com/maven/' }
-    }
+repositories {
+    google()
+    mavenCentral()
+    maven { url 'https://install.felgo.com/maven/' }
 }
 
-apply plugin: 'com.android.application'
+apply plugin: qtGradlePluginType
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation "androidx.appcompat:appcompat:1.2.0"
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    //noinspection GradleDependency
+    implementation 'androidx.core:core:1.13.1'
 }
 
 android {
-    // namespace required by AGP 8.x; androidPackageName is set by androiddeployqt
-    namespace              androidPackageName
-    // Compile against SDK 34: AGP 8.0.2 was tested up to 33 but handles 34 fine.
-    // SDK 35's android.jar uses a new format that AGP 8.0.2's aapt2 cannot parse.
-    compileSdkVersion    34
-    buildToolsVersion    androidBuildToolsVersion
+    namespace androidPackageName
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
+    ndkVersion androidNdkVersion
 
-    compileOptions {
-      sourceCompatibility 1.8
-      targetCompatibility 1.8
-    }
-
-    defaultConfig {
-      multiDexEnabled true
-      // Target the actual device SDK via the Qt-provided variable (plain integer)
-      targetSdkVersion   qtTargetSdkVersion.toInteger()
-      // productIdentifier only exists in the Felgo --gradle path; fall back to
-      // androidPackageName which is always set by androiddeployqt
-      applicationId    = project.hasProperty("productIdentifier") ? productIdentifier : androidPackageName
-      versionCode      = project.hasProperty("productVersionCode") ? productVersionCode.toInteger() : 37
-      versionName      = project.hasProperty("productVersionName") ? productVersionName : "3.7.0"
-      minSdkVersion    = project.hasProperty("qtMinSdkVersion") ? qtMinSdkVersion.toInteger() : 28
-    }
+    // Extract native libraries from the APK
+    packagingOptions.jniLibs.useLegacyPackaging true
 
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = [qt5AndroidDir + '/src', 'src', 'java']
-            aidl.srcDirs = [qt5AndroidDir + '/src', 'src', 'aidl']
-            res.srcDirs = [qt5AndroidDir + '/res', 'res']
-            resources.srcDirs = ['src']
+            java.srcDirs = [qtAndroidDir + '/src', 'src', 'java']
+            aidl.srcDirs = [qtAndroidDir + '/src', 'src', 'aidl']
+            res.srcDirs = [qtAndroidDir + '/res', 'res']
+            resources.srcDirs = ['resources']
             renderscript.srcDirs = ['src']
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
        }
     }
 
-    lintOptions {
-        abortOnError false
-    }
-    aaptOptions { // Do not compress Qt binary resources file
-        noCompress 'rcc'
-    }
     tasks.withType(JavaCompile) {
         options.incremental = true
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // Do not compress Qt binary resources file
+    aaptOptions {
+        noCompress 'rcc'
+    }
+
+    defaultConfig {
+        resConfig "en"
+        multiDexEnabled true
+        minSdkVersion qtMinSdkVersion
+        // Qt still reports 35; Play requires 36 for uploads from 2026-08-31.
+        targetSdkVersion 36
+        ndk.abiFilters = qtTargetAbiList.split(",")
+
+        // productIdentifier only exists on the Felgo --gradle path;
+        // androidPackageName is always set by androiddeployqt.
+        applicationId = project.hasProperty("productIdentifier") ? productIdentifier : androidPackageName
+        versionCode   = project.hasProperty("productVersionCode") ? productVersionCode.toInteger() : 37
+        versionName   = project.hasProperty("productVersionName") ? productVersionName : "3.7.0"
+    }
 }
