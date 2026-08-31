@@ -12,6 +12,7 @@ Item {
     property var contentWidth
     property var contentHeight
     property bool highlighted: mouseArea.pressed
+    property bool dividerVisible: true
 
     height: contentHeight || implicitHeight
     width: parent ? parent.width : 0
@@ -29,7 +30,8 @@ Item {
         anchors.bottom: parent.bottom
         width: parent.width
         height: 1
-        color: "#BDC3C7"
+        visible: listItem.dividerVisible
+        color: Kirigami.Theme.separatorColor
         z: -1
     }
 

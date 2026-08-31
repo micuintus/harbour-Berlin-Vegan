@@ -43,9 +43,9 @@ QtObject {
         var iconName = ""
         switch (type) {
         case "answer":        iconName = "call-start"; break
-        case "favorite":      iconName = "qrc:/icons/bv/starred-symbolic.svg"; break
-        case "favorite-o":    iconName = "qrc:/icons/bv/non-starred-symbolic.svg"; break
-        case "home":          iconName = "qrc:/icons/bv/go-home-symbolic.svg"; break
+        case "favorite":      iconName = "qrc:/icons/starred-symbolic.svg"; break
+        case "favorite-o":    iconName = "qrc:/icons/non-starred-symbolic.svg"; break
+        case "home":          iconName = "qrc:/icons/go-home-symbolic.svg"; break
         case "filter":        iconName = "view-filter"; break
         case "vegan":         iconName = "vegetarian-symbolic"; break
         case "my_location":   iconName = "mark-location"; break

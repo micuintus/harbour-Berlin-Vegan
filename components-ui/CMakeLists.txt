@@ -1,5 +1,7 @@
 file(GLOB_RECURSE UiQml RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} qml/*.js qml/*.qml)
 
+set_source_files_properties(qml/BrandTokens.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+
 qt_add_qml_module(BerlinVeganUi
     STATIC
     URI BerlinVegan.components.ui

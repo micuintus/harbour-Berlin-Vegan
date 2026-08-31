@@ -16,7 +16,7 @@ qt_add_qml_module(BerlinVeganPlatform
 # qrc:/icons/bv/<name>.svg when Breeze or another full KDE icon theme is
 # not installed on the host system (e.g. macOS without breeze-icons).
 qt_add_resources(BerlinVeganPlatform "kirigami_bundled_icons"
-    PREFIX "/icons/bv"
+    PREFIX "/"
     FILES
         icons/starred-symbolic.svg
         icons/non-starred-symbolic.svg

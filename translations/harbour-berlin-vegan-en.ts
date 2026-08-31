@@ -513,6 +513,16 @@
         <source>No filter or search results</source>
         <translation>No filter or search results</translation>
     </message>
+    <message id="id-tag-vegan">
+        <location filename="../qml/components/VenueListItem.qml" line="0"/>
+        <source>vegan</source>
+        <translation>vegan</translation>
+    </message>
+    <message id="id-tag-vegetarian">
+        <location filename="../qml/components/VenueListItem.qml" line="0"/>
+        <source>veggie</source>
+        <translation>veggie</translation>
+    </message>
     <message id="id-tag-new">
         <location filename="../qml/components/VenueListItem.qml" line="70"/>
         <source>new</source>

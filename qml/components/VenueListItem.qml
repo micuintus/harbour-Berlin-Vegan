@@ -32,134 +32,191 @@ import harbour.berlin.vegan 1.0
 
 BVApp.ListItem {
     id: delegate
+
     property alias distanceText: distance.text
 
-    contentHeight: streetLabel.y + streetLabel.height + streetLabel.anchors.bottomMargin
+    // Cards carry the grouping, so the platform's row divider would double up.
+    dividerVisible: false
 
-    BVApp.Label {
-        id: namelabel
-        text: model.name
-        color: delegate.highlighted ? BVApp.Theme.highlightColor : BVApp.Theme.venueListNameColor
+    readonly property real unit: BVApp.Theme.gridUnit
+    readonly property real bodySize: BVApp.Theme.fontSizeBody
+    // Only the curated berlin-vegan.de venues carry photos; the ~2300 OSM ones
+    // do not, so the thumbnail has to read as deliberate without one.
+    readonly property bool hasPhoto: typeof model.pictures !== "undefined"
+                                     && model.pictures.length > 0
 
-        width: Math.min(namelabel.implicitWidth,
-                        // space that is left after substracting all the other elements from the available width
-                        delegate.width
-                        - (namelabel.anchors.leftMargin
-                           + (veganMark.visible ? veganMark.anchors.leftMargin + veganMark.width  : 0)
-                           + (veganMark.visible && closing.visible ? veganMark.anchors.rightMargin : 0)
-                           + (newTag.visible ? newTag.anchors.leftMargin + newTag.width  : 0)
-                           + (newTag.visible && closing.visible ? newTag.anchors.rightMargin : 0)
-                           + (closing.visible ? closing.width + closing.anchors.leftMargin : 0)
-                           + distance.anchors.rightMargin))
+    contentHeight: card.height + unit * BVApp.BrandTokens.snugUnits
 
-        font.pixelSize: BVApp.Theme.venueListNameFontSize
-        truncationMode: TruncationMode.Fade
+    Rectangle {
+        id: card
+
         anchors {
+            left: parent.left
+            right: parent.right
             top: parent.top
-            left: parent.left
+            leftMargin: unit * BVApp.BrandTokens.snugUnits
+            rightMargin: unit * BVApp.BrandTokens.snugUnits
+            topMargin: unit * BVApp.BrandTokens.tightUnits
+        }
+        height: unit * BVApp.BrandTokens.thumbUnits + unit * BVApp.BrandTokens.snugUnits
+        radius: unit * BVApp.BrandTokens.radiusCardUnits
+        color: delegate.highlighted ? BVApp.BrandTokens.greenSoft
+                                    : BVApp.BrandTokens.surface
+        border.width: 1
+        border.color: BVApp.BrandTokens.hairline
 
-            topMargin: BVApp.Theme.paddingMedium
-            leftMargin: BVApp.Theme.horizontalPageMargin
+        // -- Thumbnail --------------------------------------------------------
+        Rectangle {
+            id: thumb
+            anchors {
+                left: parent.left
+                verticalCenter: parent.verticalCenter
+                leftMargin: unit * BVApp.BrandTokens.snugUnits
+            }
+            width: unit * BVApp.BrandTokens.thumbUnits
+            height: width
+            visible: unit * BVApp.BrandTokens.thumbUnits > 0
+            radius: unit * BVApp.BrandTokens.radiusChipUnits
+            color: BVApp.BrandTokens.greenSoft
+            clip: true
+
+            Text {
+                anchors.centerIn: parent
+                visible: photo.status !== Image.Ready
+                text: model.name.length > 0 ? model.name.charAt(0).toUpperCase() : "?"
+                color: BVApp.BrandTokens.green
+                font.pixelSize: BVApp.BrandTokens.title(bodySize)
+                font.weight: BVApp.BrandTokens.weightMedium
+            }
+
+            Image {
+                id: photo
+                anchors.fill: parent
+                visible: status === Image.Ready
+                source: delegate.hasPhoto ? model.pictures[0].url : ""
+                fillMode: Image.PreserveAspectCrop
+                asynchronous: true
+            }
+        }
+
+        // -- Trailing: distance only -------------------------------------------
+        // Open/closed rides on the address line instead of its own column:
+        // reserving width for "closed now" on every card, when only some are
+        // closed, is what squeezed the venue name.
+        BVApp.Label {
+            id: distance
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: unit * BVApp.BrandTokens.snugUnits
+            }
+            color: BVApp.BrandTokens.inkMuted
+            font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+            horizontalAlignment: Text.AlignRight
+        }
+
+        // -- Name, veg chip, address ------------------------------------------
+        Column {
+            anchors {
+                left: thumb.right
+                right: distance.left
+                verticalCenter: parent.verticalCenter
+                leftMargin: unit * BVApp.BrandTokens.snugUnits
+                rightMargin: unit * BVApp.BrandTokens.snugUnits
+            }
+            spacing: unit * BVApp.BrandTokens.tightUnits
+
+            Item {
+                width: parent.width
+                height: nameLabel.implicitHeight
+
+                BVApp.Label {
+                    id: nameLabel
+                    anchors {
+                        left: parent.left
+                        right: vegChip.visible ? vegChip.left : parent.right
+                        rightMargin: vegChip.visible ? unit * BVApp.BrandTokens.tightUnits : 0
+                        verticalCenter: parent.verticalCenter
+                    }
+                    text: model.name
+                    color: BVApp.BrandTokens.ink
+                    font.pixelSize: bodySize
+                    font.weight: BVApp.BrandTokens.weightMedium
+                    truncationMode: TruncationMode.Fade
+                }
+
+                Rectangle {
+                    id: vegChip
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: model.vegan >= VenueModel.Vegetarian
+                    width: vegLabel.implicitWidth + unit * BVApp.BrandTokens.snugUnits
+                    height: vegLabel.implicitHeight + unit * BVApp.BrandTokens.tightUnits
+                    radius: height / 2
+                    color: BVApp.Theme.vegTypeColor(model.vegan)
+                    // Uncurated OSM entries assert less about their veg status.
+                    opacity: (typeof model.dataSource !== "undefined"
+                              && model.dataSource === "bv") ? 1.0 : 0.55
+
+                    BVApp.Label {
+                        id: vegLabel
+                        anchors.centerIn: parent
+                        text: model.vegan === VenueModel.Vegan
+                                    //% "vegan"
+                                    ? qsTrId("id-tag-vegan")
+                                    //% "veggie"
+                                    : qsTrId("id-tag-vegetarian")
+                        color: "white"
+                        font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                        font.weight: BVApp.BrandTokens.weightMedium
+                    }
+                }
+            }
+
+            Item {
+                width: parent.width
+                height: streetLabel.implicitHeight
+
+                BVApp.Label {
+                    id: stateLabel
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: !model.open || model.closesSoon
+                                //% "closed now"
+                    text: !model.open ? qsTrId("id-venue-closed")
+                                //% "closes soon"
+                                      : qsTrId("id-venue-closes-soon")
+                    color: model.open ? BVApp.BrandTokens.warning
+                                      : BVApp.BrandTokens.inkFaint
+                    font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                    font.weight: BVApp.BrandTokens.weightMedium
+                }
+
+                BVApp.Label {
+                    id: separatorDot
+                    anchors.left: stateLabel.right
+                    anchors.leftMargin: unit * BVApp.BrandTokens.tightUnits
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible: stateLabel.visible
+                    text: "·"
+                    color: BVApp.BrandTokens.inkFaint
+                    font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                }
+
+                BVApp.Label {
+                    id: streetLabel
+                    anchors {
+                        left: stateLabel.visible ? separatorDot.right : parent.left
+                        right: parent.right
+                        leftMargin: stateLabel.visible ? unit * BVApp.BrandTokens.tightUnits : 0
+                        verticalCenter: parent.verticalCenter
+                    }
+                    text: model.street
+                    color: BVApp.BrandTokens.inkMuted
+                    font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                    truncationMode: TruncationMode.Fade
+                }
+            }
         }
     }
-
-    BVApp.ColoredTag {
-        id: newTag
-        color: BVApp.Theme.vegTypeColor(model.vegan)
-                 //% "new"
-        text: qsTrId("id-tag-new")
-        visible: model.isNew
-        height: veganMark.height
-        anchors {
-            left: namelabel.right
-            top: namelabel.top
-
-            leftMargin: BVApp.Theme.paddingSmall
-            rightMargin: BVApp.Theme.horizontalPageMargin
-        }
-    }
-
-    BVApp.VeganMarker {
-        id: veganMark
-
-        readonly property bool isCurated: typeof model.dataSource !== "undefined" && model.dataSource === "bv"
-        markerSize: namelabel.font.pixelSize * 0.92
-        color: BVApp.Theme.vegTypeColor(model.vegan)
-        opacity: isCurated ? 1.0 : 0.45
-
-        visible: !newTag.visible && (model.vegan >= VenueModel.Vegetarian)
-
-        anchors {
-            left: namelabel.right
-            top: namelabel.top
-
-            leftMargin: height * 0.16
-            rightMargin: BVApp.Theme.horizontalPageMargin
-        }
-    }
-
-
-
-    BVApp.Label {
-        id: closing
-
-        visible: !(model.open) || model.closesSoon
-                                    //% "closed now"
-        text: !(model.open) ? qsTrId("id-venue-closed") :
-                                    //% "closes soon"
-                              qsTrId("id-venue-closes-soon")
-        color: !(model.open) ? BVApp.Theme.disabledColor : BVApp.Theme.warningColor
-
-        width: !(model.open) || model.closesSoon ? contentWidth : 0
-
-        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        horizontalAlignment: Text.AlignRight
-        anchors {
-            top: namelabel.top
-            right: parent.right
-
-            leftMargin: BVApp.Theme.horizontalPageMargin
-            rightMargin: BVApp.Theme.horizontalPageMargin
-        }
-    }
-
-    BVApp.Label {
-        id: streetLabel
-        text: model.street
-
-        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        color: BVApp.Theme.secondaryColor
-
-        truncationMode: TruncationMode.Fade
-        anchors {
-            left: parent.left
-            right: distance.left
-
-            top: namelabel.y + namelabel.height > closing.y + closing.height ?
-                     namelabel.bottom
-                   : closing.bottom
-
-            leftMargin: BVApp.Theme.horizontalPageMargin
-            rightMargin: BVApp.Theme.horizontalPageMargin
-
-            topMargin: BVApp.Theme.paddingSmall
-            bottomMargin: namelabel.anchors.topMargin // <<- We'd like to have the same padding on the bottom as on the top
-        }
-    }
-
-
-    BVApp.Label {
-        id: distance
-
-        color: (model.open) ? BVApp.Theme.highlightColor : BVApp.Theme.disabledColor
-        font.pixelSize: BVApp.Theme.fontSizeExtraSmall
-        horizontalAlignment: Text.AlignRight
-        anchors {
-            right: parent.right
-            rightMargin: BVApp.Theme.horizontalPageMargin
-
-            baseline: streetLabel.baseline
-        }
-    }
-
 }

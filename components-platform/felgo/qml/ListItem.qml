@@ -12,12 +12,13 @@ SimpleRow {
 
     property var contentWidth
     property var contentHeight
+    property bool dividerVisible: true
 
     height: contentHeight
 
     style.showDisclosure: false
 
-    style.dividerColor: BVApp.Theme.dividerColor
+    style.dividerColor: dividerVisible ? BVApp.Theme.dividerColor : "transparent"
     style.dividerLeftSpacing: 0
 
     Component.onCompleted: {

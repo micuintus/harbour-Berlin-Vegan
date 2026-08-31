@@ -514,6 +514,16 @@
         <oldsource>&lt;source&gt;A venue is new for:&lt;/source&gt;</oldsource>
         <translation>Ein Laden ist neu für:</translation>
     </message>
+    <message id="id-tag-vegan">
+        <location filename="../qml/components/VenueListItem.qml" line="0"/>
+        <source>vegan</source>
+        <translation>vegan</translation>
+    </message>
+    <message id="id-tag-vegetarian">
+        <location filename="../qml/components/VenueListItem.qml" line="0"/>
+        <source>veggie</source>
+        <translation>vegetarisch</translation>
+    </message>
     <message id="id-tag-new">
         <location filename="../qml/components/VenueListItem.qml" line="70"/>
         <source>new</source>
