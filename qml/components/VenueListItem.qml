@@ -34,6 +34,7 @@ BVApp.ListItem {
     id: delegate
 
     property alias distanceText: distance.text
+    property bool showVegCategory: true
 
     // Cards carry the grouping, so the platform's row divider would double up.
     dividerVisible: true
@@ -122,7 +123,8 @@ BVApp.ListItem {
                     id: vegChip
                     anchors.right: parent.right
                     anchors.baseline: nameLabel.baseline
-                    visible: model.vegan >= VenueModel.Vegetarian
+                    visible: delegate.showVegCategory
+                             && model.vegan >= VenueModel.Vegetarian
                     text: model.vegan === VenueModel.Vegan
                                 //% "vegan"
                                 ? qsTrId("id-tag-vegan")

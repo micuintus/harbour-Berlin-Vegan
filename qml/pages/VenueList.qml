@@ -99,6 +99,10 @@ BVApp.Page {
         }
 
         delegate: VenueListItem {
+            // With the filter narrowed to a single veg category every row would
+            // carry the same label, which tells the reader nothing.
+            showVegCategory: (jsonModelCollection.filterVegCategory
+                              & ~VenueSortFilterProxyModel.VeganFlag) !== 0
             // Use custom (address) coordinate when available, otherwise fall back to GPS.
             // Show distance if either a custom coordinate is set or GPS is available.
             distanceText: {
