@@ -135,6 +135,10 @@ BVApp.Page {
         BVApp.ScrollDecorator {}
     }
 
+    BVApp.ScrollEdgeFade {
+        flickable: listView
+    }
+
     onPushed: pageStack.pushAttached("qrc:/qml/pages/VenueMapOverviewPage.qml",
                             {
                                 "positionSource": globalPositionSource,

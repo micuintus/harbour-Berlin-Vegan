@@ -256,8 +256,11 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
     // everything appears to overflow when nothing actually would on device.
     const int width = qEnvironmentVariableIntValue("BV_HARNESS_W") > 0
                           ? qEnvironmentVariableIntValue("BV_HARNESS_W") : 840;
+    // Height stays short enough to fit a laptop display. A window taller than
+    // the screen is silently clamped, and since delegate realisation follows
+    // the viewport, item counts then stop being comparable between runs.
     const int height = qEnvironmentVariableIntValue("BV_HARNESS_H") > 0
-                           ? qEnvironmentVariableIntValue("BV_HARNESS_H") : 1760;
+                           ? qEnvironmentVariableIntValue("BV_HARNESS_H") : 900;
     window->resize(width, height);
     window->show();
 

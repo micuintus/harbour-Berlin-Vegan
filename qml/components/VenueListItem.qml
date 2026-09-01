@@ -62,7 +62,8 @@ BVApp.ListItem {
         height: unit * BVApp.BrandTokens.thumbUnits + unit * BVApp.BrandTokens.snugUnits
         radius: delegate.highlighted ? unit * BVApp.BrandTokens.radiusCardUnits : 0
         color: delegate.highlighted ? BVApp.BrandTokens.greenSoft
-                                    : "transparent"
+                                    : BVApp.BrandTokens.surface
+        Behavior on color { ColorAnimation { duration: 140 } }
         // Cards separate by sitting on the canvas; an outline as well makes
         // every row read as a sticker.
         border.width: 0
@@ -95,10 +96,11 @@ BVApp.ListItem {
             Image {
                 id: photo
                 anchors.fill: parent
-                visible: status === Image.Ready
                 source: delegate.hasPhoto ? model.pictures[0].url : ""
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
+                opacity: status === Image.Ready ? 1 : 0
+                Behavior on opacity { NumberAnimation { duration: 220 } }
             }
         }
 
@@ -149,6 +151,7 @@ BVApp.ListItem {
                         verticalCenter: parent.verticalCenter
                     }
                     height: implicitHeight
+                    fadeColor: card.color
                     text: model.name
                     color: BVApp.BrandTokens.ink
                     font.pixelSize: BVApp.BrandTokens.title(bodySize)
@@ -165,6 +168,16 @@ BVApp.ListItem {
                     anchors.baseline: streetLabel.baseline
                     color: BVApp.BrandTokens.inkMuted
                     font.pixelSize: BVApp.BrandTokens.caption(bodySize)
+                    onTextChanged: distanceSettle.restart()
+                    Behavior on opacity { NumberAnimation { duration: 90 } }
+                    NumberAnimation {
+                        id: distanceSettle
+                        target: distance
+                        property: "opacity"
+                        from: 0.35
+                        to: 1.0
+                        duration: 180
+                    }
                 }
 
                 BVApp.Label {
@@ -229,6 +242,7 @@ BVApp.ListItem {
                         verticalCenter: parent.verticalCenter
                     }
                     height: implicitHeight
+                    fadeColor: card.color
                     text: model.street
                     color: BVApp.BrandTokens.inkMuted
                     font.pixelSize: BVApp.BrandTokens.caption(bodySize)
