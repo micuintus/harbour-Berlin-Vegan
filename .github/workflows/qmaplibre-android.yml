@@ -1,0 +1,125 @@
+# QMapLibre 4 for Android, built from source, and a Kirigami APK.
+#
+# Draft: triggers manually until the pipeline is proven; flip to release tags
+# once the APK passes on-device testing.
+#
+# Why two jobs: QMapLibre compiles against the Qt *Android* kit and installs
+# into a prefix; the app then builds against that prefix. Keeps the heavy
+# maplibre-native compile cacheable and separate from the app compile.
+#
+# 16 KB pages: Google Play requires 16 KB alignment for apps targeting
+# Android 15+. NDK r27 needs -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON; r28+
+# aligns by default. We pass it explicitly so the requirement survives NDK
+# bumps. Verified locally: LOAD align 0x4000 via llvm-readelf.
+
+name: qmaplibre-android
+
+on:
+  workflow_dispatch:
+
+jobs:
+  qmaplibre:
+    runs-on: ubuntu-latest
+    outputs:
+      prefix: ${{ steps.prefix.outputs.path }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Qt (Android arm64)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          host: linux
+          target: android
+          arch: android_arm64_v8a
+          modules: qtlocation qtpositioning
+
+      - uses: nttld/setup-ndk@v1
+        id: ndk
+        with:
+          ndk-version: r27c
+
+      - name: Build QMapLibre 4 (OpenGL backend)
+        run: |
+          git clone --recursive https://github.com/maplibre/maplibre-native-qt.git extern/qmaplibre
+          cmake -B build-ql -S extern/qmaplibre -GNinja \
+            -DCMAKE_TOOLCHAIN_FILE="$QT_ROOT_DIR/lib/cmake/Qt6/qt.toolchain.cmake" \
+            -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR" \
+            -DQT_HOST_PATH=$(dirname $(dirname $(which qmake))) \
+            -DANDROID_ABI=arm64-v8a \
+            -DANDROID_PLATFORM=android-28 \
+            -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/qmaplibre-prefix" \
+            -DMLN_WITH_OPENGL=ON \
+            -DMLN_QT_WITH_WIDGETS=OFF \
+            -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON
+          cmake --build build-ql
+          cmake --install build-ql
+          echo "path=$RUNNER_TEMP/qmaplibre-prefix" >> "$GITHUB_OUTPUT"
+        id: prefix
+        env:
+          ANDROID_NDK_ROOT: ${{ steps.ndk.outputs.ndk-path }}
+
+      - name: Verify 16 KB alignment
+        run: |
+          READELF=$(find "$ANDROID_NDK_ROOT" -name llvm-readelf | head -1)
+          fail=0
+          for so in $(find "$RUNNER_TEMP/qmaplibre-prefix" -name '*.so'); do
+            align=$("$READELF" -l "$so" | grep -m1 LOAD | grep -oE '0x[0-9a-f]+$')
+            echo "$so: LOAD align $align"
+            [ "$align" = "0x4000" ] || fail=1
+          done
+          exit $fail
+        env:
+          ANDROID_NDK_ROOT: ${{ steps.ndk.outputs.ndk-path }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qmaplibre-android-arm64
+          path: ${{ steps.prefix.outputs.path }}
+
+  kirigami-apk:
+    needs: qmaplibre
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: qmaplibre-android-arm64
+          path: qmaplibre-prefix
+
+      - name: Install Qt (Android arm64)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          host: linux
+          target: android
+          arch: android_arm64_v8a
+          modules: qtlocation qtpositioning
+
+      - uses: nttld/setup-ndk@v1
+        id: ndk
+        with:
+          ndk-version: r27c
+
+      - name: Build Kirigami APK
+        run: |
+          cmake -B build-android -S . -GNinja \
+            -DBV_PLATFORM=kirigami \
+            -DCMAKE_TOOLCHAIN_FILE="$QT_ROOT_DIR/lib/cmake/Qt6/qt.toolchain.cmake" \
+            -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR;qmaplibre-prefix" \
+            -DQT_HOST_PATH=$(dirname $(dirname $(which qmake))) \
+            -DANDROID_ABI=arm64-v8a \
+            -DQMapLibre_DIR="$PWD/qmaplibre-prefix/lib/cmake/QMapLibre" \
+            -DKF6_ANDROID_PREFIX="$KF6_ANDROID_PREFIX"
+          cmake --build build-android
+        env:
+          ANDROID_NDK_ROOT: ${{ steps.ndk.outputs.ndk-path }}
+          # KF6 for Android is the open item: either built by a prior job
+          # (ECM + kirigami via the KDE craft blueprint) or vendored like
+          # QMapLibre. Nothing to reference until that exists.
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: berlin-vegan-kirigami-debug-apk
+          path: build-android/**/*.apk
