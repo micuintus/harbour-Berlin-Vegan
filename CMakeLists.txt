@@ -221,6 +221,16 @@ if(QMapLibre_FOUND)
         message(STATUS "QMapLibre framework dir prioritised: ${_mln_fw}")
     endif()
     target_compile_definitions(harbour-berlin-vegan PRIVATE BV_HAS_MAPLIBRE)
+    if(APPLE)
+        # Runs after Felgo's own deployment steps, which is the point: they
+        # deploy the SDK's v3 plugin, and ours has to be the survivor.
+        add_custom_command(TARGET harbour-berlin-vegan POST_BUILD
+            COMMAND ${CMAKE_COMMAND}
+                -DBUNDLE=$<TARGET_FILE_DIR:harbour-berlin-vegan>/../..
+                -DQL_DIR=${QMapLibre_DIR}
+                -DFELGO_LIB=${Felgo_DIR}/../..
+                -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/BundleQMapLibre.cmake)
+    endif()
     message(STATUS "QMapLibre found: vector maps enabled")
 else()
     message(STATUS "QMapLibre not found: falling back to raster osm tiles")
