@@ -28,6 +28,34 @@
 #include <QPermissions>
 #include <QFileInfo>
 
+#ifdef BV_HAS_MAPLIBRE
+// Declared rather than included. The Felgo SDK bundles its own QMapLibre 3
+// framework and its -F path wins over ours no matter the ordering, so
+// <QMapLibre/Utils> resolves to a header without this function. The enum
+// values are fixed by QMapLibre to match QSGRendererInterface.
+namespace QMapLibre {
+enum RendererType { OpenGL = 3, Vulkan = 5, Metal = 6 };
+RendererType supportedRendererType();
+}
+#endif
+
+namespace {
+// MapLibre renders beside Qt on the same device, so the scene graph has to run
+// the API the map was built for. Asking beats hardcoding: the answer is a
+// compile-time choice inside QMapLibre (Metal on Apple, Vulkan or GL
+// elsewhere), and pinning OpenGL here drags the whole app onto a deprecated
+// backend for the sake of one item.
+void selectGraphicsApi()
+{
+#ifdef BV_HAS_MAPLIBRE
+    const auto renderer = QMapLibre::supportedRendererType();
+    QQuickWindow::setGraphicsApi(static_cast<QSGRendererInterface::GraphicsApi>(renderer));
+#else
+    QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
+#endif
+}
+}
+
 #ifdef Q_OS_SAILFISH
 #include <sailfishapp.h>
 #include <QGuiApplication>
@@ -67,7 +95,7 @@ int main(int argc, char *argv[])
     view->setSource(mainQMLFile);
     view->show();
 #elif defined(BV_KIRIGAMI)
-    QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
+    selectGraphicsApi();
 
     // Force Fusion style so QQC2 controls support custom background/contentItem.
     // The macOS native style blocks customization; Fusion is always available in Qt.
@@ -132,7 +160,7 @@ int main(int argc, char *argv[])
         qmlEngine.addImportPath(kf6Env);
     qmlEngine.load(QUrl(QStringLiteral("qrc:/qml/harbour-berlin-vegan.qml")));
 #else
-    QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
+    selectGraphicsApi();
     QScopedPointer<QApplication> app(new QApplication(argc, argv));
 
     // Request location permission (required on macOS, iOS, Android)

@@ -14,6 +14,11 @@ set(BV_PLATFORM "felgo" CACHE STRING "Platform backend: felgo or kirigami")
 # Never enable for a shipping build: it hijacks the event loop and exits.
 option(BV_HARNESS "Build the render-fidelity harness into the executable" OFF)
 
+# Vector maps via the Qt Location "maplibre" plugin. Optional: without it the
+# platform layer falls back to the raster osm provider, which is also the only
+# option on Sailfish.
+find_package(QMapLibre QUIET COMPONENTS Core Location)
+
 if(BV_PLATFORM STREQUAL "kirigami")
     find_package(Qt6 COMPONENTS Core Qml Quick QuickControls2 Widgets Network Positioning Location Svg Concurrent LinguistTools REQUIRED)
     find_package(KF6Kirigami REQUIRED)
@@ -200,6 +205,26 @@ target_compile_definitions(harbour-berlin-vegan
 )
 
 target_include_directories(harbour-berlin-vegan PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+if(QMapLibre_FOUND)
+    target_link_libraries(harbour-berlin-vegan PRIVATE QMapLibre::Core QMapLibre::Location)
+    # The Felgo SDK bundles its own QMapLibre 3 framework, and its headers are
+    # otherwise found first, so <QMapLibre/Utils> resolves to a version without
+    # supportedRendererType. Force our framework dir ahead of the SDK's.
+    get_target_property(_mln_cfg QMapLibre::Core IMPORTED_LOCATION_RELEASE)
+    if(APPLE AND _mln_cfg)
+        get_filename_component(_mln_fw "${_mln_cfg}" DIRECTORY)   # .../QMapLibre.framework/Versions/A
+        get_filename_component(_mln_fw "${_mln_fw}" DIRECTORY)    # .../Versions
+        get_filename_component(_mln_fw "${_mln_fw}" DIRECTORY)    # .../QMapLibre.framework
+        get_filename_component(_mln_fw "${_mln_fw}" DIRECTORY)    # .../lib
+        target_compile_options(harbour-berlin-vegan BEFORE PRIVATE "-F${_mln_fw}")
+        message(STATUS "QMapLibre framework dir prioritised: ${_mln_fw}")
+    endif()
+    target_compile_definitions(harbour-berlin-vegan PRIVATE BV_HAS_MAPLIBRE)
+    message(STATUS "QMapLibre found: vector maps enabled")
+else()
+    message(STATUS "QMapLibre not found: falling back to raster osm tiles")
+endif()
 
 target_link_libraries(harbour-berlin-vegan PRIVATE
     Qt6::Core

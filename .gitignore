@@ -15,3 +15,4 @@ CMakeUserPresets.json
 extern/
 harness-out/
 harness-out.log
+extern/qmaplibre/
