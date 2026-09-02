@@ -11,6 +11,9 @@ set(_QL_BUNDLE "${BUNDLE}")
 set(_QL_FWDIR "${_QL_BUNDLE}/Contents/Frameworks")
 set(_QL_PLUGINDIR "${_QL_BUNDLE}/Contents/PlugIns/geoservices")
 set(_QL_SRC_LIB "${QL_DIR}/../..")
+# install_name_tool compares rpath strings literally; it does not normalise
+# "..", so every delete must use the resolved absolute form.
+get_filename_component(_QL_LIB_NORM "${QL_DIR}/../.." ABSOLUTE)
 set(_QL_SRC_PLUGIN "${QL_DIR}/../../../plugins/geoservices/libqtgeoservices_maplibre.dylib")
 set(_QL_BIN "${_QL_BUNDLE}/Contents/MacOS/harbour-berlin-vegan")
 
@@ -24,6 +27,9 @@ endfunction()
 _ql_run(${CMAKE_COMMAND} -E make_directory "${_QL_FWDIR}")
 
 foreach(fw QMapLibre QMapLibreLocation QMapLibreWidgets QMapLibreQuickPrivate)
+    if(NOT EXISTS "${_QL_SRC_LIB}/${fw}.framework")
+        continue()
+    endif()
     # cp -R, not cmake -E copy_directory: a .framework is a symlink bundle and
     # CMake's copier trips over Versions/Current.
     _ql_run(/bin/cp -R
@@ -45,12 +51,16 @@ _ql_run(codesign --force --sign - "${_QL_PLUGINDIR}/libqtgeoservices_maplibre.dy
 # (v3) elsewhere. Ours must be searched first, and each stale rpath can occur
 # more than once, so deletions repeat until exhausted.
 foreach(_i 1 2 3)
-    _ql_run(install_name_tool -delete_rpath "${QL_DIR}/../.." "${_QL_BIN}")
-    _ql_run(install_name_tool -delete_rpath "${FELGO_LIB}" "${_QL_BIN}")
+    _ql_run(install_name_tool -delete_rpath "${_QL_LIB_NORM}" "${_QL_BIN}")
+    if(FELGO_LIB)
+        _ql_run(install_name_tool -delete_rpath "${FELGO_LIB}" "${_QL_BIN}")
+    endif()
     _ql_run(install_name_tool -delete_rpath @executable_path/../Frameworks "${_QL_BIN}")
 endforeach()
 _ql_run(install_name_tool -add_rpath @executable_path/../Frameworks "${_QL_BIN}")
-_ql_run(install_name_tool -add_rpath "${FELGO_LIB}" "${_QL_BIN}")
+if(FELGO_LIB)
+    _ql_run(install_name_tool -add_rpath "${FELGO_LIB}" "${_QL_BIN}")
+endif()
 _ql_run(codesign --force --sign - "${_QL_BIN}")
 
 message(STATUS "BundleQMapLibre: v4 frameworks + plugin bundled into ${_QL_BUNDLE}")

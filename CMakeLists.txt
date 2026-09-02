@@ -228,7 +228,7 @@ if(QMapLibre_FOUND)
             COMMAND ${CMAKE_COMMAND}
                 -DBUNDLE=$<TARGET_FILE_DIR:harbour-berlin-vegan>/../..
                 -DQL_DIR=${QMapLibre_DIR}
-                -DFELGO_LIB=${Felgo_DIR}/../..
+                "-DFELGO_LIB=$<IF:$<BOOL:${Felgo_DIR}>,${Felgo_DIR}/../..,>"
                 -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/BundleQMapLibre.cmake)
     endif()
     message(STATUS "QMapLibre found: vector maps enabled")
