@@ -330,12 +330,13 @@ if(NOT ANDROID AND BV_PLATFORM STREQUAL "kirigami")
             message(WARNING "No libKirigami*.dylib found in ${_kf6_prefix}/lib — skipping dylib bundling")
         endif()
 
-        # 3. Ensure the executable rpath includes the bundled Frameworks directory
+        # 3. Ensure the executable rpath includes the bundled Frameworks directory.
+        # Guarded: the QMapLibre bundling step also manages this rpath, and
+        # install_name_tool fails the whole build on a duplicate.
         add_custom_command(TARGET harbour-berlin-vegan POST_BUILD
-            COMMAND install_name_tool
-                -add_rpath "@executable_path/../Frameworks"
-                "$<TARGET_FILE:harbour-berlin-vegan>"
-            COMMENT "Adding @executable_path/../Frameworks rpath to binary"
+            COMMAND /bin/sh -c
+                "otool -l '$<TARGET_FILE:harbour-berlin-vegan>' | grep -q 'path @executable_path/../Frameworks' || install_name_tool -add_rpath '@executable_path/../Frameworks' '$<TARGET_FILE:harbour-berlin-vegan>'"
+            COMMENT "Ensuring @executable_path/../Frameworks rpath"
             VERBATIM
         )
     endif()
