@@ -171,6 +171,87 @@ QObject* findNavigation(QObject* root)
     return nullptr;
 }
 
+QObject* findByClassName(QObject* root, const QString& needle)
+{
+    if (QString::fromUtf8(root->metaObject()->className()).contains(needle))
+        return root;
+    const auto children = root->children();
+    for (QObject* child : children)
+        if (QObject* found = findByClassName(child, needle))
+            return found;
+    return nullptr;
+}
+
+// "map" in the page matrix is special: VenueMapOverviewPage is not reachable
+// through the navigation actions, yet it is exactly the page whose rendering
+// must be verified. A map that silently draws nothing is the failure mode
+// that made this harness necessary. Created with the model and position
+// source resolved by type, and pushed onto whichever stack exists.
+bool pushMapPage(QQmlApplicationEngine& engine, QObject* root)
+{
+    QObject* window = engine.rootObjects().first();
+
+    QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/qml/pages/VenueMapOverviewPage.qml")));
+    if (component.isError()) {
+        qCritical() << "harness: map page failed to compile:" << component.errorString();
+        return false;
+    }
+
+    QObject* created = component.beginCreate(engine.rootContext());
+    if (!created)
+        return false;
+    // ids in harbour-berlin-vegan.qml are not properties; find by type.
+    created->setProperty("model",
+        QVariant::fromValue(findByClassName(window, "VenueSortFilterProxyModel")));
+    created->setProperty("positionSource",
+        QVariant::fromValue(findByClassName(window, "PositionSource")));
+    component.completeCreate();
+    if (component.isError()) {
+        qCritical() << "harness: map page failed to create:" << component.errorString();
+        delete created;
+        return false;
+    }
+
+    QVariantMap initialProperties;
+    initialProperties.insert(QStringLiteral("model"),
+        QVariant::fromValue(findByClassName(window, "VenueSortFilterProxyModel")));
+    initialProperties.insert(QStringLiteral("positionSource"),
+        QVariant::fromValue(findByClassName(window, "PositionSource")));
+
+    // Felgo first: its NavigationStack.push takes a source URL, not a created
+    // item, so the page is pushed exactly the way VenueList's pushAttached
+    // does. Kirigami's ApplicationWindow exposes pageStack and takes the item.
+    if (QObject* navigation = findNavigation(root)) {
+        QVariant item = navigation->property("currentNavigationItem");
+        if (QObject* navigationItem = item.value<QObject*>()) {
+            QVariant navigationStack = QQmlProperty::read(navigationItem,
+                                                          QStringLiteral("navigationStack"));
+            if (navigationStack.value<QObject*>()) {
+                QMetaObject::invokeMethod(navigationStack.value<QObject*>(), "push",
+                    Q_ARG(QVariant, QVariant::fromValue(QUrl(
+                        QStringLiteral("qrc:/qml/pages/VenueMapOverviewPage.qml")))),
+                    Q_ARG(QVariant, initialProperties));
+                delete created;
+                return true;
+            }
+        }
+    }
+
+    QVariant stack = QQmlProperty::read(window, QStringLiteral("pageStack"));
+    if (stack.value<QObject*>()) {
+        // By URL with properties: the same shape VenueList's pushAttached
+        // uses, and PageRow takes ownership on push.
+        QMetaObject::invokeMethod(stack.value<QObject*>(), "push",
+            Q_ARG(QVariant, QVariant::fromValue(QUrl(
+                QStringLiteral("qrc:/qml/pages/VenueMapOverviewPage.qml")))),
+            Q_ARG(QVariant, initialProperties));
+        delete created;
+        return true;
+    }
+    delete created;
+    return false;
+}
+
 // Returns false when no navigation mechanism could be driven at all.
 bool activatePage(QObject* root, int pageIndex)
 {
@@ -274,7 +355,7 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
     auto step = std::make_shared<int>(0);
     auto shoot = std::make_shared<std::function<void()>>();
 
-    *shoot = [&app, window, root, outDir, pages, step, shoot, state]() {
+    *shoot = [&app, &engine, window, root, outDir, pages, step, shoot, state]() {
         if (*step >= pages.size()) {
             QJsonObject summary;
             summary[QStringLiteral("messages")] = dumpMessages();
@@ -285,15 +366,20 @@ void runRenderHarness(QQmlApplicationEngine& engine, QGuiApplication& app)
             return;
         }
 
-        const int pageIndex = pages.at(*step).toInt();
-        const QString tag = QStringLiteral("page%1").arg(pageIndex);
+        const QString pageSpec = pages.at(*step);
+        const QString tag = pageSpec == QStringLiteral("map")
+                                ? QStringLiteral("map")
+                                : QStringLiteral("page%1").arg(pageSpec);
 
-        // Every page, including the first, is entered through its navigation
-        // action, which clears the stack before pushing. Sampling whatever
-        // startup happened to leave behind is not reproducible: on a cold run
-        // an extra venue detail page rides along on top of the list.
-        if (!activatePage(root, pageIndex))
-            qCritical("harness: could not navigate to page %d", pageIndex);
+        // Every page is entered through its navigation action, which clears
+        // the stack before pushing. Sampling whatever startup happened to
+        // leave behind is not reproducible: on a cold run an extra venue
+        // detail page rides along on top of the list.
+        const bool ok = pageSpec == QStringLiteral("map")
+                            ? pushMapPage(engine, root)
+                            : activatePage(root, pageSpec.toInt());
+        if (!ok)
+            qCritical("harness: could not navigate to %s", qPrintable(pageSpec));
 
         // Sampling on a fixed delay makes the score a race: delegate creation
         // and async load failures keep mutating the scene, so item counts and
