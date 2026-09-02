@@ -554,6 +554,13 @@ BVApp.Page {
                model: ListModel {
 
                    ListElement {
+                       name: "MapLibre"
+                       url: "https://maplibre.org"
+                       licenseName: "BSD-2-Clause"
+                       licenseFile: "LICENSE.MapLibre"
+                   }
+
+                   ListElement {
                        name: "Berlin-Vegan 2.*"
                        url: "https://github.com/Berlin-Vegan/berlin-vegan-guide"
                        licenseName: "GPLv2"

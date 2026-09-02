@@ -183,6 +183,7 @@ qt_add_resources(harbour-berlin-vegan "licenses"
         qml/pages/about/LICENSE.YTPlayer
         qml/pages/about/LICENSE.TinyColor
         qml/pages/about/LICENSE.FelgoComponentShowcase
+        qml/pages/about/LICENSE.MapLibre
 )
 
 qt_add_translations(harbour-berlin-vegan

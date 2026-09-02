@@ -46,21 +46,18 @@ _ql_run(install_name_tool -add_rpath @executable_path/../Frameworks
     "${_QL_PLUGINDIR}/libqtgeoservices_maplibre.dylib")
 _ql_run(codesign --force --sign - "${_QL_PLUGINDIR}/libqtgeoservices_maplibre.dylib")
 
-# Order is load-bearing: the binary links QMapLibre directly, and both the
-# link line and Felgo's deploy add rpaths that resolve a QMapLibre.framework
-# (v3) elsewhere. Ours must be searched first, and each stale rpath can occur
-# more than once, so deletions repeat until exhausted.
-foreach(_i 1 2 3)
-    _ql_run(install_name_tool -delete_rpath "${_QL_LIB_NORM}" "${_QL_BIN}")
-    if(FELGO_LIB)
-        _ql_run(install_name_tool -delete_rpath "${FELGO_LIB}" "${_QL_BIN}")
-    endif()
-    _ql_run(install_name_tool -delete_rpath @executable_path/../Frameworks "${_QL_BIN}")
+# The binary's QMapLibre dependencies are pinned to the bundle path outright.
+# Reordering rpaths is not enough: Felgo's own deploy step runs afterwards and
+# rewrites rpaths, which let the SDK's v3 framework win and abort the app at
+# dyld (our binary calls supportedRendererType, which v3 lacks). A -change to
+# @executable_path is immune to anything Felgo does to rpaths afterwards.
+foreach(_fw QMapLibre QMapLibreLocation QMapLibreWidgets)
+    _ql_run(install_name_tool -change
+        "@rpath/${_fw}.framework/Versions/A/${_fw}"
+        "@executable_path/../Frameworks/${_fw}.framework/Versions/A/${_fw}"
+        "${_QL_BIN}")
 endforeach()
 _ql_run(install_name_tool -add_rpath @executable_path/../Frameworks "${_QL_BIN}")
-if(FELGO_LIB)
-    _ql_run(install_name_tool -add_rpath "${FELGO_LIB}" "${_QL_BIN}")
-endif()
 _ql_run(codesign --force --sign - "${_QL_BIN}")
 
 message(STATUS "BundleQMapLibre: v4 frameworks + plugin bundled into ${_QL_BUNDLE}")

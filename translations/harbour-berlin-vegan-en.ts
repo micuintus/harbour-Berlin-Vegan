@@ -523,6 +523,11 @@
         <source>veggie</source>
         <translation>vegetarian</translation>
     </message>
+    <message id="id-map-attribution">
+        <location filename="../qml/pages/VenueMapOverviewPage.qml" line="0"/>
+        <source>© OpenStreetMap contributors · maps OpenFreeMap · MapLibre</source>
+        <translation>&#169; OpenStreetMap contributors &#183; maps &lt;a href='https://openfreemap.org'&gt;OpenFreeMap&lt;/a&gt; &#183; &lt;a href='https://maplibre.org'&gt;MapLibre&lt;/a&gt;</translation>
+    </message>
     <message id="id-tag-new">
         <location filename="../qml/components/VenueListItem.qml" line="70"/>
         <source>new</source>

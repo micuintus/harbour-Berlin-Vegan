@@ -32,6 +32,11 @@ AppMap {
     copyrightsVisible: false
     showUserPosition: true      // Felgo handles permission request + blue dot
 
+    // Default viewport before GPS or a user action takes over; without it
+    // the AppMap default frames half of Europe.
+    center: QtPositioning.coordinate(52.5200, 13.4050)
+    zoomLevel: 11
+
     plugin: QL.Plugin {
         name: "maplibre"
         parameters: [

@@ -119,11 +119,15 @@ BVApp.Page {
         }
 
         Component.onCompleted: {
-            // On page open: fly to custom address if set, otherwise GPS
+            // On page open: fly to custom address if set, otherwise GPS.
+            // Without a fix the platform defaults frame the wrong city, so
+            // Berlin is the explicit fallback.
             if (page.customPosition && page.customPosition.isValid)
                 animateToLocation(page.customPosition, 15)
-            else
+            else if (map.userPositionAvailable)
                 centerAndZoom()
+            else
+                animateToLocation(QtPositioning.coordinate(52.5200, 13.4050), 11)
         }
 
         // Re-center = "where am I?" — always flies to GPS position.
@@ -165,6 +169,27 @@ BVApp.Page {
                 duration: 600
                 easing.type: Easing.InOutQuad
             }
+        }
+
+        BVApp.Label {
+            // Qt Location's copyright overlay does not work with the maplibre
+            // plugin, so the attribution is part of the page instead.
+            visible: !BVApp.Platform.isSailfish
+            text: qsTrId("id-map-attribution")
+            textFormat: Text.StyledText
+            font.pixelSize: BVApp.Theme.fontSizeTiny
+            color: BVApp.Theme.secondaryColor
+            anchors {
+                left: parent.left
+                bottom: parent.bottom
+                leftMargin: BVApp.Theme.paddingLarge
+                bottomMargin: BVApp.Theme.paddingSmall
+                             + (typeof nativeUtils !== "undefined"
+                                ? nativeUtils.safeAreaInsets.bottom : 0)
+            }
+            z: 6
+
+            onLinkActivated: Qt.openUrlExternally(link)
         }
 
         BVApp.MapReCenterButton {
