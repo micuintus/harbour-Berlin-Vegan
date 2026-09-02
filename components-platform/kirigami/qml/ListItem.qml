@@ -31,7 +31,7 @@ Item {
         width: parent.width
         height: 1
         visible: listItem.dividerVisible
-        color: Kirigami.Theme.separatorColor
+        color: "#BDC3C7"
         z: -1
     }
 
