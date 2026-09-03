@@ -249,7 +249,6 @@ target_link_libraries(harbour-berlin-vegan PRIVATE
 if(BV_PLATFORM STREQUAL "kirigami")
     target_link_libraries(harbour-berlin-vegan PRIVATE
         Qt6::QuickControls2
-        Qt6::Widgets
         Qt6::Svg
         Qt6::Concurrent
         KF6::Kirigami

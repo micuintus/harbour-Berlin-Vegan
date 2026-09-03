@@ -62,7 +62,7 @@ void selectGraphicsApi()
 #elif defined(BV_KIRIGAMI)
 #include <QTranslator>
 #include <QLocale>
-#include <QApplication>
+#include <QGuiApplication>
 #include <QLibraryInfo>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
@@ -71,7 +71,7 @@ void selectGraphicsApi()
 #else
 #include <QTranslator>
 #include <QLocale>
-#include <QApplication>
+#include <QGuiApplication>
 #include <FelgoApplication>
 #include <QQmlApplicationEngine>
 #endif
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
     // The macOS native style blocks customization; Fusion is always available in Qt.
     QQuickStyle::setStyle(QStringLiteral("Fusion"));
 
-    QScopedPointer<QApplication> app(new QApplication(argc, argv));
+    QScopedPointer<QGuiApplication> app(new QGuiApplication(argc, argv));
     app->setApplicationName(QStringLiteral("Berlin-Vegan"));
     app->setOrganizationName(QStringLiteral("berlin-vegan.org"));
     app->setApplicationVersion(QStringLiteral(APP_VERSION));
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
     qmlEngine.load(QUrl(QStringLiteral("qrc:/qml/harbour-berlin-vegan.qml")));
 #else
     selectGraphicsApi();
-    QScopedPointer<QApplication> app(new QApplication(argc, argv));
+    QScopedPointer<QGuiApplication> app(new QGuiApplication(argc, argv));
 
     // Request location permission (required on macOS, iOS, Android)
     QLocationPermission locationPermission;
