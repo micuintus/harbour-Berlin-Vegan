@@ -83,11 +83,13 @@ if(ANDROID AND BV_PLATFORM STREQUAL "kirigami")
     # KF6_ANDROID_PREFIX must point to a KF6 installation cross-compiled for Android.
     # Example: cmake -DKF6_ANDROID_PREFIX=/opt/kf6-android ...
     if(DEFINED KF6_ANDROID_PREFIX)
+        file(GLOB _kf6_android_extra_libs LIST_DIRECTORIES false
+            "${KF6_ANDROID_PREFIX}/lib/lib*Kirigami*.so")
         set_target_properties(harbour-berlin-vegan PROPERTIES
             # Let androiddeployqt find KF6 QML modules
             QT_QML_IMPORT_PATH "${KF6_ANDROID_PREFIX}/lib/qml"
-            # Bundle the Kirigami shared library
-            QT_ANDROID_EXTRA_LIBS "${KF6_ANDROID_PREFIX}/lib/libKF6Kirigami.so"
+            # Bundle the Kirigami shared libraries
+            QT_ANDROID_EXTRA_LIBS "${_kf6_android_extra_libs}"
         )
     endif()
 
