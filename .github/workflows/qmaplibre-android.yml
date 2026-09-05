@@ -232,14 +232,15 @@ jobs:
         run: |
           export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
           HOSTQT="$(dirname "$QT_ROOT_DIR")/gcc_64"
-          "$HOSTQT/bin/androiddeployqt" \
-            --input build/android-harbour-berlin-vegan-deployment-settings.json \
-            --output build/android-build \
-            --android-platform android-35 \
-            --gradle
           APK=build/android-build/harbour-berlin-vegan.apk
           BT=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)
           if [ -n "$KEYSTORE_B64" ]; then
+            "$HOSTQT/bin/androiddeployqt" \
+              --input build/android-harbour-berlin-vegan-deployment-settings.json \
+              --output build/android-build \
+              --android-platform android-35 \
+              --gradle \
+              --release
             echo "$KEYSTORE_B64" | base64 -d > release.keystore
             "$BT/zipalign" -f 4 "$APK" aligned.apk
             "$BT/apksigner" sign \
@@ -249,11 +250,20 @@ jobs:
               --out berlin-vegan-kirigami.apk aligned.apk
             echo "apk=berlin-vegan-kirigami.apk" >> "$GITHUB_OUTPUT"
           else
+            # Without the keystore, build the debug variant: AGP signs it
+            # with the debug key, so the artifact is directly installable.
+            "$HOSTQT/bin/androiddeployqt" \
+              --input build/android-harbour-berlin-vegan-deployment-settings.json \
+              --output build/android-build \
+              --android-platform android-35 \
+              --gradle
+            APK=build/android-build/build/outputs/apk/debug/android-build-debug.apk
             echo "apk=$APK" >> "$GITHUB_OUTPUT"
-            echo "::notice::No RELEASE_KEYSTORE_B64 secret; uploading unsigned APK"
+            echo "::notice::No RELEASE_KEYSTORE_B64 secret; uploading debug-signed APK"
           fi
 
       - uses: actions/upload-artifact@v4
         with:
           name: berlin-vegan-kirigami-apk
           path: ${{ steps.assemble.outputs.apk }}
+          if-no-files-found: error
