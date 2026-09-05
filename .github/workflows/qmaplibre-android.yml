@@ -129,9 +129,9 @@ jobs:
       # Kirigami uses Qt private headers, so it must be cross-built against
       # the exact kit the app uses. The KF6 prefix is in CMAKE_FIND_ROOT_PATH
       # because Qt's Android toolchain ignores prefixes outside the root set.
-      # Tool packages (CoreTools, ShaderToolsTools) are pinned to the host
-      # install: they live in the desktop kit, and the search below does not
-      # see them otherwise.
+      # Tool packages (CoreTools, ShaderToolsTools, LinguistTools) are pinned
+      # to the host install: they live in the desktop kit, and the search
+      # below does not see them otherwise.
       - name: Build Kirigami (Android arm64)
         id: prefix
         run: |
@@ -144,6 +144,7 @@ jobs:
             -DQT_HOST_PATH="$QT_ROOT_DIR/../gcc_64" \
             -DQt6CoreTools_DIR="$QT_ROOT_DIR/../gcc_64/lib/cmake/Qt6CoreTools" \
             -DQt6ShaderToolsTools_DIR="$QT_ROOT_DIR/../gcc_64/lib/cmake/Qt6ShaderToolsTools" \
+            -DQt6LinguistTools_DIR="$QT_ROOT_DIR/../gcc_64/lib/cmake/Qt6LinguistTools" \
             -DANDROID_ABI=arm64-v8a \
             -DANDROID_PLATFORM=android-28 \
             -DCMAKE_MODULE_PATH="$RUNNER_TEMP/kf6-prefix/share/ECM/cmake" \
