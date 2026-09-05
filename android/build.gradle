@@ -79,7 +79,14 @@ android {
         // productIdentifier only exists on the Felgo --gradle path;
         // androidPackageName is always set by androiddeployqt.
         applicationId = project.hasProperty("productIdentifier") ? productIdentifier : androidPackageName
-        versionCode   = project.hasProperty("productVersionCode") ? productVersionCode.toInteger() : 37
-        versionName   = project.hasProperty("productVersionName") ? productVersionName : "3.7.0"
+        // Version truth lives in CMake's PROJECT_VERSION. The plain Qt path
+        // injects it into the manifest placeholders; Felgo passes productVersion*
+        // gradle properties instead.
+        if (project.hasProperty("productVersionCode")) {
+            versionCode = productVersionCode.toInteger()
+        }
+        if (project.hasProperty("productVersionName")) {
+            versionName = productVersionName
+        }
     }
 }

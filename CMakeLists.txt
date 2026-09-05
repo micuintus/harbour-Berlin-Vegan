@@ -2,6 +2,20 @@ cmake_minimum_required(VERSION 3.21)
 
 project(harbour-berlin-vegan VERSION 4.0.0 LANGUAGES CXX)
 
+# Qt's Android toolchain only searches packages under CMAKE_FIND_ROOT_PATH
+# roots; prefixes passed via CMAKE_PREFIX_PATH alone are silently ignored.
+if(ANDROID)
+    if(DEFINED QMapLibre_DIR)
+        cmake_path(GET QMapLibre_DIR PARENT_PATH _ql_prefix)
+        cmake_path(GET _ql_prefix PARENT_PATH _ql_prefix)
+        cmake_path(GET _ql_prefix PARENT_PATH _ql_prefix)
+        list(APPEND CMAKE_FIND_ROOT_PATH "${_ql_prefix}")
+    endif()
+    if(DEFINED KF6_ANDROID_PREFIX)
+        list(APPEND CMAKE_FIND_ROOT_PATH "${KF6_ANDROID_PREFIX}")
+    endif()
+endif()
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
@@ -20,10 +34,10 @@ option(BV_HARNESS "Build the render-fidelity harness into the executable" OFF)
 find_package(QMapLibre QUIET COMPONENTS Core Location)
 
 if(BV_PLATFORM STREQUAL "kirigami")
-    find_package(Qt6 COMPONENTS Core Qml Quick QuickControls2 Widgets Network Positioning Location Svg Concurrent LinguistTools REQUIRED)
-    find_package(KF6Kirigami REQUIRED)
+    find_package(Qt6 COMPONENTS Core Qml Quick QuickControls2 Network Positioning Location Svg Concurrent LinguistTools REQUIRED)
     find_package(ECM REQUIRED NO_MODULE)
     list(APPEND CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
+    find_package(KF6Kirigami REQUIRED)
 else()
     find_package(Felgo REQUIRED)
     find_package(Qt6 COMPONENTS Core Qml Quick Network Positioning Location LinguistTools REQUIRED)
