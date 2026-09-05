@@ -128,6 +128,8 @@ jobs:
       # Kirigami uses Qt private headers, so it must be cross-built against
       # the exact kit the app uses. The KF6 prefix is in CMAKE_FIND_ROOT_PATH
       # because Qt's Android toolchain ignores prefixes outside the root set.
+      # The CoreTools pin keeps ECM's internal find_package on the host
+      # install, where qtpaths6 lives.
       - name: Build Kirigami (Android arm64)
         id: prefix
         run: |
@@ -138,6 +140,7 @@ jobs:
             -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR" \
             -DCMAKE_FIND_ROOT_PATH="$QT_ROOT_DIR;$RUNNER_TEMP/kf6-prefix" \
             -DQT_HOST_PATH="$QT_ROOT_DIR/../gcc_64" \
+            -DQt6CoreTools_DIR="$QT_ROOT_DIR/../gcc_64/lib/cmake/Qt6CoreTools" \
             -DANDROID_ABI=arm64-v8a \
             -DANDROID_PLATFORM=android-28 \
             -DCMAKE_MODULE_PATH="$RUNNER_TEMP/kf6-prefix/share/ECM/cmake" \
@@ -156,10 +159,8 @@ jobs:
           name: kf6-android-prefix
           path: ${{ steps.prefix.outputs.path }}
 
-  # Runs on workflow_dispatch only until it passes device testing; pushes
-  # exercise the two prefix jobs.
+  # Runs the full APK chain on pushes while the pipeline matures.
   kirigami-apk:
-    if: github.event_name == 'workflow_dispatch'
     needs: [qmaplibre, kf6-prefix]
     runs-on: ubuntu-latest
     steps:
