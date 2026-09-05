@@ -18,3 +18,5 @@ harness-out.log
 extern/qmaplibre/
 build-kirigami-android/
 build-kirigami-android-dbg/
+build-kirigami-android-official/
+dist/
