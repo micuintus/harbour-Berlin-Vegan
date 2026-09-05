@@ -1,16 +1,18 @@
-# QMapLibre 4 for Android, built from source, and a Kirigami APK.
+# QMapLibre 4 for Android and the Kirigami APK, built from source.
 #
-# Draft: triggers manually until the pipeline is proven; flip to release tags
-# once the APK passes on-device testing.
+# Qt comes from official prebuilds only: the Android kit for target libraries,
+# a same-version desktop install for host tools (QT_HOST_PATH). The desktop
+# install must be complete (no archives= filter): the Android kit carries no
+# host-tools CMake packages (Qt6QmlTools etc.).
 #
-# Why two jobs: QMapLibre compiles against the Qt *Android* kit and installs
-# into a prefix; the app then builds against that prefix. Keeps the heavy
-# maplibre-native compile cacheable and separate from the app compile.
+# All external prefixes must be registered in BOTH CMAKE_PREFIX_PATH and
+# CMAKE_FIND_ROOT_PATH: Qt's Android toolchain re-roots package searches
+# (CMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ONLY) and silently ignores prefixes
+# outside the root set.
 #
 # 16 KB pages: Google Play requires 16 KB alignment for apps targeting
 # Android 15+. NDK r27 needs -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON; r28+
-# aligns by default. We pass it explicitly so the requirement survives NDK
-# bumps. Verified locally: LOAD align 0x4000 via llvm-readelf.
+# aligns by default. Verified: LOAD align 0x4000 via llvm-readelf.
 
 name: qmaplibre-android
 
@@ -27,17 +29,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # The Android kit carries target libraries but not the host-tools CMake
-      # packages (Qt6CoreTools); without a desktop install beside it, Qt6Gui
-      # fails on "dependency Qt6CoreTools could not be found".
       - name: Install host Qt (Linux desktop)
         uses: jurplel/install-qt-action@v4
         with:
           version: '6.8.3'
           host: linux
-          # qtdeclarative brings the host-tools cmake packages (QmlTools etc.)
-          # that cross builds resolve via QT_HOST_PATH.
-          archives: qtdeclarative
 
       - name: Install Qt (Android arm64)
         uses: jurplel/install-qt-action@v4
@@ -53,7 +49,10 @@ jobs:
         with:
           ndk-version: r27c
 
+      # qt-cmake via the kit toolchain; Widgets component is on because the
+      # Felgo track's FelgoConfig find_package demands QMapLibreWidgets.
       - name: Build QMapLibre 4 (OpenGL backend)
+        id: prefix
         run: |
           git clone --recursive https://github.com/maplibre/maplibre-native-qt.git extern/qmaplibre
           # qt-cmake is the kit's own wrapper: it embeds the Android toolchain
@@ -66,12 +65,11 @@ jobs:
             -DANDROID_PLATFORM=android-28 \
             -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/qmaplibre-prefix" \
             -DMLN_WITH_OPENGL=ON \
-            -DMLN_QT_WITH_WIDGETS=OFF \
+            -DMLN_QT_WITH_WIDGETS=ON \
             -DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON
           cmake --build build-ql
           cmake --install build-ql
           echo "path=$RUNNER_TEMP/qmaplibre-prefix" >> "$GITHUB_OUTPUT"
-        id: prefix
         env:
           ANDROID_NDK_ROOT: ${{ steps.ndk.outputs.ndk-path }}
 
@@ -98,6 +96,12 @@ jobs:
     outputs:
       prefix: ${{ steps.prefix.outputs.path }}
     steps:
+      - name: Install host Qt (Linux desktop)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          host: linux
+
       - name: Install Qt (Android arm64)
         uses: jurplel/install-qt-action@v4
         with:
@@ -121,20 +125,21 @@ jobs:
             -DBUILD_TESTING=OFF
           cmake --install ecm-build
 
+      # Kirigami uses Qt private headers, so it must be cross-built against
+      # the exact kit the app uses. The KF6 prefix is in CMAKE_FIND_ROOT_PATH
+      # because Qt's Android toolchain ignores prefixes outside the root set.
       - name: Build Kirigami (Android arm64)
+        id: prefix
         run: |
-          # ECM's KDEInstallDirs shells out to qtpaths6 from the kit's host tools.
           export PATH="$QT_ROOT_DIR/../gcc_64/bin:$QT_ROOT_DIR/bin:$PATH"
           git clone --depth 1 --branch v6.18.0 https://invent.kde.org/frameworks/kirigami.git
-          # The desktop prefix supplies Qt6CoreTools (qtpaths) which ECM's
-          # KDEInstallDirs requires even for cross builds.
           cmake -B kirigami-build -S kirigami -GNinja \
             -DCMAKE_TOOLCHAIN_FILE="$QT_ROOT_DIR/lib/cmake/Qt6/qt.toolchain.cmake" \
-            -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR;$QT_ROOT_DIR/../gcc_64;$RUNNER_TEMP/kf6-prefix" \
-            -DQT_HOST_PATH="$QT_ROOT_DIR" \
+            -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR" \
+            -DCMAKE_FIND_ROOT_PATH="$QT_ROOT_DIR;$RUNNER_TEMP/kf6-prefix" \
+            -DQT_HOST_PATH="$QT_ROOT_DIR/../gcc_64" \
             -DANDROID_ABI=arm64-v8a \
             -DANDROID_PLATFORM=android-28 \
-            -DQt6CoreTools_DIR="$QT_ROOT_DIR/../gcc_64/lib/cmake/Qt6CoreTools" \
             -DCMAKE_MODULE_PATH="$RUNNER_TEMP/kf6-prefix/share/ECM/cmake" \
             -DECM_DIR="$RUNNER_TEMP/kf6-prefix/share/ECM/cmake" \
             -DCMAKE_INSTALL_PREFIX="$RUNNER_TEMP/kf6-prefix" \
@@ -143,7 +148,6 @@ jobs:
           cmake --build kirigami-build
           cmake --install kirigami-build
           echo "path=$RUNNER_TEMP/kf6-prefix" >> "$GITHUB_OUTPUT"
-        id: prefix
         env:
           ANDROID_NDK_ROOT: ${{ steps.ndk.outputs.ndk-path }}
 
@@ -152,8 +156,10 @@ jobs:
           name: kf6-android-prefix
           path: ${{ steps.prefix.outputs.path }}
 
-
+  # Runs on workflow_dispatch only until it passes device testing; pushes
+  # exercise the two prefix jobs.
   kirigami-apk:
+    if: github.event_name == 'workflow_dispatch'
     needs: [qmaplibre, kf6-prefix]
     runs-on: ubuntu-latest
     steps:
@@ -169,6 +175,12 @@ jobs:
           name: kf6-android-prefix
           path: kf6-prefix
 
+      - name: Install host Qt (Linux desktop)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          host: linux
+
       - name: Install Qt (Android arm64)
         uses: jurplel/install-qt-action@v4
         with:
@@ -176,7 +188,7 @@ jobs:
           host: linux
           target: android
           arch: android_arm64_v8a
-          modules: qtlocation qtpositioning
+          modules: qtlocation qtpositioning qtshadertools
 
       - uses: nttld/setup-ndk@v1
         id: ndk
@@ -185,23 +197,58 @@ jobs:
 
       - name: Build Kirigami APK
         run: |
-          cmake -B build-android -S . -GNinja \
+          QOFF="$QT_ROOT_DIR"
+          KP="$PWD/kf6-prefix"
+          QLP="$PWD/qmaplibre-prefix"
+          cmake -B build -S . -GNinja \
             -DBV_PLATFORM=kirigami \
-            -DCMAKE_TOOLCHAIN_FILE="$QT_ROOT_DIR/lib/cmake/Qt6/qt.toolchain.cmake" \
-            -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR;qmaplibre-prefix" \
+            -DCMAKE_TOOLCHAIN_FILE="$QOFF/lib/cmake/Qt6/qt.toolchain.cmake" \
+            -DCMAKE_PREFIX_PATH="$QOFF;$KP;$QLP" \
+            -DCMAKE_FIND_ROOT_PATH="$QOFF;$KP;$QLP" \
             -DQT_HOST_PATH="$(dirname "$QT_ROOT_DIR")/gcc_64" \
+            -DKF6_ANDROID_PREFIX="$KP" \
+            -DQMapLibre_DIR="$QLP/lib/cmake/QMapLibre" \
             -DANDROID_ABI=arm64-v8a \
-            -DQMapLibre_DIR="$PWD/qmaplibre-prefix/lib/cmake/QMapLibre" \
-            -DKF6Kirigami_DIR="$PWD/kf6-prefix/lib/cmake/KF6Kirigami" \
-            -DKF6_ANDROID_PREFIX="$PWD/kf6-prefix"
-          cmake --build build-android
+            -DANDROID_PLATFORM=android-28 \
+            -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --target harbour-berlin-vegan
+          cmake --build build --target harbour-berlin-vegan_prepare_apk_dir
         env:
           ANDROID_NDK_ROOT: ${{ steps.ndk.outputs.ndk-path }}
-          # KF6 for Android is the open item: either built by a prior job
-          # (ECM + kirigami via the KDE craft blueprint) or vendored like
-          # QMapLibre. Nothing to reference until that exists.
+          ANDROID_HOME: ${{ env.ANDROID_HOME || '/usr/local/lib/android/sdk' }}
+
+      - name: Assemble and sign APK
+        id: assemble
+        env:
+          ANDROID_NDK_ROOT: ${{ steps.ndk.outputs.ndk-path }}
+          KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
+          KEYSTORE_PASS: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+        run: |
+          export ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          HOSTQT="$(dirname "$QT_ROOT_DIR")/gcc_64"
+          "$HOSTQT/bin/androiddeployqt" \
+            --input build/android-harbour-berlin-vegan-deployment-settings.json \
+            --output build/android-build \
+            --android-platform android-35 \
+            --gradle
+          APK=build/android-build/harbour-berlin-vegan.apk
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > release.keystore
+            "$BT/zipalign" -f 4 "$APK" aligned.apk
+            "$BT/apksigner" sign \
+              --ks release.keystore \
+              --ks-pass pass:"$KEYSTORE_PASS" \
+              --ks-key-alias "$KEY_ALIAS" \
+              --out berlin-vegan-kirigami.apk aligned.apk
+            echo "apk=berlin-vegan-kirigami.apk" >> "$GITHUB_OUTPUT"
+          else
+            echo "apk=$APK" >> "$GITHUB_OUTPUT"
+            echo "::notice::No RELEASE_KEYSTORE_B64 secret; uploading unsigned APK"
+          fi
 
       - uses: actions/upload-artifact@v4
         with:
-          name: berlin-vegan-kirigami-debug-apk
-          path: build-android/**/*.apk
+          name: berlin-vegan-kirigami-apk
+          path: ${{ steps.assemble.outputs.apk }}
