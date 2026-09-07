@@ -110,7 +110,7 @@ jobs:
           host: linux
           target: android
           arch: android_arm64_v8a
-          modules: qtlocation qtpositioning qtshadertools
+          modules: qtlocation qtpositioning qtshadertools qt5compat
 
       - uses: nttld/setup-ndk@v1
         id: ndk
@@ -193,7 +193,7 @@ jobs:
           host: linux
           target: android
           arch: android_arm64_v8a
-          modules: qtlocation qtpositioning qtshadertools
+          modules: qtlocation qtpositioning qtshadertools qt5compat
 
       - uses: nttld/setup-ndk@v1
         id: ndk

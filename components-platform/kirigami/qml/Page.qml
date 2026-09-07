@@ -7,8 +7,13 @@ Kirigami.ScrollablePage {
     signal activated()
     signal pushed()
 
-    // pageStack is provided natively by Kirigami when the page
-    // is in the stack — no need to declare it here.
+    // Felgo/Sailfish pages call pageStack.pushAttached(); Kirigami's raw
+    // PageRow has no such API, so pages resolve their pageStack to the
+    // adapter the window exposes instead.
+    property var pageStack: {
+        var win = applicationWindow()
+        return win && win.navStack ? win.navStack : (win ? win.pageStack : null)
+    }
 
     // Felgo semantics: pages are created on push, so completion marks the
     // moment this page landed on the stack.

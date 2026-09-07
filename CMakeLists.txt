@@ -80,6 +80,22 @@ elseif(BV_PLATFORM STREQUAL "kirigami")
     target_compile_definitions(harbour-berlin-vegan PRIVATE BV_KIRIGAMI)
 endif()
 
+# The manifest's Application/Activity classes differ per track: Felgo ships
+# its own helper classes, the Kirigami build uses the plain Qt bindings.
+if(BV_PLATFORM STREQUAL "felgo")
+    set(BV_ACTIVITY_CLASS com.felgo.helper.FelgoActivity)
+    set(BV_APPLICATION_CLASS com.felgo.helper.FelgoApplication)
+else()
+    set(BV_ACTIVITY_CLASS org.qtproject.qt.android.bindings.QtActivity)
+    set(BV_APPLICATION_CLASS org.qtproject.qt.android.bindings.QtApplication)
+endif()
+set(_android_pkg "${CMAKE_CURRENT_BINARY_DIR}/android-package")
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/android/" DESTINATION "${_android_pkg}"
+     FILES_MATCHING PATTERN "*"
+     PATTERN "AndroidManifest.xml.in" EXCLUDE)
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/android/AndroidManifest.xml.in"
+               "${_android_pkg}/AndroidManifest.xml")
+
 # --- Android configuration (Kirigami builds) ---
 
 if(ANDROID AND BV_PLATFORM STREQUAL "kirigami")
@@ -99,16 +115,19 @@ if(ANDROID AND BV_PLATFORM STREQUAL "kirigami")
     if(DEFINED KF6_ANDROID_PREFIX)
         file(GLOB _kf6_android_extra_libs LIST_DIRECTORIES false
             "${KF6_ANDROID_PREFIX}/lib/lib*Kirigami*.so")
+        # Kirigami links OpenMP, which the NDK ships under the clang runtime
+        # dir; it is not packaged by androiddeployqt and must ship in the APK.
+        file(GLOB _kf6_openmp_lib LIST_DIRECTORIES false
+            "$ENV{ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/*/lib/clang/*/lib/linux/aarch64/libomp.so")
+        list(APPEND _kf6_android_extra_libs "${_kf6_openmp_lib}")
         set_target_properties(harbour-berlin-vegan PROPERTIES
-            # Let androiddeployqt find KF6 QML modules
-            QT_QML_IMPORT_PATH "${KF6_ANDROID_PREFIX}/lib/qml"
             # Bundle the Kirigami shared libraries
             QT_ANDROID_EXTRA_LIBS "${_kf6_android_extra_libs}"
         )
     endif()
 
     set_target_properties(harbour-berlin-vegan PROPERTIES
-        QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android"
+        QT_ANDROID_PACKAGE_SOURCE_DIR "${_android_pkg}"
         QT_ANDROID_PACKAGE_NAME "${PRODUCT_IDENTIFIER}"
         QT_ANDROID_VERSION_CODE "${_version_code}"
         QT_ANDROID_VERSION_NAME "${PROJECT_VERSION}"
@@ -125,10 +144,14 @@ add_subdirectory(components-ui)
 set_source_files_properties(qml/components/VenueSubTypeDefinitions.qml
     PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
+if(ANDROID AND DEFINED KF6_ANDROID_PREFIX)
+    set(_bv_qml_import_path "${KF6_ANDROID_PREFIX}/lib/qml")
+endif()
 qt_add_qml_module(harbour-berlin-vegan
     URI harbour.berlin.vegan
     VERSION 1.0
     NO_RESOURCE_TARGET_PATH
+    IMPORT_PATH ${_bv_qml_import_path}
     SOURCES
         src/VenueModel.h src/VenueModel.cpp
         src/VenueSortFilterProxyModel.h src/VenueSortFilterProxyModel.cpp
@@ -357,3 +380,8 @@ if(NOT ANDROID AND BV_PLATFORM STREQUAL "kirigami")
         )
     endif()
 endif()
+
+get_target_property(_dbg_import harbour-berlin-vegan QT_QML_IMPORT_PATH)
+message(STATUS "DEBUG QT_QML_IMPORT_PATH: ${_dbg_import}")
+get_target_property(_dbg_libs harbour-berlin-vegan QT_ANDROID_EXTRA_LIBS)
+message(STATUS "DEBUG EXTRA_LIBS: ${_dbg_libs}")

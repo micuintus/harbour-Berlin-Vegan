@@ -123,11 +123,15 @@ BVApp.ApplicationWindow
         // requires a runtime grant as well.  PositionSource (and therefore the
         // own-location marker) fail silently without it.
         if (Qt.platform.os === "android") {
-            Qt.requestPermission("android.permission.ACCESS_FINE_LOCATION",
-                function(granted) {
-                    if (!granted)
-                        console.warn("Location permission denied — own-location marker disabled")
-                })
+            var requestPermissionFn = Qt.application.requestPermission || Qt.requestPermission
+            if (requestPermissionFn) {
+                requestPermissionFn.call(Qt.application.requestPermission ? Qt.application : Qt,
+                    "android.permission.ACCESS_FINE_LOCATION",
+                    function(granted) {
+                        if (!granted)
+                            console.warn("Location permission denied — own-location marker disabled")
+                    })
+            }
         }
     }
 
@@ -214,6 +218,25 @@ BVApp.ApplicationWindow
             }
 
             pageComponent: app.initialPage
+        }
+
+        // Sailfish/Felgo open the map from the list's toolbar; Kirigami has
+        // no toolbar entry for it yet, so the drawer carries it.
+        BVApp.MenuItem {
+            visible: BVApp.Platform.isKirigami
+            menuIcon: BVApp.Theme.iconFor("map")
+            //% "Map"
+            text: qsTrId("id-venue-map-overview")
+
+            split: true
+            splitViewExtraPageComponent: app.initialPage
+            pageComponent: Component {
+                VenueMapOverviewPage {
+                    positionSource: app.globalPositionSource
+                    model: gJsonCollection
+                    customPosition: app.customSortPosition
+                }
+            }
         }
 
         BVApp.MenuItem {
