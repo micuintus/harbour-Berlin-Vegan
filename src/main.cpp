@@ -99,12 +99,30 @@ int main(int argc, char *argv[])
 
     // Force Fusion style so QQC2 controls support custom background/contentItem.
     // The macOS native style blocks customization; Fusion is always available in Qt.
+    // The env var is read at plugin init time; setStyle alone proved insufficient
+    // on Android, where the default Material style made Kirigami's Theme sync
+    // fail (styles/Material/Theme.qml fatal to item rendering).
+    qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
     QQuickStyle::setStyle(QStringLiteral("Fusion"));
+
+    // Kirigami prepends "Material" to its theme style-chain on Android,
+    // which selects the Material theme sync that breaks control rendering.
+    // Force the chain to the actual QuickControls style instead.
+    qputenv("KIRIGAMI_FORCE_STYLE", "1");
 
     QScopedPointer<QGuiApplication> app(new QGuiApplication(argc, argv));
     app->setApplicationName(QStringLiteral("Berlin-Vegan"));
     app->setOrganizationName(QStringLiteral("berlin-vegan.org"));
     app->setApplicationVersion(QStringLiteral(APP_VERSION));
+    qInfo("BVApp: QuickControls2 style = %s", qPrintable(QQuickStyle::name()));
+
+#ifdef Q_OS_ANDROID
+    // Kirigami's PlatformPluginFactory looks for
+    // libplugins_kf6_kirigami_platform_<style>.so under
+    // QCoreApplication::libraryPaths(); Android does not list the app's
+    // native lib dir there by default.
+    QCoreApplication::addLibraryPath(QCoreApplication::applicationDirPath());
+#endif
 
     // -------------------------------------------------------------------------
     // Icon theme setup — Kirigami.Icon needs Breeze to resolve symbolic icon

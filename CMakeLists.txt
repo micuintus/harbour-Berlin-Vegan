@@ -120,6 +120,19 @@ if(ANDROID AND BV_PLATFORM STREQUAL "kirigami")
         file(GLOB _kf6_openmp_lib LIST_DIRECTORIES false
             "$ENV{ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/*/lib/clang/*/lib/linux/aarch64/libomp.so")
         list(APPEND _kf6_android_extra_libs "${_kf6_openmp_lib}")
+        # Kirigami's theme factory looks in the app's lib dir for a plugin
+        # named libplugins_kf6_kirigami_platform_<Style>.so; the build emits
+        # it under its QML-plugin name, so ship a renamed copy. Without it
+        # the theme falls back to a code path that breaks item rendering.
+        set(_kirigami_platform_plugin_src
+            "${KF6_ANDROID_PREFIX}/lib/qml/org/kde/kirigami/platform/libqml_org_kde_kirigami_platform_KirigamiPlatformplugin_arm64-v8a.so")
+        if(EXISTS "${_kirigami_platform_plugin_src}")
+            set(_kirigami_platform_plugin "${CMAKE_CURRENT_BINARY_DIR}/libplugins_kf6_kirigami_platform_Fusion.so")
+            add_custom_command(TARGET harbour-berlin-vegan POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                    "${_kirigami_platform_plugin_src}" "${_kirigami_platform_plugin}")
+            list(APPEND _kf6_android_extra_libs "${_kirigami_platform_plugin}")
+        endif()
         set_target_properties(harbour-berlin-vegan PROPERTIES
             # Bundle the Kirigami shared libraries
             QT_ANDROID_EXTRA_LIBS "${_kf6_android_extra_libs}"
