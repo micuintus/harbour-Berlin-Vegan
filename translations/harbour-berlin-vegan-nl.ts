@@ -224,6 +224,11 @@
         <source>Favorites</source>
         <translation>Favorieten</translation>
     </message>
+    <message id="id-venue-map-overview">
+        <location filename="../qml/harbour-berlin-vegan.qml"/>
+        <source>Map</source>
+        <translation>Kaart</translation>
+    </message>
     <message id="id-filter">
         <location filename="../qml/harbour-berlin-vegan.qml" line="165"/>
         <source>Filter</source>
