@@ -216,6 +216,14 @@ int main(int argc, char *argv[])
     qputenv("QT_QUICK_CONTROLS_STYLE", "Fusion");
     QQuickStyle::setStyle(QStringLiteral("Fusion"));
 
+#ifdef Q_OS_ANDROID
+    // The threaded render loop loses the EGL surface on this device's
+    // sleep/wake cycle (QRhiGles2 cannot make the context current again
+    // and the app stays black until restart). The basic loop recreates
+    // the surface in-band instead.
+    qputenv("QSG_RENDER_LOOP", "basic");
+#endif
+
     // Kirigami prepends "Material" to its theme style-chain on Android,
     // which selects the Material theme sync that breaks control rendering.
     // Force the chain to the actual QuickControls style instead.
