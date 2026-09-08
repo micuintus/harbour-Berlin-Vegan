@@ -20,7 +20,10 @@ Kirigami.GlobalDrawer {
     property alias headerView: drawer.header
 
     // Compat: Felgo navigation bar offset
-    property real navigationBarOffset: 0
+    // On Kirigami this also carries the system status inset so the drawer
+    // header clears the status bar on edge-to-edge Android.
+    property real navigationBarOffset: (typeof bvWindowInsets !== "undefined")
+                                        ? bvWindowInsets.top : 0
 
     // Self-register as the window's globalDrawer
     Component.onCompleted: {

@@ -28,4 +28,9 @@ Kirigami.ApplicationWindow {
         if (initialPage)
             pageStack.push(initialPage)
     }
+
+    // Edge-to-edge Android draws under the status bar and gesture bar;
+    // reserve the system insets so the toolbar and content stay visible.
+    pageStack.anchors.topMargin: bvWindowInsets.top
+    pageStack.anchors.bottomMargin: bvWindowInsets.bottom
 }

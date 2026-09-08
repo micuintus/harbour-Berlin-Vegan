@@ -27,6 +27,14 @@
 #include <QSGRendererInterface>
 #include <QPermissions>
 #include <QFileInfo>
+#include <QObject>
+#include <QScreen>
+#include <QQmlContext>
+#ifdef Q_OS_ANDROID
+#include <QJniObject>
+#include <QJniEnvironment>
+#include <QtCore/qnativeinterface.h>
+#endif
 
 #ifdef BV_HAS_MAPLIBRE
 // Declared rather than included. The Felgo SDK bundles its own QMapLibre 3
@@ -54,6 +62,109 @@ void selectGraphicsApi()
     QQuickWindow::setGraphicsApi(QSGRendererInterface::OpenGLRhi);
 #endif
 }
+}
+
+namespace {
+#ifdef Q_OS_ANDROID
+// Android's WindowInsets via JNI (public Qt API): the only reliable source
+// under edge-to-edge, where Qt's availableGeometry() equals geometry().
+// Returns device-independent px (status/nav bar heights); 0 on failure.
+static qreal bvAndroidInsetTop()
+{
+    using namespace QNativeInterface;
+    auto check = [](const char *step, bool ok) {
+        QJniEnvironment env;
+        const bool ex = env->ExceptionCheck();
+        if (ex)
+            env->ExceptionClear();
+        if (!ok || ex)
+            qInfo("BVApp: insets %s failed (ok=%d exc=%d)", step, ok, ex);
+        return ok && !ex;
+    };
+    QJniObject activity = QAndroidApplication::context();
+    if (!check("context", activity.isValid()))
+        return 0;
+    const jint sdk = QJniObject::getStaticField<jint>("android/os/Build$VERSION", "SDK_INT");
+    qInfo("BVApp: insets sdk=%d", sdk);
+    if (sdk < 30)
+        return 0;
+    QJniObject window = activity.callObjectMethod("getWindow", "()Landroid/view/Window;");
+    if (!check("window", window.isValid()))
+        return 0;
+    QJniObject decor = window.callObjectMethod("getDecorView", "()Landroid/view/View;");
+    if (!check("decor", decor.isValid()))
+        return 0;
+    QJniObject insets = decor.callObjectMethod("getRootWindowInsets", "()Landroid/view/WindowInsets;");
+    if (!check("insets", insets.isValid()))
+        return 0;
+    const jint type = QJniObject::callStaticMethod<jint>("android/view/WindowInsets$Type", "statusBars", "()I");
+    QJniObject rect = insets.callObjectMethod("getInsets", "(I)Landroid/graphics/Insets;", type);
+    if (!check("rect", rect.isValid()))
+        return 0;
+    QJniObject res = activity.callObjectMethod("getResources", "()Landroid/content/res/Resources;");
+    QJniObject metrics = res.callObjectMethod("getDisplayMetrics", "()Landroid/util/DisplayMetrics;");
+    const jfloat density = metrics.getField<jfloat>("density");
+    const jint top = rect.getField<jint>("top");
+    qInfo("BVApp: insets top_px=%d density=%g", top, density);
+    return density > 0 ? top / density : 0;
+}
+#endif
+// Window system insets (status bar, notch, gesture bar) as QML-readable values.
+// Qt 6.8 exposes them only through the QPA layer, so derive them from the
+// public pair: availableGeometry() excludes system areas, geometry() does not.
+// The app is portrait-locked, so margins are effectively static after show.
+class BvWindowInsets : public QObject {
+    Q_OBJECT
+    Q_PROPERTY(qreal top READ top NOTIFY insetsChanged)
+    Q_PROPERTY(qreal left READ left NOTIFY insetsChanged)
+    Q_PROPERTY(qreal right READ right NOTIFY insetsChanged)
+    Q_PROPERTY(qreal bottom READ bottom NOTIFY insetsChanged)
+public:
+    explicit BvWindowInsets(QObject *parent = nullptr) : QObject(parent)
+    {
+        if (QScreen *s = QGuiApplication::primaryScreen()) {
+            connect(s, &QScreen::availableGeometryChanged,
+                    this, &BvWindowInsets::refresh);
+        }
+        refresh();
+    }
+    qreal top() const { return m_top; }
+    qreal left() const { return m_left; }
+    qreal right() const { return m_right; }
+    qreal bottom() const { return m_bottom; }
+    void refresh()
+    {
+        if (QScreen *s = QGuiApplication::primaryScreen()) {
+            const QRect geo = s->geometry();
+            const QRect avail = s->availableGeometry();
+            qreal top = avail.top() - geo.top();
+#ifdef Q_OS_ANDROID
+            // Edge-to-edge collapses the pair; use WindowInsets instead.
+            if (const qreal jniTop = bvAndroidInsetTop(); jniTop > 0)
+                top = jniTop;
+#endif
+            set(top,
+                avail.left() - geo.left(),
+                geo.right() - avail.right(),
+                geo.bottom() - avail.bottom());
+        }
+    }
+signals:
+    void insetsChanged();
+private:
+    void set(qreal t, qreal l, qreal r, qreal b)
+    {
+        if (t == m_top && l == m_left && r == m_right && b == m_bottom)
+            return;
+        m_top = t;
+        m_left = l;
+        m_right = r;
+        m_bottom = b;
+        qInfo("BVApp: window insets t=%g l=%g r=%g b=%g", t, l, r, b);
+        emit insetsChanged();
+    }
+    qreal m_top = 0, m_left = 0, m_right = 0, m_bottom = 0;
+};
 }
 
 #ifdef Q_OS_SAILFISH
@@ -176,7 +287,14 @@ int main(int argc, char *argv[])
     const QString kf6Env = qEnvironmentVariable("KF6_QML_IMPORT_PATH");
     if (!kf6Env.isEmpty())
         qmlEngine.addImportPath(kf6Env);
+    // System insets for the QML safe-area handling (top = status bar etc.).
+    auto insets = new BvWindowInsets(app.data());
+    qmlEngine.rootContext()->setContextProperty(QStringLiteral("bvWindowInsets"), insets);
     qmlEngine.load(QUrl(QStringLiteral("qrc:/qml/harbour-berlin-vegan.qml")));
+    // The window exists only after load; re-read so post-show insets apply.
+    insets->refresh();
+    QObject::connect(app.data(), &QGuiApplication::focusWindowChanged,
+                     insets, &BvWindowInsets::refresh);
 #else
     selectGraphicsApi();
     QScopedPointer<QGuiApplication> app(new QGuiApplication(argc, argv));
@@ -219,3 +337,5 @@ int main(int argc, char *argv[])
 
     return app->exec();
 }
+
+#include "main.moc"

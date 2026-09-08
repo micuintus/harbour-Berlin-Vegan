@@ -3,7 +3,7 @@
     <!-- Android 16 routes back through the predictive-back API and stops
          dispatching onBackPressed/KEYCODE_BACK to apps that do not opt out.
          Qt has no predictive-back support, so every pageStack pop would die. -->
-    <application android:enableOnBackInvokedCallback="false" android:allowNativeHeapPointerTagging="false" android:extractNativeLibs="true" android:hardwareAccelerated="true" android:name="@BV_APPLICATION_CLASS@" android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+    <application android:enableOnBackInvokedCallback="false" android:allowNativeHeapPointerTagging="false" android:extractNativeLibs="true" android:hardwareAccelerated="true" android:name="@BV_APPLICATION_CLASS@" android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:theme="@android:style/Theme.Material.Light.NoActionBar">
         <activity android:exported="true" android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation" android:name="@BV_ACTIVITY_CLASS@" android:label="@string/app_name" android:screenOrientation="portrait" android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
