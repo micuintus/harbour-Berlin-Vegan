@@ -133,8 +133,16 @@ if(ANDROID AND BV_PLATFORM STREQUAL "kirigami")
                     "${_kirigami_platform_plugin_src}" "${_kirigami_platform_plugin}")
             list(APPEND _kf6_android_extra_libs "${_kirigami_platform_plugin}")
         endif()
+    endif()
+
+    # The Qt Location maplibre backend lives in the QMapLibre prefix's
+    # plugins dir; androiddeployqt only packages plugins from the Qt kit,
+    # so without this the map page silently has no map backend.
+    file(GLOB _maplibre_geoservices_plugin
+        "${_ql_prefix}/plugins/geoservices/libplugins_geoservices_qtgeoservices_maplibre*.so")
+    list(APPEND _kf6_android_extra_libs "${_maplibre_geoservices_plugin}")
+    if(_kf6_android_extra_libs)
         set_target_properties(harbour-berlin-vegan PROPERTIES
-            # Bundle the Kirigami shared libraries
             QT_ANDROID_EXTRA_LIBS "${_kf6_android_extra_libs}"
         )
     endif()
