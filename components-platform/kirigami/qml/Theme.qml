@@ -42,27 +42,27 @@ QtObject {
     function iconFor(type) {
         var iconName = ""
         switch (type) {
-        case "answer":        iconName = "call-start"; break
+        case "answer":        iconName = "qrc:/icons/call-start-symbolic.svg"; break
         case "favorite":      iconName = "qrc:/icons/starred-symbolic.svg"; break
         case "favorite-o":    iconName = "qrc:/icons/non-starred-symbolic.svg"; break
         case "home":          iconName = "qrc:/icons/go-home-symbolic.svg"; break
-        case "filter":        iconName = "view-filter"; break
+        case "filter":        iconName = "qrc:/icons/view-filter-symbolic.svg"; break
         case "vegan":         iconName = "vegetarian-symbolic"; break
-        case "my_location":   iconName = "mark-location"; break
-        case "location":      iconName = "mark-location"; break
-        case "location_on":   iconName = "mark-location"; break
+        case "my_location":   iconName = "qrc:/icons/find-location.svg"; break
+        case "location":      iconName = "qrc:/icons/find-location.svg"; break
+        case "location_on":   iconName = "qrc:/icons/find-location.svg"; break
         case "cover-location": iconName = ""; break
         case "coffee":        iconName = "drink-symbolic"; break
-        case "map":           iconName = "map-symbolic"; break
-        case "list":          iconName = "view-list-details"; break
-        case "shopping":      iconName = "shopping-cart-symbolic"; break
-        case "about":         iconName = "help-about-symbolic"; break
-        case "schedule":      iconName = "clock"; break
-        case "details":       iconName = "documentinfo"; break
+        case "map":           iconName = "qrc:/icons/compass.svg"; break
+        case "list":          iconName = "qrc:/icons/view-list-details-symbolic.svg"; break
+        case "shopping":      iconName = "qrc:/icons/package.svg"; break
+        case "about":         iconName = "qrc:/icons/help-about-symbolic.svg"; break
+        case "schedule":      iconName = "qrc:/icons/chronometer-symbolic.svg"; break
+        case "details":       iconName = "qrc:/icons/help-about-symbolic.svg"; break
         case "accessible":    iconName = "preferences-desktop-accessibility"; break
-        case "more_vert":     iconName = "overflow-menu"; break
-        case "date_range":    iconName = "view-calendar"; break
-        case "reset":         iconName = "edit-reset"; break
+        case "more_vert":     iconName = "qrc:/icons/overflow-menu-symbolic.svg"; break
+        case "date_range":    iconName = "qrc:/icons/view-calendar-symbolic.svg"; break
+        case "reset":         iconName = "qrc:/icons/edit-reset-symbolic.svg"; break
         }
         return { iconString: iconName, fontFamily: "" }
     }

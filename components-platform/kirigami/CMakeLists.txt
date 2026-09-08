@@ -24,4 +24,15 @@ qt_add_resources(BerlinVeganPlatform "kirigami_bundled_icons"
         icons/starred-symbolic.svg
         icons/non-starred-symbolic.svg
         icons/go-home-symbolic.svg
+        icons/call-start-symbolic.svg
+        icons/view-filter-symbolic.svg
+        icons/view-list-details-symbolic.svg
+        icons/compass.svg
+        icons/find-location.svg
+        icons/help-about-symbolic.svg
+        icons/chronometer-symbolic.svg
+        icons/view-calendar-symbolic.svg
+        icons/overflow-menu-symbolic.svg
+        icons/edit-reset-symbolic.svg
+        icons/package.svg
 )
