@@ -1,0 +1,17 @@
+Categories:
+  - Navigation
+License: GPL-2.0-only
+WebSite: https://github.com/micuintus/harbour-Berlin-Vegan
+SourceCode: https://github.com/micuintus/harbour-Berlin-Vegan
+IssueTracker: https://github.com/micuintus/harbour-Berlin-Vegan/issues
+
+AutoName: Berlin-Vegan
+Summary: Vegan and vegetarian venues in Berlin
+Description: >-
+  Cross-platform guide for discovering vegan and vegetarian venues in the
+  Berlin metro area, with GPS sorting, filtering, opening hours, favorites
+  and map views. This Kirigami build is assembled from source on GitHub
+  Actions.
+
+CurrentVersion: 4.0.0
+CurrentVersionCode: 40000

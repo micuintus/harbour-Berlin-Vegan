@@ -1,0 +1,24 @@
+---
+# Berlin-Vegan self-hosted F-Droid repository.
+#
+# Secrets never live here: CI writes the release keystore to
+# fdroid/release.keystore and substitutes the passwords below from the
+# RELEASE_KEYSTORE_B64 / RELEASE_KEYSTORE_PASSWORD repo secrets.
+# Local runs use scripts/fdroid-local.sh, which does the same from
+# ~/.bvapp-release/.
+
+repo_url: https://micuintus.github.io/harbour-Berlin-Vegan/fdroid/repo
+repo_name: Berlin-Vegan
+repo_description: >-
+  Berlin-Vegan: vegan and vegetarian venues in Berlin. Kirigami build,
+  assembled from source on GitHub Actions.
+
+# Keep three versions in the main index; older ones move to the archive.
+archive_older: 3
+
+# The release key doubles as the repository key (single-app repo).
+repo_keyalias: berlin-vegan
+keystore: release.keystore
+keystorepass: ffwWEXN4-LBHEmxFPQft9gjwuFsOXU-HeemRSiiGXQY
+keypass: ffwWEXN4-LBHEmxFPQft9gjwuFsOXU-HeemRSiiGXQY
+keydname: CN=Berlin-Vegan, OU=BVApp, O=micuintus, L=Berlin, C=DE

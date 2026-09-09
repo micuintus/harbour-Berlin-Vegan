@@ -267,3 +267,57 @@ jobs:
           name: berlin-vegan-kirigami-apk
           path: ${{ steps.assemble.outputs.apk }}
           if-no-files-found: error
+
+  # Publishes the signed release APK to the self-hosted F-Droid repo on
+  # GitHub Pages. Without the release secrets there is nothing shippable
+  # to publish, so the job skips. One-time setup: repo Settings -> Pages
+  # -> Source "GitHub Actions".
+  fdroid-publish:
+    if: ${{ secrets.RELEASE_KEYSTORE_B64 != '' }}
+    needs: [kirigami-apk]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: berlin-vegan-kirigami-apk
+          path: apk-in
+
+      - name: Install fdroidserver
+        run: python3 -m pip install --break-system-packages fdroidserver
+
+      # The staged filename must be <package>_<versionCode>.apk; the
+      # metadata CurrentVersionCode in fdroid/metadata must match it.
+      - name: Stage repo and update index
+        env:
+          KEYSTORE_B64: ${{ secrets.RELEASE_KEYSTORE_B64 }}
+          KEYSTORE_PASS: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+        run: |
+          APK=$(ls apk-in/*.apk | head -1)
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/*/ | sort -V | tail -1)
+          CODE=$("$BT/aapt2" dump badging "$APK" | grep -oE "versionCode='[0-9]+'" | grep -oE "[0-9]+")
+          cp "$APK" "fdroid/repo/org.berlin_vegan.bvapp_$CODE.apk"
+          echo "$KEYSTORE_B64" | base64 -d > fdroid/release.keystore
+          sed -e "s/FDROID_KEYSTOREPASS_PLACEHOLDER/$KEYSTORE_PASS/g" \
+            fdroid/config.yml > fdroid/config.ci.yml
+          mv fdroid/config.ci.yml fdroid/config.yml
+          (cd fdroid && fdroid update)
+          rm -f fdroid/release.keystore
+          mkdir -p pages-root/fdroid
+          cp -r fdroid/repo pages-root/fdroid/repo
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages-root
+
+      - uses: actions/deploy-pages@v4
